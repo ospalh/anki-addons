@@ -9,7 +9,7 @@ import re, sys
 
 tooOld = sys.version_info < (2, 7)
 
-furiKanjiPat = r'<ruby><rb>\2</rb><rt>\1</rt></ruby>'
+furiKanjiPat = r'<ruby class="furikanji"><rb>\2</rb><rt>\1</rt></ruby>'
 
 if tooOld:
     splitPat = r' ?([^ ]+?)\[(.+?)\]'
