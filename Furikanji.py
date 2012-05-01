@@ -9,17 +9,12 @@ import re, sys
 
 tooOld = sys.version_info < (2, 7)
 
-if tooOld:
-    r = r' ?([^ ]+?)\[(.+?)\]'
-else:
-    r = r' ?([\w]+?)\[(.+?)\]'
-    
-
 furiKanjiPat = r'<ruby><rb>\2</rb><rt>\1</rt></ruby>'
+
 if tooOld:
-    rm = r' ?([^ ]+?)\[(.+?)\]'
+    splitPat = r' ?([^ ]+?)\[(.+?)\]'
 else:
-    rm = r' ?([\w]+?)\[(.+?)\]'
+    splitPat = r' ?([\w]+?)\[(.+?)\]'
 
 def noSound(repl):
     def func(match):
@@ -28,13 +23,13 @@ def noSound(repl):
             return match.group(0)
         else:
             if tooOld:
-                return re.sub(rm, repl, match.group(0))
-            return re.sub(rm, repl, match.group(0), flags=re.U)
+                return re.sub(splitPat, repl, match.group(0))
+            return re.sub(splitPat, repl, match.group(0), flags=re.U)
     return func
 
 def furikanji(txt, *args):
     if tooOld:
-        return re.sub(rm, noSound(furiKanjiPat), txt)
-    return re.sub(rm, noSound(furiKanjiPat), txt, flags=re.U)
+        return re.sub(splitPat, noSound(furiKanjiPat), txt)
+    return re.sub(splitPat, noSound(furiKanjiPat), txt, flags=re.U)
 
 addHook('fmod_furikanji', furikanji)
