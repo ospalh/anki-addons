@@ -54,7 +54,7 @@ def noInstall():
     pass
 
 addHook('fmod_furikanji', furikanji)
-addHook('fmod_kanji', kanjios)
-addHook('fmod_kana', kanaos)
-addHook('fmod_furigana', furiganaos)
+addHook('fmod_kanjiw', kanji)
+addHook('fmod_kanaw', kana)
+addHook('fmod_furiganaw', furigana)
 
