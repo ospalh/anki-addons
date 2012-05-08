@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Copyright: Damien Elmes <anki@ichi2.net>
+# © 2012 Roland Sieker <ospalh@gmail.com>
+# Origianl code: Damien Elmes <anki@ichi2.net>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 # Based off Kieran Clancy's initial implementation.
 
@@ -9,39 +10,51 @@ from anki.hooks import addHook
 tooOld = sys.version_info < (2, 7)
 
 if tooOld:
-    r = r' ?([^ ]+?)\[(.+?)\]'
+    splitPat = r' ?(?P<kanji>[^ ]+?)\[(?P<kana>.+?)\]'
 else:
-    r = r' ?([\w]+?)\[(.+?)\]'
+    splitPat = r' ?(?P<kanji>[\w]+?)\[(?P<kana>.+?)\]'
     
-ruby = r'<ruby><rb>\1</rb><rt>\2</rt></ruby>'
+furiganaPat = r'<ruby class="furigana"><rb>\g<kanji></rb><rt>\g<kana></rt></ruby>'
+furikanjiPat = r'<ruby class="furikanji"><rb>\g<kana></rb><rt>\g<kanji></rt></ruby>'
 
 def noSound(repl):
     def func(match):
-        if match.group(2).startswith("sound:"):
+        if match.group('kana').startswith("sound:"):
             # return without modification
             return match.group(0)
         else:
             if tooOld:
-                return re.sub(r, repl, match.group(0))
-            return re.sub(r, repl, match.group(0), flags=re.UNICODE)
+                return re.sub(splitPat, repl, match.group(0))
+            return re.sub(splitPat, repl, match.group(0), flags=re.UNICODE)
     return func
 
 def kanji(txt, *args):
     if tooOld:
-        return re.sub(r, noSound(r'\1'), txt)
-    return re.sub(r, noSound(r'\1'), txt, flags=re.UNICODE)
+        return re.sub(splitPat, noSound(r'<span class="kanji">\g<kanji></span>'), txt)
+    return re.sub(splitPat, noSound(r'<span class="kanji">\g<kanji></span>'), txt, flags=re.UNICODE)
 
 def kana(txt, *args):
     if tooOld:
-        return re.sub(r, noSound(r'\2'), txt)
-    return re.sub(r, noSound(r'\2'), txt, flags=re.UNICODE)
+        return re.sub(r, noSound(r'<span class="kana">\g<kana></span>'), txt)
+    return re.sub(splitPat, noSound(r'<span class="kana">\g<kana></span>'), txt, flags=re.UNICODE)
 
 def furigana(txt, *args):
     if tooOld:
-        return re.sub(r, noSound(ruby), txt)
-    return re.sub(r, noSound(ruby), txt, flags=re.UNICODE)
+        return re.sub(r, noSound(furiganaPat), txt)
+    return re.sub(splitPat, noSound(furiganaPat), txt, flags=re.UNICODE)
 
-def install():
-    addHook('fmod_kanji', kanji)
-    addHook('fmod_kana', kana)
-    addHook('fmod_furigana', furigana)
+
+def furikanji(txt, *args):
+    if tooOld:
+        return re.sub(splitPat, noSound(furikanjiPat), txt)
+    return re.sub(splitPat, noSound(furikanjiPat), txt, flags=re.U)
+
+
+def noInstall():
+    pass
+
+addHook('fmod_furikanji', furikanji)
+addHook('fmod_kanji', kanjios)
+addHook('fmod_kana', kanaos)
+addHook('fmod_furigana', furiganaos)
+
