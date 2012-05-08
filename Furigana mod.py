@@ -10,7 +10,7 @@ from anki.hooks import addHook
 tooOld = sys.version_info < (2, 7)
 
 if tooOld:
-    splitPat = r' ?(?P<kanji>[^ ]+?)\[(?P<kana>.+?)\]'
+    splitPat = r' ?(?P<kanji>[^ \n]+?)\[(?P<kana>.+?)\]'
 else:
     splitPat = r' ?(?P<kanji>[\w]+?)\[(?P<kana>.+?)\]'
     
