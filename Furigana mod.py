@@ -5,7 +5,7 @@
 # Based off Kieran Clancy's initial implementation.
 
 import re, sys
-from anki.hooks import addHook
+from anki import hooks
 
 tooOld = sys.version_info < (2, 7)
 
@@ -28,17 +28,17 @@ def noSound(repl):
             return re.sub(splitPat, repl, match.group(0), flags=re.UNICODE)
     return func
 
-def kanji(txt, *args):
+def kanjiWordRe(txt, *args):
     if tooOld:
         return re.sub(splitPat, noSound(r'<span class="kanji">\g<kanji></span>'), txt)
     return re.sub(splitPat, noSound(r'<span class="kanji">\g<kanji></span>'), txt, flags=re.UNICODE)
 
-def kana(txt, *args):
+def kanaWordRe(txt, *args):
     if tooOld:
         return re.sub(r, noSound(r'<span class="kana">\g<kana></span>'), txt)
     return re.sub(splitPat, noSound(r'<span class="kana">\g<kana></span>'), txt, flags=re.UNICODE)
 
-def furigana(txt, *args):
+def furiganaWordRe(txt, *args):
     if tooOld:
         return re.sub(r, noSound(furiganaPat), txt)
     return re.sub(splitPat, noSound(furiganaPat), txt, flags=re.UNICODE)
@@ -50,11 +50,11 @@ def furikanji(txt, *args):
     return re.sub(splitPat, noSound(furikanjiPat), txt, flags=re.U)
 
 
-def noInstall():
-    pass
-
-addHook('fmod_furikanji', furikanji)
-addHook('fmod_kanjiw', kanji)
-addHook('fmod_kanaw', kana)
-addHook('fmod_furiganaw', furigana)
+hooks.addHook('fmod_furikanji', furikanji)
+if hooks._hooks['fmod_kanji']:
+    hooks._hooks['fmod_kanji'][0] = kanjiWordRe
+if hooks._hooks['fmod_kana']:
+    hooks._hooks['fmod_kana'][0] = kanaWordRe
+if hooks._hooks['fmod_furigana']:
+    hooks._hooks['fmod_furigana'][0] = furiganaWordRe
 
