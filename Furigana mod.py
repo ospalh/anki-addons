@@ -12,7 +12,7 @@ tooOld = sys.version_info < (2, 7)
 if tooOld:
     splitPat = r' ?(?P<kanji>[^ >\n]+?)\[(?P<kana>.+?)\]'
 else:
-    splitPat = r' ?(?P<kanji>[\w]+?)\[(?P<kana>.+?)\]'
+    splitPat = u' ?(?P<kanji>[-+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
     
 furiganaPat = r'<ruby class="furigana"><rb>\g<kanji></rb><rt>\g<kana></rt></ruby>'
 furikanjiPat = r'<ruby class="furikanji"><rb>\g<kana></rb><rt>\g<kanji></rt></ruby>'
