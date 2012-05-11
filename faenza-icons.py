@@ -3,7 +3,7 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
 from aqt import toolbar
-from PyKDE4.kdeui import *
+#rom PyKDE4.kdeui import *
 
 from faenzaicons import faenzaicons
 
