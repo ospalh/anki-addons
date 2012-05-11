@@ -50,7 +50,11 @@ def furikanji(txt, *args):
     return re.sub(splitPat, noSound(furikanjiPat), txt, flags=re.U)
 
 
+def boxKana(txt, *args):
+    return u'<ruby class="boxkana"><rb style="border:dashed; border-width: 1px">　</rb><rt>%s</rt></ruby>' % txt
+
 hooks.addHook('fmod_furikanji', furikanji)
+hooks.addHook('fmod_boxkana', boxKana)
 if hooks._hooks['fmod_kanji']:
     hooks._hooks['fmod_kanji'][0] = kanjiWordRe
 if hooks._hooks['fmod_kana']:
