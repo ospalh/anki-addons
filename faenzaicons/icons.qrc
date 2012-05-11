@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/faenza/">
+    <file alias="sync.png">emblem-dropbox-syncing.png</file>
+    <file alias="stats.png">applications-office.png</file>
+  </qresource>
+</RCC>
