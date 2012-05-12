@@ -53,8 +53,13 @@ def furikanji(txt, *args):
 def boxKana(txt, *args):
     return u'<ruby class="boxkana"><rb style="border:dashed; border-width: 1px">　</rb><rt>%s</rt></ruby>' % txt
 
+def boxed(txt, *args):
+    return u'<span class="boxed" style="border:dashed; border-width: 1px">%s</span>' % txt
+
+
 hooks.addHook('fmod_furikanji', furikanji)
 hooks.addHook('fmod_boxkana', boxKana)
+hooks.addHook('fmod_boxed', boxed)
 if hooks._hooks['fmod_kanji']:
     hooks._hooks['fmod_kanji'][0] = kanjiWordRe
 if hooks._hooks['fmod_kana']:
