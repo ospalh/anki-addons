@@ -75,11 +75,7 @@ def kanjiStrokeColourContrast(txt, *args):
 
 
 def firstKanjiStrokeColourIndexed(txt, *args):
-    # This is not C.
-    # if not txt or not isHanCharacter(txt[0]):
-    if not txt:
-        return u''
-    if not isHanCharacter(txt[0]):
+    if not txt or not isHanCharacter(txt[0]):
         return u''
     fname = getFileName(txt[0], 'indexed')
     if not fname:
@@ -89,9 +85,7 @@ def firstKanjiStrokeColourIndexed(txt, *args):
 
 
 def firstKanjiStrokeColourSpectrum(txt, *args):
-    if not txt:
-        return u''
-    if not isHanCharacter(txt[0]):
+    if not txt or not isHanCharacter(txt[0]):
         return u''
     fname = getFileName(txt[0], 'spectrum')
     if not fname:
@@ -101,11 +95,7 @@ def firstKanjiStrokeColourSpectrum(txt, *args):
 
 
 def firstKanjiStrokeColourContrast(txt, *args):
-    # This is not C.
-    # if not txt or not isHanCharacter(txt[0]):
-    if not txt:
-        return u''
-    if not isHanCharacter(txt[0]):
+    if not txt or not isHanCharacter(txt[0]):
         return u''
     fname = getFileName(txt[0], 'contrast')
     if not fname:
