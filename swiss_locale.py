@@ -5,17 +5,16 @@
 # Based off Kieran Clancy's initial implementation.
 
 from anki.hooks import addHook
-import locale as chlocale
+import locale
 
 # I personally like the Swiss use of the apostroph as thousands separator.
-chlocale.setlocale(chlocale.LC_NUMERIC, 'de_CH.UTF-8')
+# locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
 
 millionsWord = (u' Millionen')
 billionsWord = (u' Milliarden')
 
 
 def chMillionen(txt, *args):
-    global chlocale
     sInt = 0
     digitShift = 0
     # check if we have whole millions
@@ -43,11 +42,11 @@ def chMillionen(txt, *args):
             sInt =  sInt / 1000
             digitShift = -3
     sNumStr = u''
-    chlocale.setlocale(chlocale.LC_NUMERIC, 'de_CH.UTF-8')
+    locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
     if digitShift == -2:
-        sNumStr = chlocale.format('%.1f', sFloat, grouping=True)
+        sNumStr = locale.format('%.1f', sFloat, grouping=True)
     else:
-        sNumStr = chlocale.format('%d', sInt, grouping=True)
+        sNumStr = locale.format('%d', sInt, grouping=True)
     if digitShift == 0:
         sNumStr += millionsWord
     if digitShift <= -2:
@@ -55,7 +54,6 @@ def chMillionen(txt, *args):
     return sNumStr
 
 def chTSqKm(txt, *args):
-    global chlocale
     digitShift = 3
     sFloat = 0.0
     try:
@@ -77,11 +75,11 @@ def chTSqKm(txt, *args):
             sInt =  sInt / 1000000
             digitShift = -6
     sNumStr = u''
-    chlocale.setlocale(chlocale.LC_NUMERIC, 'de_CH.UTF-8')
+    locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
     if digitShift == -5:
-        sNumStr = chlocale.format('%.1f', sFloat, grouping=True)
+        sNumStr = locale.format('%.1f', sFloat, grouping=True)
     else:
-        sNumStr = chlocale.format('%d', sInt, grouping=True)
+        sNumStr = locale.format('%d', sInt, grouping=True)
     if digitShift <= -5:
         # Squaremegametres. What else?!
         sNumStr += u' Mm²'
@@ -113,14 +111,13 @@ def jpMan(txt, *args):
 
 # 
 def chInteger(txt, *args):
-    global chlocale
     sInt = 0
     try:
         sInt = int(txt)
     except ValueError:
         return txt
-    chlocale.setlocale(chlocale.LC_NUMERIC, 'de_CH.UTF-8')
-    sIntStr = chlocale.format('%d', sInt, grouping=True)
+    locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
+    sIntStr = locale.format('%d', sInt, grouping=True)
     return sIntStr
 
 
