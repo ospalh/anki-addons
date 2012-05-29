@@ -42,6 +42,13 @@ def dehashilate():
                 continue
             print name, rs.group(1) + rs.group(2), 
             print ' → ',  newBaseName(n) + rs.group(2)
+            # We will probably have to take account the problem that
+            # when we decide on the new file name, a simple
+            # os.path.exists(newName) isn’t good enough. We have to
+            # check with toLower() or something. On Linux, when we
+            # have a file, say, „steuern.mp3“, we should NOT name
+            # another one „Steuern.mp3“.
+            
 
             
 
