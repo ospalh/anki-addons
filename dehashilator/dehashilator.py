@@ -3,21 +3,19 @@
 # Based on deurl-files.py by  Damien Elmes <anki@ichi2.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 #
-# Containing a “very pythonic progress dialog” from
-# © 2000-2012 Roberto Alsina 
-# Creative Commons Attribution-NonCommercial-ShareAlike 2.5 licence
-# http://creativecommons.org/licenses/by-nc-sa/2.5/
-
 # Rename files that have MD5ish names with names derived from the note
 # content.
 #
 
 import re, os
+
+from romaji import kana, roma
+from progress import progress
+
 from aqt import mw
 from aqt.qt import *
 from aqt.utils import showInfo, askUser
 from anki.utils import ids2str
-
 
 nameSourceFields = ['Reading', 'Expression', 'Kanji' ]
 
@@ -38,6 +36,11 @@ def uniqueFileName(baseName, ending):
     lbn = baseName.lower()
     return baseName + ending
 
+def katakanaize(hiragana):
+    # Turn hiragan into katakana through the circuitous route of
+    # converting them to rōmaji, then to uppercase, than to kana
+    # again.
+    return kana(roma(hiragana).upper())
 
 def dehashilate():
     nids = mw.col.db.list("select id from notes")
@@ -59,9 +62,3 @@ def dehashilate():
 
             
 
-
-
-dhma = QAction(mw)
-dhma.setText("Dehashilate media")
-mw.form.menuTools.addAction(dhma)
-mw.connect(dhma, SIGNAL("triggered()"), dehashilate)
