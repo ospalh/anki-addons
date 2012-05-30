@@ -17,7 +17,7 @@ from aqt import mw
 from aqt.qt import *
 from aqt.utils import showInfo, askUser
 from anki.utils import ids2str
-from PyQt4 import QtGui, QtCore
+
 
 nameSourceFields = ['Reading', 'Expression', 'Kanji' ]
 
