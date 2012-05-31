@@ -19,5 +19,5 @@ from dehashilator import Dehashilator
 from progress import progress
 from romaji import *
 
-__version__ = '0.0a3'
+__version__ = '0.0a4'
 __all__ = ['Dehashilator', 'progress', 'roma', 'html', 'kana']
