@@ -21,7 +21,8 @@ from progress import progress
 from aqt import mw
 from aqt.qt import *
 from aqt.utils import showInfo, askUser
-from anki.utils import ids2str
+from anki.utils import ids2str, stripHTML
+from anki.template import furigana
 
 name_source_fields = ['Reading', 'Expression', 'Kanji' ]
 
@@ -35,7 +36,7 @@ split_reading = True
 ## When split_reading is True, use a reading, even when the katakana
 ## version of the reading is identical to the expression.
 reading_for_katakana = False
-# no_reading_for_katakana = True
+# reading_for_katakana = True
 
 ## To avoid too long syncs of data when only the names have changed,
 ## provide a way to rename just the files on another computer with a
@@ -53,23 +54,82 @@ class Dehashilator(object):
     
     """
 
-    def ___init___(self):
+    def __init__(self):
         self._hash_name_pat = '(?:\[sound:|src *= *")([a-z0-9]{32})'\
             '(\.[a-zA-Z0-9]{1,5})(?:]|")'
         self._done_names = {}
         self.shell_script_string = u''
         self.batch_string = u''
 
-    def new_base_name(self, note):
-        """Get a new base name from a card.
         
-        Looks at the note’s fields and pick a new base name for the file.
-        
-        """
-        name, value = note.items()[0]
-        return value
 
-    def unique_file_name(self, base_name, ending):
+    def new_name_base(self, old_base, note):
+        """Get the base for the new name"""
+        def find_field(note, old_base):
+            """Compare the  candidate fields and the notes fields.
+            
+            Look through the two lists, name_source_fields and the
+            note’s items, to find the field we should use. Put in
+            function so we can break out of nested loops.
+            
+            """
+            for sf in name_source_fields:
+                for name, value in note.items():
+                    if name == sf:
+                        value = stripHTML(value)
+                        # Check here if we have something left. So we
+                        # can keep on looking when we have a candidate
+                        # field but it’s empty.
+                        if value and not old_base in value:
+                            # Avoid the field we got the name from
+                            # (i.e. the audio, image field).
+                            return name, value
+            # We got here: no match.
+            return None, None
+
+        # Several tries. First, look through the list.
+        name, value = find_field(note, old_base)
+        if value and not old_base in value:
+            return value
+        # Still here, next try the sort field.
+        name, value = note.items()[mw.col.models.sortIdx(note.model())]
+        value = stripHTML(value)
+        if value and not old_base in value:
+            return value
+        for name, value in note.items():
+            # Last resort: go through the fields and grab the first
+            # non-empty one, except the one with the file.
+            value = stripHTML(value)
+            if value and not old_base in value:
+                return value
+        # Well, shoot. Looks like the only field with anything
+        # interesting is the one with the file. (Almost
+        # reasonable. One-side cards to just listen to something and
+        # decide without further info if you recoginze that.)
+        return u''
+
+    def mangle_reading(self, nbn):
+        """Try to separate Japanese kanji and reading out of a string """
+        # Variable names and comments here assume the text is
+        # Japanese. When it is not, nothing bad should happen.
+        kana = furigana.kana(nbn)
+        kanji = furigana.kanji(nbn)
+        if kana and not kanji:
+            # Quick save
+            kanji = kana
+        # Now the tricky bit: decide when to use the split values.
+        if kana and kanji and kanji != kana:
+            if reading_for_katakana or \
+                    self.katakanaize(kanji) != \
+                    self.katakanaize(kana):
+                return kanji + u'_' + kana
+            else:
+                return kanji
+        # Still here: i guess don’t use the split after all.
+        return nbn
+
+
+    def new_name(self, old_base, old_end, note):
         """Make sure the desired name doesn’t clash with other names.
 
         Return a file name that doesn’t clash with existing files,
@@ -77,8 +137,11 @@ class Dehashilator(object):
         non-case-sensitive file systems.
         
         """
-        lbn = base_name.lower()
-        return base_name + ending
+        nbn = self.new_name_base(old_base, note)
+        if split_reading:
+            nbn = self.mangle_reading(nbn)
+        # Now we should check for duplicate names.
+        return nbn + old_end
 
     def katakanaize(self, hiragana):
         """Return katakana
@@ -105,7 +168,7 @@ class Dehashilator(object):
                 if None == rs:
                     continue
                 print name, rs.group(1) + rs.group(2), 
-                print ' → ',  _new_base_name(n) + rs.group(2)
+                print ' → ',  self.new_name(rs.group(1), rs.group(2), n)
 
 
 
