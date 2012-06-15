@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>List of stuff</h2>
+    {% with pages= pages  %}
+        {% include "_abstract.html" %}
+    {% endwith %}
+{% endblock content %}

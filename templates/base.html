@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My site</title>
+</head>
+<body>
+    <h1><a href="{{ url_for("index") }}">My site</a></h1>
+{% block content %}
+    <p>Default content to be displayed</p>
+{% endblock content %}
+</body>
+</html>
+

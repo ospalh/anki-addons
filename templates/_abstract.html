@@ -1,0 +1,11 @@
+<ul>
+{% for page in pages %}
+    <li>
+      <span style="background-color:{{page.status_color}};">
+        <a href="{{ url_for("page", path=page.path) }}">{{ page.title }}</a></span>
+        {{ page.abstract | safe}}
+    </li>
+{% else %}
+    <li>No page.</li>
+{% endfor %}
+</ul>
