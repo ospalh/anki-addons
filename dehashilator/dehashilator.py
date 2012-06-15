@@ -45,6 +45,10 @@ batch_name = 'rename_hash-name_files.bat'
 script_name = 'rename_hash-name_files.sh'
 
 
+hash_name_pat = '(?:\[sound:|src *= *")([a-z0-9]{32})'\
+    '(\.[a-zA-Z0-9]{1,5})(?:]|")'
+
+
 class Dehashilator(object):
 
     """Class to rename files that have MD5ish names
@@ -55,12 +59,15 @@ class Dehashilator(object):
     """
 
     def __init__(self):
-        self._hash_name_pat = '(?:\[sound:|src *= *")([a-z0-9]{32})'\
-            '(\.[a-zA-Z0-9]{1,5})(?:]|")'
-        self._done_names = {}
-        self.shell_script_string = u''
-        self.batch_string = u''
-
+        # Dictionary to keep track of the standard cases where we have
+        # to move the file and change the info in the field.
+        self.move_rename_files = {}
+        # Cases where one file is referenced a second time. Here we
+        # have to just change the field content.
+        self.just_fix_fields = {}
+        # Test string. Information shown to the usser of what we want
+        # to do.
+        self.test_string = u''
         
 
     def new_name_base(self, old_base, note):
@@ -164,11 +171,21 @@ class Dehashilator(object):
         for nid in progress(nids, "Dehashilating", "This is all wrong!"):
             n = mw.col.getNote(nid)
             for (name, value) in n.items():
-                rs =  re.search(self._hash_name_pat, value)
+                rs =  re.search(hash_name_pat, value)
                 if None == rs:
                     continue
-                print name, rs.group(1) + rs.group(2), 
-                print ' → ',  self.new_name(rs.group(1), rs.group(2), n)
+                try:
+                    other_nid = self.move_rename_files[rs.group(1)]
+                except KeyError:
+                    other_nid = None
+                if other_nid:
+                    self.just_fix_fields[rs.group(1)] = nid
+                    continue
+                new_name_ = self.new_name(rs.group(1), rs.group(2), n)
+                self.test_string += u'{0}: Old name: {1}.{2} → {3}\n'.format(name, rs.group(1),
+                                                               rs.group(2), new_name_)
+                self.move_rename_files[rs.group(1)] = nid
+        print self.test_string
 
 
 
