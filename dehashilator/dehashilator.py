@@ -147,6 +147,13 @@ class Dehashilator(object):
         nbn = self.new_name_base(old_base, note)
         if split_reading:
             nbn = self.mangle_reading(nbn)
+        # remove any dangerous characters
+        # First replace [,] with (, )
+        nbn = nbn.replace('[', '(')
+        nbn = nbn.replace(']', ')')
+        # Then delete a string of other characters
+        nbn = re.sub(r"[][<>:/\\&?\"\|]", "", nbn)
+
         # Now we should check for duplicate names.
         return nbn + old_end
 
@@ -182,7 +189,7 @@ class Dehashilator(object):
                     self.just_fix_fields[rs.group(1)] = nid
                     continue
                 new_name_ = self.new_name(rs.group(1), rs.group(2), n)
-                self.test_string += u'{0}: Old name: {1}.{2} → {3}\n'.format(name, rs.group(1),
+                self.test_string += u'{0}.{1} → {2}\n'.format(rs.group(1),
                                                                rs.group(2), new_name_)
                 self.move_rename_files[rs.group(1)] = nid
         print self.test_string
