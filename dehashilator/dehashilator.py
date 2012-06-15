@@ -49,6 +49,119 @@ hash_name_pat = '(?:\[sound:|src *= *")([a-z0-9]{32})'\
     '(\.[a-zA-Z0-9]{1,5})(?:]|")'
 
 
+
+def _exists_lc(path, name):
+    """
+    Test if file name clashes with name of extant file.
+    
+    On Windows and Mac OS X, simply check if the file exists.
+    On (other) POSIX systems, check if the name clashes with an
+    existing file's name that is the same or differs only in
+    capitalization.
+    
+    """
+    # The point is tha like this syncing from Linux to
+    # Macs/Windows should work savely.
+    if isWin or isMac:
+        return os.path.exist(os.path.join(path, name))
+    # We actually return a list with the offending file names. But
+    # doing simple checks like if _exists_lc(...): will work as
+    # expected. If this is not acceptable, a 'not not' can be
+    # added before the opening '[' to return a Boolean.
+    return [fname for fname in os.listdir(path)
+            if fname.lower() == name.lower()]
+
+
+
+def katakanaize(hiragana):
+    """
+    Return katakana
+    
+    Transform a hiragana string to katakana through the circuitous
+    route of converting it to rōmaji, then to uppercase, than to
+    kana again.
+    
+    """
+    return kana(roma(hiragana).upper())
+
+
+def mangle_reading(nbn):
+    """Try to separate Japanese kanji and reading out of a string """
+    # Variable names and comments here assume the text is
+    # Japanese. When it is not, nothing bad should happen.
+
+    # TODO
+    furi = furigana.kana(nbn)
+    kanji = furigana.kanji(nbn)
+    if furi and not kanji:
+        # Quick save
+        kanji = furi
+    # Now the tricky bit: decide when to use the split values.
+    if furi and kanji and kanji != furi:
+        if reading_for_katakana or \
+                katakanaize(kanji) != katakanaize(furi):
+            return kanji + u'_' + furi
+        else:
+            return kanji
+    # Still here: i guess don’t use the split after all.
+    return nbn
+
+
+
+def new_name_base(old_base, note):
+    """
+    Get the base of a new file name
+    
+    Look at the information on the card and use the data to create
+    a base new name.
+    """
+    def find_field(note, old_base):
+        """
+        Compare the  candidate fields and the notes fields.
+            
+        Look through the two lists, name_source_fields and the
+        note’s items, to find the field we should use. Put in
+        function so we can break out of nested loops.
+        
+        """
+        for sf in name_source_fields:
+            for name, value in note.items():
+                if name == sf:
+                    value = stripHTML(value)
+                    # Check here if we have something left. So we
+                    # can keep on looking when we have a candidate
+                    # field but it’s empty.
+                    if value and not old_base in value:
+                        # Avoid the field we got the name from
+                        # (i.e. the audio, image field).
+                        return name, value
+        # We got here: no match.
+        return None, None
+
+    # Several tries. First, look through the list.
+    name, value = find_field(note, old_base)
+    if value and not old_base in value:
+        return value
+    # Still here, next try the sort field.
+    name, value = note.items()[mw.col.models.sortIdx(note.model())]
+    value = stripHTML(value)
+    if value and not old_base in value:
+        return value
+    for name, value in note.items():
+        # Last resort: go through the fields and grab the first
+        # non-empty one, except the one with the file.
+        value = stripHTML(value)
+        if value and not old_base in value:
+            return value
+    # Well, shoot. Looks like the only field with anything interesting
+    # is the one with the file. (Almost reasonable. One-side cards to
+    # just listen to something and decide without further info if you
+    # recoginze that.)
+    raise ValueError(u'No data for new name found')
+
+
+
+
 class Dehashilator(object):
 
     """Class to rename files that have MD5ish names
@@ -68,85 +181,23 @@ class Dehashilator(object):
         # Test string. Information shown to the usser of what we want
         # to do.
         self.test_string = u''
+        self.media_list = []
         
-
-    def new_name_base(self, old_base, note):
-        """Get the base for the new name"""
-        def find_field(note, old_base):
-            """Compare the  candidate fields and the notes fields.
-            
-            Look through the two lists, name_source_fields and the
-            note’s items, to find the field we should use. Put in
-            function so we can break out of nested loops.
-            
-            """
-            for sf in name_source_fields:
-                for name, value in note.items():
-                    if name == sf:
-                        value = stripHTML(value)
-                        # Check here if we have something left. So we
-                        # can keep on looking when we have a candidate
-                        # field but it’s empty.
-                        if value and not old_base in value:
-                            # Avoid the field we got the name from
-                            # (i.e. the audio, image field).
-                            return name, value
-            # We got here: no match.
-            return None, None
-
-        # Several tries. First, look through the list.
-        name, value = find_field(note, old_base)
-        if value and not old_base in value:
-            return value
-        # Still here, next try the sort field.
-        name, value = note.items()[mw.col.models.sortIdx(note.model())]
-        value = stripHTML(value)
-        if value and not old_base in value:
-            return value
-        for name, value in note.items():
-            # Last resort: go through the fields and grab the first
-            # non-empty one, except the one with the file.
-            value = stripHTML(value)
-            if value and not old_base in value:
-                return value
-        # Well, shoot. Looks like the only field with anything
-        # interesting is the one with the file. (Almost
-        # reasonable. One-side cards to just listen to something and
-        # decide without further info if you recoginze that.)
-        return u''
-
-    def mangle_reading(self, nbn):
-        """Try to separate Japanese kanji and reading out of a string """
-        # Variable names and comments here assume the text is
-        # Japanese. When it is not, nothing bad should happen.
-        kana = furigana.kana(nbn)
-        kanji = furigana.kanji(nbn)
-        if kana and not kanji:
-            # Quick save
-            kanji = kana
-        # Now the tricky bit: decide when to use the split values.
-        if kana and kanji and kanji != kana:
-            if reading_for_katakana or \
-                    self.katakanaize(kanji) != \
-                    self.katakanaize(kana):
-                return kanji + u'_' + kana
-            else:
-                return kanji
-        # Still here: i guess don’t use the split after all.
-        return nbn
-
-
     def new_name(self, old_base, old_end, note):
-        """Make sure the desired name doesn’t clash with other names.
+        """
+        Get a file name for a new 
 
+        Make sure the desired name doesn’t clash with other names.
         Return a file name that doesn’t clash with existing files,
         doing parts by hand to avoid issues with case-sensitive and
         non-case-sensitive file systems.
         
+        This means we also have to add a version of the name to a
+        list, so the next card won't use this name.
         """
-        nbn = self.new_name_base(old_base, note)
+        nbn = new_name_base(old_base, note)
         if split_reading:
-            nbn = self.mangle_reading(nbn)
+            nbn = mangle_reading(nbn)
         # remove any dangerous characters
         # First replace [,] with (, )
         nbn = nbn.replace('[', '(')
@@ -155,17 +206,20 @@ class Dehashilator(object):
         nbn = re.sub(r"[][<>:/\\&?\"\|]", "", nbn)
 
         # Now we should check for duplicate names.
+
+        self.media_list.append((nbn + old_end).lower())
         return nbn + old_end
 
-    def katakanaize(self, hiragana):
-        """Return katakana
+    def build_media_list(self):
+        """
+        Fill self.media_list.
 
-        Transform a hiragana string to katakana through the circuitous
-        route of converting it to rōmaji, then to uppercase, than to
-        kana again.
+        Fill self.media_list with lower-case versions of all media
+        file names. The list is used so we avoid all problems with
+        duplicate names after a sync.
 
         """
-        return kana(roma(hiragana).upper())
+        pass
 
     def dehashilate(self):
         """Go through the collection and clean up MD5-ish names
@@ -174,6 +228,7 @@ class Dehashilator(object):
         look like MD5 hashes, rename the files and change the notes.
         
         """
+        self.build_media_list()
         nids = mw.col.db.list("select id from notes")
         for nid in progress(nids, "Dehashilating", "This is all wrong!"):
             n = mw.col.getNote(nid)
@@ -181,17 +236,17 @@ class Dehashilator(object):
                 rs =  re.search(hash_name_pat, value)
                 if None == rs:
                     continue
+                old_name_ = '{0}.{1}'.format(rs.group(1), rs.group(2))
                 try:
-                    other_nid = self.move_rename_files[rs.group(1)]
+                    (other_nid, other_old_name, other_new_name)  = self.move_rename_files[rs.group(1)]
                 except KeyError:
                     other_nid = None
                 if other_nid:
-                    self.just_fix_fields[rs.group(1)] = nid
+                    self.just_fix_fields[rs.group(1)] = (nid, other_old_name, other_new_name)
                     continue
                 new_name_ = self.new_name(rs.group(1), rs.group(2), n)
-                self.test_string += u'{0}.{1} → {2}\n'.format(rs.group(1),
-                                                               rs.group(2), new_name_)
-                self.move_rename_files[rs.group(1)] = nid
+                self.test_string += u'{0} → {1}\n'.format(old_name_, new_name_)
+                self.move_rename_files[rs.group(1)] = (nid, old_name_, new_name_)
         print self.test_string
 
 
