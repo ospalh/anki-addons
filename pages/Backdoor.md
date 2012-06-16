@@ -5,8 +5,8 @@ type: addon
 status: working
 status_color: green
 abstract: Use one specific password
-first_image: Kyon_no_imoutochan.png
-first_alt: キョウンの妹ちゃん
+first_image: Julia_and_her_sister.jpg
+first_alt: Julia and her sister
 
 Backdoor
 ====
