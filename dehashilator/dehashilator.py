@@ -11,18 +11,17 @@ note content.
 
 """
 
-
 import re
 import os
 
-from romaji import kana, roma
+import romaji
+import kana_kanji
 from progress import progress
 
 from aqt import mw
 from aqt.qt import *
-from aqt.utils import showInfo, askUser
+from aqt.utils import showInfo, showText, askUser
 from anki.utils import ids2str, stripHTML
-from anki.template import furigana
 
 name_source_fields = ['Reading', 'Expression', 'Kanji' ]
 
@@ -82,7 +81,7 @@ def katakanaize(hiragana):
     kana again.
     
     """
-    return kana(roma(hiragana).upper())
+    return romaji.kana(romaji.roma(hiragana).upper())
 
 
 def mangle_reading(nbn):
@@ -91,16 +90,16 @@ def mangle_reading(nbn):
     # Japanese. When it is not, nothing bad should happen.
 
     # TODO
-    furi = furigana.kana(nbn)
-    kanji = furigana.kanji(nbn)
-    if furi and not kanji:
+    kana = kana_kanji.kana(nbn)
+    kanji = kana_kanji.kanji(nbn)
+    if kana and not kanji:
         # Quick save
-        kanji = furi
+        kanji = kana
     # Now the tricky bit: decide when to use the split values.
-    if furi and kanji and kanji != furi:
+    if kana and kanji and kanji != kana:
         if reading_for_katakana or \
-                katakanaize(kanji) != katakanaize(furi):
-            return kanji + u'_' + furi
+                katakanaize(kanji) != katakanaize(kana):
+            return kanji + u'_' + kana
         else:
             return kanji
     # Still here: i guess don’t use the split after all.
@@ -247,7 +246,6 @@ class Dehashilator(object):
                 new_name_ = self.new_name(rs.group(1), rs.group(2), n)
                 self.test_string += u'{0} → {1}\n'.format(old_name_, new_name_)
                 self.move_rename_files[rs.group(1)] = (nid, old_name_, new_name_)
-        print self.test_string
-
+        showText(self.test_string)
 
 
