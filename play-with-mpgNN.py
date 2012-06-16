@@ -14,7 +14,6 @@ from anki.hooks import addHook
 ## Just play flac, ogg, vorbis with sox:
 fileFormatsToPlay = ['.mp3']
 
-#mpgBaseName = u'mpg123'
 mpgBaseName = u'mpg321'
 oldPlay = sound.play
 
@@ -61,7 +60,7 @@ def playSomeSoundsWithMpg(path):
             os.remove(tname)
         else:
             try:
-                subprocess.Popen([mpgBaseName, "-q", "-b 4m", path],
+                subprocess.Popen([mpgBaseName, "-q", "-b 4m", "--stereo", path],
                                  shell=False, stdin=None, stdout=None,
                                  stderr=None,close_fds=True)
             except OSError:
