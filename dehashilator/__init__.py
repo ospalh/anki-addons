@@ -20,6 +20,6 @@ from progress import progress
 from exists import exists_lc
 from romaji import *
 
-__version__ = '1.0.0b2'
+__version__ = '1.0.0b3'
 __all__ = ['test_and_dehashilate', 'progress', 'roma', 'html', 'kana',
            'exists_lc', '__version__']
