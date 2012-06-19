@@ -13,6 +13,7 @@ note content.
 
 import re
 import os
+import shutil
 
 import romaji
 import kana_kanji
@@ -137,8 +138,26 @@ def new_name_base(old_base, note):
 
 
 
+def free_media_name(base, end):
+    """
+    Return a useful media name.
+
+    Return a name that can be used for the media file. That is one
+    that based on the base name and end, but doesn't exist, nor does
+    the it clash with another file different only in upper/lower case.
+    """
+    mdir = mw.col.media.dir()
+    if not exists_lc(mdir, base + end):
+        return base+end
+    for i in range(1, 10000):
+        # Don't be silly. Give up after 9999 tries.
+        long_name = '{0} ({1}).{2}'.format(base, i, end)
+        if not exists_lc(mdir, long_name):
+            return base+end
+    raise ValueError
+    
         
-def new_name(old_base, old_end, note):
+def new_media_name(old_base, old_end, note):
     """
     Get new file name for a hashed file name.
     
@@ -159,22 +178,22 @@ def new_name(old_base, old_end, note):
     nbn = nbn.replace(']', ')')
     # Then delete a string of other characters
     nbn = re.sub(r"[][<>:/\\&?\"\|]", "", nbn)
-    # Now we should check for duplicate names.
-    
-    return nbn + old_end
+    if not nbn:
+        raise ValueError
+    return free_media_name(nbn, old_end)
 
-
-def fix_field(n, name, old_name_, new_name_):
-    pass
 
 
 def test_and_dehashilate():
     test_names()
-    if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'\
-                       'Backup your collection before contiuing!'):
+    if not askUser('Click on "No".\n'\
+                       'Clicking on "Yes" WILL mess up your collection\n'\
+                       '(You somehow got hold of an unfinished developement version.)'):
         return
-    showInfo('Dehash not done yet. Oh well.')
-    # dehashilate()
+    if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'\
+                       'Backup your collection before continuing!'):
+        return
+    dehashilate()
 
 def test_names():
     """Go through the collection and show possible new names
@@ -191,9 +210,13 @@ def test_names():
             rs =  re.search(hash_name_pat, value)
             if None == rs:
                 continue
-            test_string += u'{0}.{1} → {2}\n'.format(
+            try:
+                new_name_ = new_media_name(rs.group(1), rs.group(2), n)
+            except ValueError:
+                continue
+            test_string += u'{0}{1} → {2}\n'.format(
                 rs.group(1), rs.group(2),
-                new_name(rs.group(1), rs.group(2), n))
+                new_name_)
     showText(test_string)
 
 
@@ -204,7 +227,11 @@ def dehashilate():
     look like MD5 hashes, rename the files and change the notes.
     
     """
-    renamed_files = {}
+    test_string = u''
+    mdir = mw.col.media.dir()
+    new_names_dict = {}
+    rename_exec_list = []
+    mw.checkpoint(_("Dehashilate"))
     nids = mw.col.db.list("select id from notes")
     for nid in progress(nids, "Dehashilating", "This is all wrong!"):
         n = mw.col.getNote(nid)
@@ -212,17 +239,35 @@ def dehashilate():
             rs =  re.search(hash_name_pat, value)
             if None == rs:
                 continue
-            old_name_ = '{0}.{1}'.format(rs.group(1), rs.group(2))
+            old_name = '{0}{1}'.format(rs.group(1), rs.group(2))
             try:
-                (other_old_name, other_new_name)  = \
-                    renamed_files[rs.group(1)]
+                new_name  = new_names_dict[old_name]
             except KeyError:
-                other_old_name == None
-            new_name_ = new_name(rs.group(1), rs.group(2), n)
-            if not other_old_name:
-                anki.rename(old_name_, new_name_)
-                renamed_files[rs.group(1)] = (old_name_, new_name_)
+                try:
+                    new_name = new_media_name(rs.group(1), rs.group(2), n)
+                except ValueError:
+                    continue
+                do_rename = True
             else:
-                old_name_ = other_old_name
-                new_name_ = other_new_name
-            fix_field(n, name, value, old_name_, new_name_)
+                do_rename = False
+            if do_rename:
+                src = os.path.join(mdir, old_name)
+                dst = os.path.join(mdir, new_name)
+                try:
+                    os.rename(src, dst)
+                except OSError:
+                    print 'src: ', src
+                    print 'dst: ', dst
+                    pass
+                else:
+                    new_names_dict[old_name] = new_name
+            test_string += u'{0} → {1}\n'.format(old_name, new_name)
+            n[name] = value.replace(old_name, new_name)
+            j_fields = n.joinedFields()
+            rename_exec_list.append([j_fields, nid])
+    showText(test_string)
+    mw.col.db.executemany("update notes set flds = ? where id = ?", rename_exec_list)
+    mw.reset()
+    
+
+    
