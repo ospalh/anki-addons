@@ -177,6 +177,10 @@ def new_media_name(old_base, old_end, note):
 
 def test_and_dehashilate():
     test_names()
+    if not askUser('Click on "No".\n'\
+                       'Clicking on "Yes" WILL mess up your collection\n'\
+                       '(You somehow got hold of an unfinished developement version.)'):
+        return
     if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'\
                        'Backup your collection before continuing!'):
         return
