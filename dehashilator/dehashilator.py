@@ -16,6 +16,7 @@ import os
 
 import romaji
 import kana_kanji
+from exists import exists_lc
 from progress import progress
 
 from aqt import mw
@@ -46,30 +47,6 @@ script_name = 'rename_hash-name_files.sh'
 
 hash_name_pat = '(?:\[sound:|src *= *")([a-z0-9]{32})'\
     '(\.[a-zA-Z0-9]{1,5})(?:]|")'
-
-
-
-def _exists_lc(path, name):
-    """
-    Test if file name clashes with name of extant file.
-    
-    On Windows and Mac OS X, simply check if the file exists.
-    On (other) POSIX systems, check if the name clashes with an
-    existing file's name that is the same or differs only in
-    capitalization.
-    
-    """
-    # The point is tha like this syncing from Linux to
-    # Macs/Windows should work savely.
-    if isWin or isMac:
-        return os.path.exist(os.path.join(path, name))
-    # We actually return a list with the offending file names. But
-    # doing simple checks like if _exists_lc(...): will work as
-    # expected. If this is not acceptable, a 'not not' can be
-    # added before the opening '[' to return a Boolean.
-    return [fname for fname in os.listdir(path)
-            if fname.lower() == name.lower()]
-
 
 
 def katakanaize(hiragana):
@@ -160,92 +137,92 @@ def new_name_base(old_base, note):
 
 
 
+        
+def new_name(old_base, old_end, note):
+    """
+    Get new file name for a hashed file name.
+    
+    Make sure the desired name doesn’t clash with other names.
+    Return a file name that doesn’t clash with existing files,
+    doing parts by hand to avoid issues with case-sensitive and
+    non-case-sensitive file systems.
+        
+    This means we also have to add a version of the name to a
+    list, so the next card won't use this name.
+    """
+    nbn = new_name_base(old_base, note)
+    if split_reading:
+        nbn = mangle_reading(nbn)
+    # remove any dangerous characters
+    # First replace [,] with (, )
+    nbn = nbn.replace('[', '(')
+    nbn = nbn.replace(']', ')')
+    # Then delete a string of other characters
+    nbn = re.sub(r"[][<>:/\\&?\"\|]", "", nbn)
+    # Now we should check for duplicate names.
+    
+    return nbn + old_end
 
-class Dehashilator(object):
 
-    """Class to rename files that have MD5ish names
+def fix_field(n, name, old_name_, new_name_):
+    pass
 
-    Rename files with Anki <1.2-ish MD5 names with names derived from the
-    note content.
+
+def test_and_dehashilate():
+    test_names()
+    if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'\
+                       'Backup your collection before contiuing!'):
+        return
+    showInfo('Dehash not done yet. Oh well.')
+    # dehashilate()
+
+def test_names():
+    """Go through the collection and show possible new names
+    
+    Search the cards for sounds or images with file names that look
+    like MD5 hashes, rename the files and change the notes.
     
     """
-
-    def __init__(self):
-        # Dictionary to keep track of the standard cases where we have
-        # to move the file and change the info in the field.
-        self.move_rename_files = {}
-        # Cases where one file is referenced a second time. Here we
-        # have to just change the field content.
-        self.just_fix_fields = {}
-        # Test string. Information shown to the usser of what we want
-        # to do.
-        self.test_string = u''
-        self.media_list = []
-        
-    def new_name(self, old_base, old_end, note):
-        """
-        Get a file name for a new 
-
-        Make sure the desired name doesn’t clash with other names.
-        Return a file name that doesn’t clash with existing files,
-        doing parts by hand to avoid issues with case-sensitive and
-        non-case-sensitive file systems.
-        
-        This means we also have to add a version of the name to a
-        list, so the next card won't use this name.
-        """
-        nbn = new_name_base(old_base, note)
-        if split_reading:
-            nbn = mangle_reading(nbn)
-        # remove any dangerous characters
-        # First replace [,] with (, )
-        nbn = nbn.replace('[', '(')
-        nbn = nbn.replace(']', ')')
-        # Then delete a string of other characters
-        nbn = re.sub(r"[][<>:/\\&?\"\|]", "", nbn)
-
-        # Now we should check for duplicate names.
-
-        self.media_list.append((nbn + old_end).lower())
-        return nbn + old_end
-
-    def build_media_list(self):
-        """
-        Fill self.media_list.
-
-        Fill self.media_list with lower-case versions of all media
-        file names. The list is used so we avoid all problems with
-        duplicate names after a sync.
-
-        """
-        pass
-
-    def dehashilate(self):
-        """Go through the collection and clean up MD5-ish names
-
-        Search the cards for sounds or images with file names that
-        look like MD5 hashes, rename the files and change the notes.
-        
-        """
-        self.build_media_list()
-        nids = mw.col.db.list("select id from notes")
-        for nid in progress(nids, "Dehashilating", "This is all wrong!"):
-            n = mw.col.getNote(nid)
-            for (name, value) in n.items():
-                rs =  re.search(hash_name_pat, value)
-                if None == rs:
-                    continue
-                old_name_ = '{0}.{1}'.format(rs.group(1), rs.group(2))
-                try:
-                    (other_nid, other_old_name, other_new_name)  = self.move_rename_files[rs.group(1)]
-                except KeyError:
-                    other_nid = None
-                if other_nid:
-                    self.just_fix_fields[rs.group(1)] = (nid, other_old_name, other_new_name)
-                    continue
-                new_name_ = self.new_name(rs.group(1), rs.group(2), n)
-                self.test_string += u'{0} → {1}\n'.format(old_name_, new_name_)
-                self.move_rename_files[rs.group(1)] = (nid, old_name_, new_name_)
-        showText(self.test_string)
+    test_string = u''
+    nids = mw.col.db.list("select id from notes")
+    for nid in progress(nids, "Dehashilating", "This is all wrong!"):
+        n = mw.col.getNote(nid)
+        for (name, value) in n.items():
+            rs =  re.search(hash_name_pat, value)
+            if None == rs:
+                continue
+            test_string += u'{0}.{1} → {2}\n'.format(
+                rs.group(1), rs.group(2),
+                new_name(rs.group(1), rs.group(2), n))
+    showText(test_string)
 
 
+def dehashilate():
+    """Go through the collection and clean up MD5-ish names
+
+    Search the cards for sounds or images with file names that
+    look like MD5 hashes, rename the files and change the notes.
+    
+    """
+    renamed_files = {}
+    nids = mw.col.db.list("select id from notes")
+    for nid in progress(nids, "Dehashilating", "This is all wrong!"):
+        n = mw.col.getNote(nid)
+        for (name, value) in n.items():
+            rs =  re.search(hash_name_pat, value)
+            if None == rs:
+                continue
+            old_name_ = '{0}.{1}'.format(rs.group(1), rs.group(2))
+            try:
+                (other_old_name, other_new_name)  = \
+                    renamed_files[rs.group(1)]
+            except KeyError:
+                other_old_name == None
+            new_name_ = new_name(rs.group(1), rs.group(2), n)
+            if not other_old_name:
+                anki.rename(old_name_, new_name_)
+                renamed_files[rs.group(1)] = (old_name_, new_name_)
+            else:
+                old_name_ = other_old_name
+                new_name_ = other_new_name
+            fix_field(n, name, value, old_name_, new_name_)

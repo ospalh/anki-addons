@@ -15,9 +15,10 @@ useless without Anki 2.
 
 """
 
-from dehashilator import Dehashilator
+from dehashilator import test_and_dehashilate
 from progress import progress
+from exists import exists_lc
 from romaji import *
 
 __version__ = '0.0a5'
-__all__ = ['Dehashilator', 'progress', 'roma', 'html', 'kana']
+__all__ = ['test_and_dehashilate', 'progress', 'roma', 'html', 'kana', 'exists_lc']

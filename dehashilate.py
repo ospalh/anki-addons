@@ -12,15 +12,12 @@ rename the files, changing the notes as well.
 
 """
 
-from dehashilator import Dehashilator
+import dehashilator
 from aqt import mw
 from aqt.qt import *
 
-def dehashilate():
-    dehashilator = Dehashilator()
-    dehashilator.dehashilate()
 
 dhma = QAction(mw)
 dhma.setText("Dehashilate media")
 mw.form.menuTools.addAction(dhma)
-mw.connect(dhma, SIGNAL("triggered()"), dehashilate)
+mw.connect(dhma, SIGNAL("triggered()"), dehashilator.test_and_dehashilate)
