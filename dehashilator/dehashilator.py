@@ -39,13 +39,6 @@ split_reading = True
 reading_for_katakana = False
 # reading_for_katakana = True
 
-## To avoid too long syncs of data when only the names have changed,
-## provide a way to rename just the files on another computer with a
-## batch or shell script file.
-batch_name = 'rename_hash-name_files.bat'
-script_name = 'rename_hash-name_files.sh'
-
-
 hash_name_pat = '(?:\[sound:|src *= *")([a-z0-9]{32})'\
     '(\.[a-zA-Z0-9]{1,5})(?:]|")'
 
@@ -66,8 +59,6 @@ def mangle_reading(nbn):
     """Try to separate Japanese kanji and reading out of a string """
     # Variable names and comments here assume the text is
     # Japanese. When it is not, nothing bad should happen.
-
-    # TODO
     kana = kana_kanji.kana(nbn)
     kanji = kana_kanji.kanji(nbn)
     if kana and not kanji:
@@ -186,10 +177,6 @@ def new_media_name(old_base, old_end, note):
 
 def test_and_dehashilate():
     test_names()
-    if not askUser('Click on "No".\n'\
-                       'Clicking on "Yes" WILL mess up your collection\n'\
-                       '(You somehow got hold of an unfinished developement version.)'):
-        return
     if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'\
                        'Backup your collection before continuing!'):
         return
@@ -227,7 +214,6 @@ def dehashilate():
     look like MD5 hashes, rename the files and change the notes.
     
     """
-    test_string = u''
     mdir = mw.col.media.dir()
     new_names_dict = {}
     rename_exec_list = []
@@ -261,11 +247,9 @@ def dehashilate():
                     pass
                 else:
                     new_names_dict[old_name] = new_name
-            test_string += u'{0} → {1}\n'.format(old_name, new_name)
             n[name] = value.replace(old_name, new_name)
             j_fields = n.joinedFields()
             rename_exec_list.append([j_fields, nid])
-    showText(test_string)
     mw.col.db.executemany("update notes set flds = ? where id = ?", rename_exec_list)
     mw.reset()
     
