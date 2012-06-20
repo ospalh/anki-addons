@@ -252,9 +252,13 @@ def dehashilate():
                 else:
                     new_names_dict[old_name] = new_name
             n[name] = value.replace(old_name, new_name)
-            j_fields = n.joinedFields()
-            rename_exec_list.append([j_fields, nid])
-    mw.col.db.executemany("update notes set flds = ? where id = ?", rename_exec_list)
+            rename_exec_list.append(dict(nid=nid,flds=n.joinedFields()))
+    mw.col.db.executemany("update notes set flds =:flds where id =:nid",
+                          rename_exec_list)
+    # This is a bit of voodo code. Without it the cards weren't
+    # synced. Maybe this helps. (Cribbed from anki.find, but don't
+    # keep extra list of nids.) RAS 2012-06-20
+    mw.col.updateFieldCache([re_dict[nids} for re_dict in rename_exec_list])
     mw.reset()
     
 
