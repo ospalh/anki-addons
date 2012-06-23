@@ -176,7 +176,9 @@ def new_media_name(old_base, old_end, note):
 
 
 def test_and_dehashilate():
-    test_names()
+    if not test_names():
+        showInfo('No hashes found in cards. Have a nice day.')
+        return
     if not askUser('Click on "No".\n'\
                        'Clicking on "Yes" WILL mess up your collection\n'\
                        '(You somehow got hold of an unfinished developement version.)'):
@@ -208,7 +210,9 @@ def test_names():
             test_string += u'{0}{1} → {2}\n'.format(
                 rs.group(1), rs.group(2),
                 new_name_)
-    showText(test_string)
+    if (test_string):
+        showText('These new names will be used:\n' + test_string)
+    return test_string
 
 
 def dehashilate():
@@ -221,6 +225,7 @@ def dehashilate():
     mdir = mw.col.media.dir()
     new_names_dict = {}
     rename_exec_list = []
+    bad_mv_text = u''
     mw.checkpoint(_("Dehashilate"))
     nids = mw.col.db.list("select id from notes")
     for nid in progress(nids, "Dehashilating", "This is all wrong!"):
@@ -246,9 +251,8 @@ def dehashilate():
                 try:
                     os.rename(src, dst)
                 except OSError:
-                    print 'src: ', src
-                    print 'dst: ', dst
-                    pass
+                    bad_mv_text += u'{0} → {1}\n'.format(
+                        old_name, new_name)
                 else:
                     new_names_dict[old_name] = new_name
             n[name] = value.replace(old_name, new_name)
@@ -258,8 +262,10 @@ def dehashilate():
     # This is a bit of voodo code. Without it the cards weren't
     # synced. Maybe this helps. (Cribbed from anki.find, but don't
     # keep extra list of nids.) RAS 2012-06-20
-    mw.col.updateFieldCache([re_dict[nids} for re_dict in rename_exec_list])
+    mw.col.updateFieldCache([re_dict[nids] for re_dict in rename_exec_list])
     mw.reset()
+    if bad_mv_text:
+        showText('These files weren’t renamed:\n' + test_string)
     
 
     
