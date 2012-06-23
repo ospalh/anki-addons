@@ -226,33 +226,35 @@ def dehashilate():
     for nid in progress(nids, "Dehashilating", "This is all wrong!"):
         n = mw.col.getNote(nid)
         for (name, value) in n.items():
-            rs =  re.search(hash_name_pat, value)
-            if None == rs:
-                continue
-            old_name = '{0}{1}'.format(rs.group(1), rs.group(2))
-            try:
-                new_name  = new_names_dict[old_name]
-            except KeyError:
-                try:
-                    new_name = new_media_name(rs.group(1), rs.group(2), n)
-                except ValueError:
+            for i in len(re.findall(hash_name_pat, value)):
+                rs =  re.search(hash_name_pat, value)
+                if None == rs:
+                    # Should be redundant with the for "i ...:"
+                    # loop. RAS 2012-06-23
                     continue
-                do_rename = True
-            else:
-                do_rename = False
-            if do_rename:
-                src = os.path.join(mdir, old_name)
-                dst = os.path.join(mdir, new_name)
+                old_name = '{0}{1}'.format(rs.group(1), rs.group(2))
                 try:
-                    os.rename(src, dst)
-                except OSError:
-                    print 'src: ', src
-                    print 'dst: ', dst
-                    pass
+                    new_name  = new_names_dict[old_name]
+                except KeyError:
+                    try:
+                        new_name = new_media_name(rs.group(1), rs.group(2), n)
+                    except ValueError:
+                        continue
+                    do_rename = True
                 else:
-                    new_names_dict[old_name] = new_name
-            n[name] = value.replace(old_name, new_name)
-            rename_exec_list.append(dict(nid=nid,flds=n.joinedFields()))
+                    do_rename = False
+                if do_rename:
+                    src = os.path.join(mdir, old_name)
+                    dst = os.path.join(mdir, new_name)
+                    try:
+                        os.rename(src, dst)
+                    except OSError:
+                        print 'src: ', src
+                        print 'dst: ', dst
+                    else:
+                        new_names_dict[old_name] = new_name
+                    n[name] = value.replace(old_name, new_name)
+                    rename_exec_list.append(dict(nid=nid,flds=n.joinedFields()))
     mw.col.db.executemany("update notes set flds =:flds where id =:nid",
                           rename_exec_list)
     # This is a bit of voodo code. Without it the cards weren't
