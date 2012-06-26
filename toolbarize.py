@@ -96,7 +96,7 @@ def add_tool_bar():
     colorful icons to replace the Anki 2 DSAB toolbar.
     """
     mw.qt_tool_bar = QToolBar()
-    mw.qt_tool_bar.setAccessibleName('secondary tool bar')
+    # mw.qt_tool_bar.setAccessibleName('secondary tool bar')
     mw.qt_tool_bar.setObjectName('qt tool bar')
     mw.qt_tool_bar.setIconSize(QSize(32,32))
     mw.qt_tool_bar.setStyleSheet(
