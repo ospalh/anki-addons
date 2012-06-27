@@ -42,7 +42,7 @@ put_items_in_menu = True
 
 
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'anki-1-icons')
+icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
 
 def go_deck_browse():
