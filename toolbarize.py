@@ -133,7 +133,7 @@ def add_go_menu():
     mw.form.menuCol.insertAction(mw.form.actionExport, sync_action)
     # Make a new top level menu and insert it.
     go_menu = QMenu("&Go", mw)
-    mw.form.menubar.insertMenu(mw.menuBar().actions()[1] , go_menu)
+    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction() , go_menu)
     # Add DSAB to the new go menu
     go_menu.addAction(decks_action)
     go_menu.addAction(overview_action)
