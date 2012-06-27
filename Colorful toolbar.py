@@ -51,6 +51,7 @@ def go_deck_browse():
 
 def go_study():
     """Start studying cards."""
+    mw.col.reset()
     mw.col.startTimebox()
     mw.moveToState("review")
 
