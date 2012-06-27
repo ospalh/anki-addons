@@ -22,7 +22,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 ## Whether to show the old html-ish tool bar with the text
 ## html-link-"buttons".
