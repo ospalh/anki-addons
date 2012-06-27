@@ -12,6 +12,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import os
 from aqt import mw
+from aqt import clayout
 
 
 """
@@ -40,21 +41,39 @@ put_items_in_menu = True
 # put_items_in_menu = False
 
 
+
 icons_dir = os.path.join(mw.pm.addonFolder(), 'anki-1-icons')
 
 
 def go_deck_browse():
+    """Open the deck browser."""
     mw.moveToState("deckBrowser")
 
 def go_study():
+    """Start studying cards."""
     mw.col.startTimebox()
     mw.moveToState("review")
+
+def go_edit_current():
+    """Edit the current card when there is one."""
+    try:
+        mw.onEditCurrent()
+    except AttributeError:
+        pass
+
+
+def go_edit_layout():
+    """Edit the current card's note's layout if there is one."""
+    try:
+        ccard = mw.reviewer.card
+        clayout.CardLayout(mw, ccard.note(), ord=ccard.ord)
+    except AttributeError:
+        return
+
 
 
 # Make all the actions top level, so we can use them for the menu and
 # the tool bar.
-
-# _action.setIcon(QIcon(os.path.join(icons_dir, '.png')))
 
 sync_action = QAction(mw)
 sync_action.setText("S&ync")
@@ -84,7 +103,21 @@ statistics_action = QAction(mw)
 statistics_action.setText("Show statistics")
 statistics_action.setIcon(QIcon(os.path.join(icons_dir, 'statistics.png')))
 mw.connect(statistics_action, SIGNAL("triggered()"), mw.onStats)
+edit_current_action = QAction(mw)
+edit_current_action.setText("Edit current")
+edit_current_action.setIcon(QIcon(os.path.join(icons_dir, 'edit-current.png')))
+mw.connect(edit_current_action, SIGNAL("triggered()"), go_edit_current)
+edit_layout_action = QAction(mw)
+edit_layout_action.setText("Edit layout")
+edit_layout_action.setIcon(QIcon(os.path.join(icons_dir, 'edit_layout.png')))
+mw.connect(edit_layout_action, SIGNAL("triggered()"), go_edit_layout)
 
+
+# Template to add actions:
+# NN_action = QAction(mw)
+# NN_action.setText("Show NN")
+# NN_action.setIcon(QIcon(os.path.join(icons_dir, 'NN.png')))
+# mw.connect(NN_action, SIGNAL("triggered()"), mw.onNN)
 
 
 
@@ -128,7 +161,16 @@ border-bottom: 1px solid #aaa;
 
 
 
-def add_go_menu():
+def add_to_menus():
+    """
+    Add a number of items to memus.
+    
+    Put the functions of the DASB old-style tool bar links into
+    menus. Sync to the file menu, stats to the tools menu, the DASB,
+    together with a study-withouts-overview item to a new go
+    menu. Also add items to, d'uh, edit stuff to the edit menu.
+
+    """
     # Add sync to the file memu. It was there in Anki 1.
     mw.form.menuCol.insertAction(mw.form.actionExport, sync_action)
     # Make a new top level menu and insert it.
@@ -140,12 +182,17 @@ def add_go_menu():
     go_menu.addAction(study_action)
     go_menu.addAction(add_notes_action)
     go_menu.addAction(browse_cards_action)
+    # Stats. Maybe this should go to help. Seems somewhat help-ish to
+    # me, but not too much.
     mw.form.menuTools.addAction(statistics_action)
-
+    # Add to the edit menu. The undo looked a bit forlorn.
+    edit_menu = mw.form.menuEdit
+    edit_menu.addAction(edit_current_action)
+    edit_menu.addAction(edit_layout_action)
 
 
 add_tool_bar()
 if put_items_in_menu:
-    add_go_menu()
+    add_to_menus()
 if not show_normal_tool_bar:
     mw.toolbar.web.hide()
