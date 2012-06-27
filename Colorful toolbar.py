@@ -13,7 +13,7 @@ from PyQt4.QtCore import *
 import os
 from aqt import mw
 from aqt import clayout
-
+from anki.hooks import wrap
 
 """
 Add a standard tool bar to Anki2.
@@ -192,8 +192,24 @@ def add_to_menus():
     edit_menu.addAction(edit_layout_action)
 
 
+def edit_actions_off():
+    """Switch off the edit actions."""
+    edit_current_action.setEnabled(False)
+    edit_layout_action.setEnabled(False)
+
+def edit_actions_on():
+    """Switch on the edit actions."""
+    edit_current_action.setEnabled(True)
+    edit_layout_action.setEnabled(True)
+
+
 add_tool_bar()
 if put_items_in_menu:
     add_to_menus()
 if not show_normal_tool_bar:
     mw.toolbar.web.hide()
+
+
+mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off) 
+mw.overview.show = wrap(mw.overview.show, edit_actions_on)
+mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
