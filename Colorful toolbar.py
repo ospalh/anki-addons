@@ -8,11 +8,10 @@
 # "Free for Personal and Commercial Use"
 
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
 import os
 from aqt import mw
 from aqt import clayout
+from aqt.qt import *
 from anki.hooks import wrap
 
 """
