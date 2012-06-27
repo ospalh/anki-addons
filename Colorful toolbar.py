@@ -24,22 +24,11 @@ be added by the user.
 
 __version__ = "1.0.3"
 
-## Whether to show the old html-ish tool bar with the text
-## html-link-"buttons".
-# show_normal_tool_bar = True
-show_normal_tool_bar = False
-
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
 ## be dragged to another position.
 qt_toolbar_movable = True
 # qt_toolbar_movable = False
-
-## Add menus and menu items to to replace the old toolbar functions.
-put_items_in_menu = True
-# put_items_in_menu = False
-
-
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
@@ -203,12 +192,8 @@ def edit_actions_on():
 
 
 add_tool_bar()
-if put_items_in_menu:
-    add_to_menus()
-if not show_normal_tool_bar:
-    mw.toolbar.web.hide()
-
-
+add_to_menus()
+mw.toolbar.web.hide()
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off) 
 mw.overview.show = wrap(mw.overview.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
