@@ -64,6 +64,10 @@ def go_edit_layout():
 # Make all the actions top level, so we can use them for the menu and
 # the tool bar.
 
+# Most of these icons are part of the standard version, but as they
+# are not currently used by the standard version, they may disappear
+# when dae gets around to doing some clean up. So bring them along,
+# anyway.
 sync_action = QAction(mw)
 sync_action.setText("S&ync")
 sync_action.setIcon(QIcon(os.path.join(icons_dir, 'sync.png')))
@@ -102,13 +106,32 @@ edit_layout_action.setIcon(QIcon(os.path.join(icons_dir, 'edit_layout.png')))
 mw.connect(edit_layout_action, SIGNAL("triggered()"), go_edit_layout)
 
 
+
+## Add images to actions we already have. I skip a few where no icon
+## really fits.
+
+mw.form.actionDocumentation.setIcon(QIcon(os.path.join(icons_dir, 'help.png')))
+mw.form.actionDonate.setIcon(QIcon(os.path.join(icons_dir, 'donate.png')))
+mw.form.actionAbout.setIcon(QIcon(os.path.join(icons_dir, 'anki.png')))
+mw.form.actionUndo.setIcon(QIcon(os.path.join(icons_dir, 'undo.png')))
+mw.form.actionSwitchProfile.setIcon(QIcon(os.path.join(icons_dir, 'user-head.png')))
+mw.form.actionImport.setIcon(QIcon(os.path.join(icons_dir, 'import.png')))
+mw.form.actionExport.setIcon(QIcon(os.path.join(icons_dir, 'export.png')))
+mw.form.actionExit.setIcon(QIcon(os.path.join(icons_dir, 'exit.png')))
+mw.form.actionDownloadSharedPlugin.setIcon(
+    QIcon(os.path.join(icons_dir, 'download-addon.png')))
+mw.form.actionFullDatabaseCheck.setIcon(
+    QIcon(os.path.join(icons_dir, 'check-db.png')))
+mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir, 'preferences.png')))
+
 # Template to add actions:
 # NN_action = QAction(mw)
 # NN_action.setText("Show NN")
 # NN_action.setIcon(QIcon(os.path.join(icons_dir, 'NN.png')))
 # mw.connect(NN_action, SIGNAL("triggered()"), mw.onNN)
 
-
+## Template for adding images:
+# mw.form.actionNn.setIcon(QIcon(os.path.join(icons_dir, 'nn.png')))
 
 def add_tool_bar():
     """
@@ -146,6 +169,7 @@ border-bottom: 1px solid #aaa;
     mw.qt_tool_bar.addAction(browse_cards_action)
     mw.qt_tool_bar.addAction(statistics_action)
 
+#    mw.qt_tool_bar.addAction(mw.form.actionStudyDeck)
 #mw.qt_tool_bar.addAction(_action)
 
 
@@ -161,7 +185,7 @@ def add_to_menus():
 
     """
     # Add sync to the file memu. It was there in Anki 1.
-    mw.form.menuCol.insertAction(mw.form.actionExport, sync_action)
+    mw.form.menuCol.insertAction(mw.form.actionImport, sync_action)
     # Make a new top level menu and insert it.
     go_menu = QMenu("&Go", mw)
     mw.form.menubar.insertMenu(mw.form.menuTools.menuAction() , go_menu)
