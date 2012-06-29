@@ -1,10 +1,19 @@
-other-addons
+anki-addons
 ============
 
-Other Anki2 add-ons that are rather specifically tailored to my needs.
+Some Anki2 add-ons in different states of usefulness and bugginess.
 
-##Furikanji.py
-Template to display (Japanese) text with the reading in line and the Kanji as ruby.
+The more useful include:
 
-##swiss_locale.py
-Templates to format numbers just the way i like them for my geography deck.
+## backdoor.py
+Open a user profile with one specific password.
+
+##Colorful toolbar.py
+Give Anki2 a bit of the Anki1 look with a bunch of colorful command
+buttons.
+
+## Furigana mod.py
+Some templates to modify the display of Japanese text
+
+## Kanji stroke colour.py
+My take on displaying coloured stroke order diagrams.
