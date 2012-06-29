@@ -106,6 +106,12 @@ edit_layout_action.setIcon(QIcon(os.path.join(icons_dir, 'edit_layout.png')))
 mw.connect(edit_layout_action, SIGNAL("triggered()"), go_edit_layout)
 
 
+## Template to add actions:
+# NN_action = QAction(mw)
+# NN_action.setText("Show NN")
+# NN_action.setIcon(QIcon(os.path.join(icons_dir, 'NN.png')))
+# mw.connect(NN_action, SIGNAL("triggered()"), mw.onNN)
+
 
 ## Add images to actions we already have. I skip a few where no icon
 ## really fits.
@@ -124,14 +130,10 @@ mw.form.actionFullDatabaseCheck.setIcon(
     QIcon(os.path.join(icons_dir, 'check-db.png')))
 mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir, 'preferences.png')))
 
-# Template to add actions:
-# NN_action = QAction(mw)
-# NN_action.setText("Show NN")
-# NN_action.setIcon(QIcon(os.path.join(icons_dir, 'NN.png')))
-# mw.connect(NN_action, SIGNAL("triggered()"), mw.onNN)
 
 ## Template for adding images:
 # mw.form.actionNn.setIcon(QIcon(os.path.join(icons_dir, 'nn.png')))
+
 
 def add_tool_bar():
     """
@@ -168,10 +170,33 @@ border-bottom: 1px solid #aaa;
     mw.qt_tool_bar.addAction(add_notes_action)
     mw.qt_tool_bar.addAction(browse_cards_action)
     mw.qt_tool_bar.addAction(statistics_action)
+    #mw.qt_tool_bar.addAction(_action)
 
-#    mw.qt_tool_bar.addAction(mw.form.actionStudyDeck)
-#mw.qt_tool_bar.addAction(_action)
 
+
+
+def add_more_tool_bar():
+    # This realy belongs to the reviewer. TODO
+    try:
+        mw.reviewer.more_tool_bar = QToolBar()
+    except AttributeError:
+        return
+    # mw.reviewer.more_tool_bar.setAccessibleName('secondary tool bar')
+    mw.reviewer.more_tool_bar.setObjectName('more options tool bar')
+    mw.reviewer.more_tool_bar.setIconSize(QSize(24,24))
+    mw.reviewer.more_tool_bar.setStyleSheet(
+        '''QToolBar{
+background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff, stop:1 #ddd);
+border: none;
+border-bottom: 1px solid #aaa;
+}
+''')
+    mw.reviewer.more_tool_bar.setFloatable(False)
+    mw.reviewer.more_tool_bar.setMovable(False)
+    # Todo: get index of the bottom web button thingy.
+    mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
+    # Add the actions here
+    mw.reviewer.more_tool_bar.addAction(sync_action)
 
 
 def add_to_menus():
@@ -214,8 +239,22 @@ def edit_actions_on():
     edit_current_action.setEnabled(True)
     edit_layout_action.setEnabled(True)
 
+def more_tool_bar_off():
+    try: 
+        mw.reviewer.more_tool_bar.hide()
+    except:
+        pass
+
+
+def more_tool_bar_on():
+    try: 
+        mw.reviewer.more_tool_bar.show()
+    except:
+        pass
+
 
 add_tool_bar()
+# add_more_tool_bar()
 add_to_menus()
 mw.toolbar.web.hide()
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off) 
