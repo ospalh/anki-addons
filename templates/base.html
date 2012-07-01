@@ -1,14 +1,77 @@
-<!doctype html>
+<!DOCTYPE html> <!-- The new doctype -->
+
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>My site</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Coding A CSS3 &amp; HTML5 One Page Template | Tutorialzine demo</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+	<!-- Internet Explorer HTML5 enabling script: -->
+
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<style type="text/css">
+
+			.clear {
+				zoom: 1;
+				display: block;
+			}
+
+		</style>
+
+	<![endif]-->
+
 </head>
 <body>
-    <h1><a href="{{ url_for("index") }}">My site</a></h1>
-{% block content %}
-    <p>Default content to be displayed</p>
-{% endblock content %}
-</body>
-</html>
 
+	<section id="page"> <!-- Defining the #page section with the section tag -->
+
+	<header> <!-- Defining the header section of the page with the appropriate tag -->
+
+		<h1>Your Logo</h1>
+
+		<h3>and a fancy slogan</h3>
+
+		<nav class="clear"> <!-- The nav link semantically marks your main site navigation -->
+
+			<ul>
+
+				<li><a href="#article1">Photoshoot</a></li>
+				<li><a href="#article2">Sweet Tabs</a></li>
+				<li><a href="#article3">Navigation Menu</a></li>
+
+			</ul>
+
+		</nav>
+
+	</header>
+
+        {% block content %}
+          <p>Default content to be displayed</p>
+        {% endblock content %}
+
+
+  <footer> <!-- Marking the footer section -->
+
+    <div class="line"></div>
+
+    <p>Copyright 2010 - YourSite.com</p> <!-- Change the copyright notice -->
+    <a href="#" class="up">Go UP</a>
+    <a href="http://tutorialzine.com/" class="by">Template by Tutorialzine</a>
+
+  </footer>
+
+        </section> <!-- Closing the #page section -->
+
+<!-- JavaScript Includes -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/scripts/jquery.scrollTo-min.js"></script>
+<script src="/scripts/script.js"></script>
+
+</body>
+
+</html>

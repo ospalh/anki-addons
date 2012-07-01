@@ -39,14 +39,22 @@ def tag(tag):
 @app.route('/images/<fname>.png')
 def get_png(fname):
     filename = 'images/' + fname + '.png'
-    print 'load png: ', fname, ', ', filename
     return send_file(filename, mimetype='image/png')
 
 @app.route('/images/<fname>.jpg')
 def get_jpg(fname):
     filename = 'images/' + fname + '.jpg'
-    print 'load jpg: ', fname, ', ', filename
     return send_file(filename, mimetype='image/jpg')
+
+@app.route('/scripts/<fname>.js')
+def get_js(fname):
+    filename = 'scripts/' + fname + '.js'
+    return send_file(filename, mimetype='application/javascript')
+
+@app.route('/css/<fname>.css')
+def get_css(fname):
+    filename = 'css/' + fname + '.css'
+    return send_file(filename, mimetype='text/css')
 
 
 if __name__ == '__main__':
