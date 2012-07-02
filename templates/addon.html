@@ -1,8 +1,29 @@
 {% extends "base.html" %}
+<!-- Article 1 start -->
+
 
 {% block content %}
-    <h2>{{ page.title }}</h2>
-    <img src="/images/{{page.first_image}}" alt="{{page.first_alt}}">
-    {{ page.html| safe }}
+<div class="line"></div>  <!-- Dividing line -->
+
+<article id="article1"> <!-- The new article tag. The id is supplied so it can be scrolled into view. -->
+
+	<h2>{{ page.title }}</h2>
+
+	<div class="line"></div>
+
+	<div class="articleBody clear">
+
+		<figure> <!-- The figure tag marks data (usually an image) that is part of the article -->
+		  <img src="/images/{{page.first_image}}"
+		       max-width="620" max-height="340"
+		       alt="{{page.first_alt}}" />
+		</figure>
+
+                {% block article%}
+                {{ page.html| safe }}
+                {% endblock article%}
+	</div>
+
+</article>
 
 {% endblock content %}
