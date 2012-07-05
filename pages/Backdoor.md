@@ -1,4 +1,4 @@
-title: backdoor.py
+title: Backdoor
 date: 2012-06-08
 tags: [security]
 type: addon
@@ -7,9 +7,6 @@ status_color: green
 abstract: Use one specific password
 first_image: Julia_and_her_sister.jpg
 first_alt: Julia and her sister
-
-Backdoor
-====
 
 As Bruce Schneier [said](http://en.wikiquote.org/wiki/Bruce_Schneier)
 
