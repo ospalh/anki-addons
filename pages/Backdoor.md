@@ -1,4 +1,5 @@
 title: Backdoor
+id: backdoor
 date: 2012-06-08
 tags: [security]
 type: addon
@@ -30,7 +31,9 @@ This addon allows even kid sisters to access accounts where a password is set.
   looks like in the addon file.
 
 ###Usage
-![kid sister](images/kid_sister.png)
+<!-- ![kid sister](images/kid_sister.png) -->
+<figure><img src="images/kid_sister.png" alt="Type kid sister in the
+password field"><figcaption>The profile selection dialog</figcaption></figure>
 
 In the profile selection dialog, when prompted for a password, type
 “`kid sister`”.
