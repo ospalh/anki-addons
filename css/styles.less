@@ -2,6 +2,8 @@
 @bg-bg-color : #355664;
 @fg-color: #fcfcfc;
 @shd-color: #333;
+@aradius: 20px;
+@fradius: 10px;
 
 *{
 	/* Universal reset: */
@@ -140,11 +142,11 @@ nav{
 
 /* The navigation styling: */
 
-nav, article, nav ul li a,figure{
+nav, article, nav ul li a{
 	/* Applying CSS3 rounded corners: */
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
+	-moz-border-radius:@aradius;
+	-webkit-border-radius:@aradius;
+	border-radius:@aradius;
 }
 
 /* Article styles: */
@@ -172,13 +174,20 @@ figure{
 	overflow:hidden;
         max-width:620px;
         vertical-align: middle;
+	-moz-border-radius:@fradius;
+	-webkit-border-radius:@fradius;
+	border-radius:@fradius;
+
+        img{ margin-bottom: -@fradius;}
+        figcaption{ margin-top: @fradius; margin-left: 0.5 * @fradius}
+        &:hover{
+	    -moz-box-shadow:0 0 2px #4D7788;
+	    -webkit-box-shadow:0 0 2px #4D7788;
+	    box-shadow:0 0 2px #4D7788;
+        }
+
 }
 
-figure:hover{
-	-moz-box-shadow:0 0 2px #4D7788;
-	-webkit-box-shadow:0 0 2px #4D7788;
-	box-shadow:0 0 2px #4D7788;
-}
 
 figure img{
 /*	margin-left:-60px; */
@@ -233,4 +242,10 @@ blockquote {
 	    font-size: 220%;
 	    font-weight: bold; 
         }
+        &:hover{
+	    -moz-box-shadow:1px 2px 2px #4D7788;
+	    -webkit-box-shadow:1px 2px 2px #4D7788;
+	    box-shadow:1px 1px 2px #4D7788;
+        }
+
 }
