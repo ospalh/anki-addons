@@ -11,7 +11,7 @@
 import os
 from aqt import mw, clayout
 from aqt.qt import *
-from anki.hooks import wrap
+from anki.hooks import wrap, addHook
 
 """
 Add a standard tool bar to Anki2.
@@ -314,16 +314,53 @@ def maybe_more_tool_bar_on():
             pass
 
 
+
+def save_toolbars_visible():
+    mw.pm.profile['show_toolbar'] = show_text_tool_bar_action.isChecked()
+    mw.pm.profile['show_qt_toolbar'] = show_qt_tool_bar_action.isChecked()
+    mw.pm.profile['show_more_toolbar'] = show_more_tool_bar_action.isChecked()
+
+
+def save_toolbars_visible():
+    mw.pm.profile['ctb_show_toolbar'] = show_text_tool_bar_action.isChecked()
+    mw.pm.profile['ctb_show_qt_toolbar'] = show_qt_tool_bar_action.isChecked()
+    mw.pm.profile['ctb_show_more_toolbar'] = show_more_tool_bar_action.isChecked()
+
+def  load_toolbars_visible():
+    try:
+        ttb_on = mw.pm.profile['ctb_show_toolbar']
+    except KeyError:
+        ttb_on = False
+    show_text_tool_bar_action.setChecked(ttb_on)
+    toggle_text_tool_bar()    
+    try:
+        qtb_on = mw.pm.profile['ctb_show_qt_toolbar']
+    except KeyError:
+        qtb_on = True
+    show_qt_tool_bar_action.setChecked(qtb_on)
+    toggle_qt_tool_bar()
+    try:
+        mtb_on = mw.pm.profile['ctb_show_more_toolbar']
+    except KeyError:
+        mtb_on = True
+    show_more_tool_bar_action.setChecked(mtb_on)
+    # Don't toggle the more tool bar yet. It would be shown on the
+    # deck browser screen
+    # toggle_more_tool_bar()
+
+
 # Create the menus
 add_tool_bar()
 add_more_tool_bar()
 add_to_menus()
-mw.toolbar.web.hide()
+#mw.toolbar.web.hide()
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off) 
 mw.overview.show = wrap(mw.overview.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
 mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
+addHook("unloadProfile", save_toolbars_visible)
+addHook("profileLoaded", load_toolbars_visible)
 
 
