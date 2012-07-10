@@ -9,8 +9,7 @@
 
 
 import os
-from aqt import mw
-from aqt import clayout
+from aqt import mw, clayout
 from aqt.qt import *
 from anki.hooks import wrap
 
@@ -59,6 +58,26 @@ def go_edit_layout():
     except AttributeError:
         return
 
+def toggle_text_tool_bar():
+    if show_text_tool_bar_action.isChecked():
+        mw.toolbar.web.show()
+    else:
+        mw.toolbar.web.hide()
+
+def toggle_qt_tool_bar():
+    if show_qt_tool_bar_action.isChecked():
+        mw.qt_tool_bar.show()
+    else:
+        mw.qt_tool_bar.hide()
+
+def toggle_more_tool_bar():
+    # No real need to check if we are in review. Only then should we
+    # be able to activate the action.
+    if show_more_tool_bar_action.isChecked():
+        mw.reviewer.more_tool_bar.show()
+    else:
+        mw.reviewer.more_tool_bar.hide()
+        
 
 
 # Make all the actions top level, so we can use them for the menu and
@@ -111,6 +130,30 @@ mw.connect(edit_layout_action, SIGNAL("triggered()"), go_edit_layout)
 # NN_action.setText("Show NN")
 # NN_action.setIcon(QIcon(os.path.join(icons_dir, 'NN.png')))
 # mw.connect(NN_action, SIGNAL("triggered()"), mw.onNN)
+
+
+## Actions to show and hide the different tool bars.
+
+show_text_tool_bar_action = QAction(mw)
+show_text_tool_bar_action.setText("Show text tool bar")
+show_text_tool_bar_action.setCheckable(True)
+#show_text_tool_bar_action.setIcon(QIcon(os.path.join(icons_dir, 'browse.png')))
+mw.connect(show_text_tool_bar_action, SIGNAL("triggered()"), toggle_text_tool_bar)
+
+show_qt_tool_bar_action = QAction(mw)
+show_qt_tool_bar_action.setText("Show icon bar")
+show_qt_tool_bar_action.setCheckable(True)
+show_qt_tool_bar_action.setChecked(True)
+#show_qt_tool_bar_action.setIcon(QIcon(os.path.join(icons_dir, 'browse.png')))
+mw.connect(show_qt_tool_bar_action, SIGNAL("triggered()"), toggle_qt_tool_bar)
+
+show_more_tool_bar_action = QAction(mw)
+show_more_tool_bar_action.setText("Show more tool bar")
+show_more_tool_bar_action.setCheckable(True)
+show_more_tool_bar_action.setChecked(True)
+show_more_tool_bar_action.setEnabled(False)
+#show_more_tool_bar_action.setIcon(QIcon(os.path.join(icons_dir, 'browse.png')))
+mw.connect(show_more_tool_bar_action, SIGNAL("triggered()"), toggle_more_tool_bar)
 
 
 ## Add images to actions we already have. I skip a few where no icon
@@ -197,6 +240,7 @@ border-bottom: 1px solid #aaa;
     mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
     # Add the actions here
     mw.reviewer.more_tool_bar.addAction(sync_action)
+    more_tool_bar_off()
 
 
 def add_to_menus():
@@ -212,6 +256,12 @@ def add_to_menus():
     # Add sync to the file memu. It was there in Anki 1.
     mw.form.menuCol.insertAction(mw.form.actionImport, sync_action)
     # Make a new top level menu and insert it.
+    view_menu = QMenu("&View", mw)
+    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction() , view_menu)
+    view_menu.addAction(show_qt_tool_bar_action)
+    view_menu.addAction(show_text_tool_bar_action)
+    view_menu.addAction(show_more_tool_bar_action)
+    # And another one
     go_menu = QMenu("&Go", mw)
     mw.form.menubar.insertMenu(mw.form.menuTools.menuAction() , go_menu)
     # Add DSAB to the new go menu
@@ -229,34 +279,51 @@ def add_to_menus():
     edit_menu.addAction(edit_layout_action)
 
 
+
 def edit_actions_off():
     """Switch off the edit actions."""
-    edit_current_action.setEnabled(False)
-    edit_layout_action.setEnabled(False)
+    try:
+        edit_current_action.setEnabled(False)
+        edit_layout_action.setEnabled(False)
+    except AttributeError:
+        pass
+
 
 def edit_actions_on():
     """Switch on the edit actions."""
-    edit_current_action.setEnabled(True)
-    edit_layout_action.setEnabled(True)
+    try:
+        edit_current_action.setEnabled(True)
+        edit_layout_action.setEnabled(True)
+    except AttributeError:
+        pass
 
 def more_tool_bar_off():
+    show_more_tool_bar_action.setEnabled(False)
     try: 
         mw.reviewer.more_tool_bar.hide()
     except:
         pass
 
 
-def more_tool_bar_on():
-    try: 
-        mw.reviewer.more_tool_bar.show()
-    except:
-        pass
+def maybe_more_tool_bar_on():
+    show_more_tool_bar_action.setEnabled(True)
+    if show_qt_tool_bar_action.isChecked():
+        try: 
+            mw.reviewer.more_tool_bar.show()
+        except:
+            pass
 
 
+# Create the menus
 add_tool_bar()
-# add_more_tool_bar()
+add_more_tool_bar()
 add_to_menus()
 mw.toolbar.web.hide()
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off) 
 mw.overview.show = wrap(mw.overview.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
+mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
+mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
+mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
+
+
