@@ -307,7 +307,7 @@ def more_tool_bar_off():
 
 def maybe_more_tool_bar_on():
     show_more_tool_bar_action.setEnabled(True)
-    if show_qt_tool_bar_action.isChecked():
+    if show_more_tool_bar_action.isChecked():
         try: 
             mw.reviewer.more_tool_bar.show()
         except:
@@ -316,9 +316,9 @@ def maybe_more_tool_bar_on():
 
 
 def save_toolbars_visible():
-    mw.pm.profile['show_toolbar'] = show_text_tool_bar_action.isChecked()
-    mw.pm.profile['show_qt_toolbar'] = show_qt_tool_bar_action.isChecked()
-    mw.pm.profile['show_more_toolbar'] = show_more_tool_bar_action.isChecked()
+    mw.pm.profile['ctb_show_toolbar'] = show_text_tool_bar_action.isChecked()
+    mw.pm.profile['ctb_show_qt_toolbar'] = show_qt_tool_bar_action.isChecked()
+    mw.pm.profile['ctb_show_more_toolbar'] = show_more_tool_bar_action.isChecked()
 
 
 def save_toolbars_visible():
