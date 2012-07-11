@@ -1,11 +1,25 @@
-<ul>
 {% for page in pages %}
-    <li>
-      <span style="background-color:{{page.status_color}};">
-        <a href="{{ url_for("page", path=page.path) }}">{{ page.title }}</a></span>
-        {{ page.abstract | safe}}
-    </li>
+<article id="[[page.id}}"> 
+    <figure class="abstract">
+      <img src="/images/{{page.first_image}}"
+	   alt="{{page.first_alt}}" />
+    </figure>
+  <h2><a href="{{ url_for("page", path=page.path) }}">{{ page.title
+  }}</a></h2>
+
+  <div class="line"></div>
+  <div class="status">Status:
+    <span class=status_light
+    style="background-color:{{page.status_color}};
+    color:{{page.status_text_color}}; ">{{page.status}}</span></div>
+  <div class="line"></div>
+  <div class="articleBody clear">
+    {{ page.abstract| safe }}
+  </div>
+
+</article>
+
+
 {% else %}
-    <li>No page.</li>
+    <li>No pages.</li>
 {% endfor %}
-</ul>

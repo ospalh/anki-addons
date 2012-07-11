@@ -14,46 +14,41 @@
 <body>
   <section id="page">
     <header> 
-      <h1>Ospalh’s addons</h1>
+
+      <nav class="clear">
+	<ul>
+	  <li><a href="/">Home</a></li>
+          <li><a href="https://github.com/ospalh/anki-addons"
+                 class="code">View on GitHub</a></li>
+          <li><a href="https://github.com/ospalh/anki-addons/tarball/master"><span>Download tarball</span></a></li>
+          <li><a href="https://github.com/ospalh/anki-addons/zipball/master"
+                 class="download-button zip"><span>Download zipball</span></a></li>
+	</ul>
+      </nav>
+
+      <h1>anki-addons</h1>
       <h3>Lots of Anki2 add-ons</h3>
 
-		<nav class="clear"> <!-- The nav link semantically marks your main site navigation -->
-
-			<ul>
-
-				<li><a href="#article1">Photoshoot</a></li>
-				<li><a href="#article2">Sweet Tabs</a></li>
-				<li><a href="#article3">Navigation Menu</a></li>
-
-			</ul>
-
-		</nav>
-
-	</header>
+    </header>
 
         {% block content %}
-          <p>Default content to be displayed</p>
+          <p>There should be something interesting here, but
+        isn’t. Sorry about that.</p>
         {% endblock content %}
 
 
-  <footer> <!-- Marking the footer section -->
+    <footer>
+      <div class="line"></div>
 
-    <div class="line"></div>
+      
+      <span class="by"><a href="https://github.com/ospalh"><a href="https://github.com/ospalh">ospalh</a>
+      maintains <a href="https://github.com/ospalh/other-addons">anki-addons</a></span>
 
-    <p>Copyright 2010 - YourSite.com</p> <!-- Change the copyright notice -->
-    <a href="#" class="up">Go UP</a>
-    <a href="http://tutorialzine.com/" class="by">Template by Tutorialzine</a>
-
-  </footer>
-
-        </section> <!-- Closing the #page section -->
-
-<!-- JavaScript Includes -->
+      <a href="http://tutorialzine.com/" class="tmpl">Original template: Tutorialzine</a>
+    </footer>
+  </section>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="/scripts/jquery.scrollTo-min.js"></script>
 <script src="/scripts/script.js"></script>
-
 </body>
-
 </html>
