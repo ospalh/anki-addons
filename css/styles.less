@@ -39,6 +39,7 @@ a, a:visited {
   &:hover{
 	text-decoration:underline;
   }
+
 }
 
 
@@ -47,6 +48,9 @@ a, a:visited {
 h1,h2,h3{
 	font-family: "Praxis LT", "Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
 	text-shadow:0 1px 1px black;
+  a, a:visited {color: @fg-color;}
+
+
 }
 
 h1{
@@ -97,9 +101,9 @@ footer .line{
 
 nav{
 	background:url(/images/gradient_light.jpg) repeat-x 50% 50% #f8f8f8;
-	padding:0 5px;
-	position:absolute;
-	right:0;
+/*	padding:0 5px; */
+/*	position:absolute; */
+/*	right:0; */
 	top:4em;
 	
 	border:1px solid @fg-color;
@@ -185,7 +189,11 @@ figure{
 	    -webkit-box-shadow:0 0 2px #4D7788;
 	    box-shadow:0 0 2px #4D7788;
         }
-
+        
+        &.abstract{
+	    max-width:300px;
+	    max-height:150px;
+        }
 }
 
 
@@ -207,10 +215,13 @@ footer{
       position:relative;
   }
 
+  img {
+      vertical-align:text-top;
+  }
   a, a:visited{
       color:#cccccc;
-      background-color:#213e4a;
-      display:block;
+/*      background-color:#213e4a; */
+/*      display:block;*/
       padding:2px 4px;
       z-index:100;
       position:relative;
@@ -218,16 +229,13 @@ footer{
 	  text-decoration:none;
 	  background-color:#142830;
       }
-      &.by{
-	  float:left;
-          
-      }
-      &.up{
-	  float:right;
-      }
   }
-
-
+  .by{
+      float:left;
+  }
+  .tmpl{
+      float:right;
+  }
 }
 
 
@@ -249,3 +257,17 @@ blockquote {
         }
 
 }
+
+
+
+.status_light {
+	padding: 0.2em 0.2em;
+
+        &:hover{
+	    -moz-box-shadow:1px 2px 2px #4D7788;
+	    -webkit-box-shadow:1px 2px 2px #4D7788;
+	    box-shadow:1px 1px 2px #4D7788;
+        }
+
+}
+
