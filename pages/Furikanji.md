@@ -5,6 +5,7 @@ tags: [Japanese, template, kanji, furigana, rubi]
 type: addon
 status: obsolete
 status_color: yellow
+status_text_color: black
 abstract: Render kanji <em>above</em> the kana
 first_image: furikanji.png
 first_alt: Furikanji demo

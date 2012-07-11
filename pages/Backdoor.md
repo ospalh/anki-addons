@@ -5,7 +5,8 @@ tags: [security]
 type: addon
 status: working
 status_color: green
-abstract: Use one specific password
+status_text_color: white
+abstract: Use one specific password to access accounts “locked” with a password.
 first_image: Julia_and_her_sister.jpg
 first_alt: Julia and her sister
 
