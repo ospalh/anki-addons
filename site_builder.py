@@ -17,6 +17,8 @@ FLATPAGES_EXTENSION = '.md'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['DEBUG'] = True
+app.config['SERVER_PORT'] = 8080
 pages = FlatPages(app)
 freezer = Freezer(app)
 
@@ -61,4 +63,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == "build":
         freezer.freeze()
     else:
-        app.run(port=8023)
+        app.run(host='0.0.0.0', port=app.config.get('SERVER_PORT'))
