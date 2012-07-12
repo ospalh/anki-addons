@@ -3,14 +3,19 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 # Images:
 # most icons from Anki1
-# Exception: study.png,
+# Exceptions: study.png,
 # Found at http://www.vectorarts.net/vector-icons/free-study-book-icons/ ,
 # "Free for Personal and Commercial Use"
+#
+# The 'bury' and suspend icon were found at openclipart.org:
+# Free: http://creativecommons.org/publicdomain/zero/1.0/
+
 
 
 import os
 from aqt import mw, clayout
 from aqt.qt import *
+from aqt.utils import askUser
 from anki.hooks import wrap, addHook
 
 """
@@ -78,7 +83,9 @@ def toggle_more_tool_bar():
     else:
         mw.reviewer.more_tool_bar.hide()
         
-
+def ask_delete():
+    if askUser('Delete note?', defaultno=True):
+        mw.reviewer.onDelete()
 
 # Make all the actions top level, so we can use them for the menu and
 # the tool bar.
@@ -155,6 +162,41 @@ show_more_tool_bar_action.setEnabled(False)
 #show_more_tool_bar_action.setIcon(QIcon(os.path.join(icons_dir, 'browse.png')))
 mw.connect(show_more_tool_bar_action, SIGNAL("triggered()"), toggle_more_tool_bar)
 
+toggle_mark_action = QAction(mw)
+toggle_mark_action.setText("Mark")
+toggle_mark_action.setCheckable(True)
+toggle_mark_icon = QIcon()
+# Something's rotten.
+#toggle_mark_icon.addFile(fileName=os.path.join(icons_dir, 'mark_off.png'),
+#                         state=QIcon.Off)
+#toggle_mark_icon.addFile(fileName=os.path.join(icons_dir, 'mark_on.png'),
+#                         state=QIcon.On)
+# """TypeError: QIcon.addFile(QString, QSize size=QSize(), QIcon.Mode
+# mode=QIcon.Normal, QIcon.State state=QIcon.Off): 'state' is not a
+# valid keyword argument"""
+# What?
+# Off is default.
+toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_off.png'))
+# Provide all arguments in order. No point in guessing what the name of
+# state really is.
+toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_on.png'), QSize(),
+                         QIcon.Normal, QIcon.On)
+toggle_mark_action.setIcon(toggle_mark_icon)
+mw.connect(toggle_mark_action, SIGNAL("triggered()"), mw.reviewer.onMark)
+bury_action = QAction(mw)
+bury_action.setText("Bury note")
+bury_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
+mw.connect(bury_action, SIGNAL("triggered()"), mw.reviewer.onBuryNote)
+suspend_action = QAction(mw)
+suspend_action.setText("Suspend note")
+suspend_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend.png')))
+mw.connect(suspend_action, SIGNAL("triggered()"), mw.reviewer.onSuspend)
+delete_action = QAction(mw)
+delete_action.setText("Delete note")
+delete_action.setIcon(QIcon(os.path.join(icons_dir, 'delete.png')))
+mw.connect(delete_action, SIGNAL("triggered()"), ask_delete)
+
+
 
 ## Add images to actions we already have. I skip a few where no icon
 ## really fits.
@@ -172,6 +214,7 @@ mw.form.actionDownloadSharedPlugin.setIcon(
 mw.form.actionFullDatabaseCheck.setIcon(
     QIcon(os.path.join(icons_dir, 'check-db.png')))
 mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir, 'preferences.png')))
+
 
 
 ## Template for adding images:
@@ -207,6 +250,7 @@ border-bottom: 1px solid #aaa;
         mw.mainLayout.insertWidget(1, mw.qt_tool_bar)
     # Add the actions here
     mw.qt_tool_bar.addAction(sync_action)
+    mw.qt_tool_bar.addAction(edit_current_action)
     mw.qt_tool_bar.addAction(decks_action)
     mw.qt_tool_bar.addAction(overview_action)
     mw.qt_tool_bar.addAction(study_action)
@@ -239,7 +283,10 @@ border-bottom: 1px solid #aaa;
     # Todo: get index of the bottom web button thingy.
     mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
     # Add the actions here
-    mw.reviewer.more_tool_bar.addAction(sync_action)
+    mw.reviewer.more_tool_bar.addAction(toggle_mark_action)
+    mw.reviewer.more_tool_bar.addAction(bury_action)
+    mw.reviewer.more_tool_bar.addAction(suspend_action)
+    mw.reviewer.more_tool_bar.addAction(delete_action)
     more_tool_bar_off()
 
 
@@ -275,9 +322,14 @@ def add_to_menus():
     mw.form.menuTools.addAction(statistics_action)
     # Add to the edit menu. The undo looked a bit forlorn.
     edit_menu = mw.form.menuEdit
+    edit_menu.addSeparator()
     edit_menu.addAction(edit_current_action)
     edit_menu.addAction(edit_layout_action)
-
+    edit_menu.addSeparator()
+    edit_menu.addAction(bury_action)
+    edit_menu.addAction(toggle_mark_action)
+    edit_menu.addAction(suspend_action)
+    edit_menu.addAction(delete_action)
 
 
 def edit_actions_off():
@@ -285,6 +337,10 @@ def edit_actions_off():
     try:
         edit_current_action.setEnabled(False)
         edit_layout_action.setEnabled(False)
+        bury_action.setEnabled(False)
+        toggle_mark_action.setEnabled(False)
+        suspend_action.setEnabled(False)
+        delete_action.setEnabled(False)
     except AttributeError:
         pass
 
@@ -299,6 +355,10 @@ def edit_actions_on():
 
 def more_tool_bar_off():
     show_more_tool_bar_action.setEnabled(False)
+    bury_action.setEnabled(False)
+    toggle_mark_action.setEnabled(False)
+    suspend_action.setEnabled(False)
+    delete_action.setEnabled(False)
     try: 
         mw.reviewer.more_tool_bar.hide()
     except:
@@ -307,6 +367,10 @@ def more_tool_bar_off():
 
 def maybe_more_tool_bar_on():
     show_more_tool_bar_action.setEnabled(True)
+    bury_action.setEnabled(True)
+    toggle_mark_action.setEnabled(True)
+    suspend_action.setEnabled(True)
+    delete_action.setEnabled(True)
     if show_more_tool_bar_action.isChecked():
         try: 
             mw.reviewer.more_tool_bar.show()
@@ -349,6 +413,10 @@ def  load_toolbars_visible():
     # toggle_more_tool_bar()
 
 
+def update_mark_action():
+    toggle_mark_action.setChecked(mw.reviewer.card.note().hasTag("marked"))
+
+
 # Create the menus
 add_tool_bar()
 add_more_tool_bar()
@@ -359,6 +427,7 @@ mw.overview.show = wrap(mw.overview.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
 mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
+mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
 addHook("unloadProfile", save_toolbars_visible)
 addHook("profileLoaded", load_toolbars_visible)
