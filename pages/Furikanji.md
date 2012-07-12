@@ -1,5 +1,6 @@
 title: Furikanji
 id: furikanji
+main_file: Furikanji.py
 date: 2012-06-08
 tags: [Japanese, template, kanji, furigana, rubi]
 type: addon
@@ -12,6 +13,8 @@ first_alt: Furikanji demo
 
 Render kanji *above* the kana. Useful for listening comprehension.
 
+Use `{{furikanji:Field name}}` in the template.
 
-Use Furigana_mod instead.
+While this add-on works, it has been superseeded by
+[Furigana mod](/Furigana_mod.html).
 

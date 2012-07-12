@@ -1,5 +1,6 @@
 title: Backdoor
 id: backdoor
+main_file: backdoor.py
 date: 2012-06-08
 tags: [security]
 type: addon
@@ -24,12 +25,13 @@ This addon allows even kid sisters to access accounts where a password is set.
 
 ###Installation
 * Method 1: Copy the file to the Anki addons folder. I would suggest
-  to rename it, so the name is less conspiuous.
+  to rename it, so the name is less conspiuous. You probably also want
+  to remove the comment about Bruce Schneier.
 * Method 2: Insert the  part of the file from “`def shortLoad`” to the
   end into another addon already in the addons folder.
 * Method 3: If you are using a source installation, you may also patch
-  the “`load()`” method from “`ankiqt/aqt/profiles.py`”, so that it
-  looks like in the addon file.
+  the “`load`”-method from “`ankiqt/aqt/profiles.py`”, so that it
+  looks like “`shortLoad`” in the addon file.
 
 ###Usage
 <!-- ![kid sister](images/kid_sister.png) -->
@@ -38,3 +40,4 @@ password field"><figcaption>The profile selection dialog</figcaption></figure>
 
 In the profile selection dialog, when prompted for a password, type
 “`kid sister`”.
+
