@@ -19,15 +19,19 @@
 	<ul>
 	  <li><a href="/">Home</a></li>
           <li><a href="https://github.com/ospalh/anki-addons"
-                 class="code">View on GitHub</a></li>
-          <li><a href="https://github.com/ospalh/anki-addons/tarball/master"><span>Download tarball</span></a></li>
+                 class="code">GitHub project</a></li>
+          <li><a href="https://github.com/ospalh/anki-addons/tarball/master"><span>Project tarball</span></a></li>
           <li><a href="https://github.com/ospalh/anki-addons/zipball/master"
-                 class="download-button zip"><span>Download zipball</span></a></li>
+                 class="download-button zip"><span>Project
+                 zipball</span></a></li>
+          {%block sourcefile%}{%endblock sourcefile%}
 	</ul>
       </nav>
 
+{%block title%}
       <h1>anki-addons</h1>
       <h3>Lots of Anki2 add-ons</h3>
+{%endblock title%}
 
     </header>
 
@@ -40,7 +44,7 @@
 
 
     <footer>
-      
+      <div class="line"></div>
       <span class="by"><a href="https://github.com/ospalh"><a href="https://github.com/ospalh">ospalh</a>
       maintains <a href="https://github.com/ospalh/other-addons">anki-addons</a></span>
 

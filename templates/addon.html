@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 <!-- Article 1 start -->
 
+{%block htmltitle%} – {{ page.title }}{%endblock htmltitle%}
+
+{%block sourcefile%}
+<li><a href="https://github.com/ospalh/anki-addons/blob/master/{{page.main_file}}"
+       class="code">Add-on source file</a></li>
+{%endblock sourcefile%}
+
+
+{%block title%}
+    <h1>{{ page.title }}</h1>
+    <h3>An Anki2 add-on</h3>
+{%endblock title%}
+
 {% block content %}
 <article id="[[page.id}}"> 
-
-	<h2>{{ page.title }}</h2>
-
-	<div class="line"></div>
-
 	<div class="articleBody clear">
 
 		<figure> <!-- The figure tag marks data (usually an image) that is part of the article -->
@@ -21,5 +29,4 @@
 	</div>
 
 </article>
-<div class="line"></div>
 {% endblock content %}
