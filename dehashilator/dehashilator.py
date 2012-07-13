@@ -25,7 +25,7 @@ from aqt.qt import *
 from aqt.utils import showInfo, showText, askUser
 from anki.utils import ids2str, stripHTML
 
-name_source_fields = ['Reading', 'Expression', 'Kanji' ]
+name_source_fields = ['SequenceMarker','Reading', 'Expression', 'Kanji' ]
 
 ## Try to separate kanji and kana from the string to use. Convert
 ## something like 「お 父[とう]さん」 into “お父さん_おとうさん”. This
@@ -231,10 +231,10 @@ def dehashilate():
     for nid in progress(nids, "Dehashilating", "This is all wrong!"):
         n = mw.col.getNote(nid)
         for (name, value) in n.items():
-            for i in len(re.findall(hash_name_pat, value)):
+            for match in re.findall(hash_name_pat, value):
                 rs =  re.search(hash_name_pat, value)
                 if None == rs:
-                    # Should be redundant with the for "i ...:"
+                    # Should be redundant with the for match ...:
                     # loop. RAS 2012-06-23
                     continue
                 old_name = '{0}{1}'.format(rs.group(1), rs.group(2))
@@ -265,7 +265,15 @@ def dehashilate():
     # This is a bit of voodo code. Without it the cards weren't
     # synced. Maybe this helps. (Cribbed from anki.find, but don't
     # keep extra list of nids.) RAS 2012-06-20
-    mw.col.updateFieldCache([re_dict[nids] for re_dict in rename_exec_list])
+    # And it doesn't work. RAS 2012-07-13
+
+    # """File
+    # "/home/roland/Anki-tests/addons/dehashilator/dehashilator.py",
+    # line 268, in dehashilate 
+    # mw.col.updateFieldCache([re_dict[nids] for re_dict in
+    # rename_exec_list])
+    # TypeError: unhashable type: 'list'"""
+     # mw.col.updateFieldCache([re_dict[nids] for re_dict in rename_exec_list])
     mw.reset()
     if bad_mv_text:
         showText('These files weren’t renamed:\n' + test_string)
