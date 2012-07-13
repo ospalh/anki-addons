@@ -179,12 +179,13 @@ def test_and_dehashilate():
     if not test_names():
         showInfo('No hashes found in cards. Have a nice day.')
         return
-    if not askUser('Click on "No".\n'\
-                       'Clicking on "Yes" WILL mess up your collection\n'\
-                       '(You somehow got hold of an unfinished developement version.)'):
-        return
     if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'\
                        'Backup your collection before continuing!'):
+        return
+    if not askUser('Click on "No".\n'\
+                       'Clicking on "Yes" will probably mess up your collection.\n'\
+                       'You will have to fix it yourself!',
+                   defaultno=True):
         return
     dehashilate()
 
