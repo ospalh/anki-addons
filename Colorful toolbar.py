@@ -28,7 +28,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.0.5"
+__version__ = "1.0.5_os"
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -121,11 +121,12 @@ border-bottom: 1px solid #aaa;
         mw.qt_tool_bar.setMovable(False)
         mw.mainLayout.insertWidget(1, mw.qt_tool_bar)
     # Add the actions here
+    mw.qt_tool_bar.addAction(mw.form.actionSwitchProfile)
     mw.qt_tool_bar.addAction(sync_action)
     # Put this in the more tool bar, closer to the old edit button
     #    mw.qt_tool_bar.addAction(edit_current_action)
     mw.qt_tool_bar.addAction(decks_action)
-    mw.qt_tool_bar.addAction(overview_action)
+    # mw.qt_tool_bar.addAction(overview_action)
     mw.qt_tool_bar.addAction(study_action)
     mw.qt_tool_bar.addAction(add_notes_action)
     mw.qt_tool_bar.addAction(browse_cards_action)
@@ -159,6 +160,7 @@ border-bottom: 1px solid #aaa;
     mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
     # Add the actions here
     mw.reviewer.more_tool_bar.addAction(edit_current_action)
+    mw.reviewer.more_tool_bar.addAction(edit_layout_action)
     mw.reviewer.more_tool_bar.addAction(toggle_mark_action)
     mw.reviewer.more_tool_bar.addAction(bury_action)
     mw.reviewer.more_tool_bar.addAction(suspend_action)
