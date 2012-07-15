@@ -105,6 +105,7 @@ nav{
 /*	position:absolute; */
 /*	right:0; */
 	top:4em;
+	top-margin:4em;
 	
 	border:1px solid @fg-color;
 
@@ -241,20 +242,27 @@ footer{
 
 
 blockquote {
-	margin: 1em 2em;
-
-	padding-left: 1em; 
-        p:first-letter {
+    margin: 1em 2em;
+    padding-left: 1em; 
+    p:first-letter {
 	    float: left;
 	    margin: .2em .3em .1em 0;
 	    font-size: 220%;
 	    font-weight: bold; 
-        }
-        &:hover{
+    }
+    &:hover{
 	    -moz-box-shadow:1px 2px 2px #4D7788;
 	    -webkit-box-shadow:1px 2px 2px #4D7788;
 	    box-shadow:1px 1px 2px #4D7788;
-        }
+    }
+
+    &.nb:before {
+        content:"N.B.:";
+        float: left;
+        margin-right: .2em;
+        font-size: 220%;
+        font-weight: bold; 
+    }
 
 }
 
