@@ -10,16 +10,16 @@ import locale
 # I personally like the Swiss use of the apostroph as thousands separator.
 # locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
 
-millionsWord = (u' Millionen')
-billionsWord = (u' Milliarden')
+millions_word = (u' <span class="number_romaji">Millionen</span>')
+billions_word = (u' <span class="number_romaji">Milliarden</span>')
 
 
-def chMillionen(txt, *args):
-    sInt = 0
-    digitShift = 0
+def ch_millionen(txt, *args):
+    s_int = 0
+    digit_shift = 0
     # check if we have whole millions
     try:
-        sInt = int(txt)
+        s_int = int(txt)
         if float(txt) ==  0.0:
             # special special case. Normal exceptions: stuff like 0.5...
             # but make sure we go to the exception for true 0.
@@ -27,103 +27,108 @@ def chMillionen(txt, *args):
     except ValueError:
         # check if we have a whole number
         try:
-            sInt = int (1000000 * float(txt))
+            s_int = int (1000000 * float(txt))
         except ValueError:
             # Can’t get to an integer at all. forget special formarting.
             return txt
-        digitShift = 6
-        if sInt < 10000:
+        digit_shift = 6
+        if s_int < 10000:
             # Don’t group below 10000
-            return str(sInt)
-    if digitShift == 0 and sInt >= 1000:
-        digitShift = -2
-        sFloat = sInt / 1000.0
-        if sInt % 1000 == 0:
-            sInt =  sInt / 1000
-            digitShift = -3
-    sNumStr = u''
+            return str(s_int)
+    if digit_shift == 0 and s_int >= 1000:
+        digit_shift = -2
+        s_float = s_int / 1000.0
+        if s_int % 1000 == 0:
+            s_int =  s_int / 1000
+            digit_shift = -3
+    s_num_str = u''
     locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
-    if digitShift == -2:
-        sNumStr = locale.format('%.1f', sFloat, grouping=True)
+    if digit_shift == -2:
+        s_num_str = locale.format('%.1f', s_float, grouping=True)
     else:
-        sNumStr = locale.format('%d', sInt, grouping=True)
-    if digitShift == 0:
-        sNumStr += millionsWord
-    if digitShift <= -2:
-        sNumStr += billionsWord
-    return sNumStr
+        s_num_str = locale.format('%d', s_int, grouping=True)
+    s_num_str = '<span class="number_arab">{0}</span>'.format(s_num_str)
+    if digit_shift == 0:
+        s_num_str += millions_word
+    if digit_shift <= -2:
+        s_num_str += billions_word
+    return s_num_str
 
-def chTSqKm(txt, *args):
-    digitShift = 3
-    sFloat = 0.0
+def ch_t_sqkm(txt, *args):
+    digit_shift = 3
+    s_float = 0.0
     try:
-        sFloat = 1000 * float(txt)
+        s_float = 1000 * float(txt)
     except ValueError:
         # Not a number.
         return txt
-    sInt = int (sFloat)
-    if  sInt < 10000:
+    s_int = int (s_float)
+    if  s_int < 10000:
         # Don’t group. That’s some rule to write numbers like 7500 w/o
         # grouping.
-        if sInt == sFloat:
-            return str(sInt) + u' km²'
-        return str(sFloat) + u' km²'
-    if sInt >= 1000000:
-        digitShift = -5
-        sFloat = sInt / 1000000.0
-        if sInt % 1000000 == 0:
-            sInt =  sInt / 1000000
-            digitShift = -6
-    sNumStr = u''
+        if s_int == s_float:
+            return str(s_int) + u' <span class="number_romaji">km²</span>'
+        return str(s_float) + u' <span class="number_romaji">km²</span>'
+    if s_int >= 1000000:
+        digit_shift = -5
+        s_float = s_int / 1000000.0
+        if s_int % 1000000 == 0:
+            s_int =  s_int / 1000000
+            digit_shift = -6
+    s_num_str = u''
     locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
-    if digitShift == -5:
-        sNumStr = locale.format('%.1f', sFloat, grouping=True)
+    if digit_shift == -5:
+        s_num_str = locale.format('%.1f', s_float, grouping=True)
     else:
-        sNumStr = locale.format('%d', sInt, grouping=True)
-    if digitShift <= -5:
+        s_num_str = locale.format('%d', s_int, grouping=True)
+    s_num_str = '<span class="number_arab">{0}</span>'.format(s_num_str)
+    if digit_shift <= -5:
         # Squaremegametres. What else?!
-        sNumStr += u' Mm²'
+        s_num_str += u' <span class="number_romaji">Mm²</span>'
     else:
-        sNumStr += u' km²'
-    return sNumStr
+        s_num_str += u' <span class="number_romaji">km²''</span>'
+    return s_num_str
 
 
 
-def jpMan(txt, *args):
+def jp_man(txt, *args):
     # We cheat a bit. We know that we won’t have 一億km².
-    iFloat = 0.0
+    i_float = 0.0
     try:
-        iFloat = float(txt)
+        i_float = float(txt)
     except ValueError:
         # Not a number.
         return txt
-    iInt = int(iFloat)
-    mFloat = iFloat / 10.0
-    mInt = int(mFloat)
-    if iFloat < 10.0 or mInt != mFloat:
-        iFloat *= 1000
-        iInt = int(iFloat)
-        if iInt == iFloat:
-            return str(iInt)
-        return str(iFloat)
-    return str(mFloat) + u'万'
+    i_int = int(i_float)
+    m_float = i_float / 10.0
+    m_int = int(m_float)
+    if i_float < 10.0 or m_int != m_float:
+        i_float *= 1000
+        i_int = int(i_float)
+        if i_int == i_float:
+            i_str = locale.format('%d', i_int, grouping=True)
+            return '<span class="number_arab">{0}</span>'.format(i_str)
+        f_str = locale.format('%f', i_float, grouping=True)
+        return '<span class="number_arab">{0}</span>'.format(f_str)
+    return str(m_float) + u'<span class="number_kanji">万</span>'
 
 
 # 
-def chInteger(txt, *args):
-    sInt = 0
+def ch_integer(txt, *args):
+    s_int = 0
     try:
-        sInt = int(txt)
+        s_int = int(txt)
     except ValueError:
         return txt
     locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
-    sIntStr = locale.format('%d', sInt, grouping=True)
-    return sIntStr
+    s_int_str = locale.format('%d', s_int, grouping=True)
+    s_int_str = '<span class="number_arab">{0}</span>'.format(s_int_str)
+    return s_int_str
 
 
 
 
-addHook('fmod_swissmega', chMillionen)
-addHook('fmod_swisssqkm', chTSqKm)
-addHook('fmod_swissint', chInteger)
-addHook('fmod_jpman', jpMan)
+addHook('fmod_swissmega', ch_millionen)
+addHook('fmod_swisssqkm', ch_t_sqkm)
+addHook('fmod_swissint', ch_integer)
+addHook('fmod_jpman', jp_man)
