@@ -28,7 +28,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.0.5_os"
+__version__ = "1.0.6os"
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -197,7 +197,8 @@ def add_to_menus():
     mw.form.menubar.insertMenu(mw.form.menuTools.menuAction() , go_menu)
     # Add DSAB to the new go menu
     go_menu.addAction(decks_action)
-    go_menu.addAction(overview_action)
+    # Another personal taste edit: i don't like the overview page.
+    #go_menu.addAction(overview_action)
     go_menu.addAction(study_action)
     go_menu.addAction(add_notes_action)
     go_menu.addAction(browse_cards_action)
