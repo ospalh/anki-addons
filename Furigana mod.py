@@ -22,7 +22,7 @@ Also add a few other templates.
 
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2os"
 
 try:
     # Just a dummy call to re.sub to see if the flags work. I think it
@@ -37,8 +37,10 @@ except TypeError:
 else:
     # Pretty much what this is about. Use unicode word characters in
     # the pattern and flags=re.UNICODE below. Also name the groups so
-    # the code below becomes a bit more readable. 
-    split_pat = u' ?(?P<kanji>\w+?)\[(?P<kana>.+?)\]'
+    # the code below becomes a bit more readable. The extra characters
+    # in the kanji group are just to my personal taste. I learn those
+    # characters as Japanese "words".
+    split_pat = u' ?(?P<kanji>[-+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
     
 
 furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
