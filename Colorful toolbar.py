@@ -126,7 +126,8 @@ border-bottom: 1px solid #aaa;
     #    mw.qt_tool_bar.addAction(edit_current_action)
     mw.qt_tool_bar.addAction(decks_action)
     mw.qt_tool_bar.addAction(overview_action)
-    mw.qt_tool_bar.addAction(study_action)
+    # Keep in line with the old tool bar. Don't show in standard version.
+    # mw.qt_tool_bar.addAction(study_action)
     mw.qt_tool_bar.addAction(add_notes_action)
     mw.qt_tool_bar.addAction(browse_cards_action)
     mw.qt_tool_bar.addAction(statistics_action)
