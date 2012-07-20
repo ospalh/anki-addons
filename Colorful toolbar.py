@@ -126,7 +126,7 @@ border-bottom: 1px solid #aaa;
     # Put this in the more tool bar, closer to the old edit button
     #    mw.qt_tool_bar.addAction(edit_current_action)
     mw.qt_tool_bar.addAction(decks_action)
-    # mw.qt_tool_bar.addAction(overview_action)
+    #mw.qt_tool_bar.addAction(overview_action)
     mw.qt_tool_bar.addAction(study_action)
     mw.qt_tool_bar.addAction(add_notes_action)
     mw.qt_tool_bar.addAction(browse_cards_action)
@@ -198,7 +198,7 @@ def add_to_menus():
     # Add DSAB to the new go menu
     go_menu.addAction(decks_action)
     # Another personal taste edit: i don't like the overview page.
-    #go_menu.addAction(overview_action)
+    go_menu.addAction(overview_action)
     go_menu.addAction(study_action)
     go_menu.addAction(add_notes_action)
     go_menu.addAction(browse_cards_action)
