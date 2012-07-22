@@ -28,13 +28,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.0.6"
-
-## Position of the new toolbar: either starting out above the old tool
-## bar and movable, or below the old tool bar. In that case it can't
-## be dragged to another position.
-qt_toolbar_movable = True
-# qt_toolbar_movable = False
+__version__ = "1.0.6nb"
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
@@ -103,23 +97,17 @@ def add_tool_bar():
     mw.qt_tool_bar = QToolBar()
     # mw.qt_tool_bar.setAccessibleName('secondary tool bar')
     mw.qt_tool_bar.setObjectName('qt tool bar')
-    mw.qt_tool_bar.setIconSize(QSize(32,32))
+    mw.qt_tool_bar.setIconSize(QSize(24,24))
     mw.qt_tool_bar.setStyleSheet(
         '''QToolBar{
-background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff, stop:1 #ddd);
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #fff, stop:1 #ddd);
 border: none;
 border-bottom: 1px solid #aaa;
 }
 ''')
-    # Conditional setup
-    if qt_toolbar_movable:
-        mw.qt_tool_bar.setFloatable(True)
-        mw.qt_tool_bar.setMovable(True)
-        mw.addToolBar(mw.qt_tool_bar)
-    else:
-        mw.qt_tool_bar.setFloatable(False)
-        mw.qt_tool_bar.setMovable(False)
-        mw.mainLayout.insertWidget(1, mw.qt_tool_bar)
+    mw.qt_tool_bar.setFloatable(True)
+    mw.qt_tool_bar.setMovable(True)
+    mw.addToolBar(Qt.LeftToolBarArea, mw.qt_tool_bar)
     # Add the actions here
     mw.qt_tool_bar.addAction(sync_action)
     # Put this in the more tool bar, closer to the old edit button
@@ -149,15 +137,14 @@ def add_more_tool_bar():
     mw.reviewer.more_tool_bar.setIconSize(QSize(24,24))
     mw.reviewer.more_tool_bar.setStyleSheet(
         '''QToolBar{
-background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff, stop:1 #ddd);
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #fff, stop:1 #ddd);
 border: none;
 border-bottom: 1px solid #aaa;
 }
 ''')
-    mw.reviewer.more_tool_bar.setFloatable(False)
-    mw.reviewer.more_tool_bar.setMovable(False)
-    # Todo: get index of the bottom web button thingy.
-    mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
+    mw.reviewer.more_tool_bar.setFloatable(True)
+    mw.reviewer.more_tool_bar.setMovable(True)
+    mw.addToolBar(Qt.RightToolBarArea, mw.reviewer.more_tool_bar)
     # Add the actions here
     mw.reviewer.more_tool_bar.addAction(edit_current_action)
     mw.reviewer.more_tool_bar.addAction(toggle_mark_action)
