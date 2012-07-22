@@ -121,7 +121,7 @@ border-bottom: 1px solid #aaa;
         mw.qt_tool_bar.setMovable(False)
         mw.mainLayout.insertWidget(1, mw.qt_tool_bar)
     # Add the actions here
-    mw.qt_tool_bar.addAction(mw.form.actionSwitchProfile)
+    # mw.qt_tool_bar.addAction(mw.form.actionSwitchProfile)
     mw.qt_tool_bar.addAction(sync_action)
     # Put this in the more tool bar, closer to the old edit button
     #    mw.qt_tool_bar.addAction(edit_current_action)
