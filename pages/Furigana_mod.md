@@ -68,6 +68,14 @@ it naturally does not work with AnkiWeb or AnkiDroid (or, presumably,
 the iOS client). Here the text is renderend as it is seen in the edit
 screen, with the square brackets.
 
+
+### Boxed and boxkana
+
+The `boxed` template surrounds the field text with a dashed box. The
+`boxkana` template creates an empty box and sets the field text as
+ruby above the box. A typical use for the latter is learning kanji,
+when the reading is given as a hint.
+
 ### Furigana, kanji and reading templates
 
 The `{{furigana:Field NN}}`, `{{kanji:Field NN}}` and `{{reading:Field
