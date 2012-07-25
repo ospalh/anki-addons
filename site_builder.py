@@ -24,8 +24,11 @@ freezer = Freezer(app)
 
 @app.route('/')
 def index():
-    addons_pages = [p for p in pages if 'addon' in p.meta.get('type', [])]
-    return render_template('index.html', pages=addons_pages)
+    green_addons = [p for p in pages if 'green' in p.meta.get('status_color', [])]
+    yellow_addons = [p for p in pages if 'yellow' in p.meta.get('status_color', [])]
+    red_addons = [p for p in pages if 'red' in p.meta.get('status_color', [])]
+    return render_template('index.html', green=green_addons,
+                           yellow=yellow_addons, red=red_addons)
 
 
 @app.route('/<path:path>.html')

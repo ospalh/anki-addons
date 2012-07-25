@@ -5,7 +5,20 @@ date: 2012-07-02
 
 
 {% block content %}
-    {% with pages= pages  %}
+    {% with pages = green  %}
         {% include "_abstract.html" %}
     {% endwith %}
+
+<div class="line"></div>
+
+    {% with pages = yellow  %}
+        {% include "_abstract.html" %}
+    {% endwith %}
+
+<div class="line"></div>
+
+    {% with pages = red  %}
+        {% include "_abstract.html" %}
+    {% endwith %}
+
 {% endblock content %}
