@@ -71,10 +71,20 @@ screen, with the square brackets.
 
 ### Boxed and boxkana
 
+<figure style="max-width:125px;"><img src="images/boxed.png"
+alt="ausruhen やすむ"><img src="images/boxkana.png"
+alt="ausruhen やすむ"><figcaption>Two ways to show the reading of a
+kanji you want to learn.
+</figcaption></figure>
+
 The `boxed` template surrounds the field text with a dashed box. The
 `boxkana` template creates an empty box and sets the field text as
 ruby above the box. A typical use for the latter is learning kanji,
-when the reading is given as a hint.
+when the reading is given as a hint. For the figure,
+`{{boxed:Lesung}}` and `{{boxkana:Lesung}}` has been used in the front
+template of a
+„[Die Kanji Lernen und Behalten](http://www.kanji-lernen.de/)“ deck,
+the German version of “Remembering the Kanji”.
 
 ### Furigana, kanji and reading templates
 
