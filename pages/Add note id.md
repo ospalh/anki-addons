@@ -22,13 +22,10 @@ case, for example with an example sentence.
 The solution is to add the number that Anki uses internally to
 identify the note to the note itself.
 
-To use, the first field in the card model must be named "Note ID"
+To use, the first field in the card model must be named "Note ID".
+Then, when adding content, this field is automatically filled with the
+note id when you move the cursor to another field.
 
-Add the nid (note id) to a field named "Note ID" when adding or
-editing notes, when that field loses focus. When the “Note ID”
-field is the first field, this automatically satisfies the rule
-that the first field has to be unique.  That means the “real”
-fields with interesting content don’t have to be
-unique. (Personally, for synonyms i like to have the same content
-in the “Expression” or “Meaning” fields, and then put further
-information in note or disambiguation fields.)
+#### Limitation
+This add-on does not provide a way to update existing cards en
+masse.
