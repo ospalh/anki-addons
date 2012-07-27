@@ -14,7 +14,7 @@ from aqt import mw
 from aqt.qt import *
 from aqt.utils import askUser
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 
 
