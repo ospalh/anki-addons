@@ -7,7 +7,7 @@ type: addon
 status: for desktop use only
 status_color: yellow
 status_text_color: black
-abstract: Improved way to parse kanji and readings, a way to rendder kanji the kana and a few other display hacks.
+abstract: Improved way to parse kanji and readings, a way to render kanji the kana and a few other display hacks.
 first_image: furikanji.png
 first_alt: Furikanji demo
 
