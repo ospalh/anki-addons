@@ -166,6 +166,8 @@ border-bottom: 1px solid #aaa;
     mw.reviewer.more_tool_bar.addAction(suspend_action)
     mw.reviewer.more_tool_bar.addAction(delete_action)
     mw.reviewer.more_tool_bar.addSeparator()
+    mw.reviewer.more_tool_bar.addAction(mw.form.actionUndo)
+    mw.reviewer.more_tool_bar.addSeparator()
     mw.reviewer.more_tool_bar.addAction(options_action)
     mw.reviewer.more_tool_bar.addSeparator()
     mw.reviewer.more_tool_bar.addAction(replay_action)
