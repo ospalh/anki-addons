@@ -260,6 +260,7 @@ def dehashilate():
                     else:
                         new_names_dict[old_name] = new_name
                     n[name] = value.replace(old_name, new_name)
+                    n.flush()
                     rename_exec_list.append(dict(nid=nid,flds=n.joinedFields()))
     mw.col.db.executemany("update notes set flds =:flds where id =:nid",
                           rename_exec_list)
