@@ -26,6 +26,10 @@ To use, the first field in the card model must be named "Note ID".
 Then, when adding content, this field is automatically filled with the
 note id when you move the cursor to another field.
 
-#### Limitation
-This add-on does not provide a way to update existing cards en
-masse.
+
+#### Menu
+There is also an item in the Tools menu that goes through the whole
+collection and adds note ids to all empty Note ID fields. This is
+useful when adding the field to decks you already
+have. ([UTSL](http://www.jargon.net/jargonfile/u/UTSL.html) to hide the
+menu item.)
