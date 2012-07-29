@@ -1,8 +1,6 @@
 title: Kanji stroke color
 id: kanjistrokecolor
 main_file: Kanji stroke colour.py
-date: 2012-05-13
-tags: [svg, kanji, color, desktop]
 type: addon
 status: hackish, desktop only
 status_color: yellow

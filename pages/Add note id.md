@@ -1,8 +1,6 @@
 title: Add note id
 id: add_nid
 main_file: Add note id.py
-date: 2012-06-18
-tags: [field, add, unique, nid]
 type: addon
 status: working
 status_color: green

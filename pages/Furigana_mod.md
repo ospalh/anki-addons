@@ -1,8 +1,6 @@
 title: Modified furigana
 id: furigana_mod
 main_file: Furikanji_mod.py
-date: 2012-06-08
-tags: [Japanese, template, kanji, furigana, rubi]
 type: addon
 status: for desktop use only
 status_color: yellow

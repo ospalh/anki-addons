@@ -1,8 +1,6 @@
 title: Backdoor
 id: backdoor
 main_file: backdoor.py
-date: 2012-06-08
-tags: [security]
 type: addon
 status: working
 status_color: green
