@@ -24,9 +24,15 @@ freezer = Freezer(app)
 
 @app.route('/')
 def index():
-    green_addons = [p for p in pages if 'green' in p.meta.get('status_color', [])]
-    yellow_addons = [p for p in pages if 'yellow' in p.meta.get('status_color', [])]
-    red_addons = [p for p in pages if 'red' in p.meta.get('status_color', [])]
+    green_addons = [p for p in pages if 
+                    'green' in p.meta.get('status_color', [])
+                    and 'addon' in p.meta.get('type', [])]
+    yellow_addons = [p for p in pages if 
+                     'yellow' in p.meta.get('status_color', [])
+                     and 'addon' in p.meta.get('type', [])]
+    red_addons = [p for p in pages if 
+                  'red' in p.meta.get('status_color', [])
+                  and 'addon' in p.meta.get('type', [])]
     return render_template('index.html', green=green_addons,
                            yellow=yellow_addons, red=red_addons)
 
@@ -36,10 +42,6 @@ def page(path):
     page = pages.get_or_404(path)
     return render_template('addon.html', page=page)
 
-@app.route('/tag/<string:tag>/')
-def tag(tag):
-    tagged = [p for p in pages if tag in p.meta.get('tags', [])]
-    return render_template('tag.html', pages=tagged, tag=tag)
 
 @app.route('/images/<fname>.png')
 def get_png(fname):
