@@ -1,6 +1,6 @@
 title: Modified furigana
-id: furigana_mod
-main_file: Furikanji_mod.py
+id: furiganamod
+main_file: Furigana mod.py
 type: addon
 status: for desktop use only
 status_color: yellow
