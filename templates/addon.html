@@ -3,10 +3,18 @@
 
 {%block htmltitle%} – {{ page.title }}{%endblock htmltitle%}
 
-{%block sourcefile%}
+{%block morelinks%}
 <li><a href="https://github.com/ospalh/anki-addons/blob/master/{{page.main_file}}"
-       class="code">Add-on source file</a></li>
-{%endblock sourcefile%}
+       class="code">Add-on source</a></li>
+{% if page.ankiweb_id %}
+<li><a href="http://beta.ankiweb.net/shared/info/{{page.ankiweb_id}}"
+       class="code">AnkiWeb download</a></li>
+{% endif %}
+{% if page.download_file %}
+<li><a href="https://github.com/downloads/ospalh/anki-addons/{{page.download_file}}"
+       class="code">Package download</a></li>
+{% endif %}
+{%endblock morelinks%}
 
 
 {%block title%}
@@ -18,7 +26,7 @@
 <article id="{{page.id}}"> 
 	<div class="articleBody clear">
 
-		<figure> <!-- The figure tag marks data (usually an image) that is part of the article -->
+		<figure>
 		  <img src="/images/{{page.first_image}}"
 		       alt="{{page.first_alt}}" />
 		</figure>
