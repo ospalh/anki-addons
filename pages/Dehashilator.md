@@ -8,6 +8,7 @@ status_text_color: white
 abstract: Rename media files with names that look like MD5 hashes.
 first_image: hashes.png
 first_alt: Old and new file names.
+download_file: dehashilator.zip
 
 Rename media files with names that look like MD5 hashes.
 <blockquote class=nb>This add-on is likely to break your
