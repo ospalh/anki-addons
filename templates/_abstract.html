@@ -6,6 +6,9 @@
     </figure>
   <h2><a href="{{ url_for("page", path=page.path) }}">{{ page.title
   }}</a></h2>
+    {%if page.subtitle%}
+    <h4>{{page.subtitle}}</h4>
+    {%endif%}
 
   <div class="line"></div>
   <div class="status">Status:
