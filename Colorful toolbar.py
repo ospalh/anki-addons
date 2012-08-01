@@ -28,11 +28,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-<<<<<<< HEAD
 __version__ = "1.0.6os"
-=======
-__version__ = "1.0.6"
->>>>>>> master
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -130,14 +126,8 @@ border-bottom: 1px solid #aaa;
     # Put this in the more tool bar, closer to the old edit button
     #    mw.qt_tool_bar.addAction(edit_current_action)
     mw.qt_tool_bar.addAction(decks_action)
-<<<<<<< HEAD
     #mw.qt_tool_bar.addAction(overview_action)
     mw.qt_tool_bar.addAction(study_action)
-=======
-    mw.qt_tool_bar.addAction(overview_action)
-    # Keep in line with the old tool bar. Don't show in standard version.
-    # mw.qt_tool_bar.addAction(study_action)
->>>>>>> master
     mw.qt_tool_bar.addAction(add_notes_action)
     mw.qt_tool_bar.addAction(browse_cards_action)
     mw.qt_tool_bar.addAction(statistics_action)
