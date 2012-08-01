@@ -17,7 +17,7 @@ the template `{{kanjiColor:NN}}`.
 ### Alternative
 
 This add-on serves a similar purpose as
-[cayennes](http://cayennes.github.com)’s 
+[cayennes](http://cayennes.github.com)’s
  [add-on](https://github.com/cayennes/kanji-colorize/tree/master/anki)
  part of the kanji-colorize project.
 
@@ -32,11 +32,11 @@ This add-on serves a similar purpose as
 #### Cons
 
 * The core function, color, is not working on AnkiWeb/AnkiDroid
-* The set-up of Cayennes's add-on may be easier on the add-on side.
+* The set-up of Cayennes' add-on may be easier on the add-on side.
 
 ### Diagrams
 
-The diagrams can be produced with either Cayenne's
+The diagrams can be produced with either Cayenne'
 [kanji-colorize](https://github.com/cayennes/kanji-colorize/) script
 or with [my fork](https://github.com/ospalh/kanji-colorize) of it.
 

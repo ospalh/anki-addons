@@ -11,9 +11,9 @@ first_alt: The idea is to pick the stroke colors from an image file.
 
 This is a work in progress that is intended to replace my
 [Kanji stroke color](/Kanji stroke colour.html) add-on and possibly
-coexist with [cayennes](http://cayennes.github.com)’s
+coexist with [cayennes](http://cayennes.github.com)’
 [add-on](https://github.com/cayennes/kanji-colorize/tree/master/anki),
-this one used on desktop clients, cayennes’s on AnkiWeb and mobile
+this one used on desktop clients, cayennes’ on AnkiWeb and mobile
 devices.
 
 ### Goals
@@ -25,7 +25,7 @@ devices.
 * Add other effects, such as shadows, or possibly animation, on the fly. Again, with
   different parameters at different times.
 * Use this as a normal template or to replace the svgs/images from
-  cayennes’s add-on
+  cayennes’ add-on
   
 ## Data set
 
