@@ -1,10 +1,10 @@
 title: Play with sox
 id: sox
 main_file: Play wit sox.py
-status: early development
+status: useless
 type: addon
 status_color: red
-status_text_color: useless
+status_text_color: white
 abstract: The idea was to make flac and ogg audio files usable on Windows systems.
 first_image: sox-out.png
 first_alt: Console output of sox
@@ -19,7 +19,7 @@ installed. The idea was simple. As sox can handle ogg and falc files,
 why not play those files with sox‽ 
 
 Unfortunately, while sox
-can convert and in other ways process, some versions don’t play audio
+can convert and in other ways process lots of audio formats, some versions don’t play audio
 on Windows systems. Also, it appears that the newest Anki installs
 don’t come with sox any more.
 
