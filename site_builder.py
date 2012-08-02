@@ -63,6 +63,11 @@ def get_css(fname):
     filename = 'css/' + fname + '.css'
     return send_file(filename, mimetype='text/css')
 
+@app.route('/css/<fname>.less')
+def get_css(fname):
+    filename = 'css/' + fname + '.less'
+    return send_file(filename, mimetype='text/css')
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == "build":
