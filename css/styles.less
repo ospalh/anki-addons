@@ -4,6 +4,7 @@
 @shd-color: #333;
 @aradius: 20px;
 @fradius: 10px;
+@slradius: 3px;
 
 *{
 	/* Universal reset: */
@@ -45,7 +46,7 @@ a, a:visited {
 
 /* Headings: */
 
-h1,h2,h3{
+h1,h2,h3,h4{
 	font-family: "Praxis LT", "Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
 	text-shadow:0 1px 1px black;
   a, a:visited {color: @fg-color;}
@@ -54,24 +55,39 @@ h1,h2,h3{
 }
 
 h1{
-	/* The logo text */
-	font-size:3.5em;
-	padding:0.5em 0 0;
+
+    /* The logo text */
+    
+    font-size:3.5em;
+    padding:0.5em 0 0;
 }
 
-h3{
-	/* The slogan text */
-	font-family: "Praxis LT", forte,"Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
-	font-size:2em;
-	font-weight:normal;
-	margin:0 0 1em;
+header 
+{
+    padding-top: 20px;
+    h1{}
+    h3{
+        margin:0 0 1em;
+    }
+    h2{
+	letter-spacing:0.01em;
+    }
 }
 
 
 h2{
 	font-size:2.2em;
 	font-weight:normal;
-	letter-spacing:0.01em;
+}
+
+h3{
+	/* The slogan text */
+	font-size:1.7em;
+        font-weight:normal;
+}
+
+h4{
+    font-size:1.2em;
 }
 
 p{
@@ -104,6 +120,7 @@ nav{
 /*	padding:0 5px; */
 /*	position:absolute; */
 /*	right:0; */
+
 	top:4em;
 	top-margin:4em;
 	
@@ -113,23 +130,22 @@ nav{
 	-webkit-box-shadow:0 1px 1px @shd-color;
 	box-shadow:0 1px 1px @shd-color;
 
-
   ul li{
       display:inline;
       a,
       a:visited{
-	color:#565656;
-	display:block;
-	float:left;
-	font-size:1.25em;
-	font-weight:bold;
-	margin:5px 2px;
-	padding:7px 10px 4px;
-	text-shadow:0 1px 1px white;
-        &:hover{
-	text-decoration:none;
-	background-color:#f0f0f0;
-        }
+	  color:#565656;
+	  display:block;
+	  float:left;
+	  font-size:1.25em;
+	  font-weight:bold;
+	  margin:5px 2px;
+	  padding:7px 10px 4px;
+	  text-shadow:0 1px 1px white;
+          &:hover{
+	      text-decoration:none;
+	      background-color:#f0f0f0;
+          }
       }
   }
 
@@ -154,10 +170,13 @@ nav, article, nav ul li a{
 	border-radius:@aradius;
 }
 
+
 /* Article styles: */
 
 #page{
-	width:960px;
+	width:85%;
+	min-width:400px;
+	max-width:900px;
 	margin:0 auto;
 	position:relative;
 }
@@ -177,7 +196,8 @@ figure{
 	/* max-height:300px; */
 	margin-left:15px;
 	overflow:hidden;
-        max-width:620px;
+        /*max-width:620px;*/
+        max-width:95%;
         vertical-align: middle;
 	-moz-border-radius:@fradius;
 	-webkit-border-radius:@fradius;
@@ -192,6 +212,8 @@ figure{
         }
         
         &.abstract{
+	    /* max-width:300px; */
+	    /* max-height:150px; */
 	    max-width:300px;
 	    max-height:150px;
         }
@@ -270,6 +292,11 @@ blockquote {
 
 .status_light {
 	padding: 0.2em 0.2em;
+
+	-moz-border-radius:@slradius;
+	-webkit-border-radius:@slradius;
+	border-radius:@slradius;
+
 
         &:hover{
 	    -moz-box-shadow:1px 2px 2px #4D7788;
