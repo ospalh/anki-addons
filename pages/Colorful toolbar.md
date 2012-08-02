@@ -35,7 +35,7 @@ space. On github, there is also a branch and package named
 with a slightly different icon selection more to the personal taste of
 the author.
 
-<figure style="max-width:562px;"><img src="images/toolbar netbook.png" alt="Anki 2 with the 
+<figure style=width:562px;"><img src="images/toolbar netbook.png" alt="Anki 2 with the 
 tool bar at the left and right.  The review area reads Die Hauptstadt
 von Niue ist">
 <img src="images/toolbar ospalh.png" alt="Anki 2 with a study icon
@@ -53,7 +53,7 @@ personal taste of the user.
 
 ## What *is* the capital of Niue?
 
-<figure  style="max-width:562px;"><img src="images/Niue Alofi.png" alt="Anki 2. The review area
+<figure  style=width:562px;"><img src="images/Niue Alofi.png" alt="Anki 2. The review area
 reads Die Hauptstadt von Niue ist Alofi">
 </figure>
 [Alofi](http://en.wikipedia.org/wiki/Alofi).
