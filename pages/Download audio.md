@@ -5,7 +5,7 @@ status: early development
 type: addon
 status_color: red
 status_text_color: white
-abstract: The goal is to automatically download pronunciations from severl sites.
+abstract: The goal is to automatically download pronunciations from several sites.
 first_image: dl_code.png
 first_alt: Bits of the code.
 
