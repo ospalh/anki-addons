@@ -25,6 +25,14 @@ Study Add Browse” functions can also be reached through the "Go" menu.
 
 ## Variants
 
+<figure style=width:562px;" class="clear"><img src="images/toolbar netbook.png"
+alt="Anki 2 with the tool bar at the left and right.  The review area
+reads Die Hauptstadt von Niue ist"> <img src="images/toolbar ospalh.png"
+alt="Anki 2 with a study icon and an undo icon.  The
+review area reads Die Hauptstadt von Niue ist"> <figcaption>Two
+variants of the arrangement and selection of icons.</figcaption>
+</figure>
+
 Appart from the standard version, there is a
 [netbook version](http://beta.ankiweb.net/shared/info/1330596667)
 on the AnkiWeb
@@ -35,12 +43,6 @@ space. On github, there is also a branch and package named
 with a slightly different icon selection more to the personal taste of
 the author.
 
-<figure style=width:562px;"><img src="images/toolbar netbook.png" alt="Anki 2 with the 
-tool bar at the left and right.  The review area reads Die Hauptstadt
-von Niue ist">
-<img src="images/toolbar ospalh.png" alt="Anki 2 with a study icon
-and an undo icon.  The review area reads Die Hauptstadt von Niue ist">
-<figcaption>Two variants of the arrangement and selection of icons.</figcaption> </figure>
 
 [UTSL](http://www.jargon.net/jargonfile/u/UTSL.html) for further
 changes to the icons shown.
@@ -53,7 +55,6 @@ personal taste of the user.
 
 ## What *is* the capital of Niue?
 
-<figure  style=width:562px;"><img src="images/Niue Alofi.png" alt="Anki 2. The review area
-reads Die Hauptstadt von Niue ist Alofi">
-</figure>
+<figure style=width:562px;"><img src="images/Niue Alofi.png" alt="Anki
+2. The review area reads Die Hauptstadt von Niue ist Alofi"> </figure>
 [Alofi](http://en.wikipedia.org/wiki/Alofi).
