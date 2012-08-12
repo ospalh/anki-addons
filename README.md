@@ -3,6 +3,8 @@ anki-addons
 
 Some Anki2 add-ons in different states of usefulness and bugginess.
 
+See [http://ospalh.github.com/anki-addons/](http://ospalh.github.com/anki-addons/) for a full list.
+
 The more useful include:
 
 ## backdoor.py
