@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 
-from anki.sound import playFromText
+from anki.sound import playFromText, play
 from aqt import utils, reviewer
 
 sound_re = '\[sound:(.*?)\]'
@@ -48,7 +48,7 @@ def patched_play_from_text(text):
     # Still here, neither all mp3 nor all playable with play. The
     # classical sound.play.
     for match in matches:
-        sound.play(match)
+        play(match)
 
 
 def play_with_mpg321(files):
