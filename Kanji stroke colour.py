@@ -57,7 +57,7 @@ def kanji_stroke_color(txt, *args):
             fname = get_file_name(c)
             if fname:
                 rtxt +=  u'<img class="kanjicolor" alt="{kanji}" '\
-                    'src="file://{fname}">'.format(kanji=c, fname=fname)
+                    'src="{fname}">'.format(kanji=c, fname=fname)
             else:
                 rtxt += c
         else:
@@ -78,7 +78,7 @@ def kanji_stroke_color_spectrum(txt, *args):
             fname = get_file_name(c, 'spectrum')
             if fname:
                 rtxt +=  u'<img class="kanjicolor" alt="{kanji}" '\
-                    'src="file://{fname}">'.format(kanji=c, fname=fname)
+                    'src="{fname}">'.format(kanji=c, fname=fname)
             else:
                 rtxt += c
         else:
@@ -100,7 +100,7 @@ def kanji_stroke_color_contrast(txt, *args):
             fname = get_file_name(c, 'contrast')
             if fname:
                 rtxt +=  u'<img class="kanjicolor" alt="{kanji}" '\
-                    'src="file://{fname}">'.format(kanji=c, fname=fname)
+                    'src="{fname}">'.format(kanji=c, fname=fname)
             else:
                 rtxt += c
         else:
@@ -121,7 +121,7 @@ def first_kanji_stroke_color(txt, *args):
     if not fname:
         return u''
     return u'<img class="kanjicolor" alt="{kanji}" '\
-        'src="file://{fname}">'.format(kanji=txt[0], fname=fname)
+        'src="{fname}">'.format(kanji=txt[0], fname=fname)
 
 
 def first_kanji_stroke_color_spectrum(txt, *args):
@@ -136,7 +136,7 @@ def first_kanji_stroke_color_spectrum(txt, *args):
     if not fname:
         return u''
     return u'<img class="kanjicolor" alt="{kanji}" '\
-        'src="file://{fname}">'.format(kanji=txt[0], fname=fname)
+        'src="{fname}">'.format(kanji=txt[0], fname=fname)
 
 
 def first_kanji_stroke_color_contrast(txt, *args):
@@ -151,7 +151,7 @@ def first_kanji_stroke_color_contrast(txt, *args):
     if not fname:
         return u''
     return u'<img class="kanjicolor" alt="{kanji}" '\
-        'src="file://{fname}">'.format(kanji=txt[0], fname=fname)
+        'src="{fname}">'.format(kanji=txt[0], fname=fname)
 
 
 hooks.addHook('fmod_kanjiColor', kanji_stroke_color)
