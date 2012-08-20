@@ -91,7 +91,7 @@ def firstKanjiStrokeColourSpectrum(txt, *args):
     if not fname:
         return u''
     return u'<img class="kanjicolor" alt="{kanji}" '\
-        'src="{fname}">'.format(kanji=txt[0], fname=fname)
+        'src="file://{fname}">'.format(kanji=txt[0], fname=fname)
 
 
 def firstKanjiStrokeColourContrast(txt, *args):
