@@ -53,8 +53,17 @@ japanese_reading_keys = ["reading", "kana", u'かな',u'仮名']
 audio_field_keys = ["audio", "sound"]
 
 
-def get_fields(card=None, note=None, japanese=False):
+def get_side_fields(card, japanese=False):
+    """
+    Get a list of the audio fields "visible" at the moment.
 
+    Return a list of all the audio fields on the currently visible
+    side of the current card.
+    """
+    return []
+
+
+def get_note_fields(note, japanese=False):
     return []
 
 
