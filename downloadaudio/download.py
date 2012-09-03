@@ -26,7 +26,7 @@ Google TTS: Get pronunciations from the Google Text-To-Speech service. These are
             robot voices, so be a bit suspicous about them.
 Forvo: Try to get pronunciations from the crowd-sourced forvo.com.
        Pronunciations are often noisy and may turn out to be wrong. To
-       use this serivec, you need to register at forvo.com and gat a
+       use this service, you need to register at forvo.com and get a
        “developer” key. The free service is limited to 1000 requests
        per day.
 
