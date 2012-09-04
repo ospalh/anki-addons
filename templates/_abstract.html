@@ -4,7 +4,7 @@
       <img src="/images/{{page.first_image}}"
 	   alt="{{page.first_alt}}" />
     </figure>
-  <h2><a href="{{ url_for("page", path=page.path) }}">{{ page.title
+  <h2><a href="/anki-addons{{ url_for("page", path=page.path) }}">{{ page.title
   }}</a></h2>
     {%if page.subtitle%}
     <h4>{{page.subtitle}}</h4>

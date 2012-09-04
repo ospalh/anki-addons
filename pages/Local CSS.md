@@ -31,9 +31,9 @@ as before.
 
 ### Classes 
 
-The add-on adds the classes `loc` to all cards, The model and template
+The add-on adds the classes `loc` to all cards. The model and template
 names of each card are reduced to the characters `a` to `z`, `A` to `Z`, `0` to `9`
-and `_` and added as classes as well, in the form of , `model_NN` and
+and `_` and added as classes as well, in the form of `model_NN` and
 `template_NN`. As an example, the second card (`card1`) of a model or
 note type called “Satz Japanese 日本語” and that is called “Hörübung”
 would have the css classes `card card1 model_SatzJapanese
@@ -41,9 +41,9 @@ template_Hrbung`. These classes can be used to build CSS selectors.
 
 ### Standard use
 
-To apply a style to the whole card only on a specific computer, the
-`user_sytle.css` file on that computer should use the CSS selector
-`.loc.card`. The example in the bottom of the example image was done with 
+To apply a style to the whole card only on a specific computer, use the
+`user_sytle.css` file on that computer. You should use the CSS selector
+`.loc.card`. The example in the bottom of the image was done with 
 <blockquote><pre><code>.loc.card{ 
     font-family: Linux Biolinum O;
     background-color: #ededff;
@@ -78,7 +78,7 @@ the <tt>c</tt> and the <tt>.</tt>.
 
 Applying different styles to different cards works in a similar way.
 
-As an example, i use a standard style of balck on light blue for
+As an example, i use a standard style of black on light blue for
 standard cards and black ond light red for grammar cards. In the
 alternative style i use light colored text on dark background, dark
 green for normal cards and dark red for grammar cards. The standard

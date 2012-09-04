@@ -40,8 +40,7 @@ on the AnkiWeb
 the two icon bars to the left and right, to preserve vertical screen
 space. On github, there is also a branch and package named
 [`ospalh-special`](https://github.com/downloads/ospalh/anki-addons/colorful_toolbar_ospalh-special.zip)
-with a slightly different icon selection more to the personal taste of
-the author.
+with a slightly different icon selection more to my personal taste.
 
 
 [UTSL](http://www.jargon.net/jargonfile/u/UTSL.html) for further

@@ -17,7 +17,7 @@ the template `{{kanjiColor:NN}}`.
 ### Alternative
 
 This add-on serves a similar purpose as
-[cayennes](http://cayennes.github.com)’s
+[cayennes](http://cayennes.github.com)’
  [add-on](https://github.com/cayennes/kanji-colorize/tree/master/anki)
  part of the kanji-colorize project.
 
