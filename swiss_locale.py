@@ -139,17 +139,15 @@ def jp_man(txt, *args):
     return str(m_float) + u'<span class="number_kanji">万</span>'
 
 
-#
 def ch_integer(txt, *args):
-    s_int = 0
+    """
+    Return text formated as a swiss integer if possible.
+    """
     try:
         s_int = int(txt)
     except ValueError:
         return txt
-    locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
-    s_int_str = locale.format('%d', s_int, grouping=True)
-    s_int_str = '<span class="number_arab">{0}</span>'.format(s_int_str)
-    return s_int_str
+    return swiss_format(s_int)
 
 
 
