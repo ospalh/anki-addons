@@ -94,6 +94,7 @@ def ch_t_sqkm(txt, *args):
     * Return txt multiplied by 1'000 with km<sup>2</sup> added when it is <1000
     * Return txt divided by 1'000 with Mm<sup>2</sup> added when it is >=1000
     When txt is reformated, it uses the Swiss thousands separator of "'".
+    The text is also wrapped in some classes.
     This gives nice formating for area numbers in my geography deck.
     """
     # Total rework. RAS 2012-09-06
@@ -118,25 +119,33 @@ def ch_t_sqkm(txt, *args):
 
 
 def jp_man(txt, *args):
-    # We cheat a bit. We know that we won’t have 一億km².
-    i_float = 0.0
+    """
+    Return the text reformated for my geography deck.
+
+    * Return txt when it is not a number
+    * Return txt multiplied by 1'000 when it is <10
+    * Return txt divided by 10 with "万" added when it is >=10
+    The text is also wrapped in some classes.
+    This gives nice formating for area numbers for Japanese
+    prefectures in my geography deck.
+    """
+    # Total rework. RAS 2012-09-06
+    # Parts taken from my "days" script, see
+    # https://github.com/ospalh/age/blob/master/days
     try:
-        i_float = float(txt)
-    except ValueError:
-        # Not a number.
+        dec_kilo = decimal.Decimal(txt)
+    except decimal.InvalidOperation:
+        # No number
         return txt
-    i_int = int(i_float)
-    m_float = i_float / 10.0
-    m_int = int(m_float)
-    if i_float < 10.0 or m_int != m_float:
-        i_float *= 1000
-        i_int = int(i_float)
-        if i_int == i_float:
-            i_str = locale.format('%d', i_int, grouping=True)
-            return '<span class="number_arab">{0}</span>'.format(i_str)
-        f_str = locale.format('%f', i_float, grouping=True)
-        return '<span class="number_arab">{0}</span>'.format(f_str)
-    return str(m_float) + u'<span class="number_kanji">万</span>'
+    dks, dkd, dke = dec_kilo.as_tuple()
+    # order of magnitude +1
+    omagp = len(dkd) + dke
+    # We cheat a bit. We know that we won’t have 一億km². No check for
+    # >=6.
+    if omagp >= 2:
+        return arab_format_string.format(float(dec_kilo)/10.0) + \
+            u'<span class="number_kanji">万</span>'
+    return arab_format_string.format(int(dec_kilo*1000))
 
 
 def ch_integer(txt, *args):
