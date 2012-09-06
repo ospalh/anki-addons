@@ -36,7 +36,7 @@ def swiss_format(num):
     """
     do_group = (num >= 10000)
     if not isMac:
-        locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
+        locale.setlocale(locale.LC_NUMERIC, ('de_CH', 'UTF-8'))
         num_string = locale.format('%d', num, grouping=do_group)
     else:
         num_string = str(num)
