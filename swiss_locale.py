@@ -86,40 +86,35 @@ def ch_millionen(txt, *args):
 
 
 def ch_t_sqkm(txt, *args):
-    digit_shift = 3
-    s_float = 0.0
-    try:
-        s_float = 1000 * float(txt)
-    except ValueError:
-        # Not a number.
-        return txt
-    s_int = int (s_float)
-    if  s_int < 10000:
-        # Don’t group. That’s some rule to write numbers like 7500 w/o
-        # grouping.
-        if s_int == s_float:
-            return str(s_int) + u' <span class="number_romaji">km²</span>'
-        return str(s_float) + u' <span class="number_romaji">km²</span>'
-    if s_int >= 1000000:
-        digit_shift = -5
-        s_float = s_int / 1000000.0
-        if s_int % 1000000 == 0:
-            s_int =  s_int / 1000000
-            digit_shift = -6
-    s_num_str = u''
-    locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
-    if digit_shift == -5:
-        s_num_str = locale.format('%.1f', s_float, grouping=True)
-    else:
-        s_num_str = locale.format('%d', s_int, grouping=True)
-    s_num_str = '<span class="number_arab">{0}</span>'.format(s_num_str)
-    if digit_shift <= -5:
-        # Squaremegametres. What else?!
-        s_num_str += u' <span class="number_romaji">Mm²</span>'
-    else:
-        s_num_str += u' <span class="number_romaji">km²''</span>'
-    return s_num_str
+    """
+    Return the text reformated for my geography deck.
 
+    * Return txt when it is not a number
+
+    * Return txt multiplied by 1'000 with km<sup>2</sup> added when it is <1000
+    * Return txt divided by 1'000 with Mm<sup>2</sup> added when it is >=1000
+    When txt is reformated, it uses the Swiss thousands separator of "'".
+    This gives nice formating for area numbers in my geography deck.
+    """
+    # Total rework. RAS 2012-09-06
+    # Parts taken from my "days" script, see
+    # https://github.com/ospalh/age/blob/master/days
+    try:
+        dec_kilo = decimal.Decimal(txt)
+    except decimal.InvalidOperation:
+        # No number
+        return txt
+    dks, dkd, dke = dec_kilo.as_tuple()
+    # order of magnitude +1
+    omagp = len(dkd) + dke
+    if omagp >= 4:
+        return arab_format_string.format(float(dec_kilo)/1000.0) + \
+            u' <span class="number_romaji">Mm<sup>2</sup></span>'
+    if dke < -3:
+        return str(float(dec_kilo)*1000.0) + \
+            u' <span class="number_romaji">km<sup>2</sup></span>'
+    return swiss_format(int(dec_kilo*1000)) + \
+        u' <span class="number_romaji">km<sup>2</sup></span>'
 
 
 def jp_man(txt, *args):
