@@ -4,55 +4,86 @@
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 # Based off Kieran Clancy's initial implementation.
 
-from anki.hooks import addHook
 import locale
+import decimal
+from anki.hooks import addHook
+from anki.utils import isMac
+
+"""
+Anki-2 add-on to format numbers just the way i like them.
+"""
 
 # I personally like the Swiss use of the apostroph as thousands separator.
 # locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
 
+__version__ = '1.1.0'
+
 millions_word = (u' <span class="number_romaji">Millionen</span>')
 billions_word = (u' <span class="number_romaji">Milliarden</span>')
+arab_format_string = '<span class="number_arab">{0}</span>'
+
+sigfig = 2
+
+def swiss_format(num):
+    """
+    Return the number num as a string with Swiss formating.
+
+    Return the number num as a string with Swiss formating, but don't
+    use a thousands separator for numbers < 10'000. Also wrap the
+    number in a span with class number_arab.
+
+    There seems to be a problem with locales on Macs, so just wrap in
+    the span there.
+    """
+    do_group = (num >= 10000)
+    if not isMac:
+        locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
+        num_string = locale.format('%d', num, grouping=do_group)
+    else:
+        num_string = str(num)
+    return arab_format_string.format(num_string)
+
 
 
 def ch_millionen(txt, *args):
-    s_int = 0
-    digit_shift = 0
-    # check if we have whole millions
+    """
+    Return the text reformated for my geography deck.
+
+    * Return txt when it is not a number or when it is 0
+    * Return txt multiplied by 1'000'000 when it is <1
+    * Return txt with the words Millionen added when it is >=1 and <
+      1000
+    * Return txt with the words Billionen added when it is >= 1000
+    When txt is reformated, it uses the Swiss thousands separator of "'".
+    This gives nice formating for inhabitans numbers in my geography deck.
+    """
+    # Total rework. RAS 2012-09-06
+    # Parts taken from my "days" script, see
+    # https://github.com/ospalh/age/blob/master/days
     try:
-        s_int = int(txt)
-        if float(txt) ==  0.0:
-            # special special case. Normal exceptions: stuff like 0.5...
-            # but make sure we go to the exception for true 0.
-            raise ValueError
-    except ValueError:
-        # check if we have a whole number
-        try:
-            s_int = int (1000000 * float(txt))
-        except ValueError:
-            # Can’t get to an integer at all. forget special formarting.
-            return txt
-        digit_shift = 6
-        if s_int < 10000:
-            # Don’t group below 10000
-            return str(s_int)
-    if digit_shift == 0 and s_int >= 1000:
-        digit_shift = -2
-        s_float = s_int / 1000.0
-        if s_int % 1000 == 0:
-            s_int =  s_int / 1000
-            digit_shift = -3
-    s_num_str = u''
-    locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
-    if digit_shift == -2:
-        s_num_str = locale.format('%.1f', s_float, grouping=True)
-    else:
-        s_num_str = locale.format('%d', s_int, grouping=True)
-    s_num_str = '<span class="number_arab">{0}</span>'.format(s_num_str)
-    if digit_shift == 0:
-        s_num_str += millions_word
-    if digit_shift <= -2:
-        s_num_str += billions_word
-    return s_num_str
+        dec_mega = decimal.Decimal(txt)
+    except decimal.InvalidOperation:
+        # No number
+        return txt
+    if 0 == dec_mega:
+        # Case "0 Einwohner" == "0 Millionen Einwohner"
+        return txt
+
+    dms, dmd, dme = dec_mega.as_tuple()
+    # order of magnitude +1
+    omagp = len(dmd) + dme
+    # billons
+    if omagp >= 4:
+        return arab_format_string.format(float(dec_mega)/1000.0) + billions_word
+    # Full millions
+    if dme >= 0:
+        # No need to do the swiss formating here. It is the point of
+        # the billions exercise that we have <1000 million here. And we don't
+        # really need it until 10 billions.
+        return str(int(dec_mega)) + millions_word
+    # Less than a million or something like 3.5 million.
+    return swiss_format(int(dec_mega*1000000))
+
 
 def ch_t_sqkm(txt, *args):
     digit_shift = 3
@@ -113,7 +144,7 @@ def jp_man(txt, *args):
     return str(m_float) + u'<span class="number_kanji">万</span>'
 
 
-# 
+#
 def ch_integer(txt, *args):
     s_int = 0
     try:
