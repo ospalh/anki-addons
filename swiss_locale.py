@@ -36,8 +36,15 @@ def swiss_format(num):
     """
     do_group = (num >= 10000)
     if not isMac:
-        locale.setlocale(locale.LC_NUMERIC, ('de_CH', 'UTF-8'))
-        num_string = locale.format('%d', num, grouping=do_group)
+        # AFAIK loading locales on Macs didn't throw an exception, but
+        # gave ugly layout. So don't try it there.
+        try:
+            # On the other hand, i have problems loading the swiss
+            # locale on some other systems. So only try it.
+            locale.setlocale(locale.LC_NUMERIC, ('de_CH', 'UTF-8'))
+            num_string = locale.format('%d', num, grouping=do_group)
+        except:
+            num_string = str(num)
     else:
         num_string = str(num)
     return arab_format_string.format(num_string)
