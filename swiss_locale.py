@@ -22,7 +22,6 @@ millions_word = (u' <span class="number_romaji">Millionen</span>')
 billions_word = (u' <span class="number_romaji">Milliarden</span>')
 arab_format_string = '<span class="number_arab">{0}</span>'
 
-sigfig = 2
 
 def swiss_format(num):
     """
