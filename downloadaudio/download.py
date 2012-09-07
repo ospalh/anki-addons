@@ -200,6 +200,8 @@ def get_note_fields(note, japanese=False):
                     pass
     return field_pairs_list
 
+def download_fields(note, general_pairs, japanese_pairs):
+    pass
 
 
 def download_for_side():
