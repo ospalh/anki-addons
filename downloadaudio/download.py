@@ -5,14 +5,20 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
 import re
+import os
 from aqt import mw
-from anki.card import Card
-from anki.note import Note
+from aqt.qt import *
+
+#from anki.cards import Card
+#from anki.notes import Note
 from anki.hooks import addHook
 
-from forvo import get_word_from_forvo
-from google_tts import get_word_from_google
-from japansepod  import get_word_from_jpod
+#from forvo import get_word_from_forvo
+#from google_tts import get_word_from_google
+#from japansepod  import get_word_from_jpod
+
+# debug:
+from aqt.utils import showText
 
 """
 Anki2 add-on to download pronunciations.
@@ -57,6 +63,7 @@ audio_field_keys = ["audio", "sound"]
 
 ## End configuration area
 
+icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
 # Change this at your own risk.
 field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
@@ -69,101 +76,117 @@ def uniqify_list(seq):
     [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
     return no_dupes
 
-def candidate_field_names(fname, readings=False):
+def field_source_name(note, fname, readings=False):
     """
-    Return a list of candidate source field names derived from fname.
+    Return a suitable source field name.
 
-    When fname does not contain any string from audio_field_keys, an
-    empty list is returned.
+    Look for a suitable field to get the source text from and return it.
+    If no suitable field is found, a KeyError is raised.
 
-    There are four ways the candidate name is generated:
+    There are four ways the source field is determined:
     * readings is False:
       * when fname is in one of the strings is audio_field_key,
         expression_fields is used as list of candidates
-      * when the audio_field_key is only a substring, that substring
+      * when the audio_field_key is only a substring of fname, that substring
         and a trailing or leading ' ' or '_' is removed and that used
-        as the candidate
-    * readings is False:
+        as the candidate.
+    * readings is True:
       * when fname is in one of the strings is audio_field_key,
         japanese_reading_keys is used as list of candidates
       * when the audio_field_key is only a substring, that substring
         is replaced by the strings from japanese_reading_keys
+
+    The first field that matches the candidate is used.  Comparisions
+    are done with lowercase strings, the uppercase name is returned.
     """
-    fname = fname.lower()
-    candidate_names = []
+    t_name = fname.lower()
+    field_names = [item[0] for item in note.items()]
+    f_names = [fn.lower() for fn in field_names]
     for afk in audio_field_keys:
-        if fname == afk:
-            if reading:
-                return japanese_reading_keys
+        if t_name == afk:
+            if readings:
+                sources_list = japanese_reading_keys
             else:
-                return expression_fields
-        if not afk in fname:
-            Continue
-        todo # do the replacing described above
-
-
-
-
-def fids_for_name(fname, readings=False):
-    """
-    Return a pair of field ids for fname.
-
-    Return a pair of field ids when a field named fname is found in
-    the current card's model and when a suitable field to get the text
-    for the download from is found. When either of these fields is not
-    found, a KeyError is raised. A KeyError is also raised when no
-    string from audio_field_key is found in fname.
-
-    The 'suitable' field is determined by another function.
-    """
-    audio_fid = fid_for_name(fname)
-    candidates = candidate_field_names(fname, readings)
-    for candidate in  candidates:
-        try:
-            source_fid = fid_for_name(candidate)
-        except KeyError as ke:
+                sources_list = expression_fields
+            for cnd in sources_list:
+                for idx, lname in enumerate(f_names):
+                    if cnd == lname:
+                        return field_names[idx]
+            # At this point: The target name is good, but we found no
+            # source name.
+            raise KeyError("No source name found (case 1)")
+        # This point: target name is not exactly the field name
+        if not afk in t_name:
+            # And not a substring either
             continue
-        return (audio_fid, source_fid)
-    # Still here. Either no candidate name at all or no field found
-    # for any.
-    raise KeyError("No source field found.")
+        # Here: the field name contains an audio or sound.
+        # Mangle the name as described. For the readings case we get a
+        # list. So do a list for the other case as well.
+        if readings:
+            sources_list = [t_name.replace(afk, rk)
+                            for rk in japanese_reading_keys]
+        else:
+            # Here the tricky bit is to remove the right number of '_'
+            # or ' ' characters, 0 or 1, but not 2. What we want is:
+            # ExampleAudio -> Example
+            # Example_Audio -> Example
+            # Audio_Example -> Example
+            # but
+            # Another_Audio_Example -> Another_Example, not Another_Example
+            # While a bit tricky, this is not THAT hard to do. (Not
+            # lookbehind needed.)
+            sources_list = [re.sub('[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
+                                   '', t_name, count=1)]
+        for cnd in sources_list:
+            for idx, lname in enumerate(f_names):
+                if cnd == lname:
+                    return field_names[idx]
+        # We do have audio or sound as sub-string but did not find a
+        # maching field.
+        raise KeyError("No source field found. (case 2)")
+    # No audio field at all.
+    raise KeyError("No source field found. (case 3)")
 
-def get_side_fields(japanese=False):
+
+
+
+
+def get_side_fields(card, note, japanese=False):
     """
-    Get a list of field ids for "visible" download fields.
+    Get a list of field name pairs for "visible" download fields.
 
     Check the visible side of the current card for fields that contain
     a string from audio_field_keys.
     Then check the
     """
-    try:
-        card = mw.reviewer.card
-    except:
-        return []
-    if not card:
-        return []
     if 'question' == mw.reviewer.state:
         template = card.template()[u'qfmt']
     else:
         template = card.template()[u'afmt']
-    field_name_list = []
+    audio_field_name_list = []
     for afk in audio_field_keys:
         # Append all fields in the current template/side that contain
         # 'audio' or 'sound'
-        field_name_list.append(re.findall(field_name_re % (afk, ), template,
-                                   flags=re.IGNORECASE))
-    field_name_list = uniqify_list(field_name_list)
-    field_ids_list = []
-    for fname in field_ids_list:
+        audio_field_name_list += re.findall(field_name_re % (re.escape(afk), ),
+                                            template, flags=re.IGNORECASE)
+    audio_field_name_list = uniqify_list(audio_field_name_list)
+    all_field_names = [item[0] for item in note.items()]
+    # Filter out non-existing fields.
+    audio_field_name_list = [fn for fn in audio_field_name_list
+                             if fn in all_field_names]
+    field_pairs_list = []
+    for fname in audio_field_name_list:
         try:
-            field_ids_list.append(fids_for_name(fname, readings=japanese))
+            field_pairs_list.append((field_source_name(note, fname,
+                                                       readings=japanese),
+                                     fname))
         except KeyError:
             pass
-    return field_ids_list
+    return field_pairs_list
 
 
 
-def get_note_fields(note, japanese=False):
+def get_note_field_pairs(note, japanese=False):
     return []
 
 
@@ -172,33 +195,67 @@ def download_for_side():
     card = mw.reviewer.card
     if not card:
         return
-    general_fields = get_fields(card=card)
-    japanese_fields = get_fields(card=card, japanese=True)
+    note = card.note()
+    # Brainstorm: things to use:
+    # note.items()
+    # note.model()
+    # field_names = [item[0] for item in note.items()]
+    # field_contents_1 = [item[1] for item in note.items()]
+    # field_contents_2 = note.values()
+    general_field_pairs = get_side_fields(card, note)
+    if "japanese" in note.model()['name'].lower():
+        japanese_field_pairs = get_side_fields(card, note, japanese=True)
+    else:
+        japanese_field_pairs = []
+    # debug. just look that we get the right fields for now
+    test_text = "Use these general fields:\n"
+    test_text += str(general_field_pairs)
+    test_text += "\n and these Japanese fields:\n"
+    test_text += str(japanese_field_pairs)
+    showText(test_text)
 
 def download_for_note():
     note = mw.reviewer.card.note()
     if not note:
         return
-    general_fields = get_general_fields(note=note)
-    japanese_fields = get_japanese_fields(note=note, japanese=True)
+    general_field_pairs = get_note_field_pairs(note)
+    if "japanese" in note.model()['name'].lower():
+        japanese_field_pairs = get_note_field_pairs(note, japanese=True)
+    else:
+        japanese_field_pairs = []
+    # debug. just look that we get the right fields for now
+    test_text = "Use these general fields:\n"
+    test_text += str(general_field_pairs)
+    test_text += "\n and these Japanese fields:\n"
+    test_text += str(japanese_field_pairs)
+    showText(test_text)
 
 
-def question_state():
+
+def download_off():
     note_download_action.setEnabled(False)
+    side_download_action.setEnabled(False)
 
-def question_state():
+def download_on():
     note_download_action.setEnabled(True)
+    side_download_action.setEnabled(True)
 
 
 note_download_action = QAction(mw)
-note_download_action.setText(u"Note audio.")
+note_download_action.setText(u"Note audio")
 note_download_action.setIcon(QIcon(os.path.join(icons_dir,
                                                 'download_note_audio.png')))
 note_download_action.setToolTip("Download audio for all audio fields " + \
                                 "of this note.")
 mw.connect(note_download_action, SIGNAL("triggered()"), download_for_note)
 
+side_download_action = QAction(mw)
+side_download_action.setText(u"Side audio")
+side_download_action.setIcon(QIcon(os.path.join(icons_dir,
+                                                'download_side_audio.png')))
+side_download_action.setToolTip("Download audio for audio fields " + \
+                                "currently visible.")
+mw.connect(side_download_action, SIGNAL("triggered()"), download_for_side)
 
-if hide_download_not_on_question:
-    addHook('showQuestion' question_state)
-    addHook('showAnswer', answer_state)
+mw.form.menuTools.addAction(note_download_action)
+mw.form.menuTools.addAction(side_download_action)
