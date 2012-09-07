@@ -186,8 +186,19 @@ def get_side_fields(card, note, japanese=False):
 
 
 
-def get_note_field_pairs(note, japanese=False):
-    return []
+def get_note_fields(note, japanese=False):
+    field_names = [item[0] for item in note.items()]
+    field_pairs_list = []
+    for afk in audio_field_keys:
+        for fn in field_names:
+            if afk in fn.lower():
+                try:
+                    field_pairs_list.append((field_source_name(note, fn,\
+                                                      readings=japanese),
+                                             fn))
+                except KeyError:
+                    pass
+    return field_pairs_list
 
 
 
@@ -218,9 +229,9 @@ def download_for_note():
     note = mw.reviewer.card.note()
     if not note:
         return
-    general_field_pairs = get_note_field_pairs(note)
+    general_field_pairs = get_note_fields(note)
     if "japanese" in note.model()['name'].lower():
-        japanese_field_pairs = get_note_field_pairs(note, japanese=True)
+        japanese_field_pairs = get_note_fields(note, japanese=True)
     else:
         japanese_field_pairs = []
     # debug. just look that we get the right fields for now
