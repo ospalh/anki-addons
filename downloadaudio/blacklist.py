@@ -10,6 +10,13 @@
 Maintain a blacklist of undesired files.
 '''
 
+import hashlib
 
-def is_blacklisted(file_name=None, blob=None):
-    return False
+blacklist_hashes = None
+
+def is_blacklisted(file_name):
+    retrieved_hash = hashlib.sha256(file(file_name, 'r').read())
+    return (retrieved_hash.hexdigest() in blacklist_hashes)
+
+def init():
+    pass
