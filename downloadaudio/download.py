@@ -15,10 +15,12 @@ from anki.hooks import addHook
 
 #from forvo import get_word_from_forvo
 #from google_tts import get_word_from_google
-#from japansepod  import get_word_from_jpod
+from japansepod  import get_word_from_jpod
+
+from rewiew_gui import store_or_blacklist
 
 # debug:
-from aqt.utils import showText
+#from aqt.utils import showText
 
 """
 Anki2 add-on to download pronunciations.
@@ -201,7 +203,25 @@ def get_note_fields(note, japanese=False):
     return field_pairs_list
 
 def download_fields(note, general_pairs, japanese_pairs):
-    pass
+    # debug. just look that we get the right fields for now
+    retrieved_files_list = []
+    for source, dest in general_pairs:
+        print 'Get pronunciation from ', note[source], ' (field ', source,\
+            ') and put it in field ' , dest
+    #for source, dest in general_pairs:
+    #    dl_data = get_word_from_forvo(source, dest)
+    #    if dl_data:
+    #        retrieved_files_list.append(dl_data)
+    #for source, dest in general_pairs:
+    #    dl_data = get_word_from_google(source, dest)
+    #    if dl_data:
+    #        retrieved_files_list.append(dl_data)
+    for source, dest in japanese_pairs:
+        dl_data = get_word_from_jpod(source, dest)
+        if dl_data:
+            retrieved_files_list.append(dl_data)
+    if retrieved_files_list:
+        store_or_blacklist(retrieved_files_list)
 
 
 def download_for_side():
@@ -220,12 +240,7 @@ def download_for_side():
         japanese_field_pairs = get_side_fields(card, note, japanese=True)
     else:
         japanese_field_pairs = []
-    # debug. just look that we get the right fields for now
-    test_text = "Use these general fields:\n"
-    test_text += str(general_field_pairs)
-    test_text += "\n and these Japanese fields:\n"
-    test_text += str(japanese_field_pairs)
-    showText(test_text)
+    download_fields(note, general_field_pairs, japanese_field_pairs)
 
 def download_for_note():
     note = mw.reviewer.card.note()
@@ -236,12 +251,7 @@ def download_for_note():
         japanese_field_pairs = get_note_fields(note, japanese=True)
     else:
         japanese_field_pairs = []
-    # debug. just look that we get the right fields for now
-    test_text = "Use these general fields:\n"
-    test_text += str(general_field_pairs)
-    test_text += "\n and these Japanese fields:\n"
-    test_text += str(japanese_field_pairs)
-    showText(test_text)
+    download_fields(note, general_field_pairs, japanese_field_pairs)
 
 
 
