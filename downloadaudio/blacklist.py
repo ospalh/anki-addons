@@ -21,8 +21,14 @@ bl_file_path = os.path.join(mw.pm.addonFolder(), 'downloadaudio',
                             'blacklist.json')
 
 
-def is_blacklisted(file_name):
-    """Return whether the file is already blacklisted"""
+def get_hash(file_name):
+    """
+    Return hash of the file.
+
+    Return hash of the file file_name.  The more important function is
+    that this throws a ValueError when the hash of the file is already
+    in the list.
+    """
     if not blacklist_hashes:
         load_hashes()
     retrieved_hash = hashlib.sha256(file(file_name, 'r').read())
