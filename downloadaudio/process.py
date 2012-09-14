@@ -3,14 +3,18 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
+import os
+
 # IAR. Variables before imports. The packages we import are rather
 # obscure. Don't fail when they aren't there.
 sox_fail = None
 pydub_fail = None
+
 try:
     import pysox
 except ImportError as ie:
     sox_fail = ie
+
 try:
     from pydub import AudioSegment
 except ImportError as ie:
@@ -35,7 +39,7 @@ output_format = ".ogg"
 
 
 
-def process_audio(file_name, silence_percent=0.1, silence_end_percent = None):
+def process_audio(file_name, silence_percent=0.1, silence_end_percent=None):
     if sox_fail:
         raise sox_fail
     file_base_name = os.path.basename(file_name)
@@ -53,14 +57,22 @@ def process_audio(file_name, silence_percent=0.1, silence_end_percent = None):
         # So use pydub to convert mp3s to wavs.
         segments = AudioSegment.from_mp3(file_name)
         wav_file_name = free_media_name(file_base_name_noext, '.wav')
-        segments.write(wav_file_name, format='wav')
+        segments.export(wav_file_name, format='wav')
         os.remove(file_name)
         file_name = wav_file_name
         sox_in_file = pysox.CSoxStream(file_name)
         # Now we should be pretty much at the point we were at the
         # except IOError. With the data in the sox_in_file object.
     # Now do the processing with pysox.
-    sox_out_file = free_media_name(file_base_name_noext, output_format)
+    out_file_name = free_media_name(file_base_name_noext, output_format)
+    sox_signal = sox_in_file.get_signal()
+    # We want to pull up mono to stereo, but not downmix more-channel
+    # stuff to two channels.  Looks like we have to change the signal
+    # as well as use the channels effect.
+    in_channels = sox_signal.get_signalinfo()['channels']
+    if 1 == in_channels:
+        sox_signal.set_param(channels=2)
+    sox_out_file = pysox.CSoxStream(out_file_name, 'w', sox_signal)
     sox_chain = pysox.CEffectsChain(sox_in_file, sox_out_file)
     sox_chain.add_effect(pysox.CEffect(
             'silence',[b'1', b'0', '{}%'.format(silence_percent)]))
@@ -72,4 +84,15 @@ def process_audio(file_name, silence_percent=0.1, silence_end_percent = None):
     sox_chain.add_effect(pysox.CEffect(
             'silence',[b'1', b'0', '{}%'.format(silence_end_percent)]))
     sox_chain.add_effect(pysox.CEffect('reverse',[]))
-    return file_name
+    sox_chain.add_effect(pysox.CEffect('gain',[b'-n']))
+    if 1 == in_channels:
+        # Work around what appears a bug in pysox. Looks like we need
+        # to duplicate the samples. And to do that, we have to pretend
+        # to go from 2 channels to 4 channels. In reality we go from 1
+        # channel to 2. (pysox's development status is alpha, so i'm
+        # not complaining)
+        sox_chain.add_effect(pysox.CEffect('channels',[b'4']))
+    sox_chain.flow_effects()
+    sox_out_file.close()
+    os.remove(file_name)
+    return out_file_name
