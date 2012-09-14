@@ -3,6 +3,7 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
+from aqt import mw
 import os
 
 # IAR. Variables before imports. The packages we import are rather
@@ -64,7 +65,9 @@ def process_audio(file_name, silence_percent=0.1, silence_end_percent=None):
         # Now we should be pretty much at the point we were at the
         # except IOError. With the data in the sox_in_file object.
     # Now do the processing with pysox.
-    out_file_name = free_media_name(file_base_name_noext, output_format)
+    out_file_name = os.path.join(mw.col.media.dir(),
+                                 free_media_name(file_base_name_noext,
+                                                 output_format)
     sox_signal = sox_in_file.get_signal()
     # We want to pull up mono to stereo, but not downmix more-channel
     # stuff to two channels.  Looks like we have to change the signal
@@ -95,4 +98,4 @@ def process_audio(file_name, silence_percent=0.1, silence_end_percent=None):
     sox_chain.flow_effects()
     sox_out_file.close()
     os.remove(file_name)
-    return out_file_name
+    return os.path.basename(out_file_name)
