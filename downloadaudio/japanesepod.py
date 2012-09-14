@@ -35,8 +35,11 @@ def get_word_from_jpod(source):
     kanji, kana = get_kanji_kana(source)
     base_name = get_file_name(kanji, kana)
     get_url = build_query_url(kanji, kana)
-    file_name, retrieve_header = urllib.urlretrieve(
-        get_url, os.join(mw.col.media.dir(), base_name))
+    try:
+        file_name, retrieve_header = urllib.urlretrieve(
+            get_url, os.join(mw.col.media.dir(), base_name))
+    except:
+        return None
     try:
         file_hash = get_hash(file_name)
     except ValueError:
@@ -46,7 +49,7 @@ def get_word_from_jpod(source):
         file_name = procces_audio(file_name)
     except:
         pass
-    return file_name, file_hash
+    return os.path.basename(file_name), file_hash
 
 
 def build_query_url(kanji, kana):
