@@ -206,22 +206,28 @@ def download_fields(note, general_pairs, japanese_pairs):
     # debug. just look that we get the right fields for now
     retrieved_files_list = []
     for source, dest in general_pairs:
-        print 'Get pronunciation from ', note[source], ' (field ', source,\
+        text = note['source']
+        print 'Get pronunciation from ', text, ' (field ', source,\
             ') and put it in field ' , dest
-    #for source, dest in general_pairs:
-    #    dl_data = get_word_from_forvo(source, dest)
-    #    if dl_data:
-    #        retrieved_files_list.append(dl_data)
-    #for source, dest in general_pairs:
-    #    dl_data = get_word_from_google(source, dest)
-    #    if dl_data:
-    #        retrieved_files_list.append(dl_data)
+    #    try:
+    #        dl_fname, dl_hash = get_word_from_forvo(text, dest)
+    #    else:
+    #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
+    #    try:
+    #        dl_fname, dl_hash = get_word_from_google(text, dest)
+    #    else:
+    #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
     for source, dest in japanese_pairs:
-        dl_data = get_word_from_jpod(source, dest)
-        if dl_data:
-            retrieved_files_list.append(dl_data)
+        text = note['source']
+        print 'Get Japanese pronunciation from ', text, ' (field ', source,\
+            ') and put it in field ' , dest
+        try:
+            dl_fname, dl_hash = get_word_from_jpod(text, dest)
+        else:
+            # That is, no exception
+            retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
     if retrieved_files_list:
-        store_or_blacklist(retrieved_files_list)
+        store_or_blacklist(note, retrieved_files_list)
 
 
 def download_for_side():
