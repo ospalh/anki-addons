@@ -38,6 +38,8 @@ qt_toolbar_movable = True
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
+have_dl_audio = False
+
 
 def go_deck_browse():
     """Open the deck browser."""
@@ -254,13 +256,23 @@ def more_tool_bar_off():
 
 def maybe_more_tool_bar_on():
     """Show the more tool bar when we should."""
+    global have_dl_audio
     show_more_tool_bar_action.setEnabled(True)
     bury_action.setEnabled(True)
     toggle_mark_action.setEnabled(True)
     suspend_action.setEnabled(True)
     delete_action.setEnabled(True)
     if show_more_tool_bar_action.isChecked():
-        try: 
+        if not have_dl_audio:
+            try:
+                # Try to add the download action. 
+                mw.reviewer.more_tool_bar.addSeparator()
+                mw.reviewer.more_tool_bar.addAction(
+                    mw.note_download_action)
+                have_dl_audio = True
+            except:
+                pass
+        try:
             mw.reviewer.more_tool_bar.show()
         except:
             pass
