@@ -21,7 +21,7 @@ choices what to do wit each:
 
 import os
 from aqt import mw
-from anki.sound import play
+from anki.sound import play, playFromText
 from blacklist import add_black_hash
 
 
@@ -50,7 +50,7 @@ def store_or_blacklist(note, retrieved_data):
             items_added = True
             note[dest] += '[sound:' + dl_fname + ']'
         if action_id == action['delete']:
-            os.remove(os.path.join(mw.mediaDir(), dl_fname))
+            os.remove(os.path.join(mw.col.media.dir(), dl_fname))
         if action_id == action['blacklist']:
             add_black_hash(dl_hash)
     if items_added:
@@ -58,7 +58,8 @@ def store_or_blacklist(note, retrieved_data):
 
 
 def remove_all_files(files_etc):
-    pass
+    for source, dest, text, dl_fname, dl_hash in files_etc:
+        os.remove(os.path.join(mw.col.media.dir(), dl_fname))
 
 class ReviewFiles(QDialog):
     """
@@ -89,16 +90,18 @@ class ReviewFiles(QDialog):
         layout.addWidget(source_head_label, 1,1)
         play_head_label = QLabel(u'review', self)
         layout.addWidget(play_head_label, 1,2)
+        play_old_head_label = QLabel(u'review', self)
+        layout.addWidget(play_old_head_label, 1,3)
         add_head_label = QLabel(u'add', self)
-        layout.addWidget(add_head_label, 1,3)
+        layout.addWidget(add_head_label, 1,4)
         keep_head_label = QLabel(u'keep', self)
-        layout.addWidget(keep_head_label, 1,4)
+        layout.addWidget(keep_head_label, 1,5)
         delete_head_label = QLabel(u'delete', self)
-        layout.addWidget(delete_head_label, 1,5)
+        layout.addWidget(delete_head_label, 1,6)
         blacklist_head_label = QLabel(u'blacklist', self)
-        layout.addWidget(blacklist_head_label, 1,6)
+        layout.addWidget(blacklist_head_label, 1,7)
         rule_label = QLabel('<hr>')
-        layout.addWidget(rule_label, 2, 0, 1, 7)
+        layout.addWidget(rule_label, 2, 0, 1, 8)
         self.create_rows(layout)
         dialog_buttons = QDialogButtonBox(self)
         dialog_buttons.addButton(QDialogButtonBox.Cancel)
@@ -107,7 +110,7 @@ class ReviewFiles(QDialog):
                      self, SLOT("accept()"))
         self.connect(dialog_buttons, SIGNAL("rejected()"),
                      self, SLOT("reject()"))
-        layout.addWidget(dialog_buttons, 5+ 3, 0, 1, 7)
+        layout.addWidget(dialog_buttons, len(self.buttons_groups) + 3, 0, 1, 8)
 
 
     def create_rows(self, layout):
@@ -122,6 +125,15 @@ class ReviewFiles(QDialog):
             t_play_button.setIcon(QIcon(os.path.join(icons_dir, 'play.png')))
             layout.addWidget(t_play_button, num, 2)
             t_play_button.clicked.connect(lambda: play(dl_fname))
+            if self.note[dest]:
+                t_play_old_button = QPushButton(self)
+                t_play_old_button.setIcon(
+                    QIcon(os.path.join(icons_dir, 'play.png')))
+                layout.addWidget(t_play_old_button, num, 3)
+                # Doesn't seem to work.
+                t_play_old_button.clicked.connect(
+                    lambda: playFromText(self.note[dest]))
+            # The group where we later look what to do:
             t_button_group = QButtonGroup(self)
             t_button_group.setExclusive(True)
             # Now the four buttons
@@ -130,26 +142,26 @@ class ReviewFiles(QDialog):
             t_add_button.setChecked(True)
             t_add_button.setFlat(True)
             t_add_button.setIcon(QIcon(os.path.join(icons_dir, 'add.png')))
-            layout.addWidget(t_add_button, num, 3)
+            layout.addWidget(t_add_button, num, 4)
             t_button_group.addButton(t_add_button, action['add'])
             t_keep_button = QPushButton(self)
             t_keep_button.setCheckable(True)
             t_keep_button.setFlat(True)
             t_keep_button.setIcon(QIcon(os.path.join(icons_dir, 'keep.png')))
-            layout.addWidget(t_keep_button, num, 4)
+            layout.addWidget(t_keep_button, num, 5)
             t_button_group.addButton(t_keep_button,  action['keep'])
             t_delete_button = QPushButton(self)
             t_delete_button.setCheckable(True)
             t_delete_button.setFlat(True)
             t_delete_button.setIcon(QIcon(os.path.join(icons_dir,
                                                        'delete.png')))
-            layout.addWidget(t_delete_button, num, 5)
+            layout.addWidget(t_delete_button, num, 6)
             t_button_group.addButton(t_delete_button,  action['delete'])
             t_blacklist_button = QPushButton(self)
             t_blacklist_button.setCheckable(True)
             t_blacklist_button.setFlat(True)
             t_blacklist_button.setIcon(QIcon(os.path.join(icons_dir,
                                                           'blacklist.png')))
-            layout.addWidget(t_blacklist_button, num, 6)
+            layout.addWidget(t_blacklist_button, num, 7)
             t_button_group.addButton(t_blacklist_button,  action['blacklist'])
             self.buttons_groups.append(t_button_group)
