@@ -221,12 +221,14 @@ def download_fields(note, general_pairs, japanese_pairs):
         text = note[source]
         print 'Get Japanese pronunciation from ', text, ' (field ', source,\
             ') and put it in field ' , dest
-        # testing: crash and burn. Seeing the impact site is helpful.
-        #try:
-        dl_fname, dl_hash = get_word_from_jpod(text)
-        #except Exception as e:
-        #    print 'Got some exception; ', type(e), str(e)
-        #    continue
+        # testing: Catch only known problems here. Otherwise crash and
+        # burn. Seeing the impact site is helpful.
+        try:
+            dl_fname, dl_hash = get_word_from_jpod(text)
+        except ValueError as ve:
+            if "blacklist" in str(ve):
+                continue
+            raise
         #try:
         #    dl_fname, dl_hash = get_word_from_jpod(text, dest)
 
