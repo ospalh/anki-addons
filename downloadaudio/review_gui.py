@@ -20,12 +20,22 @@ choices what to do wit each:
 """
 
 import os
+# normal
+# from aqt import mw
+
+
+
+
+
 
 # Debug
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 # permanent
 # from aqt.qt import *
+
+# icons_dir = os.path.join(mw.pm.addonFolder(), 'icons')
+icons_dir = os.path.join('.', 'icons')
 
 # def store_or_blacklist(note, retrieved_data):
 def store_or_blacklist(note, retrieved_data):
@@ -74,14 +84,18 @@ class ReviewFiles(QDialog):
     def initUI(self):
         layout = QGridLayout()
         self.setLayout(layout)
-        explanation = QLabel(
-            u'Please select an action for each downloaded file:', self)
+        explanation = QLabel(self)
+        if len(self.list) > 1:
+            explanation.setText(
+                u'Please select an action for each downloaded file:')
+        else:
+            explanation.setText(u'Please select what to do with the file:')
         layout.addWidget(explanation, 0, 0, 1, 7)
         text_head_label = QLabel(u'<b>Source text</b>', self)
         layout.addWidget(text_head_label, 1,0)
         source_head_label = QLabel(u'(from field)', self)
         layout.addWidget(source_head_label, 1,1)
-        play_head_label = QLabel(u'play', self)
+        play_head_label = QLabel(u'review', self)
         layout.addWidget(play_head_label, 1,2)
         add_head_label = QLabel(u'add', self)
         layout.addWidget(add_head_label, 1,3)
@@ -104,19 +118,38 @@ class ReviewFiles(QDialog):
             tf_label = QLabel(source, self)
             layout.addWidget(tf_label, num, 1)
             # Play button.
+            t_play_button = QPushButton(self)
+            t_play_button.setIcon(QIcon(os.path.join(icons_dir, 'play.png')))
+            layout.addWidget(t_play_button, num, 2)
 
             t_button_group = QButtonGroup(self)
-            t_add_button = QRadioButton(self)
+            t_button_group.setExclusive(True)
+            t_add_button = QPushButton(self)
+            t_add_button.setCheckable(True)
             t_add_button.setChecked(True)
+            t_add_button.setFlat(True)
+            # test
+            t_add_button.setIcon(QIcon(os.path.join(icons_dir, 'add.png')))
             layout.addWidget(t_add_button, num, 3)
             t_button_group.addButton(t_add_button, 0)
-            t_keep_button = QRadioButton(self)
+            t_keep_button = QPushButton(self)
+            t_keep_button.setCheckable(True)
+            t_keep_button.setFlat(True)
+            t_keep_button.setIcon(QIcon(os.path.join(icons_dir, 'keep.png')))
             layout.addWidget(t_keep_button, num, 4)
             t_button_group.addButton(t_keep_button, 1)
-            t_delete_button = QRadioButton(self)
+            t_delete_button = QPushButton(self)
+            t_delete_button.setCheckable(True)
+            t_delete_button.setFlat(True)
+            t_delete_button.setIcon(QIcon(os.path.join(icons_dir,
+                                                       'delete.png')))
             layout.addWidget(t_delete_button, num, 5)
             t_button_group.addButton(t_delete_button, 2)
-            t_blacklist_button = QRadioButton(self)
+            t_blacklist_button = QPushButton(self)
+            t_blacklist_button.setCheckable(True)
+            t_blacklist_button.setFlat(True)
+            t_blacklist_button.setIcon(QIcon(os.path.join(icons_dir,
+                                                          'blacklist.png')))
             layout.addWidget(t_blacklist_button, num, 6)
             t_button_group.addButton(t_blacklist_button, 3)
             self.buttons_groups.append(t_button_group)
