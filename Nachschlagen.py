@@ -20,8 +20,8 @@ show_japanese = True
 ## There is nothing wrong with the Saiga lookup. It’s just that i
 ## don’t like it as much as the Kanji-Lexikon. So make it easy to
 ## switch that on or off.
-show_saiga = True
-# show_saiga = False
+# show_saiga = True
+show_saiga = False
 
 ## These two, "expression_fields" and "meaning_fields", are the "field
 ## name lists" refered to in the popup error message.

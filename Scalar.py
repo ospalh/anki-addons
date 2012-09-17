@@ -16,7 +16,7 @@ scalar_field = 'Scalar'
 # Factor to decide what counts as ‘good enough’. It should be > 1.0
 # (or at least >= 1.0). What you use here depends on how precisely you
 # want to remember your numbers.
-pass_factor = 1.5
+pass_factor = 2.0
 
 # How the number is coloured.
 fail_color= '#f00'
