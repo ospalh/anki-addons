@@ -127,7 +127,7 @@ class ReviewFiles(QDialog):
             t_play_button = QPushButton(self)
             t_play_button.setIcon(QIcon(os.path.join(icons_dir, 'play.png')))
             layout.addWidget(t_play_button, num, 2)
-            # t_play_button.connect(SIGNAL("clicked()"), play)
+            t_play_button.clicked.connect(lambda: play(dl_fname))
             t_button_group = QButtonGroup(self)
             t_button_group.setExclusive(True)
             # Now the four buttons
