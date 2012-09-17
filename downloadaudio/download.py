@@ -271,29 +271,34 @@ def download_for_note():
 
 
 def download_off():
-    note_download_action.setEnabled(False)
-    side_download_action.setEnabled(False)
+    mw.note_download_action.setEnabled(False)
+    mw.side_download_action.setEnabled(False)
 
 def download_on():
-    note_download_action.setEnabled(True)
-    side_download_action.setEnabled(True)
+    mw.note_download_action.setEnabled(True)
+    mw.side_download_action.setEnabled(True)
 
 
-note_download_action = QAction(mw)
-note_download_action.setText(u"Note audio")
-note_download_action.setIcon(QIcon(os.path.join(icons_dir,
+mw.note_download_action = QAction(mw)
+mw.note_download_action.setText(u"Note audio")
+mw.note_download_action.setIcon(QIcon(os.path.join(icons_dir,
                                                 'download_note_audio.png')))
-note_download_action.setToolTip("Download audio for all audio fields " + \
+mw.note_download_action.setToolTip("Download audio for all audio fields " + \
                                 "of this note.")
-mw.connect(note_download_action, SIGNAL("triggered()"), download_for_note)
+mw.connect(mw.note_download_action, SIGNAL("triggered()"), download_for_note)
 
-side_download_action = QAction(mw)
-side_download_action.setText(u"Side audio")
-side_download_action.setIcon(QIcon(os.path.join(icons_dir,
+mw.side_download_action = QAction(mw)
+mw.side_download_action.setText(u"Side audio")
+mw.side_download_action.setIcon(QIcon(os.path.join(icons_dir,
                                                 'download_side_audio.png')))
-side_download_action.setToolTip("Download audio for audio fields " + \
+mw.side_download_action.setToolTip("Download audio for audio fields " + \
                                 "currently visible.")
-mw.connect(side_download_action, SIGNAL("triggered()"), download_for_side)
+mw.connect(mw.side_download_action, SIGNAL("triggered()"), download_for_side)
 
-mw.form.menuTools.addAction(note_download_action)
-mw.form.menuTools.addAction(side_download_action)
+
+mw.form.menuTools.addAction(mw.note_download_action)
+mw.form.menuTools.addAction(mw.side_download_action)
+
+# Todo: switch off at start and on when we get to reviewing.
+# # And start with the acitons off.
+# download_off()
