@@ -15,9 +15,9 @@ from anki.hooks import addHook
 
 #from forvo import get_word_from_forvo
 #from google_tts import get_word_from_google
-from japansepod  import get_word_from_jpod
+from japanesepod  import get_word_from_jpod
 
-from rewiew_gui import store_or_blacklist
+from review_gui import store_or_blacklist
 
 # debug:
 #from aqt.utils import showText
@@ -206,7 +206,7 @@ def download_fields(note, general_pairs, japanese_pairs):
     # debug. just look that we get the right fields for now
     retrieved_files_list = []
     for source, dest in general_pairs:
-        text = note['source']
+        text = note[source]
         print 'Get pronunciation from ', text, ' (field ', source,\
             ') and put it in field ' , dest
     #    try:
@@ -218,14 +218,21 @@ def download_fields(note, general_pairs, japanese_pairs):
     #    else:
     #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
     for source, dest in japanese_pairs:
-        text = note['source']
+        text = note[source]
         print 'Get Japanese pronunciation from ', text, ' (field ', source,\
             ') and put it in field ' , dest
-        try:
-            dl_fname, dl_hash = get_word_from_jpod(text, dest)
-        else:
+        # testing: crash and burn. Seeing the impact site is helpful.
+        #try:
+        dl_fname, dl_hash = get_word_from_jpod(text)
+        #except Exception as e:
+        #    print 'Got some exception; ', type(e), str(e)
+        #    continue
+        #try:
+        #    dl_fname, dl_hash = get_word_from_jpod(text, dest)
+
+        #else:
             # That is, no exception
-            retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
+        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
     if retrieved_files_list:
         store_or_blacklist(note, retrieved_files_list)
 

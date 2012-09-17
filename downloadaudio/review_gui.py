@@ -21,14 +21,14 @@ choices what to do wit each:
 
 import os
 from aqt import mw
-from anki.sounds import play
+from anki.sound import play
 from blacklist import add_black_hash
 
 
 
 from aqt.qt import *
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'icons')
+icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
 # to make the code a bit more readable
 action = {'add' : 0, 'keep': 1, 'delete': 2, 'blacklist': 3}
@@ -127,7 +127,7 @@ class ReviewFiles(QDialog):
             t_play_button = QPushButton(self)
             t_play_button.setIcon(QIcon(os.path.join(icons_dir, 'play.png')))
             layout.addWidget(t_play_button, num, 2)
-
+            # t_play_button.connect(SIGNAL("clicked()"), play)
             t_button_group = QButtonGroup(self)
             t_button_group.setExclusive(True)
             # Now the four buttons
