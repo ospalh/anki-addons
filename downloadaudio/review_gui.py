@@ -46,17 +46,12 @@ def store_or_blacklist(note, retrieved_data):
     for idx, (source, dest, text, dl_fname, dl_hash) \
             in enumerate(retrieved_data):
         action_id = review_files.buttons_groups[idx].checkedId()
-        print 'id for row ', idx, 'is ', action_id
         if action_id == action['add']:
-            print 'add for list row ', idx
-            # Add dest field and file name pair to list
             items_added = True
             note[dest] += '[sound:' + dl_fname + ']'
         if action_id == action['delete']:
-            print 'remove for list row ', idx
             os.remove(os.path.join(mw.mediaDir(), dl_fname))
         if action_id == action['blacklist']:
-            print 'blacklist for list row ', idx
             add_black_hash(dl_hash)
     if items_added:
         note.flush()
@@ -72,7 +67,6 @@ class ReviewFiles(QDialog):
     def __init__(self, note, files_list):
         self.note = note
         self.list = files_list
-        # self.buttonBox = None
         self.buttons_groups = []
         super(ReviewFiles, self).__init__() # Voodoo code. Look it up!
         self.initUI()
