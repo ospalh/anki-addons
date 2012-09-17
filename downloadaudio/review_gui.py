@@ -20,32 +20,22 @@ choices what to do wit each:
 """
 
 import os
-# normal
-# from aqt import mw
-# from anki.sounds import play
-
-# from blacklist import add_black_hash
+from aqt import mw
+from anki.sounds import play
+from blacklist import add_black_hash
 
 
 
-# Debug
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-# permanent
-# from aqt.qt import *
+from aqt.qt import *
 
-# icons_dir = os.path.join(mw.pm.addonFolder(), 'icons')
-icons_dir = os.path.join('.', 'icons')
+icons_dir = os.path.join(mw.pm.addonFolder(), 'icons')
 
 # to make the code a bit more readable
 action = {'add' : 0, 'keep': 1, 'delete': 2, 'blacklist': 3}
 
-# def store_or_blacklist(note, retrieved_data):
 def store_or_blacklist(note, retrieved_data):
     if not note or not retrieved_data:
         return
-    #for (source, dest, text, dl_fname, dl_hash) in retrieved_data:
-    #    pass
     review_files = ReviewFiles(note, retrieved_data)
     if not review_files.exec_():
         remove_all_files(retrieved_data)
@@ -61,16 +51,15 @@ def store_or_blacklist(note, retrieved_data):
             print 'add for list row ', idx
             # Add dest field and file name pair to list
             items_added = True
-            # note[dest] += '[sound:' + dl_fname + ']'
+            note[dest] += '[sound:' + dl_fname + ']'
         if action_id == action['delete']:
             print 'remove for list row ', idx
-            # os.remove(os.path.join(mw.mediaDir(), dl_fname))
+            os.remove(os.path.join(mw.mediaDir(), dl_fname))
         if action_id == action['blacklist']:
             print 'blacklist for list row ', idx
-            # add_black_hash(dl_hash)
+            add_black_hash(dl_hash)
     if items_added:
-        pass
-        # note.flush()
+        note.flush()
 
 
 def remove_all_files(files_etc):
@@ -170,17 +159,3 @@ class ReviewFiles(QDialog):
             layout.addWidget(t_blacklist_button, num, 6)
             t_button_group.addButton(t_blacklist_button,  action['blacklist'])
             self.buttons_groups.append(t_button_group)
-
-
-
-
-
-# debug
-if __name__ == '__main__':
-    app = QApplication([])
-    app.connect(app, SIGNAL('lastWindowClosed()'), app,
-                SLOT('quit()'))
-    store_or_blacklist('dummy_note',
-                       [('source', 'dest', 'text', 'dl_fname', 'dl_hash'),
-                        ('ource', 'est', 'ext', 'l_fname', 'l_hash')]
-                       )
