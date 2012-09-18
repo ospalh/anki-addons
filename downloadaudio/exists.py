@@ -22,7 +22,7 @@ def free_media_name(base, end):
         return base+end
     for i in range(1, 10000):
         # Don't be silly. Give up after 9999 tries.
-        long_name = u'{0} ({1}){2}'.format(base, i, end)
+        long_name = u'{0}_{1}{2}'.format(base, i, end)
         if not exists_lc(mdir, long_name):
             return long_name
     raise ValueError
