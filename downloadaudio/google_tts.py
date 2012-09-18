@@ -11,7 +11,7 @@
 Download Japanese pronunciations from Japanesepod
 '''
 
-
+import tempfile
 import urllib
 import urllib2
 import os
@@ -26,37 +26,38 @@ from exists import free_media_name
 download_file_extension = u'.mp3'
 
 # Set the default language for tts.
-default_language = 'en'
+default_language = 'ja'
 
 url_gtts = 'http://translate.google.com/translate_tts?'
 
 user_agent_string = 'Mozilla/5.0'
-
-opener = urllib.FancyURLopener({})
-opener.version = user_agent_string
 
 # Code
 
 def get_word_from_google(source, language=None):
     if not source:
         raise ValueError('Nothing to download')
-    base_name = free_media_name(source, download_file_extension)
-    get_url = build_query_url(source, language=None)
+    # base_name = free_media_name(source, download_file_extension)
+    get_url = build_query_url(source)
     # This may throw an exception
-    file_name, retrieve_header = opener.retrieve(
-        get_url, os.path.join(mw.col.media.dir(), base_name))
+    request = urllib2.Request(get_url)
+    request.add_header('User-agent', user_agent_string)
+    response = urllib2.urlopen(request)
+    if 200 != response.code:
+        raise ValueError(str(response.code) + ': ' + response.msg)
+    print 'dl from url ' + get_url
+    temp_file = tempfile.NamedTemporaryFile(delete=False,
+                                            suffix=download_file_extension)
+    temp_file.write(response.read())
+    temp_file.close()
     try:
-        file_hash = get_hash(file_name)
+        file_hash = get_hash(temp_file.name)
     except ValueError:
-        os.remove(file_name)
+        os.remove(temp_file.name)
         # Simpler to just raise again
         raise
-    # for testing
-    # try:
-    file_name = process_audio(file_name)
-    # except:
-    #    pass
-    return os.path.basename(file_name), file_hash
+    return process_audio(temp_file.name, source, download_file_extension),\
+        file_hash
 
 
 def build_query_url(source, language=None):
