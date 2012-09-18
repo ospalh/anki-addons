@@ -14,7 +14,7 @@ from aqt.qt import *
 from anki.hooks import addHook
 
 #from forvo import get_word_from_forvo
-#from google_tts import get_word_from_google
+from google_tts import get_word_from_google
 from japanesepod  import get_word_from_jpod
 
 from review_gui import store_or_blacklist
@@ -218,12 +218,18 @@ def download_fields(note, general_pairs, japanese_pairs):
         text = note[source]
     #    try:
     #        dl_fname, dl_hash = get_word_from_forvo(text, dest)
+    #    except:
+    #        pass
     #    else:
     #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
-    #    try:
-    #        dl_fname, dl_hash = get_word_from_google(text, dest)
-    #    else:
-    #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
+        try:
+            dl_fname, dl_hash = get_word_from_google(text, dest)
+        except:
+            # pass
+            # Test: crash and burn
+            raise
+        else:
+            retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
     for source, dest in japanese_pairs:
         text = note[source]
         # testing: Catch only known problems here. Otherwise crash and

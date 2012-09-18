@@ -114,6 +114,8 @@ class ReviewFiles(QDialog):
 
 
     def create_rows(self, layout):
+        play_button_group = QButtonGroup(self)
+        old_play_button_group = QButtonGroup(self)
         for num, (source, dest, text, dl_fname, dl_hash)\
                 in enumerate(self.list, 3):
             tt_label = QLabel(text, self)
@@ -122,17 +124,15 @@ class ReviewFiles(QDialog):
             layout.addWidget(tf_label, num, 1)
             # Play button.
             t_play_button = QPushButton(self)
+            play_button_group.addButton(t_play_button, num - 3)
             t_play_button.setIcon(QIcon(os.path.join(icons_dir, 'play.png')))
             layout.addWidget(t_play_button, num, 2)
-            t_play_button.clicked.connect(lambda: play(dl_fname))
             if self.note[dest]:
                 t_play_old_button = QPushButton(self)
+                old_play_button_group.addButton(t_play_old_button, num - 3)
                 t_play_old_button.setIcon(
                     QIcon(os.path.join(icons_dir, 'play.png')))
                 layout.addWidget(t_play_old_button, num, 3)
-                # Doesn't seem to work.
-                t_play_old_button.clicked.connect(
-                    lambda: playFromText(self.note[dest]))
             # The group where we later look what to do:
             t_button_group = QButtonGroup(self)
             t_button_group.setExclusive(True)
@@ -165,3 +165,8 @@ class ReviewFiles(QDialog):
             layout.addWidget(t_blacklist_button, num, 7)
             t_button_group.addButton(t_blacklist_button,  action['blacklist'])
             self.buttons_groups.append(t_button_group)
+        play_button_group.buttonClicked.connect(
+            lambda button: play(self.list[play_button_group.id(button)][3]))
+        old_play_button_group.buttonClicked.connect(
+            lambda button: playFromText(self.note[
+                    self.list[old_play_button_group.id(button)][1]]))
