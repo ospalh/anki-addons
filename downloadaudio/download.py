@@ -13,7 +13,6 @@ from aqt.qt import *
 #from anki.notes import Note
 from anki.hooks import addHook
 
-#from forvo import get_word_from_forvo
 from google_tts import get_word_from_google
 from japanesepod  import get_word_from_jpod
 
@@ -33,11 +32,6 @@ Japanese-pod: This looks for a field called reading(*) and triss to
               though.
 Google TTS: Get pronunciations from the Google Text-To-Speech service. These are
             robot voices, so be a bit suspicous about them.
-Forvo: Try to get pronunciations from the crowd-sourced forvo.com.
-       Pronunciations are often noisy and may turn out to be wrong. To
-       use this service, you need to register at forvo.com and get a
-       “developer” key. The free service is limited to 1000 requests
-       per day.
 
 There are three ways to download: Current card, current note and
 manual.
@@ -216,12 +210,6 @@ def download_fields(note, general_pairs, japanese_pairs):
     retrieved_files_list = []
     for source, dest in general_pairs:
         text = note[source]
-    #    try:
-    #        dl_fname, dl_hash = get_word_from_forvo(text, dest)
-    #    except:
-    #        pass
-    #    else:
-    #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
         try:
             dl_fname, dl_hash = get_word_from_google(text, dest)
         except:
