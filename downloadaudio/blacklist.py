@@ -41,11 +41,14 @@ def get_hash(file_name):
     if retrieved_hash.hexdigest() in blacklist_hashes:
         raise ValueError('Retrieved file is in blacklist. ' +\
                              '(No pronunciation found.)')
+    return retrieved_hash
 
 def add_black_hash(black_hash):
     """Add a new hash to the list of blacklisted hashes."""
     global blacklist_hashes
-    blacklist_hashes += black_hash
+    if not blacklist_hashes:
+        load_hashes()
+    blacklist_hashes.append(black_hash.hexdigest())
     save_hashes()
 
 def load_hashes():
