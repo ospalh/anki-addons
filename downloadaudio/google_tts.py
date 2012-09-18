@@ -13,10 +13,10 @@ Download Japanese pronunciations from Japanesepod
 
 
 import urllib
+import urllib2
 import os
 
 from aqt import mw
-from anki.template import furigana
 
 from process_audio import process_audio
 from blacklist import get_hash
@@ -25,18 +25,25 @@ from exists import free_media_name
 
 download_file_extension = u'.mp3'
 
+# Set the default language for tts.
+default_language = 'en'
 
-url_jdict='http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
-# url_jdict='http://assets.languagepod101.com/dictionary/japanese/audioogg.php?'
+url_gtts = 'http://translate.google.com/translate_tts?'
+
+user_agent_string = 'Mozilla/5.0'
+
+opener = urllib.FancyURLopener({})
+opener.version = user_agent_string
 
 # Code
 
-def get_word_from_jpod(source):
-    kanji, kana = get_kanji_kana(source)
-    base_name = build_file_name(kanji, kana)
-    get_url = build_query_url(kanji, kana)
+def get_word_from_google(source, language=None):
+    if not source:
+        raise ValueError('Nothing to download')
+    base_name = free_media_name(source, download_file_extension)
+    get_url = build_query_url(source, language=None)
     # This may throw an exception
-    file_name, retrieve_header = urllib.urlretrieve(
+    file_name, retrieve_header = opener.retrieve(
         get_url, os.path.join(mw.col.media.dir(), base_name))
     try:
         file_hash = get_hash(file_name)
@@ -52,31 +59,10 @@ def get_word_from_jpod(source):
     return os.path.basename(file_name), file_hash
 
 
-def build_query_url(kanji, kana):
+def build_query_url(source, language=None):
         qdict = {}
-        if kanji:
-            qdict['kanji'] = kanji.encode('utf-8')
-        if kana:
-            qdict['kana'] = kana.encode('utf-8')
-        return url_jdict + urllib.urlencode(qdict)
-
-
-def build_file_name(kanji, kana):
-    """Get a valid download file name."""
-    base_name = kanji
-    if kana:
-        base_name += u'_' + kana
-    # Use my function that takes different capitalization rules into
-    # account. This may throw a ValueError.
-    return free_media_name(base_name, download_file_extension)
-
-
-def get_kanji_kana(source):
-    """Split reading into kanji and kana."""
-    kanji = furigana.kanji(source)
-    kana = furigana.kana(source)
-    #if kanji == kana:
-    #    kana = u""
-    if not kanji and not kana:
-        raise ValueError('Nothing to download')
-    return kanji, kana
+        if not language:
+            language = default_language
+        qdict['tl'] = language.encode('utf-8')
+        qdict['q'] = source.encode('utf-8')
+        return url_gtts + urllib.urlencode(qdict)
