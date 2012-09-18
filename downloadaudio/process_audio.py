@@ -42,6 +42,14 @@ output_format = ".ogg"
 
 
 def process_audio(file_name, silence_percent=0.1, silence_end_percent=None):
+    """
+    Process audio.
+
+    Take the audio file with file_name, convert mono to stereo, clip
+    silence at the begining and end, normalize, convert to format
+    indicated by output_format, put in the media folder with a
+    suitable file name and return that base name.
+    """
     if sox_fail:
         raise sox_fail
     file_base_name = os.path.basename(file_name)
@@ -57,7 +65,6 @@ def process_audio(file_name, silence_percent=0.1, silence_end_percent=None):
     # File is perfectly all right, but not English (i.e., with a pure
     # ASCII name). We have to work around files with non-ascii names.
     temp_file_name = munge_to_tempfile(file_name, file_extension)
-    print u'processing from ' + temp_file_name
     try:
         sox_in_file = pysox.CSoxStream(temp_file_name)
     except IOError:
@@ -72,14 +79,12 @@ def process_audio(file_name, silence_percent=0.1, silence_end_percent=None):
         segments.export(wav_file_name, format='wav')
         os.remove(temp_file_name)
         temp_file_name = munge_to_tempfile(wav_file_name, ".wav")
-        print u'actually processing from ' + temp_file_name
         sox_in_file = pysox.CSoxStream(temp_file_name)
         # Now we should be pretty much at the point we were at the
         # except IOError. With the data in the sox_in_file object.
     # Now do the processing with pysox.
     tof = tempfile.NamedTemporaryFile(delete=False, suffix=output_format)
     temp_out_file_name = tof.name
-    print u'processing to ' + temp_out_file_name
     tof.close()
     sox_signal = sox_in_file.get_signal()
     # We want to pull up mono to stereo, but not downmix more-channel
@@ -115,6 +120,11 @@ def process_audio(file_name, silence_percent=0.1, silence_end_percent=None):
                                 file_base_name_noext, output_format)
 
 def munge_to_tempfile(file_name, suffix):
+    """Copy content of file_name to a temporary file.
+
+    (That point is to work around what appears to be a bug in pysox,
+    that i can't get to load files with non-ASCII names.
+    """
     tfile = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
     ufile = open(file_name, "rb")
     tfile.write(ufile.read())
@@ -125,6 +135,12 @@ def munge_to_tempfile(file_name, suffix):
 
 
 def unmunge_to_mediafile(temp_file_name, media_base_name, suffix):
+    """
+    Copy content of temp_file_name to a file in the media directory.
+
+    Copy content of temp_file_name to a file in the media directory
+    with a name based on . media_base_name and suffix.
+    """
     mdir = mw.col.media.dir()
     media_file_name = free_media_name(media_base_name, suffix)
     tfile = open(temp_file_name, "rb")

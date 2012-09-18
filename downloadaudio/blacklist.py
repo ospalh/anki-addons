@@ -12,7 +12,13 @@ Maintain a blacklist of undesired files.
 
 import hashlib
 import os
-import simplejson as json
+
+# As in the main Anki code.
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
 
 from aqt import mw
 
@@ -33,7 +39,6 @@ def get_hash(file_name):
         load_hashes()
     retrieved_hash = hashlib.sha256(file(file_name, 'r').read())
     if retrieved_hash.hexdigest() in blacklist_hashes:
-        print 'Retrieved file is in blacklist. '
         raise ValueError('Retrieved file is in blacklist. ' +\
                              '(No pronunciation found.)')
 
