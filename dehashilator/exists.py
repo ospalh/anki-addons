@@ -21,7 +21,7 @@ def exists_lc(path, name):
     # The point is tha like this syncing from Linux to
     # Macs/Windows should work savely.
     if isWin or isMac:
-        return os.path.exist(os.path.join(path, name))
+        return os.path.exists(os.path.join(path, name))
     # We actually return a list with the offending file names. But
     # doing simple checks like if _exists_lc(...): will work as
     # expected. If this is not acceptable, a 'not not' can be added
