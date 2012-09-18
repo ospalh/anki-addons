@@ -45,7 +45,6 @@ def get_word_from_google(source, language=None):
     response = urllib2.urlopen(request)
     if 200 != response.code:
         raise ValueError(str(response.code) + ': ' + response.msg)
-    print 'dl from url ' + get_url
     temp_file = tempfile.NamedTemporaryFile(delete=False,
                                             suffix=download_file_extension)
     temp_file.write(response.read())
