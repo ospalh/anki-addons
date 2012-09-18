@@ -12,7 +12,9 @@ Download Japanese pronunciations from Japanesepod
 '''
 
 
+import tempfile
 import urllib
+import urllib2
 import os
 
 from aqt import mw
@@ -32,24 +34,30 @@ url_jdict='http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
 # Code
 
 def get_word_from_jpod(source):
+    """
+    Download audio from kanji and kana from japanesepod.
+    """
     kanji, kana = get_kanji_kana(source)
-    base_name = build_file_name(kanji, kana)
+    base_name = build_base_name(kanji, kana)
     get_url = build_query_url(kanji, kana)
     # This may throw an exception
-    file_name, retrieve_header = urllib.urlretrieve(
-        get_url, os.path.join(mw.col.media.dir(), base_name))
+    request = urllib2.Request(get_url)
+    # request.add_header('User-agent', 'PyMOTW (http://www.doughellmann.com/PyMOTW/)')
+    response = urllib2.urlopen(request)
+    if 200 != response.code:
+        raise ValueError(str(response.code) + ': ' + response.msg)
+    temp_file = tempfile.NamedTemporaryFile(delete=False,
+                                            suffix=download_file_extension)
+    temp_file.write(response.read())
+    temp_file.close()
     try:
-        file_hash = get_hash(file_name)
+        file_hash = get_hash(temp_file.name)
     except ValueError:
-        os.remove(file_name)
+        os.remove(temp_file.name)
         # Simpler to just raise again
         raise
-    # for testing
-    # try:
-    file_name = process_audio(file_name)
-    # except:
-    #    pass
-    return os.path.basename(file_name), file_hash
+    return process_audio(temp_file.name, base_name, download_file_extension),\
+        file_hash
 
 
 def build_query_url(kanji, kana):
@@ -61,14 +69,12 @@ def build_query_url(kanji, kana):
         return url_jdict + urllib.urlencode(qdict)
 
 
-def build_file_name(kanji, kana):
-    """Get a valid download file name."""
+def build_base_name(kanji, kana):
+    """Base of the file name to come."""
     base_name = kanji
     if kana:
         base_name += u'_' + kana
-    # Use my function that takes different capitalization rules into
-    # account. This may throw a ValueError.
-    return free_media_name(base_name, download_file_extension)
+    return base_name
 
 
 def get_kanji_kana(source):

@@ -13,8 +13,7 @@ from aqt.qt import *
 #from anki.notes import Note
 from anki.hooks import addHook
 
-#from forvo import get_word_from_forvo
-#from google_tts import get_word_from_google
+from google_tts import get_word_from_google
 from japanesepod  import get_word_from_jpod
 
 from review_gui import store_or_blacklist
@@ -33,11 +32,6 @@ Japanese-pod: This looks for a field called reading(*) and triss to
               though.
 Google TTS: Get pronunciations from the Google Text-To-Speech service. These are
             robot voices, so be a bit suspicous about them.
-Forvo: Try to get pronunciations from the crowd-sourced forvo.com.
-       Pronunciations are often noisy and may turn out to be wrong. To
-       use this service, you need to register at forvo.com and get a
-       “developer” key. The free service is limited to 1000 requests
-       per day.
 
 There are three ways to download: Current card, current note and
 manual.
@@ -158,8 +152,8 @@ def get_side_fields(card, note, japanese=False):
     Get a list of field name pairs for "visible" download fields.
 
     Check the visible side of the current card for fields that contain
-    a string from audio_field_keys.
-    Then check the
+    a string from audio_field_keys.  Then check the note for these
+    fields and suitable data source fields.
     """
     if 'question' == mw.reviewer.state:
         template = card.template()[u'qfmt']
@@ -179,9 +173,8 @@ def get_side_fields(card, note, japanese=False):
     field_pairs_list = []
     for fname in audio_field_name_list:
         try:
-            field_pairs_list.append((field_source_name(note, fname,
-                                                       readings=japanese),
-                                     fname))
+            field_pairs_list.append(
+                (field_source_name(note, fname, readings=japanese), fname))
         except KeyError:
             pass
     return field_pairs_list
@@ -189,49 +182,55 @@ def get_side_fields(card, note, japanese=False):
 
 
 def get_note_fields(note, japanese=False):
+    """
+    Get a list of field name pairs for download.
+
+    Check all field names and return source and destination fields for
+    downloading audio.
+    """
     field_names = [item[0] for item in note.items()]
     field_pairs_list = []
     for afk in audio_field_keys:
         for fn in field_names:
             if afk in fn.lower():
                 try:
-                    field_pairs_list.append((field_source_name(note, fn,\
-                                                      readings=japanese),
-                                             fn))
+                    field_pairs_list.append(
+                        (field_source_name(note, fn, readings=japanese), fn))
                 except KeyError:
                     pass
     return field_pairs_list
 
 def download_fields(note, general_pairs, japanese_pairs):
-    # debug. just look that we get the right fields for now
+    """
+    Download data for the fields provided.
+
+    Go to the (planned three, at the moment one) site(s) and download
+    for the pairs. Then call a function that asks the user what to do.
+    """
     retrieved_files_list = []
     for source, dest in general_pairs:
         text = note[source]
-        print 'Get pronunciation from ', text, ' (field ', source,\
-            ') and put it in field ' , dest
-    #    try:
-    #        dl_fname, dl_hash = get_word_from_forvo(text, dest)
-    #    else:
-    #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
-    #    try:
-    #        dl_fname, dl_hash = get_word_from_google(text, dest)
-    #    else:
-    #        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
+        try:
+            dl_fname, dl_hash = get_word_from_google(text, dest)
+        except:
+            # pass
+            # Test: crash and burn
+            raise
+        else:
+            retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
     for source, dest in japanese_pairs:
         text = note[source]
-        print 'Get Japanese pronunciation from ', text, ' (field ', source,\
-            ') and put it in field ' , dest
         # testing: Catch only known problems here. Otherwise crash and
         # burn. Seeing the impact site is helpful.
         try:
             dl_fname, dl_hash = get_word_from_jpod(text)
         except ValueError as ve:
             if "blacklist" in str(ve):
+                print 'Caught blacklist'
                 continue
             raise
         #try:
         #    dl_fname, dl_hash = get_word_from_jpod(text, dest)
-
         #else:
             # That is, no exception
         retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
@@ -240,16 +239,16 @@ def download_fields(note, general_pairs, japanese_pairs):
 
 
 def download_for_side():
+    """
+    Download audio for one side.
+
+    Download audio for all audio fields on the currently visible card
+    side.
+    """
     card = mw.reviewer.card
     if not card:
         return
     note = card.note()
-    # Brainstorm: things to use:
-    # note.items()
-    # note.model()
-    # field_names = [item[0] for item in note.items()]
-    # field_contents_1 = [item[1] for item in note.items()]
-    # field_contents_2 = note.values()
     general_field_pairs = get_side_fields(card, note)
     if "japanese" in note.model()['name'].lower():
         japanese_field_pairs = get_side_fields(card, note, japanese=True)
@@ -258,6 +257,7 @@ def download_for_side():
     download_fields(note, general_field_pairs, japanese_field_pairs)
 
 def download_for_note():
+    """Download for all audio on the current card."""
     note = mw.reviewer.card.note()
     if not note:
         return
