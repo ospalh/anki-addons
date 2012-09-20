@@ -20,7 +20,7 @@ from anki import hooks
 from aqt import utils, mw
 
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 
 user_css_name = 'user_style.css'
 css_encoding =  'utf-8'
