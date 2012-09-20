@@ -56,8 +56,9 @@ def get_word_from_jpod(source):
         os.remove(temp_file.name)
         # Simpler to just raise again
         raise
+    extras = dict(source='Japanesepod')
     return process_audio(temp_file.name, base_name, download_file_extension),\
-        file_hash
+        file_hash, extras
 
 
 def build_query_url(kanji, kana):

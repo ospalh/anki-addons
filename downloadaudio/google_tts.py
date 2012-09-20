@@ -55,8 +55,9 @@ def get_word_from_google(source, language=None):
         os.remove(temp_file.name)
         # Simpler to just raise again
         raise
+    extras = dict(source='GoogleTTS')
     return process_audio(temp_file.name, source, download_file_extension),\
-        file_hash
+        file_hash, extras
 
 
 def build_query_url(source, language=None):
