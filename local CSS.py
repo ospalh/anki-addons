@@ -1,7 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# © Roland Sieker <ospalh@gmail.com>  2012-04-10
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# © copyright 2012 Roland Sieker <ospalh@gmail.com>
+# Contains snippets of code from anki proper,
+# written by Damien Elmes <anki@ichi2.net>
+# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 # Insipired by CSS Modify Style-Sheet input by DAThomas
 """
 Load local CSS and add it to the cards.
