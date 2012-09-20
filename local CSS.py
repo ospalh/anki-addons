@@ -40,20 +40,19 @@ def fix_body_class():
     """
     # Gather all the A-Za-z0-9_ characters from the template and model
     # names and add those as class.
-    # Fix a bug. Partly a typo, but cribbed extra code from Anki's
-    # cards.py. RAS 2012-09-20
-    model = mw.reviewer.card.model()
-    # We used odid, not ord for this. That was a typo.
 
-    # Check if we have a cloze type.
+    # Fix a bug. The template number is card.ord, not
+    # card.odid. Partly a typo. RAS 2012-09-20
+    model = mw.reviewer.card.model()
+    # Cribbed extra code from Anki's cards.py, to deal with cloze
+    # types. RAS 2012-09-20
     if model['type'] == MODEL_STD:
         template_nr = mw.reviewer.card.ord
     else:
         template_nr = 0
     template_class = re.sub('[\W_]+', '',
                             model['tmpls'][template_nr]['name']).lower()
-    model_class = re.sub('[\W_]+', '', mw.reviewer.card.model()['name'])\
-        .lower()
+    model_class = re.sub('[\W_]+', '', model['name']).lower()
     body_class = '{0} card card{1} template_{2} model_{3}'.format(
         local_class, mw.reviewer.card.ord,
         template_class, model_class)
