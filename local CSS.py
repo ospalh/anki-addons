@@ -10,13 +10,15 @@ This is an add-on for Anki 2 SRS.
 Load the file 'user_style.css' from the user’s profile folder
 (e.g. "~/Anki/User 1/user_style.css") and add it to the cards, before
 the style from the template.
-"""  
+"""
 
-from anki.cards  import Card
-from anki import hooks
-from aqt import utils, mw
 import os
 import re
+from anki.cards  import Card
+from anki.consts import *
+from anki import hooks
+from aqt import utils, mw
+
 
 __version__ = '1.2.0'
 
@@ -38,9 +40,18 @@ def fix_body_class():
     """
     # Gather all the A-Za-z0-9_ characters from the template and model
     # names and add those as class.
-    template_class = re.sub('[\W_]+', '', mw.reviewer.card.model()['tmpls']\
-                                [mw.reviewer.card.odid]['name'])\
-                                .lower()
+    # Fix a bug. Partly a typo, but cribbed extra code from Anki's
+    # cards.py. RAS 2012-09-20
+    model = mw.reviewer.card.model()
+    # We used odid, not ord for this. That was a typo.
+
+    # Check if we have a cloze type.
+    if model['type'] == MODEL_STD:
+        template_nr = mw.reviewer.card.ord
+    else:
+        template_nr = 0
+    template_class = re.sub('[\W_]+', '',
+                            model['tmpls'][template_nr]['name']).lower()
     model_class = re.sub('[\W_]+', '', mw.reviewer.card.model()['name'])\
         .lower()
     body_class = '{0} card card{1} template_{2} model_{3}'.format(
