@@ -218,5 +218,5 @@ class ReviewFiles(QDialog):
         ret_text = u'Source text: <b>{0}</b><br>from field: {1}'\
             .format(text, source)
         for key, value in extras.items():
-            ret_text += '<br>{0}: {1}'.format(key, value)
+            ret_text += u'<br>{0}: {1}'.format(key, value)
         return ret_text
