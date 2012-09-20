@@ -211,19 +211,20 @@ def download_fields(note, general_pairs, japanese_pairs):
     for source, dest in general_pairs:
         text = note[source]
         try:
-            dl_fname, dl_hash = get_word_from_google(text, dest)
+            dl_fname, dl_hash, extras = get_word_from_google(text, dest)
         except:
             # pass
             # Test: crash and burn
             raise
         else:
-            retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
+            retrieved_files_list.append(
+                (source, dest, text, dl_fname, dl_hash, extras))
     for source, dest in japanese_pairs:
         text = note[source]
         # testing: Catch only known problems here. Otherwise crash and
         # burn. Seeing the impact site is helpful.
         try:
-            dl_fname, dl_hash = get_word_from_jpod(text)
+            dl_fname, dl_hash, extras = get_word_from_jpod(text)
         except ValueError as ve:
             if "blacklist" in str(ve):
                 print 'Caught blacklist'
@@ -233,7 +234,8 @@ def download_fields(note, general_pairs, japanese_pairs):
         #    dl_fname, dl_hash = get_word_from_jpod(text, dest)
         #else:
             # That is, no exception
-        retrieved_files_list.append((source, dest, text, dl_fname, dl_hash))
+        retrieved_files_list.append(
+            (source, dest, text, dl_fname, dl_hash, extras))
     if retrieved_files_list:
         store_or_blacklist(note, retrieved_files_list)
 

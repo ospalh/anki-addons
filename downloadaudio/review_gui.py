@@ -43,7 +43,7 @@ def store_or_blacklist(note, retrieved_data):
     # Go through the list once and just do what needs to be done.
     # Keep track if we have to do some clean up.
     items_added = False
-    for idx, (source, dest, text, dl_fname, dl_hash) \
+    for idx, (source, dest, text, dl_fname, dl_hash, extras) \
             in enumerate(retrieved_data):
         action_id = review_files.buttons_groups[idx].checkedId()
         if action_id == action['add']:
@@ -58,7 +58,8 @@ def store_or_blacklist(note, retrieved_data):
 
 
 def remove_all_files(files_etc):
-    for source, dest, text, dl_fname, dl_hash in files_etc:
+    for source, dest, text, dl_fname, dl_hash, extras\
+            in files_etc:
         os.remove(os.path.join(mw.col.media.dir(), dl_fname))
 
 class ReviewFiles(QDialog):
@@ -68,6 +69,7 @@ class ReviewFiles(QDialog):
     def __init__(self, note, files_list):
         self.note = note
         self.list = files_list
+        super(ReviewFiles, self).__init__() # Cut-and-pasted
         self.buttons_groups = []
         self.text_help = u"Text used to retrieve audio.<br>"+ \
             u"(Mouse over the texts below to see further information."
@@ -95,7 +97,6 @@ class ReviewFiles(QDialog):
             u"When your downloaded file tells you that they they are sorry, " + \
             u"will add this soon &c., click on this."
         self.blacklist_help_text_short = u"Blacklist this file"
-        super(ReviewFiles, self).__init__() # Voodoo code. Look it up!
         self.initUI()
 
 
@@ -147,11 +148,11 @@ class ReviewFiles(QDialog):
     def create_rows(self, layout):
         play_button_group = QButtonGroup(self)
         old_play_button_group = QButtonGroup(self)
-        for num, (source, dest, text, dl_fname, dl_hash)\
+        for num, (source, dest, text, dl_fname, dl_hash, extras)\
                 in enumerate(self.list, 3):
             tt_label = QLabel(text, self)
             tt_label.setToolTip(
-                self.build_text_help_label(text, source))
+                self.build_text_help_label(text, source, extras))
             layout.addWidget(tt_label, num, 0)
             # Play button.
             t_play_button = QPushButton(self)
@@ -213,7 +214,9 @@ class ReviewFiles(QDialog):
                     self.list[old_play_button_group.id(button)][1]]))
 
 
-    def build_text_help_label(self, text, source, extras=None):
+    def build_text_help_label(self, text, source, extras):
         ret_text = u'Source text: <b>{0}</b><br>from field: {1}'\
             .format(text, source)
+        for key, value in extras.items():
+            ret_text += '<br>{0}: {1}'.format(key, value)
         return ret_text
