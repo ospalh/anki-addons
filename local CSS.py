@@ -40,12 +40,7 @@ def fix_body_class():
     """
     # Gather all the A-Za-z0-9_ characters from the template and model
     # names and add those as class.
-
-    # Fix a bug. The template number is card.ord, not
-    # card.odid. Partly a typo. RAS 2012-09-20
     model = mw.reviewer.card.model()
-    # Cribbed extra code from Anki's cards.py, to deal with cloze
-    # types. RAS 2012-09-20
     if model['type'] == MODEL_STD:
         template_nr = mw.reviewer.card.ord
     else:
