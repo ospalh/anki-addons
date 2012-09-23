@@ -102,6 +102,7 @@ class ReviewFiles(QDialog):
 
 
     def initUI(self):
+        self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QGridLayout()
         self.setLayout(layout)
         explanation = QLabel(self)
