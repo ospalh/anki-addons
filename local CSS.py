@@ -1,7 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# © Roland Sieker <ospalh@gmail.com>  2012-04-10
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# © copyright 2012 Roland Sieker <ospalh@gmail.com>
+# Contains snippets of code from anki proper,
+# written by Damien Elmes <anki@ichi2.net>
+# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 # Insipired by CSS Modify Style-Sheet input by DAThomas
 """
 Load local CSS and add it to the cards.
@@ -10,15 +12,17 @@ This is an add-on for Anki 2 SRS.
 Load the file 'user_style.css' from the user’s profile folder
 (e.g. "~/Anki/User 1/user_style.css") and add it to the cards, before
 the style from the template.
-"""  
+"""
 
-from anki.cards  import Card
-from anki import hooks
-from aqt import utils, mw
 import os
 import re
+from anki.cards  import Card
+from anki.consts import *
+from anki import hooks
+from aqt import utils, mw
 
-__version__ = '1.2.0'
+
+__version__ = '1.2.2'
 
 user_css_name = 'user_style.css'
 css_encoding =  'utf-8'
@@ -38,11 +42,14 @@ def fix_body_class():
     """
     # Gather all the A-Za-z0-9_ characters from the template and model
     # names and add those as class.
-    template_class = re.sub('[\W_]+', '', mw.reviewer.card.model()['tmpls']\
-                                [mw.reviewer.card.odid]['name'])\
-                                .lower()
-    model_class = re.sub('[\W_]+', '', mw.reviewer.card.model()['name'])\
-        .lower()
+    model = mw.reviewer.card.model()
+    if model['type'] == MODEL_STD:
+        template_nr = mw.reviewer.card.ord
+    else:
+        template_nr = 0
+    template_class = re.sub('[\W_]+', '',
+                            model['tmpls'][template_nr]['name']).lower()
+    model_class = re.sub('[\W_]+', '', model['name']).lower()
     body_class = '{0} card card{1} template_{2} model_{3}'.format(
         local_class, mw.reviewer.card.ord,
         template_class, model_class)
