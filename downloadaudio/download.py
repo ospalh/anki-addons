@@ -15,8 +15,10 @@ from anki.hooks import addHook
 
 from google_tts import get_word_from_google
 from japanesepod  import get_word_from_jpod
-
 from review_gui import store_or_blacklist
+from update_gui import update_pairs
+from language import get_language_code
+
 
 # debug:
 #from aqt.utils import showText
@@ -207,6 +209,8 @@ def download_fields(note, general_pairs, japanese_pairs):
     Go to the (planned three, at the moment one) site(s) and download
     for the pairs. Then call a function that asks the user what to do.
     """
+    general_pairs, japanese_pairs, language_code = update_pairs(
+        general_pairs, japanese_pairs, get_language_code(note))
     retrieved_files_list = []
     for source, dest in general_pairs:
         text = note[source]
@@ -256,9 +260,10 @@ def download_for_side():
         japanese_field_pairs = get_side_fields(card, note, japanese=True)
     else:
         japanese_field_pairs = []
-    download_fields(note, general_field_pairs, japanese_field_pairs)
+    download_fields(note, general_field_pairs, japanese_field_pairs,
+                    get_language_code(note))
 
-def download_for_note():
+def download_for_note(ask_user=False):
     """Download for all audio on the current card."""
     note = mw.reviewer.card.note()
     if not note:
@@ -268,17 +273,27 @@ def download_for_note():
         japanese_field_pairs = get_note_fields(note, japanese=True)
     else:
         japanese_field_pairs = []
-    download_fields(note, general_field_pairs, japanese_field_pairs)
+    language_code = get_language_code(note)
+    if ask_user:
+        general_field_pairs, japanese_field_pairs, language_code = \
+            update_pairs(note, general_pairs, japanese_pairs,
+                         get_language_code(note))
+    download_fields(note, general_field_pairs, japanese_field_pairs,
+                    language_code))
 
+def download_manual():
+    downolad_for_note(aski_user=True)
 
 
 def download_off():
     mw.note_download_action.setEnabled(False)
     mw.side_download_action.setEnabled(False)
+    mw.manual_download_action.setEnabled(False)
 
 def download_on():
     mw.note_download_action.setEnabled(True)
     mw.side_download_action.setEnabled(True)
+    mw.manual_download_action.setEnabled(True)
 
 
 mw.note_download_action = QAction(mw)
@@ -297,9 +312,18 @@ mw.side_download_action.setToolTip("Download audio for audio fields " + \
                                 "currently visible.")
 mw.connect(mw.side_download_action, SIGNAL("triggered()"), download_for_side)
 
+mw.manual_download_action = QAction(mw)
+mw.manual_download_action.setText(u"Manual audio")
+mw.manual_download_action.setIcon(QIcon(os.path.join(icons_dir,
+                                                'download_audio_manual.png')))
+mw.manual_download_action.setToolTip("Download audio, " + \
+                                "editing the information first.")
+mw.connect(mw.manual_download_action, SIGNAL("triggered()"), download_manual)
+
 
 mw.form.menuTools.addAction(mw.note_download_action)
 mw.form.menuTools.addAction(mw.side_download_action)
+mw.form.menuTools.addAction(mw.manual_download_action)
 
 # Todo: switch off at start and on when we get to reviewing.
 # # And start with the acitons off.

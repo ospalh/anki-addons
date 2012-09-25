@@ -18,7 +18,7 @@ Return a two-letter language code.
 """
 
 
-def get_language_code(card=None, note=None):
+def get_language_code(note=None):
     if not card and not note:
         return default_audio_language_code
     # Test. Always return ja.
