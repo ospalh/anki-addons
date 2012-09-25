@@ -19,6 +19,8 @@ Return a two-letter language code.
 """
 
 
+# Brainstorm: mw.col.decks.current()['conf']
+
 def get_language_code(card=None):
     if not card and not note:
         return default_audio_language_code
