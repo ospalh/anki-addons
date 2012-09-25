@@ -202,20 +202,18 @@ def get_note_fields(note, japanese=False):
                     pass
     return field_pairs_list
 
-def download_fields(note, general_pairs, japanese_pairs):
+def download_fields(note, general_pairs, japanese_pairs, language=None):
     """
     Download data for the fields provided.
 
     Go to the (planned three, at the moment one) site(s) and download
     for the pairs. Then call a function that asks the user what to do.
     """
-    general_pairs, japanese_pairs, language_code = update_pairs(
-        general_pairs, japanese_pairs, get_language_code(note))
     retrieved_files_list = []
     for source, dest in general_pairs:
         text = note[source]
         try:
-            dl_fname, dl_hash, extras = get_word_from_google(text, dest)
+            dl_fname, dl_hash, extras = get_word_from_google(text, language)
         except:
             # pass
             # Test: crash and burn
@@ -261,7 +259,7 @@ def download_for_side():
     else:
         japanese_field_pairs = []
     download_fields(note, general_field_pairs, japanese_field_pairs,
-                    get_language_code(note))
+                    get_language_code(card))
 
 def download_for_note(ask_user=False):
     """Download for all audio on the current card."""
@@ -279,7 +277,7 @@ def download_for_note(ask_user=False):
             update_pairs(note, general_pairs, japanese_pairs,
                          get_language_code(note))
     download_fields(note, general_field_pairs, japanese_field_pairs,
-                    language_code))
+                    language_code)
 
 def download_manual():
     downolad_for_note(aski_user=True)

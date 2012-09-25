@@ -7,6 +7,7 @@
 import re
 import os
 from aqt import mw
+from anki.cards import Card
 
 
 ## Set the two-letter language code for the language you are learning
@@ -18,7 +19,7 @@ Return a two-letter language code.
 """
 
 
-def get_language_code(note=None):
+def get_language_code(card=None):
     if not card and not note:
         return default_audio_language_code
     # Test. Always return ja.
