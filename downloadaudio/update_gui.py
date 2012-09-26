@@ -19,13 +19,14 @@ def update_pairs(general_pairs, japanese_pairs, language_code):
 
 class ReviewFields(QDialog):
     """
-    A Dialog to let the user keep or discard files.
+    A Dialog to let the user edit the texts or change the language.
     """
     def __init__(self, general_pairs, japanese_pairs, language_code):
         self.general_pairs = general_pairs,
         self.japanese_pairs = japanese_pairs
         self.language_code = language_code
         super(ReviewFields, self).__init__() # Cut-and-pasted
+
         self.initUI()
 
 
@@ -34,6 +35,12 @@ class ReviewFields(QDialog):
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
         self.setLayout(layout)
+        explanation = QLabel(self)
+        if len(self.list) > 1:
+            explanation.setText(
+                u'Please select an action for each downloaded file:')
+        else:
+            explanation.setText(u'Please select what to do with the file:')
 
         layout.addWidget(explanation, 0, 0, 1, 7)
         text_head_label = QLabel(u'<b>Source text</b>', self)
