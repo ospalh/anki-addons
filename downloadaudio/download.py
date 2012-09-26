@@ -274,13 +274,13 @@ def download_for_note(ask_user=False):
     language_code = get_language_code(note)
     if ask_user:
         general_field_pairs, japanese_field_pairs, language_code = \
-            update_pairs(note, general_pairs, japanese_pairs,
+            update_pairs(general_field_pairs, japanese_field_pairs,
                          get_language_code(note))
     download_fields(note, general_field_pairs, japanese_field_pairs,
                     language_code)
 
 def download_manual():
-    downolad_for_note(aski_user=True)
+    download_for_note(ask_user=True)
 
 
 def download_off():
