@@ -212,6 +212,9 @@ def download_fields(note, general_pairs, japanese_pairs, language=None):
     retrieved_files_list = []
     for source, dest in general_pairs:
         text = note[source]
+        if not text:
+            # EAFP code. Needed for testing.
+            continue
         try:
             dl_fname, dl_hash, extras = get_word_from_google(text, language)
         except:
@@ -223,6 +226,10 @@ def download_fields(note, general_pairs, japanese_pairs, language=None):
                 (source, dest, text, dl_fname, dl_hash, extras))
     for source, dest in japanese_pairs:
         text = note[source]
+        if not text:
+            # EAFP code. Needed for testing.
+            continue
+
         # testing: Catch only known problems here. Otherwise crash and
         # burn. Seeing the impact site is helpful.
         try:
