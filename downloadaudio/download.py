@@ -7,6 +7,7 @@
 import re
 import os
 from aqt import mw
+from aqt.utils import showInfo
 from aqt.qt import *
 
 #from anki.cards import Card
@@ -256,6 +257,8 @@ def download_fields(note, general_data, japanese_data, language=None):
             (source, dest, text, dl_fname, dl_hash, extras))
     if retrieved_files_list:
         store_or_blacklist(note, retrieved_files_list)
+    else:
+        shotInfo(u'Nothing downloaded')
 
 
 def download_for_side():
