@@ -14,8 +14,6 @@ Change the download audio parameters on user input.
 
 def update_data(general_fields, japanese_fields, language_code):
     """Return updated download information"""
-    print 'general fields: ', general_fields
-    print 'japanese fields: ', japanese_fields
     review_fields = ReviewFields(general_fields, japanese_fields,
                                  language_code)
     if not review_fields.exec_():
@@ -84,7 +82,6 @@ class ReviewFields(QDialog):
     def create_general_rows(self, layout):
         gf_layout = QGridLayout()
         for num, (source, dest, text) in enumerate(self.general_fields):
-            print num, source, dest, text
             label = QLabel(u'{0}:'.format(source))
             gf_layout.addWidget(label, num, 0)
             ledit = QLineEdit(text)
@@ -96,7 +93,6 @@ class ReviewFields(QDialog):
     def create_japanese_rows(self, layout):
         jf_layout = QGridLayout()
         for num, (source, dest, kanji, kana) in enumerate(self.japanese_fields):
-            print num, source, dest, kanji, kana
             label = QLabel(u'{0}:'.format(source))
             jf_layout.addWidget(label, num, 0)
             kanji_edit = QLineEdit(kanji)
