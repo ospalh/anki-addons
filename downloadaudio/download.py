@@ -17,9 +17,9 @@ from anki.hooks import addHook
 from google_tts import get_word_from_google
 from japanesepod  import get_word_from_jpod
 from review_gui import store_or_blacklist
-from update_gui import update_pairs
+from update_gui import update_data
 from language import get_language_code
-
+from anki.template import furigana
 
 # debug:
 #from aqt.utils import showText
@@ -75,9 +75,9 @@ def uniqify_list(seq):
     [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
     return no_dupes
 
-def field_source_name(note, fname, readings=False):
+def field_data(note, fname, readings=False):
     """
-    Return a suitable source field name.
+    Return a suitable source field name and the text in that field.
 
     Look for a suitable field to get the source text from and return it.
     If no suitable field is found, a KeyError is raised.
@@ -97,7 +97,19 @@ def field_source_name(note, fname, readings=False):
 
     The first field that matches the candidate is used.  Comparisions
     are done with lowercase strings, the uppercase name is returned.
+
+    Also returned is the text from the field, as one string when
+    reading is False, As two strings, kanji and kana, when reading is
+    True
     """
+    def return_data(idx):
+        text = note[field_names[idx]]
+        if readings:
+            return field_names[idx], fname,\
+                furigana.kanji(text), furigana.kana(text)
+        else:
+            return field_names[idx], fname, text
+
     t_name = fname.lower()
     field_names = [item[0] for item in note.items()]
     f_names = [fn.lower() for fn in field_names]
@@ -110,7 +122,7 @@ def field_source_name(note, fname, readings=False):
             for cnd in sources_list:
                 for idx, lname in enumerate(f_names):
                     if cnd == lname:
-                        return field_names[idx]
+                        return return_data(idx)
             # At this point: The target name is good, but we found no
             # source name.
             raise KeyError("No source name found (case 1)")
@@ -139,7 +151,7 @@ def field_source_name(note, fname, readings=False):
         for cnd in sources_list:
             for idx, lname in enumerate(f_names):
                 if cnd == lname:
-                    return field_names[idx]
+                    return return_data(idx)
         # We do have audio or sound as sub-string but did not find a
         # maching field.
         raise KeyError("No source field found. (case 2)")
@@ -152,7 +164,7 @@ def field_source_name(note, fname, readings=False):
 
 def get_side_fields(card, note, japanese=False):
     """
-    Get a list of field name pairs for "visible" download fields.
+    Get a list of field data for "visible" download fields.
 
     Check the visible side of the current card for fields that contain
     a string from audio_field_keys.  Then check the note for these
@@ -173,46 +185,48 @@ def get_side_fields(card, note, japanese=False):
     # Filter out non-existing fields.
     audio_field_name_list = [fn for fn in audio_field_name_list
                              if fn in all_field_names]
-    field_pairs_list = []
+    field_data_list = []
     for fname in audio_field_name_list:
         try:
-            field_pairs_list.append(
-                (field_source_name(note, fname, readings=japanese), fname))
+            field_data_list.append(
+                field_data(note, fname, readings=japanese))
         except KeyError:
             pass
-    return field_pairs_list
+    return field_data_list
 
 
 
 def get_note_fields(note, japanese=False):
     """
-    Get a list of field name pairs for download.
+    Get a list of field data for download.
 
     Check all field names and return source and destination fields for
     downloading audio.
     """
     field_names = [item[0] for item in note.items()]
-    field_pairs_list = []
+    field_data_list = []
     for afk in audio_field_keys:
         for fn in field_names:
             if afk in fn.lower():
                 try:
-                    field_pairs_list.append(
-                        (field_source_name(note, fn, readings=japanese), fn))
+                    field_data_list.append(
+                        field_data(note, fn, readings=japanese))
                 except KeyError:
                     pass
-    return field_pairs_list
+    return field_data_list
 
-def download_fields(note, general_pairs, japanese_pairs, language=None):
+def download_fields(note, general_data, japanese_data, language=None):
     """
     Download data for the fields provided.
 
     Go to the (planned three, at the moment one) site(s) and download
-    for the pairs. Then call a function that asks the user what to do.
+    for the data. Then call a function that asks the user what to do.
     """
     retrieved_files_list = []
-    for source, dest in general_pairs:
-        text = note[source]
+    for source, dest, text in general_data:
+        if not text:
+            # EAFP code. Needed for testing.
+            continue
         try:
             dl_fname, dl_hash, extras = get_word_from_google(text, language)
         except:
@@ -222,21 +236,23 @@ def download_fields(note, general_pairs, japanese_pairs, language=None):
         else:
             retrieved_files_list.append(
                 (source, dest, text, dl_fname, dl_hash, extras))
-    for source, dest in japanese_pairs:
-        text = note[source]
+    for source, dest, kanji, kana in japanese_data:
+        if not kanji and not kana:
+            continue
         # testing: Catch only known problems here. Otherwise crash and
         # burn. Seeing the impact site is helpful.
         try:
-            dl_fname, dl_hash, extras = get_word_from_jpod(text)
+            dl_fname, dl_hash, extras = get_word_from_jpod(kanji, kana)
         except ValueError as ve:
             if "blacklist" in str(ve):
                 print 'Caught blacklist'
                 continue
             raise
-        #try:
-        #    dl_fname, dl_hash = get_word_from_jpod(text, dest)
-        #else:
-            # That is, no exception
+        # This text may be a bit ugly. Never mind. It's just for display
+        if kanji != kana:
+            text = u'{0} ({1})'.format(kanji,kana)
+        else:
+            text = kanji
         retrieved_files_list.append(
             (source, dest, text, dl_fname, dl_hash, extras))
     if retrieved_files_list:
@@ -256,12 +272,12 @@ def download_for_side():
     if not card:
         return
     note = card.note()
-    general_field_pairs = get_side_fields(card, note)
+    general_field_data = get_side_fields(card, note)
     if "japanese" in note.model()['name'].lower():
-        japanese_field_pairs = get_side_fields(card, note, japanese=True)
+        japanese_field_data = get_side_fields(card, note, japanese=True)
     else:
-        japanese_field_pairs = []
-    download_fields(note, general_field_pairs, japanese_field_pairs,
+        japanese_field_data = []
+    download_fields(note, general_field_data, japanese_field_data,
                     get_language_code(card))
 
 def download_for_note(ask_user=False):
@@ -269,21 +285,21 @@ def download_for_note(ask_user=False):
     note = mw.reviewer.card.note()
     if not note:
         return
-    general_field_pairs = get_note_fields(note)
+    general_field_data = get_note_fields(note)
     if "japanese" in note.model()['name'].lower():
-        japanese_field_pairs = get_note_fields(note, japanese=True)
+        japanese_field_data = get_note_fields(note, japanese=True)
     else:
-        japanese_field_pairs = []
+        japanese_field_data = []
     language_code = get_language_code(note)
     if ask_user:
-        general_field_pairs, japanese_field_pairs, language_code = \
-            update_pairs(note, general_pairs, japanese_pairs,
-                         get_language_code(note))
-    download_fields(note, general_field_pairs, japanese_field_pairs,
+        general_field_data, japanese_field_data, language_code = \
+            update_data(general_field_data, japanese_field_data,
+                        language_code)
+    download_fields(note, general_field_data, japanese_field_data,
                     language_code)
 
 def download_manual():
-    downolad_for_note(aski_user=True)
+    download_for_note(ask_user=True)
 
 
 def download_off():
