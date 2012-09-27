@@ -258,7 +258,7 @@ def download_fields(note, general_data, japanese_data, language=None):
     if retrieved_files_list:
         store_or_blacklist(note, retrieved_files_list)
     else:
-        shotInfo(u'Nothing downloaded')
+        showInfo(u'Nothing downloaded')
 
 
 def download_for_side():
