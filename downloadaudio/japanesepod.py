@@ -18,7 +18,6 @@ import urllib2
 import os
 
 from aqt import mw
-from anki.template import furigana
 
 from process_audio import process_audio
 from blacklist import get_hash
@@ -33,11 +32,10 @@ url_jdict='http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
 
 # Code
 
-def get_word_from_jpod(source):
+def get_word_from_jpod(kanji, kana):
     """
     Download audio from kanji and kana from japanesepod.
     """
-    kanji, kana = get_kanji_kana(source)
     base_name = build_base_name(kanji, kana)
     get_url = build_query_url(kanji, kana)
     # This may throw an exception
@@ -76,14 +74,3 @@ def build_base_name(kanji, kana):
     if kana:
         base_name += u'_' + kana
     return base_name
-
-
-def get_kanji_kana(source):
-    """Split reading into kanji and kana."""
-    kanji = furigana.kanji(source)
-    kana = furigana.kana(source)
-    #if kanji == kana:
-    #    kana = u""
-    if not kanji and not kana:
-        raise ValueError('Nothing to download')
-    return kanji, kana

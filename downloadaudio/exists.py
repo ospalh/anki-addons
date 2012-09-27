@@ -5,9 +5,10 @@
 #
 
 import os
+import re
 import sys
 from aqt import mw
-from anki.utils import isWin, isMac
+from anki.utils import isWin, isMac, stripHTML
 
 def free_media_name(base, end):
     """
@@ -17,6 +18,9 @@ def free_media_name(base, end):
     that based on the base name and end, but doesn't exist, nor does
     it clash with another file different only in upper/lower case.
     """
+    base = stripHTML(base)
+    # Basically stripping the 'invalidFilenameChars'. (Not tested too much).
+    base = re.sub('[\\/:\*?"<>\|]', '', base)
     mdir = mw.col.media.dir()
     if not exists_lc(mdir, base + end):
         return base+end

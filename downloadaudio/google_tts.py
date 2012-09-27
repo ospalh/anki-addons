@@ -25,9 +25,6 @@ from exists import free_media_name
 
 download_file_extension = u'.mp3'
 
-# Set the default language for tts.
-default_language = 'ja'
-
 url_gtts = 'http://translate.google.com/translate_tts?'
 
 user_agent_string = 'Mozilla/5.0'
@@ -38,7 +35,7 @@ def get_word_from_google(source, language=None):
     if not source:
         raise ValueError('Nothing to download')
     # base_name = free_media_name(source, download_file_extension)
-    get_url = build_query_url(source)
+    get_url = build_query_url(source, language)
     # This may throw an exception
     request = urllib2.Request(get_url)
     request.add_header('User-agent', user_agent_string)
