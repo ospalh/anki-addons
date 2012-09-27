@@ -6,27 +6,44 @@
 
 from aqt.qt import *
 from aqt import mw
-
+from language import default_audio_language_code
 
 """
 Change the download audio parameters on user input.
 """
 
-def update_pairs(general_pairs, japanese_pairs, language_code):
+def update_data(general_fields, japanese_fields, language_code):
     """Return updated download information"""
-    return general_pairs, japanese_pairs, language_code
+    print 'general fields: ', general_fields
+    print 'japanese fields: ', japanese_fields
+    review_fields = ReviewFields(general_fields, japanese_fields,
+                                 language_code)
+    if not review_fields.exec_():
+        return [], [], None
+    for num, (source, dest, old_text) in enumerate(general_fields):
+        general_fields[num] = (source, dest,
+                               review_fields.general_text_lineedits[num].text())
+    for num, (source, dest, old_kanji, old_kana) in enumerate(japanese_fields):
+        japanese_fields[num] = (source, dest,
+                                review_fields.kanji_lineedits[num].text(),
+                                review_fields.kana_lineedits[num].text())
+    language_code = review_fields.language_code_lineedit.text()
+    return general_fields, japanese_fields, language_code
 
 
 class ReviewFields(QDialog):
     """
     A Dialog to let the user edit the texts or change the language.
     """
-    def __init__(self, general_pairs, japanese_pairs, language_code):
-        self.general_pairs = general_pairs,
-        self.japanese_pairs = japanese_pairs
-        self.language_code = language_code
+    def __init__(self, general_fields, japanese_fields, language_code):
+        self.general_fields = general_fields
+        self.japanese_fields = japanese_fields
+        self.language_code = language_code # possibly None
+        self.language_code_lineedit = None
+        self.general_text_lineedits = []
+        self.kanji_lineedits = []
+        self.kana_lineedits = []
         super(ReviewFields, self).__init__() # Cut-and-pasted
-
         self.initUI()
 
 
@@ -36,37 +53,24 @@ class ReviewFields(QDialog):
         layout = QVBoxLayout()
         self.setLayout(layout)
         explanation = QLabel(self)
-        if len(self.list) > 1:
+        if len(self.general_fields) + len(self.japanese_fields) > 0:
             explanation.setText(
-                u'Please select an action for each downloaded file:')
-        else:
-            explanation.setText(u'Please select what to do with the file:')
-
-        layout.addWidget(explanation, 0, 0, 1, 7)
-        text_head_label = QLabel(u'<b>Source text</b>', self)
-        text_head_label.setToolTip(self.text_help)
-        layout.addWidget(text_head_label, 1,0)
-        play_head_label = QLabel(u'play', self)
-        play_head_label.setToolTip(self.play_help)
-        layout.addWidget(play_head_label, 1,1)
-        play_old_head_label = QLabel(u'play old', self)
-        play_old_head_label.setToolTip(self.play_old_help)
-        layout.addWidget(play_old_head_label, 1,2)
-        add_head_label = QLabel(u'add', self)
-        add_head_label.setToolTip(self.add_help_text_long)
-        layout.addWidget(add_head_label, 1,3)
-        keep_head_label = QLabel(u'keep', self)
-        keep_head_label.setToolTip(self.keep_help_text_long)
-        layout.addWidget(keep_head_label, 1,4)
-        delete_head_label = QLabel(u'delete', self)
-        delete_head_label.setToolTip(self.delete_help_text_long)
-        layout.addWidget(delete_head_label, 1,5)
-        blacklist_head_label = QLabel(u'blacklist', self)
-        blacklist_head_label.setToolTip(self.blacklist_help_text_long)
-        layout.addWidget(blacklist_head_label, 1,6)
-        rule_label = QLabel('<hr>')
-        layout.addWidget(rule_label, 2, 0, 1, 7)
-        self.create_rows(layout)
+                u'Please edit the text below or change the language.')
+        else :
+            explanation.setText(u'Please select the language to use:')
+        layout.addWidget(explanation)
+        self.create_general_rows(layout)
+        self.create_japanese_rows(layout)
+        lang_hlayout = QHBoxLayout()
+        lc_label = QLabel(u'Language code:', self)
+        lang_hlayout.addWidget(lc_label)
+        self.language_code_lineedit = QLineEdit(self)
+        try:
+            self.language_code_lineedit.setText(self.language_code)
+        except:
+            self.language_code_lineedit.setText(default_audio_language_code)
+        lang_hlayout.addWidget(self.language_code_lineedit)
+        layout.addLayout(lang_hlayout)
         dialog_buttons = QDialogButtonBox(self)
         dialog_buttons.addButton(QDialogButtonBox.Cancel)
         dialog_buttons.addButton(QDialogButtonBox.Ok)
@@ -74,81 +78,31 @@ class ReviewFields(QDialog):
                      self, SLOT("accept()"))
         self.connect(dialog_buttons, SIGNAL("rejected()"),
                      self, SLOT("reject()"))
-        layout.addWidget(dialog_buttons, len(self.buttons_groups) + 3, 0, 1, 7)
+        layout.addWidget(dialog_buttons)
 
 
-    def create_rows(self, layout):
-        play_button_group = QButtonGroup(self)
-        old_play_button_group = QButtonGroup(self)
-        for num, (source, dest, text, dl_fname, dl_hash, extras)\
-                in enumerate(self.list, 3):
-            tt_label = QLabel(text, self)
-            tt_label.setToolTip(
-                self.build_text_help_label(text, source, extras))
-            layout.addWidget(tt_label, num, 0)
-            # Play button.
-            t_play_button = QPushButton(self)
-            play_button_group.addButton(t_play_button, num - 3)
-            t_play_button.setToolTip(self.play_help)
-            t_play_button.setIcon(QIcon(os.path.join(icons_dir, 'play.png')))
-            layout.addWidget(t_play_button, num, 1)
-            if self.note[dest]:
-                t_play_old_button = QPushButton(self)
-                old_play_button_group.addButton(t_play_old_button, num - 3)
-                t_play_old_button.setIcon(
-                    QIcon(os.path.join(icons_dir, 'play.png')))
-                t_play_old_button.setToolTip(self.note[dest])
-                layout.addWidget(t_play_old_button, num, 2)
-            else:
-                dummy_label = QLabel('',self)
-                dummy_label.setToolTip(self.play_old_empty_line_help)
-                layout.addWidget(dummy_label, num, 2)
-            # The group where we later look what to do:
-            t_button_group = QButtonGroup(self)
-            t_button_group.setExclusive(True)
-            # Now the four buttons
-            t_add_button = QPushButton(self)
-            t_add_button.setCheckable(True)
-            t_add_button.setChecked(True)
-            t_add_button.setFlat(True)
-            t_add_button.setToolTip(self.add_help_text_short)
-            t_add_button.setIcon(QIcon(os.path.join(icons_dir, 'add.png')))
-            layout.addWidget(t_add_button, num, 3)
-            t_button_group.addButton(t_add_button, action['add'])
-            t_keep_button = QPushButton(self)
-            t_keep_button.setCheckable(True)
-            t_keep_button.setFlat(True)
-            t_keep_button.setToolTip(self.keep_help_text_short)
-            t_keep_button.setIcon(QIcon(os.path.join(icons_dir, 'keep.png')))
-            layout.addWidget(t_keep_button, num, 4)
-            t_button_group.addButton(t_keep_button,  action['keep'])
-            t_delete_button = QPushButton(self)
-            t_delete_button.setCheckable(True)
-            t_delete_button.setFlat(True)
-            t_delete_button.setToolTip(self.delete_help_text_short)
-            t_delete_button.setIcon(QIcon(os.path.join(icons_dir,
-                                                       'delete.png')))
-            layout.addWidget(t_delete_button, num, 5)
-            t_button_group.addButton(t_delete_button,  action['delete'])
-            t_blacklist_button = QPushButton(self)
-            t_blacklist_button.setCheckable(True)
-            t_blacklist_button.setFlat(True)
-            t_blacklist_button.setToolTip(self.blacklist_help_text_short)
-            t_blacklist_button.setIcon(QIcon(os.path.join(icons_dir,
-                                                          'blacklist.png')))
-            layout.addWidget(t_blacklist_button, num, 6)
-            t_button_group.addButton(t_blacklist_button,  action['blacklist'])
-            self.buttons_groups.append(t_button_group)
-        play_button_group.buttonClicked.connect(
-            lambda button: play(self.list[play_button_group.id(button)][3]))
-        old_play_button_group.buttonClicked.connect(
-            lambda button: playFromText(self.note[
-                    self.list[old_play_button_group.id(button)][1]]))
+    def create_general_rows(self, layout):
+        gf_layout = QGridLayout()
+        for num, (source, dest, text) in enumerate(self.general_fields):
+            print num, source, dest, text
+            label = QLabel(u'{0}:'.format(source))
+            gf_layout.addWidget(label, num, 0)
+            ledit = QLineEdit(text)
+            gf_layout.addWidget(ledit, num, 1)
+            self.general_text_lineedits.append(ledit)
+        layout.addLayout(gf_layout)
 
 
-    def build_text_help_label(self, text, source, extras):
-        ret_text = u'Source text: <b>{0}</b><br>from field: {1}'\
-            .format(text, source)
-        for key, value in extras.items():
-            ret_text += u'<br>{0}: {1}'.format(key, value)
-        return ret_text
+    def create_japanese_rows(self, layout):
+        jf_layout = QGridLayout()
+        for num, (source, dest, kanji, kana) in enumerate(self.japanese_fields):
+            print num, source, dest, kanji, kana
+            label = QLabel(u'{0}:'.format(source))
+            jf_layout.addWidget(label, num, 0)
+            kanji_edit = QLineEdit(kanji)
+            jf_layout.addWidget(kanji_edit, num, 1)
+            self.kanji_lineedits.append(kanji_edit)
+            kana_edit = QLineEdit(kana)
+            jf_layout.addWidget(kana_edit, num, 2)
+            self.kana_lineedits.append(kana_edit)
+        layout.addLayout(jf_layout)
