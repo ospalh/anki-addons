@@ -3,7 +3,7 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 # Images:
 # most icons from Anki1
-# Exceptions: 
+# Exceptions:
 # study.png,
 # Found at http://www.vectorarts.net/vector-icons/free-study-book-icons/ ,
 # "Free for Personal and Commercial Use"
@@ -88,7 +88,7 @@ def toggle_more_tool_bar():
         mw.reviewer.more_tool_bar.show()
     else:
         mw.reviewer.more_tool_bar.hide()
-        
+
 def ask_delete():
     """Delete a note after asking the user."""
     if askUser('Delete note?', defaultno=True):
@@ -181,7 +181,7 @@ border-bottom: 1px solid #aaa;
 def add_to_menus():
     """
     Add a number of items to memus.
-    
+
     Put the functions of the DASB old-style tool bar links into
     menus. Sync to the file menu, stats to the tools menu, the DASB,
     together with a study-withouts-overview item to a new go
@@ -248,7 +248,7 @@ def more_tool_bar_off():
     toggle_mark_action.setEnabled(False)
     suspend_action.setEnabled(False)
     delete_action.setEnabled(False)
-    try: 
+    try:
         mw.reviewer.more_tool_bar.hide()
     except:
         pass
@@ -265,10 +265,10 @@ def maybe_more_tool_bar_on():
     if show_more_tool_bar_action.isChecked():
         if not have_dl_audio:
             try:
-                # Try to add the download action. 
+                # Try to add the download action.
                 mw.reviewer.more_tool_bar.addSeparator()
                 mw.reviewer.more_tool_bar.addAction(
-                    mw.note_download_action)
+                    mw.manual_download_action)
                 have_dl_audio = True
             except:
                 pass
@@ -297,7 +297,7 @@ def  load_toolbars_visible():
     except KeyError:
         ttb_on = False
     show_text_tool_bar_action.setChecked(ttb_on)
-    toggle_text_tool_bar()    
+    toggle_text_tool_bar()
     try:
         qtb_on = mw.pm.profile['ctb_show_qt_toolbar']
     except KeyError:
@@ -464,7 +464,7 @@ add_tool_bar()
 add_more_tool_bar()
 add_to_menus()
 #mw.toolbar.web.hide()
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off) 
+mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off)
 mw.overview.show = wrap(mw.overview.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
 mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
@@ -473,5 +473,3 @@ mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
 addHook("unloadProfile", save_toolbars_visible)
 addHook("profileLoaded", load_toolbars_visible)
-
-
