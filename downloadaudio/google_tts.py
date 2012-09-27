@@ -36,7 +36,6 @@ def get_word_from_google(source, language=None):
         raise ValueError('Nothing to download')
     # base_name = free_media_name(source, download_file_extension)
     get_url = build_query_url(source, language)
-    print 'gtts url: ', get_url
     # This may throw an exception
     request = urllib2.Request(get_url)
     request.add_header('User-agent', user_agent_string)

@@ -104,12 +104,9 @@ def field_data(note, fname, readings=False):
     def return_data(idx):
         text = note[field_names[idx]]
         if readings:
-            print '(japanese) returning',  field_names[idx], fname,\
-                furigana.kanji(text), furigana.kana(text)
             return field_names[idx], fname,\
                 furigana.kanji(text), furigana.kana(text)
         else:
-            print 'returning',  field_names[idx], fname, text
             return field_names[idx], fname, text
 
     t_name = fname.lower()
@@ -190,10 +187,8 @@ def get_side_fields(card, note, japanese=False):
     field_data_list = []
     for fname in audio_field_name_list:
         try:
-            print 'try to get field data for ', note, fname, japanese
             field_data_list.append(
                 field_data(note, fname, readings=japanese))
-            print 'got ', field_data(note, fname, readings=japanese)
         except KeyError:
             pass
     return field_data_list
@@ -213,10 +208,8 @@ def get_note_fields(note, japanese=False):
         for fn in field_names:
             if afk in fn.lower():
                 try:
-                    print 'try to get field data for ', note, fn, japanese
                     field_data_list.append(
                         field_data(note, fn, readings=japanese))
-                    print 'got ', field_data(note, fn, readings=japanese)
                 except KeyError:
                     pass
     return field_data_list
