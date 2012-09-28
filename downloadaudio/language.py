@@ -31,7 +31,9 @@ def get_language_code(card=None):
     # First, look at the tags
     for tag in card.note().tags:
         try:
-            return re.search('^lang_([a-z]{2,3})$', tag).group(1)
+            return re.search('^lang_([a-z]{2,3})$', tag, flags=re.IGNORECASE)\
+                .group(1).lower()
+
         except:
             continue
     # Then, look at the deck conf
