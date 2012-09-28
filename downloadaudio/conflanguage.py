@@ -11,7 +11,8 @@ from aqt.forms import dconf
 from anki.hooks import addHook, wrap
 from aqt.qt import *
 
-from language import default_audio_language_code
+from language import default_audio_language_code, al_code_code
+
 
 def setup_ui(self, Dialog):
     help_text = '''<p>This code is used for audio downloads.
@@ -30,12 +31,10 @@ def setup_ui(self, Dialog):
 
 def load_conf(self):
     self.form.audio_download_language.setText(
-        self.conf.get('addon_audio_download_language',
-                      default_audio_language_code))
+        self.conf.get(al_code_code, default_audio_language_code))
 
 def save_conf(self):
-    self.conf['addon_audio_download_language'] = \
-        self.form.audio_download_language.text()
+    self.conf[al_code_code] = self.form.audio_download_language.text()
 
 
 dconf.Ui_Dialog.setupUi = wrap(dconf.Ui_Dialog.setupUi, setup_ui)
