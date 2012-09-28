@@ -14,6 +14,10 @@ from anki.cards import Card
 ## here. (This is typically not your native language.)
 default_audio_language_code = "ja"
 
+
+### Dont't change this!
+al_code_code = 'addon_audio_download_language'
+
 """
 Return a two-letter language code.
 """
@@ -22,7 +26,17 @@ Return a two-letter language code.
 # Brainstorm: mw.col.decks.current()['conf']
 
 def get_language_code(card=None):
-    if not card and not note:
+    if not card:
         return default_audio_language_code
-    # Test. Always return ja.
-    return default_audio_language_code
+    # First, look at the tags
+    for tag in card.note().tags:
+        try:
+            return re.search('^lang_([a-z]{2,3})$', tag).group(1)
+        except:
+            continue
+    # Then, look at the deck conf
+    try:
+        return mw.col.decks.confForDid(card.did)\
+            ['addon_audio_download_language']
+    except:
+        return default_audio_language_code

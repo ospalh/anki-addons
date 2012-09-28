@@ -7,7 +7,7 @@
 import re
 import os
 from aqt import mw
-from aqt.utils import showInfo
+from aqt.utils import tooltip
 from aqt.qt import *
 
 #from anki.cards import Card
@@ -258,7 +258,7 @@ def download_fields(note, general_data, japanese_data, language=None):
     if retrieved_files_list:
         store_or_blacklist(note, retrieved_files_list)
     else:
-        shotInfo(u'Nothing downloaded')
+        tooltip(u'Nothing downloaded')
 
 
 def download_for_side():
@@ -282,7 +282,8 @@ def download_for_side():
 
 def download_for_note(ask_user=False):
     """Download for all audio on the current card."""
-    note = mw.reviewer.card.note()
+    card = mw.reviewer.card
+    note = card.note()
     if not note:
         return
     general_field_data = get_note_fields(note)
@@ -290,7 +291,7 @@ def download_for_note(ask_user=False):
         japanese_field_data = get_note_fields(note, japanese=True)
     else:
         japanese_field_data = []
-    language_code = get_language_code(note)
+    language_code = get_language_code(card)
     if ask_user:
         general_field_data, japanese_field_data, language_code = \
             update_data(general_field_data, japanese_field_data,
