@@ -46,7 +46,7 @@ def scalar_type_ans_answer_filter(self, buf):
             scalar_worked, colour_string = scalar_color(cor, self.typedAnswer)
     if scalar_worked:
         return re.sub(self.typeAnsPat, """
-<span id=coransscalar style="font-family: '%s'; font-size: %spx; colour: black; background: %s">%s</span>""" %
+<span id=coransscalar style="font-family: '%s'; font-size: %spx; color: black; background: %s">%s</span>""" %
                       (self.typeFont, self.typeSize, colour_string, self.typedAnswer), buf)
     else:
         return old_type_ans_answer_filter(self, buf)
