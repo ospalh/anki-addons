@@ -3,9 +3,11 @@
 # Based in part on code by Damien Elmes <anki@ichi2.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+import re
+
 from aqt.reviewer import Reviewer
 from anki.utils import stripHTML
-import re
+
 """Add-on for Anki 2 to colour a typed in numeric answer."""
 
 
@@ -25,13 +27,19 @@ exact_color= '#0f0'
 # (It looks like ‘red’, ‘yellow’ and ‘green’ work but are
 # different colours.)
 
+# And the classes that are added.
+fail_class= 'scalarfail'
+pass_class= 'scalarpass'
+exact_class= 'scalarexact'
+
+scalar_format_string = "<span class=\"typedscalar {0}\" style=\"font-family: " + \
+    "'{1}'; font-size: {2} px; background-color: {3}\">{4}</span>"
+
 
 
 def scalar_type_ans_answer_filter(self, buf):
     # Redo bits of typeQuesAnswerFilter to get the field name typed in and most of the old typeAnsAnswerFilter.
     m = re.search(self.typeAnsPat, buf)
-    colour_string = u''
-    scalar_worked = False
     if not self.typeCorrect:
         return re.sub(self.typeAnsPat, "", buf)
     # tell webview to call us back with the input content
@@ -43,46 +51,51 @@ def scalar_type_ans_answer_filter(self, buf):
     if m:
         fld = m.group(1)
         if not fld.startswith("cq:") and scalar_field in fld:
-            scalar_worked, colour_string = scalar_color(cor, self.typedAnswer)
-    if scalar_worked:
-        return re.sub(self.typeAnsPat, """
-<span id=coransscalar style="font-family: '%s'; font-size: %spx; color: black; background: %s">%s</span>""" %
-                      (self.typeFont, self.typeSize, colour_string, self.typedAnswer), buf)
-    else:
-        return old_type_ans_answer_filter(self, buf)
+            try:
+                color_string, class_string = \
+                    scalar_color_class(cor, self.typedAnswer)
+                return re.sub(self.typeAnsPat,
+                              scalar_format_string.format(class_string, self.typeFont,
+                                                          self.typeSize, color_string,
+                                                          self.typedAnswer),
+                              buf)
+            except:
+                return old_type_ans_answer_filter(self, buf)
+    # Still here not really Scalar.:
+    return old_type_ans_answer_filter(self, buf)
 
-def scalar_color(a, b):
+
+def scalar_color_class(a, b):
     """
-    Return a Boolean and a color string.
+    Return a color string and a class string.
 
-    Return True and a string that can be used to color a html text. The color
-    is a red, yellow or green depending on how close the two numbers a
-    and b are to each other.
+    Return a string that can be used to color a html text and a
+    string that can be used as css class. The color is a red, yellow
+    or green depending on how close the two numbers a and b are to
+    each other, the class describes this fact.
 
-    When a and b can't be converted to numbers, False and an empty
-    string is returend.
+    When a and b can't be converted to numbers, the ValueError of that
+    conversion is not caught.
     """
     try:
         target_value = int(a)
         given_value =  int(b)
     except ValueError:
-        try:
-            target_value = float(a)
-            given_value =  float(b)
-        except ValueError:
-            return False, u''
+        # New style: no try here. Catch that case higher up.
+        target_value = float(a)
+        given_value =  float(b)
     # One of the two conversions worked: we have two valid numbers, two
     # ints or two floats. We don’t really care which.
     if target_value == given_value:
-        return True, exact_color
+        return exact_color, exact_class
     # Now we know that they are not the same, so either red or yellow.
     try:
         factor = 1.0 * given_value/target_value
     except ZeroDivisionError:
-        return True, fail_color
+        return fail_color, fail_class
     if factor < 1.0/pass_factor or factor > pass_factor:
-        return True, fail_color
-    return True, pass_color
+        return fail_color, fail_class
+    return pass_color, pass_class
 
 
 old_type_ans_answer_filter = Reviewer.typeAnsAnswerFilter
