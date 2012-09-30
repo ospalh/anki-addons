@@ -32,8 +32,9 @@ fail_class= 'scalarfail'
 pass_class= 'scalarpass'
 exact_class= 'scalarexact'
 
+# Just for me: don't set background color (directly)
 scalar_format_string = "<span class=\"typedscalar {0}\" style=\"font-family: " + \
-    "'{1}'; font-size: {2} px; background-color: {3}\">{4}</span>"
+    "'{1}'; font-size: {2} px;\">{4}</span>"
 
 
 
