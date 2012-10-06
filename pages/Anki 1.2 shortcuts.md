@@ -7,14 +7,14 @@ type: addon
 status: working
 status_color: green
 status_text_color: white
-abstract: Re-activate F5, Ctrl+f and Ctr+w shortcuts.
+abstract: Re-activate F5, Ctrl+f and Ctrl+w shortcuts.
 first_image: anki12_shortcuts.png
 first_alt: Central parts of the add-on source
 
 Reactivate three Anki 1 shortcuts:
 
 - *F5* replay audio
-- *Ctr+f* card browser
+- *Ctrl+f* card browser
 - *Ctrl+w* Deck overview
 
 This is just a little rework of the
