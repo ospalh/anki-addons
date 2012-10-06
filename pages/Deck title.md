@@ -17,7 +17,7 @@ When there is more than one profile, it also shows the current profile name.
 
 ### Setup
 
-There behavior of the add-on can be changed in two points by editing
+The behavior of the add-on can be changed in two points by editing
 the source file:
 
 * title_separator: What to print between the deck name and program
