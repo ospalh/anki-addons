@@ -18,7 +18,7 @@ import os
 
 from aqt import mw
 
-from process_audio import process_audio
+from process_audio import process_audio, unmunge_to_mediafile
 from blacklist import get_hash
 from exists import free_media_name
 
@@ -53,8 +53,13 @@ def get_word_from_google(source, language=None):
         # Simpler to just raise again
         raise
     extras = dict(source='GoogleTTS')
-    return process_audio(temp_file.name, source, download_file_extension),\
-        file_hash, extras
+    try:
+        return process_audio(temp_file.name, source, download_file_extension),\
+            file_hash, extras
+    except:
+        return unmunge_to_mediafile(temp_file.name, source,
+                                    download_file_extension),\
+            file_hash, extras
 
 
 def build_query_url(source, language=None):
