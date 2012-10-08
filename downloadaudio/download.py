@@ -230,24 +230,21 @@ def download_fields(note, general_data, japanese_data, language=None):
         try:
             dl_fname, dl_hash, extras = get_word_from_google(text, language)
         except:
-            # pass
-            # Test: crash and burn
-            raise
+            pass
         else:
             retrieved_files_list.append(
                 (source, dest, text, dl_fname, dl_hash, extras))
     for source, dest, kanji, kana in japanese_data:
         if not kanji and not kana:
             continue
-        # testing: Catch only known problems here. Otherwise crash and
-        # burn. Seeing the impact site is helpful.
         try:
             dl_fname, dl_hash, extras = get_word_from_jpod(kanji, kana)
         except ValueError as ve:
             if "blacklist" in str(ve):
                 print 'Caught blacklist'
-                continue
-            raise
+            continue
+        except:
+            continue
         # This text may be a bit ugly. Never mind. It's just for display
         if kanji != kana:
             text = u'{0} ({1})'.format(kanji,kana)

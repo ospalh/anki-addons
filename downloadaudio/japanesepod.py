@@ -19,7 +19,7 @@ import os
 
 from aqt import mw
 
-from process_audio import process_audio
+from process_audio import process_audio, unmunge_to_mediafile
 from blacklist import get_hash
 from exists import free_media_name
 
@@ -55,8 +55,15 @@ def get_word_from_jpod(kanji, kana):
         # Simpler to just raise again
         raise
     extras = dict(source='Japanesepod')
-    return process_audio(temp_file.name, base_name, download_file_extension),\
-        file_hash, extras
+    try:
+        return process_audio(temp_file.name, base_name,
+                             download_file_extension),\
+            file_hash, extras
+    except:
+        # Most likely case when we get here: no pysox
+        return unmunge_to_mediafile(temp_file.name, base_name,
+                                    download_file_extension),\
+            file_hash, extras
 
 
 def build_query_url(kanji, kana):
