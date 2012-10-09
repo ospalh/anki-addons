@@ -219,13 +219,13 @@ def download_fields(note, general_data, japanese_data, language=None):
     """
     Download data for the fields provided.
 
-    Go to the (planned three, at the moment one) site(s) and download
-    for the data. Then call a function that asks the user what to do.
+    Go to the two sites and download for the data. Then call a
+    function that asks the user what to do.
     """
     retrieved_files_list = []
     for source, dest, text in general_data:
         if not text:
-            # EAFP code. Needed for testing.
+            # EAFP code. Needed for testing. Keep it.
             continue
         try:
             dl_fname, dl_hash, extras = get_word_from_google(text, language)
@@ -252,11 +252,14 @@ def download_fields(note, general_data, japanese_data, language=None):
             text = kanji
         retrieved_files_list.append(
             (source, dest, text, dl_fname, dl_hash, extras))
-    if retrieved_files_list:
+    try:
         store_or_blacklist(note, retrieved_files_list)
-    else:
-        tooltip(u'Nothing downloaded')
-
+    except ValueError as ve:
+        tooltip(str(ve))
+    except RuntimeError as re:
+        if not 'cancel' in str(re):
+            raise
+        # else: quietly drop out on user cancel
 
 def download_for_side():
     """
@@ -290,9 +293,18 @@ def download_for_note(ask_user=False):
         japanese_field_data = []
     language_code = get_language_code(card)
     if ask_user:
-        general_field_data, japanese_field_data, language_code = \
-            update_data(general_field_data, japanese_field_data,
-                        language_code)
+        try:
+            general_field_data, japanese_field_data, language_code = \
+                update_data(general_field_data, japanese_field_data,
+                            language_code)
+        except RuntimeError as re:
+            if 'cancel' in str(re):
+                # User canceled. No need for the "Nothing downloaded"
+                # message.
+                return
+            else:
+                # Don't know how to handle this after all
+                raise
     download_fields(note, general_field_data, japanese_field_data,
                     language_code)
 

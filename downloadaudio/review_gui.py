@@ -35,11 +35,11 @@ action = {'add' : 0, 'keep': 1, 'delete': 2, 'blacklist': 3}
 
 def store_or_blacklist(note, retrieved_data):
     if not note or not retrieved_data:
-        return
+        raise ValueError('Nothing downloaded')
     review_files = ReviewFiles(note, retrieved_data)
     if not review_files.exec_():
         remove_all_files(retrieved_data)
-        return
+        raise RuntimeError('User cancel')
     # Go through the list once and just do what needs to be done.
     # Keep track if we have to do some clean up.
     items_added = False

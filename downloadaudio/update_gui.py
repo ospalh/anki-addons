@@ -17,7 +17,7 @@ def update_data(general_fields, japanese_fields, language_code):
     review_fields = ReviewFields(general_fields, japanese_fields,
                                  language_code)
     if not review_fields.exec_():
-        return [], [], None
+        raise RuntimeError('User cancel')
     for num, (source, dest, old_text) in enumerate(general_fields):
         general_fields[num] = (source, dest,
                                review_fields.general_text_lineedits[num].text())
