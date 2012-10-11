@@ -95,10 +95,7 @@ def toggle_more_tool_bar():
     else:
         mw.reviewer.more_tool_bar.hide()
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 def ask_delete():
     """Delete a note after asking the user."""
     if askUser('Delete note?', defaultno=True):
