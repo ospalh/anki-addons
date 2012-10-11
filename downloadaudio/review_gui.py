@@ -25,13 +25,13 @@ from anki.sound import play, playFromText
 from blacklist import add_black_hash
 
 
-
 from aqt.qt import *
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
 # to make the code a bit more readable
-action = {'add' : 0, 'keep': 1, 'delete': 2, 'blacklist': 3}
+action = {'add': 0, 'keep': 1, 'delete': 2, 'blacklist': 3}
+
 
 def store_or_blacklist(note, retrieved_data):
     if not note or not retrieved_data:
@@ -62,6 +62,7 @@ def remove_all_files(files_etc):
             in files_etc:
         os.remove(os.path.join(mw.col.media.dir(), dl_fname))
 
+
 class ReviewFiles(QDialog):
     """
     A Dialog to let the user keep or discard files.
@@ -69,12 +70,12 @@ class ReviewFiles(QDialog):
     def __init__(self, note, files_list):
         self.note = note
         self.list = files_list
-        super(ReviewFiles, self).__init__() # Cut-and-pasted
+        super(ReviewFiles, self).__init__()  # Cut-and-pasted
         self.buttons_groups = []
-        self.text_help = u"Text used to retrieve audio.<br>"+ \
+        self.text_help = u"Text used to retrieve audio.<br>" + \
             u"(Mouse over the texts below to see further information."
         self.play_help = u"Play the retrieved file."
-        self.play_old_help = u"<p>Play the current content of the audio field."+\
+        self.play_old_help = u"<p>Play the current content of the audio field." + \
             u" No button means the field is empty. " + \
             u"Hovering over the button shows the current field contetn as text."
         self.play_old_empty_line_help = u"The target field is empty."
@@ -83,8 +84,8 @@ class ReviewFiles(QDialog):
             u"(But you may want to select only one file in this column.)"
         self.add_help_text_short = u"Add this sound to the card"
         self.keep_help_text_long = u"Keep the file.<br>" + \
-            u"Keep this file in the media collection folder, but don’t add " +\
-            u"it to the card. (This means the file will show up as an "+ \
+            u"Keep this file in the media collection folder, but don’t add " + \
+            u"it to the card. (This means the file will show up as an " + \
             u"unused medium and may be deleted during the unused media check."
         self.keep_help_text_short = u"Keep this file"
         self.delete_help_text_long = u"Delete the file.<br>" + \
@@ -94,12 +95,10 @@ class ReviewFiles(QDialog):
             u"Add an idetifier for this file to a blacklist. When this " + \
             u"file is downloaded again, it will be silently dropped. This " + \
             u"behaviour is useful for Japanesepod downloads. " + \
-            u"When your downloaded file tells you that they they are sorry, " + \
+            u"When your downloaded file tells you that they they are sorry, " +\
             u"will add this soon &c., click on this."
         self.blacklist_help_text_short = u"Blacklist this file"
         self.initUI()
-
-
 
     def initUI(self):
         self.setWindowIcon(QIcon(":/icons/anki.png"))
@@ -114,25 +113,25 @@ class ReviewFiles(QDialog):
         layout.addWidget(explanation, 0, 0, 1, 7)
         text_head_label = QLabel(u'<b>Source text</b>', self)
         text_head_label.setToolTip(self.text_help)
-        layout.addWidget(text_head_label, 1,0)
+        layout.addWidget(text_head_label, 1, 0)
         play_head_label = QLabel(u'play', self)
         play_head_label.setToolTip(self.play_help)
-        layout.addWidget(play_head_label, 1,1)
+        layout.addWidget(play_head_label, 1, 1)
         play_old_head_label = QLabel(u'play old', self)
         play_old_head_label.setToolTip(self.play_old_help)
-        layout.addWidget(play_old_head_label, 1,2)
+        layout.addWidget(play_old_head_label, 1, 2)
         add_head_label = QLabel(u'add', self)
         add_head_label.setToolTip(self.add_help_text_long)
-        layout.addWidget(add_head_label, 1,3)
+        layout.addWidget(add_head_label, 1, 3)
         keep_head_label = QLabel(u'keep', self)
         keep_head_label.setToolTip(self.keep_help_text_long)
-        layout.addWidget(keep_head_label, 1,4)
+        layout.addWidget(keep_head_label, 1, 4)
         delete_head_label = QLabel(u'delete', self)
         delete_head_label.setToolTip(self.delete_help_text_long)
-        layout.addWidget(delete_head_label, 1,5)
+        layout.addWidget(delete_head_label, 1, 5)
         blacklist_head_label = QLabel(u'blacklist', self)
         blacklist_head_label.setToolTip(self.blacklist_help_text_long)
-        layout.addWidget(blacklist_head_label, 1,6)
+        layout.addWidget(blacklist_head_label, 1, 6)
         rule_label = QLabel('<hr>')
         layout.addWidget(rule_label, 2, 0, 1, 7)
         self.create_rows(layout)
@@ -144,7 +143,6 @@ class ReviewFiles(QDialog):
         self.connect(dialog_buttons, SIGNAL("rejected()"),
                      self, SLOT("reject()"))
         layout.addWidget(dialog_buttons, len(self.buttons_groups) + 3, 0, 1, 7)
-
 
     def create_rows(self, layout):
         play_button_group = QButtonGroup(self)
@@ -169,7 +167,7 @@ class ReviewFiles(QDialog):
                 t_play_old_button.setToolTip(self.note[dest])
                 layout.addWidget(t_play_old_button, num, 2)
             else:
-                dummy_label = QLabel('',self)
+                dummy_label = QLabel('', self)
                 dummy_label.setToolTip(self.play_old_empty_line_help)
                 layout.addWidget(dummy_label, num, 2)
             # The group where we later look what to do:
@@ -213,7 +211,6 @@ class ReviewFiles(QDialog):
         old_play_button_group.buttonClicked.connect(
             lambda button: playFromText(self.note[
                     self.list[old_play_button_group.id(button)][1]]))
-
 
     def build_text_help_label(self, text, source, extras):
         ret_text = u'Source text: <b>{0}</b><br>from field: {1}'\

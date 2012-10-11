@@ -6,7 +6,6 @@
 # License: AGNU GPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
 
-
 '''
 Download Japanese pronunciations from Japanesepod
 '''
@@ -30,6 +29,7 @@ url_gtts = 'http://translate.google.com/translate_tts?'
 user_agent_string = 'Mozilla/5.0'
 
 # Code
+
 
 def get_word_from_google(source, language=None):
     if not source:

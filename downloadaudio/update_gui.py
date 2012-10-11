@@ -12,6 +12,7 @@ from language import default_audio_language_code
 Change the download audio parameters on user input.
 """
 
+
 def update_data(general_fields, japanese_fields, language_code):
     """Return updated download information"""
     review_fields = ReviewFields(general_fields, japanese_fields,
@@ -36,15 +37,13 @@ class ReviewFields(QDialog):
     def __init__(self, general_fields, japanese_fields, language_code):
         self.general_fields = general_fields
         self.japanese_fields = japanese_fields
-        self.language_code = language_code # possibly None
+        self.language_code = language_code  # possibly None
         self.language_code_lineedit = None
         self.general_text_lineedits = []
         self.kanji_lineedits = []
         self.kana_lineedits = []
-        super(ReviewFields, self).__init__() # Cut-and-pasted
+        super(ReviewFields, self).__init__()  # Cut-and-pasted
         self.initUI()
-
-
 
     def initUI(self):
         self.setWindowIcon(QIcon(":/icons/anki.png"))
@@ -54,7 +53,7 @@ class ReviewFields(QDialog):
         if len(self.general_fields) + len(self.japanese_fields) > 0:
             explanation.setText(
                 u'Please edit the text below or change the language.')
-        else :
+        else:
             explanation.setText(u'Please select the language to use:')
         layout.addWidget(explanation)
         self.create_general_rows(layout)
@@ -78,7 +77,6 @@ class ReviewFields(QDialog):
                      self, SLOT("reject()"))
         layout.addWidget(dialog_buttons)
 
-
     def create_general_rows(self, layout):
         gf_layout = QGridLayout()
         for num, (source, dest, text) in enumerate(self.general_fields):
@@ -88,7 +86,6 @@ class ReviewFields(QDialog):
             gf_layout.addWidget(ledit, num, 1)
             self.general_text_lineedits.append(ledit)
         layout.addLayout(gf_layout)
-
 
     def create_japanese_rows(self, layout):
         jf_layout = QGridLayout()

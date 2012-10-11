@@ -43,6 +43,7 @@ def get_hash(file_name):
                              '(No pronunciation found.)')
     return retrieved_hash
 
+
 def add_black_hash(black_hash):
     """Add a new hash to the list of blacklisted hashes."""
     global blacklist_hashes
@@ -51,10 +52,12 @@ def add_black_hash(black_hash):
     blacklist_hashes.append(black_hash.hexdigest())
     save_hashes()
 
+
 def load_hashes():
     """Load the blacklist from disk."""
     global blacklist_hashes
     blacklist_hashes = json.load(open(bl_file_path, 'r'))
+
 
 def save_hashes():
     """Save the blacklist back to disk."""

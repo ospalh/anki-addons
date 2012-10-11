@@ -38,7 +38,7 @@ def get_language_code(card=None):
             continue
     # Then, look at the deck conf
     try:
-        return mw.col.decks.confForDid(card.did)\
-            ['addon_audio_download_language']
+        return mw.col.decks.confForDid(card.did)[
+            'addon_audio_download_language']
     except:
         return default_audio_language_code
