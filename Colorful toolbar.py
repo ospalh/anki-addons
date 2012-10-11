@@ -13,7 +13,6 @@
 # Free: http://creativecommons.org/publicdomain/zero/1.0/
 
 
-
 import os
 from aqt import mw, clayout
 from aqt.qt import *
@@ -28,7 +27,8 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.0.6os"
+__version__ = "1.0.7os"
+
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -45,11 +45,13 @@ def go_deck_browse():
     """Open the deck browser."""
     mw.moveToState("deckBrowser")
 
+
 def go_study():
     """Start studying cards."""
     mw.col.reset()
     mw.col.startTimebox()
     mw.moveToState("review")
+
 
 def go_edit_current():
     """Edit the current card when there is one."""
@@ -57,6 +59,7 @@ def go_edit_current():
         mw.onEditCurrent()
     except AttributeError:
         pass
+
 
 def go_edit_layout():
     """Edit the current card's note's layout if there is one."""
@@ -66,6 +69,7 @@ def go_edit_layout():
     except AttributeError:
         return
 
+
 def toggle_text_tool_bar():
     """Switch the original toolbar on or off."""
     if show_text_tool_bar_action.isChecked():
@@ -73,12 +77,14 @@ def toggle_text_tool_bar():
     else:
         mw.toolbar.web.hide()
 
+
 def toggle_qt_tool_bar():
     """Switch the new upper tool bar on or off."""
     if show_qt_tool_bar_action.isChecked():
         mw.qt_tool_bar.show()
     else:
         mw.qt_tool_bar.hide()
+
 
 def toggle_more_tool_bar():
     """Switch the new lower tool bar on or off."""
@@ -89,6 +95,10 @@ def toggle_more_tool_bar():
     else:
         mw.reviewer.more_tool_bar.hide()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 def ask_delete():
     """Delete a note after asking the user."""
     if askUser('Delete note?', defaultno=True):
@@ -105,7 +115,7 @@ def add_tool_bar():
     mw.qt_tool_bar = QToolBar()
     # mw.qt_tool_bar.setAccessibleName('secondary tool bar')
     mw.qt_tool_bar.setObjectName('qt tool bar')
-    mw.qt_tool_bar.setIconSize(QSize(32,32))
+    mw.qt_tool_bar.setIconSize(QSize(32, 32))
     mw.qt_tool_bar.setStyleSheet(
         '''QToolBar{
 background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff, stop:1 #ddd);
@@ -148,7 +158,7 @@ def add_more_tool_bar():
         return
     # mw.reviewer.more_tool_bar.setAccessibleName('secondary tool bar')
     mw.reviewer.more_tool_bar.setObjectName('more options tool bar')
-    mw.reviewer.more_tool_bar.setIconSize(QSize(24,24))
+    mw.reviewer.more_tool_bar.setIconSize(QSize(24, 24))
     mw.reviewer.more_tool_bar.setStyleSheet(
         '''QToolBar{
 background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff, stop:1 #ddd);
@@ -192,13 +202,13 @@ def add_to_menus():
     mw.form.menuCol.insertAction(mw.form.actionImport, sync_action)
     # Make a new top level menu and insert it.
     view_menu = QMenu(u"&View", mw)
-    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction() , view_menu)
+    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction(), view_menu)
     view_menu.addAction(show_qt_tool_bar_action)
     view_menu.addAction(show_text_tool_bar_action)
     view_menu.addAction(show_more_tool_bar_action)
     # And another one
     go_menu = QMenu(u"&Go", mw)
-    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction() , go_menu)
+    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction(), go_menu)
     # Add DSAB to the new go menu
     go_menu.addAction(decks_action)
     # Another personal taste edit: i don't like the overview page.
@@ -233,6 +243,7 @@ def edit_actions_off():
     except AttributeError:
         pass
 
+
 def edit_actions_on():
     """Switch on the edit actions."""
     try:
@@ -240,6 +251,7 @@ def edit_actions_on():
         edit_layout_action.setEnabled(True)
     except AttributeError:
         pass
+
 
 def more_tool_bar_off():
     """Hide the more tool bar."""
@@ -263,6 +275,7 @@ def maybe_more_tool_bar_on():
     suspend_action.setEnabled(True)
     delete_action.setEnabled(True)
     if show_more_tool_bar_action.isChecked():
+<<<<<<< HEAD
         if not have_dl_audio:
             try:
                 # Try to add the download action.
@@ -272,18 +285,21 @@ def maybe_more_tool_bar_on():
                 have_dl_audio = True
             except:
                 pass
+=======
+>>>>>>> master
         try:
             mw.reviewer.more_tool_bar.show()
         except:
             pass
 
 
-
 def save_toolbars_visible():
     """Save if we should show the tool bars in the profile."""
     mw.pm.profile['ctb_show_toolbar'] = show_text_tool_bar_action.isChecked()
     mw.pm.profile['ctb_show_qt_toolbar'] = show_qt_tool_bar_action.isChecked()
-    mw.pm.profile['ctb_show_more_toolbar'] = show_more_tool_bar_action.isChecked()
+    mw.pm.profile['ctb_show_more_toolbar'] = \
+        show_more_tool_bar_action.isChecked()
+
 
 def  load_toolbars_visible():
     """
@@ -313,10 +329,10 @@ def  load_toolbars_visible():
     # deck browser screen
     # toggle_more_tool_bar()
 
+
 def update_mark_action():
     """Set the state of the mark action to the marked state of the note."""
     toggle_mark_action.setChecked(mw.reviewer.card.note().hasTag("marked"))
-
 
 
 # Make all the actions top level, so we can use them for the menu and
@@ -443,7 +459,8 @@ mw.form.actionDocumentation.setIcon(QIcon(os.path.join(icons_dir, 'help.png')))
 mw.form.actionDonate.setIcon(QIcon(os.path.join(icons_dir, 'donate.png')))
 mw.form.actionAbout.setIcon(QIcon(os.path.join(icons_dir, 'anki.png')))
 mw.form.actionUndo.setIcon(QIcon(os.path.join(icons_dir, 'undo.png')))
-mw.form.actionSwitchProfile.setIcon(QIcon(os.path.join(icons_dir, 'switch-profile.png')))
+mw.form.actionSwitchProfile.setIcon(QIcon(os.path.join(icons_dir,
+                                                       'switch-profile.png')))
 mw.form.actionImport.setIcon(QIcon(os.path.join(icons_dir, 'import.png')))
 mw.form.actionExport.setIcon(QIcon(os.path.join(icons_dir, 'export.png')))
 mw.form.actionExit.setIcon(QIcon(os.path.join(icons_dir, 'exit.png')))
@@ -451,12 +468,11 @@ mw.form.actionDownloadSharedPlugin.setIcon(
     QIcon(os.path.join(icons_dir, 'download-addon.png')))
 mw.form.actionFullDatabaseCheck.setIcon(
     QIcon(os.path.join(icons_dir, 'check-db.png')))
-mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir, 'preferences.png')))
+mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir,
+                                                     'preferences.png')))
 
 ## Hide the edit and nmore buttons.
 mw.reviewer._bottomCSS += ".stat {display:none;}"
-
-
 
 
 # Create the menus

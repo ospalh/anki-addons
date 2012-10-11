@@ -7,6 +7,8 @@
 from lxml import html
 from aqt.browser import DataModel
 
+__version__ = "1.0.1"
+
 # Define the name of the class you want to be hidden in the browser.
 hide_class_selector = '.browserhide'
 

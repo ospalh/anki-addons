@@ -2,16 +2,18 @@
 # Copyright: Roland Sieker ( ospalh@gmail.com )
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+import re
 from aqt import toolbar
-#rom PyKDE4.kdeui import *
 
 from faenzaicons import faenzaicons
 
-import re
 
+"""
+Anki 2 add-on to show a few icons.
 
-"""Add-on for Anki 2 that replaces the icons with my favorites from the KFaenza KDE icon set.
-Starting with the tool bar."""
+Add-on for Anki 2 that replaces the icons with my favorites from the
+KFaenza KDE icon set.  Starting with the tool bar.
+"""
 
 
 def ourIconsList(self):
@@ -24,4 +26,3 @@ def ourIconsList(self):
 
 
 toolbar.Toolbar._rightIconsList = ourIconsList
-

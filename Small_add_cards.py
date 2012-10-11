@@ -10,7 +10,7 @@ from anki.hooks import wrap
 from aqt.addcards import AddCards
 from aqt.qt import *
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
 def reset_min_size(self):
@@ -28,7 +28,6 @@ def more_less_button(self):
         _("Show less"), ar)
     self.connect(self.more_less_button, SIGNAL("clicked()"),
                  lambda add_dialog=self: show_more_less(add_dialog))
-
 
 
 def show_more_less(add_dialog):

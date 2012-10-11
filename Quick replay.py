@@ -15,6 +15,8 @@ import tempfile
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
 
+__version__ = "1.0.1"
+
 sound_re = '\[sound:(.*?)\]'
 
 # mp3_command_list = ['mpg123'  '-q', '-b 4m']
@@ -60,11 +62,12 @@ def play_with_mpg321(files):
     try:
         subprocess.Popen(tmp_play_list,
                          shell=False, stdin=None, stdout=None,
-                         stderr=None,close_fds=True)
+                         stderr=None, close_fds=True)
     except OSError:
         # On Macs, we get ‘Interruppted system call’s. Just
         # ignore, like anki’s sound module does.
         pass
+
 
 def play_with_play(files):
     # The same, only use other command name.
@@ -73,7 +76,7 @@ def play_with_play(files):
     try:
         subprocess.Popen(tmp_play_list,
                          shell=False, stdin=None, stdout=None,
-                         stderr=None,close_fds=True)
+                         stderr=None, close_fds=True)
     except OSError:
         pass
 
@@ -124,7 +127,7 @@ def fix_commands():
                               .format(play_command_list[0]))
             # and clear the list
             play_command_list = None
-        
+
 
 # We don't really need the old_play_from_text. We have copied the
 # central point of the old, the findall. Anyway.

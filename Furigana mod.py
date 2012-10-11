@@ -3,7 +3,7 @@
 # Provenance:
 # Via libanki/anki/template/furigana.py by Damien Elmes <anki@ichi2.net>
 # Based off Kieran Clancy's initial implementation.
-# License: 
+# License:
 # GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 
@@ -19,10 +19,9 @@ display as base text and what as ruby. This bit works only with Python
 2.7.
 
 Also add a few other templates.
-
 """
 
-__version__ = "1.0.2os"
+__version__ = "1.0.3os"
 
 try:
     # Just a dummy call to re.sub to see if the flags work. I think it
@@ -41,7 +40,6 @@ else:
     # in the kanji group are just to my personal taste. I learn those
     # characters as Japanese "words".
     split_pat = u' ?(?P<kanji>[-+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
-    
 
 furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
     '<rt>\g<kana></rt></ruby>'
@@ -63,6 +61,7 @@ def no_sound(repl):
                 return re.sub(split_pat, repl, match.group(0))
     return func
 
+
 def kanji_word_re(txt, *args):
     """Strip kana and wrap base text in class kanji."""
     try:
@@ -73,6 +72,7 @@ def kanji_word_re(txt, *args):
         return re.sub(
             split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt)
 
+
 def kana_word_re(txt, *args):
     """Strip base text and wrap kana in class kana."""
     try:
@@ -80,23 +80,23 @@ def kana_word_re(txt, *args):
             split_pat, no_sound(r'<span class="kana">\g<kana></span>'),
             txt, flags=re.UNICODE)
     except TypeError:
-        return re.sub(split_pat, no_sound(r'<span class="kana">\g<kana></span>'), txt)
-    
+        return re.sub(split_pat,
+                      no_sound(r'<span class="kana">\g<kana></span>'), txt)
+
 
 def furigana_word_re(txt, *args):
     """
     Format text for ruby display.
-    
+
     Put text with square brackets in <ruby> tags, using text before
     the brackets as <rb>, the text in the brackets as <rt>. Add class
     furigana to the ruby tag.
-    
+
     """
     try:
         return re.sub(split_pat, no_sound(furigana_pat), txt, flags=re.UNICODE)
     except TypeError:
         return re.sub(split_pat, no_sound(furigana_pat), txt)
-
 
 
 def furikanji(txt, *args):
@@ -107,13 +107,12 @@ def furikanji(txt, *args):
     the brackets as <rt>, the text in the brackets as <rb>. Add class
     furikanji to the ruby tag. This is reversed from the standard way
     and typically shows small kanji above their reading.
-    
+
     """
     try:
         return re.sub(split_pat, no_sound(furikanji_pat), txt, flags=re.UNICODE)
     except TypeError:
         return re.sub(split_pat, no_sound(furikanji_pat), txt)
-
 
 
 def box_kana(txt, *args):
@@ -128,6 +127,7 @@ def box_kana(txt, *args):
     return u'<ruby class="boxkana">'\
         u'<rb style="border:dashed; border-width: 1px">　</rb>'\
         u'<rt>%s</rt></ruby>' % txt
+
 
 def boxed(txt, *args):
     """
