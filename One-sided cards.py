@@ -5,10 +5,10 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
 
-
 from aqt import mw
 from anki.consts import *
 from anki.hooks import addHook
+
 
 def maybe_skip_question():
     model = mw.reviewer.card.model()

@@ -5,6 +5,14 @@
 # written by Damien Elmes <anki@ichi2.net>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 # Insipired by CSS Modify Style-Sheet input by DAThomas
+
+import os
+import re
+from anki.cards  import Card
+from anki.consts import *
+from anki import hooks
+from aqt import utils, mw
+
 """
 Load local CSS and add it to the cards.
 
@@ -14,18 +22,11 @@ Load the file 'user_style.css' from the user’s profile folder
 the style from the template.
 """
 
-import os
-import re
-from anki.cards  import Card
-from anki.consts import *
-from anki import hooks
-from aqt import utils, mw
-
 
 __version__ = '1.2.2'
 
 user_css_name = 'user_style.css'
-css_encoding =  'utf-8'
+css_encoding = 'utf-8'
 local_class = 'loc'
 
 user_css = u''
@@ -56,13 +57,12 @@ def fix_body_class():
     mw.web.eval("document.body.className = '{0}';".format(body_class))
 
 
-
 def get_user_css():
     """
     Load the user's CSS data from disk.
     """
     global user_css
-    css_path = os.path.join(mw.pm.profileFolder() , user_css_name)
+    css_path = os.path.join(mw.pm.profileFolder(), user_css_name)
     try:
         f = open(css_path, 'r')
         user_css = unicode(f.read(), css_encoding)

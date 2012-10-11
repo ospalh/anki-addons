@@ -24,10 +24,11 @@ use_argv_0 = False
 
 __version__ = '1.1.2'
 
+
 class DeckNamer(object):
     u"""Provide functions to set the title to the deck name in Anki2
     """
-    
+
     def __init__(self):
         self.prog_name = self.get_prog_name()
         self.profile_string = u''
@@ -49,7 +50,7 @@ class DeckNamer(object):
 
     def get_profile_string(self):
         if len(mw.pm.profiles()) > 1 and mw.pm.name:
-            self.profile_string =  mw.pm.name + title_separator
+            self.profile_string = mw.pm.name + title_separator
         else:
             self.profile_string = u''
         return self.profile_string
@@ -57,9 +58,8 @@ class DeckNamer(object):
     def deck_browser_title(self):
         mw.setWindowTitle(self.get_profile_string() + self.prog_name)
 
-
     def overview_title(self):
-        mw.setWindowTitle(self.get_deck_name() + title_separator + 
+        mw.setWindowTitle(self.get_deck_name() + title_separator +
                           self.profile_string + self.prog_name)
 
     def card_title(self):
@@ -71,20 +71,15 @@ class DeckNamer(object):
         if self.subdeck_name == self.deck_name:
             self.overview_title()
             return
-        mw.setWindowTitle(self.deck_name + 
-                          '(' + self.subdeck_name[len(self.deck_name):] + ')' + 
-                          title_separator + self.profile_string + self.prog_name)
-        
+        mw.setWindowTitle(self.deck_name +
+                          '(' + self.subdeck_name[len(self.deck_name):] + ')' +
+                          title_separator + self.profile_string +
+                          self.prog_name)
 
 
 deck_namer = DeckNamer()
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, deck_namer.deck_browser_title) 
+mw.deckBrowser.show = wrap(mw.deckBrowser.show, deck_namer.deck_browser_title)
 mw.overview.show = wrap(mw.overview.show, deck_namer.overview_title)
 mw.reviewer.show = wrap(mw.reviewer.show, deck_namer.overview_title)
 if show_subdeck:
-    addHook('showQuestion', deck_namer.card_title) 
-
-
-
-
-
+    addHook('showQuestion', deck_namer.card_title)

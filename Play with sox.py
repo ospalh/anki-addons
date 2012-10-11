@@ -6,7 +6,10 @@ rather than let them through to the mplayer, which, at least on
 windows, can’t handle them.
 """
 
-import sys, os, subprocess, tempfile
+import os
+import subprocess
+import sys
+import tempfile
 
 from anki import sound
 from anki.hooks import addHook
@@ -33,12 +36,12 @@ fileFormatsToSox = ['.ogg', '.flac', '.vorbis']
 #         '.wavpcm', '.wv', '.wve', '.xa', '.xi']
 
 
-
 soxBaseName = u'sox'
 oldPlay = sound.play
 
 
 DETACHED_PROCESS = 0x00000008
+
 
 def soxyEnding(fname):
     for ffts in fileFormatsToSox:
@@ -82,7 +85,7 @@ def playSomeSoundsWithSox(path):
             try:
                 subprocess.Popen([soxBaseName, "-q", path, "-d"],
                                  shell=False, stdin=None, stdout=None,
-                                 stderr=None,close_fds=True)
+                                 stderr=None, close_fds=True)
             except OSError:
                 # On Macs, we get ‘Interruppted system call’s. Just
                 # ignore, like anki’s sound module does.
@@ -117,11 +120,9 @@ def findSox():
         # set the base name to empty, used as a test later
         soxBaseName = None
         # and complain.
-        utils.showInfo(u'Play with sox plugin: Could not find sox in path. Please download and install it.')
+        utils.showInfo(u'Play with sox plugin: Could not find sox in path. ' +
+                       u'Please download and install it.')
 
 sound.play = playSomeSoundsWithSox
-
-
-
 
 addHook("init", findSox)

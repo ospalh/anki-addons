@@ -6,6 +6,7 @@
 import cPickle
 from aqt.profiles import ProfileManager
 
+
 def shortLoad(self, name, passwd=None):
     prof = cPickle.loads(
         self.db.scalar("select data from profiles where name = ?",

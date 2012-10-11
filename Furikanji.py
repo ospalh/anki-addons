@@ -4,8 +4,10 @@
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 # Based off Kieran Clancy's initial implementation.
 
+import re
+import sys
 from anki.hooks import addHook
-import re, sys
+
 
 tooOld = sys.version_info < (2, 7)
 
@@ -15,6 +17,7 @@ if tooOld:
     splitPat = r' ?([^ ]+?)\[(.+?)\]'
 else:
     splitPat = r' ?([\w]+?)\[(.+?)\]'
+
 
 def noSound(repl):
     def func(match):
@@ -26,6 +29,7 @@ def noSound(repl):
                 return re.sub(splitPat, repl, match.group(0))
             return re.sub(splitPat, repl, match.group(0), flags=re.U)
     return func
+
 
 def furikanji(txt, *args):
     if tooOld:

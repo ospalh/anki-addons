@@ -8,15 +8,16 @@ import os
 import sys
 from anki.utils import isWin, isMac
 
+
 def exists_lc(path, name):
     """
     Test if file name clashes with name of extant file.
-    
+
     On Windows and Mac OS X, simply check if the file exists.
     On (other) POSIX systems, check if the name clashes with an
     existing file's name that is the same or differs only in
     capitalization.
-    
+
     """
     # The point is tha like this syncing from Linux to
     # Macs/Windows should work savely.

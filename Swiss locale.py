@@ -50,7 +50,6 @@ def swiss_format(num):
     return arab_format_string.format(num_string)
 
 
-
 def ch_millionen(txt, *args):
     """
     Return the text reformated for my geography deck.
@@ -80,7 +79,8 @@ def ch_millionen(txt, *args):
     omagp = len(dmd) + dme
     # billons
     if omagp >= 4:
-        return arab_format_string.format(float(dec_mega)/1000.0) + billions_word
+        return arab_format_string.format(float(dec_mega) / 1000.0)\
+            + billions_word
     # Full millions
     if dme >= 0:
         # No need to do the swiss formating here. It is the point of
@@ -88,7 +88,7 @@ def ch_millionen(txt, *args):
         # really need it until 10 billions.
         return str(int(dec_mega)) + millions_word
     # Less than a million or something like 3.5 million.
-    return swiss_format(int(dec_mega*1000000))
+    return swiss_format(int(dec_mega * 1000000))
 
 
 def ch_t_sqkm(txt, *args):
@@ -115,12 +115,12 @@ def ch_t_sqkm(txt, *args):
     # order of magnitude +1
     omagp = len(dkd) + dke
     if omagp >= 4:
-        return arab_format_string.format(float(dec_kilo)/1000.0) + \
+        return arab_format_string.format(float(dec_kilo) / 1000.0) + \
             u' <span class="number_romaji">Mm<sup>2</sup></span>'
     if dke < -3:
-        return str(float(dec_kilo)*1000.0) + \
+        return str(float(dec_kilo) * 1000.0) + \
             u' <span class="number_romaji">km<sup>2</sup></span>'
-    return swiss_format(int(dec_kilo*1000)) + \
+    return swiss_format(int(dec_kilo * 1000)) + \
         u' <span class="number_romaji">km<sup>2</sup></span>'
 
 
@@ -149,9 +149,9 @@ def jp_man(txt, *args):
     # We cheat a bit. We know that we won’t have 一億km². No check for
     # >=6.
     if omagp >= 2:
-        return arab_format_string.format(float(dec_kilo)/10.0) + \
+        return arab_format_string.format(float(dec_kilo) / 10.0) + \
             u'<span class="number_kanji">万</span>'
-    return arab_format_string.format(int(dec_kilo*1000))
+    return arab_format_string.format(int(dec_kilo * 1000))
 
 
 def ch_integer(txt, *args):
@@ -163,8 +163,6 @@ def ch_integer(txt, *args):
     except ValueError:
         return txt
     return swiss_format(s_int)
-
-
 
 
 addHook('fmod_swissmega', ch_millionen)

@@ -19,9 +19,9 @@ sound_re = '\[sound:(.*?)\]'
 
 
 command_list = [
-    'vlc', # The program. Munged to the path on startup
-    '-Idummy', # Interface: no gui.
-    '--play-and-exit' # Pretty much says it
+    'vlc',  # The program. Munged to the path on startup
+    '-Idummy',  # Interface: no gui.
+    '--play-and-exit'  # Pretty much says it
     ]
 
 
@@ -50,12 +50,11 @@ def play_with_vlc(files):
     try:
         subprocess.Popen(tmp_play_list,
                          shell=False, stdin=None, stdout=None,
-                         stderr=None,close_fds=True)
+                         stderr=None, close_fds=True)
     except OSError:
         # On Macs, we get ‘Interruppted system call’s. Just
         # ignore, like anki’s sound module does.
         pass
-
 
 
 def which(program):

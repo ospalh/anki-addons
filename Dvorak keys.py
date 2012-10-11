@@ -26,20 +26,21 @@ eases_dict = {
     # Home row, both hands, use what is free:
     # (I could say that the left hand is the failure and the three on
     # the left hand are the good answers.)
-    u'u':1, u'h':2, u't':3, u'n' : 4,
+    u'u': 1, u'h': 2, u't': 3, u'n': 4,
     # top letter row, left hand, left to right, (the u';' is there for
     # programmer dvorak)
-    u"'":1, u';':1, u',':2, u'.':3, u'p':4,
+    u"'": 1, u';': 1, u',': 2, u'.': 3, u'p': 4,
     ## top row, right hand, right to left (two for the pinkie, so you
     ## don’t have to aim too hard.)
-    # Don’t use this row: ‘r’ is replay audio.
-    # u'l':1, u'/':1, u'r':2, u'c':3, u'g' : 4,
+    # Don’t use this row:  ‘r’ is replay audio.
+    # u'l': 1, u'/': 1, u'r': 2, u'c': 3, u'g': 4,
     }
 
 ## Example for QWERTY: use the keys from one nubbin to the other:
 ## (I can’t find really good sets of four keys that aren’t already
 ## used for other uses.)
-#eases_dict = {u'f' : 1, u'g': 2, u'h' : 3, u'j' : 4,}
+#eases_dict = {u'f': 1, u'g': 2, u'h': 3, u'j': 4,}
+
 
 def dvorak_keys(self, evt):
     """

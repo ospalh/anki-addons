@@ -8,11 +8,10 @@
 
 Rename files with Anki <1.2-ish MD5 names with names derived from the
 note content.
-
 """
 
-import re
 import os
+import re
 import shutil
 
 import romaji
@@ -25,7 +24,7 @@ from aqt.qt import *
 from aqt.utils import showInfo, showText, askUser
 from anki.utils import ids2str, stripHTML
 
-name_source_fields = ['SequenceMarker','Reading', 'Expression', 'Kanji' ]
+name_source_fields = ['SequenceMarker', 'Reading', 'Expression', 'Kanji']
 
 ## Try to separate kanji and kana from the string to use. Convert
 ## something like 「お 父[とう]さん」 into “お父さん_おとうさん”. This
@@ -46,11 +45,11 @@ hash_name_pat = '(?:\[sound:|src *= *")([a-z0-9]{32})'\
 def katakanaize(hiragana):
     """
     Return katakana
-    
+
     Transform a hiragana string to katakana through the circuitous
     route of converting it to rōmaji, then to uppercase, than to
     kana again.
-    
+
     """
     return romaji.kana(romaji.roma(hiragana).upper())
 
@@ -75,22 +74,21 @@ def mangle_reading(nbn):
     return nbn
 
 
-
 def new_name_base(old_base, note):
     """
     Get the base of a new file name
-    
+
     Look at the information on the card and use the data to create
     a base new name.
     """
     def find_field(note, old_base):
         """
         Compare the  candidate fields and the notes fields.
-            
+
         Look through the two lists, name_source_fields and the
         note’s items, to find the field we should use. Put in
         function so we can break out of nested loops.
-        
+
         """
         for sf in name_source_fields:
             for name, value in note.items():
@@ -128,7 +126,6 @@ def new_name_base(old_base, note):
     raise ValueError(u'No data for new name found')
 
 
-
 def free_media_name(base, end):
     """
     Return a useful media name.
@@ -139,24 +136,24 @@ def free_media_name(base, end):
     """
     mdir = mw.col.media.dir()
     if not exists_lc(mdir, base + end):
-        return base+end
+        return base + end
     for i in range(1, 10000):
         # Don't be silly. Give up after 9999 tries.
         long_name = '{0}_{1}{2}'.format(base, i, end)
         if not exists_lc(mdir, long_name):
             return long_name
     raise ValueError
-    
-        
+
+
 def new_media_name(old_base, old_end, note):
     """
     Get new file name for a hashed file name.
-    
+
     Make sure the desired name doesn’t clash with other names.
     Return a file name that doesn’t clash with existing files,
     doing parts by hand to avoid issues with case-sensitive and
     non-case-sensitive file systems.
-        
+
     This means we also have to add a version of the name to a
     list, so the next card won't use this name.
     """
@@ -174,34 +171,33 @@ def new_media_name(old_base, old_end, note):
     return free_media_name(nbn, old_end)
 
 
-
 def test_and_dehashilate():
     if not test_names():
         showInfo('No hashes found in cards. Have a nice day.')
         return
-    if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'\
-                       'Backup your collection before continuing!'):
+    if not askUser('Go ahead?\nThis cannot be undone!\nUse at your own risk!\n'
+                   'Backup your collection before continuing!'):
         return
-    if not askUser('Click on "No".\n'\
-                       'Clicking on "Yes" will probably mess up your collection.\n'\
-                       'You will have to fix it yourself!',
+    if not askUser('Click on "No".\n'
+                   'Clicking on "Yes" will probably mess up your collection.\n'
+                   'You will have to fix it yourself!',
                    defaultno=True):
         return
     dehashilate()
 
+
 def test_names():
     """Go through the collection and show possible new names
-    
+
     Search the cards for sounds or images with file names that look
     like MD5 hashes, rename the files and change the notes.
-    
     """
     test_string = u''
     nids = mw.col.db.list("select id from notes")
     for nid in progress(nids, "Dehashilating", "This is all wrong!"):
         n = mw.col.getNote(nid)
         for (name, value) in n.items():
-            rs =  re.search(hash_name_pat, value)
+            rs = re.search(hash_name_pat, value)
             if None == rs:
                 continue
             try:
@@ -221,7 +217,7 @@ def dehashilate():
 
     Search the cards for sounds or images with file names that
     look like MD5 hashes, rename the files and change the notes.
-    
+
     """
     mdir = mw.col.media.dir()
     new_names_dict = {}
@@ -233,14 +229,14 @@ def dehashilate():
         n = mw.col.getNote(nid)
         for (name, value) in n.items():
             for match in re.findall(hash_name_pat, value):
-                rs =  re.search(hash_name_pat, value)
+                rs = re.search(hash_name_pat, value)
                 if None == rs:
                     # Should be redundant with the for match ...:
                     # loop. RAS 2012-06-23
                     continue
                 old_name = '{0}{1}'.format(rs.group(1), rs.group(2))
                 try:
-                    new_name  = new_names_dict[old_name]
+                    new_name = new_names_dict[old_name]
                 except KeyError:
                     try:
                         new_name = new_media_name(rs.group(1), rs.group(2), n)
@@ -261,7 +257,8 @@ def dehashilate():
                         new_names_dict[old_name] = new_name
                     n[name] = value.replace(old_name, new_name)
                     n.flush()
-                    rename_exec_list.append(dict(nid=nid,flds=n.joinedFields()))
+                    rename_exec_list.append(dict(nid=nid,
+                                                 flds=n.joinedFields()))
     mw.col.db.executemany("update notes set flds =:flds where id =:nid",
                           rename_exec_list)
     # This is a bit of voodo code. Without it the cards weren't
@@ -271,7 +268,7 @@ def dehashilate():
 
     # """File
     # "/home/roland/Anki-tests/addons/dehashilator/dehashilator.py",
-    # line 268, in dehashilate 
+    # line 268, in dehashilate
     # mw.col.updateFieldCache([re_dict[nids] for re_dict in
     # rename_exec_list])
     # TypeError: unhashable type: 'list'"""
@@ -279,6 +276,3 @@ def dehashilate():
     mw.reset()
     if bad_mv_text:
         showText('These files weren’t renamed:\n' + test_string)
-    
-
-    

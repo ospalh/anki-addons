@@ -30,7 +30,6 @@ def more_less_button(self):
                  lambda add_dialog=self: show_more_less(add_dialog))
 
 
-
 def show_more_less(add_dialog):
     # Use the visibility of (the first of ) the top element(s) to
     # decide if we should hide or show.

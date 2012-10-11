@@ -3,14 +3,22 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 #
 # Dictionary lookup support for my favorite dictionaries
-# 
+#
 # © 2011–2012 Roland Sieker <ospalh@gmail.com>
 #
-# Based on the lookup.py from the JapaneseSupport plugin
+# Based on lookup.py from the JapaneseSupport plugin
 # Original author: Damien Elmes <anki@ichi2.net>
 
+import urllib
+import re
+from aqt import mw
+from aqt.qt import *
+from aqt.utils import showInfo
+from aqt.webview import QWebPage
+
+
 ### Configure in this block
-### Konfiguration here
+### Hier Konfiguration
 
 ## Show Japanese dictonaries
 ## Japanisch-Wörterbücher anzeigen
@@ -30,7 +38,7 @@ show_saiga = True
 ## first one where a text is found will be used.
 ## Liste mit Feldern, in denen der Fremdsprachentext gesucht wird. Das
 ## erste, in dem ein Text gefunden wird, wird benutzt.
-expression_fields = [u'Expression' , u'Kanji', u'Reading', u'Back']
+expression_fields = [u'Expression', u'Kanji', u'Reading', u'Back']
 #expression_fields = [u'Front']
 
 ## List of fields to use for the German text for Wadoku look-up. The
@@ -38,20 +46,12 @@ expression_fields = [u'Expression' , u'Kanji', u'Reading', u'Back']
 ## Liste mit Feldern für den deutschen Text, der bei Wadoku
 ## nachgeschlagen wird. Das erste, in dem ein Text gefunden wird, wird
 ## benutzt.
-meaning_fields = [u'Meaning' , u'Deutsch', u'German', u'Front']
+meaning_fields = [u'Meaning', u'Deutsch', u'German', u'Front']
 #meaning_fields = [u'Back']
 
 
 ### End configuration block
 ### Ende Konfiguration
-
-
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-import urllib, re
-from aqt import mw
-from aqt.utils import showInfo
-from aqt.webview import QWebPage
 
 
 class Nachschlagen(object):
@@ -79,47 +79,44 @@ class Nachschlagen(object):
             text = self.get_selection()
         if len(text) == 0:
             raise ValueError(u"Kein Text zum nachschlagen.")
-        base_url="http://www.wadoku.de/wadoku/search/"
+        base_url = "http://www.wadoku.de/wadoku/search/"
         url = base_url + urllib.quote(text.encode("utf-8"))
         qurl = QUrl()
         qurl.setEncodedUrl(url)
         QDesktopServices.openUrl(qurl)
 
     def saiga(self, field_list=expression_fields):
-        # I don’t really use this dictionary any more. Feel free to add it to your menu again.
-        "Look up first kanji in text on Saiga."
+        """Look up first kanji in text on Saiga."""
+        # I don’t really use this dictionary any more. Feel free to
+        # add it to your menu again.
         if field_list:
             kanji = self.get_text_from_fields(field_list)
         else:
             kanji = self.get_selection()
         kanji = self.get_first_han_character(kanji)
         if len(kanji) == 0:
-            raise ValueError ("No kanji found.")
+            raise ValueError("No kanji found.")
         new_text = urllib.quote(kanji.encode("utf-8"))
         url = ("http://www.saiga-jp.com/cgi-bin/dic.cgi?m=search&sc=0&f=0&j=" +
-               new_text +
-               "&g=&e=&s=&rt=0&start=1")
+               new_text + "&g=&e=&s=&rt=0&start=1")
         qurl = QUrl()
         qurl.setEncodedUrl(url)
         QDesktopServices.openUrl(qurl)
 
-
     def kanjilexikon(self, field_list=expression_fields):
-        "Look up first kanji in text on Kanji-Lexikon."
+        """Look up first kanji in text on Kanji-Lexikon."""
         if field_list:
             kanji = self.get_text_from_fields(field_list)
         else:
             kanji = self.get_selection()
         kanji = self.get_han_characters(kanji)
         if len(kanji) == 0:
-            raise ValueError ("No kanji found.")
+            raise ValueError("No kanji found.")
         new_text = urllib.quote(kanji.encode("utf-8"))
-        url = ("http://lingweb.eva.mpg.de/kanji/index.html?kanji=" +
-               new_text )
+        url = ("http://lingweb.eva.mpg.de/kanji/index.html?kanji=" + new_text)
         qurl = QUrl()
         qurl.setEncodedUrl(url)
         QDesktopServices.openUrl(qurl)
-
 
     def forvo(self, field_list=expression_fields):
         "Look up pronunciation on forvo."
@@ -145,16 +142,16 @@ class Nachschlagen(object):
             return True
         return False
 
-
     def get_han_characters(self, text):
         ret = u''
         # Maybe we got utf-8
         try:
             utext = unicode(text, 'utf-8')
         except TypeError:
-            utext = text # Hope text is already unicode. If we put in
+            # Hope text is already unicode. If we put in
             # a number or something, we'll fail in one of the
             # next lines. EAFP
+            utext = text
         for c in utext:
             if self.is_han_character(c):
                 ret += c
@@ -165,15 +162,14 @@ class Nachschlagen(object):
         try:
             utext = unicode(text, 'utf-8')
         except TypeError:
-            utext = text # Hope text is already unicode. If we put in
-            # a number or something, we'll fail in one of the
-            # next lines. EAFP
+            # As above, hope this is unicode (EAFP).
+            utext = text
         for c in utext:
             if self.is_han_character(c):
                 return c
         return u''
 
-    def get_text_from_fields(self, fields = expression_fields):
+    def get_text_from_fields(self, fields=expression_fields):
         text = None
         for field in fields:
             try:
@@ -184,14 +180,14 @@ class Nachschlagen(object):
             if len(text):
                 return text
         if not text:
-            raise ValueError("No field found for lookup. Consider changing the field name lists in the plugin source.")
-
+            raise ValueError("No field found for lookup. " +
+                             "Consider changing the field name lists " +
+                             "in the plugin source.")
 
 
 def init_nachschlagen():
     if not getattr(mw, "nachschlagen", None):
         mw.nachschlagen = Nachschlagen(mw)
-
 
 
 def on_lookup_wadoku_expression():
@@ -202,12 +198,14 @@ def on_lookup_wadoku_expression():
     except ValueError as ve:
         showInfo(str(ve))
 
+
 def on_lookup_wadoku_meaning():
     init_nachschlagen()
     try:
         mw.nachschlagen.wadoku(meaning_fields)
     except ValueError as ve:
         showInfo(str(ve))
+
 
 def on_lookup_wadoku_selection():
     init_nachschlagen()
@@ -217,12 +215,14 @@ def on_lookup_wadoku_selection():
     except ValueError as ve:
         showInfo(str(ve))
 
+
 def on_lookup_saiga_expression():
     init_nachschlagen()
     try:
         mw.nachschlagen.saiga()
     except ValueError as ve:
         showInfo(str(ve))
+
 
 def on_lookup_saiga_selection():
     init_nachschlagen()
@@ -239,6 +239,7 @@ def on_lookup_kl_expression():
     except ValueError as ve:
         showInfo(str(ve))
 
+
 def on_lookup_kl_selection():
     init_nachschlagen()
     try:
@@ -254,6 +255,7 @@ def on_lookup_forvo_expression():
     except ValueError as ve:
         showInfo(str(ve))
 
+
 def on_lookup_forvo_selection():
     init_nachschlagen()
     try:
@@ -261,11 +263,12 @@ def on_lookup_forvo_selection():
     except ValueError as ve:
         showInfo(str(ve))
 
+
 def create_menu():
     mn = QMenu()
     mn.setTitle("Nachschlagen")
     mw.form.menuTools.addAction(mn.menuAction())
-    # 
+    #
     mw.form.menu_nachschlagen = mn
     # add actions
     if show_japanese:
@@ -307,7 +310,7 @@ def create_menu():
         kls.setText("Kanjiauswahl bei Kanji-Lexikon")
         mn.addAction(kls)
         mw.connect(kls, SIGNAL("triggered()"), on_lookup_kl_selection)
-    # Show these always. 
+    # Show these always.
     fae = QAction(mw)
     fae.setText("Ausdruck bei Forvo")
     # fae.setShortcut("Ctrl+4")
@@ -319,8 +322,8 @@ def create_menu():
     mw.connect(fas, SIGNAL("triggered()"), on_lookup_forvo_selection)
 
 
-
-# Looks like there isn’t an easy way to switch the menus on or of (at the moment).
+# Looks like there isn’t an easy way to switch the menus on or of (at
+# the moment).
 
 #def disable_nachschlagen():
 #    mw.form.menu_nachschlagen.setEnabled(False)

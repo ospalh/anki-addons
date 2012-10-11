@@ -3,8 +3,6 @@
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 
-"""Replace time values with just days or years."""
-
 import math
 from decimal import Decimal
 from anki import utils, sched, stats
@@ -12,10 +10,13 @@ from anki.lang import _
 # To override fmtTimeSpan that are already loaded:
 from aqt import browser, deckbrowser, reviewer
 
+"""Replace time values with just days or years."""
+
 __version__ = "1.0.0"
 
-day_format_separators =  {-1: u'.', -3: u"’", -4: u"’", -6: u"’" }
+day_format_separators = {-1: u'.', -3: u"’", -4: u"’", -6: u"’"}
 year = 365.2421897
+
 
 def omag(x):
     """Return the order of magnitude of a number."""
@@ -23,6 +24,7 @@ def omag(x):
         return int(math.floor(math.log10(abs(x))))
     except ValueError:
         return 0
+
 
 def days_from_s(seconds, sigfig=2, short=False, maybe_show_years=True):
     """
@@ -32,21 +34,21 @@ def days_from_s(seconds, sigfig=2, short=False, maybe_show_years=True):
     argument formated in a specific way that should make parsing the
     decimal part of the age easier for humans.
     """
-    days = seconds/86400.0
+    days = seconds / 86400.0
     if days > year and maybe_show_years:
         if short:
-            return"{0:.1f}".format(days/year) + _("&#8239;a")
+            return"{0:.1f}".format(days / year) + _("&#8239;a")
         else:
-            return"{0:.1f} ".format(days/year) + _("years")
+            return"{0:.1f} ".format(days / year) + _("years")
     # Calculate how many digits to show. Show full precision of days,
     # limited for shorter times.
     show_digits = max(sigfig - omag(days) - 1, 0)
     out_string = ''
     if 0 == show_digits:
-        out_string = str(int(round(days,0)))
+        out_string = str(int(round(days, 0)))
     else:
-        decimal_days = Decimal(str(days))\
-            .quantize(Decimal('0.' + '0'*(show_digits-1) + '1'))
+        decimal_days = Decimal(str(days)) \
+            .quantize(Decimal('0.' + '0' * (show_digits - 1) + '1'))
         dec_sign, dec_digits, dec_exponent = decimal_days.as_tuple()
         ndig = len(dec_digits)
         if dec_sign:
