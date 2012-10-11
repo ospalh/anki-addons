@@ -10,6 +10,7 @@ from anki.utils import stripHTML
 
 """Add-on for Anki 2 to colour a typed in numeric answer."""
 
+__version__ = "1.0.1"
 
 # Code word to look for in the field name to decide whether to do the
 # number comparison:
@@ -21,24 +22,25 @@ scalar_field = 'Scalar'
 pass_factor = 1.5
 
 # How the number is coloured.
-fail_color= '#f00'
-pass_color= '#ff0'
-exact_color= '#0f0'
+fail_color = '#f00'
+pass_color = '#ff0'
+exact_color = '#0f0'
 # (It looks like ‘red’, ‘yellow’ and ‘green’ work but are
 # different colours.)
 
 # And the classes that are added.
-fail_class= 'scalarfail'
-pass_class= 'scalarpass'
-exact_class= 'scalarexact'
+fail_class = 'scalarfail'
+pass_class = 'scalarpass'
+exact_class = 'scalarexact'
 
-scalar_format_string = "<span class=\"typedscalar {0}\" style=\"font-family: " + \
-    "'{1}'; font-size: {2} px; background-color: {3}\">{4}</span>"
-
+scalar_format_string = "<span class=\"typedscalar {0}\" " + \
+    "style=\"font-family: '{1}'; font-size: {2} px; " + \
+    "background-color: {3}\">{4}</span>"
 
 
 def scalar_type_ans_answer_filter(self, buf):
-    # Redo bits of typeQuesAnswerFilter to get the field name typed in and most of the old typeAnsAnswerFilter.
+    # Redo bits of typeQuesAnswerFilter to get the field name typed in
+    # and most of the old typeAnsAnswerFilter.
     m = re.search(self.typeAnsPat, buf)
     if not self.typeCorrect:
         return re.sub(self.typeAnsPat, "", buf)
@@ -54,11 +56,11 @@ def scalar_type_ans_answer_filter(self, buf):
             try:
                 color_string, class_string = \
                     scalar_color_class(cor, self.typedAnswer)
-                return re.sub(self.typeAnsPat,
-                              scalar_format_string.format(class_string, self.typeFont,
-                                                          self.typeSize, color_string,
-                                                          self.typedAnswer),
-                              buf)
+                return re.sub(
+                    self.typeAnsPat, scalar_format_string.format(
+                        class_string, self.typeFont, self.typeSize,
+                        color_string, self.typedAnswer),
+                    buf)
             except:
                 return old_type_ans_answer_filter(self, buf)
     # Still here not really Scalar.:
@@ -79,21 +81,21 @@ def scalar_color_class(a, b):
     """
     try:
         target_value = int(a)
-        given_value =  int(b)
+        given_value = int(b)
     except ValueError:
         # New style: no try here. Catch that case higher up.
         target_value = float(a)
-        given_value =  float(b)
+        given_value = float(b)
     # One of the two conversions worked: we have two valid numbers, two
     # ints or two floats. We don’t really care which.
     if target_value == given_value:
         return exact_color, exact_class
     # Now we know that they are not the same, so either red or yellow.
     try:
-        factor = 1.0 * given_value/target_value
+        factor = 1.0 * given_value / target_value
     except ZeroDivisionError:
         return fail_color, fail_class
-    if factor < 1.0/pass_factor or factor > pass_factor:
+    if factor < 1.0 / pass_factor or factor > pass_factor:
         return fail_color, fail_class
     return pass_color, pass_class
 

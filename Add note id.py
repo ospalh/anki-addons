@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+# -*- mode: Python ; coding: utf-8 -*-
 #
 # Copyricht © 2012 Roland Sieker, <ospalh@gmail.com>
-# 
+#
 # Portions of this file were originally written by
 # Damien Elmes <anki@ichi2.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
@@ -16,11 +16,8 @@ from aqt.utils import askUser
 
 __version__ = '1.1.0'
 
-
-
 # Field names to use. Use only lower-case here.
 id_fields = ['note id', 'nid']
-
 
 
 def progress(data, *args):
@@ -32,25 +29,26 @@ def progress(data, *args):
 
     """
     # found at http://lateral.netmanagers.com.ar/weblog/posts/BB917.html
-    # © 2000-2012 Roberto Alsina 
+    # © 2000-2012 Roberto Alsina
     # Creative Commons Attribution-NonCommercial-ShareAlike 2.5 licence
     # http://creativecommons.org/licenses/by-nc-sa/2.5/
-    it=iter(data)
-    widget = QProgressDialog(*args+(0,it.__length_hint__()))
-    c=0
+    it = iter(data)
+    widget = QProgressDialog(*args + (0, it.__length_hint__()))
+    c = 0
     for v in it:
         QCoreApplication.instance().processEvents()
         if widget.wasCanceled():
             raise StopIteration
-        c+=1
+        c += 1
         widget.setValue(c)
         yield(v)
+
 
 def add_nids_to_all():
     """
     Add note id to all empty fields with the right names.
 
-    Iterate over all notes and add the nid 
+    Iterate over all notes and add the nid
     """
     if not askUser("Add note id to all 'Note ID' fields?"):
         return
@@ -72,6 +70,7 @@ def add_nids_to_all():
                         n[name] = str(nid)
                         n.flush()
     mw.reset()
+
 
 def onFocusLost(flag, n, fidx):
     field_name = None
