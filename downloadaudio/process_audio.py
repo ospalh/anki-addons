@@ -40,7 +40,6 @@ output_format = ".ogg"
 # output_format = ".flac"
 
 
-
 def process_audio(temp_file_name, base_name, suffix,
                   silence_percent=0.1, silence_end_percent=None):
     """
@@ -92,29 +91,28 @@ def process_audio(temp_file_name, base_name, suffix,
     sox_out_file = pysox.CSoxStream(temp_out_file_name, 'w', sox_signal)
     sox_chain = pysox.CEffectsChain(sox_in_file, sox_out_file)
     sox_chain.add_effect(pysox.CEffect(
-            'silence',[b'1', b'0', '{}%'.format(silence_percent)]))
+            'silence', [b'1', b'0', '{}%'.format(silence_percent)]))
     # Trick: to automatically remove silence at the end, reverse,
     # remove at the front and reverse.
-    sox_chain.add_effect(pysox.CEffect('reverse',[]))
+    sox_chain.add_effect(pysox.CEffect('reverse', []))
     if not silence_end_percent:
         silence_end_percent = silence_percent
     sox_chain.add_effect(pysox.CEffect(
-            'silence',[b'1', b'0', '{}%'.format(silence_end_percent)]))
-    sox_chain.add_effect(pysox.CEffect('reverse',[]))
-    sox_chain.add_effect(pysox.CEffect('gain',[b'-n']))
+            'silence', [b'1', b'0', '{}%'.format(silence_end_percent)]))
+    sox_chain.add_effect(pysox.CEffect('reverse', []))
+    sox_chain.add_effect(pysox.CEffect('gain', [b'-n']))
     if 1 == in_channels:
         # Work around what appears a bug in pysox. Looks like we need
         # to duplicate the samples. And to do that, we have to pretend
         # to go from 2 channels to 4 channels. In reality we go from 1
         # channel to 2. (pysox's development status is alpha, so i'm
         # not complaining)
-        sox_chain.add_effect(pysox.CEffect('channels',[b'4']))
+        sox_chain.add_effect(pysox.CEffect('channels', [b'4']))
     sox_chain.flow_effects()
     sox_out_file.close()
     os.remove(temp_file_name)
     return unmunge_to_mediafile(temp_out_file_name,
                                 base_name, output_format)
-
 
 
 def unmunge_to_mediafile(temp_file_name, media_base_name, suffix):

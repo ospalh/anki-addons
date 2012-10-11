@@ -6,7 +6,6 @@
 # License: AGNU GPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
 
-
 '''
 Download Japanese pronunciations from Japanesepod
 '''
@@ -27,10 +26,11 @@ from exists import free_media_name
 download_file_extension = u'.mp3'
 
 
-url_jdict='http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
+url_jdict = 'http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
 # url_jdict='http://assets.languagepod101.com/dictionary/japanese/audioogg.php?'
 
 # Code
+
 
 def get_word_from_jpod(kanji, kana):
     """
@@ -40,7 +40,8 @@ def get_word_from_jpod(kanji, kana):
     get_url = build_query_url(kanji, kana)
     # This may throw an exception
     request = urllib2.Request(get_url)
-    # request.add_header('User-agent', 'PyMOTW (http://www.doughellmann.com/PyMOTW/)')
+    # request.add_header('User-agent', 'PyMOTW
+    # (http://www.doughellmann.com/PyMOTW/)')
     response = urllib2.urlopen(request)
     if 200 != response.code:
         raise ValueError(str(response.code) + ': ' + response.msg)

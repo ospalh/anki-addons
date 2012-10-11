@@ -10,6 +10,7 @@ import sys
 from aqt import mw
 from anki.utils import isWin, isMac, stripHTML
 
+
 def free_media_name(base, end):
     """
     Return a useful media name.
@@ -23,7 +24,7 @@ def free_media_name(base, end):
     base = re.sub('[\\/:\*?"<>\|]', '', base)
     mdir = mw.col.media.dir()
     if not exists_lc(mdir, base + end):
-        return base+end
+        return base + end
     for i in range(1, 10000):
         # Don't be silly. Give up after 9999 tries.
         long_name = u'{0} ({1}){2}'.format(base, i, end)

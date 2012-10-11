@@ -55,9 +55,8 @@ manual.
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
 expression_fields = ['expression', 'front', 'back']
-japanese_reading_keys = ["reading", "kana", u'かな',u'仮名']
+japanese_reading_keys = ["reading", "kana", u'かな', u'仮名']
 audio_field_keys = ["audio", "sound"]
-
 
 
 ## End configuration area
@@ -74,6 +73,7 @@ def uniqify_list(seq):
     no_dupes = []
     [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
     return no_dupes
+
 
 def field_data(note, fname, readings=False):
     """
@@ -159,9 +159,6 @@ def field_data(note, fname, readings=False):
     raise KeyError("No source field found. (case 3)")
 
 
-
-
-
 def get_side_fields(card, note, japanese=False):
     """
     Get a list of field data for "visible" download fields.
@@ -195,7 +192,6 @@ def get_side_fields(card, note, japanese=False):
     return field_data_list
 
 
-
 def get_note_fields(note, japanese=False):
     """
     Get a list of field data for download.
@@ -214,6 +210,7 @@ def get_note_fields(note, japanese=False):
                 except KeyError:
                     pass
     return field_data_list
+
 
 def download_fields(note, general_data, japanese_data, language=None):
     """
@@ -247,7 +244,7 @@ def download_fields(note, general_data, japanese_data, language=None):
             continue
         # This text may be a bit ugly. Never mind. It's just for display
         if kanji != kana:
-            text = u'{0} ({1})'.format(kanji,kana)
+            text = u'{0} ({1})'.format(kanji, kana)
         else:
             text = kanji
         retrieved_files_list.append(
@@ -260,6 +257,7 @@ def download_fields(note, general_data, japanese_data, language=None):
         if not 'cancel' in str(re):
             raise
         # else: quietly drop out on user cancel
+
 
 def download_for_side():
     """
@@ -279,6 +277,7 @@ def download_for_side():
         japanese_field_data = []
     download_fields(note, general_field_data, japanese_field_data,
                     get_language_code(card))
+
 
 def download_for_note(ask_user=False):
     """Download for all audio on the current card."""
@@ -308,6 +307,7 @@ def download_for_note(ask_user=False):
     download_fields(note, general_field_data, japanese_field_data,
                     language_code)
 
+
 def download_manual():
     download_for_note(ask_user=True)
 
@@ -316,6 +316,7 @@ def download_off():
     mw.note_download_action.setEnabled(False)
     mw.side_download_action.setEnabled(False)
     mw.manual_download_action.setEnabled(False)
+
 
 def download_on():
     mw.note_download_action.setEnabled(True)
