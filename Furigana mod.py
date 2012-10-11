@@ -19,10 +19,9 @@ display as base text and what as ruby. This bit works only with Python
 2.7.
 
 Also add a few other templates.
-
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 try:
     # Just a dummy call to re.sub to see if the flags work. I think it

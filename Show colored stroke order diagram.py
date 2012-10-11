@@ -30,6 +30,8 @@ from aqt import mw
 from anki import hooks
 import xml.etree.ElementTree as ET
 
+__version__ = "0.0.2"
+
 kanjiVgStrokeOrderXml = None
 
 

@@ -36,6 +36,8 @@ fileFormatsToSox = ['.ogg', '.flac', '.vorbis']
 #         '.wavpcm', '.wv', '.wve', '.xa', '.xi']
 
 
+__version__ = "1.0.1"
+
 soxBaseName = u'sox'
 oldPlay = sound.play
 

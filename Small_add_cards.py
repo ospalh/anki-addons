@@ -10,7 +10,7 @@ from anki.hooks import wrap
 from aqt.addcards import AddCards
 from aqt.qt import *
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
 def reset_min_size(self):

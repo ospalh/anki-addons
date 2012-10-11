@@ -15,6 +15,8 @@ import tempfile
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
 
+__version__ = "1.0.1"
+
 sound_re = '\[sound:(.*?)\]'
 
 # mp3_command_list = ['mpg123'  '-q', '-b 4m']

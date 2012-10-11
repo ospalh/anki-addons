@@ -23,7 +23,7 @@ the style from the template.
 """
 
 
-__version__ = '1.2.2'
+__version__ = '1.2.3'
 
 user_css_name = 'user_style.css'
 css_encoding = 'utf-8'

@@ -16,7 +16,7 @@ diagrams have to be provided as svg is the right directories.
 """
 
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 strokeorder_basename = u'kanji-colorize-'
 

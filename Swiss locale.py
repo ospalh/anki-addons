@@ -16,7 +16,7 @@ Anki-2 add-on to format numbers just the way i like them.
 # I personally like the Swiss use of the apostroph as thousands separator.
 # locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
 
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 
 millions_word = (u' <span class="number_romaji">Millionen</span>')
 billions_word = (u' <span class="number_romaji">Milliarden</span>')

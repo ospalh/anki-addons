@@ -14,7 +14,8 @@ import tempfile
 from anki import sound
 from anki.hooks import addHook
 
-## Just play flac, ogg, vorbis with sox:
+__version__ = "1.0.1"
+
 fileFormatsToPlay = ['.mp3']
 
 mpgBaseName = u'mpg321'

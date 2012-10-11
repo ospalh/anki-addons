@@ -12,7 +12,7 @@ from aqt import browser, deckbrowser, reviewer
 
 """Replace time values with just days or years."""
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 day_format_separators = {-1: u'.', -3: u"’", -4: u"’", -6: u"’"}
 year = 365.2421897

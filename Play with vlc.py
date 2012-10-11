@@ -15,8 +15,9 @@ import tempfile
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
 
-sound_re = '\[sound:(.*?)\]'
+__version__ = "1.0.1"
 
+sound_re = '\[sound:(.*?)\]'
 
 command_list = [
     'vlc',  # The program. Munged to the path on startup

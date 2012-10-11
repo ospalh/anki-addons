@@ -24,6 +24,8 @@ JapaneseModel = 'japanese'
 
 ### End of configuration block.
 
+__version__ = "1.0.1"
+
 kanjiKanaRe = r' ?([^ ]+?)\[(.+?)\]'
 
 
