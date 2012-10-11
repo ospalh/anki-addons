@@ -6,19 +6,23 @@ rather than let them through to the mplayer, which, at least on
 windows, can’t handle them.
 """
 
-import sys, os, subprocess, tempfile
+import os
+import subprocess
+import sys
+import tempfile
 
 from anki import sound
 from anki.hooks import addHook
 
-## Just play flac, ogg, vorbis with sox:
+__version__ = "1.0.1"
+
 fileFormatsToPlay = ['.mp3']
 
 mpgBaseName = u'mpg321'
 oldPlay = sound.play
 
-
 DETACHED_PROCESS = 0x00000008
+
 
 def mpgyEnding(fname):
     for ffts in fileFormatsToPlay:
@@ -62,7 +66,7 @@ def playSomeSoundsWithMpg(path):
             try:
                 subprocess.Popen([mpgBaseName, "-q", "-b 4m", "--stereo", path],
                                  shell=False, stdin=None, stdout=None,
-                                 stderr=None,close_fds=True)
+                                 stderr=None, close_fds=True)
             except OSError:
                 # On Macs, we get ‘Interruppted system call’s. Just
                 # ignore, like anki’s sound module does.
@@ -97,7 +101,9 @@ def findMpg():
         # set the base name to empty, used as a test later
         mpgBaseName = None
         # and complain.
-        utils.showInfo(u'Play with mpg plugin: Could not find {} in path. Please download and install it.'.format(mpgBaseName))
+        help_string = u'Play with mpg plugin: ' + \
+            u'Could not find {} in path. Please download and install it.'
+        utils.showInfo(help_string.format(mpgBaseName))
 
 sound.play = playSomeSoundsWithMpg
 

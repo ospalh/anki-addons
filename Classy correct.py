@@ -6,8 +6,10 @@
 from aqt.reviewer import Reviewer
 from anki.utils import stripHTML
 import re
-"""Add-on for Anki 2 to add css classes to typed in answer, numeric or
-othrwise."""
+"""
+Add-on for Anki 2 to add css classes to typed in answer, numeric or
+othrwise.
+"""
 
 
 # Code word to look for in the field name to decide whether to do the
@@ -26,14 +28,13 @@ ScalarField = 'Scalar'
 passFactor = 2.0
 
 
-
 def typeAnsAnswerFilterDispatcher(self, buf):
     m = re.search(self.typeAnsPat, buf)
 
 
-
 def scalarTypeAnsAnswerFilter(self, buf):
-    # Redo bits of typeQuesAnswerFilter to get the field name typed in and most of the old typeAnsAnswerFilter.
+    # Redo bits of typeQuesAnswerFilter to get the field name typed in
+    # and most of the old typeAnsAnswerFilter.
     m = re.search(self.typeAnsPat, buf)
     typedClass = u''
     scalarWorked = False
@@ -48,7 +49,7 @@ def scalarTypeAnsAnswerFilter(self, buf):
     if m:
         fld = m.group(1)
         if not fld.startswith("cq:") and ScalarField in fld:
-            scalarWorked, typedClass = scalarColour(cor, self.typedAnswer)
+            scalarWorked, typedClass = scalarColor(cor, self.typedAnswer)
     if scalarWorked:
         return re.sub(self.typeAnsPat, """
 <span id=coransscalar %s>%s</span>""" %
@@ -56,16 +57,21 @@ def scalarTypeAnsAnswerFilter(self, buf):
     else:
         return oldTypeAnsAnswerFilter(self, buf)
 
-def scalarColour(a, b):
-    """Return the colour the answer should be, red, yellow or green,
- depending on how close we are to the target."""
+
+def scalarColor(a, b):
+    """
+    Return color for the answer
+
+    Return the color the answer should be, red, yellow or green,
+    depending on how close we are to the target.
+    """
     try:
         target_value = int(a)
-        given_value =  int(b)
+        given_value = int(b)
     except ValueError:
         try:
             target_value = float(a)
-            given_value =  float(b)
+            given_value = float(b)
         except ValueError:
             return False, u''
     # One of the two conversions worked: we have two valid numbers, two
@@ -74,10 +80,10 @@ def scalarColour(a, b):
         return True, 'class=typedgood'
     # Now we know that they are not the same, so either red or yellow.
     try:
-        factor = 1.0 * given_value/target_value
+        factor = 1.0 * given_value / target_value
     except ZeroDivisionError:
         return True, 'class=typedfail'
-    if factor < 1.0/passFactor or factor > passFactor:
+    if factor < 1.0 / passFactor or factor > passFactor:
         return True, 'class=typedfail'
     return True, 'class=typedpass'
 

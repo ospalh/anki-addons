@@ -16,9 +16,10 @@ diagrams have to be provided as svg is the right directories.
 """
 
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 strokeorder_basename = u'kanji-colorize-'
+
 
 def is_han_character(uchar):
     """
@@ -30,6 +31,7 @@ def is_han_character(uchar):
     if uchar >= u'\u4e00' and uchar <= u'\u9fff':
         return True
     return False
+
 
 def get_file_name(txt, colors='indexed'):
     """
@@ -56,13 +58,14 @@ def kanji_stroke_color(txt, *args):
         if is_han_character(c):
             fname = get_file_name(c)
             if fname:
-                rtxt +=  u'<img class="kanjicolor" alt="{kanji}" '\
+                rtxt += u'<img class="kanjicolor" alt="{kanji}" '\
                     'src="{fname}">'.format(kanji=c, fname=fname)
             else:
                 rtxt += c
         else:
             rtxt += c
     return rtxt
+
 
 def kanji_stroke_color_spectrum(txt, *args):
     """
@@ -77,7 +80,7 @@ def kanji_stroke_color_spectrum(txt, *args):
         if is_han_character(c):
             fname = get_file_name(c, 'spectrum')
             if fname:
-                rtxt +=  u'<img class="kanjicolor" alt="{kanji}" '\
+                rtxt += u'<img class="kanjicolor" alt="{kanji}" '\
                     'src="{fname}">'.format(kanji=c, fname=fname)
             else:
                 rtxt += c
@@ -99,7 +102,7 @@ def kanji_stroke_color_contrast(txt, *args):
         if is_han_character(c):
             fname = get_file_name(c, 'contrast')
             if fname:
-                rtxt +=  u'<img class="kanjicolor" alt="{kanji}" '\
+                rtxt += u'<img class="kanjicolor" alt="{kanji}" '\
                     'src="{fname}">'.format(kanji=c, fname=fname)
             else:
                 rtxt += c
