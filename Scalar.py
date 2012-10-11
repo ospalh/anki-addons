@@ -37,10 +37,6 @@ exact_class = 'scalarexact'
 scalar_format_string = "<span class=\"typedscalar {0}\" style=\"font-family: " + \
     "'{1}'; font-size: {2} px;\">{4}</span>"
 
-scalar_format_string = "<span class=\"typedscalar {0}\" " + \
-    "style=\"font-family: '{1}'; font-size: {2} px; " + \
-    "background-color: {3}\">{4}</span>"
-
 
 def scalar_type_ans_answer_filter(self, buf):
     # Redo bits of typeQuesAnswerFilter to get the field name typed in
