@@ -272,7 +272,6 @@ def maybe_more_tool_bar_on():
     suspend_action.setEnabled(True)
     delete_action.setEnabled(True)
     if show_more_tool_bar_action.isChecked():
-<<<<<<< HEAD
         if not have_dl_audio:
             try:
                 # Try to add the download action.
@@ -282,8 +281,6 @@ def maybe_more_tool_bar_on():
                 have_dl_audio = True
             except:
                 pass
-=======
->>>>>>> master
         try:
             mw.reviewer.more_tool_bar.show()
         except:
