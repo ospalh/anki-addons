@@ -5,6 +5,8 @@
 #
 # Emulate some Anki 1.2 shortcuts.
 
+__version__ = "1.1.0"
+
 from aqt import mw
 from aqt.reviewer import Reviewer
 from aqt.qt import *
