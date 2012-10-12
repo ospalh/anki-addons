@@ -19,7 +19,7 @@ __version__ = "1.0.1"
 
 sound_re = '\[sound:(.*?)\]'
 
-command_list = ['mplayer', '-quiet']
+command_list = ['mplayer', '-really-quiet']
 
 
 def patched_play_from_text(text):
@@ -45,8 +45,9 @@ def play_with_mplayer(files):
     tmp_play_list.extend(files)
     try:
         subprocess.Popen(tmp_play_list,
-                         shell=False, stdin=None, stdout=None,
-                         stderr=None, close_fds=True)
+                         shell=False, stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         close_fds=True)
     except OSError:
         # On Macs, we get ‘Interruppted system call’s. Just
         # ignore, like anki’s sound module does.
