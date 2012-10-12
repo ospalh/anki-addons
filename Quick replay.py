@@ -15,7 +15,7 @@ import tempfile
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
 
-__version__ = "1.0.1"
+__version__ = "1.1.1"
 
 sound_re = '\[sound:(.*?)\]'
 
