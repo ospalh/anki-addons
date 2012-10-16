@@ -26,13 +26,30 @@ This add-on serves a similar purpose as
 * Keeps the collection.media folder clean.
 * Somewhat simple to exchange the whole set with another color
   scheme. Just bend one link to another directory.
-* With the alt text and the kanjistrokeorder font, it's not that bad
-  on AnkiWeb/AnkiDroid
 
 #### Cons
-
 * The core function, color, is not working on AnkiWeb/AnkiDroid
 * The set-up of Cayennes' add-on may be easier on the add-on side.
+
+#### Without the add-on
+
+When a construction like `<div
+class="strokes">{{kanjiColor:Kanji}}</div>` is used on the cards and
+something like
+<blockquote><pre><code>.strokes {
+font-size:150px;
+font-family:KanjiStrokeOrders;
+}</code></pre></blockquote>
+in the style, it isn’t too bad on AnkiWeb or mobile decices: The kanji
+will be shown with the kanji stroke order font, which uses the same
+data base.
+#### Ospalh-special
+Daring spirits can use my
+[variant](https://github.com/ospalh/Anki-Android/tree/stroke-color-addon)
+of [AnkiDroid](https://github.com/nicolas-raoul/Anki-Android). I have
+added the equvalent of this addon, giving colored storke order
+diagrams on AnkiDroid. You should merge this branch into the newest
+version of AnkiDroid, not just use that branch as-is.
 
 ### Diagrams
 
