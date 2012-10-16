@@ -12,6 +12,10 @@ first_alt: Console output of mpg321
 This is a quick hack to play mp3 files with a dedicated mp3 player,
 rather than with mplayer. This intentionally bypasses the mplayer play
 queue. The advantage is that replaying the media starts immediately,
-even before the first playing is finished. The disadvantage is that
+even before the first playing is finished. 
+
+The disadvantage is that
 when a card contains several audio files, they are played
 simultaneously, which is usually not what we want.
+The [Quick replay](/anki-addons/Quick replay.html) add-on should fix
+this problem.

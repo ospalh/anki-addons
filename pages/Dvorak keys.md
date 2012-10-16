@@ -1,6 +1,6 @@
 title: Dvorak keys
 id: dvorak
-main_file: Deck name in title.py
+main_file: dvorak keys.py
 status: working
 type: addon
 status_color: green

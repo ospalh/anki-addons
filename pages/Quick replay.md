@@ -13,7 +13,7 @@ Play mp3 files with mpg321, and flac and ogg files with play (that is,
 sox). This bypasses the mplayer play queue. Like this, when you hit
 replay, the replay starts at once.
 
-<blockquote class="NB">Some versions of sox for windows may not be
+<blockquote class="nb">Some versions of sox for Windows may not be
 able to play sound. In this case, you may want to uninstall this
 add-on.</blockquote>
 
