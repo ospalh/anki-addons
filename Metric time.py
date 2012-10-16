@@ -15,7 +15,12 @@ from aqt import browser, deckbrowser, reviewer
 __version__ = "1.0.1"
 
 day_format_separators = {-1: u'.', -3: u"’", -4: u"’", -6: u"’"}
+# Year length taken from Wikipedia's tropical year article as "mean
+# tropical year current value"
 year = 365.2421897
+# NIST value for tropical year
+# year = 3.155693E+07 / 86400.0
+# which is 5.567e-05 days or 4.81s longer
 
 
 def omag(x):
