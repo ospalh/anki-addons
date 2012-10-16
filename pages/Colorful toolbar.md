@@ -25,7 +25,7 @@ Study Add Browse” functions can also be reached through the "Go" menu.
 
 ## Variants
 
-<figure style=width:562px;" class="clear"><img src="images/toolbar netbook.png"
+<figure style="width:562px;" class="clear"><img src="images/toolbar netbook.png"
 alt="Anki 2 with the tool bar at the left and right.  The review area
 reads Die Hauptstadt von Niue ist"> <img src="images/toolbar ospalh.png"
 alt="Anki 2 with a study icon and an undo icon.  The
