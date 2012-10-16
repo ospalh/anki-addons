@@ -1,6 +1,6 @@
 title: Dvorak keys
 id: dvorak
-main_file: dvorak keys.py
+main_file: Dvorak keys.py
 status: working
 type: addon
 status_color: green
@@ -9,7 +9,7 @@ abstract: Use keys easy to use for user of the <a href="http://en.wikipedia.org/
 first_image: Dvorak_keys.png
 first_alt: The keys to use.
 ankiweb_id: 2714331040
-
+extra_jq_script: dvorak_tips.js
 
 Use keys easy to use for user of the <a
 href="http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">dvorak
@@ -20,8 +20,9 @@ the keys usually produce.
 
 There are two sets of keys to use, with the four typing fingers of the
 left hand in the row above the home row, going from “again” with the
-little finger, through “hard” with the ring finger, “good” for the middle
-finger to “easy” for the index finger.
+<span class="qtbase" id="pinky">little finger</span>, through “hard”
+with the ring finger, “good” for the middle finger to “easy” for the
+index finger.
 
 The second set is in the home position. Left index finger for “again”
 and three fingers of the right hand: index finger for “hard”, middle
@@ -38,4 +39,5 @@ comments in the source file for details.
 
 I tried to find good keys to use for QWERTY keyboards, but
 couldn't. My best idea was to use the four keys for the index fingers,
-in the home positions or reaching towards each other. These are 
+in the home positions or reaching towards each other. These are there
+in a commented-out alternative version of the dictionary.

@@ -33,7 +33,7 @@ and the field name contains “Reading”. Use `{{type:Reading}}` or
 
 ## “Correct answer was:”
 
-<figure  style="width:410px;"><img
+<figure style="width:410px;"><img
 src="images/compare full reading.png" alt="Correctly typed reading and
 lots of red.">
 <figcaption>Even though the reading was typed correctly there is a lot

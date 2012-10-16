@@ -20,7 +20,7 @@ AnkiWeb may result in suboptimal layout.
 
 ### Furikanji
 
-The template `furikanji` uses a standard reading field to 
+The template `furikanji` uses a standard reading field to
 render kanji *above* the kana. This is useful for listening comprehension.
 
 To use this, put  `{{furikanji:Field name}}` instead of
@@ -30,8 +30,8 @@ The ruby element has the aditional class `furikanji`. So special
 styling can be added. For example, markers that show the beginning and
 end of a specific block.
 
-<figure style=width:277px;">
-<img src="images/furikanji-desktop.png" 
+<figure style="width:277px;">
+<img src="images/furikanji-desktop.png"
     alt="起きなよいい加減お きなよいいかげん">
 <figcaption>Example use of furigana and
     furikanji. The source of the text is an Anki-2-ified version of the
@@ -57,7 +57,7 @@ as styling and
 &lt;div class="nhg redish lnsz">{{furikanji:Reading}}&lt;/div></code></pre></blockquote>
 as back template.
 
-<figure style=width:411px;"><img src="images/furikanji-web.png" alt="起きなよいい加減お
+<figure style="width:411px;"><img src="images/furikanji-web.png" alt="起きなよいい加減お
 起[お]きなよいい 加減[かげん]"><figcaption>On AnkiWeb, the furikanji
 don’t work.</figcaption></figure>
 
@@ -69,7 +69,7 @@ screen, with the square brackets.
 
 ### Boxed and boxkana
 
-<figure style=width:125px;"><img src="images/boxed.png"
+<figure style="width:125px;"><img src="images/boxed.png"
 alt="ausruhen やすむ"><img src="images/boxkana.png"
 alt="ausruhen やすむ"><figcaption>Two ways to show the reading of a
 kanji you want to learn.
@@ -105,4 +105,3 @@ The addon also adds the class `furigana` to the ruby element.
   other separator between the 「お」 and 「釣」: 「お 釣[つ]り」.
 * This mechanism only work with Python version 2.7.
 * As the other functions, this works only on the desktop client.
-

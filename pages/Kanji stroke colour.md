@@ -36,7 +36,7 @@ This add-on serves a similar purpose as
 
 ### Diagrams
 
-The diagrams can be produced with either Cayenne'
+The diagrams can be produced with either Cayennes'
 [kanji-colorize](https://github.com/cayennes/kanji-colorize/) script
 or with [my fork](https://github.com/ospalh/kanji-colorize) of it.
 

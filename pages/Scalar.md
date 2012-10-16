@@ -25,7 +25,7 @@ On the
 other hand, if you had typed  “400” as the answer, with the original
 behaviour, you would get the “4” in green and “00” in red, showing more
 green, even though the answer is farther from the correct one than the
-“50”. 
+“50”.
 
 With this add-on the 400 would be completely red.
 
@@ -35,7 +35,7 @@ With this add-on the 400 would be completely red.
 To use, the
 name of the answer field (the `{{type:NN}}` bit) must contain the word
 “Scalar”. (E.g. “Area_Scalar” or “Inhabitants_Scalar” for a geography
-deck or “Atomic_Mass_Scalar” for a chemistry deck.) 
+deck or “Atomic_Mass_Scalar” for a chemistry deck.)
 
 For fields without
 “Scalar” in the name the behaviour stays the same, doing the
@@ -50,7 +50,7 @@ file should be a help.
 
 ## “Correct answer was:”
 
-<figure  style="width:410px;"><img
+<figure style="width:410px;"><img
 src="images/compare_by_char.png" alt="Very close answer and
 lots of red.">
 <figcaption>Even though the reading was typed correctly there is a lot
@@ -62,4 +62,3 @@ add-on operates, but i see this as a bonus, not a problem. At this
 time, people who really want this text could possibly add it to their
 own copy of the add-on. (In other words,
 [UTSL](http://www.jargon.net/jargonfile/u/UTSL.html).)
-

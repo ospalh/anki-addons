@@ -54,6 +54,6 @@ personal taste of the user.
 
 ## What *is* the capital of Niue?
 
-<figure style=width:562px;"><img src="images/Niue Alofi.png" alt="Anki
+<figure style="width:562px;"><img src="images/Niue Alofi.png" alt="Anki
 2. The review area reads Die Hauptstadt von Niue ist Alofi"> </figure>
 [Alofi](http://en.wikipedia.org/wiki/Alofi).
