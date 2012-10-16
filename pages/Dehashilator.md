@@ -1,6 +1,6 @@
 title: Dehashilator
 id: dehashilator
-main_file: dehashilate.py
+main_file: Dehashilate.py
 status: breaks collections
 type: addon
 status_color: red
@@ -22,7 +22,7 @@ That meant that you had directories full of file names like
 `2304355e4eb95f078b2565352f2b5413.mp3`, that bore no relation to the
 fact they were used on.
 For decks that were created on these versions, those file names are
-still present in Anki 2 collections. 
+still present in Anki 2 collections.
 
 While this is no real problem, it prevents you to identify a specific
 file without starting Anki, for example to edit a picture. It also

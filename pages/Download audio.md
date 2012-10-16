@@ -1,6 +1,6 @@
 title: Download audio
 id: dlaudio
-main_file: download audio.py
+main_file: Download audio.py
 status: early development
 type: addon
 status_color: red
@@ -17,4 +17,3 @@ version of my old Anki 1.2 downolad Japanese audio plugin.
 * Download data from several sites
 * Automatically process the audio
 * Automatically detect blacklisted files
-

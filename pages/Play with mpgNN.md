@@ -1,6 +1,6 @@
 title: Play with mpg123
 id: playwithmpg
-main_file: play-with-mpgNN.py
+main_file: Play with mpgNN.py
 type: addon
 status: obsolete
 status_color: red

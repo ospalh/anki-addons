@@ -1,6 +1,6 @@
 title: Backdoor
 id: backdoor
-main_file: backdoor.py
+main_file: Backdoor.py
 type: addon
 status: working
 status_color: green
@@ -38,4 +38,3 @@ password field"><figcaption>The profile selection dialog</figcaption></figure>
 
 In the profile selection dialog, when prompted for a password, type
 “`kid sister`”.
-

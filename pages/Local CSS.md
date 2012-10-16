@@ -1,7 +1,7 @@
 title: Local CSS
 subtitle: Adapt card styles to time and place
 id: localcss
-main_file: local CSS.py
+main_file: Local CSS.py
 status: working
 type: addon
 status_color: green
@@ -11,7 +11,8 @@ first_image: three_styles.png
 first_alt: The same card with different styles
 ankiweb_id: 2587372325
 
-This loads the local CSS file `user_style.css` and adds the style to the CSS set in the card templates.
+This loads the local CSS file `user_style.css` and adds the style to
+the CSS set in the card templates.
 
 It also adds a few classes to the cards.
 
@@ -29,22 +30,23 @@ Typically the standard styling in the card template isn’t
 changed. Like this, reviewing on AnkiWeb and on mobile devices works
 as before.
 
-### Classes 
+### Classes
 
 The add-on adds the classes `loc` to all cards. The model and template
-names of each card are reduced to the characters `a` to `z`, `A` to `Z`, `0` to `9`
-and `_` and added as classes as well, in the form of `model_NN` and
-`template_NN`. As an example, the second card (`card1`) of a model or
-note type called “Satz Japanese 日本語” and that is called “Hörübung”
-would have the css classes `card card1 model_SatzJapanese
-template_Hrbung`. These classes can be used to build CSS selectors.
+names of each card are reduced to the characters `a` to `z`, `A` to
+`Z`, `0` to `9` and `_` and added as classes as well, in the form of
+`model_NN` and `template_NN`. As an example, the second card (`card1`)
+of a model or note type called “Satz Japanese 日本語” and that is
+called “Hörübung” would have the css classes `loc card card1
+model_SatzJapanese template_Hrbung`. These classes can be used to
+build CSS selectors.
 
 ### Standard use
 
 To apply a style to the whole card only on a specific computer, use the
 `user_sytle.css` file on that computer. You should use the CSS selector
-`.loc.card`. The example in the bottom of the image was done with 
-<blockquote><pre><code>.loc.card{ 
+`.loc.card`. The example in the bottom of the image was done with
+<blockquote><pre><code>.loc.card{
     font-family: Linux Biolinum O;
     background-color: #ededff;
     font-size: 58px;}</code></pre></blockquote>
@@ -58,19 +60,23 @@ setup for <tt>.card</tt> is used in the template, the style file should use
 ### Sub-elements
 
 The easiest way to select only parts of a card is to add classes with
-the `<div>` or `<span>` elements. For example a
-Japanese answer can be written as `<div class="nihongo">{{furigana:Japanese}}</div>` in the back template of a card.
+the `<div>` or `<span>` elements. For example a Japanese answer can be
+written as `<div class="nihongo">{{furigana:Japanese}}</div>` in the
+back template of a card.
 
 Then, different Japanese fonts can be selected on different computers
-by using <tt>.loc .nihongo{font-family: [IPAPMincho](http://ossipedia.ipa.go.jp/ipafont/index.html);}</tt> in one style file
-and <tt>.loc .nihongo{font-family: "[Moon font](http://cooltext.com/Download-Font-%E6%9C%88+Moon)";}</tt> in another.
+by using <tt>.loc .nihongo{font-family:
+[IPAPMincho](http://ossipedia.ipa.go.jp/ipafont/index.html);}</tt> in
+one style file and <tt>.loc .nihongo{font-family:
+"[Moon font](http://cooltext.com/Download-Font-%E6%9C%88+Moon)";}</tt>
+in another.
 
 <blockquote class=nb>
-As the <tt>loc</tt> and <tt>card</tt> apply to the same object, the selector
-<tt>.loc.card</tt> contains <em>no</em> space. When setting the style for a
-sub-element, a space <em>must</em> be added. For example, to change the style of the
-Japanese text, use <tt>.loc .nihongo</tt> with a space between
-the <tt>c</tt> and the <tt>.</tt>.
+As the <tt>loc</tt> and <tt>card</tt> apply to the same object, the
+selector <tt>.loc.card</tt> contains <em>no</em> space. When setting
+the style for a sub-element, a space <em>must</em> be added. For
+example, to change the style of the Japanese text, use <tt>.loc
+.nihongo</tt> with a space between the <tt>c</tt> and the <tt>.</tt>.
 </blockquote>
 
 

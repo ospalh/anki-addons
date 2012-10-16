@@ -1,6 +1,6 @@
 title: Compare to kana
 id: comparekana
-main_file: compare to kana.py
+main_file: Compare to kana.py
 type: addon
 status: working
 status_color: green

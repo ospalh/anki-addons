@@ -1,6 +1,6 @@
 title: faenza-icons
 id: faenzaicons
-main_file: faenza-icons.py
+main_file: Faenza icons.py
 status: abandoned
 type: addon
 status_color: red
@@ -15,4 +15,6 @@ This is an abandoned effort to give Anki 2 a more colorful look. If
 you liked the color icons of Anki 1, you may take a look at the
 [colorful toolbar](Colorful toolbar.html) add-on.
 
-The icons are taken from the [KFaenza](http://opendesktop.org/content/show.php?content=143890) KDE icon theme.
+The icons are taken from the
+[KFaenza](http://opendesktop.org/content/show.php?content=143890) KDE
+icon theme.
