@@ -23,6 +23,7 @@ app.config['SERVER_PORT'] = 8080
 pages = FlatPages(app)
 freezer = Freezer(app)
 
+
 @app.route('/anki-addons/')
 def index():
     green_addons = [p for p in pages if
@@ -49,25 +50,35 @@ def get_png(fname):
     filename = 'images/' + fname + '.png'
     return send_file(filename, mimetype='image/png')
 
+
 @app.route('/anki-addons/images/<fname>.jpg')
 def get_jpg(fname):
     filename = 'images/' + fname + '.jpg'
     return send_file(filename, mimetype='image/jpg')
+
 
 @app.route('/anki-addons/scripts/<fname>.js')
 def get_js(fname):
     filename = 'scripts/' + fname + '.js'
     return send_file(filename, mimetype='application/javascript')
 
+
 @app.route('/anki-addons/css/<fname>.css')
 def get_css(fname):
     filename = 'css/' + fname + '.css'
     return send_file(filename, mimetype='text/css')
 
+
 @app.route('/anki-addons/css/<fname>.less')
 def get_less(fname):
     filename = 'css/' + fname + '.less'
     return send_file(filename, mimetype='text/css')
+
+
+#@freezer.register_generator
+#def css():
+#    for script_file in css.all():
+#        yield script_file
 
 
 if __name__ == '__main__':
