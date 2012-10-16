@@ -65,7 +65,7 @@ def get_css(fname):
     return send_file(filename, mimetype='text/css')
 
 @app.route('/anki-addons/css/<fname>.less')
-def get_css(fname):
+def get_less(fname):
     filename = 'css/' + fname + '.less'
     return send_file(filename, mimetype='text/css')
 

@@ -2,9 +2,13 @@
 @bg-bg-color : #355664;
 @fg-color: #fcfcfc;
 @shd-color: #333;
+@a-color: #0196e3;
+
 @aradius: 20px;
 @fradius: 10px;
 @slradius: 3px;
+
+@qt-color: desaturate(spin(@a-color, -60), 50%);
 
 *{
 	/* Universal reset: */
@@ -30,7 +34,7 @@ body{
 /* Hyperlink Styles: */
 
 a, a:visited {
-	color:#0196e3;
+	color:@a-color;
 	text-decoration:none;
 	outline:none;
 
@@ -82,7 +86,7 @@ h2{
 
 h3{
 	/* The slogan text */
-	font-size:1.7em;
+	font-size:2em;
         font-weight:normal;
 }
 
@@ -116,7 +120,7 @@ footer .line{
 }
 
 nav{
-	background:url(/images/gradient_light.jpg) repeat-x 50% 50% #f8f8f8;
+	background:url(/chinese-support-addon/images/gradient_light.jpg) repeat-x 50% 50% #f8f8f8;
 /*	padding:0 5px; */
 /*	position:absolute; */
 /*	right:0; */
@@ -171,6 +175,7 @@ nav, article, nav ul li a{
 }
 
 
+
 /* Article styles: */
 
 #page{
@@ -218,6 +223,7 @@ figure{
 	    max-height:150px;
         }
 }
+
 
 
 figure img{
@@ -289,11 +295,48 @@ blockquote {
 
 }
 
+
 ul {
     margin: 0.2em 0.1em;
     padding-left: 1.5em;
 }
 
+.qtbase {
+	/* color:@qt-color; */
+    &:after {
+        content : "*";
+        position: relative;
+        bottom: 2 rem;
+        vertical-align: baseline;
+    }
+
+    &:hover {
+	text-decoration: underline;
+        color: @qt-color;
+    }
+}
+
+
+.ui-tooltip-default{
+border-color: @bg-color;
+background-color: @bg-bg-color;
+color: @fg-color;
+
+}
+.ui-tooltip-default .ui-tooltip-titlebar{
+background-color: @bg-bg-color;
+}
+
+
+.ui-tooltip-content {
+    color: @fg-color;
+    background-color: @bg-color;
+}
+
+.ui-tooltip-tip, .ui-tooltip-title, .ui-tooltip-titlebar  {
+    color: @fg-color;
+   background-color: @bg-bg-color;
+}
 
 .status_light {
 	padding: 0.2em 0.2em;
