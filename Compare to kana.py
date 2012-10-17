@@ -9,11 +9,6 @@
 import re
 from aqt.reviewer import Reviewer
 from anki.utils import stripHTML
-from anki.hooks import addHook
-
-# To let the reviewer do the red/green colouring.
-# from aqt.reviewer import Reviewer
-from aqt import mw
 
 # First code word to look for in the field name to decide whether to
 # do the kanji removal.
