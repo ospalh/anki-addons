@@ -8,7 +8,6 @@
 
 
 import re
-import sys
 from anki import hooks
 
 """
@@ -55,7 +54,8 @@ def no_sound(repl):
         else:
             try:
                 #EAFP
-                return re.sub(split_pat, repl, match.group(0), flags=re.UNICODE)
+                return re.sub(split_pat, repl, match.group(0),
+                              flags=re.UNICODE)
             except TypeError:
                 return re.sub(split_pat, repl, match.group(0))
     return func
@@ -109,7 +109,8 @@ def furikanji(txt, *args):
 
     """
     try:
-        return re.sub(split_pat, no_sound(furikanji_pat), txt, flags=re.UNICODE)
+        return re.sub(split_pat, no_sound(furikanji_pat), txt,
+                      flags=re.UNICODE)
     except TypeError:
         return re.sub(split_pat, no_sound(furikanji_pat), txt)
 
