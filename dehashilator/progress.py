@@ -12,7 +12,7 @@ Iterate over progress(iterator)
 instead of iterator. That’s pretty much it.
 '''
 
-from aqt.qt import *
+from aqt.qt import QProgressDialog, QCoreApplication
 
 
 def progress(data, *args):

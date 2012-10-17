@@ -15,12 +15,10 @@ import urllib
 import urllib2
 import os
 
-from aqt import mw
 
 from process_audio import process_audio, unmunge_to_mediafile
 from blacklist import get_hash
-from exists import free_media_name
-
+from language import default_audio_language_code
 
 download_file_extension = u'.mp3'
 
@@ -65,7 +63,7 @@ def get_word_from_google(source, language=None):
 def build_query_url(source, language=None):
         qdict = {}
         if not language:
-            language = default_language
+            language = default_audio_language_code
         qdict['tl'] = language.encode('utf-8')
         qdict['q'] = source.encode('utf-8')
         return url_gtts + urllib.urlencode(qdict)

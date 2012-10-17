@@ -8,10 +8,10 @@
 
 import os
 import re
-from anki.cards  import Card
-from anki.consts import *
+from anki.cards import Card
+from anki.consts import MODEL_STD
 from anki import hooks
-from aqt import utils, mw
+from aqt import mw
 
 """
 Load local CSS and add it to the cards.

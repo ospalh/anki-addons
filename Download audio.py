@@ -16,5 +16,6 @@ Japanese audio from Japanesepod.
 ## downloadaudio folder to the right two-letter code.
 
 
+# Flake8 complains, but that is OK. We need the imports here. RAS 2012-10-17
 import downloadaudio.conflanguage
 import downloadaudio.download

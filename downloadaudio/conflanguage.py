@@ -4,12 +4,11 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
-from aqt import mw
-from aqt.reviewer import Reviewer
 from aqt.deckconf import DeckConf
 from aqt.forms import dconf
-from anki.hooks import addHook, wrap
-from aqt.qt import *
+from anki.hooks import wrap
+from aqt.qt import QHBoxLayout, QLabel, QLineEdit
+from aqt.lang import _
 
 from language import default_audio_language_code, al_code_code
 

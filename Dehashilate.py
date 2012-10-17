@@ -14,7 +14,7 @@ rename the files, changing the notes as well.
 
 import dehashilator
 from aqt import mw
-from aqt.qt import *
+from aqt.qt import QAction, SIGNAL
 
 
 dhma = QAction(mw)

@@ -5,9 +5,7 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
 import re
-import os
 from aqt import mw
-from anki.cards import Card
 
 
 ## Set the two-letter language code for the language you are learning

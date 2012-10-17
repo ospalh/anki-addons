@@ -8,16 +8,11 @@
 __version__ = "1.1.1"
 
 from aqt import mw
-from aqt.reviewer import Reviewer
-from aqt.qt import *
+from aqt.qt import QShortcut, SIGNAL, QKeySequence
 
 mw.other_deck = QShortcut(QKeySequence("Ctrl+w"), mw)
 mw.other_browse = QShortcut(QKeySequence("Ctrl+f"), mw)
-# F5 is back in the standard install (i think) RAS 2012-10-11
-# mw.replay_audio = QShortcut(QKeySequence("F5"), mw)
 
 mw.connect(mw.other_deck, SIGNAL("activated()"),
            lambda: mw.moveToState("deckBrowser"))
 mw.connect(mw.other_browse, SIGNAL("activated()"), lambda: mw.onBrowse())
-#mw.connect(mw.replay_audio, SIGNAL("activated()"),
-#           lambda: mw.reviewer.replayAudio())

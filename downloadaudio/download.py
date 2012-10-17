@@ -8,14 +8,10 @@ import re
 import os
 from aqt import mw
 from aqt.utils import tooltip
-from aqt.qt import *
-
-#from anki.cards import Card
-#from anki.notes import Note
-from anki.hooks import addHook
+from aqt.qt import QAction, QIcon, SIGNAL
 
 from google_tts import get_word_from_google
-from japanesepod  import get_word_from_jpod
+from japanesepod import get_word_from_jpod
 from review_gui import store_or_blacklist
 from update_gui import update_data
 from language import get_language_code
@@ -33,8 +29,10 @@ Japanese-pod: This looks for a field called reading(*) and triss to
               name suggests, these are only Japanese words. The
               pronunciations that are there are rather high-quality,
               though.
-Google TTS: Get pronunciations from the Google Text-To-Speech service. These are
-            robot voices, so be a bit suspicous about them.
+
+Google TTS: Get pronunciations from the Google Text-To-Speech
+            service. These are robot voices, so be a bit suspicous
+            about them.
 
 There are three ways to download: Current card, current note and
 manual.
@@ -327,25 +325,25 @@ def download_on():
 mw.note_download_action = QAction(mw)
 mw.note_download_action.setText(u"Note audio")
 mw.note_download_action.setIcon(QIcon(os.path.join(icons_dir,
-                                                'download_note_audio.png')))
-mw.note_download_action.setToolTip("Download audio for all audio fields " + \
-                                "of this note.")
+                                                   'download_note_audio.png')))
+mw.note_download_action.setToolTip(
+    "Download audio for all audio fields of this note.")
 mw.connect(mw.note_download_action, SIGNAL("triggered()"), download_for_note)
 
 mw.side_download_action = QAction(mw)
 mw.side_download_action.setText(u"Side audio")
-mw.side_download_action.setIcon(QIcon(os.path.join(icons_dir,
-                                                'download_side_audio.png')))
-mw.side_download_action.setToolTip("Download audio for audio fields " + \
-                                "currently visible.")
+mw.side_download_action.setIcon(
+    QIcon(os.path.join(icons_dir, 'download_side_audio.png')))
+mw.side_download_action.setToolTip(
+    "Download audio for audio fields currently visible.")
 mw.connect(mw.side_download_action, SIGNAL("triggered()"), download_for_side)
 
 mw.manual_download_action = QAction(mw)
 mw.manual_download_action.setText(u"Manual audio")
-mw.manual_download_action.setIcon(QIcon(os.path.join(icons_dir,
-                                                'download_audio_manual.png')))
-mw.manual_download_action.setToolTip("Download audio, " + \
-                                "editing the information first.")
+mw.manual_download_action.setIcon(
+    QIcon(os.path.join(icons_dir, 'download_audio_manual.png')))
+mw.manual_download_action.setToolTip(
+    "Download audio, editing the information first.")
 mw.connect(mw.manual_download_action, SIGNAL("triggered()"), download_manual)
 
 

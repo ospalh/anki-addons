@@ -10,9 +10,8 @@
 # Original author: Damien Elmes <anki@ichi2.net>
 
 import urllib
-import re
 from aqt import mw
-from aqt.qt import *
+from aqt.qt import QDesktopServices, QUrl, QMenu, QAction, SIGNAL
 from aqt.utils import showInfo
 from aqt.webview import QWebPage
 

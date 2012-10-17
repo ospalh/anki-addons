@@ -10,7 +10,6 @@ import os
 import re
 import subprocess
 import sys
-import tempfile
 
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
@@ -85,12 +84,12 @@ def find_vlc():
     global command_list
     if command_list:
         if sys.platform.startswith("win32"):
-            mp3_command_list[0] += '.exe'
+            command_list[0] += '.exe'
         if not which(command_list[0]):
             # Complain,
-            utils.showWarning(u'Replay with vlc add-on: Could not find {} '\
-                                  'in path. Please download and install it.'
-                              .format(command_list[0]))
+            warn_string = u'Replay with vlc add-on: Could not find {} ' \
+                + u'in path. Please download and install it.'
+            utils.showWarning(warn_string.format(command_list[0]))
             # and clear the list
             command_list = None
 

@@ -11,7 +11,7 @@
 
 from anki.hooks import addHook
 from aqt import mw
-from aqt.qt import *
+from aqt.qt import QProgressDialog, QAction, QCoreApplication, SIGNAL
 from aqt.utils import askUser
 
 __version__ = '1.1.0'

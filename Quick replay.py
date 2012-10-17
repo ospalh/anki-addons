@@ -10,7 +10,6 @@ import os
 import re
 import subprocess
 import sys
-import tempfile
 
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
@@ -81,7 +80,7 @@ def find_mplayer():
     global command_list
     if command_list:
         if sys.platform.startswith("win32"):
-            mp3_command_list[0] += '.exe'
+            command_list[0] += '.exe'
         if not which(command_list[0]):
             # Complain,
             warn_string = u'Replay with mplayer add-on: Could not find {} ' + \

@@ -15,7 +15,7 @@
 
 import os
 from aqt import mw, clayout
-from aqt.qt import *
+from aqt.qt import QAction, QMenu, SIGNAL, QIcon, QSize, QToolBar
 from aqt.utils import askUser
 from anki.hooks import wrap, addHook
 

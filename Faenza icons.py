@@ -4,6 +4,7 @@
 
 import re
 from aqt import toolbar
+from aqt.lang import _
 
 from faenzaicons import faenzaicons
 

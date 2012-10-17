@@ -13,6 +13,7 @@ import tempfile
 
 from anki import sound
 from anki.hooks import addHook
+from aqt import utils
 
 __version__ = "1.0.1"
 
@@ -64,9 +65,10 @@ def playSomeSoundsWithMpg(path):
             os.remove(tname)
         else:
             try:
-                subprocess.Popen([mpgBaseName, "-q", "-b 4m", "--stereo", path],
-                                 shell=False, stdin=None, stdout=None,
-                                 stderr=None, close_fds=True)
+                subprocess.Popen(
+                    [mpgBaseName, "-q", "-b 4m", "--stereo", path],
+                    shell=False, stdin=None, stdout=None, stderr=None,
+                    close_fds=True)
             except OSError:
                 # On Macs, we get ‘Interruppted system call’s. Just
                 # ignore, like anki’s sound module does.

@@ -18,7 +18,7 @@ useless without Anki 2.
 from dehashilator import test_and_dehashilate
 from progress import progress
 from exists import exists_lc
-from romaji import *
+from romaji import roma, html, kana
 
 __version__ = '1.0.0b5'
 __all__ = ['test_and_dehashilate', 'progress', 'roma', 'html', 'kana',

@@ -41,10 +41,8 @@ __all__ = ['roma', 'kana', 'gyou', 'tenten', 'maru']
 
 
 import random
-import unicodedata
-from unicodedata import *
+import  unicodedata
 import re
-from re import *
 
 _roma = {}
 _kana = {}
@@ -101,7 +99,7 @@ def _setup():
     for point in range(0x3040, 0x30FF):
         char = unichr(point)
         for pattern in [regular, chiisai]:
-            match = pattern.match(name(char, ''))
+            match = pattern.match(unicodedata.name(char, ''))
             if match:
                 syllable = match.group(3)
                 for fix in _irregular:
@@ -220,7 +218,7 @@ def gyou(g, family=None, kanaify=False, rare=False):
     roman = _gyou[g]
     if not rare:
         roman = [x for x in roman if not x in
-                  set(['wi', 'WI', 'we', 'WE'])]
+                 set(['wi', 'WI', 'we', 'WE'])]
     if kanaify:
         return tuple([kana(x) for x in roman])
     return tuple(roman)

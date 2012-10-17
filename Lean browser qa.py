@@ -17,8 +17,8 @@ def reduce_format_qa(self, text):
     doc = html.fromstring(text)
     for el in doc.cssselect(hide_class_selector):
         el.drop_tree()
-    return old_format_qa(self,
-                         unicode(html.tostring(doc, encoding='utf-8'),'utf-8'))
+    return old_format_qa(
+        self, unicode(html.tostring(doc, encoding='utf-8'), 'utf-8'))
 
 
 old_format_qa = DataModel.formatQA

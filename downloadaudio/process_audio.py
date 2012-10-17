@@ -90,15 +90,16 @@ def process_audio(temp_file_name, base_name, suffix,
         sox_signal.set_param(channels=2)
     sox_out_file = pysox.CSoxStream(temp_out_file_name, 'w', sox_signal)
     sox_chain = pysox.CEffectsChain(sox_in_file, sox_out_file)
-    sox_chain.add_effect(pysox.CEffect(
-            'silence', [b'1', b'0', '{}%'.format(silence_percent)]))
+    sox_chain.add_effect(
+        pysox.CEffect('silence', [b'1', b'0', '{}%'.format(silence_percent)]))
     # Trick: to automatically remove silence at the end, reverse,
     # remove at the front and reverse.
     sox_chain.add_effect(pysox.CEffect('reverse', []))
     if not silence_end_percent:
         silence_end_percent = silence_percent
-    sox_chain.add_effect(pysox.CEffect(
-            'silence', [b'1', b'0', '{}%'.format(silence_end_percent)]))
+    sox_chain.add_effect(
+        pysox.CEffect('silence',
+                      [b'1', b'0', '{}%'.format(silence_end_percent)]))
     sox_chain.add_effect(pysox.CEffect('reverse', []))
     sox_chain.add_effect(pysox.CEffect('gain', [b'-n']))
     if 1 == in_channels:

@@ -36,5 +36,5 @@ def kanji(txt, *args):
 def kana(txt, *args):
     """Return the kana of a standard kakasi reading."""
     if too_old:
-        return re.sub(r, no_sound(r'\g<kana>'), txt)
+        return re.sub(split_pat, no_sound(r'\g<kana>'), txt)
     return re.sub(split_pat, no_sound(r'\g<kana>'), txt, flags=re.UNICODE)
