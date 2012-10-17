@@ -21,7 +21,7 @@ from progress import progress
 from aqt import mw
 from aqt.utils import showInfo, showText, askUser
 from anki.utils import stripHTML
-from aqt.lang import _
+from anki.lang import _
 
 name_source_fields = ['SequenceMarker', 'Reading', 'Expression', 'Kanji']
 
