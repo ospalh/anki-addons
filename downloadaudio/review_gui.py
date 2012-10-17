@@ -25,7 +25,8 @@ from anki.sound import play, playFromText
 from blacklist import add_black_hash
 
 
-from aqt.qt import *
+from aqt.qt import QGridLayout, QLabel, QDialog, QDialogButtonBox, \
+    QPushButton, QIcon, SIGNAL, SLOT, QButtonGroup
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
@@ -72,31 +73,30 @@ class ReviewFiles(QDialog):
         self.list = files_list
         super(ReviewFiles, self).__init__()  # Cut-and-pasted
         self.buttons_groups = []
-        self.text_help = u"Text used to retrieve audio.<br>" + \
-            u"(Mouse over the texts below to see further information."
+        self.text_help = u"""Text used to retrieve audio.<br>
+(Mouse over the texts below to see further information."""
         self.play_help = u"Play the retrieved file."
-        self.play_old_help = u"<p>Play the current content of the audio field." + \
-            u" No button means the field is empty. " + \
-            u"Hovering over the button shows the current field contetn as text."
+        self.play_old_help = u"""<p>Play the current content of the
+ audio field. No button means the field is empty. Hovering over the
+ button shows the current field contetn as text."""
         self.play_old_empty_line_help = u"The target field is empty."
-        self.add_help_text_long = u"Add the sound to the card.<br>" + \
-            u"This is the normal thing to select for a good download. " + \
-            u"(But you may want to select only one file in this column.)"
+        self.add_help_text_long = u"""Add the sound to the
+card.<br>This is the normal thing to select for a good download. (But
+you may want to select only one file in this column.)"""
         self.add_help_text_short = u"Add this sound to the card"
-        self.keep_help_text_long = u"Keep the file.<br>" + \
-            u"Keep this file in the media collection folder, but don’t add " + \
-            u"it to the card. (This means the file will show up as an " + \
-            u"unused medium and may be deleted during the unused media check."
+        self.keep_help_text_long = u"""Keep the file.<br> Keep this
+file in the media collection folder, but don’t add it to the
+card. (This means the file will show up as an unused medium and may be
+deleted during the unused media check."""
         self.keep_help_text_short = u"Keep this file"
-        self.delete_help_text_long = u"Delete the file.<br>" + \
-            u"This is the normal thing to do with a file you don’t like."
+        self.delete_help_text_long = u"""Delete the file.<br>
+This is the normal thing to do with a file you don’t like."""
         self.delete_help_text_short = u"Delete this file"
-        self.blacklist_help_text_long = u"Blacklist the file.<br>" + \
-            u"Add an idetifier for this file to a blacklist. When this " + \
-            u"file is downloaded again, it will be silently dropped. This " + \
-            u"behaviour is useful for Japanesepod downloads. " + \
-            u"When your downloaded file tells you that they they are sorry, " +\
-            u"will add this soon &c., click on this."
+        self.blacklist_help_text_long = u"""Blacklist the file.<br>
+Add an idetifier for this file to a blacklist. When this file is
+downloaded again, it will be silently dropped. This behaviour is
+useful for Japanesepod downloads. When your downloaded file tells you
+that they they are sorry, will add this soon &c., click on this."""
         self.blacklist_help_text_short = u"Blacklist this file"
         self.initUI()
 

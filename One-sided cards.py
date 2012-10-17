@@ -6,7 +6,7 @@
 
 
 from aqt import mw
-from anki.consts import *
+from anki.consts import MODEL_STD
 from anki.hooks import addHook
 
 __version__ = "1.0.1"

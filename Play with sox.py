@@ -13,6 +13,7 @@ import tempfile
 
 from anki import sound
 from anki.hooks import addHook
+from aqt import utils
 
 ## Just play flac, ogg, vorbis with sox:
 fileFormatsToSox = ['.ogg', '.flac', '.vorbis']

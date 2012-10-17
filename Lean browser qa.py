@@ -16,8 +16,8 @@ hide_class_name = u'browserhide'
 
 def reduce_format_qa(self, text):
     soup = BeautifulSoup(text)
-    for hide in soup.findAll(True,
-                        {'class': re.compile('\\b' + hide_class_name + '\\b')}):
+    for hide in soup.findAll(True, {'class': re.compile(
+                '\\b' + hide_class_name + '\\b')}):
         hide.extract()
     return old_format_qa(self, unicode(soup))
 

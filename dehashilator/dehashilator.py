@@ -12,7 +12,6 @@ note content.
 
 import os
 import re
-import shutil
 
 import romaji
 import kana_kanji
@@ -20,9 +19,9 @@ from exists import exists_lc
 from progress import progress
 
 from aqt import mw
-from aqt.qt import *
 from aqt.utils import showInfo, showText, askUser
-from anki.utils import ids2str, stripHTML
+from anki.utils import stripHTML
+from aqt.lang import _
 
 name_source_fields = ['SequenceMarker', 'Reading', 'Expression', 'Kanji']
 
@@ -123,7 +122,7 @@ def new_name_base(old_base, note):
     # is the one with the file. (Almost reasonable. One-side cards to
     # just listen to something and decide without further info if you
     # recoginze that.)
-    raise ValueError(u'No data for new name found')
+    raise ValueError(_(u'No data for new name found'))
 
 
 def free_media_name(base, end):
@@ -251,8 +250,8 @@ def dehashilate():
                     try:
                         os.rename(src, dst)
                     except OSError:
-                        print 'src: ', src
-                        print 'dst: ', dst
+                        print u'Problem movivg {0} → {1}\n'.format(src, dst)
+                        bad_mv_text += u'{0} → {1}\n'.format(src, dst)
                     else:
                         new_names_dict[old_name] = new_name
                     n[name] = value.replace(old_name, new_name)
@@ -275,4 +274,4 @@ def dehashilate():
      # mw.col.updateFieldCache([re_dict[nids] for re_dict in rename_exec_list])
     mw.reset()
     if bad_mv_text:
-        showText('These files weren’t renamed:\n' + test_string)
+        showText(_(u'These files weren’t renamed:\n') + bad_mv_text)

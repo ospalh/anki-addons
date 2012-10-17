@@ -10,7 +10,6 @@ import os
 import re
 import subprocess
 import sys
-import tempfile
 
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
@@ -41,9 +40,9 @@ def patched_play_from_text(text):
             return
     # The same for ogg and flac
     if play_command_list:
-        play_files = [pf for pf in matches \
-                          for ending in play_endings_list \
-                          if pf.lower().endswith(ending)]
+        play_files = [pf for pf in matches
+                      for ending in play_endings_list
+                      if pf.lower().endswith(ending)]
         if len(play_files) == len(matches):
             play_with_play(play_files)
             return
@@ -112,9 +111,9 @@ def fix_commands():
             mp3_command_list[0] += '.exe'
         if not which(mp3_command_list[0]):
             # Complain,
-            utils.showWarning(u'Quick replay add-on: Could not find {} '\
-                                  'in path. Please download and install it.'
-                              .format(mp3_command_list[0]))
+            warn_string = u'Quick replay add-on: Could not find {} '\
+                + u'in path. Please download and install it.'
+            utils.showWarning(warn_string.format(mp3_command_list[0]))
             # and clear the list
             mp3_command_list = None
     if play_command_list:
@@ -122,9 +121,9 @@ def fix_commands():
             play_command_list[0] += '.exe'
         if not which(play_command_list[0]):
             # Complain,
-            utils.showWarning(u'Quick replay add-on:: Could not find {} '\
-                                  'in path. Please download and install it.'
-                              .format(play_command_list[0]))
+            warn_string = u'Quick replay add-on:: Could not find {} ' \
+                + u'in path. Please download and install it.'
+            utils.showWarning(warn_string .format(play_command_list[0]))
             # and clear the list
             play_command_list = None
 

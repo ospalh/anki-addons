@@ -5,7 +5,6 @@
 #
 
 import os
-import sys
 from anki.utils import isWin, isMac
 
 

@@ -14,9 +14,9 @@
 # * Attribution. You must attribute the work by stating your use of KanjiVG in
 #   your own copyright header and linking to KanjiVG's website
 #   (http://kanjivg.tagaini.net)
-# * Share Alike. If you alter, transform, or build upon this work, you may
-#   distribute the resulting work only under the same or similar license to this
-#   one.
+# * Share Alike. If you alter, transform, or build upon this work, you
+#   may distribute the resulting work only under the same or similar
+#   license to this one.
 #
 # See http://creativecommons.org/licenses/by-sa/3.0/ for more details.
 # This file has been generated on 2012-04-01, using the latest KanjiVG data

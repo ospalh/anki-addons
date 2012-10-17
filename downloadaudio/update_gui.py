@@ -4,8 +4,8 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
-from aqt.qt import *
-from aqt import mw
+from aqt.qt import QGridLayout, QLabel, QLineEdit, QDialog,\
+    QIcon, QHBoxLayout, QVBoxLayout, SLOT, QDialogButtonBox, SIGNAL
 from language import default_audio_language_code
 
 """
@@ -20,9 +20,10 @@ def update_data(general_fields, japanese_fields, language_code):
     if not review_fields.exec_():
         raise RuntimeError('User cancel')
     for num, (source, dest, old_text) in enumerate(general_fields):
-        general_fields[num] = (source, dest,
-                               review_fields.general_text_lineedits[num].text())
-    for num, (source, dest, old_kanji, old_kana) in enumerate(japanese_fields):
+        general_fields[num] = (
+            source, dest, review_fields.general_text_lineedits[num].text())
+    for num, (source, dest, old_kanji, old_kana) \
+            in enumerate(japanese_fields):
         japanese_fields[num] = (source, dest,
                                 review_fields.kanji_lineedits[num].text(),
                                 review_fields.kana_lineedits[num].text())
@@ -104,7 +105,8 @@ Clear it to not download anything for this field.</p>''')
         jpod_head_label = QLabel(
             u'Requests send to Japanesepod, split into kanji and kana:')
         jf_layout.addWidget(jpod_head_label, 0, 0, 1, 3)
-        for num, (source, dest, kanji, kana) in enumerate(self.japanese_fields):
+        for num, (source, dest, kanji, kana)\
+                in enumerate(self.japanese_fields):
             label = QLabel(u'{0}:'.format(source))
             label.setToolTip(u'Source of the request text')
             jf_layout.addWidget(label, num + 1, 0)

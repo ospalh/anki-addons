@@ -16,18 +16,13 @@ import urllib
 import urllib2
 import os
 
-from aqt import mw
-
 from process_audio import process_audio, unmunge_to_mediafile
 from blacklist import get_hash
-from exists import free_media_name
-
 
 download_file_extension = u'.mp3'
 
-
-url_jdict = 'http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
-# url_jdict='http://assets.languagepod101.com/dictionary/japanese/audioogg.php?'
+url_jdict = \
+    'http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
 
 # Code
 
