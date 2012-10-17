@@ -21,16 +21,17 @@ japanese_model = 'japanese'
 
 __version__ = "1.0.1"
 
-kanjiKanaRe = r' ?([^ ]+?)\[(.+?)\]'
+kanji_kana_re = r' ?([^ ]+?)\[(.+?)\]'
 
 
-def noSound(repl):
+def no_sound(repl):
     def func(match):
         if match.group(2).startswith("sound:"):
             # return without modification
             return match.group(0)
         else:
-            return re.sub(kanjiKanaRe, repl, match.group(0))
+            return re.sub(kanji_kana_re, repl, match.group(0))
+
     return func
 
 
@@ -44,7 +45,7 @@ def kana(txt, *args):
     except TypeError:
         # which will not work when this is already unicode
         pass
-    return re.sub(kanjiKanaRe, noSound(r'\2'), txt, flags=re.UNICODE)
+    return re.sub(kanji_kana_re, no_sound(r'\2'), txt, flags=re.UNICODE)
 
 
 def kana_type_ans_answer_filter(self, buf):
