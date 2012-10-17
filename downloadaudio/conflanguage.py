@@ -8,7 +8,7 @@ from aqt.deckconf import DeckConf
 from aqt.forms import dconf
 from anki.hooks import wrap
 from aqt.qt import QHBoxLayout, QLabel, QLineEdit
-from aqt.lang import _
+from anki.lang import _
 
 from language import default_audio_language_code, al_code_code
 

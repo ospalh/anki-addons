@@ -9,7 +9,7 @@
 from anki.hooks import wrap
 from aqt.addcards import AddCards
 from aqt.qt import QDialogButtonBox, QWidgetItem, SIGNAL
-from aqt.lang import _
+from anki.lang import _
 
 __version__ = '1.0.1'
 
