@@ -12,10 +12,10 @@ from anki.utils import stripHTML
 
 # First code word to look for in the field name to decide whether to
 # do the kanji removal.
-ReadingField = 'reading'
+reading_field = 'reading'
 
 # Second code word to look for in the note model name.
-JapaneseModel = 'japanese'
+japanese_model = 'japanese'
 
 ### End of configuration block.
 
@@ -47,7 +47,7 @@ def kana(txt, *args):
     return re.sub(kanjiKanaRe, noSound(r'\2'), txt, flags=re.UNICODE)
 
 
-def kanaTypeAnsAnswerFilter(self, buf):
+def kana_type_ans_answer_filter(self, buf):
     # Redo bits of typeQuesAnswerFilter to get the field name typed in
     # and most of the old typeAnsAnswerFilter.
     m = re.search(self.typeAnsPat, buf)
@@ -57,13 +57,13 @@ def kanaTypeAnsAnswerFilter(self, buf):
     # Copy-and-pasted. I guess it’s harmless
     self.web.eval("_getTypedText();")
     # munge correct value
-    modelName = self.card.model()[u'name']
+    model_name = self.card.model()[u'name']
     # Cascade of tests
     if m:
         fld = m.group(1)
-        # if not fld.startswith("cq:") and ReadingField in fld.lower():
-        if not fld.startswith("cq:") and ReadingField in fld.lower() \
-                and JapaneseModel in modelName.lower():
+        # if not fld.startswith("cq:") and reading_field in fld.lower():
+        if not fld.startswith("cq:") and reading_field in fld.lower() \
+                and japanese_model in model_name.lower():
             cor = self.mw.col.media.strip(stripHTML(self.typeCorrect))
             # The extra kana(...) here is the whole point of this plugin.
             res = self.correct(kana(cor), self.typedAnswer)
@@ -71,8 +71,8 @@ def kanaTypeAnsAnswerFilter(self, buf):
 <span id=coranskana style="font-family: '%s'; font-size: %spx">%s</span>""" %
                           (self.typeFont, self.typeSize, res), buf)
     # Still here: we failed one of our tests. So do it the old way.
-    return oldTypeAnsAnswerFilter(self, buf)
+    return old_type_ans_answer_filter(self, buf)
 
 
-oldTypeAnsAnswerFilter = Reviewer.typeAnsAnswerFilter
-Reviewer.typeAnsAnswerFilter = kanaTypeAnsAnswerFilter
+old_type_ans_answer_filter = Reviewer.typeAnsAnswerFilter
+Reviewer.typeAnsAnswerFilter = kana_type_ans_answer_filter
