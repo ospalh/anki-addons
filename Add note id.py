@@ -14,10 +14,21 @@ from aqt import mw
 from aqt.qt import QProgressDialog, QAction, QCoreApplication, SIGNAL
 from aqt.utils import askUser
 
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 
-# Field names to use. Use only lower-case here.
+# Field names to use. Use only lower-case here. The field name can
+# have upper-case letters. (Use "Note ID" as the field name.)
 id_fields = ['note id', 'nid']
+
+## Select one or the other line.
+
+## You can remove the '# ' from the 'show_menu_item =
+## False' line (and add one to the show_menu_item = True' line) to
+## hide the 'Add note ids' menu after you have filled the fields in
+## your old cards. NB.: remember to remove the space at the start of
+## the line, too.
+show_menu_item = True
+# show_menu_item = False
 
 
 def progress(data, *args):
@@ -95,9 +106,10 @@ def onFocusLost(flag, n, fidx):
     return True
 
 
-add_nid = QAction(mw)
-add_nid.setText("Add note ids")
-mw.form.menuTools.addAction(add_nid)
-mw.connect(add_nid, SIGNAL("triggered()"), add_nids_to_all)
+if show_menu_item:
+    add_nid = QAction(mw)
+    mw.form.menuTools.addAction(add_nid)
+    add_nid.setText("Add note ids")
+    mw.connect(add_nid, SIGNAL("triggered()"), add_nids_to_all)
 
 addHook('editFocusLost', onFocusLost)
