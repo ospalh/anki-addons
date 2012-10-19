@@ -4,13 +4,17 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
-from aqt.qt import QGridLayout, QLabel, QLineEdit, QDialog,\
-    QIcon, QHBoxLayout, QVBoxLayout, SLOT, QDialogButtonBox, SIGNAL
-from language import default_audio_language_code
-
 """
 Change the download audio parameters on user input.
 """
+
+from PyQt4.QtCore import SIGNAL, SLOT
+from PyQt4.QtGui import QDialog, QDialogButtonBox, QGridLayout, QHBoxLayout, \
+    QIcon, QLabel, QLineEdit, QVBoxLayout
+
+from anki.lang import _
+
+from language import default_audio_language_code
 
 
 def update_data(general_fields, japanese_fields, language_code):
@@ -47,24 +51,25 @@ class ReviewFields(QDialog):
         self.initUI()
 
     def initUI(self):
-        language_help = u'''<p>This will be transmitted as part of the
+        language_help = _(u'''<p>This will be transmitted as part of the
 requst sent to Google TTS. Use a standard language code here. Using
 invalid values or codes of unsupported languages will result in no
-downloads.</p>'''
+downloads.</p>''')
+        self.setWindowTitle(_(u'Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
         self.setLayout(layout)
         explanation = QLabel(self)
         if len(self.general_fields) + len(self.japanese_fields) > 0:
             explanation.setText(
-                u'Please edit the text below or change the language.')
+                _(u'Please edit the text below or change the language.'))
         else:
-            explanation.setText(u'Please select the language to use:')
+            explanation.setText(_(u'Please select the language to use:'))
         layout.addWidget(explanation)
         self.create_general_rows(layout)
         self.create_japanese_rows(layout)
         lang_hlayout = QHBoxLayout()
-        lc_label = QLabel(u'Language code:', self)
+        lc_label = QLabel(_(u'Language code:'), self)
         lang_hlayout.addWidget(lc_label)
         lc_label.setToolTip(language_help)
         self.language_code_lineedit = QLineEdit(self)
@@ -86,16 +91,16 @@ downloads.</p>'''
 
     def create_general_rows(self, layout):
         gf_layout = QGridLayout()
-        gtts_head_label = QLabel('Requests send to Google TTS:')
+        gtts_head_label = QLabel(_('Requests to send to Google TTS:'))
         gf_layout.addWidget(gtts_head_label, 0, 0, 1, 2)
         for num, (source, dest, text) in enumerate(self.general_fields):
             label = QLabel(u'{0}:'.format(source))
-            label.setToolTip(u'Source of the request text')
+            label.setToolTip(_(u'Source of the request text'))
             gf_layout.addWidget(label, num + 1, 0)
             ledit = QLineEdit(text)
             ledit.setToolTip(
-                u'''<p>Text of the request. Edit this as appropriate.
-Clear it to not download anything for this field.</p>''')
+                _(u'''<p>Text of the request. Edit this as appropriate.
+Clear it to not download anything for this field.</p>'''))
             gf_layout.addWidget(ledit, num + 1, 1)
             self.general_text_lineedits.append(ledit)
         layout.addLayout(gf_layout)
@@ -103,24 +108,24 @@ Clear it to not download anything for this field.</p>''')
     def create_japanese_rows(self, layout):
         jf_layout = QGridLayout()
         jpod_head_label = QLabel(
-            u'Requests send to Japanesepod, split into kanji and kana:')
+            _(u'Requests send to Japanesepod, split into kanji and kana:'))
         jf_layout.addWidget(jpod_head_label, 0, 0, 1, 3)
         for num, (source, dest, kanji, kana)\
                 in enumerate(self.japanese_fields):
             label = QLabel(u'{0}:'.format(source))
-            label.setToolTip(u'Source of the request text')
+            label.setToolTip(_(u'Source of the request text'))
             jf_layout.addWidget(label, num + 1, 0)
             kanji_edit = QLineEdit(kanji)
             kanji_edit.setToolTip(
-                u'''<p>Kanji of the request. Edit this as appropriate.
+                _(u'''<p>Kanji of the request. Edit this as appropriate.
 Clear it to not download anything for this field.
-For pure kana words, enter (or keep) the kana here.</p>''')
+For pure kana words, enter (or keep) the kana here.</p>'''))
             jf_layout.addWidget(kanji_edit, num + 1, 1)
             self.kanji_lineedits.append(kanji_edit)
             kana_edit = QLineEdit(kana)
             kana_edit.setToolTip(
-                u'''<p>Kana of the request. Edit this as appropriate.
-For pure kana words, enter (or keep) the kana here or clear it.</p>''')
+                _(u'''<p>Kana of the request. Edit this as appropriate.
+For pure kana words, enter (or keep) the kana here or clear it.</p>'''))
             jf_layout.addWidget(kana_edit, num + 1, 2)
             self.kana_lineedits.append(kana_edit)
         layout.addLayout(jf_layout)

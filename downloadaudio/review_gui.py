@@ -20,13 +20,17 @@ choices what to do wit each:
 """
 
 import os
+
+from PyQt4.QtGui import QButtonGroup, QDialog, QDialogButtonBox, QGridLayout, \
+    QIcon, QLabel, QPushButton
+from PyQt4.QtCore import SIGNAL, SLOT
+
 from aqt import mw
+from anki.lang import _
 from anki.sound import play, playFromText
+
 from blacklist import add_black_hash
 
-
-from aqt.qt import QGridLayout, QLabel, QDialog, QDialogButtonBox, \
-    QPushButton, QIcon, SIGNAL, SLOT, QButtonGroup
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
@@ -68,68 +72,70 @@ class ReviewFiles(QDialog):
     """
     A Dialog to let the user keep or discard files.
     """
+
     def __init__(self, note, files_list):
         self.note = note
         self.list = files_list
         super(ReviewFiles, self).__init__()  # Cut-and-pasted
         self.buttons_groups = []
-        self.text_help = u"""Text used to retrieve audio.<br>
-(Mouse over the texts below to see further information."""
+        self.text_help = _(u"""Text used to retrieve audio.<br>
+(Mouse over the texts below to see further information.""")
         self.play_help = u"Play the retrieved file."
-        self.play_old_help = u"""<p>Play the current content of the
+        self.play_old_help = _(u"""<p>Play the current content of the
  audio field. No button means the field is empty. Hovering over the
- button shows the current field contetn as text."""
-        self.play_old_empty_line_help = u"The target field is empty."
-        self.add_help_text_long = u"""Add the sound to the
+ button shows the current field contetn as text.""")
+        self.play_old_empty_line_help = _(u"The target field is empty.")
+        self.add_help_text_long = _(u"""Add the sound to the
 card.<br>This is the normal thing to select for a good download. (But
-you may want to select only one file in this column.)"""
-        self.add_help_text_short = u"Add this sound to the card"
-        self.keep_help_text_long = u"""Keep the file.<br> Keep this
+you may want to select only one file in this column.)""")
+        self.add_help_text_short = _(u"Add this sound to the card")
+        self.keep_help_text_long = _(u"""Keep the file.<br> Keep this
 file in the media collection folder, but don’t add it to the
 card. (This means the file will show up as an unused medium and may be
-deleted during the unused media check."""
-        self.keep_help_text_short = u"Keep this file"
-        self.delete_help_text_long = u"""Delete the file.<br>
-This is the normal thing to do with a file you don’t like."""
-        self.delete_help_text_short = u"Delete this file"
-        self.blacklist_help_text_long = u"""Blacklist the file.<br>
+deleted during the unused media check.""")
+        self.keep_help_text_short = _(u"Keep this file")
+        self.delete_help_text_long = _(u"""Delete the file.<br>
+This is the normal thing to do with a file you don’t like.""")
+        self.delete_help_text_short = _(u"Delete this file")
+        self.blacklist_help_text_long = _(u"""Blacklist the file.<br>
 Add an idetifier for this file to a blacklist. When this file is
 downloaded again, it will be silently dropped. This behaviour is
 useful for Japanesepod downloads. When your downloaded file tells you
-that they they are sorry, will add this soon &c., click on this."""
-        self.blacklist_help_text_short = u"Blacklist this file"
+that they they are sorry, will add this soon &c., click on this.""")
+        self.blacklist_help_text_short = _(u"Blacklist this file")
         self.initUI()
 
     def initUI(self):
+        self.setWindowTitle(_(u'Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QGridLayout()
         self.setLayout(layout)
         explanation = QLabel(self)
         if len(self.list) > 1:
             explanation.setText(
-                u'Please select an action for each downloaded file:')
+                _(u'Please select an action for each downloaded file:'))
         else:
-            explanation.setText(u'Please select what to do with the file:')
+            explanation.setText(_(u'Please select what to do with the file:'))
         layout.addWidget(explanation, 0, 0, 1, 7)
-        text_head_label = QLabel(u'<b>Source text</b>', self)
+        text_head_label = QLabel(_(u'<b>Source text</b>'), self)
         text_head_label.setToolTip(self.text_help)
         layout.addWidget(text_head_label, 1, 0)
-        play_head_label = QLabel(u'play', self)
+        play_head_label = QLabel(_(u'play'), self)
         play_head_label.setToolTip(self.play_help)
         layout.addWidget(play_head_label, 1, 1)
-        play_old_head_label = QLabel(u'play old', self)
+        play_old_head_label = QLabel(_(u'play old'), self)
         play_old_head_label.setToolTip(self.play_old_help)
         layout.addWidget(play_old_head_label, 1, 2)
-        add_head_label = QLabel(u'add', self)
+        add_head_label = QLabel(_(u'add'), self)
         add_head_label.setToolTip(self.add_help_text_long)
         layout.addWidget(add_head_label, 1, 3)
-        keep_head_label = QLabel(u'keep', self)
+        keep_head_label = QLabel(_(u'keep'), self)
         keep_head_label.setToolTip(self.keep_help_text_long)
         layout.addWidget(keep_head_label, 1, 4)
-        delete_head_label = QLabel(u'delete', self)
+        delete_head_label = QLabel(_(u'delete'), self)
         delete_head_label.setToolTip(self.delete_help_text_long)
         layout.addWidget(delete_head_label, 1, 5)
-        blacklist_head_label = QLabel(u'blacklist', self)
+        blacklist_head_label = QLabel(_(u'blacklist'), self)
         blacklist_head_label.setToolTip(self.blacklist_help_text_long)
         layout.addWidget(blacklist_head_label, 1, 6)
         rule_label = QLabel('<hr>')
@@ -209,11 +215,11 @@ that they they are sorry, will add this soon &c., click on this."""
         play_button_group.buttonClicked.connect(
             lambda button: play(self.list[play_button_group.id(button)][3]))
         old_play_button_group.buttonClicked.connect(
-            lambda button: playFromText(self.note[
-                    self.list[old_play_button_group.id(button)][1]]))
+            lambda button: playFromText(
+                self.note[self.list[old_play_button_group.id(button)][1]]))
 
     def build_text_help_label(self, text, source, extras):
-        ret_text = u'Source text: <b>{0}</b><br>from field: {1}'\
+        ret_text = _(u'Source text: <b>{0}</b><br>from field: {1}')\
             .format(text, source)
         for key, value in extras.items():
             ret_text += u'<br>{0}: {1}'.format(key, value)
