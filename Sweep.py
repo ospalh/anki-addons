@@ -11,8 +11,7 @@ import re
 import subprocess
 import sys
 
-from anki.sound import playFromText, play
-from aqt import utils, reviewer
+from aqt import utils
 from aqt import mw
 from PyQt4.QtGui import QAction, QMenu
 from PyQt4.QtCore import SIGNAL
@@ -109,7 +108,17 @@ def sweep_current_note():
 
 
 if find_sweep():
-    # Now add to the menu
+    # Either reuse an edit-media sub-menu created by another add-on
+    # (probably by Y.T., notably the download audio add-on) r create
+    # that menu. When we already have that menu, add a separator,
+    # otherwise create that menu.
+    try:
+        mw.edit_media_submenu.addSeparator()
+    except AttributeError:
+        mw.edit_media_submenu = QMenu(u"&Media", mw)
+        mw.form.menuEdit.addSeparator()
+        mw.form.menuEdit.addMenu(mw.edit_media_submenu)
+    # Now add to that menu
     mw.sweep_audio_fiels_action = QAction(mw)
     mw.sweep_audio_fiels_action.setText(u"Edit audio")
     # mw.sweep_audio_fiels_action.setIcon(
@@ -118,5 +127,4 @@ if find_sweep():
         "Edit audio files of the current note with sweep-audio-editor.")
     mw.connect(mw.sweep_audio_fiels_action, SIGNAL("triggered()"),
                sweep_current_note)
-    mw.form.menuTools.addAction(mw.sweep_audio_fiels_action)
-
+    mw.edit_media_submenu.addAction(mw.sweep_audio_fiels_action)
