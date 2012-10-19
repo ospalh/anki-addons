@@ -5,22 +5,20 @@ type: addon
 status: hackish
 status_color: yellow
 status_text_color: black
-abstract: Play sound files with dedicated programs, bypassing the mplayer play queue. Like this, when you hit replay, the replay starts at once.
+abstract: Bypass the mplayer play queue. Like this, when you hit replay, the replay starts at once.
 first_image: mpg321.png
 first_alt: Console output of mpg321
 
-Play mp3 files with mpg321, and flac and ogg files with play (that is,
-sox). This bypasses the mplayer play queue. Like this, when you hit
-replay, the replay starts at once.
+Play all audio from a single card with a single call to mplayer.
 
-<blockquote class="nb">Some versions of sox for Windows may not be
-able to play sound. In this case, you may want to uninstall this
-add-on.</blockquote>
+Normally, audio and video files are put in a queue and played one after
+the other.
 
-The add-on checks if mpg321 and play are installed, but does nothing
-to fix it if they are not there.
+But i sometimes like an audiofile replayed immediately, even before
+the first playing is finished. This makes that work. Just hit “r” or “F5”.
 
-The advantage over the Play-with-mpgNN and Play with ogg add-ons is
-that this plays all sound files of a card one after the other for each
-play or replay, avoiding the ugly situation that several files are
-played at once.
+<blockquote class="nb">
+This add-on has not ben tested on all
+platforms. It may not work when the only mplayer available is the one
+from a binary Anki installation.
+</blockquote>
