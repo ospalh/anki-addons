@@ -20,7 +20,7 @@ their [MD5](http://en.wikipedia.org/wiki/MD5)
 That meant that you had directories full of file names like
 `66a6565b69edcb65e7a083a4df1f0900.png` or
 `2304355e4eb95f078b2565352f2b5413.mp3`, that bore no relation to the
-fact they were used on.
+facts (now notes) they were used on.
 For decks that were created on these versions, those file names are
 still present in Anki 2 collections.
 
