@@ -13,7 +13,7 @@ import sys
 
 from aqt import utils
 from aqt import mw
-from PyQt4.QtGui import QAction, QMenu
+from PyQt4.QtGui import QAction, QIcon, QMenu
 from PyQt4.QtCore import SIGNAL
 
 __version__ = "1.1.0"
@@ -121,8 +121,15 @@ if find_sweep():
     # Now add to that menu
     mw.sweep_audio_fiels_action = QAction(mw)
     mw.sweep_audio_fiels_action.setText(u"Edit audio")
-    # mw.sweep_audio_fiels_action.setIcon(
-    #     QIcon(os.path.join(icons_dir, 'download_audio_manual.png')))
+    icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
+    try:
+        # Bad hack. Use the icon brought along from another add-on and
+        # nicked from the program we use. That program is GPLed, so we
+        # should be OK with that.
+        mw.sweep_audio_fiels_action.setIcon(
+            QIcon(os.path.join(icons_dir, 'scrubby.xpm')))
+    except:
+        pass
     mw.sweep_audio_fiels_action.setToolTip(
         "Edit audio files of the current note with sweep-audio-editor.")
     mw.connect(mw.sweep_audio_fiels_action, SIGNAL("triggered()"),
