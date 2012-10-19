@@ -38,48 +38,12 @@ in, according to two rules:
   also has fields “Country Audio” and “Capital Audio”, the add-on can
   download pronunciation for these two fields separately.
 
-### Japanesepod
-
-reading instead of Expression
-
-### Change
-
-in `downloadaudio/download.py`
-
 ## Manual, note, side
 
 Two of the three download modes, note and side mode, immediately
 download the audio when triggered. The note mode checks all the fields
-of the card.
-
-### Manual
-
-
-
-### Review
-
-#### Japanesepod
-
-Blacklist
-
-
-
-## Language
-
-There are up to four ways the download language is determined
-
-* For manual downloads, the language code can be set in the dialog.
-* The language code can be set as a tag on individual cards
-* ... settings ...
-* ... default ...
-
-## Google TTS
-
-Caveat emptor robot voice
-
-## Japanesepod
-
-Split kana kanji
+of the card and downloads for suitable fields. The side mode only
+downloads files for the visible side of the current card.
 
 ## Private use
 
@@ -89,9 +53,6 @@ them. While i see no problem with using them privately, re-publishing,
 for example by uploading a shared deck to Ankiweb, is most likely
 prohibited by those rights.
 
-## Pysox and Pydub
-
-Get them.
 
 ## Ideas for improvements
 While this add-on works as it is, a few things would be nice.
