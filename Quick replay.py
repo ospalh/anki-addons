@@ -2,7 +2,7 @@
 # Copyright: Roland Sieker ( ospalh@gmail.com )
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 """
-Anki 2 add-on to play sound with mpg321 or play (sox).
+Anki 2 add-on that throws media at vlc instead of mplayer.
 """
 
 import copy
@@ -14,14 +14,11 @@ import sys
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
 
-__version__ = "1.0.1"
+__version__ = "1.1.1"
 
 sound_re = '\[sound:(.*?)\]'
 
-# mp3_command_list = ['mpg123'  '-q', '-b 4m']
-mp3_command_list = ['mpg321',  '-q', '-b 4m', '--stereo']
-play_command_list = ['play', '-q']
-play_endings_list = ['.ogg', '.flac']
+command_list = ['mplayer', '-really-quiet']
 
 
 def patched_play_from_text(text):
@@ -30,53 +27,29 @@ def patched_play_from_text(text):
         # Avoid any problems with calling the programs with zero
         # files.
         return
-    # Check if we have mpg321
-    if mp3_command_list:
-        # Isolate the mp3s. Play with our command if that is all the
-        # sounds.
-        mp3_files = [mp for mp in matches if mp.lower().endswith('.mp3')]
-        if len(mp3_files) == len(matches):
-            play_with_mpg321(mp3_files)
+    if command_list:
+            play_with_mplayer(matches)
             return
-    # The same for ogg and flac
-    if play_command_list:
-        play_files = [pf for pf in matches
-                      for ending in play_endings_list
-                      if pf.lower().endswith(ending)]
-        if len(play_files) == len(matches):
-            play_with_play(play_files)
-            return
-    # Still here, neither all mp3 nor all playable with play. The
-    # classical sound.play.
+    # Still here: no command list. I guess we didn't find
+    # mplayer. Good luck playing it with play...
     for match in matches:
         play(match)
 
 
-def play_with_mpg321(files):
+def play_with_mplayer(files):
     # We don't do the file name fixing. The point of this is to play
     # it quickly. When there is no easy way to do it on Windows, than
-    # remove this add-on. So, just throw the names at mpg321.
-    tmp_play_list = copy.copy(mp3_command_list)
+    # remove this add-on. So, just throw the names at mplayer.
+    tmp_play_list = copy.copy(command_list)
     tmp_play_list.extend(files)
     try:
         subprocess.Popen(tmp_play_list,
-                         shell=False, stdin=None, stdout=None,
-                         stderr=None, close_fds=True)
+                         shell=False, stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         close_fds=True)
     except OSError:
         # On Macs, we get ‘Interruppted system call’s. Just
         # ignore, like anki’s sound module does.
-        pass
-
-
-def play_with_play(files):
-    # The same, only use other command name.
-    tmp_play_list = copy.copy(play_command_list)
-    tmp_play_list.extend(files)
-    try:
-        subprocess.Popen(tmp_play_list,
-                         shell=False, stdin=None, stdout=None,
-                         stderr=None, close_fds=True)
-    except OSError:
         pass
 
 
@@ -97,40 +70,28 @@ def which(program):
     return None
 
 
-def fix_commands():
+def find_mplayer():
     """
-    Try to find the play commands.
+    Try to find mplayer
 
-    Look if we have mpg321 and play. Fix it by adding an .exe on
+    Look if we have mplayer. Fix it by adding an .exe on
     windows first. Clear the commands when we don't have one.
     """
-    global mp3_command_list
-    global play_command_list
-    if mp3_command_list:
+    global command_list
+    if command_list:
         if sys.platform.startswith("win32"):
-            mp3_command_list[0] += '.exe'
-        if not which(mp3_command_list[0]):
+            command_list[0] += '.exe'
+        if not which(command_list[0]):
             # Complain,
-            warn_string = u'Quick replay add-on: Could not find {} '\
-                + u'in path. Please download and install it.'
-            utils.showWarning(warn_string.format(mp3_command_list[0]))
+            warn_string = u'Replay with mplayer add-on: Could not find {} ' + \
+                u'in path. Please download and install it.'
+            utils.showWarning(warn_string.format(command_list[0]))
             # and clear the list
-            mp3_command_list = None
-    if play_command_list:
-        if sys.platform.startswith("win32"):
-            play_command_list[0] += '.exe'
-        if not which(play_command_list[0]):
-            # Complain,
-            warn_string = u'Quick replay add-on:: Could not find {} ' \
-                + u'in path. Please download and install it.'
-            utils.showWarning(warn_string .format(play_command_list[0]))
-            # and clear the list
-            play_command_list = None
+            command_list = None
 
 
 # We don't really need the old_play_from_text. We have copied the
 # central point of the old, the findall. Anyway.
-
 old_play_from_text = playFromText
 playFromText = patched_play_from_text
 
@@ -138,4 +99,4 @@ playFromText = patched_play_from_text
 # get to it.
 reviewer.playFromText = patched_play_from_text
 
-fix_commands()
+find_mplayer()
