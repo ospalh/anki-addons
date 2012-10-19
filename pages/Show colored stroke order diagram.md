@@ -10,7 +10,7 @@ first_image: palette_gimped.png
 first_alt: The idea is to pick the stroke colors from an image file.
 
 This is a work in progress that is intended to replace my
-[Kanji stroke color](/Kanji stroke colour.html) add-on and possibly
+[Kanji stroke color](Kanji stroke colour.html) add-on and possibly
 coexist with [cayennes](http://cayennes.github.com)’
 [add-on](https://github.com/cayennes/kanji-colorize/tree/master/anki),
 this one used on desktop clients, cayennes’ on AnkiWeb and mobile
@@ -26,10 +26,8 @@ devices.
   different parameters at different times.
 * Use this as a normal template or to replace the svgs/images from
   cayennes’ add-on
-  
+
 ## Data set
 
 This uses the [KanjiVG](http://kanjivg.tagaini.net/) kanji stroke
 order data set as the base.
-
-
