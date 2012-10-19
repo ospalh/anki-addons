@@ -2,7 +2,7 @@
 # Copyright: Roland Sieker ( ospalh@gmail.com )
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 """
-Anki 2 add-on that throws media at vlc instead of mplayer.
+Anki 2 add-on that changes the way sound and videos are played.
 """
 
 import copy
