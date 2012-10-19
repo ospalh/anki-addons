@@ -27,8 +27,8 @@ id_fields = ['note id', 'nid']
 ## hide the 'Add note ids' menu after you have filled the fields in
 ## your old cards. NB.: remember to remove the space at the start of
 ## the line, too.
-show_menu_item = True
-# show_menu_item = False
+# show_menu_item = True
+show_menu_item = False
 
 
 def progress(data, *args):
