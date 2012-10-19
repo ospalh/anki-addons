@@ -3,8 +3,8 @@ id: dlaudio
 main_file: Download audio.py
 status: undocumented
 type: addon
-status_color: red
-status_text_color: white
+status_color: yellow
+status_text_color: black
 abstract: Automatically download audio from Google TTS and Japanesepod
 first_image: Downloaded audio.png
 first_alt: Reviewing downloaded audio files.
