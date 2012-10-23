@@ -27,7 +27,7 @@ with Anki.
 </blockquote>
 
 
-This add-on replaces the standard time-formating function with one
+This add-on replaces the standard time-formatting function with one
 that returns times shorter than a year as days – even times much
 shorter than a day. Longer times are written as years with one decimal
 place.
@@ -36,6 +36,6 @@ place.
 Daring spirits can use my
 [variant](https://github.com/ospalh/Anki-Android/tree/metric-time) of
 [AnkiDroid](https://github.com/nicolas-raoul/Anki-Android). I have
-added the equvalent of this addon, showing times as fractinal days in
+added the equivalent of this addon, showing times as fractional days in
 AnkiDroid. You should merge this branch into the newest version of
 AnkiDroid, not just use that branch as-is.

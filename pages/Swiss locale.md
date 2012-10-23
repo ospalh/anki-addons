@@ -7,7 +7,7 @@ status_color: red
 status_text_color: white
 abstract: An add-on to make my German geography deck work.
 first_image: nordzypern.png
-first_alt: The input of 0.26 is formated as 260'000.
+first_alt: The input of 0.26 is formatted as 260'000.
 
 This add-on provides a few hacks to make my personal German geography
 deck work.
@@ -22,7 +22,7 @@ with Anki.
 The main problem this tries to fix is the vast span of inhabitants of
 the countries and territories of the world (more than seven orders of
 magnitude if you include the Pitcairn Islands, five if you count only
-independant states and exclude religious headquarters). Basically there is no
+independent states and exclude religious headquarters). Basically there is no
 nice way to display 67 and 1,347,350,000 and have both numbers look
 good without a little bit of hacking. That is even more the case when
 you use the input answer feature.
@@ -44,9 +44,9 @@ megameter times one megameter, 1 Mm<sup>2</sup>.
 
 The `Swiss` part comes from the fact that i just personally like the
 Swiss way of writing large numbers, with an apostrophe as thousands
-separator, and have included this in the add-on. The Swiss formating
+separator, and have included this in the add-on. The Swiss formatting
 will only work on Linux systems.
 
 While this add-on only works with the desktop client, the deck for
 which this is written compensates for that, so that the deck is
-useable on AnkiWeb and mobile devices.
+usable on AnkiWeb and mobile devices.

@@ -33,7 +33,7 @@ review area reads Die Hauptstadt von Niue ist"> <figcaption>Two
 variants of the arrangement and selection of icons.</figcaption>
 </figure>
 
-Appart from the standard version, there is a
+Apart from the standard version, there is a
 [netbook version](http://beta.ankiweb.net/shared/info/1330596667)
 on the AnkiWeb
 [download page](http://beta.ankiweb.net/shared/addons/), that places

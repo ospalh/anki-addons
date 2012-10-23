@@ -5,14 +5,14 @@ status: working
 type: addon
 status_color: green
 status_text_color: white
-abstract: Use keys easy to use for user of the <a href="http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">dvorak simplified keyboard</a> to answer a question.
+abstract: Use keys easy to use for user of the <a href="http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak simplified keyboard</a> to answer a question.
 first_image: Dvorak_keys.png
 first_alt: The keys to use.
 ankiweb_id: 2714331040
 extra_jq_script: dvorak_tips.js
 
 Use keys easy to use for user of the <a
-href="http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">dvorak
+href="http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak
 simplified keyboard</a> to answer a question.
 
 The point is to remember the key positions, rather than the characters

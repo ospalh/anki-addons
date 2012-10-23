@@ -22,7 +22,7 @@ the source file:
 
 * title_separator: What to print between the deck name and program
   name. Normally a spaced n-dash.
-* show_subdeck: Whether to show the subdeck you have descendet into
+* show_subdeck: Whether to show the subdeck you have descended into
   during learning or only the deck you clicked on in the deck
   browser.
 

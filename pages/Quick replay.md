@@ -14,11 +14,11 @@ Play all audio from a single card with a single call to mplayer.
 Normally, audio and video files are put in a queue and played one after
 the other.
 
-But i sometimes like an audiofile replayed immediately, even before
+But i sometimes like an audio file replayed immediately, even before
 the first playing is finished. This makes that work. Just hit “r” or “F5”.
 
 <blockquote class="nb">
-This add-on has not ben tested on all
+This add-on has not been tested on all
 platforms. It may not work when the only mplayer available is the one
 from a binary Anki installation.
 </blockquote>

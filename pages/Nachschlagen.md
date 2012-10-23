@@ -12,7 +12,7 @@ ankiweb_id: 1211332804
 
 Like the “Lookup” menu from the Japanese support add-on, this adds a
 menu called „Nachschlagen“ were you can look up words at some of my
-favourite resources.
+favorite resources.
 
 A few of them are German, and the whole add-on is kept in German as
 well. „Nachschlagen“ is German for “Lookup”.
@@ -24,14 +24,14 @@ a few things can be configured. Most of it is not too important and
 explained in the file itself. You may encounter the error message “No
 field found for lookup. Consider changing the field name lists in the
 plugin source.” That means that my guesses about what you use as
-field names were wrong. In this case you should add your favourite
+field names were wrong. In this case you should add your favorite
 field names to the `expression_fields` and `meaning_fields` lists.
 
 
 ## For learners of any spoken language
 
 The “Forvo” links are useful for learners of any spoken language. Look
-up prununciations at the crowdsourced [forvo.com](http://forvo.com).
+up pronunciations at the crowd-sourced [forvo.com](http://forvo.com).
 
 ## For learners of Japanese
 

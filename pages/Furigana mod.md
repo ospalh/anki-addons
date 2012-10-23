@@ -9,7 +9,7 @@ abstract: Improved way to parse kanji and readings, a way to render kanji the ka
 first_image: furikanji.png
 first_alt: Furikanji demo
 
-This add-on adds support for Furikanji, adds two other templates and
+This add-on adds support for furikanji, adds two other templates and
 slightly changes the way kanji and readings are parsed.
 
 <blockquote class=nb>
@@ -26,7 +26,7 @@ render kanji *above* the kana. This is useful for listening comprehension.
 To use this, put  `{{furikanji:Field name}}` instead of
 `{{furigana:Field name}}` in the template.
 
-The ruby element has the aditional class `furikanji`. So special
+The ruby element has the additional class `furikanji`. So special
 styling can be added. For example, markers that show the beginning and
 end of a specific block.
 
@@ -63,7 +63,7 @@ don’t work.</figcaption></figure>
 
 As the furikanji rendering is done on the fly by the desktop client,
 it naturally does not work with AnkiWeb or AnkiDroid (or, presumably,
-the iOS client). Here the text is renderend as it is seen in the edit
+the iOS client). Here the text is rendered as it is seen in the edit
 screen, with the square brackets.
 
 

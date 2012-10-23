@@ -12,18 +12,18 @@ ankiweb_id: 333346658
 
 When learning some types of numbers, like the number of inhabitants of
 a country, often close is good enough. This add-on makes Anki show
-that, it colours the answer in yellow when it was close to the
+that, it colors the answer in yellow when it was close to the
 original answer.
 
 #### Example
 In the image correct answer is “48”, when you know it’s close to 50,
-you type that. The original behaviour was to compare character by character,
+you type that. The original behavior was to compare character by character,
 and show the typed answer in red, a 5 is no 4 and a 0 is no 8. With this add-on, the whole answer
 would be yellow, as it is  close to the correct answer.
 
 On the
 other hand, if you had typed  “400” as the answer, with the original
-behaviour, you would get the “4” in green and “00” in red, showing more
+behavior, you would get the “4” in green and “00” in red, showing more
 green, even though the answer is farther from the correct one than the
 “50”.
 
@@ -38,7 +38,7 @@ name of the answer field (the `{{type:NN}}` bit) must contain the word
 deck or “Atomic_Mass_Scalar” for a chemistry deck.)
 
 For fields without
-“Scalar” in the name the behaviour stays the same, doing the
+“Scalar” in the name the behavior stays the same, doing the
 character-by-character comparison.
 
 ### Configuration

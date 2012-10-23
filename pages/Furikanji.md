@@ -15,5 +15,5 @@ Render kanji *above* the kana. Useful for listening comprehension.
 
 Use `{{furikanji:Field name}}` in the template.
 
-While this add-on works, it has been superseeded by
+While this add-on works, it has been superseded by
 [Furigana mod](Furigana mod.html).
