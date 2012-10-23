@@ -85,7 +85,7 @@ example, to change the style of the Japanese text, use <tt>.loc
 Applying different styles to different cards works in a similar way.
 
 As an example, i use a standard style of black on light blue for
-standard cards and black ond light red for grammar cards. In the
+standard cards and black and light red for grammar cards. In the
 alternative style i use light colored text on dark background, dark
 green for normal cards and dark red for grammar cards. The standard
 cards use the the `.loc.card` selector described above. The model name
@@ -108,6 +108,6 @@ anywhere but on Windows systems), soft links can be used instead: `ln
 
 ### Reloading
 
-The user style is loaded when the profile is opend. To reload the
-style afer a change go to the “Switch Profiles” dialog and re-open the
+The user style is loaded when the profile is opened. To reload the
+style after a change go to the “Switch Profiles” dialog and re-open the
 profile.

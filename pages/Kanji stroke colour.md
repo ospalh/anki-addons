@@ -40,14 +40,14 @@ something like
 font-size:150px;
 font-family:KanjiStrokeOrders;
 }</code></pre></blockquote>
-in the style, it isn’t too bad on AnkiWeb or mobile decices: The kanji
+in the style, it isn’t too bad on AnkiWeb or mobile devices: The kanji
 will be shown with the kanji stroke order font, which uses the same
 data base.
 #### Ospalh-special
 Daring spirits can use my
 [variant](https://github.com/ospalh/Anki-Android/tree/stroke-color-addon)
 of [AnkiDroid](https://github.com/nicolas-raoul/Anki-Android). I have
-added the equvalent of this addon, giving colored storke order
+added the equivalent of this addon, giving colored stoke order
 diagrams on AnkiDroid. You should merge this branch into the newest
 version of AnkiDroid, not just use that branch as-is.
 

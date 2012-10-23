@@ -16,4 +16,4 @@ not-quite-ogg files lying around that most programs can play, but vlc
 can't. So i just gave up on this. Sorry.
 
 Use [Quick replay](Quick replay.html) instead. Maybe it will find the
-onboard mplayer one day.
+on board mplayer one day.

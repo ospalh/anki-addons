@@ -56,7 +56,7 @@ time it had problems with several hash-like media in a single field.
 ## Notes
 
 This was written as a one-of fix-my-collection-once add-on. As such,
-with my personal collection fixed, i am not really interrested in
+with my personal collection fixed, i am not really interested in
 making this perfect. It will probably stay in its current, somewhat
 buggy, state. Others are welcome to do their own work or to send pull
 requests, but simple “it broke my collection” issue reports will be

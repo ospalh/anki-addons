@@ -23,7 +23,7 @@ This addon allows even kid sisters to access accounts where a password is set.
 
 ###Installation
 * Method 1: Copy the file to the Anki addons folder. I would suggest
-  to rename it, so the name is less conspiuous. You probably also want
+  to rename it, so the name is less conspicuous. You probably also want
   to remove the comment about Bruce Schneier.
 * Method 2: Insert the  part of the file from “`def shortLoad`” to the
   end into another addon already in the addons folder.

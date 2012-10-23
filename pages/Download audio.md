@@ -33,7 +33,7 @@ in, according to two rules:
   ignorecase">Sound</span>”.
 * For other fields, the add-on looks for a second field with the same
   name with “Audio” or “Sound” added. Like this, one note can store
-  different audio files for differnt fields. For example, a geography
+  different audio files for different fields. For example, a geography
   deck can have fields “Country” and “Capital”. When that note
   also has fields “Country Audio” and “Capital Audio”, the add-on can
   download pronunciation for these two fields separately.
@@ -84,9 +84,9 @@ Split kana kanji
 ## Private use
 
 These audio files can be freely downloaded without registering or
-agreeing to a license, they keep the copyright of those providing
+agreeing to a license, but they keep the copyright of those providing
 them. While i see no problem with using them privately, re-publishing,
-for example by uploading a shared deck to Ankiweb, is most likely
+for example by uploading a shared deck to AnkiWeb, is most likely
 prohibited by those rights.
 
 ## Pysox and Pydub
