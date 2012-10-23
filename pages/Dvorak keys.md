@@ -34,7 +34,7 @@ like add card or edit card.
 
 ### Configuration
 
-The keys that are used are defined in a python dictionary. Read the
+The keys that are used are defined in a Python dictionary. Read the
 comments in the source file for details.
 
 I tried to find good keys to use for QWERTY keyboards, but
