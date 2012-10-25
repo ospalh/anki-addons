@@ -1,6 +1,6 @@
 title: Dvorak keys
 id: dvorak
-main_file: Dvorak keys.py
+main_file: Dvorak%20keys.py
 status: working
 type: addon
 status_color: green

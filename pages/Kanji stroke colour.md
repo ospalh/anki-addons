@@ -1,12 +1,12 @@
 title: Kanji stroke color
 id: kanjistrokecolor
-main_file: Kanji stroke colour.py
+main_file: Kanji%20stroke%20colour.py
 type: addon
 status: hackish, desktop only
 status_color: yellow
 status_text_color: black
 abstract: A quick hack add-on to show (colored) stroke order diagrams.
-first_image: stroke color.png
+first_image: stroke%20color.png
 first_alt: Colored stroke order diagram for 休
 
 This is a quick hack to show colored stroke order diagrams. You need

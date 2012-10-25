@@ -1,6 +1,6 @@
 title: Quick replay
 id: playwithmpg
-main_file: Quick replay.py
+main_file: Quick%20replay.py
 type: addon
 status: hackish
 status_color: yellow

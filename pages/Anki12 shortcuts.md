@@ -1,6 +1,6 @@
 title: Anki 1.2 shortcuts
 id: anki12shorts
-main_file: Anki12 shortcuts.py
+main_file: Anki12%20shortcuts.py
 date: 2012-10-16
 tags: [anki1, shortcut]
 type: addon

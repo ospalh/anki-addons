@@ -1,7 +1,7 @@
 title: Local CSS
 subtitle: Adapt card styles to time and place
 id: localcss
-main_file: Local CSS.py
+main_file: Local%20CSS.py
 status: working
 type: addon
 status_color: green

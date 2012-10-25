@@ -1,12 +1,12 @@
 title: Download audio
 id: dlaudio
-main_file: Download audio.py
+main_file: Download%20audio.py
 status: undocumented
 type: addon
 status_color: yellow
 status_text_color: black
 abstract: Automatically download audio from Google TTS and Japanesepod
-first_image: Downloaded audio.png
+first_image: Downloaded%20audio.png
 first_alt: Reviewing downloaded audio files.
 extra_jq_script: audio_tips.js
 
@@ -37,6 +37,24 @@ in, according to two rules:
   deck can have fields “Country” and “Capital”. When that note
   also has fields “Country Audio” and “Capital Audio”, the add-on can
   download pronunciation for these two fields separately.
+
+### Japanesepod
+
+Downloading Japanese pronunciations from Japanesepod works a little
+bit different. The field must be set up in the way used by the
+Japanese support addon, that is, there should be a “<span class="qtbase
+  ignorecase">Reading</span>” field and an “Audio” or “Sound”
+field. The reading field must contain both the kanji and kana for
+the requested word, with the reading for the kanji in square
+brackets. For example as 「仮定[かてい]」, which will be automatically
+split into 「仮定」 and 「かてい」.
+
+Alternative names for “Reading” are “Kana”, 「かな」and 「仮名」.
+
+Also, when “Audio” is just a substring, that substring is replaced
+with “Reading”, not removed. For example, when you have a field
+“Japanese Audio”, you need another field “Japanese Reading”.
+
 
 ## Manual, note, side
 

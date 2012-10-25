@@ -1,12 +1,12 @@
 title: Colorful toolbar
 id: colorbar
-main_file: Colorful toolbar.py
+main_file: Colorful%20toolbar.py
 type: addon
 status: working
 status_color: green
 status_text_color: white
 abstract: Replace the top menu bar with the “Decks Study Add Browse” text buttons and the two rather drab sync and statistics buttons with a colorful icon toolbar like the one in Anki 1.
-first_image: Colorful toolbar.png
+first_image: Colorful%20toolbar.png
 first_alt: Anki 2 review window with two icon bars. The review area reads Die Hauptstadt von Niue ist
 ankiweb_id: 388296573
 
@@ -25,9 +25,9 @@ Study Add Browse” functions can also be reached through the "Go" menu.
 
 ## Variants
 
-<figure style="width:562px;" class="clear"><img src="images/toolbar netbook.png"
+<figure style="width:562px;" class="clear"><img src="images/toolbar%20netbook.png"
 alt="Anki 2 with the tool bar at the left and right.  The review area
-reads Die Hauptstadt von Niue ist"> <img src="images/toolbar ospalh.png"
+reads Die Hauptstadt von Niue ist"> <img src="images/toolbar%20ospalh.png"
 alt="Anki 2 with a study icon and an undo icon.  The
 review area reads Die Hauptstadt von Niue ist"> <figcaption>Two
 variants of the arrangement and selection of icons.</figcaption>
@@ -54,6 +54,6 @@ personal taste of the user.
 
 ## What *is* the capital of Niue?
 
-<figure style="width:562px;"><img src="images/Niue Alofi.png" alt="Anki
+<figure style="width:562px;"><img src="images/Niue%20Alofi.png" alt="Anki
 2. The review area reads Die Hauptstadt von Niue ist Alofi"> </figure>
 [Alofi](http://en.wikipedia.org/wiki/Alofi).

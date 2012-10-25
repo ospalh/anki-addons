@@ -1,6 +1,6 @@
 title: Edit media
 id: editmedia
-main_file: Edit media.py
+main_file: Edit%20media.py
 date: 2012-10-19
 tags: [edit audio]
 type: addon

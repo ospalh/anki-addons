@@ -1,6 +1,6 @@
 title: Lean browser question/answer
 id: leanqa
-main_file: Lean browser qa.py
+main_file: Lean%20browser%20qa.py
 date: 2012-10-19
 tags: [browser display]
 type: addon

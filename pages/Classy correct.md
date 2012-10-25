@@ -1,6 +1,6 @@
 title: Classy correct
 id: classy_correct
-main_file: Classy correct.py
+main_file: Classy%20correct.py
 date: 2012-05-12
 tags: [class, css, abandoned]
 type: addon
