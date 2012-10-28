@@ -7,6 +7,7 @@
 from anki.hooks import addHook
 
 def sep(txt, *args):
+    """Make the text Somebody Else's Problem."""
     return ''
 
 addHook('fmod_sep', sep)
