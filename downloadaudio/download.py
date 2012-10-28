@@ -8,7 +8,8 @@ import re
 import os
 from aqt import mw
 from aqt.utils import tooltip
-from aqt.qt import QAction, QIcon, SIGNAL
+from PyQt4.QtGui import QAction, QIcon, QMenu
+from PyQt4.QtCore import SIGNAL
 
 from google_tts import get_word_from_google
 from japanesepod import get_word_from_jpod
@@ -322,6 +323,18 @@ def download_on():
     mw.manual_download_action.setEnabled(True)
 
 
+# Either reuse an edit-media sub-menu created by another add-on
+# (probably by Y.T., notably the external edit add-on that is in the
+# works) or create that menu. When we already have that menu, add a
+# separator, otherwise create that menu.
+try:
+    mw.edit_media_submenu.addSeparator()
+except AttributeError:
+    mw.edit_media_submenu = QMenu(u"&Media", mw)
+    mw.form.menuEdit.addSeparator()
+    mw.form.menuEdit.addMenu(mw.edit_media_submenu)
+
+
 mw.note_download_action = QAction(mw)
 mw.note_download_action.setText(u"Note audio")
 mw.note_download_action.setIcon(QIcon(os.path.join(icons_dir,
@@ -347,9 +360,9 @@ mw.manual_download_action.setToolTip(
 mw.connect(mw.manual_download_action, SIGNAL("triggered()"), download_manual)
 
 
-mw.form.menuTools.addAction(mw.note_download_action)
-mw.form.menuTools.addAction(mw.side_download_action)
-mw.form.menuTools.addAction(mw.manual_download_action)
+mw.edit_media_submenu.addAction(mw.note_download_action)
+mw.edit_media_submenu.addAction(mw.side_download_action)
+mw.edit_media_submenu.addAction(mw.manual_download_action)
 
 # Todo: switch off at start and on when we get to reviewing.
 # # And start with the acitons off.

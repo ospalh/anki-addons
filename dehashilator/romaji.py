@@ -94,8 +94,8 @@ def _setup():
             _gyou[g.lower()].append(kana.lower())
     #TODO: set up dann table (u,ku,gu,su,zu,tsu,du,nu,fu,...)
     # find the basic kana and chiisai kana from their unicode data names
-    regular = compile(r'(HIRAGANA|KATAKANA) (LETTER) (.+)')
-    chiisai = compile(r'(HIRAGANA|KATAKANA) (SMALL LETTER) (.+)')
+    regular = re.compile(r'(HIRAGANA|KATAKANA) (LETTER) (.+)')
+    chiisai = re.compile(r'(HIRAGANA|KATAKANA) (SMALL LETTER) (.+)')
     for point in range(0x3040, 0x30FF):
         char = unichr(point)
         for pattern in [regular, chiisai]:
