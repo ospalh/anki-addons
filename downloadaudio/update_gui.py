@@ -66,8 +66,10 @@ downloads.</p>''')
         else:
             explanation.setText(_(u'Please select the language to use:'))
         layout.addWidget(explanation)
-        self.create_general_rows(layout)
-        self.create_japanese_rows(layout)
+        if len(self.general_fields) > 0:
+            self.create_general_rows(layout)
+        if len(self.japanese_fields) > 0:
+            self.create_japanese_rows(layout)
         lang_hlayout = QHBoxLayout()
         lc_label = QLabel(_(u'Language code:'), self)
         lang_hlayout.addWidget(lc_label)
@@ -125,7 +127,7 @@ For pure kana words, enter (or keep) the kana here.</p>'''))
             kana_edit = QLineEdit(kana)
             kana_edit.setToolTip(
                 _(u'''<p>Kana of the request. Edit this as appropriate.
-For pure kana words, enter (or keep) the kana here or clear it.</p>'''))
+For pure kana words, enter (or keep) the kana here or clear this field.</p>'''))
             jf_layout.addWidget(kana_edit, num + 1, 2)
             self.kana_lineedits.append(kana_edit)
         layout.addLayout(jf_layout)
