@@ -23,7 +23,7 @@ from anki import hooks
 from aqt import mw
 
 
-__version__ = '1.2.3'
+__version__ = '1.2.4'
 
 user_css_name = 'user_style.css'
 """File name of the user's CSS"""
