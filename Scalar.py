@@ -3,23 +3,26 @@
 # Based in part on code by Damien Elmes <anki@ichi2.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+"""Add-on for Anki 2 to colour a typed in numeric answer."""
+
 import re
 
 from aqt.reviewer import Reviewer
 from anki.utils import stripHTML
 
-"""Add-on for Anki 2 to colour a typed in numeric answer."""
 
 __version__ = "1.0.1"
 
 # Code word to look for in the field name to decide whether to do the
 # number comparison:
-scalar_field = 'Scalar'
+scalar_field = 'scalar'
+"""Code word needed to tread input as number"""
 
 # Factor to decide what counts as ‘good enough’. It should be > 1.0
 # (or at least >= 1.0). What you use here depends on how precisely you
 # want to remember your numbers.
 pass_factor = 1.5
+"""Factor that defines what gets a yellow color."""
 
 # How the number is coloured.
 fail_color = '#f00'
@@ -39,6 +42,13 @@ scalar_format_string = "<span class=\"typedscalar {0}\" " + \
 
 
 def scalar_type_ans_answer_filter(self, buf):
+    """
+    Return numeric answer in red, yellow or green.
+
+    When certain conditions are met, return the typed-in answer in
+    red, yellow or green, depending how close the given answer was to
+    the correct one.
+    """
     # Redo bits of typeQuesAnswerFilter to get the field name typed in
     # and most of the old typeAnsAnswerFilter.
     m = re.search(self.typeAnsPat, buf)
@@ -50,20 +60,26 @@ def scalar_type_ans_answer_filter(self, buf):
     # munge correct value
     cor = self.mw.col.media.strip(stripHTML(self.typeCorrect))
     # Cascade of tests
-    if m:
+    try:
         fld = m.group(1)
-        if not fld.startswith("cq:") and scalar_field in fld:
-            try:
-                color_string, class_string = \
-                    scalar_color_class(cor, self.typedAnswer)
-                return re.sub(
-                    self.typeAnsPat, scalar_format_string.format(
-                        class_string, self.typeFont, self.typeSize,
-                        color_string, self.typedAnswer),
-                    buf)
-            except:
-                return old_type_ans_answer_filter(self, buf)
-    # Still here not really Scalar.:
+    except AttributeError:
+        # No typed answer field.
+        return old_type_ans_answer_filter(self, buf)
+    if scalar_field in fld.lower() and not fld.startswith("cq:"):
+        try:
+            color_string, class_string = \
+                scalar_color_class(cor, self.typedAnswer)
+        except ValueError:
+            # not floats
+            return old_type_ans_answer_filter(self, buf)
+        else:
+            return re.sub(
+                self.typeAnsPat,
+                scalar_format_string.format(class_string, self.typeFont,
+                                            self.typeSize, color_string,
+                                            self.typedAnswer),
+                buf)
+    # Still here not really scalar.:
     return old_type_ans_answer_filter(self, buf)
 
 
