@@ -11,7 +11,7 @@ from aqt.reviewer import Reviewer
 from anki.utils import stripHTML
 
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 # Code word to look for in the field name to decide whether to do the
 # number comparison:
