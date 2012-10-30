@@ -4,14 +4,15 @@
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 # Based off Kieran Clancy's initial implementation.
 
-import locale
-import decimal
-from anki.hooks import addHook
-from anki.utils import isMac
-
 """
 Anki-2 add-on to format numbers just the way i like them.
 """
+
+import decimal
+import locale
+
+from anki.hooks import addHook
+from anki.utils import isMac
 
 # I personally like the Swiss use of the apostroph as thousands separator.
 # locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
@@ -42,9 +43,10 @@ def swiss_format(num):
             # On the other hand, i have problems loading the swiss
             # locale on some other systems. So only try it.
             locale.setlocale(locale.LC_NUMERIC, ('de_CH', 'UTF-8'))
-            num_string = locale.format('%d', num, grouping=do_group)
-        except:
+        except locale.Error:
             num_string = str(num)
+        else:
+            num_string = locale.format('%d', num, grouping=do_group)
     else:
         num_string = str(num)
     return arab_format_string.format(num_string)
