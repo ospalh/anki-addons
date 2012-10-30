@@ -26,8 +26,11 @@ from aqt import mw
 __version__ = '1.2.3'
 
 user_css_name = 'user_style.css'
+"""File name of the user's CSS"""
 css_encoding = 'utf-8'
+"""Encoding of the user's CSS file"""
 local_class = 'loc'
+"""Class added to all cards"""
 
 user_css = u''
 
