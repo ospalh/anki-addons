@@ -16,6 +16,7 @@ from japanesepod import get_word_from_jpod
 from review_gui import store_or_blacklist
 from update_gui import update_data
 from language import get_language_code
+from anki.utils import stripHTML
 from anki.template import furigana
 
 # debug:
@@ -102,7 +103,14 @@ def field_data(note, fname, readings=False):
     True
     """
     def return_data(idx):
+        """Get the text, remove html, possibly split into kanji and kana. """
         text = note[field_names[idx]]
+        # This is taken from aqt/browser.py.
+        text = text.replace("<br>", u" ")
+        text = text.replace("<br />", u" ")
+        # Reformat so we have exactly one space between words.
+        text = ' '.join(text.split())
+        text = stripHTML(text)
         if readings:
             return field_names[idx], fname,\
                 furigana.kanji(text), furigana.kana(text)
