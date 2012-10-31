@@ -5,7 +5,7 @@ status: quick hack
 type: addon
 status_color: yellow
 status_text_color: black
-abstract: Another abandoned try to play everything.
+abstract: Remove size limits from add card window
 first_image: too%20small.png
 first_alt: The reason why there was a size limit in the first place.
 

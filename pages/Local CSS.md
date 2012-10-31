@@ -53,8 +53,8 @@ To apply a style to the whole card only on a specific computer, use the
 
 <blockquote class=nb> The selector in the style file must be more
 specific than the one used in the template in the collection. When a
-setup for `.card` is used in the template, the style file should use
-`.loc.card`, not just `.loc` </blockquote>
+setup for <code>.card</code> is used in the template, the style file should use
+<code>.loc.card</code>, not just <code>.loc</code> </blockquote>
 
 
 ### Sub-elements
@@ -72,11 +72,11 @@ one style file and <code>.loc .nihongo{font-family:
 in another.
 
 <blockquote class=nb>
-As the `loc` and `card` apply to the same object, the
-selector `.loc.card` contains <em>no</em> space. When setting
+As the <code>loc</code> and <code>card</code> apply to the same object, the
+selector <code>.loc.card</code> contains <em>no</em> space. When setting
 the style for a sub-element, a space <em>must</em> be added. For
-example, to change the style of the Japanese text, use <tt>.loc
-.nihongo</tt> with a space between the `c` and the `.`.
+example, to change the style of the Japanese text, use <code>.loc
+.nihongo</code> with a space between the <code>c</code> and the <code>.</code>.
 </blockquote>
 
 
