@@ -1,7 +1,7 @@
 title: Local CSS
 subtitle: Adapt card styles to time and place
 id: localcss
-main_file: Local CSS.py
+main_file: Local%20CSS.py
 status: working
 type: addon
 status_color: green
@@ -53,8 +53,8 @@ To apply a style to the whole card only on a specific computer, use the
 
 <blockquote class=nb> The selector in the style file must be more
 specific than the one used in the template in the collection. When a
-setup for <tt>.card</tt> is used in the template, the style file should use
-<tt>.loc.card</tt>, not just <tt>.loc</tt> </blockquote>
+setup for `.card` is used in the template, the style file should use
+`.loc.card`, not just `.loc` </blockquote>
 
 
 ### Sub-elements
@@ -65,18 +65,18 @@ written as `<div class="nihongo">{{furigana:Japanese}}</div>` in the
 back template of a card.
 
 Then, different Japanese fonts can be selected on different computers
-by using <tt>.loc .nihongo{font-family:
-[IPAPMincho](http://ossipedia.ipa.go.jp/ipafont/index.html);}</tt> in
-one style file and <tt>.loc .nihongo{font-family:
-"[Moon font](http://cooltext.com/Download-Font-%E6%9C%88+Moon)";}</tt>
+by using <code>.loc .nihongo{font-family:
+[IPAPMincho](http://ossipedia.ipa.go.jp/ipafont/index.html);}</code> in
+one style file and <code>.loc .nihongo{font-family:
+"[Moon font](http://cooltext.com/Download-Font-%E6%9C%88+Moon)";}</code>
 in another.
 
 <blockquote class=nb>
-As the <tt>loc</tt> and <tt>card</tt> apply to the same object, the
-selector <tt>.loc.card</tt> contains <em>no</em> space. When setting
+As the `loc` and `card` apply to the same object, the
+selector `.loc.card` contains <em>no</em> space. When setting
 the style for a sub-element, a space <em>must</em> be added. For
 example, to change the style of the Japanese text, use <tt>.loc
-.nihongo</tt> with a space between the <tt>c</tt> and the <tt>.</tt>.
+.nihongo</tt> with a space between the `c` and the `.`.
 </blockquote>
 
 

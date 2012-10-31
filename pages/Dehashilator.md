@@ -16,7 +16,7 @@ collection. You *will* have to fix a few file names by hand.</blockquote>
 
 Up to version 1.1, Anki changed the names of media files added to
 their [MD5](http://en.wikipedia.org/wiki/MD5)
-[hashes](http://en.wikipedia.org/wiki/Cryptographic hash function).
+[hashes](http://en.wikipedia.org/wiki/Cryptographic_hash_function).
 That meant that you had directories full of file names like
 `66a6565b69edcb65e7a083a4df1f0900.png` or
 `2304355e4eb95f078b2565352f2b5413.mp3`, that bore no relation to the
@@ -55,7 +55,7 @@ time it had problems with several hash-like media in a single field.
 
 ## Notes
 
-This was written as a one-of fix-my-collection-once add-on. As such,
+This was written as a one-off fix-my-collection-once add-on. As such,
 with my personal collection fixed, i am not really interested in
 making this perfect. It will probably stay in its current, somewhat
 buggy, state. Others are welcome to do their own work or to send pull

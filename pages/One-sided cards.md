@@ -1,6 +1,6 @@
 title: One-sided cards
 id: oneside
-main_file: One-sided cards.py
+main_file: One-sided%20cards.py
 date: 2012-10-19
 tags: [review answer]
 type: addon

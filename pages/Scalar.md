@@ -51,10 +51,9 @@ file should be a help.
 ## “Correct answer was:”
 
 <figure style="width:410px;"><img
-src="images/compare_by_char.png" alt="Very close answer and
-lots of red.">
-<figcaption>Even though the reading was typed correctly there is a lot
-of red and extra text.</figcaption></figure>
+src="images/compare_by_char.png" alt="Very close answer and lots of red.">
+<figcaption>Even though the typed in answer is close to the correct
+one, there is a lot of red and extra text.</figcaption></figure>
 
 When this add-on is working, the “Correct answer
 was:” text is not shown at all. This is partly due to the way the

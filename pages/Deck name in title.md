@@ -1,6 +1,6 @@
 title: Deck name in title
 id: title
-main_file: Deck name in title.py
+main_file: Deck%20name%20in%20title.py
 status: working
 type: addon
 status_color: green
@@ -25,4 +25,3 @@ the source file:
 * show_subdeck: Whether to show the subdeck you have descended into
   during learning or only the deck you clicked on in the deck
   browser.
-

@@ -1,12 +1,12 @@
 title: Download audio
 id: dlaudio
-main_file: Download audio.py
+main_file: Download%20audio.py
 status: undocumented
 type: addon
 status_color: red
 status_text_color: white
 abstract: Automatically download audio from Google TTS and Japanesepod
-first_image: Downloaded audio.png
+first_image: Downloaded%20audio.png
 first_alt: Reviewing downloaded audio files.
 extra_jq_script: audio_tips.js
 
@@ -40,11 +40,21 @@ in, according to two rules:
 
 ### Japanesepod
 
-reading instead of Expression
+Downloading Japanese pronunciations from Japanesepod works a little
+bit different. The field must be set up in the way used by the
+Japanese support addon, that is, there should be a “<span class="qtbase
+  ignorecase">Reading</span>” field and an “Audio” or “Sound”
+field. The reading field must contain both the kanji and kana for
+the requested word, with the reading for the kanji in square
+brackets. For example as 「仮定[かてい]」, which will be automatically
+split into 「仮定」 and 「かてい」.
 
-### Change
+Alternative names for “Reading” are “Kana”, 「かな」and 「仮名」.
 
-in `downloadaudio/download.py`
+Also, when “Audio” is just a substring, that substring is replaced
+with “Reading”, not removed. For example, when you have a field
+“Japanese Audio”, you need another field “Japanese Reading”.
+
 
 ## Manual, note, side
 

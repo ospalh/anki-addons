@@ -1,6 +1,6 @@
 title: Play with mpg123
 id: playwithmpg
-main_file: Play with mpgNN.py
+main_file: Play%20with%20mpgNN.py
 type: addon
 status: obsolete
 status_color: red
@@ -17,5 +17,5 @@ even before the first playing is finished.
 The disadvantage is that
 when a card contains several audio files, they are played
 simultaneously, which is usually not what we want.
-The [Quick replay](Quick replay.html) add-on should fix
+The [Quick replay](Quick%20replay.html) add-on should fix
 this problem.

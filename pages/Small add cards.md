@@ -1,12 +1,12 @@
 title: Small add cards
 id: smalladd
-main_file: Small add cards.py
+main_file: Small%20add%20cards.py
 status: quick hack
 type: addon
 status_color: yellow
 status_text_color: black
 abstract: Another abandoned try to play everything.
-first_image: too small.png
+first_image: too%20small.png
 first_alt: The reason why there was a size limit in the first place.
 
 In the Google forum, there came up the question if there was a way to

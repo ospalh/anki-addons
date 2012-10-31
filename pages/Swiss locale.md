@@ -1,6 +1,6 @@
 title: Swiss locale
 id: swisslocale
-main_file: Swiss locale.py
+main_file: Swiss%20locale.py
 type: addon
 status: one-off, broken
 status_color: red

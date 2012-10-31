@@ -1,6 +1,6 @@
 title: Show colored stroke order diagrams
 id: csod
-main_file: Show colored stroke order diagram.py
+main_file: Show%20colored%20stroke%20order%20diagram.py
 status: early development
 type: addon
 status_color: red
@@ -10,7 +10,7 @@ first_image: palette_gimped.png
 first_alt: The idea is to pick the stroke colors from an image file.
 
 This is a work in progress that is intended to replace my
-[Kanji stroke color](Kanji stroke colour.html) add-on and possibly
+[Kanji stroke color](Kanji%20stroke%20colour.html) add-on and possibly
 coexist with [cayennes](http://cayennes.github.com)’
 [add-on](https://github.com/cayennes/kanji-colorize/tree/master/anki),
 this one used on desktop clients, cayennes’ on AnkiWeb and mobile

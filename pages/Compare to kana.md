@@ -1,6 +1,6 @@
 title: Compare to kana
 id: comparekana
-main_file: Compare to kana.py
+main_file: Compare%20to%20kana.py
 type: addon
 status: working
 status_color: green
@@ -34,7 +34,7 @@ and the field name contains “Reading”. Use `{{type:Reading}}` or
 ## “Correct answer was:”
 
 <figure style="width:410px;"><img
-src="images/compare full reading.png" alt="Correctly typed reading and
+src="images/compare%20full%20reading.png" alt="Correctly typed reading and
 lots of red.">
 <figcaption>Even though the reading was typed correctly there is a lot
 of red and extra text.</figcaption></figure>

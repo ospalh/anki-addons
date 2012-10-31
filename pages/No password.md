@@ -1,6 +1,6 @@
 title: No password
 id: nopw
-main_file: No password.py
+main_file: No%20password.py
 status: obsolete
 type: addon
 status_color: red
