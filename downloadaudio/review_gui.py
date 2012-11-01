@@ -78,30 +78,31 @@ class ReviewFiles(QDialog):
         self.list = files_list
         super(ReviewFiles, self).__init__()  # Cut-and-pasted
         self.buttons_groups = []
-        self.text_help = _(u"""Text used to retrieve audio.<br>
-(Mouse over the texts below to see further information.""")
-        self.play_help = u"Play the retrieved file."
-        self.play_old_help = _(u"""<p>Play the current content of the
- audio field. No button means the field is empty. Hovering over the
- button shows the current field contetn as text.""")
+        self.text_help = _(u"""<h4>Text used to retrieve audio.</h4>
+<p>Mouse over the texts below to see further information.</p>""")
+        self.play_help = u"<h4>Play the retrieved file.</h4>"
+        self.play_old_help = _(u"""<h4>Play the current content of the
+ audio field.</h4>
+<p>No button means the field is empty. Hovering over the button shows
+the current field content as text.</p> """)
         self.play_old_empty_line_help = _(u"The target field is empty.")
-        self.add_help_text_long = _(u"""Add the sound to the
-card.<br>This is the normal thing to select for a good download. (But
-you may want to select only one file in this column.)""")
+        self.add_help_text_long = _(u"""<h4>Add the sound to the card.</h4>
+<p>This is the normal thing to select for a good download.
+(You may want to select only one file in this column.)</p>""")
         self.add_help_text_short = _(u"Add this sound to the card")
-        self.keep_help_text_long = _(u"""Keep the file.<br> Keep this
-file in the media collection folder, but don’t add it to the
-card. (This means the file will show up as an unused medium and may be
-deleted during the unused media check.""")
+        self.keep_help_text_long = _(u"""<h4>Keep the file.</h4>
+<p>Keep this file in the media collection folder, but don’t add it to
+the card. (This means the file will show up as an unused medium and
+may be deleted during the unused media check.</p>""")
         self.keep_help_text_short = _(u"Keep this file")
-        self.delete_help_text_long = _(u"""Delete the file.<br>
-This is the normal thing to do with a file you don’t like.""")
+        self.delete_help_text_long = _(u"""<h4>Delete the file.</h4>
+<p>This is the normal thing to do with a file you don’t like.</p>""")
         self.delete_help_text_short = _(u"Delete this file")
-        self.blacklist_help_text_long = _(u"""Blacklist the file.<br>
+        self.blacklist_help_text_long = _(u"""<h4>Blacklist the file.</h4>
 Add an idetifier for this file to a blacklist. When this file is
 downloaded again, it will be silently dropped. This behaviour is
 useful for Japanesepod downloads. When your downloaded file tells you
-that they they are sorry, will add this soon &c., click on this.""")
+that they are sorry, will add this soon &c., click on this.""")
         self.blacklist_help_text_short = _(u"Blacklist this file")
         self.initUI()
 
