@@ -54,7 +54,9 @@ class ReviewFields(QDialog):
         language_help = _(u'''<h4>Language code.</h4>
 <p>This will be transmitted as part of the requst sent to Google
 TTS. Use a standard language code here. Using invalid values or codes
-of unsupported languages will result in no downloads. Do <em>not</em> use domain codes (E.g. <code>zh</code> rather than <code>ch</code> for Chinese.)</p>''')
+of unsupported languages will result in no downloads. Do <em>not</em>
+use domain codes (E.g. use <code>zh</code> rather than <code>ch</code>
+for Chinese.)</p>''')
         self.setWindowTitle(_(u'Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
