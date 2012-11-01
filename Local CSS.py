@@ -6,13 +6,6 @@
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 # Insipired by CSS Modify Style-Sheet input by DAThomas
 
-import os
-import re
-from anki.cards import Card
-from anki.consts import MODEL_STD
-from anki import hooks
-from aqt import mw
-
 """
 Load local CSS and add it to the cards.
 
@@ -22,12 +15,22 @@ Load the file 'user_style.css' from the user’s profile folder
 the style from the template.
 """
 
+import os
+import re
+from anki.cards import Card
+from anki.consts import MODEL_STD
+from anki import hooks
+from aqt import mw
 
-__version__ = '1.2.3'
+
+__version__ = '1.2.4'
 
 user_css_name = 'user_style.css'
+"""File name of the user's CSS"""
 css_encoding = 'utf-8'
+"""Encoding of the user's CSS file"""
 local_class = 'loc'
+"""Class added to all cards"""
 
 user_css = u''
 
@@ -64,14 +67,14 @@ def get_user_css():
     global user_css
     css_path = os.path.join(mw.pm.profileFolder(), user_css_name)
     try:
-        f = open(css_path, 'r')
-        user_css = unicode(f.read(), css_encoding)
-        f.close()
-    except:
-        user_css = u''
+        with open(css_path, 'r') as f:
+            user_css = unicode(f.read(), css_encoding)
+    except IOError:
+        pass
 
 
 def localized_card_css(self):
+    """Set the css for a card"""
     return_css = u''
     if user_css:
         return_css = '<style>%s</style>' % user_css

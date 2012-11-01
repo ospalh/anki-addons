@@ -23,8 +23,8 @@ except ImportError:
 from aqt import mw
 
 blacklist_hashes = None
-bl_file_path = os.path.join(mw.pm.addonFolder(), 'downloadaudio',
-                            'blacklist.json')
+bl_file_path = os.path.join(
+    mw.pm.addonFolder(), 'downloadaudio', 'blacklist.json')
 
 
 def get_hash(file_name):
