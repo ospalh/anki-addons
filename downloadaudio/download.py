@@ -6,18 +6,20 @@
 
 import re
 import os
-from aqt import mw
-from aqt.utils import tooltip
 from PyQt4.QtGui import QAction, QIcon, QMenu
 from PyQt4.QtCore import SIGNAL
 
-from google_tts import get_word_from_google
-from japanesepod import get_word_from_jpod
-from review_gui import store_or_blacklist
-from update_gui import update_data
-from language import get_language_code
-from anki.utils import stripHTML
+from aqt import mw
+from aqt.utils import tooltip
+from anki.hooks import addHook
 from anki.template import furigana
+from anki.utils import stripHTML
+
+from .google_tts import get_word_from_google
+from .japanesepod import get_word_from_jpod
+from .language import get_language_code
+from .review_gui import store_or_blacklist
+from .update_gui import update_data
 
 # debug:
 #from aqt.utils import showText
@@ -245,7 +247,8 @@ def download_fields(note, general_data, japanese_data, language=None):
             dl_fname, dl_hash, extras = get_word_from_jpod(kanji, kana)
         except ValueError as ve:
             if "blacklist" in str(ve):
-                print 'Caught blacklist'
+                # print 'Caught blacklist'
+                pass
             continue
         except:
             continue
@@ -286,18 +289,21 @@ def download_for_side():
                     get_language_code(card))
 
 
-def download_for_note(ask_user=False):
+def download_for_note(note=False, ask_user=False):
     """Download for all audio on the current card."""
-    card = mw.reviewer.card
-    note = card.note()
+    card = None
     if not note:
-        return
+        try:
+            card = mw.reviewer.card
+            note = card.note()
+        except:
+            return
     general_field_data = get_note_fields(note)
     if "japanese" in note.model()['name'].lower():
         japanese_field_data = get_note_fields(note, japanese=True)
     else:
         japanese_field_data = []
-    language_code = get_language_code(card)
+    language_code = get_language_code(card=card, note=note)
     if ask_user:
         try:
             general_field_data, japanese_field_data, language_code = \
@@ -329,6 +335,22 @@ def download_on():
     mw.note_download_action.setEnabled(True)
     mw.side_download_action.setEnabled(True)
     mw.manual_download_action.setEnabled(True)
+
+
+def editor_download_editing(self):
+    self.saveNow()
+    download_for_note(ask_user=True, note=self.note)
+    self.loadNote()
+
+
+def editor_add_download_editing_button(self):
+    """Add the download button to the editor"""
+    dl_button = self._addButton("download_audio",
+                                lambda self=self:
+                                    editor_download_editing(self),
+                                tip=u"Download audio...", text=" ")
+    dl_button.setIcon(QIcon(os.path.join(icons_dir,
+                                         'download_note_audio.png')))
 
 
 # Either reuse an edit-media sub-menu created by another add-on
@@ -375,3 +397,6 @@ mw.edit_media_submenu.addAction(mw.manual_download_action)
 # Todo: switch off at start and on when we get to reviewing.
 # # And start with the acitons off.
 # download_off()
+
+
+addHook("setupEditorButtons", editor_add_download_editing_button)
