@@ -51,10 +51,10 @@ class ReviewFields(QDialog):
         self.initUI()
 
     def initUI(self):
-        language_help = _(u'''<p>This will be transmitted as part of the
-requst sent to Google TTS. Use a standard language code here. Using
-invalid values or codes of unsupported languages will result in no
-downloads.</p>''')
+        language_help = _(u'''<h4>Language code.</h4>
+<p>This will be transmitted as part of the requst sent to Google
+TTS. Use a standard language code here. Using invalid values or codes
+of unsupported languages will result in no downloads. Do <em>not</em> use domain codes (E.g. <code>zh</code> rather than <code>ch</code> for Chinese.)</p>''')
         self.setWindowTitle(_(u'Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
@@ -101,8 +101,9 @@ downloads.</p>''')
             gf_layout.addWidget(label, num + 1, 0)
             ledit = QLineEdit(text)
             ledit.setToolTip(
-                _(u'''<p>Text of the request. Edit this as appropriate.
-Clear it to not download anything for this field.</p>'''))
+                _(u'''<h4>Text of the request.</h4>
+<p>Edit this as appropriate.  Clear it to not download anything for
+this field.</p>'''))
             gf_layout.addWidget(ledit, num + 1, 1)
             self.general_text_lineedits.append(ledit)
         layout.addLayout(gf_layout)
@@ -118,16 +119,16 @@ Clear it to not download anything for this field.</p>'''))
             label.setToolTip(_(u'Source of the request text'))
             jf_layout.addWidget(label, num + 1, 0)
             kanji_edit = QLineEdit(kanji)
-            kanji_edit.setToolTip(
-                _(u'''<p>Kanji of the request. Edit this as appropriate.
-Clear it to not download anything for this field.
-For pure kana words, enter (or keep) the kana here.</p>'''))
+            kanji_edit.setToolTip(_(u'''<h4>Kanji of the request.</h4>
+<p>Edit this as appropriate.  Clear it to not download anything for
+this field.  For pure kana words, enter (or keep) the kana here.</p>'''))
             jf_layout.addWidget(kanji_edit, num + 1, 1)
             self.kanji_lineedits.append(kanji_edit)
             kana_edit = QLineEdit(kana)
             kana_edit.setToolTip(
-                _(u'''<p>Kana of the request. Edit this as appropriate.
-For pure kana words, enter (or keep) the kana here or clear this field.</p>'''))
+                _(u'''<h4>Kana of the request.</h4>
+<p>Edit this as appropriate.  For pure kana words, enter (or keep) the
+kana here or clear this field.</p>'''))
             jf_layout.addWidget(kana_edit, num + 1, 2)
             self.kana_lineedits.append(kana_edit)
         layout.addLayout(jf_layout)
