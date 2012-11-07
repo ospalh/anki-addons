@@ -56,9 +56,14 @@ manual.
 ## versions of the field names. When these lists contain upper-case
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
-expression_fields = ['expression', 'front', 'back']
+expression_fields = ['expression', 'hanzi', 'front', 'back']
+"""Fields we get our Google TTS download text from."""
+
 japanese_reading_keys = ["reading", "kana", u'かな', u'仮名']
+"""Fields we get our Japanesepod download text from."""
+
 audio_field_keys = ["audio", "sound"]
+"""Fields we put our downloaded sounds in."""
 
 
 ## End configuration area
