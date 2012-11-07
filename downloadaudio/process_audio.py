@@ -27,12 +27,12 @@ from  exists import free_media_name
 
 ### Use a format here that sox can write and that Anki can play. Only
 ### formats that your Anki can read are useful. If in doubt, use
-### ".wav".(Typically sox can write about any audio file format, or
+### ".wav". (Typically sox can write about any audio file format, or
 ### any audio file format but mp3.)
 ## Small, lossy, otherwise nice but may not work with your Anki
-output_format = ".ogg"
-## Save, but large files.
-# output_format = ".wav"
+# output_format = ".ogg"
+## Safe, but large files.
+output_format = ".wav"
 ## Lossy. Should work with Anki. May not work with your sox
 # output_format = ".mp3"
 ## Not quite as big as .wav, lossless, rather nice but may not work
