@@ -77,7 +77,6 @@ def store_or_blacklist(note, retrieved_data):
             mw.reviewer.replayAudio()
 
 
-
 def remove_all_files(files_etc):
     for source, dest, text, dl_fname, dl_hash, extras\
             in files_etc:
