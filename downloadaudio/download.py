@@ -245,7 +245,8 @@ def download_fields(note, general_data, japanese_data, language=None):
             dl_fname, dl_hash, extras = get_word_from_jpod(kanji, kana)
         except ValueError as ve:
             if "blacklist" in str(ve):
-                print 'Caught blacklist'
+                # print 'Caught blacklist'
+                pass
             continue
         except:
             continue
