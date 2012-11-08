@@ -17,4 +17,18 @@ $(document).ready(function(){
 	}
     });
 
+
+    $('#fourth').qtip({
+        content: {
+            text:'A fourth way is to change the default_audio_language code ' +
+                'in the file "downloadaudio/language.py" in the addons folder.',
+        },
+        style: {
+            classes: 'ui-tooltip-rounded ui-tooltip-shadow',
+        },
+        show: {
+	    solo: true
+	}
+    });
+
 });
