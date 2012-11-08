@@ -146,22 +146,13 @@ available through the megaphone button above the field edit list.
 
 
 
-### Review
+## Review
 
-#### Japanesepod
+### Japanesepod
 
 Blacklist
 
 
-
-## Language
-
-There are up to four ways the download language is determined
-
-* For manual downloads, the language code can be set in the dialog.
-* The language code can be set as a tag on individual cards
-* ... settings ...
-* ... default ...
 
 ## Google TTS
 
@@ -192,3 +183,5 @@ While this add-on works as it is, a few things would be nice.
    word doesn’t actually appear on the card. While it is no big
    problem to complete the word in the “Manual audio” dialog, the
    add-on could automatically add the 「る」 for 一段動詞.
+
+This will most likely not by implemented any time soon.
