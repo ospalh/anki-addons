@@ -18,6 +18,7 @@ from anki.utils import stripHTML
 from .google_tts import get_word_from_google
 from .japanesepod import get_word_from_jpod
 from .language import get_language_code
+from .mw import get_words_from_mw
 from .review_gui import store_or_blacklist
 from .uniqify import uniqify_list
 from .update_gui import update_data
@@ -58,7 +59,7 @@ manual.
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
 expression_fields = ['expression', 'hanzi', 'front', 'back']
-"""Fields we get our Google TTS download text from."""
+"""Fields we get our Google TTS or MW download text from."""
 
 japanese_reading_keys = ["reading", "kana", u'かな', u'仮名']
 """Fields we get our Japanesepod download text from."""
@@ -231,6 +232,7 @@ def download_fields(note, general_data, japanese_data, language=None):
         if not text:
             # EAFP code. Needed for testing. Keep it.
             continue
+        # Get from Google TTS
         try:
             dl_fname, dl_hash, extras = get_word_from_google(text, language)
         except:
@@ -238,6 +240,18 @@ def download_fields(note, general_data, japanese_data, language=None):
         else:
             retrieved_files_list.append(
                 (source, dest, text, dl_fname, dl_hash, extras))
+        # Get from mw, only English.
+        if language.startswith('en'):
+            try:
+                mw_list = get_words_from_mw(text)
+            except:
+                raise
+            else:
+                # Use more readable rather than efficent code:
+                for dl_fname, dl_hash, extras in mw_list:
+                    retrieved_files_list.append(
+                        (source, dest, text, dl_fname, dl_hash, extras))
+    # New loop, get from Japanesepod
     for source, dest, kanji, kana in japanese_data:
         if not kanji and not kana:
             continue
