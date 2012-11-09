@@ -245,9 +245,8 @@ def download_fields(note, general_data, japanese_data, language=None):
             try:
                 mw_list = get_words_from_mw(text)
             except:
-                raise
+                pass
             else:
-                # Use more readable rather than efficent code:
                 for dl_fname, dl_hash, extras in mw_list:
                     retrieved_files_list.append(
                         (source, dest, text, dl_fname, dl_hash, extras))
