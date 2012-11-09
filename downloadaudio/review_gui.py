@@ -60,6 +60,21 @@ def store_or_blacklist(note, retrieved_data):
             add_black_hash(dl_hash)
     if items_added:
         note.flush()
+        # We have to do different things here, for download during
+        # review, we should reload the card and replay. When we are in
+        # the add dialog, we do a field update there.
+        rnote = None
+        try:
+            rnote = mw.reviewer.card.note()
+        except:
+            # Could not get the note of the reviewer's card. Probably
+            # not reviewing at all.
+            return
+        if note == rnote:
+            # The note we have is the one we were reviewing, so,
+            # reload and replay
+            mw.reviewer.card.load()
+            mw.reviewer.replayAudio()
 
 
 def remove_all_files(files_etc):

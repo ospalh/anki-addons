@@ -250,7 +250,7 @@ def dehashilate():
                     try:
                         os.rename(src, dst)
                     except OSError:
-                        print u'Problem movivg {0} → {1}\n'.format(src, dst)
+                        # print u'Problem movivg {0} → {1}\n'.format(src, dst)
                         bad_mv_text += u'{0} → {1}\n'.format(src, dst)
                     else:
                         new_names_dict[old_name] = new_name

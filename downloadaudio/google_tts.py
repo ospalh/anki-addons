@@ -7,7 +7,7 @@
 
 
 '''
-Download Japanese pronunciations from Japanesepod
+Download pronunciations from GoogleTTS
 '''
 
 import tempfile
