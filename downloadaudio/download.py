@@ -19,6 +19,7 @@ from .google_tts import get_word_from_google
 from .japanesepod import get_word_from_jpod
 from .language import get_language_code
 from .review_gui import store_or_blacklist
+from .uniqify import uniqify_list
 from .update_gui import update_data
 
 # debug:
@@ -72,14 +73,6 @@ icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
 # Change this at your own risk.
 field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
-
-
-def uniqify_list(seq):
-    """Return a copy of the list with every element appearing only once."""
-    # From http://www.peterbe.com/plog/uniqifiers-benchmark
-    no_dupes = []
-    [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
-    return no_dupes
 
 
 def field_data(note, fname, readings=False):
