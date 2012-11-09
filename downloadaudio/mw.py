@@ -68,14 +68,17 @@ def get_words_from_mw(source):
         onclick_string = input_tag['onclick']
         # Now cut off the bits on the left and right that should be
         # there. If not, this will fail. (Most likely the split.)
-        # (The idea for this downloader came from the "English helper"
-        # (for Chinese people) Anki 1 plugin. That plugin used res for
-        # this processing, but those fail with words that contain an
-        # apostrophe.)
         onclick_string = onclick_string.lstrip('return au(').rstrip(');')
         mw_audio_fn_base, mw_audio_word = onclick_string.split(', ')
         mw_audio_fn_base = mw_audio_fn_base.lstrip("'").rstrip("'")
         mw_audio_word = mw_audio_word.lstrip("'").rstrip("'")
+        # (The idea for this downloader came from the "English helper"
+        # (for Chinese people) Anki 1 plugin. That plugin used res for
+        # this processing, but those fail with words that contain an
+        # apostrophe.)
+        # So add a special case: strip the backslash from the words
+        # with apostrope
+        mw_audio_word = mw_audio_word.replace(r"\'", "'")
         # There may be a meaning number, as in "1row" "3row" in the
         # title..
         match = re.search(
