@@ -18,7 +18,9 @@ from anki.utils import stripHTML
 from .google_tts import get_word_from_google
 from .japanesepod import get_word_from_jpod
 from .language import get_language_code
+from .mw import get_words_from_mw
 from .review_gui import store_or_blacklist
+from .uniqify import uniqify_list
 from .update_gui import update_data
 
 # debug:
@@ -72,14 +74,6 @@ icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
 # Change this at your own risk.
 field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
-
-
-def uniqify_list(seq):
-    """Return a copy of the list with every element appearing only once."""
-    # From http://www.peterbe.com/plog/uniqifiers-benchmark
-    no_dupes = []
-    [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
-    return no_dupes
 
 
 def field_data(note, fname, readings=False):
@@ -238,6 +232,7 @@ def download_fields(note, general_data, japanese_data, language=None):
         if not text:
             # EAFP code. Needed for testing. Keep it.
             continue
+        # Get from Google TTS
         try:
             dl_fname, dl_hash, extras = get_word_from_google(text, language)
         except:
@@ -245,6 +240,17 @@ def download_fields(note, general_data, japanese_data, language=None):
         else:
             retrieved_files_list.append(
                 (source, dest, text, dl_fname, dl_hash, extras))
+        # Get from mw, only English.
+        if language.startswith('en'):
+            try:
+                mw_list = get_words_from_mw(text)
+            except:
+                raise
+            else:
+                # Use more readable rather than efficent code:
+                for dl_fname, dl_hash, extras in mw_list:
+                    retrieved_files_list.append(
+                        (source, dest, text, dl_fname, dl_hash, extras))
     for source, dest, kanji, kana in japanese_data:
         if not kanji and not kana:
             continue
