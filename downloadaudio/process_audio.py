@@ -82,12 +82,7 @@ def process_audio(temp_file_name, base_name, suffix,
     temp_out_file_name = tof.name
     tof.close()
     sox_signal = sox_in_file.get_signal()
-    # We want to pull up mono to stereo, but not downmix more-channel
-    # stuff to two channels.  Looks like we have to change the signal
-    # as well as use the channels effect.
-    in_channels = sox_signal.get_signalinfo()['channels']
-    if 1 == in_channels:
-        sox_signal.set_param(channels=2)
+    # (Removed the upmixing stuff.)
     sox_out_file = pysox.CSoxStream(temp_out_file_name, 'w', sox_signal)
     sox_chain = pysox.CEffectsChain(sox_in_file, sox_out_file)
     sox_chain.add_effect(
@@ -102,13 +97,7 @@ def process_audio(temp_file_name, base_name, suffix,
                       [b'1', b'0', '{}%'.format(silence_end_percent)]))
     sox_chain.add_effect(pysox.CEffect('reverse', []))
     sox_chain.add_effect(pysox.CEffect('gain', [b'-n']))
-    if 1 == in_channels:
-        # Work around what appears a bug in pysox. Looks like we need
-        # to duplicate the samples. And to do that, we have to pretend
-        # to go from 2 channels to 4 channels. In reality we go from 1
-        # channel to 2. (pysox's development status is alpha, so i'm
-        # not complaining)
-        sox_chain.add_effect(pysox.CEffect('channels', [b'4']))
+    # (Removed the upmixing stuff)
     sox_chain.flow_effects()
     sox_out_file.close()
     os.remove(temp_file_name)
@@ -125,10 +114,8 @@ def unmunge_to_mediafile(temp_file_name, media_base_name, suffix):
     """
     mdir = mw.col.media.dir()
     media_file_name = free_media_name(media_base_name, suffix)
-    tfile = open(temp_file_name, "rb")
-    mfile = open(os.path.join(mdir, media_file_name), 'wb')
-    mfile.write(tfile.read())
-    tfile.close()
-    mfile.close()
+    with open(temp_file_name, "rb") as tfile:
+        with open(os.path.join(mdir, media_file_name), 'wb') as mfile:
+            mfile.write(tfile.read())
     os.remove(temp_file_name)
     return media_file_name

@@ -4,6 +4,7 @@
 
 """Return a copy of the list with every element appearing only once."""
 
+
 def uniqify_list(seq):
     """Return a copy of the list with every element appearing only once."""
     # From http://www.peterbe.com/plog/uniqifiers-benchmark
