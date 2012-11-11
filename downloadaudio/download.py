@@ -6,18 +6,22 @@
 
 import re
 import os
-from aqt import mw
-from aqt.utils import tooltip
 from PyQt4.QtGui import QAction, QIcon, QMenu
 from PyQt4.QtCore import SIGNAL
 
-from google_tts import get_word_from_google
-from japanesepod import get_word_from_jpod
-from review_gui import store_or_blacklist
-from update_gui import update_data
-from language import get_language_code
-from anki.utils import stripHTML
+from aqt import mw
+from aqt.utils import tooltip
+from anki.hooks import addHook
 from anki.template import furigana
+from anki.utils import stripHTML
+
+from .google_tts import get_word_from_google
+from .japanesepod import get_word_from_jpod
+from .language import get_language_code
+from .mw import get_words_from_mw
+from .review_gui import store_or_blacklist
+from .uniqify import uniqify_list
+from .update_gui import update_data
 
 # debug:
 #from aqt.utils import showText
@@ -54,9 +58,14 @@ manual.
 ## versions of the field names. When these lists contain upper-case
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
-expression_fields = ['expression', 'front', 'back']
+expression_fields = ['expression', 'hanzi', 'front', 'back']
+"""Fields we get our Google TTS download text from."""
+
 japanese_reading_keys = ["reading", "kana", u'かな', u'仮名']
+"""Fields we get our Japanesepod download text from."""
+
 audio_field_keys = ["audio", "sound"]
+"""Fields we put our downloaded sounds in."""
 
 
 ## End configuration area
@@ -65,14 +74,6 @@ icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
 # Change this at your own risk.
 field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
-
-
-def uniqify_list(seq):
-    """Return a copy of the list with every element appearing only once."""
-    # From http://www.peterbe.com/plog/uniqifiers-benchmark
-    no_dupes = []
-    [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
-    return no_dupes
 
 
 def field_data(note, fname, readings=False):
@@ -231,6 +232,7 @@ def download_fields(note, general_data, japanese_data, language=None):
         if not text:
             # EAFP code. Needed for testing. Keep it.
             continue
+        # Get from Google TTS
         try:
             dl_fname, dl_hash, extras = get_word_from_google(text, language)
         except:
@@ -238,6 +240,16 @@ def download_fields(note, general_data, japanese_data, language=None):
         else:
             retrieved_files_list.append(
                 (source, dest, text, dl_fname, dl_hash, extras))
+        # Get from mw, only English.
+        if language.startswith('en'):
+            try:
+                mw_list = get_words_from_mw(text)
+            except:
+                pass
+            else:
+                for dl_fname, dl_hash, extras in mw_list:
+                    retrieved_files_list.append(
+                        (source, dest, text, dl_fname, dl_hash, extras))
     for source, dest, kanji, kana in japanese_data:
         if not kanji and not kana:
             continue
@@ -245,7 +257,8 @@ def download_fields(note, general_data, japanese_data, language=None):
             dl_fname, dl_hash, extras = get_word_from_jpod(kanji, kana)
         except ValueError as ve:
             if "blacklist" in str(ve):
-                print 'Caught blacklist'
+                # print 'Caught blacklist'
+                pass
             continue
         except:
             continue
@@ -286,18 +299,21 @@ def download_for_side():
                     get_language_code(card))
 
 
-def download_for_note(ask_user=False):
+def download_for_note(note=False, ask_user=False):
     """Download for all audio on the current card."""
-    card = mw.reviewer.card
-    note = card.note()
+    card = None
     if not note:
-        return
+        try:
+            card = mw.reviewer.card
+            note = card.note()
+        except:
+            return
     general_field_data = get_note_fields(note)
     if "japanese" in note.model()['name'].lower():
         japanese_field_data = get_note_fields(note, japanese=True)
     else:
         japanese_field_data = []
-    language_code = get_language_code(card)
+    language_code = get_language_code(card=card, note=note)
     if ask_user:
         try:
             general_field_data, japanese_field_data, language_code = \
@@ -329,6 +345,22 @@ def download_on():
     mw.note_download_action.setEnabled(True)
     mw.side_download_action.setEnabled(True)
     mw.manual_download_action.setEnabled(True)
+
+
+def editor_download_editing(self):
+    self.saveNow()
+    download_for_note(ask_user=True, note=self.note)
+    self.loadNote()
+
+
+def editor_add_download_editing_button(self):
+    """Add the download button to the editor"""
+    dl_button = self._addButton("download_audio",
+                                lambda self=self:
+                                    editor_download_editing(self),
+                                tip=u"Download audio...", text=" ")
+    dl_button.setIcon(QIcon(os.path.join(icons_dir,
+                                         'download_note_audio.png')))
 
 
 # Either reuse an edit-media sub-menu created by another add-on
@@ -375,3 +407,6 @@ mw.edit_media_submenu.addAction(mw.manual_download_action)
 # Todo: switch off at start and on when we get to reviewing.
 # # And start with the acitons off.
 # download_off()
+
+
+addHook("setupEditorButtons", editor_add_download_editing_button)

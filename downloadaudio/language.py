@@ -26,14 +26,16 @@ learning Japanese.
 al_code_code = 'addon_audio_download_language'
 
 
-def get_language_code(card=None):
+def get_language_code(card=None, note=None):
     """
     Return a language code.
     """
-    if not card:
-        return default_audio_language_code
+    if not note:
+        if not card:
+            return default_audio_language_code
+        note = card.note()
     # First, look at the tags
-    for tag in card.note().tags:
+    for tag in note.tags:
         try:
             return re.search('^lang_([a-z]{2,3})$', tag,
                              flags=re.IGNORECASE).group(1).lower()
@@ -41,6 +43,7 @@ def get_language_code(card=None):
             continue
     # Then, look at the deck conf
     try:
+        # It is possible we don't have a card. EAFP.
         return mw.col.decks.confForDid(card.did)[
             'addon_audio_download_language']
     except:
