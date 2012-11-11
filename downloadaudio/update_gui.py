@@ -127,8 +127,7 @@ this field.  For pure kana words, enter (or keep) the kana here.</p>'''))
             jf_layout.addWidget(kanji_edit, num + 1, 1)
             self.kanji_lineedits.append(kanji_edit)
             kana_edit = QLineEdit(kana)
-            kana_edit.setToolTip(
-                _(u'''<h4>Kana of the request.</h4>
+            kana_edit.setToolTip(_(u'''<h4>Kana of the request.</h4>
 <p>Edit this as appropriate.  For pure kana words, enter (or keep) the
 kana here or clear this field.</p>'''))
             jf_layout.addWidget(kana_edit, num + 1, 2)
