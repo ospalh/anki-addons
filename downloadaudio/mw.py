@@ -132,10 +132,10 @@ def get_word_hash_pair(base_name, source):
     audio_response = urllib2.urlopen(audio_request)
     if 200 != audio_response.code:
         raise ValueError(str(audio_response.code) + ': ' + audio_response.msg)
-    temp_file = tempfile.NamedTemporaryFile(
-        delete=False, suffix=download_file_extension)
-    temp_file.write(audio_response.read())
-    temp_file.close()
+    with tempfile.NamedTemporaryFile(delete=False,
+                                     suffix=download_file_extension) \
+                                     as temp_file:
+        temp_file.write(audio_response.read())
     try:
         file_hash = get_hash(temp_file.name)
     except ValueError:

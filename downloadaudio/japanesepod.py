@@ -40,10 +40,10 @@ def get_word_from_jpod(kanji, kana):
     response = urllib2.urlopen(request)
     if 200 != response.code:
         raise ValueError(str(response.code) + ': ' + response.msg)
-    temp_file = tempfile.NamedTemporaryFile(delete=False,
-                                            suffix=download_file_extension)
-    temp_file.write(response.read())
-    temp_file.close()
+    with tempfile.NamedTemporaryFile(delete=False,
+                                     suffix=download_file_extension) \
+                                     as temp_file:
+        temp_file.write(response.read())
     try:
         file_hash = get_hash(temp_file.name)
     except ValueError:
