@@ -20,6 +20,7 @@ from BeautifulSoup import BeautifulSoup as soup
 
 from .process_audio import process_audio, unmunge_to_mediafile
 from .blacklist import get_hash
+from .siteicon import get_icon
 
 download_file_extension = u'.wav'
 
@@ -29,6 +30,9 @@ url_mw_popup = 'http://www.merriam-webster.com/audio.php?'
 """URL for the play audio pop-up"""
 
 user_agent_string = 'Mozilla/5.0'
+
+site_icon = None
+"""The sites's favicon. Reloaded on first download after program start."""
 
 
 def get_words_from_mw(source):
@@ -43,6 +47,7 @@ def get_words_from_mw(source):
     """
     if not source:
         raise ValueError('Nothing to download')
+    maybe_get_icon()
     # The download has to be done in steps:
     # First, get the page for the definitions
     word_page_url = url_mw_word + urllib.quote(source.encode('utf-8'))
@@ -117,7 +122,7 @@ def get_words_from_mw(source):
             word_file, word_hash = get_word_hash_pair(mw_fn, source)
         except ValueError:
             continue
-        words_tuple_list.append((word_file, word_hash, extras))
+        words_tuple_list.append((word_file, word_hash, extras, site_icon))
     return words_tuple_list
 
 
@@ -183,3 +188,11 @@ def join_strings(a, b):
     l = [i for i in l if i]
     if l:
         return ", ".join(l)
+
+
+def maybe_get_icon():
+    """Get the site icon when we haven't got it already."""
+    global site_icon
+    if site_icon:
+        return
+    site_icon = get_icon(url_mw_word, user_agent_string)

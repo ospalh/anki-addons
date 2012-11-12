@@ -234,12 +234,13 @@ def download_fields(note, general_data, japanese_data, language=None):
             continue
         # Get from Google TTS
         try:
-            dl_fname, dl_hash, extras = get_word_from_google(text, language)
+            dl_fname, dl_hash, extras, icon = get_word_from_google(
+                text, language)
         except:
             pass
         else:
             retrieved_files_list.append(
-                (source, dest, text, dl_fname, dl_hash, extras))
+                (source, dest, text, dl_fname, dl_hash, extras, icon))
         # Get from mw, only English.
         if language.startswith('en'):
             try:
@@ -247,15 +248,15 @@ def download_fields(note, general_data, japanese_data, language=None):
             except:
                 pass
             else:
-                for dl_fname, dl_hash, extras in mw_list:
+                for dl_fname, dl_hash, extras, icon in mw_list:
                     retrieved_files_list.append(
-                        (source, dest, text, dl_fname, dl_hash, extras))
+                        (source, dest, text, dl_fname, dl_hash, extras, icon))
     # New loop, get from Japanesepod
     for source, dest, kanji, kana in japanese_data:
         if not kanji and not kana:
             continue
         try:
-            dl_fname, dl_hash, extras = get_word_from_jpod(kanji, kana)
+            dl_fname, dl_hash, extras, icon = get_word_from_jpod(kanji, kana)
         except ValueError as ve:
             if "blacklist" in str(ve):
                 # print 'Caught blacklist'
@@ -269,7 +270,7 @@ def download_fields(note, general_data, japanese_data, language=None):
         else:
             text = kanji
         retrieved_files_list.append(
-            (source, dest, text, dl_fname, dl_hash, extras))
+            (source, dest, text, dl_fname, dl_hash, extras, icon))
     try:
         store_or_blacklist(note, retrieved_files_list)
     except ValueError as ve:
