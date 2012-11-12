@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """Get a site icon as a QIcon."""
 
