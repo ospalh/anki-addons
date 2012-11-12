@@ -34,7 +34,9 @@ def get_icon(url, agent=None):
         return get_favicon(url, agent)
     # The url may be absolute or relative.
     if not urlparse.urlsplit(icon_url).netloc:
-        icon_url = urllib.quote(icon_url.encode('utf-8'))
+        icon_url = urlparse.urljoin(
+            url, urllib.quote(icon_url.encode('utf-8')))
+    print icon_url
     icon_request = urllib2.Request(icon_url)
     if agent:
         icon_request.add_header('User-agent', agent)
