@@ -34,12 +34,15 @@ user_agent_string = 'Mozilla/5.0'
 site_icon = None
 """The sites's favicon. Reloaded on first download after program start."""
 
+services = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
+"""Mapping of languages to "services", that is, lookup directions."""
 
-def get_words_from_mw(source):
+
+def get_words_from_beolingus(source):
     """
-    Get pronunciations of a word from Merriam-Webster.
+    Get pronunciations of a word from BeoLingus
 
-    Look up an English word at merriam-webster.com, look for
+    Look up a English word at merriam-webster.com, look for
     pronunciations in the page and get audio files for those.
 
     There may be more than one pronunciation (eg row: \ˈrō\ and
