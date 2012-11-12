@@ -1,9 +1,9 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2012 Roland Sieker, ospalh@gmail.com
-# Inspiration and source of the URL: Tymon Warecki
 #
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 
 '''
