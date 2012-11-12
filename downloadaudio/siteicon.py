@@ -11,8 +11,8 @@ from BeautifulSoup import BeautifulSoup as soup
 from PyQt4.QtGui import QImage, QPixmap
 from PyQt4.QtCore import Qt
 
-
 icon_size = 20
+
 
 def get_icon(url, agent=None):
     """
@@ -32,8 +32,10 @@ def get_icon(url, agent=None):
         icon_url = page_soup.find(name='link', attrs={'rel': 'icon'})['href']
     except (TypeError, KeyError):
         return get_favicon(url, agent)
-    icon_url = urllib.quote(icon_url.encode('utf-8'))
-    icon_request = urllib2.Request(urlparse.urljoin(url, icon_url))
+    # The url may be absolute or relative.
+    if not urlparse.urlsplit(icon_url).netloc:
+        icon_url = urllib.quote(icon_url.encode('utf-8'))
+    icon_request = urllib2.Request(icon_url)
     if agent:
         icon_request.add_header('User-agent', agent)
     icon_response = urllib2.urlopen(icon_request)
