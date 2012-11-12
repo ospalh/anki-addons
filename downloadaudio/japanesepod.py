@@ -11,26 +11,29 @@ Download Japanese pronunciations from Japanesepod
 '''
 
 
+import os
 import tempfile
 import urllib
 import urllib2
-import os
 
-from process_audio import process_audio, unmunge_to_mediafile
-from blacklist import get_hash
+from .blacklist import get_hash
+from .process_audio import process_audio, unmunge_to_mediafile
+from .siteicon import get_icon
 
 download_file_extension = u'.mp3'
 
 url_jdict = \
     'http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?'
-
-# Code
+icon_url = "http://www.japanesepod101.com/"
+site_icon = None
+"""The sites's favicon. Reloaded on first download after program start."""
 
 
 def get_word_from_jpod(kanji, kana):
     """
     Download audio from kanji and kana from japanesepod.
     """
+    maybe_get_icon()
     base_name = build_base_name(kanji, kana)
     get_url = build_query_url(kanji, kana)
     # This may throw an exception
@@ -54,12 +57,12 @@ def get_word_from_jpod(kanji, kana):
     try:
         return process_audio(temp_file.name, base_name,
                              download_file_extension),\
-            file_hash, extras
+            file_hash, extras, site_icon
     except:
         # Most likely case when we get here: no pysox
         return unmunge_to_mediafile(temp_file.name, base_name,
                                     download_file_extension),\
-            file_hash, extras
+            file_hash, extras, site_icon
 
 
 def build_query_url(kanji, kana):
@@ -77,3 +80,11 @@ def build_base_name(kanji, kana):
     if kana:
         base_name += u'_' + kana
     return base_name
+
+
+def maybe_get_icon():
+    """Get the site icon when we haven't got it already."""
+    global site_icon
+    if site_icon:
+        return
+    site_icon = get_icon(icon_url)
