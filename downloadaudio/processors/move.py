@@ -11,6 +11,10 @@ from .exists import free_media_name
 
 class AudioMover(AudioProcessor):
 
+    def __init__(self):
+        # Just pro forma
+        AudioProcessor.__init__(self)
+
     def process_and_move(self, in_name, base_name):
         """
         Copy content of temp_file_name to a file in the media directory.

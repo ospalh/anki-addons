@@ -3,41 +3,29 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
-from aqt import mw
-import os
 import tempfile
+import pysox
+import pydub
 
-# IAR. Variables before imports. The packages we import are rather
-# obscure. Don't fail when they aren't there.
-sox_fail = None
-pydub_fail = None
-
-try:
-    import pysox
-except ImportError as ie:
-    sox_fail = ie
-
-try:
-    from pydub import AudioSegment
-except ImportError as ie:
-    pydub_fail = ie
+from .exists import free_media_name
 
 
-from  exists import free_media_name
+class AudioMover(AudioProcessor):
 
-### Use a format here that sox can write and that Anki can play. Only
-### formats that your Anki can read are useful. If in doubt, use
-### ".wav". (Typically sox can write about any audio file format, or
-### any audio file format but mp3.)
-## Small, lossy, otherwise nice but may not work with your Anki
-# output_format = ".ogg"
-## Safe, but large files.
-output_format = ".wav"
-## Lossy. Should work with Anki. May not work with your sox
-# output_format = ".mp3"
-## Not quite as big as .wav, lossless, rather nice but may not work
-## with your Anki
-# output_format = ".flac"
+    def __init__(self):
+        AudioProcessor.__init__(self)
+        self.output_format = ".flac"
+
+    def process_and_move(self, in_name, base_name):
+        """
+        Make new audio file in the media directory.
+
+        Copy content of temp_file_name to a file in the media directory
+        with a name based on . media_base_name and suffix.
+        """
+
+        suffix = os.path.splitext(in_name)[1]
+
 
 
 def process_audio(temp_file_name, base_name, suffix,
