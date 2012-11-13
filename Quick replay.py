@@ -14,12 +14,11 @@ import sys
 from anki.sound import playFromText, play
 from aqt import utils, reviewer
 
-__version__ = "1.1.1"
-
+__version__ = "1.1.2"
 sound_re = '\[sound:(.*?)\]'
-
 command_list = ['mplayer', '-really-quiet']
 
+fse = sys.getfilesystemencoding()
 
 def patched_play_from_text(text):
     matches = re.findall(sound_re, text)
@@ -27,6 +26,7 @@ def patched_play_from_text(text):
         # Avoid any problems with calling the programs with zero
         # files.
         return
+    matches = [mtch.encode(fse) for mtch in matches]
     if command_list:
             play_with_mplayer(matches)
             return
