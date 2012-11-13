@@ -41,7 +41,7 @@ class JapanesepodDownloader(AudioDownloader):
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
         # download, ...
-        if not "ja" == self.language:
+        if not self.language.startswith('ja'):
             return
         if not base:
             return
@@ -53,7 +53,6 @@ class JapanesepodDownloader(AudioDownloader):
             return
         if 200 != response.code:
             return
-        import os  # remove this when done debugging
         with tempfile.NamedTemporaryFile(delete=False,
                                          suffix=self.file_extension) \
                                          as temp_file:

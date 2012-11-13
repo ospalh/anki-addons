@@ -18,5 +18,9 @@ each site first.
 """
 
 from .japanesepod import JapanesepodDownloader
-downloaders = [JapanesepodDownloader()]
+from .mw import MerriamWebsterDownloader
+
+downloaders = [JapanesepodDownloader(), MerriamWebsterDownloader()]
+"""List of downloaders. The sites are tried in the order they appear here."""
+
 __all__ = [downloaders]

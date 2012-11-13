@@ -32,6 +32,21 @@ icon_url = 'http://dict.tu-chemnitz.de/'
 site_icon = None
 """The sites's favicon. Reloaded on first download after program start."""
 
+download_file_extension = u'.wav'
+
+url_mw_word = 'http://www.merriam-webster.com/dictionary/'
+"""URL to get the word definition page."""
+url_mw_popup = 'http://www.merriam-webster.com/audio.php?'
+"""URL for the play audio pop-up"""
+
+user_agent_string = 'Mozilla/5.0'
+
+
+services = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
+"""Mapping of languages to "services", that is, lookup directions."""
+
+
+
 
 def get_words_from_bl(source):
     """
