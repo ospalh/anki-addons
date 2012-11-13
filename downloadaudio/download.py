@@ -2,35 +2,15 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
-
-import re
-import os
-from PyQt4.QtGui import QAction, QIcon, QMenu
-from PyQt4.QtCore import SIGNAL
-
-from aqt import mw
-from aqt.utils import tooltip
-from anki.hooks import addHook
-from anki.template import furigana
-from anki.utils import stripHTML
-
-from .google_tts import get_word_from_google
-from .japanesepod import get_word_from_jpod
-from .language import get_language_code
-from .mw import get_words_from_mw
-from .review_gui import store_or_blacklist
-from .uniqify import uniqify_list
-from .update_gui import update_data
-
-# debug:
-#from aqt.utils import showText
+#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """
 Anki2 add-on to download pronunciations.
 
-This add-on downloads pronunciations from up to three sites:
-Japanese-pod: This looks for a field called reading(*) and triss to
+This add-on downloads pronunciations from a number of sites
+Japanese-pod: This looks for a field called reading(*) and tries to
               get a pronunciation from the languagepod website. As the
               name suggests, these are only Japanese words. The
               pronunciations that are there are rather high-quality,
@@ -38,7 +18,9 @@ Japanese-pod: This looks for a field called reading(*) and triss to
 
 Google TTS: Get pronunciations from the Google Text-To-Speech
             service. These are robot voices, so be a bit suspicous
-            about them.
+            about them. Can speak whole sentences.
+Merriam-Webster: American English. Just single words.
+BeoLingus: Planned. May download English, German and Spanish words.
 
 There are three ways to download: Current card, current note and
 manual.
@@ -52,230 +34,67 @@ manual.
    strings that can be modified before the requests are sent.
 """
 
+import os
+from PyQt4.QtGui import QAction, QIcon, QMenu
+from PyQt4.QtCore import SIGNAL
 
-## Change these to mach the field names of your decks. Make sure to
-## not use capital letters. We compare these to lower-case only
-## versions of the field names. When these lists contain upper-case
-## letters, no field will ever be matched and nothing will be
-## downloaded.
-expression_fields = ['expression', 'hanzi', 'front', 'back']
-"""Fields we get our Google TTS download text from."""
+from aqt import mw
+from aqt.utils import tooltip
+from anki.hooks import addHook
 
-japanese_reading_keys = ["reading", "kana", u'かな', u'仮名']
-"""Fields we get our Japanesepod download text from."""
+from .blacklist import get_hash
+from .get_fields import get_note_fields, get_side_fields
+from .language import get_language_code
+from .downloaders import downloaders
+from .review_gui import store_or_blacklist
+from .update_gui import update_data
+from .processor import preferred_format, processor
 
-audio_field_keys = ["audio", "sound"]
-"""Fields we put our downloaded sounds in."""
-
-
-## End configuration area
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
-
-# Change this at your own risk.
-field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
+"""Place were we keep our megaphone icon.."""
 
 
-def field_data(note, fname, readings=False):
+def do_download(note, field_data, language):
     """
-    Return a suitable source field name and the text in that field.
+    Download audio data.
 
-    Look for a suitable field to get the source text from and return it.
-    If no suitable field is found, a KeyError is raised.
-
-    There are four ways the source field is determined:
-    * readings is False:
-      * when fname is in one of the strings is audio_field_key,
-        expression_fields is used as list of candidates
-      * when the audio_field_key is only a substring of fname, that substring
-        and a trailing or leading ' ' or '_' is removed and that used
-        as the candidate.
-    * readings is True:
-      * when fname is in one of the strings is audio_field_key,
-        japanese_reading_keys is used as list of candidates
-      * when the audio_field_key is only a substring, that substring
-        is replaced by the strings from japanese_reading_keys
-
-    The first field that matches the candidate is used.  Comparisions
-    are done with lowercase strings, the uppercase name is returned.
-
-    Also returned is the text from the field, as one string when
-    reading is False, As two strings, kanji and kana, when reading is
-    True
-    """
-    def return_data(idx):
-        """Get the text, remove html, possibly split into kanji and kana. """
-        text = note[field_names[idx]]
-        # This is taken from aqt/browser.py.
-        text = text.replace("<br>", u" ")
-        text = text.replace("<br />", u" ")
-        # Reformat so we have exactly one space between words.
-        text = ' '.join(text.split())
-        text = stripHTML(text)
-        if readings:
-            return field_names[idx], fname,\
-                furigana.kanji(text), furigana.kana(text)
-        else:
-            return field_names[idx], fname, text
-
-    t_name = fname.lower()
-    field_names = [item[0] for item in note.items()]
-    f_names = [fn.lower() for fn in field_names]
-    for afk in audio_field_keys:
-        if t_name == afk:
-            if readings:
-                sources_list = japanese_reading_keys
-            else:
-                sources_list = expression_fields
-            for cnd in sources_list:
-                for idx, lname in enumerate(f_names):
-                    if cnd == lname:
-                        return return_data(idx)
-            # At this point: The target name is good, but we found no
-            # source name.
-            raise KeyError("No source name found (case 1)")
-        # This point: target name is not exactly the field name
-        if not afk in t_name:
-            # And not a substring either
-            continue
-        # Here: the field name contains an audio or sound.
-        # Mangle the name as described. For the readings case we get a
-        # list. So do a list for the other case as well.
-        if readings:
-            sources_list = [t_name.replace(afk, rk)
-                            for rk in japanese_reading_keys]
-        else:
-            # Here the tricky bit is to remove the right number of '_'
-            # or ' ' characters, 0 or 1, but not 2. What we want is:
-            # ExampleAudio -> Example
-            # Example_Audio -> Example
-            # Audio_Example -> Example
-            # but
-            # Another_Audio_Example -> Another_Example, not Another_Example
-            # While a bit tricky, this is not THAT hard to do. (Not
-            # lookbehind needed.)
-            sources_list = [re.sub('[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
-                                   '', t_name, count=1)]
-        for cnd in sources_list:
-            for idx, lname in enumerate(f_names):
-                if cnd == lname:
-                    return return_data(idx)
-        # We do have audio or sound as sub-string but did not find a
-        # maching field.
-        raise KeyError("No source field found. (case 2)")
-    # No audio field at all.
-    raise KeyError("No source field found. (case 3)")
-
-
-def get_side_fields(card, note, japanese=False):
-    """
-    Get a list of field data for "visible" download fields.
-
-    Check the visible side of the current card for fields that contain
-    a string from audio_field_keys.  Then check the note for these
-    fields and suitable data source fields.
-    """
-    if 'question' == mw.reviewer.state:
-        template = card.template()[u'qfmt']
-    else:
-        template = card.template()[u'afmt']
-    audio_field_name_list = []
-    for afk in audio_field_keys:
-        # Append all fields in the current template/side that contain
-        # 'audio' or 'sound'
-        audio_field_name_list += re.findall(field_name_re % (re.escape(afk), ),
-                                            template, flags=re.IGNORECASE)
-    audio_field_name_list = uniqify_list(audio_field_name_list)
-    all_field_names = [item[0] for item in note.items()]
-    # Filter out non-existing fields.
-    audio_field_name_list = [fn for fn in audio_field_name_list
-                             if fn in all_field_names]
-    field_data_list = []
-    for fname in audio_field_name_list:
-        try:
-            field_data_list.append(
-                field_data(note, fname, readings=japanese))
-        except KeyError:
-            pass
-    return field_data_list
-
-
-def get_note_fields(note, japanese=False):
-    """
-    Get a list of field data for download.
-
-    Check all field names and return source and destination fields for
-    downloading audio.
-    """
-    field_names = [item[0] for item in note.items()]
-    field_data_list = []
-    for afk in audio_field_keys:
-        for fn in field_names:
-            if afk in fn.lower():
-                try:
-                    field_data_list.append(
-                        field_data(note, fn, readings=japanese))
-                except KeyError:
-                    pass
-    return field_data_list
-
-
-def download_fields(note, general_data, japanese_data, language=None):
-    """
-    Download data for the fields provided.
-
-    Go to the two sites and download for the data. Then call a
-    function that asks the user what to do.
+    Go through the list of words and list of sites and download each
+    word from each site. Then call a function that asks the user what
+    to do.
     """
     retrieved_files_list = []
-    for source, dest, text in general_data:
-        if not text:
-            # EAFP code. Needed for testing. Keep it.
-            continue
-        # Get from Google TTS
-        try:
-            dl_fname, dl_hash, extras, icon = get_word_from_google(
-                text, language)
-        except:
-            pass
-        else:
-            retrieved_files_list.append(
-                (source, dest, text, dl_fname, dl_hash, extras, icon))
-        # Get from mw, only English.
-        if language.startswith('en'):
-            try:
-                mw_list = get_words_from_mw(text)
-            except:
-                pass
-            else:
-                for dl_fname, dl_hash, extras, icon in mw_list:
-                    retrieved_files_list.append(
-                        (source, dest, text, dl_fname, dl_hash, extras, icon))
-    for source, dest, kanji, kana in japanese_data:
-        if not kanji and not kana:
-            continue
-        try:
-            dl_fname, dl_hash, extras, icon = get_word_from_jpod(kanji, kana)
-        except ValueError as ve:
-            if "blacklist" in str(ve):
-                # print 'Caught blacklist'
-                pass
-            continue
-        except:
-            continue
-        # This text may be a bit ugly. Never mind. It's just for display
-        if kanji != kana:
-            text = u'{0} ({1})'.format(kanji, kana)
-        else:
-            text = kanji
-        retrieved_files_list.append(
-            (source, dest, text, dl_fname, dl_hash, extras, icon))
+    for (source, dest, text, base, ruby) in field_data:
+        for downloader in downloaders:
+            # Use a public variable to set the language.
+            downloader.language = language
+            downloader.download_files(text, base, ruby)
+            for temp_fname, extras in downloader.downloads_list:
+                try:
+                    item_hash = get_hash(temp_fname)
+                except ValueError:
+                    # Now the downloader downloads, doesn't remove
+                    # files with bad hashes. So do it here.
+                    os.remove(temp_fname)
+                    continue
+                try:
+                    # Dto. audio processing/file moving. The
+                    # downloader downloads to a temp file, so move
+                    # here.
+                    file_name = processor.process_and_move(
+                        temp_fname, downloader.base_name)
+                except:
+                    os.remove(temp_fname)
+                    continue
+                retrieved_files_list.append((
+                    source, dest, downloader.display_text,
+                    file_name, item_hash, extras, downloader.site_icon))
     try:
         store_or_blacklist(note, retrieved_files_list)
     except ValueError as ve:
         tooltip(str(ve))
-    except RuntimeError as re:
-        if not 'cancel' in str(re):
+    except RuntimeError as rte:
+        if not 'cancel' in str(rte):
             raise
         # else: quietly drop out on user cancel
 
@@ -291,17 +110,18 @@ def download_for_side():
     if not card:
         return
     note = card.note()
-    general_field_data = get_side_fields(card, note)
-    if "japanese" in note.model()['name'].lower():
-        japanese_field_data = get_side_fields(card, note, japanese=True)
-    else:
-        japanese_field_data = []
-    download_fields(note, general_field_data, japanese_field_data,
-                    get_language_code(card))
+    field_data = get_side_fields(card, note)
+    do_download(note, field_data, get_language_code(card))
 
 
 def download_for_note(note=False, ask_user=False):
-    """Download for all audio on the current card."""
+    """
+    Download audio for all fields.
+
+    Download audio for all fields of the note passed in or the current
+    note. When ask_user is true, show a dialog that lets the user
+    modify these texts.
+    """
     card = None
     if not note:
         try:
@@ -309,27 +129,20 @@ def download_for_note(note=False, ask_user=False):
             note = card.note()
         except:
             return
-    general_field_data = get_note_fields(note)
-    if "japanese" in note.model()['name'].lower():
-        japanese_field_data = get_note_fields(note, japanese=True)
-    else:
-        japanese_field_data = []
+    field_data = get_note_fields(note)
     language_code = get_language_code(card=card, note=note)
     if ask_user:
         try:
-            general_field_data, japanese_field_data, language_code = \
-                update_data(general_field_data, japanese_field_data,
-                            language_code)
-        except RuntimeError as re:
-            if 'cancel' in str(re):
+            field_data, language_code = update_data(field_data, language_code)
+        except RuntimeError as rte:
+            if 'cancel' in str(rte):
                 # User canceled. No need for the "Nothing downloaded"
                 # message.
                 return
             else:
                 # Don't know how to handle this after all
                 raise
-    download_fields(note, general_field_data, japanese_field_data,
-                    language_code)
+    do_download(note, field_data, language_code)
 
 
 def download_manual():

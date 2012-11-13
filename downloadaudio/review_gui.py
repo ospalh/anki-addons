@@ -22,7 +22,7 @@ choices what to do wit each:
 import os
 
 from PyQt4.QtGui import QButtonGroup, QDialog, QDialogButtonBox, QGridLayout, \
-    QIcon, QLabel, QPushButton
+    QIcon, QLabel, QPixmap, QPushButton
 from PyQt4.QtCore import SIGNAL, SLOT
 
 from aqt import mw
@@ -172,7 +172,13 @@ that they are sorry, will add this soon &c., click on this.""")
         for num, (source, dest, text, dl_fname, dl_hash, extras, icon)\
                 in enumerate(self.list, 3):
             ico_label = QLabel('', self)
-            ico_label.setPixmap(icon)
+            if icon:
+                # Two changes to the old version: We pass around a
+                # QImage, not a QPixmap (because we can *have* a
+                # QImage for the the standalone downloader) and we
+                # should handle the case that we have a None object
+                # here. (Also, we don't scale up 16x16 images.)
+                ico_label.setPixmap(QPixmap.fromImage(icon))
             layout.addWidget(ico_label, num, 0)
             tt_label = QLabel(text, self)
             tt_label.setToolTip(
