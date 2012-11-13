@@ -3,10 +3,9 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
-from aqt import mw
 import os
 
-from .exists import free_media_name
+from .audio_processor import AudioProcessor
 
 
 class AudioMover(AudioProcessor):
@@ -24,10 +23,4 @@ class AudioMover(AudioProcessor):
         """
         # (This is the ex-unmunge_to_mediafile)
         suffix = os.path.splitext(in_name)[1]
-        mdir = mw.col.media.dir()
-        media_file_name = free_media_name(base_name, suffix)
-        with open(temp_file_name, "rb") as tfile:
-            with open(os.path.join(mdir, media_file_name), 'wb') as mfile:
-                mfile.write(tfile.read())
-        os.remove(in_name)
-        return media_file_name
+        self.unmunge_to_mediafile(in_name, base_name, suffix)

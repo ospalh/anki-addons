@@ -27,7 +27,7 @@ class JapanesepodDownloader(AudioDownloader):
         self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
-        self.site_icon = self.get_icon()
+        self.get_icon()
 
     def download_files(self, word, base, ruby):
         """
@@ -36,7 +36,7 @@ class JapanesepodDownloader(AudioDownloader):
         Get text for the base and ruby (kanji and kana) when
         self.language is ja.
         """
-        self.Download_list = []
+        self.downloads_list = []
         self.set_names(word, base, ruby)
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
@@ -53,6 +53,7 @@ class JapanesepodDownloader(AudioDownloader):
             return
         if 200 != response.code:
             return
+        import os  # remove this when done debugging
         with tempfile.NamedTemporaryFile(delete=False,
                                          suffix=self.file_extension) \
                                          as temp_file:

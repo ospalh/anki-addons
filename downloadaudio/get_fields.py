@@ -67,7 +67,7 @@ def field_data(note, fname, readings):
     Also returned is the text from the field, always as three strings
     now, just cleaned up and split into base (kanji) and ruby (furigana).
     """
-    def return_data(idx, split_result):
+    def return_data(idx):
         """
         Return a cleaned-up version of the field content.
 
@@ -84,7 +84,7 @@ def field_data(note, fname, readings):
         text = u' '.join(text.split())
         if not text:
             raise ValueError('Source field empty')
-        if split_result:
+        if readings:
             base = furigana.kanji(text)
             ruby = furigana.kana(text)
             text = u''
@@ -96,7 +96,7 @@ def field_data(note, fname, readings):
     t_name = fname.lower()
     field_names = [item[0] for item in note.items()]
     f_names = [fn.lower() for fn in field_names]
-    # First, look if we have a
+    # First, look for just audio fields
     for afk in audio_field_keys:
         if t_name == afk:
             if readings:
@@ -169,23 +169,18 @@ def get_side_fields(card, note):
     field_data_list = []
     for fname in audio_field_name_list:
         try:
-            # This is changed now. Instead of saying if we want
-            # reading or not, we first look for a reading field and
-            # when we don't find one, look for a general source
-            # field. Also, we always get three source data strings
-            # now.
+            # This is changed a bit. Just look for readings for a
+            # field, then for "normal" target for that field.
             field_data_list.append(
                 field_data(note, fname, readings=True))
-        except KeyError:
-            # No reading field
-            try:
-                field_data_list.append(
-                    field_data(note, fname, readings=False))
-            except (KeyError, ValueError):
-                # No or empty 'normal' field.
-                pass
-        except ValueError:
-            # Found empty field
+        except (KeyError, ValueError):
+            # No or empty reading field
+            pass
+        try:
+            field_data_list.append(
+                field_data(note, fname, readings=False))
+        except (KeyError, ValueError):
+            # No or empty 'normal' field.
             pass
     return field_data_list
 
@@ -207,16 +202,13 @@ def get_note_fields(note):
                     # fields.
                     field_data_list.append(
                         field_data(note, fn, readings=True))
-                except KeyError:
-                    # No readings field.
-                    try:
-                        # So look for 'normal' field.
-                        field_data_list.append(
-                            field_data(note, fn, readings=False))
-                    except (KeyError, ValueError):
-                        # No or empty 'normal' field
-                        pass
-                except ValueError:
-                    # Empty readings field
+                except (KeyError, ValueError):
+                    # No or empty readings field.
+                    pass
+                try:
+                    field_data_list.append(
+                        field_data(note, fn, readings=False))
+                except (KeyError, ValueError):
+                    # No or empty 'normal' field
                     pass
     return field_data_list

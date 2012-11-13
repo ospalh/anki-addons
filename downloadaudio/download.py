@@ -43,12 +43,12 @@ from aqt.utils import tooltip
 from anki.hooks import addHook
 
 from .blacklist import get_hash
+from .downloaders import downloaders
 from .get_fields import get_note_fields, get_side_fields
 from .language import get_language_code
-from .downloaders import downloaders
+from .processors import processor
 from .review_gui import store_or_blacklist
 from .update_gui import update_data
-from .processor import preferred_format, processor
 
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
@@ -75,6 +75,7 @@ def do_download(note, field_data, language):
                 except ValueError:
                     # Now the downloader downloads, doesn't remove
                     # files with bad hashes. So do it here.
+                    # print 'bad hash'
                     os.remove(temp_fname)
                     continue
                 try:
@@ -83,7 +84,7 @@ def do_download(note, field_data, language):
                     # here.
                     file_name = processor.process_and_move(
                         temp_fname, downloader.base_name)
-                except:
+                except Exception:
                     os.remove(temp_fname)
                     continue
                 retrieved_files_list.append((

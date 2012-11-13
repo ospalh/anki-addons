@@ -116,7 +116,7 @@ class AudioDownloader(object):
         QPixmap.
         """
         if not with_pyqt:
-            self.sit_icon = None
+            self.site_icon = None
             return
         page_request = urllib2.Request(self.icon_url)
         if self.user_agent:
@@ -160,7 +160,7 @@ class AudioDownloader(object):
         way of doing site icons.)
         """
         if not with_pyqt:
-            self.sit_icon = None
+            self.site_icon = None
             return
         ico_url = urlparse.urljoin(self.icon_url, "/favicon.ico")
         ico_request = urllib2.Request(ico_url)

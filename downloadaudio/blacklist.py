@@ -37,7 +37,7 @@ def get_hash(file_name):
     """
     if not blacklist_hashes:
         load_hashes()
-    retrieved_hash = hashlib.sha256(file(file_name, 'r').read())
+    retrieved_hash = hashlib.sha256(file(file_name, 'rb').read())
     if retrieved_hash.hexdigest() in blacklist_hashes:
         raise ValueError('Retrieved file is in blacklist. ' +
                          '(No pronunciation found.)')

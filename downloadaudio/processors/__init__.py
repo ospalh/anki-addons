@@ -12,7 +12,7 @@ have_pysox = True
 try:
     import pysox
     import pydub
-except:
+except ImportError:
     have_pysox = False
 
 if have_pysox:
