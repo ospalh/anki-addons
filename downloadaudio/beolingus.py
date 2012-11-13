@@ -24,18 +24,16 @@ from .siteicon import get_icon
 
 download_file_extension = u'.wav'
 
-url_mw_word = 'http://www.merriam-webster.com/dictionary/'
+# url_bl_word = 'dict.tu-chemnitz.de/dings.cgi?service=de-en&query=unwahr'
+url_bl_word = 'dict.tu-chemnitz.de/dings.cgi?'
 """URL to get the word definition page."""
-url_mw_popup = 'http://www.merriam-webster.com/audio.php?'
-"""URL for the play audio pop-up"""
-
 user_agent_string = 'Mozilla/5.0'
-
+icon_url = 'http://dict.tu-chemnitz.de/'
 site_icon = None
 """The sites's favicon. Reloaded on first download after program start."""
 
 
-def get_words_from_mw(source):
+def get_words_from_bl(source):
     """
     Get pronunciations of a word from Merriam-Webster.
 
@@ -50,7 +48,7 @@ def get_words_from_mw(source):
     maybe_get_icon()
     # The download has to be done in steps:
     # First, get the page for the definitions
-    word_page_url = url_mw_word + urllib.quote(source.encode('utf-8'))
+    word_page_url = url_bl_word + urllib.quote(source.encode('utf-8'))
     # This may throw an exception
     word_request = urllib2.Request(word_page_url)
     # Not sure if this is needed
@@ -171,7 +169,7 @@ def get_word_hash_pair(base_name, source):
 def get_popup_url(base_name, source):
     """Build url for the MW play audio pop-up."""
     qdict = dict(file=base_name, word=source)
-    return url_mw_popup + urllib.urlencode(qdict)
+    return url_bl_popup + urllib.urlencode(qdict)
 
 
 def join_strings(a, b):
@@ -192,4 +190,4 @@ def maybe_get_icon():
     global site_icon
     if site_icon:
         return
-    site_icon = get_icon(url_mw_word, user_agent_string)
+    site_icon = get_icon(icon_url, user_agent_string)
