@@ -10,199 +10,96 @@
 Download pronunciations from BeoLingus.
 '''
 
-import tempfile
 import urllib
-import urllib2
-import os
+import urlparse
 import re
 
-from BeautifulSoup import BeautifulSoup as soup
-
-from .process_audio import process_audio, unmunge_to_mediafile
-from .blacklist import get_hash
-from .siteicon import get_icon
-
-download_file_extension = u'.wav'
-
 # url_bl_word = 'dict.tu-chemnitz.de/dings.cgi?service=de-en&query=unwahr'
-url_bl_word = 'dict.tu-chemnitz.de/dings.cgi?'
-"""URL to get the word definition page."""
-user_agent_string = 'Mozilla/5.0'
-icon_url = 'http://dict.tu-chemnitz.de/'
-site_icon = None
-"""The sites's favicon. Reloaded on first download after program start."""
 
 download_file_extension = u'.wav'
 
-url_mw_word = 'http://www.merriam-webster.com/dictionary/'
-"""URL to get the word definition page."""
-url_mw_popup = 'http://www.merriam-webster.com/audio.php?'
-"""URL for the play audio pop-up"""
 
-user_agent_string = 'Mozilla/5.0'
+from .downloader import AudioDownloader
 
 
-services = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
-"""Mapping of languages to "services", that is, lookup directions."""
+class BeolingusDownloader(AudioDownloader):
+    """Download audio from Japanesepod"""
+    def __init__(self):
+        AudioDownloader.__init__(self)
+        self.file_extension = u'.mp3'
+        self.icon_url = 'http://dict.tu-chemnitz.de/'
+        self.url = 'http://dict.tu-chemnitz.de/dings.cgi?'
+        self.site_url = 'http://dict.tu-chemnitz.de/'
+        # Seen this encoding in their page. Oh, my.
+        self.site_encoding = 'ISO-8859-1'
+        self.speak_code = 'dings.cgi?speak='
+        self.text_code = 'text='
+        self.services_dict = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
+        """
+        Mapping of languages to "services".
 
+        We can get pronunciations for the three keys in this dictionary.
+        """
+        self.service = None
+        self.get_icon()
 
+    def download_files(self, word, base, ruby):
+        """
+        Get pronunciations of a word from BeoLingus
 
+        Get pronunciations for words in one of three languages.
+        """
+        self.downloads_list = []
+        self.set_names(word, base, ruby)
+        # EAFP. When we call this with a wrong language we fly right
+        # out of this with a KeyError.
+        self.service = self.services_dict[self.language]
+        if not word:
+            return
+        word_soup = self.get_soup_from_url(self.build_word_url(word))
+        a_list = word_soup.findAll('a')
+        href_list = [a['href'] for a in a_list]
+        href_list = self.uniqify_list(href_list)
+        href_list = [href for href in href_list
+                     if (self.speak_code + self.language) in href]
+        href_list = [href for href in href_list
+                     if href.endswith(self.text_code + word)]
+        for url_to_get in href_list:
+            try:
+                word_path, word_file = self.get_word_file(url_to_get, word)
+            except ValueError:
+                continue
+            self.downloads_list.append(
+                (word_path, word_file, dict(Source="Beolingus")))
 
-def get_words_from_bl(source):
-    """
-    Get pronunciations of a word from Merriam-Webster.
+    def get_word_file(self, popup_url, word):
+        """
+        Get an audio file from Beolingus
 
-    Look up an English word at merriam-webster.com, look for
-    pronunciations in the page and get audio files for those.
+        Load what would be shown as the Beolingus play audio browser
+        pop-up, isolate the "Listen with your default mp3 player" link
+        from that, get the file that points to and get that.
+        """
+        word = urllib.quote(word.encode('utf-8'))
+        popup_url = re.sub(';text=.*$', ';text=' + word, popup_url)
+        popup_url = urlparse.urljoin(self.site_url, popup_url)
+        popup_soup = self.get_soup_from_url(popup_url)
+        # The audio link should be the only link.
+        a_list = popup_soup.findAll('a')
+        href_list = [a['href'] for a in a_list]
+        href_list = [href for href in href_list if "speak" in href]
+        href_list = [href for href in href_list
+                     if href.endswith(self.file_extension)]
+        # If we don't have exactly one url, something's wrong. Assume
+        # we have at least one.
+        word_url = href_list[0]
+        word_url = urlparse.urljoin(self.site_url, word_url)
+        word_data = self.get_data_from_url(word_url)
+        word_path, word_fname = self.get_file_name()
+        with open(word_path, 'wb') as word_file:
+            word_file.write(word_data)
+        return word_path, word_fname
 
-    There may be more than one pronunciation (eg row: \ˈrō\ and
-    \ˈrau̇\), so return a list.
-    """
-    if not source:
-        raise ValueError('Nothing to download')
-    maybe_get_icon()
-    # The download has to be done in steps:
-    # First, get the page for the definitions
-    word_page_url = url_bl_word + urllib.quote(source.encode('utf-8'))
-    # This may throw an exception
-    word_request = urllib2.Request(word_page_url)
-    # Not sure if this is needed
-    word_request.add_header('User-agent', user_agent_string)
-    word_response = urllib2.urlopen(word_request)
-    if 200 != word_response.code:
-        raise ValueError(str(word_response.code) + ': ' + word_response.msg)
-    # Do our parsing with BeautifulSoup
-    word_soup = soup(word_response)
-    # The audio clips are stored as input tags with class au
-    word_input_aus = word_soup.findAll(name='input', attrs={'class': 'au'})
-    # The interesting bit it the onclick attribute and looks like
-    # "return au('moore01v', 'Moore\'s law')" Isolate those. Make it
-    # readable. We do the whole processing EAFP style. When MW changes
-    # the format, the processing will raise an exception that we will
-    # catch in download.py.
-    file_list = []
-    meaning_no_list = []
-    for input_tag in word_input_aus:
-        onclick_string = input_tag['onclick']
-        # Now cut off the bits on the left and right that should be
-        # there. If not, this will fail. (Most likely the split.)
-        # (The idea for this downloader came from the "English helper"
-        # (for Chinese people) Anki 1 plugin. That plugin used res for
-        # this processing, but those fail with words that contain an
-        # apostrophe.)
-        onclick_string = onclick_string.lstrip('return au(').rstrip(');')
-        mw_audio_fn_base, mw_audio_word = onclick_string.split(', ')
-        mw_audio_fn_base = mw_audio_fn_base.lstrip("'").rstrip("'")
-        mw_audio_word = mw_audio_word.lstrip("'").rstrip("'")
-        # There may be a meaning number, as in "1row" "3row" in the
-        # title..
-        match = re.search(
-            "Listen to the pronunciation of ([0-9]+)" + re.escape(source),
-            input_tag['title'])
-        try:
-            meaning_no = match.group(1)
-        except AttributeError:
-            meaning_no = None
-        #  The same file may appear more than once, but with different
-        #  meaning_nos.
-        try:
-            other_index = file_list.index(mw_audio_fn_base)
-        except ValueError:
-            # This is the normal case: First time we see this file.
-            # But only add this if it is actually what we have been
-            # looking for. For example if you ask mw for rower, you
-            # get the "row" page, which has pronunciations for "row",
-            # "rower" and the other "row".
-            if mw_audio_word == source:
-                file_list.append(mw_audio_fn_base)
-                meaning_no_list.append(meaning_no)
-        else:
-            # We already have this word, at index other_index in the
-            # three lists. That meaning_no is None or a string. The
-            # same for this meaning_no.
-            meaning_no_list[other_index] = join_strings(
-                meaning_no_list[other_index], meaning_no)
-    words_tuple_list = []
-    for idx, mw_fn in enumerate(file_list):
-        meaning_no = meaning_no_list[idx]
-        extras = dict(source='Merriam-Webster')
-        if meaning_no:
-            extras['Meaning #'] = meaning_no
-        try:
-            word_file, word_hash = get_word_hash_pair(mw_fn, source)
-        except ValueError:
-            continue
-        words_tuple_list.append((word_file, word_hash, extras, site_icon))
-    return words_tuple_list
-
-
-def get_word_hash_pair(base_name, source):
-    """
-    Get an audio file from MW, check the hash and return it.
-
-    Load what would be shown as the MW play audio browser pop-up,
-    isolate the "Use your default player" link from that, get the file
-    that points to and get that. Than do the hash checking and
-    processing.
-    """
-    popup_url = get_popup_url(base_name, source)
-    popup_request = urllib2.Request(popup_url)
-    # Not sure if this is needed
-    popup_request.add_header('User-agent', user_agent_string)
-    popup_response = urllib2.urlopen(popup_request)
-    if 200 != popup_response.code:
-        raise ValueError(str(popup_response.code) + ': ' + popup_response.msg)
-    popup_soup = soup(popup_response)
-    # The audio clip is the only embed tag.
-    popup_embed = popup_soup.find(name='embed')
-    audio_url = popup_embed['src']
-    audio_request = urllib2.Request(audio_url)
-    # Not sure if this is needed
-    audio_request.add_header('User-agent', user_agent_string)
-    audio_response = urllib2.urlopen(audio_request)
-    if 200 != audio_response.code:
-        raise ValueError(str(audio_response.code) + ': ' + audio_response.msg)
-    with tempfile.NamedTemporaryFile(delete=False,
-                                     suffix=download_file_extension) \
-                                     as temp_file:
-        temp_file.write(audio_response.read())
-    try:
-        file_hash = get_hash(temp_file.name)
-    except ValueError:
-        os.remove(temp_file.name)
-        raise
-    try:
-        return process_audio(temp_file.name, source, download_file_extension,
-                             silence_percent=0.2, silence_end_percent=0.5),\
-               file_hash
-    except:
-        return unmunge_to_mediafile(temp_file.name, source,
-                                    download_file_extension),\
-               file_hash
-
-
-def get_popup_url(base_name, source):
-    """Build url for the MW play audio pop-up."""
-    qdict = dict(file=base_name, word=source)
-    return url_bl_popup + urllib.urlencode(qdict)
-
-
-def join_strings(a, b):
-    """
-    Return joined string or None.
-
-    From two inputs which are both either a string or None, build a
-    return string if possible.
-    """
-    l = [a, b]
-    l = [i for i in l if i]
-    if l:
-        return ", ".join(l)
-
-
-def maybe_get_icon():
-    """Get the site icon when we haven't got it already."""
-    global site_icon
-    if site_icon:
-        return
-    site_icon = get_icon(icon_url, user_agent_string)
+    def build_word_url(self, source):
+        qdict = dict(service=self.service, query=source.encode('utf-8'))
+        return self.url + urllib.urlencode(qdict)

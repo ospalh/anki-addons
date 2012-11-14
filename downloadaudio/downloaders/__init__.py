@@ -17,12 +17,13 @@ When PyQt4 is installed, this downolads the site icon (favicon) for
 each site first.
 """
 
+from .beolingus import BeolingusDownloader
+from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
 from .mw import MerriamWebsterDownloader
-from .google_tts import GooglettsDownloader
 
 downloaders = [JapanesepodDownloader(), MerriamWebsterDownloader(),
-               GooglettsDownloader()]
+               BeolingusDownloader(), GooglettsDownloader()]
 """List of downloaders. The sites are tried in the order they appear here."""
 
 __all__ = [downloaders]
