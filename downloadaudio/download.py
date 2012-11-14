@@ -68,7 +68,14 @@ def do_download(note, field_data, language):
         for downloader in downloaders:
             # Use a public variable to set the language.
             downloader.language = language
-            downloader.download_files(text, base, ruby)
+            try:
+                # Make it easer inside the downloader. If anything
+                # goes wrong, don't catch or rais whatever you want.
+                downloader.download_files(text, base, ruby)
+            except:
+                # Uncomment this raise while testing new downloaders.
+                # raise
+                continue
             for temp_fname, extras in downloader.downloads_list:
                 try:
                     item_hash = get_hash(temp_fname)
