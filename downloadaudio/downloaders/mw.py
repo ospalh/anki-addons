@@ -20,7 +20,6 @@ class MerriamWebsterDownloader(AudioDownloader):
     """Download audio from Japanesepod"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://www.merriam-webster.com/dictionary/'
         # Here the word page url works to get the favicon.
         self.icon_url = self.url
@@ -101,19 +100,18 @@ class MerriamWebsterDownloader(AudioDownloader):
             if meaning_no:
                 extras['Meaning #'] = meaning_no
             try:
-                word_path, word_file = self.get_word_tmpfile(mw_fn, word)
+                word_path, word_file = self.get_word_file(mw_fn, word)
             except ValueError:
                 continue
             self.downloads_list.append((word_path, word_file, extras))
 
-    def get_word_tmpfile(self, base_name, word):
+    def get_word_file(self, base_name, word):
         """
-        Get an audio file from MW, and return its temp file name.
+        Get an audio file from MW.
 
         Load what would be shown as the MW play audio browser pop-up,
         isolate the "Use your default player" link from that, get the
-        file that points to and get that. Than do the hash checking
-        and processing.
+        file that points to and get that.
         """
         popup_soup = self.get_soup_from_url(
             self.get_popup_url(base_name, word))
