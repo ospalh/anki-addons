@@ -10,6 +10,7 @@
 Class to download a files from a speaking dictionary or TTS service.
 '''
 
+import tempfile
 import urllib
 import urllib2
 import urlparse
@@ -46,9 +47,9 @@ class AudioDownloader(object):
 
         This is where self.download_files should
         """
-        self.display_text = ''
+        self.display_text = u''
         """Text shown as source after download"""
-        self.base_name = ''
+        self.base_name = u''
         """Base of the final file name."""
         self.file_extension = u'.wav'
         # A typical downloaders will need something like this.
@@ -65,6 +66,23 @@ class AudioDownloader(object):
         At least Google TTS won't give out their translations unless
         we pretend to be some typical browser.
         """
+        self.use_temp_files = False
+        """
+        Whether to use files created by tempfiles or not.
+
+        Where to write the downloaded files, in /tmp/ or into the Anki
+        media directory directly. (This is
+        """
+        self.download_directory = None
+        """
+        Where to write the downloaded files.
+
+        If this is None or empty
+        (i.e. "if not self.download_directory:...")
+        (and self.use_temp_files == False)
+        we use the current directory.
+        """
+
         self.site_icon = None
         """The sites's favicon."""
 
@@ -200,3 +218,29 @@ class AudioDownloader(object):
         Wrapper helper function aronud self.get_data_from_url()
         """
         return soup(self.get_data_from_url(url_in))
+
+    def get_file_name(self):
+        """
+        Get a free file name.
+
+        Determine where we should write the data and build a free name
+        based on that. This looks at self.use_temp_files and
+        self.download_diretory. Read their docstrings.
+        """
+        if self.use_temp_files:
+            tfile = tempfile.NamedTemporaryFile(
+                delete=False, suffix=self.file_extension)
+            tfile.close()
+            # Hack, free_media_name returns full path and file name,
+            # so return two files here as well. But there is no real
+            # need to split off the file name from the direcotry bit.
+            return tfile.name, tfile.name
+        else:
+            # IAR, specifically PEP8. When we don't use temp files, we
+            # should clean up the request string a bit, and that is
+            # best done with Anki functions. So, when
+            # self.use_temp_files is False, we need anki, bits of
+            # which are imported by ..exists.
+            from ..exists import free_media_name
+            return free_media_name(
+                self.base_name, self.file_extension)

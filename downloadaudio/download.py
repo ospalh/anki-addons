@@ -54,6 +54,13 @@ from .update_gui import update_data
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 """Place were we keep our megaphone icon.."""
 
+# A bit of set-up
+for downloader in downloaders:
+    # We have two audio "processors". One that is actually processing,
+    # and one where we would have to move files around, but where we
+    # can skip that step. Let the downloaders know which one we have.
+    downloader.use_temp_files = processor.useful
+
 
 def do_download(note, field_data, language):
     """
@@ -76,24 +83,31 @@ def do_download(note, field_data, language):
                 # Uncomment this raise while testing new downloaders.
                 # raise
                 continue
-            for temp_fname, extras in downloader.downloads_list:
+            for word_path, file_name, extras in downloader.downloads_list:
                 try:
-                    item_hash = get_hash(temp_fname)
+                    item_hash = get_hash(word_path)
                 except ValueError:
                     # Now the downloader downloads, doesn't remove
                     # files with bad hashes. So do it here.
                     # print 'bad hash'
-                    os.remove(temp_fname)
+                    os.remove(word_path)
                     continue
-                try:
-                    # Dto. audio processing/file moving. The
-                    # downloader downloads to a temp file, so move
-                    # here.
-                    file_name = processor.process_and_move(
-                        temp_fname, downloader.base_name)
-                except Exception:
-                    os.remove(temp_fname)
-                    continue
+                if processor.useful:
+                    # if not processor.useful we write directly to the
+                    # media dir.
+                    try:
+                        # Dto. audio processing/file moving. The
+                        # downloader downloads to a temp file, so move
+                        # here.
+                        file_name = processor.process_and_move(
+                            word_path, downloader.base_name)
+                    except Exception:
+                        raise
+                        os.remove(word_path)
+                        continue
+                # else:
+                #    file_name = file_name
+                # We pass the file name around for this case.
                 retrieved_files_list.append((
                     source, dest, downloader.display_text,
                     file_name, item_hash, extras, downloader.site_icon))

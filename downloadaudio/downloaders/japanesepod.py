@@ -11,10 +11,7 @@
 Download Japanese pronunciations from Japanesepod
 '''
 
-
-import tempfile
 import urllib
-import urllib2
 
 from .downloader import AudioDownloader
 
@@ -48,12 +45,12 @@ class JapanesepodDownloader(AudioDownloader):
         # Reason why we don't just do the get_data_.. bit inside the
         # with: Like this we don't have to clean up the temp file.
         word_data = self.get_data_from_url(self.query_url(base, ruby))
-        with tempfile.NamedTemporaryFile(delete=False,
-                                         suffix=self.file_extension) \
-                                         as temp_file:
-            temp_file.write(word_data)
+        word_file_path, word_file_name = self.get_file_name()
+        with open(word_file_path, 'wb') as word_file:
+            word_file.write(word_data)
         # We have a file, but not much to say about it.
-        self.downloads_list.append((temp_file.name, {}))
+        self.downloads_list.append(
+            (word_file_path, word_file_name, dict(Source='JapanesePod')))
 
     def query_url(self, kanji, kana):
         qdict = {}

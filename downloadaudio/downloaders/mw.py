@@ -10,12 +10,8 @@
 Download pronunciations from Merriam-Webster.
 """
 
-import tempfile
 import urllib
-import urllib2
 import re
-from BeautifulSoup import BeautifulSoup as soup
-
 
 from .downloader import AudioDownloader
 
@@ -101,14 +97,14 @@ class MerriamWebsterDownloader(AudioDownloader):
                     meaning_no_list[other_index], meaning_no)
         for idx, mw_fn in enumerate(file_list):
             meaning_no = meaning_no_list[idx]
-            extras = dict(source='Merriam-Webster')
+            extras = dict(Source="Merriam-Webster")
             if meaning_no:
                 extras['Meaning #'] = meaning_no
             try:
-                word_file = self.get_word_tmpfile(mw_fn, word)
+                word_path, word_file = self.get_word_tmpfile(mw_fn, word)
             except ValueError:
                 continue
-            self.downloads_list.append((word_file, extras))
+            self.downloads_list.append((word_path, word_file, extras))
 
     def get_word_tmpfile(self, base_name, word):
         """
@@ -124,11 +120,10 @@ class MerriamWebsterDownloader(AudioDownloader):
         # The audio clip is the only embed tag.
         popup_embed = popup_soup.find(name='embed')
         word_data = self.get_data_from_url(popup_embed['src'])
-        with tempfile.NamedTemporaryFile(delete=False,
-                                         suffix=self.file_extension) \
-                                         as temp_file:
-            temp_file.write(word_data)
-        return temp_file.name
+        word_path, word_fname = self.get_file_name()
+        with open(word_path, 'wb') as word_file:
+            word_file.write(word_data)
+        return word_path, word_fname
 
     def get_popup_url(self, base_name, source):
         """Build url for the MW play audio pop-up."""

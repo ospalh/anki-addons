@@ -8,17 +8,23 @@ Move a file to the Anki2 media folder, processing it on the way when
 possible.
 """
 
-import os
+import shutil
 
-from aqt import mw
-
-from .exists import free_media_name
+from ..exists import free_media_name
 
 
 class AudioProcessor(object):
 
     def __init__(self):
-        pass
+        """
+        Keep track if there is a point in using this at all.
+
+        Only one of the audio processors is actually useful. The other
+        just moves the file without changing it. So we can use this
+        value and skip the step of creating a temp file and then just
+        moving the content of that file.
+        """
+        self.useful = False
 
     def process_and_move(self, in_name, base_name):
         """
@@ -37,10 +43,9 @@ class AudioProcessor(object):
         raise NotImplementedError("Use a class derived from this.")
 
     def unmunge_to_mediafile(self, in_name, base_name, suffix):
-        mdir = mw.col.media.dir()
-        media_file_name = free_media_name(base_name, suffix)
-        with open(in_name, "rb") as tfile:
-            with open(os.path.join(mdir, media_file_name), 'wb') as mfile:
-                mfile.write(tfile.read())
-        os.remove(in_name)
+        # New style: we now get both the path and just the file name out
+        # of free_media_name.
+        media_path, media_file_name = free_media_name(base_name, suffix)
+        # Don't copy and delete, let the os do the work.
+        shutil.move(in_name, media_path)
         return media_file_name

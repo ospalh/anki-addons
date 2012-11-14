@@ -16,6 +16,7 @@ class AudioNormaliser(AudioProcessor):
     def __init__(self):
         AudioProcessor.__init__(self)
         self.output_format = ".flac"
+        self.useful = True
 
     def process_and_move(self, in_name, base_name):
         """

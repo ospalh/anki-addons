@@ -11,7 +11,9 @@ from .audio_processor import AudioProcessor
 class AudioMover(AudioProcessor):
 
     def __init__(self):
-        # Just pro forma
+        # Sets up that this is actually sort-of useless. (The point of
+        # this class is that we have AudioNormaliser, that may or may
+        # not work.)
         AudioProcessor.__init__(self)
 
     def process_and_move(self, in_name, base_name):
@@ -21,6 +23,5 @@ class AudioMover(AudioProcessor):
         Copy content of temp_file_name to a file in the media directory
         with a name based on . media_base_name and suffix.
         """
-        # (This is the ex-unmunge_to_mediafile)
         suffix = os.path.splitext(in_name)[1]
         self.unmunge_to_mediafile(in_name, base_name, suffix)

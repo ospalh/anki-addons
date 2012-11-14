@@ -4,11 +4,16 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
-from .japanesepod import JapanesepodDownloader
 
+import argparse
 import sys
 
-# Test case, download a file from Japanesepod, print the file name.
+from . import downloaders
+from .japanesepod import JapanesepodDownloader
+
+def move_here(dl):
+
+    pass
 
 jpd = JapanesepodDownloader()
 jpd.language = 'ja'
