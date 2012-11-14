@@ -45,18 +45,13 @@ class JapanesepodDownloader(AudioDownloader):
             return
         if not base:
             return
-        get_url = self.query_url(base, ruby)
-        request = urllib2.Request(get_url)
-        try:
-            response = urllib2.urlopen(request)
-        except:
-            return
-        if 200 != response.code:
-            return
+        # Reason why we don't just do the get_data_.. bit inside the
+        # with: Like this we don't have to clean up the temp file.
+        word_data = self.get_data_from_url(self.query_url(base, ruby))
         with tempfile.NamedTemporaryFile(delete=False,
                                          suffix=self.file_extension) \
                                          as temp_file:
-            temp_file.write(response.read())
+            temp_file.write(word_data)
         # We have a file, but not much to say about it.
         self.downloads_list.append((temp_file.name, {}))
 

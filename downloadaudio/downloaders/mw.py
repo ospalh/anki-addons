@@ -47,20 +47,9 @@ class MerriamWebsterDownloader(AudioDownloader):
             return
         if not word:
             return
-        word_page_url = self.url + urllib.quote(word.encode('utf-8'))
-        word_request = urllib2.Request(word_page_url)
-        # Not sure if this is needed
-        word_request.add_header('User-agent', self.user_agent)
-        try:
-            word_response = urllib2.urlopen(word_request)
-        except:
-            raise
-            return
-        if 200 != word_response.code:
-            raise ValueError(str(word_response.code)
-                             + ': ' + word_response.msg)
         # Do our parsing with BeautifulSoup
-        word_soup = soup(word_response)
+        word_soup = self.get_soup_from_url(
+            self.url + urllib.quote(word.encode('utf-8')))
         # The audio clips are stored as input tags with class au
         word_input_aus = word_soup.findAll(name='input', attrs={'class': 'au'})
         # The interesting bit it the onclick attribute and looks like
@@ -130,28 +119,15 @@ class MerriamWebsterDownloader(AudioDownloader):
         file that points to and get that. Than do the hash checking
         and processing.
         """
-        popup_url = self.get_popup_url(base_name, word)
-        popup_request = urllib2.Request(popup_url)
-        popup_request.add_header('User-agent', self.user_agent)
-        popup_response = urllib2.urlopen(popup_request)
-        if 200 != popup_response.code:
-            raise ValueError(str(popup_response.code)
-                             + ': ' + popup_response.msg)
-        popup_soup = soup(popup_response)
+        popup_soup = self.get_soup_from_url(
+            self.get_popup_url(base_name, word))
         # The audio clip is the only embed tag.
         popup_embed = popup_soup.find(name='embed')
-        audio_url = popup_embed['src']
-        audio_request = urllib2.Request(audio_url)
-        # Not sure if this is needed
-        audio_request.add_header('User-agent', self.user_agent)
-        audio_response = urllib2.urlopen(audio_request)
-        if 200 != audio_response.code:
-            raise ValueError(str(audio_response.code)
-                             + ': ' + audio_response.msg)
+        word_data = self.get_data_from_url(popup_embed['src'])
         with tempfile.NamedTemporaryFile(delete=False,
                                          suffix=self.file_extension) \
                                          as temp_file:
-            temp_file.write(audio_response.read())
+            temp_file.write(word_data)
         return temp_file.name
 
     def get_popup_url(self, base_name, source):

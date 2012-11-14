@@ -177,3 +177,26 @@ class AudioDownloader(object):
                 or ico_size.height() > max_size.height():
             self.site_icon = self.site_icon.scaled(
                 max_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+
+    def get_data_from_url(self, url_in):
+        """
+        Return raw data loaded from an URL.
+
+        Helper function. Put in an URL and it sets the agent, sends
+        the requests, checks that we got error code 200 and returns
+        the raw data only when everything is OK.
+        """
+        request = urllib2.Request(url_in)
+        request.add_header('User-agent', self.user_agent)
+        response = urllib2.urlopen(request)
+        if 200 != response.code:
+            raise ValueError(str(response.code) + ': ' + response.msg)
+        return response.read()
+
+    def get_soup_from_url(self, url_in):
+        """
+        Return data loaded from an URL, as BeautifulSoup(3) object.
+
+        Wrapper helper function aronud self.get_data_from_url()
+        """
+        return soup(self.get_data_from_url(url_in))
