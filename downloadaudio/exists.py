@@ -6,6 +6,7 @@
 
 import os
 import re
+import sys
 from aqt import mw
 from anki.utils import isWin, isMac, stripHTML
 
@@ -23,13 +24,17 @@ def free_media_name(base, end):
     base = re.sub('[\\/:\*?"<>\|]', '', base)
     mdir = mw.col.media.dir()
     if not exists_lc(mdir, base + end):
-        return base + end
+        return os.path.join(mdir, base + end), base + end
     for i in range(1, 10000):
-        # Don't be silly. Give up after 9999 tries.
-        long_name = u'{0}_{1}{2}'.format(base, i, end)
+        # Don't be silly. Give up after 9999 tries (by falling out of
+        # this loop).
+        long_name = u'{0} ({1}){2}'.format(base, i, end)
         if not exists_lc(mdir, long_name):
-            return long_name
-    raise ValueError
+            # New: return both full path and the file name (with ending).
+            return os.path.join(mdir, long_name), long_name
+    # The only way we can have arrived here is by unsuccessfully
+    # trying the 10000 names.
+    raise ValueError('Could not find free name.')
 
 
 def exists_lc(path, name):

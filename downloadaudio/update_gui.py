@@ -9,7 +9,7 @@ Change the download audio parameters on user input.
 """
 
 from PyQt4.QtCore import SIGNAL, SLOT
-from PyQt4.QtGui import QDialog, QDialogButtonBox, QGridLayout, QHBoxLayout, \
+from PyQt4.QtGui import QDialog, QDialogButtonBox, QFrame, QGridLayout, QHBoxLayout, \
     QIcon, QLabel, QLineEdit, QVBoxLayout
 
 from anki.lang import _
@@ -17,61 +17,64 @@ from anki.lang import _
 from language import default_audio_language_code
 
 
-def update_data(general_fields, japanese_fields, language_code):
+def update_data(data_fields, language_code):
     """Return updated download information"""
-    review_fields = ReviewFields(general_fields, japanese_fields,
-                                 language_code)
+    review_fields = ReviewFields(data_fields, language_code)
     if not review_fields.exec_():
         raise RuntimeError('User cancel')
-    for num, (source, dest, old_text) in enumerate(general_fields):
-        general_fields[num] = (
-            source, dest, review_fields.general_text_lineedits[num].text())
-    for num, (source, dest, old_kanji, old_kana) \
-            in enumerate(japanese_fields):
-        japanese_fields[num] = (source, dest,
-                                review_fields.kanji_lineedits[num].text(),
-                                review_fields.kana_lineedits[num].text())
+    for num, (source, dest, old_text, old_base, old_ruby) \
+            in enumerate(data_fields):
+        data_fields[num] = (source, dest,
+                            review_fields.text_lineedits[num].text(),
+                            review_fields.base_lineedits[num].text(),
+                            review_fields.ruby_lineedits[num].text())
     language_code = review_fields.language_code_lineedit.text()
-    return general_fields, japanese_fields, language_code
+    return data_fields, language_code
 
 
 class ReviewFields(QDialog):
     """
     A Dialog to let the user edit the texts or change the language.
     """
-    def __init__(self, general_fields, japanese_fields, language_code):
-        self.general_fields = general_fields
-        self.japanese_fields = japanese_fields
+    def __init__(self, data_fields, language_code):
+        self.data_fields = data_fields
         self.language_code = language_code  # possibly None
         self.language_code_lineedit = None
-        self.general_text_lineedits = []
-        self.kanji_lineedits = []
-        self.kana_lineedits = []
-        super(ReviewFields, self).__init__()  # Cut-and-pasted
+        self.text_lineedits = []
+        self.base_lineedits = []
+        self.ruby_lineedits = []
+        # super(ReviewFields, self).__init__()  # Cut-and-pasted
+        QDialog.__init__(self)
         self.initUI()
 
     def initUI(self):
         language_help = _(u'''<h4>Language code.</h4>
-<p>This will be transmitted as part of the requst sent to Google
-TTS. Use a standard language code here. Using invalid values or codes
-of unsupported languages will result in no downloads. Do <em>not</em>
-use domain codes (E.g. use <code>zh</code> rather than <code>cn</code>
-for Chinese.)</p>''')
+<p>This will be transmitted as part of the requst sent to the
+sites. As some sites only support one language, this is also used to
+decide where to send the requests. Use a standard language code
+here. Using invalid values or codes of unsupported languages will
+result in no downloads. Do <em>not</em> use domain codes (E.g. use
+<code>zh</code> rather than <code>cn</code> for Chinese.)</p>''')
         self.setWindowTitle(_(u'Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
         self.setLayout(layout)
-        explanation = QLabel(self)
-        if len(self.general_fields) + len(self.japanese_fields) > 0:
-            explanation.setText(
-                _(u'Please edit the text below or change the language.'))
-        else:
-            explanation.setText(_(u'Please select the language to use:'))
-        layout.addWidget(explanation)
-        if len(self.general_fields) > 0:
-            self.create_general_rows(layout)
-        if len(self.japanese_fields) > 0:
-            self.create_japanese_rows(layout)
+        edit_text_head = QLabel(_('''\
+<h4>Requests to send to the download sites</h4>
+In split edit fields, set the expression (kanji) on the left, the
+reading (kana) on the right.
+'''))
+        layout.addWidget(edit_text_head)
+        self.create_data_rows(layout)
+        line = QFrame(self)
+        line.setFrameShape(QFrame.HLine)
+        line.setFrameShadow(QFrame.Sunken)
+        layout.addWidget(line)
+        lcode_head = QLabel(_('''\
+<h4>Language code</h4>
+Set the language of the request here.
+'''))
+        layout.addWidget(lcode_head)
         lang_hlayout = QHBoxLayout()
         lc_label = QLabel(_(u'Language code:'), self)
         lang_hlayout.addWidget(lc_label)
@@ -93,43 +96,39 @@ for Chinese.)</p>''')
                      self, SLOT("reject()"))
         layout.addWidget(dialog_buttons)
 
-    def create_general_rows(self, layout):
+    def create_data_rows(self, layout):
         gf_layout = QGridLayout()
-        gtts_head_label = QLabel(_('Requests to send to Google TTS:'))
-        gf_layout.addWidget(gtts_head_label, 0, 0, 1, 2)
-        for num, (source, dest, text) in enumerate(self.general_fields):
+        for num, (source, dest, text, base, ruby) \
+                in enumerate(self.data_fields):
+            # We create all three QTextEdits for each item and hide
+            # empty text fields and base, ruby fields when text is not
+            # empty.
             label = QLabel(u'{0}:'.format(source))
             label.setToolTip(_(u'Source of the request text'))
-            gf_layout.addWidget(label, num + 1, 0)
+            gf_layout.addWidget(label, num, 0)
             ledit = QLineEdit(text)
-            ledit.setToolTip(
+            self.text_lineedits.append(ledit)
+            bedit = QLineEdit(base)
+            self.base_lineedits.append(bedit)
+            redit = QLineEdit(ruby)
+            self.ruby_lineedits.append(redit)
+            if text:
+                gf_layout.addWidget(ledit, num, 1, 1, 2)
+                ledit.setToolTip(
                 _(u'''<h4>Text of the request.</h4>
 <p>Edit this as appropriate.  Clear it to not download anything for
 this field.</p>'''))
-            gf_layout.addWidget(ledit, num + 1, 1)
-            self.general_text_lineedits.append(ledit)
-        layout.addLayout(gf_layout)
-
-    def create_japanese_rows(self, layout):
-        jf_layout = QGridLayout()
-        jpod_head_label = QLabel(
-            _(u'Requests send to Japanesepod, split into kanji and kana:'))
-        jf_layout.addWidget(jpod_head_label, 0, 0, 1, 3)
-        for num, (source, dest, kanji, kana)\
-                in enumerate(self.japanese_fields):
-            label = QLabel(u'{0}:'.format(source))
-            label.setToolTip(_(u'Source of the request text'))
-            jf_layout.addWidget(label, num + 1, 0)
-            kanji_edit = QLineEdit(kanji)
-            kanji_edit.setToolTip(_(u'''<h4>Kanji of the request.</h4>
+                bedit.hide()
+                redit.hide()
+            else:
+                ledit.hide()
+                gf_layout.addWidget(bedit, num, 1)
+                bedit.setToolTip(_(u'''<h4>Kanji of the request.</h4>
 <p>Edit this as appropriate.  Clear it to not download anything for
 this field.  For pure kana words, enter (or keep) the kana here.</p>'''))
-            jf_layout.addWidget(kanji_edit, num + 1, 1)
-            self.kanji_lineedits.append(kanji_edit)
-            kana_edit = QLineEdit(kana)
-            kana_edit.setToolTip(_(u'''<h4>Kana of the request.</h4>
+                gf_layout.addWidget(redit, num, 2)
+                redit.setToolTip(
+                _(u'''<h4>Kana of the request.</h4>
 <p>Edit this as appropriate.  For pure kana words, enter (or keep) the
 kana here or clear this field.</p>'''))
-            jf_layout.addWidget(kana_edit, num + 1, 2)
-            self.kana_lineedits.append(kana_edit)
-        layout.addLayout(jf_layout)
+        layout.addLayout(gf_layout)
