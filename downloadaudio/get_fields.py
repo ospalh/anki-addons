@@ -8,6 +8,7 @@ import re
 from aqt import mw
 from anki.template import furigana
 from anki.utils import stripHTML
+from anki.sound import stripSounds
 
 """
 Extract field data to download.
@@ -80,6 +81,7 @@ def field_data(note, fname, readings):
         text = text.replace(u'<br>', u' ')
         text = text.replace(u'<br />', u' ')
         text = stripHTML(text)
+        text = stripSounds(text)
         # Reformat so we have exactly one space between words.
         text = u' '.join(text.split())
         if not text:
