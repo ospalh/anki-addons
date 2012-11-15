@@ -80,7 +80,9 @@ def do_download(note, field_data, language):
                 # goes wrong, don't catch or rais whatever you want.
                 downloader.download_files(text, base, ruby)
             except:
-                # Uncomment this raise while testing new downloaders.
+                # Uncomment this raise while testing new downloaders,
+                # and replace the list in downloadres.__init__ with
+                # one containing only the downloader in question.
                 # raise
                 continue
             for word_path, file_name, extras in downloader.downloads_list:
