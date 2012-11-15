@@ -41,7 +41,6 @@ class BeolingusDownloader(AudioDownloader):
         We can get pronunciations for the three keys in this dictionary.
         """
         self.service = None
-        self.get_icon()
 
     def download_files(self, word, base, ruby):
         """
@@ -64,6 +63,9 @@ class BeolingusDownloader(AudioDownloader):
                      if (self.speak_code + self.language) in href]
         href_list = [href for href in href_list
                      if href.endswith(self.text_code + word)]
+        if href_list:
+            # Only get the icon when we (seem to) have a pronunciation
+            self.maybe_get_icon()
         for url_to_get in href_list:
             try:
                 word_path, word_file = self.get_word_file(url_to_get, word)
