@@ -42,7 +42,7 @@ def uniqify_list(seq):
     return no_dupes
 
 
-def field_data(note, fname, readings):
+def field_data(note, fname, readings, get_empty=False):
     """
     Return a suitable source field name and the text in that field.
 
@@ -84,7 +84,7 @@ def field_data(note, fname, readings):
         text = stripSounds(text)
         # Reformat so we have exactly one space between words.
         text = u' '.join(text.split())
-        if not text:
+        if not text and not get_empty:
             raise ValueError('Source field empty')
         if readings:
             base = furigana.kanji(text)
@@ -93,7 +93,7 @@ def field_data(note, fname, readings):
         else:
             base = u''
             ruby = u''
-        return field_names[idx], fname, text, base, ruby
+        return field_names[idx], fname, text, base, ruby, readings
 
     t_name = fname.lower()
     field_names = [item[0] for item in note.items()]
@@ -187,7 +187,7 @@ def get_side_fields(card, note):
     return field_data_list
 
 
-def get_note_fields(note):
+def get_note_fields(note, get_empty=False):
     """
     Get a list of field data for download.
 
@@ -202,14 +202,14 @@ def get_note_fields(note):
                 try:
                     # Here, too, first try reading, then try other
                     # fields.
-                    field_data_list.append(
-                        field_data(note, fn, readings=True))
+                    field_data_list.append(field_data(
+                            note, fn, readings=True, get_empty=get_empty))
                 except (KeyError, ValueError):
                     # No or empty readings field.
                     pass
                 try:
-                    field_data_list.append(
-                        field_data(note, fn, readings=False))
+                    field_data_list.append(field_data(
+                            note, fn, readings=False, get_empty=get_empty))
                 except (KeyError, ValueError):
                     # No or empty 'normal' field
                     pass

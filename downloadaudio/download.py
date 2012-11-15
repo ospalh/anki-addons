@@ -71,7 +71,7 @@ def do_download(note, field_data, language):
     to do.
     """
     retrieved_files_list = []
-    for (source, dest, text, base, ruby) in field_data:
+    for (source, dest, text, base, ruby, dummy_split) in field_data:
         for downloader in downloaders:
             # Use a public variable to set the language.
             downloader.language = language
@@ -151,7 +151,7 @@ def download_for_note(note=False, ask_user=False):
             note = card.note()
         except:
             return
-    field_data = get_note_fields(note)
+    field_data = get_note_fields(note, get_empty=ask_user)
     language_code = get_language_code(card=card, note=note)
     if ask_user:
         try:
