@@ -32,7 +32,6 @@ class JapanesepodDownloader(AudioDownloader):
         Get text for the base and ruby (kanji and kana) when
         self.language is ja.
         """
-        self.maybe_get_icon()
         self.downloads_list = []
         self.set_names(word, base, ruby)
         # We return (without adding files to the list) at the slightes
