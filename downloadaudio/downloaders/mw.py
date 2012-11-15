@@ -24,7 +24,6 @@ class MerriamWebsterDownloader(AudioDownloader):
         # Here the word page url works to get the favicon.
         self.icon_url = self.url
         self.popup_url = 'http://www.merriam-webster.com/audio.php?'
-        self.get_icon()
 
     def download_files(self, word, base, ruby):
         """
@@ -94,6 +93,9 @@ class MerriamWebsterDownloader(AudioDownloader):
                 # same for this meaning_no.
                 meaning_no_list[other_index] = self.join_strings(
                     meaning_no_list[other_index], meaning_no)
+        if file_list:
+            # Only get the icon when we (seem to) have a pronunciation
+            self.maybe_get_icon()
         for idx, mw_fn in enumerate(file_list):
             meaning_no = meaning_no_list[idx]
             extras = dict(Source="Merriam-Webster")

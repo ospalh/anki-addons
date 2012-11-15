@@ -9,8 +9,8 @@ Change the download audio parameters on user input.
 """
 
 from PyQt4.QtCore import SIGNAL, SLOT
-from PyQt4.QtGui import QDialog, QDialogButtonBox, QFrame, QGridLayout, QHBoxLayout, \
-    QIcon, QLabel, QLineEdit, QVBoxLayout
+from PyQt4.QtGui import QDialog, QDialogButtonBox, QFrame, QGridLayout, \
+    QHBoxLayout, QIcon, QLabel, QLineEdit, QVBoxLayout
 
 from anki.lang import _
 
@@ -22,12 +22,13 @@ def update_data(data_fields, language_code):
     review_fields = ReviewFields(data_fields, language_code)
     if not review_fields.exec_():
         raise RuntimeError('User cancel')
-    for num, (source, dest, old_text, old_base, old_ruby) \
+    for num, (source, dest, old_text, old_base, old_ruby, split_reading) \
             in enumerate(data_fields):
         data_fields[num] = (source, dest,
                             review_fields.text_lineedits[num].text(),
                             review_fields.base_lineedits[num].text(),
-                            review_fields.ruby_lineedits[num].text())
+                            review_fields.ruby_lineedits[num].text(),
+                            split_reading)
     language_code = review_fields.language_code_lineedit.text()
     return data_fields, language_code
 
@@ -59,21 +60,39 @@ result in no downloads. Do <em>not</em> use domain codes (E.g. use
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
         self.setLayout(layout)
-        edit_text_head = QLabel(_('''\
+        edit_text_head = QLabel()
+        kanji_et =_('''\
 <h4>Requests to send to the download sites</h4>
-In split edit fields, set the expression (kanji) on the left, the
-reading (kana) on the right.
-'''))
+<p>In the split edit fields, set the kanji on the left, the
+kana on the right.</p>
+''')
+        base_et =_('''\
+<h4>Requests to send to the download sites</h4>
+<p>In split edit fields, set the expression (base) on the left, the
+reading (ruby) on the right.</p>
+''')
+        single_et =_('''\
+<h4>Requests to send to the download sites</h4>
+''')
+        # Now decide which help text to show.
+        # First, decide if we have any split fields. (Don't care about
+        # performance. This may not be the quickest way).
+        if [itm for itm in self.data_fields if itm[5]]:
+            # Yes, the list of all items with split fields is not empty.
+            # A bit C-ish test. language_code may be None:
+            if self.language_code and self.language_code.startswith('ja'):
+                edit_text_head.setText(kanji_et)
+            else:
+                edit_text_head.setText(base_et)
+        else:
+            edit_text_head.setText(single_et)
         layout.addWidget(edit_text_head)
         self.create_data_rows(layout)
         line = QFrame(self)
         line.setFrameShape(QFrame.HLine)
         line.setFrameShadow(QFrame.Sunken)
         layout.addWidget(line)
-        lcode_head = QLabel(_('''\
-<h4>Language code</h4>
-Set the language of the request here.
-'''))
+        lcode_head = QLabel(_('''<h4>Language code</h4>'''))
         layout.addWidget(lcode_head)
         lang_hlayout = QHBoxLayout()
         lc_label = QLabel(_(u'Language code:'), self)
@@ -98,7 +117,7 @@ Set the language of the request here.
 
     def create_data_rows(self, layout):
         gf_layout = QGridLayout()
-        for num, (source, dest, text, base, ruby) \
+        for num, (source, dest, text, base, ruby, split_reading) \
                 in enumerate(self.data_fields):
             # We create all three QTextEdits for each item and hide
             # empty text fields and base, ruby fields when text is not
@@ -112,23 +131,44 @@ Set the language of the request here.
             self.base_lineedits.append(bedit)
             redit = QLineEdit(ruby)
             self.ruby_lineedits.append(redit)
-            if text:
+            # We did use "if text:" for the test for a while. That was
+            # no good. We should show an empty field here. So we have
+            # to bring along the info whetehr we should show one or
+            # two line edits.
+            if not split_reading:
                 gf_layout.addWidget(ledit, num, 1, 1, 2)
                 ledit.setToolTip(
                 _(u'''<h4>Text of the request.</h4>
 <p>Edit this as appropriate.  Clear it to not download anything for
-this field.</p>'''))
+this line.</p>'''))
                 bedit.hide()
                 redit.hide()
             else:
                 ledit.hide()
                 gf_layout.addWidget(bedit, num, 1)
-                bedit.setToolTip(_(u'''<h4>Kanji of the request.</h4>
-<p>Edit this as appropriate.  Clear it to not download anything for
-this field.  For pure kana words, enter (or keep) the kana here.</p>'''))
+                kanji_tt_text = _(u'''\
+<h4>Kanji of the request.</h4>
+<p>Edit this as appropriate.  Clear this to not download anything for
+this line.  For pure kana words, enter (or keep) the kana
+here.</p>''')
+                base_tt_text = _(u'''\
+<h4>Expression of the request.</h4>
+<p>Edit this as appropriate. Clear this to not download anything for
+this line.</p>''')
+                # A bit C-ish. language_code may be None.
+                if self.language_code and self.language_code.startswith('ja'):
+                    bedit.setToolTip(kanji_tt_text)
+                else:
+                    bedit.setToolTip(base_tt_text)
                 gf_layout.addWidget(redit, num, 2)
-                redit.setToolTip(
-                _(u'''<h4>Kana of the request.</h4>
+
+                kana_tt_text = _(u'''<h4>Kana of the request.</h4>
 <p>Edit this as appropriate.  For pure kana words, enter (or keep) the
-kana here or clear this field.</p>'''))
+kana here or clear this field.</p>''')
+                ruby_tt_text = _(u'''<h4>Reading (ruby) of the request.</h4>
+<p>Edit this as appropriate.</p>''')
+                if self.language_code and self.language_code.startswith('ja'):
+                    redit.setToolTip(kana_tt_text)
+                else:
+                    redit.setToolTip(ruby_tt_text)
         layout.addLayout(gf_layout)

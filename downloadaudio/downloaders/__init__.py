@@ -20,10 +20,11 @@ each site first.
 from .beolingus import BeolingusDownloader
 from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
+from .leo import LeoDownloader
 from .mw import MerriamWebsterDownloader
 
 downloaders = [JapanesepodDownloader(), MerriamWebsterDownloader(),
-               BeolingusDownloader(), GooglettsDownloader()]
+               BeolingusDownloader(), LeoDownloader(), GooglettsDownloader()]
 """List of downloaders. The sites are tried in the order they appear here."""
 
 __all__ = [downloaders]

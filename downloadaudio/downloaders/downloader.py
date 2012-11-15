@@ -125,14 +125,17 @@ class AudioDownloader(object):
         self.base_name = text
         self.display_text = text
 
-    def get_icon(self):
+    def maybe_get_icon(self):
         """
-        Get icon for the site as a QPixmap.
+        Get icon for the site as a QImage if we haven't already.
 
         Get the site icon, either the 'rel="icon"' or the favicon, for
-        the web page at url or passed in as page_html. Return a PyQt4
-        QPixmap.
+        the web page at url or passed in as page_html and store it as
+        a QImage. This function can be called repeatedly and loads the
+        icon only once.
         """
+        if self.site_icon:
+            return
         if not with_pyqt:
             self.site_icon = None
             return
@@ -177,6 +180,8 @@ class AudioDownloader(object):
         page doesn't contain a link tag with rel set to icon (the new
         way of doing site icons.)
         """
+        if self.site_icon:
+            return
         if not with_pyqt:
             self.site_icon = None
             return

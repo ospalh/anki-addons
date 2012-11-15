@@ -71,7 +71,7 @@ def do_download(note, field_data, language):
     to do.
     """
     retrieved_files_list = []
-    for (source, dest, text, base, ruby) in field_data:
+    for (source, dest, text, base, ruby, dummy_split) in field_data:
         for downloader in downloaders:
             # Use a public variable to set the language.
             downloader.language = language
@@ -80,7 +80,9 @@ def do_download(note, field_data, language):
                 # goes wrong, don't catch or rais whatever you want.
                 downloader.download_files(text, base, ruby)
             except:
-                # Uncomment this raise while testing new downloaders.
+                # Uncomment this raise while testing new downloaders,
+                # and replace the list in downloadres.__init__ with
+                # one containing only the downloader in question.
                 # raise
                 continue
             for word_path, file_name, extras in downloader.downloads_list:
@@ -151,7 +153,7 @@ def download_for_note(note=False, ask_user=False):
             note = card.note()
         except:
             return
-    field_data = get_note_fields(note)
+    field_data = get_note_fields(note, get_empty=ask_user)
     language_code = get_language_code(card=card, note=note)
     if ask_user:
         try:

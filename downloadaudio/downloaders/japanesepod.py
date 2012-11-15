@@ -24,7 +24,6 @@ class JapanesepodDownloader(AudioDownloader):
         self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
-        self.get_icon()
 
     def download_files(self, word, base, ruby):
         """
@@ -42,6 +41,8 @@ class JapanesepodDownloader(AudioDownloader):
             return
         if not base:
             return
+        # Only get the icon when we are using Japanese.
+        self.maybe_get_icon()
         # Reason why we don't just do the get_data_.. bit inside the
         # with: Like this we don't have to clean up the temp file.
         word_data = self.get_data_from_url(self.query_url(base, ruby))
