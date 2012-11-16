@@ -22,9 +22,11 @@ from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
 from .leo import LeoDownloader
 from .mw import MerriamWebsterDownloader
+from .wiktionary import WiktionaryDownloader
 
 downloaders = [JapanesepodDownloader(), MerriamWebsterDownloader(),
-               BeolingusDownloader(), LeoDownloader(), GooglettsDownloader()]
+               LeoDownloader(), WiktionaryDownloader(), BeolingusDownloader(),
+               GooglettsDownloader()]
 """List of downloaders. The sites are tried in the order they appear here."""
 
 __all__ = [downloaders]
