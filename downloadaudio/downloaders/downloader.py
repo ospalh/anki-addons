@@ -176,7 +176,7 @@ class AudioDownloader(object):
         """
         Get favicon for the site.
 
-        This is called when the site_url can't be loaded or when that
+        This is called when the icon_url can't be loaded or when that
         page doesn't contain a link tag with rel set to icon (the new
         way of doing site icons.)
         """

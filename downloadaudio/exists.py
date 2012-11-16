@@ -6,7 +6,6 @@
 
 import os
 import re
-import sys
 from aqt import mw
 from anki.utils import isWin, isMac, stripHTML
 

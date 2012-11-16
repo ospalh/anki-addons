@@ -14,16 +14,11 @@ import urllib
 import urlparse
 import re
 
-# url_bl_word = 'dict.tu-chemnitz.de/dings.cgi?service=de-en&query=unwahr'
-
-download_file_extension = u'.wav'
-
-
 from .downloader import AudioDownloader
 
 
 class BeolingusDownloader(AudioDownloader):
-    """Download audio from Japanesepod"""
+    """Download audio from Beolingus (TU Chemnitz)"""
     def __init__(self):
         AudioDownloader.__init__(self)
         self.file_extension = u'.mp3'
@@ -68,11 +63,11 @@ class BeolingusDownloader(AudioDownloader):
             self.maybe_get_icon()
         for url_to_get in href_list:
             try:
-                word_path, word_file = self.get_word_file(url_to_get, word)
+                word_path, word_fname = self.get_word_file(url_to_get, word)
             except ValueError:
                 continue
             self.downloads_list.append(
-                (word_path, word_file, dict(Source="Beolingus")))
+                (word_path, word_fname, dict(Source="Beolingus")))
 
     def get_word_file(self, popup_url, word):
         """
