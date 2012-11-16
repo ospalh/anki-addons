@@ -93,8 +93,8 @@ def find_sweep():
             command_list[0] += '.exe'
         if not which(command_list[0]):
             # Complain,
-            warn_string = u'Replay with sweep add-on: Could not find {} ' + \
-                u'in path. Please download and install it.'
+            warn_string = u'''Edit media add-on: Could not find \
+{0} in path. Please download and install it.'''
             utils.showWarning(warn_string.format(command_list[0]))
             # and clear the list
             command_list = None
@@ -119,4 +119,3 @@ if find_sweep():
     mw.connect(mw.sweep_audio_fiels_action, SIGNAL("triggered()"),
                sweep_current_note)
     mw.form.menuTools.addAction(mw.sweep_audio_fiels_action)
-
