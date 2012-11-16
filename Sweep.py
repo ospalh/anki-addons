@@ -93,8 +93,8 @@ def find_sweep():
             command_list[0] += '.exe'
         if not which(command_list[0]):
             # Complain,
-            warn_string = u'Replay with sweep add-on: Could not find {} ' + \
-                u'in path. Please download and install it.'
+            warn_string = u'''Replay with sweep add-on: Could not find {0} \
+in path. Please download and install it.'''
             utils.showWarning(warn_string.format(command_list[0]))
             # and clear the list
             command_list = None

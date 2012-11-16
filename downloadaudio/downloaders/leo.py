@@ -28,7 +28,7 @@ class LeoDownloader(AudioDownloader):
     def __init__(self):
         AudioDownloader.__init__(self)
         self.file_extension = u'.mp3'
-        self.url = 'http://www.leo.org/dict/audio_{}/{}.mp3'
+        self.url = 'http://www.leo.org/dict/audio_{language}/{word}.mp3'
         # And, yes, they use ch for Chinese.
         # (I'm not sure if they really have anything for ru or it.)
         self.language_dict = {'de': 'de', 'en': 'en', 'es': 'es', 'fr': 'fr',
@@ -82,7 +82,7 @@ class LeoDownloader(AudioDownloader):
         if self.chinese_code == self.language:
             word = ruby
         return self.url.format(
-            self.language, urllib.quote(word.encode('utf-8')))
+            language=self.language, word=urllib.quote(word.encode('utf-8')))
 
     def get_flag_icon(self):
         """

@@ -103,8 +103,8 @@ def findMpg():
         # set the base name to empty, used as a test later
         mpgBaseName = None
         # and complain.
-        help_string = u'Play with mpg plugin: ' + \
-            u'Could not find {} in path. Please download and install it.'
+        help_string = u'''Play with mpg plugin: \
+Could not find {0} in path. Please download and install it.'''
         utils.showInfo(help_string.format(mpgBaseName))
 
 sound.play = playSomeSoundsWithMpg
