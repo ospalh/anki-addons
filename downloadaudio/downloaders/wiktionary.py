@@ -45,7 +45,7 @@ class WiktionaryDownloader(AudioDownloader):
         self.language = self.language[:2]
         word_soup = self.get_soup_from_url(
             self.url.format(self.language, word))
-        # There are (at least) two ways the audio files can be present:
+        # There are a number of ways the audio files can be present:
         ogg_url_list = []
         # As simple links:
         a_list = word_soup.findAll('a')
@@ -60,12 +60,10 @@ class WiktionaryDownloader(AudioDownloader):
             # We look for links to ogg files (and not the description
             # pages) that contain our word.
             if re.search(self.word_ogg_re.format(word=re.escape(word)), href):
-                print 'good href: {}'.format(href)
                 ogg_url_list.append(href)
         # Next, look for source and src. Seen those inside audio tags.
         # I'm not sure if this is any use, but i guess it does no harm.
         source_list = word_soup.findAll('source')
-        print 'source list: {}'.format(source_list)
         for source in source_list:
             try:
                 # Take the same precaution as above
@@ -75,26 +73,18 @@ class WiktionaryDownloader(AudioDownloader):
             # We might have other source tags, for whatever. Use the
             # same re as above. Should work out fine.
             if re.search(self.word_ogg_re.format(word=re.escape(word)), src):
-                print 'good src: {}'.format(src)
                 ogg_url_list.append(src)
-
-        # At least from fr.wiktionary.org i got <button>.
+        # At least from fr.wiktionary.org i got a <button>.
         button_list = word_soup.findAll('button')
-        print 'button list: {}'.format(button_list)
         for button in button_list:
             try:
-                # Take the same precaution as above
                 video_url = re.search(
                     self.button_onclick_re, button['onclick']).group(1)
             except (KeyError, AttributeError):
                 continue
             if re.search(self.word_ogg_re.format(
                     word=re.escape(word)), video_url):
-                print 'good vurl: {}'.format(video_url)
                 ogg_url_list.append(video_url)
-
-        # When we have the audio tags, there probably are direct <a>
-        # links to those files as well, so
         ogg_url_list = self.uniqify_list(ogg_url_list)
         for url_to_get in ogg_url_list:
             # We may have to add a scheme or a scheme and host
