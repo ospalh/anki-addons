@@ -85,11 +85,10 @@ class BeolingusDownloader(AudioDownloader):
                 # As said above, the bit in the curly braces may not be there.
                 extras['Part of speech'] = part_of_speech
             try:
-                word_path, word_file = self.get_word_file(url_to_get, word)
+                word_path, word_fname = self.get_word_file(url_to_get, word)
             except ValueError:
                 continue
-            self.downloads_list.append(
-                (word_path, word_file, extras))
+            self.downloads_list.append((word_path, word_fname, extras))
 
     def get_word_file(self, popup_url, word):
         """
