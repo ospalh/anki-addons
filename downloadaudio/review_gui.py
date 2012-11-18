@@ -244,7 +244,7 @@ that they are sorry, will add this soon &c., click on this.""")
                 self.note[self.list[old_play_button_group.id(button)][1]]))
 
     def build_text_help_label(self, text, source, extras):
-        ret_text = _(u'Source text: <b>{0}</b><br>from field: {1}')\
+        ret_text = _(u'Source text: <b>{0}</b><br>From field: {1}')\
             .format(text, source)
         for key, value in extras.items():
             ret_text += u'<br>{0}: {1}'.format(key, value)

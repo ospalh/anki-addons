@@ -23,12 +23,14 @@ class GooglettsDownloader(AudioDownloader):
         self.icon_url = 'http://translate.google.com/'
         self.url = 'http://translate.google.com/translate_tts?'
 
-    def download_files(self, word, base, ruby):
+    def download_files(self, word, base, ruby, split):
         """
         Get text from GoogleTTS.
         """
         self.maybe_get_icon()
         self.downloads_list = []
+        if split:
+            word = base
         self.set_names(word, base, ruby)
         if not word:
             raise ValueError('Nothing to download')

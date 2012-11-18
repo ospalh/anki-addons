@@ -25,7 +25,7 @@ class MerriamWebsterDownloader(AudioDownloader):
         self.icon_url = self.url
         self.popup_url = 'http://www.merriam-webster.com/audio.php?'
 
-    def download_files(self, word, base, ruby):
+    def download_files(self, word, base, ruby, split):
         """
         Get pronunciations of a word from BeoLingus
 
@@ -36,6 +36,8 @@ class MerriamWebsterDownloader(AudioDownloader):
         \ˈrau̇\), so return a list.
         """
         self.downloads_list = []
+        if split:
+            word = base
         self.set_names(word, base, ruby)
         if not self.language.startswith('en'):
             return

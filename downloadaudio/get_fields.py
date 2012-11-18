@@ -86,13 +86,12 @@ def field_data(note, fname, readings, get_empty=False):
         text = u' '.join(text.split())
         if not text and not get_empty:
             raise ValueError('Source field empty')
-        if readings:
-            base = furigana.kanji(text)
-            ruby = furigana.kana(text)
-            text = u''
-        else:
-            base = u''
-            ruby = u''
+        # We pass the reading/plain on to the update dialog. We don't
+        # look at the texts any more to decide what to do. So don't
+        # set anything to empty here. Rather do the split even if it
+        # is pointless.
+        base = furigana.kanji(text)
+        ruby = furigana.kana(text)
         return field_names[idx], fname, text, base, ruby, readings
 
     t_name = fname.lower()
