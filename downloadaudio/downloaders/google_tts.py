@@ -30,7 +30,10 @@ class GooglettsDownloader(AudioDownloader):
         self.maybe_get_icon()
         self.downloads_list = []
         if split:
-            word = base
+            if word == base:
+                return
+            else:
+                word = base
         self.set_names(word, base, ruby)
         if not word:
             raise ValueError('Nothing to download')
