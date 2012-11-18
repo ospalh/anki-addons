@@ -48,7 +48,10 @@ class BeolingusDownloader(AudioDownloader):
         """
         self.downloads_list = []
         if split:
-            word = base
+            if word == base:
+                return
+            else:
+                word = base
         self.set_names(word, base, ruby)
         # EAFP. When we call this with a wrong language we fly right
         # out of this with a KeyError.
