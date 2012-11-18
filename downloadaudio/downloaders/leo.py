@@ -59,7 +59,10 @@ class LeoDownloader(AudioDownloader):
         """
         self.downloads_list = []
         if split:
-            word = base
+            if word == base:
+                return
+            else:
+                word = base
         if not word and not ruby:
             return
         # Fix the language. EAFP.
