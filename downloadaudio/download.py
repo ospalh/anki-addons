@@ -71,18 +71,18 @@ def do_download(note, field_data, language):
     to do.
     """
     retrieved_files_list = []
-    for (source, dest, text, base, ruby, dummy_split) in field_data:
+    for (source, dest, text, base, ruby, split) in field_data:
         for downloader in downloaders:
             # Use a public variable to set the language.
             downloader.language = language
             try:
                 # Make it easer inside the downloader. If anything
                 # goes wrong, don't catch or rais whatever you want.
-                downloader.download_files(text, base, ruby)
+                downloader.download_files(text, base, ruby, split)
             except:
-                # Uncomment this raise while testing new downloaders,
-                # and replace the list in downloadres.__init__ with
-                # one containing only the downloader in question.
+                ## Uncomment this raise while testing a new
+                ## downloaders.  Also comment out all the others in the
+                ## downloaders list in downloaders.__init__
                 # raise
                 continue
             for word_path, file_name, extras in downloader.downloads_list:

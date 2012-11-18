@@ -24,9 +24,14 @@ from .leo import LeoDownloader
 from .mw import MerriamWebsterDownloader
 from .wiktionary import WiktionaryDownloader
 
-downloaders = [JapanesepodDownloader(), MerriamWebsterDownloader(),
-               LeoDownloader(), WiktionaryDownloader(), BeolingusDownloader(),
-               GooglettsDownloader()]
+downloaders = [
+    JapanesepodDownloader(),
+    MerriamWebsterDownloader(),
+    LeoDownloader(),
+    WiktionaryDownloader(),
+    BeolingusDownloader(),
+    GooglettsDownloader(),
+    ]
 """List of downloaders. The sites are tried in the order they appear here."""
 
 __all__ = [downloaders]

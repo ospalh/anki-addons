@@ -48,7 +48,7 @@ class LeoDownloader(AudioDownloader):
             # When we use this dict, we have already munged the 'zh' to 'ch'
             'ch': 'http://dict.leo.org/favicon_ch.ico'}
 
-    def download_files(self, word, base, ruby):
+    def download_files(self, word, base, ruby, split):
         """
         Download a word from LEO
 
@@ -58,6 +58,8 @@ class LeoDownloader(AudioDownloader):
         Italian or Russian.
         """
         self.downloads_list = []
+        if split:
+            word = base
         if not word and not ruby:
             return
         # Fix the language. EAFP.
