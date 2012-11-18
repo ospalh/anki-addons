@@ -38,12 +38,12 @@ class WiktionaryDownloader(AudioDownloader):
         Get pronunciations of a word from the right wiktionary.
         """
         self.downloads_list = []
+        self.set_names(word, base, ruby)
         if split:
             if word == base:
                 return
             else:
                 word = base
-        self.set_names(word, base, ruby)
         if not word:
             return
         self.maybe_get_icon()
