@@ -25,7 +25,7 @@ class JapanesepodDownloader(AudioDownloader):
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
 
-    def download_files(self, word, base, ruby):
+    def download_files(self, word, base, ruby, split):
         """
         Downloader functon.
 

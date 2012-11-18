@@ -45,13 +45,15 @@ class BeolingusDownloader(AudioDownloader):
         """
         self.service = None
 
-    def download_files(self, word, base, ruby):
+    def download_files(self, word, base, ruby, split):
         """
         Get pronunciations of a word from BeoLingus
 
         Get pronunciations for words in one of three languages.
         """
         self.downloads_list = []
+        if split:
+            word = base
         self.set_names(word, base, ruby)
         # EAFP. When we call this with a wrong language we fly right
         # out of this with a KeyError.

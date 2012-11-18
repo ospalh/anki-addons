@@ -33,11 +33,13 @@ class WiktionaryDownloader(AudioDownloader):
         # onclick attribute.
         self.button_onclick_re = '"videoUrl":"([^"]+)"'
 
-    def download_files(self, word, base, ruby):
+    def download_files(self, word, base, ruby, split):
         """
         Get pronunciations of a word from the right wiktionary.
         """
         self.downloads_list = []
+        if split:
+            word = base
         self.set_names(word, base, ruby)
         if not word:
             return

@@ -86,7 +86,7 @@ class AudioDownloader(object):
         self.site_icon = None
         """The sites's favicon."""
 
-    def download_files(self, word, base, ruby):
+    def download_files(self, word, base, ruby, split):
         """
         Downloader functon.
 
@@ -94,18 +94,17 @@ class AudioDownloader(object):
         by the derived classes.
 
         The input is the text to use for the download, either the
-        whole text (for most languages) or split into kanji and kana
-        for Japanese. (The same split could be used for a Chinese
-        downloader, split into hanzi and pinyin (or bopomofo, ...).)
+        whole text (for most languages) or split into kanji and kana,
+        base and ruby.
 
-        This function should clear the self.downloads_list, try to get
-        pronunciation files from its source, put those into tempfiles,
-        and add a (temp_file_name, extras) pair to
-        self_downloads_lists for each downloaded file (which may of
-        course be zero, e.g. when the self.language is wrong). extras
-        should be a dict with interesting informations, like meaning
-        numbers, name of speaker &c. It should also call
-        self.set_names().
+        This function should clear the self.downloads_list, call
+        self.set_names(), and try to get pronunciation files from its
+        source, put those into tempfiles, and add a (temp_file_path,
+        base_name, extras) pair to self_downloads_lists for each
+        downloaded file (which may of course be zero, e.g. when the
+        self.language is wrong). extras should be a dict with
+        interesting informations, like meaning numbers, name of
+        speaker &c.
         """
         # NB. Checking file hashes and audio processing is now
         # done by the calling function.
