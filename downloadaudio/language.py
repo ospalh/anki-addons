@@ -34,17 +34,23 @@ def get_language_code(card=None, note=None):
         if not card:
             return default_audio_language_code
         note = card.note()
-    # First, look at the tags
+    # First look at the tags
     for tag in note.tags:
         try:
             return re.search('^lang_([a-z]{2,3})$', tag,
                              flags=re.IGNORECASE).group(1).lower()
         except:
             continue
-    # Then, look at the deck conf
+    # Then, look at the deck conf. First get it.
+    if card:
+        did = card.did
+    else:
+        try:
+            did = note.model()['did']
+        except (TypeError, KeyError):
+            did = 0
+    deck_conf = mw.col.decks.confForDid(did)
     try:
-        # It is possible we don't have a card. EAFP.
-        return mw.col.decks.confForDid(card.did)[
-            'addon_audio_download_language']
-    except:
+        return deck_conf['addon_audio_download_language']
+    except (TypeError, KeyError):
         return default_audio_language_code
