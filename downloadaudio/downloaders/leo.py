@@ -38,6 +38,7 @@ class LeoDownloader(AudioDownloader):
         # We should keep a number of site icons handy, with the right
         # flag for the request.
         self.site_icon_dict = {}
+        self.site_file_name_encoding = 'ISO-8859-1'
         self.icon_url_dict = {
             'de': 'http://dict.leo.org/favicon.ico',
             'en': 'http://dict.leo.org/favicon.ico',
@@ -81,7 +82,8 @@ class LeoDownloader(AudioDownloader):
         if self.chinese_code == self.language:
             word = ruby
         return self.url.format(
-            language=self.language, word=urllib.quote(word.encode('utf-8')))
+            language=self.language, word=urllib.quote(word.encode(
+                    self.site_file_name_encoding)))
 
     def get_flag_icon(self):
         """
