@@ -21,12 +21,16 @@ from .beolingus import BeolingusDownloader
 from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
 from .leo import LeoDownloader
+from .macmillan_american import MacmillanAmericanDownloader
+from .macmillan_british import MacmillanBritishDownloader
 from .mw import MerriamWebsterDownloader
 from .wiktionary import WiktionaryDownloader
 
 downloaders = [
     JapanesepodDownloader(),
     MerriamWebsterDownloader(),
+#    MacmillanAmericanDownloader(),
+    MacmillanBritishDownloader(),
     LeoDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),

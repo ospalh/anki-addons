@@ -17,17 +17,14 @@ from .downloader import AudioDownloader
 
 
 class MerriamWebsterDownloader(AudioDownloader):
-    """Download audio from Japanesepod"""
+    """Download audio from Merriam-Webster."""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.url = 'http://www.merriam-webster.com/dictionary/'
-        # Here the word page url works to get the favicon.
-        self.icon_url = self.url
-        self.popup_url = 'http://www.merriam-webster.com/audio.php?'
+        self.file_extension = u'.mp3'
 
     def download_files(self, word, base, ruby, split):
         """
-        Get pronunciations of a word from BeoLingus
+        Get pronunciations of a word from Merriam-Webster.
 
         Look up a English word at merriam-webster.com, look for
         pronunciations in the page and get audio files for those.
