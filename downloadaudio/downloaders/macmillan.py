@@ -40,6 +40,7 @@ class MacmillanDownloader(AudioDownloader):
             return
         if not word:
             return
+        word = word.replace("'", "-")
         self.maybe_get_icon()
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
