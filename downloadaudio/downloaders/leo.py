@@ -58,12 +58,9 @@ class LeoDownloader(AudioDownloader):
         Italian or Russian.
         """
         self.downloads_list = []
-        if split:
-            word = base
-        if not word and not ruby:
-            return
         # Fix the language. EAFP.
         self.language = self.language_dict[self.language[:2]]
+        # set_names also checks the language.
         self.set_names(word, base, ruby)
         # Only get the icon when we have a word
         # self.maybe_get_icon()
@@ -111,9 +108,13 @@ class LeoDownloader(AudioDownloader):
         """
         Set the display text and file base name variables.
         """
-        if self.language != self.chinese_code:
+        if self.language == self.chinese_code:
+            if not ruby:
+                raise ValueError('Nothing to download')
+            self.base_name = u"{0}_{1}".format(base, ruby)
+            self.display_text = u"{1} ({0})".format(base, ruby)
+        else:
+            if not text:
+                raise ValueError('Nothing to download')
             self.base_name = text
             self.display_text = text
-            return
-        self.base_name = u"{0}_{1}".format(base, ruby)
-        self.display_text = u"{1} ({0})".format(base, ruby)

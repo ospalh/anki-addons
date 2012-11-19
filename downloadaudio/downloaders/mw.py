@@ -37,7 +37,8 @@ class MerriamWebsterDownloader(AudioDownloader):
         """
         self.downloads_list = []
         if split:
-            word = base
+            # Avoid double downloads
+            return
         self.set_names(word, base, ruby)
         if not self.language.startswith('en'):
             return

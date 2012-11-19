@@ -36,10 +36,12 @@ class JapanesepodDownloader(AudioDownloader):
         self.set_names(word, base, ruby)
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
-        # download, ...
+        # download, not from a reading field...
         if not self.language.startswith('ja'):
             return
         if not base:
+            return
+        if not split:
             return
         # Only get the icon when we are using Japanese.
         self.maybe_get_icon()

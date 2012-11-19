@@ -39,7 +39,8 @@ class WiktionaryDownloader(AudioDownloader):
         """
         self.downloads_list = []
         if split:
-            word = base
+            # Avoid double downloads.
+            return
         self.set_names(word, base, ruby)
         if not word:
             return
