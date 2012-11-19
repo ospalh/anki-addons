@@ -21,7 +21,7 @@ def free_media_name(base, end):
     """
     base = stripHTML(base)
     # Basically stripping the 'invalidFilenameChars'. (Not tested too much).
-    base = re.sub('[\\/:\*?"<>\|]', '', base)
+    base = re.sub('[\\/:\*?\'"<>\|]', '', base)
     mdir = mw.col.media.dir()
     if not exists_lc(mdir, base + end):
         return os.path.join(mdir, base + end), base + end
