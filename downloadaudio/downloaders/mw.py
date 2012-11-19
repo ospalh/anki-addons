@@ -68,9 +68,7 @@ class MerriamWebsterDownloader(AudioDownloader):
             mw_audio_fn_base, mw_audio_word = onclick_string.split(', ')
             mw_audio_fn_base = mw_audio_fn_base.lstrip("'").rstrip("'")
             mw_audio_word = mw_audio_word.lstrip("'").rstrip("'")
-            # I can't get str.strip('\\') or str.strip('\\') to
-            # work. Work around.
-            mw_audio_word = ''.join(mw_audio_word.split("\\"))
+            mw_audio_word = mw_audio_word.replace("\\", "")
             # There may be a meaning number, as in "1row" "3row" in the
             # title..
             match = re.search(
