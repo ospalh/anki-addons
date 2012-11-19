@@ -154,6 +154,10 @@ def download_for_note(note=False, ask_user=False):
         except:
             return
     field_data = get_note_fields(note, get_empty=ask_user)
+    if not field_data:
+        # Complain before we show the empty dialog.
+        tooltip(u'Nothing to download.')
+        return
     language_code = get_language_code(card=card, note=note)
     if ask_user:
         try:
