@@ -17,7 +17,7 @@ from .downloader import AudioDownloader
 
 
 class MerriamWebsterDownloader(AudioDownloader):
-    """Download audio from Japanesepod"""
+    """Download audio from Meriam-Webster"""
     def __init__(self):
         AudioDownloader.__init__(self)
         self.url = 'http://www.merriam-webster.com/dictionary/'
@@ -27,7 +27,7 @@ class MerriamWebsterDownloader(AudioDownloader):
 
     def download_files(self, word, base, ruby, split):
         """
-        Get pronunciations of a word from BeoLingus
+        Get pronunciations of a word from Meriam-Webster
 
         Look up a English word at merriam-webster.com, look for
         pronunciations in the page and get audio files for those.
