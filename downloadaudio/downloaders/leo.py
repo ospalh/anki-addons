@@ -38,6 +38,7 @@ class LeoDownloader(AudioDownloader):
         # We should keep a number of site icons handy, with the right
         # flag for the request.
         self.site_icon_dict = {}
+        self.site_file_name_encoding = 'ISO-8859-1'
         self.icon_url_dict = {
             'de': 'http://dict.leo.org/favicon.ico',
             'en': 'http://dict.leo.org/favicon.ico',
@@ -58,15 +59,9 @@ class LeoDownloader(AudioDownloader):
         Italian or Russian.
         """
         self.downloads_list = []
-        if split:
-            if word == base:
-                return
-            else:
-                word = base
-        if not word and not ruby:
-            return
         # Fix the language. EAFP.
         self.language = self.language_dict[self.language[:2]]
+        # set_names also checks the language.
         self.set_names(word, base, ruby)
         # Only get the icon when we have a word
         # self.maybe_get_icon()
@@ -87,7 +82,8 @@ class LeoDownloader(AudioDownloader):
         if self.chinese_code == self.language:
             word = ruby
         return self.url.format(
-            language=self.language, word=urllib.quote(word.encode('utf-8')))
+            language=self.language, word=urllib.quote(word.encode(
+                    self.site_file_name_encoding)))
 
     def get_flag_icon(self):
         """
@@ -114,9 +110,13 @@ class LeoDownloader(AudioDownloader):
         """
         Set the display text and file base name variables.
         """
-        if self.language != self.chinese_code:
+        if self.language == self.chinese_code:
+            if not ruby:
+                raise ValueError('Nothing to download')
+            self.base_name = u"{0}_{1}".format(base, ruby)
+            self.display_text = u"{1} ({0})".format(base, ruby)
+        else:
+            if not text:
+                raise ValueError('Nothing to download')
             self.base_name = text
             self.display_text = text
-            return
-        self.base_name = u"{0}_{1}".format(base, ruby)
-        self.display_text = u"{1} ({0})".format(base, ruby)
