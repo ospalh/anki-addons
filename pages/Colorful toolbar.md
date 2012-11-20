@@ -6,6 +6,7 @@ status: working
 status_color: green
 status_text_color: white
 abstract: Replace the top menu bar with the “Decks Study Add Browse” text buttons and the two rather drab sync and statistics buttons with a colorful icon toolbar like the one in Anki 1.
+subtitle: Get back the Anki1 look
 first_image: Colorful%20toolbar.png
 first_alt: Anki 2 review window with two icon bars. The review area reads Die Hauptstadt von Niue ist
 ankiweb_id: 388296573

@@ -6,6 +6,7 @@ status: working
 status_color: green
 status_text_color: white
 abstract: The first field of cards should be unique. To make sure this is the case, this add-on adds a unique number to fields called `Note ID`.
+subtitle: Make all cards unique
 first_image: Note%20ID.png
 first_alt: The first field is called Note ID
 ankiweb_id: 1672832404
