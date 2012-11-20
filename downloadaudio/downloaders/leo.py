@@ -11,6 +11,8 @@
 Download pronunciations from leo.org
 '''
 
+import os
+import sys
 import urllib
 
 # Make this work without PyQt
@@ -48,6 +50,11 @@ class LeoDownloader(AudioDownloader):
             'ru': 'http://dict.leo.org/favicon_ru.ico',
             # When we use this dict, we have already munged the 'zh' to 'ch'
             'ch': 'http://dict.leo.org/favicon_ch.ico'}
+        # As the name implies, a hack. Try to use the cjklib TTEMPÉ
+        # brings along. A syntem-wide installed one should work as
+        # well.
+        self.have_tried_cjklib_hack = False
+        self.reading_factory = None
 
     def download_files(self, word, base, ruby, split):
         """
@@ -80,10 +87,44 @@ class LeoDownloader(AudioDownloader):
     def query_url(self, word, ruby):
         """Build query URL"""
         if self.chinese_code == self.language:
-            word = ruby
+            word = self.fix_pinyin(ruby)
         return self.url.format(
             language=self.language, word=urllib.quote(word.encode(
                     self.site_file_name_encoding)))
+
+    def fix_pinyin(self, pinyin):
+        # Hacks. It is overkill to ship cjklib with this add-on. But
+        # to get the tone numbers as numbers, we should use it. My
+        # hope (guess) is that the typical user that will want Chinese
+        # pronunciations will also have TTEMPÉ's (version of mine)
+        # chinese-support-plugin installed. So try to use that and
+        # don't complain if it doesn't work.
+        if not self.have_tried_cjklib_hack:
+            try:
+                # If this works, the whole shebang is run as an Anki2
+                # add-on. If not, we will still look for a system-wide
+                # cjklib, but obviously not for anothre add-on.
+                from aqt.utils import isWin
+            except:
+                pass
+            else:
+                from aqt import mw
+                addon_dir = mw.pm.addonFolder()
+                if isWin:
+                    # The isWin bit is copied from TTEMPÉ's code.
+                    addon_dir = addon_dir.encode(sys.getfilesystemencoding())
+                sys.path.append(os.path.join(addon_dir, "chinese"))
+            self.have_tried_cjk_hack = True
+        if not self.reading_factory:
+            try:
+                from cjklib.reading import ReadingFactory
+            except ImportError:
+                return pinyin
+            else:
+                self.reading_factory = ReadingFactory()
+        return self.reading_factory.convert(
+            pinyin, 'Pinyin',  'Pinyin', targetOptions={
+                'toneMarkType': 'numbers'}).replace('5', '0')
 
     def get_flag_icon(self):
         """
