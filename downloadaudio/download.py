@@ -62,7 +62,7 @@ for downloader in downloaders:
     downloader.use_temp_files = processor.useful
 
 
-def do_download(note, field_data, language):
+def do_download(note, field_data, language, hide_text=False):
     """
     Download audio data.
 
@@ -101,13 +101,13 @@ def do_download(note, field_data, language):
                     # if not processor.useful we write directly to the
                     # media dir.
                     try:
-                        # Dto. audio processing/file moving. The
+                        # As above. Audio processing/file moving. The
                         # downloader downloads to a temp file, so move
                         # here.
                         file_name = processor.process_and_move(
                             word_path, downloader.base_name)
                     except Exception:
-                        raise
+                        # raise  # Use this to debug an audio processor.
                         os.remove(word_path)
                         continue
                 # else:
@@ -117,7 +117,8 @@ def do_download(note, field_data, language):
                     source, dest, downloader.display_text,
                     file_name, item_hash, extras, downloader.site_icon))
     try:
-        store_or_blacklist(note, retrieved_files_list, show_skull_and_bones)
+        store_or_blacklist(
+            note, retrieved_files_list, show_skull_and_bones, hide_text)
     except ValueError as ve:
         tooltip(str(ve))
     except RuntimeError as rte:
@@ -138,7 +139,7 @@ def download_for_side():
         return
     note = card.note()
     field_data = get_side_fields(card, note)
-    do_download(note, field_data, get_language_code(card))
+    do_download(note, field_data, get_language_code(card), hide_text=True)
 
 
 def download_for_note(note=False, ask_user=False):
