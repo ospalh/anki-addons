@@ -1,4 +1,4 @@
-title: Somebody else's problem
+title: Somebody else’s problem
 id: sep
 main_file: Somebody elses problem.py
 type: addon
@@ -11,9 +11,9 @@ first_alt: An SEP-field is an easy way to make things invisible
 
 This is a quick hack to hide field content only on the desktop client.
 
-Put fields you don't want to see on the desktop into `{{sep:NN}}`
+Put fields you don’t want to see on the desktop into `{{sep:NN}}`
 templates, and they become
-[somebody else's problem](http://hitchhikers.wikia.com/wiki/Somebody_Else%27s_Problem_field).
+[somebody else’s problem](http://hitchhikers.wikia.com/wiki/Somebody_Else%27s_Problem_field).
 
 On AnkiWeb and AnkiDroid (and AnkiMobile), the template is unknown and
 default behaviour is to show the text without modification – the field
@@ -33,9 +33,8 @@ in the card CSS.
 
 The
 [problem](https://groups.google.com/forum/?fromgroups=&hl=en#!topic/ankisrs/jK3Jh4EzwKE)
-was that i didn't want to copy a bunch of video files to my Android
+was that i didn’t want to copy a bunch of video files to my Android
 device to save FAT
 [directory entries](http://en.wikipedia.org/wiki/File_Allocation_Table#VFAT_long_file_names),
 which are in short supply if you have a collection with many files
 with long non-ASCII names.
-
