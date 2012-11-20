@@ -21,10 +21,22 @@ Extract field data to download.
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
 expression_fields = ['expression', 'front', 'back']
-"""Fields we get our Google TTS download text from."""
+"""
+Fields we get the 'normal download text from.
+
+Text from these fields is used by most downloaders.
+"""
 
 reading_keys = ['reading', 'kana', u'かな', u'仮名', 'hanzi', 'pinyin']
-"""Fields we get our Japanese (or possibly Chinese) download text from."""
+"""
+Fields we get our East Asian text from.
+
+For Japanese (Japanesepod) and Chinese (LEO with language code set to
+'zh'), we use these fields as source. They should be filled by the
+standard add-ons (Japanese Support and Chinese support version
+<=0.6.1) in a useful way (that is, with the reading in square
+brackets).
+"""
 
 audio_field_keys = ['audio', 'sound']
 """Fields we put our downloaded sounds in."""

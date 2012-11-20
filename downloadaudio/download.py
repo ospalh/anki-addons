@@ -71,6 +71,7 @@ def do_download(note, field_data, language):
     to do.
     """
     retrieved_files_list = []
+    show_skull_and_bones = False
     for (source, dest, text, base, ruby, split) in field_data:
         for downloader in downloaders:
             # Use a public variable to set the language.
@@ -85,6 +86,8 @@ def do_download(note, field_data, language):
                 ## downloaders list in downloaders.__init__
                 # raise
                 continue
+            show_skull_and_bones = \
+                show_skull_and_bones or downloader.show_skull_and_bones
             for word_path, file_name, extras in downloader.downloads_list:
                 try:
                     item_hash = get_hash(word_path)
@@ -114,7 +117,7 @@ def do_download(note, field_data, language):
                     source, dest, downloader.display_text,
                     file_name, item_hash, extras, downloader.site_icon))
     try:
-        store_or_blacklist(note, retrieved_files_list)
+        store_or_blacklist(note, retrieved_files_list, show_skull_and_bones)
     except ValueError as ve:
         tooltip(str(ve))
     except RuntimeError as rte:

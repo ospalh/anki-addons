@@ -38,10 +38,10 @@ icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 action = {'add': 0, 'keep': 1, 'delete': 2, 'blacklist': 3}
 
 
-def store_or_blacklist(note, retrieved_data):
+def store_or_blacklist(note, retrieved_data, show_skull_and_bones):
     if not note or not retrieved_data:
         raise ValueError('Nothing downloaded')
-    review_files = ReviewFiles(note, retrieved_data)
+    review_files = ReviewFiles(note, retrieved_data, show_skull_and_bones)
     if not review_files.exec_():
         remove_all_files(retrieved_data)
         raise RuntimeError('User cancel')
@@ -88,10 +88,15 @@ class ReviewFiles(QDialog):
     A Dialog to let the user keep or discard files.
     """
 
-    def __init__(self, note, files_list):
+    def __init__(self, note, files_list, show_skull_and_bones):
+        super(ReviewFiles, self).__init__()  # Cut-and-pasted
         self.note = note
         self.list = files_list
-        super(ReviewFiles, self).__init__()  # Cut-and-pasted
+        self.show_skull_and_bones = show_skull_and_bones
+        self.right_column = 8
+        if not self.show_skull_and_bones:
+            # Hide one column.
+            self.right_column = 7
         self.buttons_groups = []
         self.text_help = _(u"""<h4>Text used to retrieve audio.</h4>
 <p>Mouse over the texts below to see further information.</p>""")
@@ -132,7 +137,7 @@ that they are sorry, will add this soon &c., click on this.""")
                 _(u'Please select an action for each downloaded file:'))
         else:
             explanation.setText(_(u'Please select what to do with the file:'))
-        layout.addWidget(explanation, 0, 0, 1, 8)
+        layout.addWidget(explanation, 0, 0, 1, self.right_column)
         text_head_label = QLabel(_(u'<b>Source text</b>'), self)
         text_head_label.setToolTip(self.text_help)
         layout.addWidget(text_head_label, 1, 0, 1, 2)
@@ -151,11 +156,12 @@ that they are sorry, will add this soon &c., click on this.""")
         delete_head_label = QLabel(_(u'delete'), self)
         delete_head_label.setToolTip(self.delete_help_text_long)
         layout.addWidget(delete_head_label, 1, 6)
-        blacklist_head_label = QLabel(_(u'blacklist'), self)
-        blacklist_head_label.setToolTip(self.blacklist_help_text_long)
-        layout.addWidget(blacklist_head_label, 1, 7)
+        if self.show_skull_and_bones:
+            blacklist_head_label = QLabel(_(u'blacklist'), self)
+            blacklist_head_label.setToolTip(self.blacklist_help_text_long)
+            layout.addWidget(blacklist_head_label, 1, 7)
         rule_label = QLabel('<hr>')
-        layout.addWidget(rule_label, 2, 0, 1, 8)
+        layout.addWidget(rule_label, 2, 0, 1, self.right_column)
         self.create_rows(layout)
         dialog_buttons = QDialogButtonBox(self)
         dialog_buttons.addButton(QDialogButtonBox.Cancel)
@@ -164,7 +170,8 @@ that they are sorry, will add this soon &c., click on this.""")
                      self, SLOT("accept()"))
         self.connect(dialog_buttons, SIGNAL("rejected()"),
                      self, SLOT("reject()"))
-        layout.addWidget(dialog_buttons, len(self.buttons_groups) + 3, 0, 1, 8)
+        layout.addWidget(dialog_buttons,
+                         len(self.buttons_groups) + 3, 0, 1, self.right_column)
 
     def create_rows(self, layout):
         play_button_group = QButtonGroup(self)
@@ -234,7 +241,10 @@ that they are sorry, will add this soon &c., click on this.""")
             t_blacklist_button.setToolTip(self.blacklist_help_text_short)
             t_blacklist_button.setIcon(QIcon(os.path.join(icons_dir,
                                                           'blacklist.png')))
-            layout.addWidget(t_blacklist_button, num, 7)
+            if self.show_skull_and_bones:
+                layout.addWidget(t_blacklist_button, num, 7)
+            else:
+                t_blacklist_button.hide()
             t_button_group.addButton(t_blacklist_button,  action['blacklist'])
             self.buttons_groups.append(t_button_group)
         play_button_group.buttonClicked.connect(

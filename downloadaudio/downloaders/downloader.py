@@ -82,6 +82,16 @@ class AudioDownloader(object):
         (and self.use_temp_files == False)
         we use the current directory.
         """
+        self.show_skull_and_bones = False
+        """
+        Should we show the skull and crossbones in the review dialog?
+
+        Normal downloaders should leave this alone. The point of the
+        whole blacklist mechanism is that JapanesePod can't say
+        now. Only when there is a chance that we have a file we want
+        to blacklist (that is, when we actually downloaded something
+        from Japanesepod) should we set this to True.
+        """
 
         self.site_icon = None
         """The sites's favicon."""
