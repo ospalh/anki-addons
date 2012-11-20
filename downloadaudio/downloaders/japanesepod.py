@@ -34,6 +34,9 @@ class JapanesepodDownloader(AudioDownloader):
         """
         self.downloads_list = []
         self.set_names(word, base, ruby)
+        # We need to reset this. It could be True from the last dl,
+        # and we may not download anything later.
+        self.show_skull_and_bones = False
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
         # download, not from a reading field...
@@ -54,6 +57,9 @@ class JapanesepodDownloader(AudioDownloader):
         # We have a file, but not much to say about it.
         self.downloads_list.append(
             (word_file_path, word_file_name, dict(Source='JapanesePod')))
+        # Who knows, maybe we want to blacklsit what we just got.
+        self.show_skull_and_bones = True
+
 
     def query_url(self, kanji, kana):
         qdict = {}
