@@ -30,8 +30,11 @@ class GooglettsDownloader(AudioDownloader):
         self.maybe_get_icon()
         self.downloads_list = []
         if split:
-            # Avoid double download
-            return
+            # Avoid double download, but not for chinese
+            if self.language.startswith('zh'):
+                word = base
+            else:
+                return
         self.set_names(word, base, ruby)
         if not word:
             raise ValueError('Nothing to download')
