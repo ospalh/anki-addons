@@ -42,8 +42,10 @@ def index():
 @app.route('/anki-addons/<path:path>.html')
 def page(path):
     page = pages.get_or_404(path)
-    return render_template('addon.html', page=page)
-
+    if 'addon' in page.meta.get('type', []):
+        return render_template('addon.html', page=page)
+    elif 'subpage' in page.meta.get('type', []):
+        return render_template('subpage.html', page=page)
 
 @app.route('/anki-addons/images/<fname>.png')
 def get_png(fname):

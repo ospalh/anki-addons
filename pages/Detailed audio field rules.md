@@ -1,25 +1,15 @@
-title: Download audio
-id: dlaudio
-main_file: Download%20audio.py
+title: Detailed audio field rules
+id: fieldrules
+source_file: downloadaudio/get_fields.py
 status: undocumented
-type: addon
-status_color: yellow
-status_text_color: black
-abstract: Automatically download audio from Google TTS and Japanesepod
-first_image: Downloaded%20audio.png
-first_alt: Reviewing downloaded audio files.
-extra_jq_script: audio_tips.js
+type: subpage
 ankiweb_id: 3100585138
+parent: Download audio
 
-Automatically download audio from a number of talking dictionaries.
 
-This add-on adds three menu items,
 
-* “Edit/Media/Note audio”
-* “Edit/Media/Side audio” and
-* “Edit/Media/Manual audio”,
-
-that all try to download audio in slightly different
+This add-on adds three menu items, “Note audio”, “Side audio” and
+“Manual audio”, that all try to download audio in slightly different
 manners.
 
 ## Please be patient
@@ -29,13 +19,6 @@ not. Please be patient.
 
 ## Setup – Fields
 
-This add-on adds the pronunciation to a field named “Audio”. You will
-probably have to [add this field](Add audio field.html) to your notes
-and cards.
-
-It is possible, but not neccessary to make use of more then one audio field per
-note. The [detailed rules](Detailed audio field rules.html) describe how
-to set this up.
 
 The download mechanism looks for audio fields to store the information
 in, according to two rules:
@@ -148,7 +131,7 @@ audio”. When reviewing, all three modes are available in the
 “Edit/Media” menu. When editing cards, the “Manual audio” mode is
 available through the megaphone button above the field edit list.
 
-“” “” “” “” “”
+“” “” “” “” “” “”
 
 
 ### Manual audio
