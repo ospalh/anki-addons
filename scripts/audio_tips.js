@@ -31,4 +31,16 @@ $(document).ready(function(){
 	}
     });
 
+    $('.profload').qtip({
+        content: {
+            text:'Actually this happens when the profile is loaded, and once per user.',
+        },
+        style: {
+            classes: 'ui-tooltip-rounded ui-tooltip-shadow',
+        },
+        show: {
+	    solo: true
+	}
+    });
+
 });

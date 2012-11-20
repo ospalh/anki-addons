@@ -1,21 +1,17 @@
 title: Detailed audio field rules
 id: fieldrules
 source_file: downloadaudio/get_fields.py
-status: undocumented
 type: subpage
 ankiweb_id: 3100585138
 parent: Download audio
+extra_jq_script: audio_tips.js
+
+In most cases, adding a field “Audio” to the note and at least one
+side of a card is enough, but more sophisticated use of the add-on is
+also possible.
 
 
-
-This add-on adds three menu items, “Note audio”, “Side audio” and
-“Manual audio”, that all try to download audio in slightly different
-manners.
-
-## Please be patient
-
-While the add-on is pretty much finished, this manual page is
-not. Please be patient.
+“” “” “” “” “” “”
 
 ## Setup – Fields
 

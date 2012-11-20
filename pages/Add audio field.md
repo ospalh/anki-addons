@@ -1,7 +1,6 @@
 title: Add audio field
 id: addaudio
-source_file: Download%20audio/downloadaudio/get%20fields.py
-status: undocumented
+source_file: downloadaudio/get_fields.py
 type: subpage
 ankiweb_id: 3100585138
 parent: Download audio
