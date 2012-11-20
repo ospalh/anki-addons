@@ -67,7 +67,7 @@ class LeoDownloader(AudioDownloader):
         """
         self.downloads_list = []
         # Fix the language. EAFP.
-        self.language = self.language_dict[self.language[:2]]
+        self.language = self.language_dict[self.language[:2].lower()]
         # set_names also checks the language.
         self.set_names(word, base, ruby)
         # Only get the icon when we have a word

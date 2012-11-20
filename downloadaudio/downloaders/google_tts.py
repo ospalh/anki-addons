@@ -31,7 +31,7 @@ class GooglettsDownloader(AudioDownloader):
         self.downloads_list = []
         if split:
             # Avoid double download, but not for chinese
-            if self.language.startswith('zh'):
+            if self.language.lower().startswith('zh'):
                 word = base
             else:
                 return

@@ -37,7 +37,7 @@ class JapanesepodDownloader(AudioDownloader):
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
         # download, not from a reading field...
-        if not self.language.startswith('ja'):
+        if not self.language.lower().startswith('ja'):
             return
         if not base:
             return
