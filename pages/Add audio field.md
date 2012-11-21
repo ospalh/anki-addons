@@ -4,10 +4,39 @@ type: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 
+The add-on requires a field called “Audio” to put the downloaded data,
+and a field called “Expression” to get the text to download from.
+
+While adding or renaming fields in Anki isn’t too hard, a short guide
+might be helpful.
+
+## Method one: hope and try
+
+When you downloaded a shared deck that already has some audio data,
+it may work without any change. You can try the menu item
+“Edit/Media/Note audio” for a few cards. When a dialog prompts you to
+“Please select what to do with the file”, you are in luck and your
+model already works with this add-on.
+
+Admittedly, it is quite likely that you will only get “Nothing to download”
+popup messages and you will have to rename or add fields.
+
+You may also want to rename a field when you get pronunciations in
+your native language.
+
+## Before you start
+
+Adding fields or changing field names requires a full upload of the
+collection. Make sure you sync before you do this.
+
+<blockquote class="nb">When you learn with mobile devices or with
+AnkiWeb, sync on these remote clients first. Then sync your desktop
+client. Only then start checking the field list.</blockquote>
+
+## Checking the field list
 
 
-## Setup – Fields
-
+## Adding an audio field
 
 The download mechanism looks for audio fields to store the information
 in, according to two rules:
@@ -54,10 +83,6 @@ appear in the list. If not, click on the field where you store your
 foreign words, click on “Rename” and enter “Expression”  as the
 new. name. At this point a dialog may pop up.
 
-<blockquote class="nb">Adding fields or changing field names requires
-a full sync. Make sure your collection is synced before adding the
-names. Remember to sync any learning progress with mobile
-devices, too.</blockquote>
 
 When you need to sync, click on “No” and sync your collection. Then
 try again, and answer “Yes” at the dialog.
