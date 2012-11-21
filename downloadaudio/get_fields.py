@@ -20,7 +20,19 @@ Extract field data to download.
 ## versions of the field names. When these lists contain upper-case
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
-expression_fields = ['expression', 'front', 'back']
+expression_fields = [
+    u'expression',
+    u'front',
+    u'english',
+    u'french',
+    u'français',
+    u'german',
+    u'deutsch',
+    u'japanese',
+    u'spanish',
+    u'español',
+    u'日本語',
+    u'漢字']
 """
 Fields we get the 'normal download text from.
 
