@@ -6,8 +6,10 @@
 
 from aqt.deckconf import DeckConf
 from aqt.forms import dconf
-from anki.hooks import wrap
+from anki.hooks import addHook, wrap
+from aqt import mw
 from aqt.qt import QHBoxLayout, QLabel, QLineEdit
+from aqt.utils import getText, tooltip
 from anki.lang import _
 
 from language import default_audio_language_code, al_code_code
@@ -38,6 +40,46 @@ def save_conf(self):
     self.conf[al_code_code] = self.form.audio_download_language.text()
 
 
+def ask_and_set_language_code():
+    lang_code, ok = getText(
+        prompt=u'''<h4>Set download language code</h4>
+Set the <a
+href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">code</a>
+of the language you are learning.<br>
+(<code>zh</code> for Chinese,
+<code>en</code> for English ...)
+''',
+        default=default_audio_language_code,
+        title=u'Set language')
+    if not ok or not lang_code:
+        tooltip(u'Setting download language aborted.')
+        return
+    if len(lang_code) < 2:
+        tooltip(u'Not setting download language.<br>Too short.')
+        return
+    # Go through all configuration sets
+    for conf in mw.col.decks.allConf():
+        try:
+            conf[al_code_code]
+        except KeyError:
+            # and set only where there is none already set
+            conf[al_code_code] = lang_code
+            mw.col.decks.save(conf)
+    mw.col.decks.flush()
+
+
+def maybe_ask_language():
+    try:
+        # We just look at this to see if it is set.
+        mw.col.decks.confForDid(1)[al_code_code]
+    except KeyError:
+        ask_and_set_language_code()
+    #else:
+    #    # Really, we don't care about the language of the default deck
+    #    pass
+
+
+addHook("profileLoaded", maybe_ask_language)
 dconf.Ui_Dialog.setupUi = wrap(dconf.Ui_Dialog.setupUi, setup_ui)
 DeckConf.loadConf = wrap(DeckConf.loadConf, load_conf)
 DeckConf.saveConf = wrap(DeckConf.saveConf, save_conf, 'before')
