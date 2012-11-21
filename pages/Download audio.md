@@ -18,19 +18,21 @@ This add-on adds three menu items,
 * “Edit/Media/Side audio” and
 * “Edit/Media/Manual audio”,
 
-All three try to download audio in slightly different manners.
-
-## Please be patient
-
-While the add-on is pretty much finished, this manual page is
-not. Please be patient.
+All three try to download audio in slightly different manners from a
+number of sources.
+<span class="clear" />
 
 ## First start – Language
 
-The first time you <span class="qtbase profload">start</span> Anki
-after downloading the add-on, a dialog will appear asking for a
-language code. Here you should select the language you are learning,
-not your native language.
+<figure style="width:410px;"><img src="images/Set%20language.png"
+alt="Dialog: Set language: ">
+<figcaption>Set the code of the language you are learning on
+startup.</figcaption>
+</figure>
+The <span class="qtbase nolangcode">first time</span> you <span
+class="qtbase profload">start</span> Anki after downloading the
+add-on, a dialog will appear asking for a language code. Here you
+should select the language you are learning, not your native language.
 
 <blockquote class="nb">When setting the language, use language
 codes. Do <em>not</em> use country domain names. For example, use
@@ -47,11 +49,10 @@ This add-on adds the pronunciation to a field named “Audio”. You will
 probably have to [add this field](Add audio field.html) to your notes
 and cards.
 
-It is possible, but not neccessary, to make use of more then one audio
-field per note. The [detailed rules](Detailed audio field rules.html)
-describe how to set this up and describes the field selection rules in
-detail.
-
+More sophisticated uses are also possible. Interested users can look
+at the [detailed rules](Detailed audio field rules.html) on field
+selection for hints on how to use more then one pronunciation per
+note.
 
 
 ## Downloading
@@ -162,6 +163,10 @@ Caveat emptor robot voice
 
 Gimick: get "house" UmtsUmtsUmtsUmtsUmtsUmtsUmtsUmtsUmtsUmtsUmts
 
+### Wiktionary
+
+Beware! User content. You *might* get obsecnities. Please clean up
+wiktionary in that case.
 
 ## Private use
 

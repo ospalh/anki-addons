@@ -3,18 +3,22 @@
 
 
 $(document).ready(function(){
-
-    $('.ignorecase').qtip({
-        content: {
-            text:'The case of the field name is ignored, so “expression”' +
-'“FRONT” “bACk” &c. will all work.',
-        },
+    $('.qtbase').qtip({
         style: {
             classes: 'ui-tooltip-rounded ui-tooltip-shadow',
         },
         show: {
 	    solo: true
 	}
+    });
+
+
+
+    $('.ignorecase').qtip({
+        content: {
+            text:'The case of the field name is ignored, so “expression”' +
+'“FRONT” “bACk” &c. will all work.',
+        }
     });
 
 
@@ -23,24 +27,31 @@ $(document).ready(function(){
             text:'A fourth way is to change the default_audio_language code ' +
                 'in the file "downloadaudio/language.py" in the addons folder.',
         },
-        style: {
-            classes: 'ui-tooltip-rounded ui-tooltip-shadow',
-        },
-        show: {
-	    solo: true
-	}
     });
 
     $('.profload').qtip({
         content: {
-            text:'Actually this happens when the profile is loaded, and once per user.',
-        },
-        style: {
-            classes: 'ui-tooltip-rounded ui-tooltip-shadow',
-        },
-        show: {
-	    solo: true
-	}
+            text:'This happens when the profile is loaded, and once per user.',
+        }
+    });
+
+    $('.nolangcode').qtip({
+        content: {
+            text:'This will apear until the language code is set for the default deck.'
+        }
+    });
+
+    $('.hanzipinyin').qtip({
+        content: {
+            text:'At the moment the Chinese support add-on stores everything including the pinyin in a single field called Hanzi.'
+        }
+    });
+
+
+    $('.morefields').qtip({
+        content: {
+            text:'The model actually has even more fields, i skip a few that are not relevant here.'
+        }
     });
 
 });
