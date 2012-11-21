@@ -17,7 +17,6 @@ gives examples on how to use more than one pronunciation per note.
 
 ## Fields rules
 
-
 The download mechanism uses these rules to match audio fields to text
 fields:
 
@@ -31,17 +30,31 @@ fields are:
   </ul>
   the add-on looks for a field called
   <ul>
-    <li>“Expression”,</li>
+    <li>“Expression” or</li>
     <li>“Front” or</li>
-    <li>“Back”.</li>
+  </ul>
+  or for a field with the names of a language where there is a chance of
+  downloading words spoken by humans (as opposed to the GoogleTTS
+  robot):
+  <ul>
+    <li>Deutsch</li>
+    <li>English</li>
+    <li>Español</li>
+    <li>Français</li>
+    <li>French</li>
+    <li>German</li>
+    <li>Japanese</li>
+    <li>Spanish</li>
+    <li>日本語</li>
+    <li>漢字</li>
   </ul>
 * For fields where “Audio” or “Sound” is a substring, this word is
   removed and the rest used to look for a field. For example, to get
   pronunciations for a field called “Example”, you should add a field
   named “Example Audio” (or “Audio Example”). When downloading, the
-  add-on will find the field “Example Audio”, strip the “Audio” and
-  clean up the space to get “Example” and look for that field to get
-  the text.
+  add-on will find the field “Example Audio”, strip the “Audio”, clean
+  up the space to get “Example” and look for that field to get the
+  text.
 
 To get Japanese pronunciations from
 [JapanesePod101.com](http://japanesepod101.com) or Chinese
@@ -70,7 +83,7 @@ reading stored in the note. The detailed rules are:
   Audio” to download from the reading field.
 
 All of these field names are not case sensitive. For example, “expression”,
-“FRONT”, “bAcK” &c. will all work.
+“FRONT” &c. will all work.
 
 The field names are defined in the lists in the file
 “[`downloadaudio/get_fields.py`](https://github.com/ospalh/anki-addons/blob/master/downloadaudio/get_fields.py)”
@@ -163,4 +176,5 @@ to the same field
 ## Card templates
 
 This page does not discuss in detail what to do with the audio
-data. Don’t forget to add them to some card templates. Be creative.
+data. Don’t forget to add the audio fields to some card templates. Be
+creative.
