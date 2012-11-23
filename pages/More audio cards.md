@@ -46,6 +46,10 @@ and the content of the bottom left “Front Template” box with
 <div>{{Back}}</div>
 </code></pre></blockquote>
 
+Next, to get rid of the generic “Card n” name, click on the “More”
+button at the bottom and select “Rename”. In the dialog, pick a
+descriptive name.
+
 The `{{#Audio}}`/`{{/Audio}}` pair in the front template means we will
 only get this card for notes where we have already downloaded
 something.  In this simple case, this pair is not necessary, but when
