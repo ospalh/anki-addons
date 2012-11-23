@@ -54,4 +54,11 @@ $(document).ready(function(){
         }
     });
 
+
+    $('.orfirst').qtip({
+        content: {
+            text:'This method can be used for the first field, too.'
+        }
+    });
+
 });

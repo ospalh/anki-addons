@@ -3,28 +3,46 @@ id: addaudio
 type: subpage
 ankiweb_id: 3100585138
 parent: Download audio
+extra_jq_script: audio_tips.js
 
-The add-on requires a field called “Audio” to put the downloaded data,
-and a field called “Expression” to get the text to download from.
+The add-on requires a field called “Audio”, or that contains the word
+“Audio”, to put the downloaded data.
 
 While adding or renaming fields in Anki isn’t too hard, a short guide
 might be helpful.
 
-## Method one: hope and try
+## <span id="one_try">Step one: Try</span>
+
+<figure style="width:410px;">
+<img src="images/manual_audio.png" alt"Anki with a card shown and the
+mouse pointing to the menu item
+Edit/Media/Manual audio. ">
+<figcaption>When reviewing, activate the
+Edit/Media/Manual audio menu.</figcaption>
+</figure>
 
 When you downloaded a shared deck that already has some audio data,
-it may work without any change. You can try the menu item
-“Edit/Media/Note audio” for a few cards. When a dialog prompts you to
-“Please select what to do with the file”, you are in luck and your
+it may work without any change. Start reviewiing the new deck. On the
+first card, try the menu item
+“Edit/Media/Manual audio”.
+<figure style="width:286px;">
+<img src="images/preview_audio.png" alt="Dialog window with text ">
+<figcaption>When you get this, the add-on will go fetch.</figcaption>
+</figure>
+When a dialog with
+“Requests to send to the download sites”, and with the right words in
+the edit boxes below, you are in luck and your
 model already works with this add-on.
 
-Admittedly, it is quite likely that you will only get “Nothing to download”
-popup messages and you will have to rename or add fields.
 
-You may also want to rename a field when you get pronunciations in
-your native language.
+<figure style="width:410px;">
+<img src="images/nothing_to_download.png" alt="Anki with a card shown
+and a message reading nothing to download">
+<figcaption>When you get this, you need to add an audio field.</figcaption>
+</figure>
 
-## Before you start
+<span class="flush" />
+## Before you go on
 
 Adding fields or changing field names requires a full upload of the
 collection. Make sure you sync before you do this.
@@ -33,170 +51,140 @@ collection. Make sure you sync before you do this.
 AnkiWeb, sync on these remote clients first. Then sync your desktop
 client. Only then start checking the field list.</blockquote>
 
+
 ## Checking the field list
 
+When the download test didn’t work, you should click on the  “Edit”
+button in the bottom left.
 
+<figure style="width:333px;">
+<img src="images/front_back.png" alt="Edit current window with fields
+Front and Back. ">
+<img src="images/id_franz_de.png" alt="Edit current window with fields
+Französisch, Deutsch ...">
+<figcaption>Candidates for downloading are the first field or the
+field named „Französisch“.</figcaption>
+</figure>
+
+Take a look at the field list and decide for which field or
+fields you would like to download data.
+
+Then click on the “Fields...” button.
+
+<span class="clear" />
 ## Adding an audio field
 
-The download mechanism looks for audio fields to store the information
-in, according to two rules:
+In the “Fields for NN” dialog, click on “Add”
 
-* When there is a field called “<span class="qtbase
-  ignorecase">Expression</span>”, “<span class="qtbase
-  ignorecase">Front</span>”, or “<span class="qtbase
-  ignorecase">Back</span>”, the add-on looks for a field called “<span
-  class="qtbase ignorecase">Audio</span>” or “<span class="qtbase
-  ignorecase">Sound</span>”.
-* For other fields, the add-on looks for a second field with the same
-  name with “Audio” or “Sound” added. Like this, one note can store
-  different audio files for different fields. For example, a geography
-  deck can have fields “Country” and “Capital”. When that note
-  also has fields “Country Audio” and “Capital Audio”, the add-on can
-  download pronunciation for these two fields separately.
+### Add for the first field
 
+<figure style="width:449px;">
+<img src="images/add_for_base.png" alt="Dialog with text Field name:
+and input text Audio.">
+<figcaption>Here we want to download for the first field</figcaption>
+</figure>
 
-### Japanesepod
+When you want to download for the first field, just type “Audio” for
+the new field name. Then click  “OK”.
 
-Downloading Japanese pronunciations from Japanesepod works a little
-bit different. The field must be set up in the way used by the
-Japanese support addon, that is, there should be a “<span class="qtbase
-  ignorecase">Reading</span>” field and an “Audio” or “Sound”
-field. The reading field must contain both the kanji and kana for
-the requested word, with the reading for the kanji in square
-brackets. For example as 「仮定[かてい]」, which will be automatically
-split into 「仮定」 and 「かてい」.
+<span class="clear" />
+### <span id="otherfield">Add for <span class="qtbase orfirst">other</span> field</span>
 
-Alternative names for “Reading” are “Kana”, 「かな」and 「仮名」.
+<figure style="width:673px;">
+<img src="images/add_not_first.png" alt="Anki review window with a
+picture of a bird in the first field and the word l'oiseau in the
+second field. That word and the field name Back are marked. To the
+right a dialog with the field names. The word Back is marked. Below a
+dialog. Text: Field name. Text input: Back Audio. The
+word Back is marked.">
+<figcaption>Look for what you want to download, then use that field’s
+name in the new field.</figcaption>
+</figure>
 
-Also, when “Audio” is just a substring, that substring is replaced
-with “Reading”, not removed. For example, when you have a field
-“Japanese Audio”, you need another field “Japanese Reading”.
+Alternatively, when the field you want to download for is not the
+first field, just should use that field’s name, followed by
+“Audio”. Then click  “OK” here, too.
 
-### Add fields
-<blockquote class="nb">Make sure that you have a field called
-“Expression” and another field named “Audio”. For Japanese, you also need
-a field called “Reading”.</blockquote>
+In the example, sending pictures of birds to GoogleTTS would not
+work. So we look for interesting text in the “Edit Current”
+window: «l'oiseau», marked in red with a “1” in the image. That text
+is in the field named “Back” (blue 2). That field name appears
+again in the “Fields for NN” dialog. (blue 3). Use this field name
+together with the word “Audio” as the new field name. In this case,
+use “Back Audio”. (blue 4)
 
-To add an “Audio” field and to rename a field to “Expression”, click
-on “Edit” in the bottom left, then on “Fields”. Check if these names
-appear in the list. If not, click on the field where you store your
-foreign words, click on “Rename” and enter “Expression”  as the
-new. name. At this point a dialog may pop up.
+<span class="clear" />
+### <span id="thewarning">The warning</span>
 
-
-When you need to sync, click on “No” and sync your collection. Then
-try again, and answer “Yes” at the dialog.
-
-Similarly, if there is no
-field named “Audio”, click on “Add” and enter “Audio” as the new name.
-
-## Setup – Language
-
-The default download language is Japanese, when you are learning
-another language, you have to change this, there are <span
-class="qtbase" id="fourth">three</span> ways to do this.
-
-<blockquote class="nb">When setting the language, use language
-codes. Do <em>not</em> use country domain names. For example, use
-<code>zh</code> for Chinese, <em>not</em>
-<code>cn</code>.</blockquote>
-
-Google TTS works only with a few languages. Using an unsupported or
-invalid code will result in no audio downloads.
-
-A list of audio codes can – unsprprisingly – be found at
-[Wikipedia](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-
-### Deck options ###
-
-To permanently set the language change it in the new “Language code”
-field in the deck options.
-
-In the deck selector, click on the gear button to the right of the
-deck name, then select “”options“”. In the dialog that opens, click on the
-“”general“” tab. Enter the code for your language in the “Language
-code” text field.
-
-This setting is done by options group. Each deck has an options group,
-but these goups can be shared between decks. See the
-[Anki manual](http://ankisrs.net/docs/manual.html#deckoptions) for
-more details.
-
-Through the options group mechanism, different decks can use different
-download languages.
-
-### Tags ###
-
-When a note has a tag in the form “`lang_<NN>`” (e.g. “`lang_en`” for
-English, “`lang_zh`” Chinese), this language code (that is “`en`” or
- “`zh`”) is used for the download.
- words fo
-
-### Manual download ###
-
-For manual downloads, the language for the current request can be set
-at the same time the text is changed.
-
-## Downloading
-
-Once the deck hes been set up, pronunciations can be downloaded in one
-of three ways, called “Note audio” “Side audio” and “Manual
-audio”. When reviewing, all three modes are available in the
-“Edit/Media” menu. When editing cards, the “Manual audio” mode is
-available through the megaphone button above the field edit list.
-
-“” “” “” “” “” “”
+<figure style="width:510px;">
+<img src="images/sync_warning.png" alt="Dialog with text The requested
+change will require a full upload of the database when you next
+synchronize your collection. If you have reviews or other changes
+waiting on another device that haven't been synchronized here yet,
+they will be lost. Continue?">
+<figcaption>Read and decide.</figcaption>
+</figure>
+At this point, a warning dialog may appear. If you are not sure about
+this, click “No”, sync changes from remote devices to this
+collecection and do the steps above again. If you are sure, click
+“Yes”.
 
 
-### Manual audio
+### More fields
 
-### Note audio
-
-### Side audio
-
-
-
-## Review
-
-### Japanesepod
-
-Blacklist
+You can add more than one audio field to download from more than one
+source field by repeating the [Add for other field](#otherfield)
+step.
 
 
+<span class="clear" />
+## <span id="renamefields">Rename fields</span>
 
-## Google TTS
+<figure style="width:410px;">
+<img src="images/00906.png" alt="Anki review window. Text: Übersetzen
+Ja, mein Herr. Oui monsieur. 00906. Below, a dialog window. Text:
+Requests send to the download sites ID 00906">
+<figcaption>No Sir. I do not want to learn to pronounce “00906”.</figcaption>
+</figure>
+When the [test above](#one_try) tried to download from a wrong field,
+you have to rename the audio field. Doing this is similar to [adding
+an audio field](#otherfield).
 
-Caveat emptor robot voice
+<figure style="width:597px;">
 
-## Japanesepod
+<img src="images/change_name.png" alt="On the left: Window with a list
+of fields with their content, ID:00906, Französisch:Oui,
+monsieur, Deutsch: Ja, mein Herr and
+Audio:sound:00906.mp3. Französisch is marked in blue, Oui,
+monsieur in red and Audio in yellow. To the
+right a dialog with the field names. Französisch is marked in blue,
+Audio is selected and marked in yellow. Below a
+dialog. Text: New name. Text input: Französisch Audio. Französisch is
+marked in blue, Audio in yellow.">
+<figcaption>Change the name of the field “Audio” Add the name of the
+source field to the name.</figcaption>
+</figure>
 
-Split kana kanji
+* Start reviewing.
+* From the main window, click the “Edit” button in the bottom left.
+* Look at the field list:
+  <ul>
+    <li>There should be a field named “Audio” or “Sound”. (yellow in
+  the image)</li>
+    <li>Identify the interesting text («Oui monsieur.», red). Note the
+  field name („Französisch“, blue)</li>
+  </ul>
+* Click the “Fields...” button
+* The two field names, („Französisch“ and “Audio”), appear in the list
+  and are marked in blue and yellow.
+* Click on “Audio” to select the field.
+* Then click the “Rename” button.
+* As the new name, add the other field’s name to the old
+  name. (“Französisch Audio”  or “Audio Französisch”, either will work.)
+* Click “OK”. [The warning](#thewarning) may pop up.
 
-## Private use
+## Go back
 
-These audio files can be freely downloaded without registering or
-agreeing to a license, but they keep the copyright of those providing
-them. While i see no problem with using them privately, re-publishing,
-for example by uploading a shared deck to AnkiWeb, is most likely
-prohibited by those rights.
-
-## Pysox and Pydub
-
-Get them.
-
-## Ideas for improvements
-While this add-on works as it is, a few things would be nice.
-
-* Automatically edit the information before the request is sent. I use
-  what i call “electric” cards for Japanese verbs, where the different
-  forms are formed automatically. That means that the whole word
-  doesn’t actually appear on the card. While it is no big problem to
-  complete the word in the “Manual audio” dialog, the add-on could
-  automatically add the 「る」 for 一段動詞.  This will most likely
-  not by implemented any time soon.
-* English pronunciation from [Meriam-Webster](http://www.merriam-webster.com/).
-* English and German, and possibly Spanish and Portugese pronunciation
-  from [BeoLingus](http://dict.tu-chemnitz.de/doc/faq.en.html) (from
-  the [TU Chemnitz](http://www.tu-chemnitz.de/en/)).
-* Pronunciations in other languages when i get links where you can
-  directly download words (without registering &c.).
+When you are finished with setting up the fields, simply click
+“Close” in the “Fields for NN” dialog  and “Close” again in the “Edit
+Current” dialog.
