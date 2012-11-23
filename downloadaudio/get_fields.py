@@ -20,23 +20,12 @@ Extract field data to download.
 ## versions of the field names. When these lists contain upper-case
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
-expression_fields = [
-    u'expression',
-    u'front',
-    u'english',
-    u'french',
-    u'français',
-    u'german',
-    u'deutsch',
-    u'japanese',
-    u'spanish',
-    u'español',
-    u'日本語',
-    u'漢字']
+expression_fields = [u'expression', u'word']
 """
 Fields we get the 'normal download text from.
 
-Text from these fields is used by most downloaders.
+Text from these fields is used by most downloaders. When no field is
+found here, we use the first field.
 """
 
 reading_keys = ['reading', 'kana', u'かな', u'仮名', 'hanzi', 'pinyin']
@@ -134,7 +123,13 @@ def field_data(note, fname, readings, get_empty=False):
                         return return_data(idx)
             # At this point: The target name is good, but we found no
             # source name.
-            raise KeyError('No source name found (case 1)')
+            if not readings:
+                # Don't give for most languages. Simply use the first
+                # field. That should work for a lot of people
+                return return_data(0)
+            else:
+                # But that doesn't really work for Japanese.
+                raise KeyError('No source name found (case 1)')
         # This point: target name is not exactly the field name
         if not afk in t_name:
             # And not a substring either
