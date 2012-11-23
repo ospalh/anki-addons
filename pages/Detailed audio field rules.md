@@ -9,8 +9,9 @@ extra_jq_script: audio_tips.js
 In most cases – including learning Japanese or Chinese with the
 [standard](https://ankiweb.net/shared/info/3918629684)
 [add-ons](https://ankiweb.net/shared/info/3448800906) installed –
-adding a field “Audio” to the note and to at least one side of a card
-is enough, but more sophisticated use of the add-on is also possible.
+[adding a field](Add%20audio%20field.html) “Audio” to the note and to at
+least [one side of a card](Add%20audio%20to%20cards.html) is enough, but more
+sophisticated use of the add-on is also possible.
 
 This page describes how the add-on matches audio and text fields and
 gives examples on how to use more than one pronunciation per note.
@@ -31,23 +32,10 @@ fields are:
   the add-on looks for a field called
   <ul>
     <li>“Expression” or</li>
-    <li>“Front” or</li>
+    <li>“Word”</li>
   </ul>
-  or for a field with the names of a language where there is a chance of
-  downloading words spoken by humans (as opposed to the GoogleTTS
-  robot):
-  <ul>
-    <li>Deutsch</li>
-    <li>English</li>
-    <li>Español</li>
-    <li>Français</li>
-    <li>French</li>
-    <li>German</li>
-    <li>Japanese</li>
-    <li>Spanish</li>
-    <li>日本語</li>
-    <li>漢字</li>
-  </ul>
+* When there is an “Audio” or “Sound” field, but no “Expression” or
+  “Word” field, the first field is used as the source.
 * For fields where “Audio” or “Sound” is a substring, this word is
   removed and the rest used to look for a field. For example, to get
   pronunciations for a field called “Example”, you should add a field
@@ -81,14 +69,16 @@ reading stored in the note. The detailed rules are:
   *replaced* with  one from the “Reading” list. For example, when
   there is a field called “Japanese Reading”, add a field “Japanese
   Audio” to download from the reading field.
+* There is no first field rule for readings.
 
 All of these field names are not case sensitive. For example, “expression”,
-“FRONT” &c. will all work.
+“auDIO” or “SOUND” will work.
 
 The field names are defined in the lists in the file
 “[`downloadaudio/get_fields.py`](https://github.com/ospalh/anki-addons/blob/master/downloadaudio/get_fields.py)”
 in the add-ons folder. That folder can be displayed through the
-“Tools/Add-ons/Open Add-ons Folder...” menu item.
+“Tools/Add-ons/Open Add-ons Folder...” menu item, and names can be
+added to the lists.
 
 ## Examples
 
@@ -171,10 +161,3 @@ Here the plain substring and the reading substring rules match:
 
 Here, too, pronunciations from different source texts are downloaded
 to the same field
-
-
-## Card templates
-
-This page does not discuss in detail what to do with the audio
-data. Don’t forget to add the audio fields to some card templates. Be
-creative.

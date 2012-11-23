@@ -46,38 +46,40 @@ A list of audio codes can – unsprprisingly – be found at
 ## Setup – Fields
 
 This add-on adds the pronunciation to a field named “Audio”. You will
-probably have to [add this field](Add audio field.html) to your notes
+probably have to [add this field](Add%20audio%20field.html) to your notes
 and cards.
 
 More sophisticated uses are also possible. Interested users can look
-at the [detailed rules](Detailed audio field rules.html) on field
+at the [detailed rules](Detailed%20audio%20field%20rules.html) on field
 selection for hints on how to use more then one pronunciation per
 note.
 
+## Setup – Cards
 
+To use the downloaded data, you have to add [add the field](Add%20audio%20to%20cards.html) to a card.
+
+Here, too, more ore sophisticated uses are described on an
+[extra page](More%20audio%20cards.html).
 ## Downloading
 
-Once the deck hes been set up, pronunciations can be downloaded in one
-of three ways, called “Note audio” “Side audio” and “Manual
-audio”. When reviewing, all three modes are available in the
-“Edit/Media” menu. When editing cards, the “Manual audio” mode is
-available through the megaphone button above the field edit list.
+When reviewing, select one of the three “Edit/Media/Note audio”,
+“Edit/Media/Side audio” and “Edit/Media/Manual audio” menu items to
+download.
 
-“” “” “” “” “”
-
+When editing or adding cards, click the megaphone button above the field edit
+list to do a manual download.
 
 ### Side audio
 
-Once triggered, the side audio mode starts without further user
-input. It loads audio that will appear on the currently visible
+Side audio loads audio that will appear on the currently visible
 side. During the (review)[#Review], it will hide the text it used to
 get the sounds. Use this while learning from your native language to
 the foreign language, or when trying to recoginize spoken words.
 
 ### Note audio
 
-In note audio mode, sounds for all audio fields of the current note
-are fetched in one go. During the (review)[#Review], the texts used to
+Note audio fetches sounds for all audio fields of the current note.
+During the (review)[#Review], the texts used to
 retrieve the sounds are shown.
 
 ### Manual audio
@@ -86,9 +88,16 @@ Manual audio mode opens a dialog showing all fields where files can be
 downloaded. The texts, as well as the language to use, can be changed
 before the request is send.
 
+For most downloads, the dialog has one edit field for the text and one
+edit field for the language code. Use this to change what is sent to
+fetch the audio. In the exapmle, you will get more re
+
 ## Review
 
 After the download, click here, here, or here.
+
+“” “” “” “” “”
+
 
 ## Languages
 
@@ -108,7 +117,15 @@ English, “`lang_zh`” Chinese), this language code (that is “`en`” or
  “`zh`”) is used for the download.
  words fo
 
-### Manual download ###
+
+### Multilingual notes
+
+For single notes that should use more then one language, there are two
+possibilities:
+
+* Put cards for different languages in different decks
+
+### Manual download
 
 For manual downloads, the language for the current request can be set
 at the same time the text is changed.
