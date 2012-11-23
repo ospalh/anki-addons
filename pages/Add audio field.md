@@ -41,7 +41,7 @@ and a message reading nothing to download">
 <figcaption>When you get this, you need to add an audio field.</figcaption>
 </figure>
 
-<span class="flush" />
+<span class="clear" />
 ## Before you go on
 
 Adding fields or changing field names requires a full upload of the
