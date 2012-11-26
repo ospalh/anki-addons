@@ -53,9 +53,9 @@ descriptive name.
 The `{{#Audio}}`/`{{/Audio}}` pair in the front template means we will
 only get this card for notes where we have already downloaded
 something.  In this simple case, this pair is not necessary, but when
-other fields, for example an ID or the front text, this becomes
-necessary. Using it here, too, guards against surprises later.
+other fields, like an ID, a hint or the front text are added, this
+becomes necessary. Using it here, too, guards against surprises later.
 
 This example assumes the standard field names. When you see `{Unknown
-field NN}` in the boxes on the right, you must change it to the field names
-of your note.
+field NN}` in the boxes on the right, you must change the names  to
+those of your note, as listed in the  “Edit Current” window.

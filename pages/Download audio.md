@@ -72,7 +72,7 @@ list to do a manual download.
 ### Side audio
 
 Side audio loads audio that will appear on the currently visible
-side. During the (review)[#Review], it will hide the text it used to
+side. During the [review](#Review), it will hide the text it used to
 get the sounds. Use this while learning from your native language to
 the foreign language, or when trying to recoginize spoken words.
 
@@ -82,11 +82,34 @@ Note audio fetches sounds for all audio fields of the current note.
 During the (review)[#Review], the texts used to
 retrieve the sounds are shown.
 
+
 ### Manual audio
 
+<figure style="width:286px;">
+<img src="images/update_annex.png" alt="Anki Download audio dialog
+window. Text: Requestst send to the download sites. Front. Edit text:
+to annex. The to is marked..">
+<figcaption>Edit the request before it is send.</figcaption>
+</figure>
 Manual audio mode opens a dialog showing all fields where files can be
 downloaded. The texts, as well as the language to use, can be changed
 before the request is send.
+
+<figure style="width:457px;">
+<img src="images/update_kanji_kana.png" alt="Anki Download audio dialog
+window. Text: Requestst send to the download sites. Reading. Edit texts:
+夫 おっと, Text: Expression. Edit text 夫.">
+<figcaption>Edit Japanese text.</figcaption>
+</figure>
+
+When learning Japanese or Chinese, when there is a “Reading” field,
+
+As a little hint, in the example you should use the “Note audio” mode:
+most dictionaries have pronunciations for verbs without “to” and for
+nouns without article. In the note audio dialog delete the
+“to&nbsp;”. Download for  “annex”, not for “to annex”. The
+Merriam-Webster downloader should fetch two pronunciations, `\ə-ˈneks,\`
+as in the verb and `\ˈa-ˌneks\` like the noun.
 
 For most downloads, the dialog has one edit field for the text and one
 edit field for the language code. Use this to change what is sent to
