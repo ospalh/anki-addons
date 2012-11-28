@@ -61,4 +61,22 @@ $(document).ready(function(){
         }
     });
 
+    $('.sendicons').qtip({
+        content: {
+            text:'I am not perfectly happy with some of the icons i use. If you have better ones, please let me know.'
+        }
+    });
+
+    $('.tu').qtip({
+        content: {
+            text:'Technische Universität, university of technology.'
+        }
+    });
+
+    $('.sonya').qtip({
+        content: {
+            text:'It get’<em>s on ya</em> nerves. Apologies to all people named Sonya.'
+        }
+    });
+
 });

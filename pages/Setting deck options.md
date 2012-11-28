@@ -5,29 +5,45 @@ type: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 
-Setting the language in the deck options isn't too hard, but a
-step-by-step guide may be useful.
+During startup, only one language code is set for all decks.
 
-
-
+To change this language later, or to use more than one foreign
+language, the language code can be changed in the deck options.
 
 ## Deck options
 
-To permanently set the language change it in the new “Language code”
-field in the deck options.
-
-In the deck selector, click on the gear button to the right of the
-deck name, then select “”options“”. In the dialog that opens, click on the
-“”general“” tab. Enter the code for your language in the “Language
-code” text field.
-
-This setting is done by options group. Each deck has an options group,
+Each deck has an options group,
 but these goups can be shared between decks. See the
 [Anki manual](http://ankisrs.net/docs/manual.html#deckoptions) for
 more details.
 
-Through the options group mechanism, different decks can use different
-download languages.
+## Changing languages
+
+<figure style="width:477px;"><img src="images/click_on_gear.png"
+alt="Dialog: Set language: ">
+<figcaption>Set the code of the language you are learning on
+startup.</figcaption>
+</figure>
+To change the language for an options group, first click on the gear
+button to the right of the deck name.
+<figure style="width:478px;"><img src="images/options_for.png"
+alt="Dialog: Set language: ">
+<figcaption>Set the code of the language you are learning on
+startup.</figcaption>
+</figure>
+This will open the “Options for NN” dialog. There, click on the
+“General” tab. On that sheet, change the language code in new input
+field.
 
 
-“” “” “” “” “” “”
+## Adding deck options
+
+When learning different languages, arrange the notes in different
+decks and add an option groups for each deck:
+
+As above, click on the gear and select “Options”. In the “Options for
+NN” dialog, near the top, beside the option group name list, there is
+another gear button. Click on that and select “Add”. Enter a new
+name. Putting the language name into the options name helps keeping
+them apart. Then, go to the “General” tab and set the language code
+again.
