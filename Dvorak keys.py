@@ -15,7 +15,7 @@ Simple Anki plugin to use more keys to answer the card.
 from anki.hooks import wrap
 from aqt.reviewer import Reviewer
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 # These keys make (a bit of) sense when you look at a dvorak keyboard:
 # use the home row, and those keys than aren’t bound to other
