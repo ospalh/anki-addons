@@ -15,7 +15,7 @@ Simple Anki plugin to use more keys to answer the card.
 from anki.hooks import wrap
 from aqt.reviewer import Reviewer
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 # These keys make (a bit of) sense when you look at a dvorak keyboard:
 # use the home row, and those keys than aren’t bound to other
@@ -27,9 +27,13 @@ eases_dict = {
     # (I could say that the left hand is the failure and the three on
     # the left hand are the good answers.)
     u'u': 1, u'h': 2, u't': 3, u'n': 4,
-    # top letter row, left hand, left to right, (the u';' is there for
-    # programmer dvorak)
-    u"'": 1, u';': 1, u',': 2, u'.': 3, u'p': 4,
+    # top letter row, left hand, left to right
+    u"'": 1, u',': 2, u'.': 3, u'p': 4,
+    # Bottom row.
+    u';': 1,  u'q': 2, u'j': 3, u'k': 4,
+    # When you use programmer Dvorak you actually use the 1 from the
+    # "wrong" block.
+    #
     ## top row, right hand, right to left (two for the pinkie, so you
     ## don’t have to aim too hard.)
     # Don’t use this row:  ‘r’ is replay audio.
