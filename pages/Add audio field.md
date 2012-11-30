@@ -13,19 +13,20 @@ might be helpful.
 
 ## <span id="one_try">Step one: Try</span>
 
-<figure style="width:410px;">
-<img src="images/manual_audio.png" alt"Anki with a card shown and the
+<figure>
+<img src="images/manual_audio.png" alt="Anki with a card shown and the
 mouse pointing to the menu item
 Edit/Media/Manual audio. ">
 <figcaption>When reviewing, activate the
 Edit/Media/Manual audio menu.</figcaption>
 </figure>
-
 When you downloaded a shared deck that already has some audio data,
 it may work without any change. Start reviewiing the new deck. On the
 first card, try the menu item
 “Edit/Media/Manual audio”.
-<figure style="width:286px;">
+
+<span class="clear" />
+<figure>
 <img src="images/preview_audio.png" alt="Dialog window with text ">
 <figcaption>When you get this, the add-on will go fetch.</figcaption>
 </figure>
@@ -34,14 +35,13 @@ When a dialog with
 the edit boxes below, you are in luck and your
 model already works with this add-on.
 
-
-<figure style="width:410px;">
+<span class="clear" />
+<figure>
 <img src="images/nothing_to_download.png" alt="Anki with a card shown
 and a message reading nothing to download">
 <figcaption>When you get this, you need to add an audio field.</figcaption>
 </figure>
 
-<span class="clear" />
 ## Before you go on
 
 Adding fields or changing field names requires a full upload of the
@@ -57,7 +57,7 @@ client. Only then start checking the field list.</blockquote>
 When the download test didn’t work, you should click on the  “Edit”
 button in the bottom left.
 
-<figure style="width:333px;">
+<figure style="width: 333px;">
 <img src="images/front_back.png" alt="Edit current window with fields
 Front and Back. ">
 <img src="images/id_franz_de.png" alt="Edit current window with fields
@@ -71,14 +71,15 @@ fields you would like to download data.
 
 Then click on the “Fields...” button.
 
-<span class="clear" />
+
 ## Adding an audio field
 
 In the “Fields for NN” dialog, click on “Add”
 
+<span class="clear" />
 ### Add for the first field
 
-<figure style="width:449px;">
+<figure>
 <img src="images/add_for_base.png" alt="Dialog with text Field name:
 and input text Audio.">
 <figcaption>Here we want to download for the first field</figcaption>
@@ -90,7 +91,7 @@ the new field name. Then click  “OK”.
 <span class="clear" />
 ### <span id="otherfield">Add for <span class="qtbase orfirst">other</span> field</span>
 
-<figure style="width:673px;">
+<figure>
 <img src="images/add_not_first.png" alt="Anki review window with a
 picture of a bird in the first field and the word l'oiseau in the
 second field. That word and the field name Back are marked. To the
@@ -107,7 +108,7 @@ first field, just should use that field’s name, followed by
 
 In the example, sending pictures of birds to GoogleTTS would not
 work. So we look for interesting text in the “Edit Current”
-window: «l'oiseau», marked in red with a “1” in the image. That text
+window: « l'oiseau », marked in red with a “1” in the image. That text
 is in the field named “Back” (blue 2). That field name appears
 again in the “Fields for NN” dialog. (blue 3). Use this field name
 together with the word “Audio” as the new field name. In this case,
@@ -116,7 +117,7 @@ use “Back Audio”. (blue 4)
 <span class="clear" />
 ### <span id="thewarning">The warning</span>
 
-<figure style="width:510px;">
+<figure>
 <img src="images/sync_warning.png" alt="Dialog with text The requested
 change will require a full upload of the database when you next
 synchronize your collection. If you have reviews or other changes
@@ -140,7 +141,7 @@ step.
 <span class="clear" />
 ## <span id="renamefields">Rename fields</span>
 
-<figure style="width:410px;">
+<figure>
 <img src="images/00906.png" alt="Anki review window. Text: Übersetzen
 Ja, mein Herr. Oui monsieur. 00906. Below, a dialog window. Text:
 Requests send to the download sites ID 00906">
@@ -150,8 +151,7 @@ When the [test above](#one_try) tried to download from a wrong field,
 you have to rename the audio field. Doing this is similar to [adding
 an audio field](#otherfield).
 
-<figure style="width:597px;">
-
+<figure>
 <img src="images/change_name.png" alt="On the left: Window with a list
 of fields with their content, ID:00906, Französisch:Oui,
 monsieur, Deutsch: Ja, mein Herr and
@@ -171,7 +171,7 @@ source field to the name.</figcaption>
   <ul>
     <li>There should be a field named “Audio” or “Sound”. (yellow in
   the image)</li>
-    <li>Identify the interesting text («Oui monsieur.», red). Note the
+    <li>Identify the interesting text (« Oui monsieur. », red). Note the
   field name („Französisch“, blue)</li>
   </ul>
 * Click the “Fields...” button

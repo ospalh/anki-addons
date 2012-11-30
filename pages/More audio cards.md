@@ -9,7 +9,7 @@ hearing comprehension.
 
 ## Template editor
 
-<figure style="width:648px;">
+<figure>
 <img src="images/card_types.png" alt="Window with tabs reading Forward
 Reverse Example at the top. The left of the main area is split in
 three parts, Front template, Styling and Back template. The right is

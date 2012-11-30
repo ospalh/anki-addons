@@ -5,9 +5,14 @@ status: undocumented
 type: addon
 status_color: yellow
 status_text_color: black
-abstract: Automatically download audio from talking dictionaries or from Google TTS.
+abstract: "Automatically download audio from talking dictionaries or
+from Google TTS."
 first_image: Downloaded%20audio.png
-first_alt: Reviewing downloaded audio files.
+first_caption: "One word where non-native speakers should look up the
+pronunciation."
+first_alt: "A dialog window. Six lines with different site icons, the
+word “hearth” and some more buttons. A bubble help with the text
+Source text: hearth From field: Front Source: Macmillan Variant: British"
 subtitle: Hear what you learn
 ankiweb_id: 3100585138
 extra_jq_script: audio_tips.js
@@ -19,13 +24,17 @@ This add-on adds three menu items,
 * “Edit/Media/Manual audio”,
 
 All three try to download audio in slightly different manners from a
-number of sources.
+number of sources. It also adds a button to the edit card screens to
+download from there.
 <span class="clear" />
 
 ## First start – Language
 
-<figure style="width:410px;"><img src="images/Set%20language.png"
-alt="Dialog: Set language: ">
+<figure>
+<img src="images/Set%20language.png" alt="A Dialog window. Text: Set
+download language code Set the code of the language you are
+learning. (zh for Chinese, en for English ...) Below a text input line
+with text ja.">
 <figcaption>Set the code of the language you are learning on
 startup.</figcaption>
 </figure>
@@ -46,8 +55,8 @@ A list of audio codes can – unsprprisingly – be found at
 ## Setup – Fields
 
 This add-on adds the pronunciation to a field named “Audio”. You will
-probably have to [add this field](Add%20audio%20field.html) to your notes
-and cards.
+probably have to [add this field](Add%20audio%20field.html) to your notes.
+This has to be done for each note type you use.
 
 More sophisticated uses are also possible. Interested users can look
 at the [detailed rules](Detailed%20audio%20field%20rules.html) on field
@@ -64,6 +73,12 @@ Here, too, more sophisticated uses are described on an
 
 ## Downloading
 
+<figure>
+<img src="images/manual_audio.png" alt="Anki with a card shown and the
+mouse pointing to the menu item
+Edit/Media/Manual audio.">
+<figcaption>Use these menus when reviewing.</figcaption>
+</figure>
 When reviewing, select one of the three “Edit/Media/Note audio”,
 “Edit/Media/Side audio” and “Edit/Media/Manual audio” menu items to
 download.
@@ -75,20 +90,20 @@ manual download.
 ### Side audio
 
 Side audio loads audio that will appear on the currently visible
-side. During the [review](#Review), it will hide the text it used to
+side. During the [review](#review), it will hide the text it used to
 get the sounds. Use this while learning from your native language to
 the foreign language, or when trying to recoginize spoken words.
 
 ### Note audio
 
 Note audio fetches sounds for all audio fields of the current note.
-During the (review)[#Review], the texts used to
+During the [review](#review), the texts used to
 retrieve the sounds are shown.
 
 
 ### Manual audio
 
-<figure style="width:286px;">
+<figure>
 <img src="images/update_annex.png" alt="Anki Download audio dialog
 window. Text: Requestst send to the download sites. Front. Edit text:
 to annex. The to is marked..">
@@ -98,7 +113,8 @@ Manual audio mode opens a dialog showing all fields where files can be
 downloaded. The texts, as well as the language to use, can be changed
 before the request is send.
 
-<figure style="width:457px;">
+<span  class="clear" />
+<figure>
 <img src="images/update_kanji_kana.png" alt="Anki Download audio dialog
 window. Text: Requestst send to the download sites. Reading. Edit texts:
 夫 おっと, Text: Expression. Edit text 夫.">
@@ -112,40 +128,38 @@ For Chinese the base text is usually just hanzi, the reading
 pinyin. For Japanese, the screen text calls the base text “kanji” for
 simplicity, but it often contains kana as well.
 
-As a little hint, for decks like that shown in in the first example
+For decks like that shown in in the first example
 you should use the “Note audio” mode: most dictionaries have
 pronunciations for verbs without “to” and for nouns without
-article. In the note audio dialog delete the “to&nbsp;”. Download for
-“annex”, not for “to annex”. The Merriam-Webster downloader should
-fetch two pronunciations, `\ə-ˈneks,\` as in the verb and `\ˈa-ˌneks\`
-like the noun.
+article. Delete these in the note audio dialog. For example download for
+“annex”, not for “to annex”.
 
 Along with the edit field or fields for the request text, the edit
 dialog also as a field to set the  language code. This can be used to
 download in a language different from that set for the current deck,
-even when the [tag](#Tags) is not set for the current note.
+even when the [tag](#tags) is not set for the current note.
 
-## Review
+## <span id="review">Review</span>
 
 When the add-on could not find anything to download, a brief
 notification appears.
 
-<figure style="width:358px;"><img src="images/devise.png"
+<figure><img src="images/devise.png"
 alt="The review dialog. The buttons are described in the main text">
 <figcaption>Decide what to do whith each file.</figcaption>
 </figure>
 After a successful download, a dialog appears. It lists the
-retrieved audio clips, one per row.  The icon for each showsthe
+retrieved audio clips, one per row.  The icon for each shows the
 source, Hovering over the icon or the word shows some information
 about the file.
 
 Each row has a number of buttons, one or two play buttons and three or
 for radio buttons.
 
-The left (or only) play button plays the newly
-retrieved file. If there is a second play button, the field where the
-new will be added is not empty. Clicking this button plays the old
-field content.
+The left (or only) play button plays the newly retrieved file. If
+there is a second play button, the field where the new audio clip will
+be added is not empty. Clicking this button plays the old field
+content.
 
 
 To the right, there are three or four radio buttons. Select one for
@@ -155,11 +169,18 @@ each line. They determine what happens to the downloaded file.
   be added to the card. This is the normal thing to select for a good
   download, but when many files were downloaded, you may want to
   add only a few of them.
-* The *keep* <span class="qtbase sendicons">question mark</span> icon.
-* Delete
-* Maybe blacklist. [blacklist](Downloader%20sites.html#blacklist)
+* The *keep* <span class="qtbase sendicons">question mark</span>
+  icon. When this button is down, the add-on will neither add the file
+  to the card nor delete it but keep it in the media collection
+  folder. This means the file will show up as an unused medium and may
+  be deleted during an unused media check.
+* The *delete* cross mark button. When this button is down the audio
+  clip will be deleted. This is the normal thing to do with a file you
+  don’t like.
+* There may be a *blacklist* skull-and-bones button. When this is
+  down, the same file will be dropped in the future. See
+  [blacklist](Downloader%20sites.html#blacklist) for more information.
 
-“” “” “” “”
 
 
 ## Languages
@@ -173,13 +194,11 @@ options group. Like this, it is possible to use different download
 languages with different decks. See also the
 [Anki manual](http://ankisrs.net/docs/dev/manual.html#deckoptions).
 
-### <span id="Tags">Using tags</span>
+### <span id="tags">Using tags</span>
 
 When a note has a tag in the form “`lang_<NN>`” (e.g. “`lang_en`” for
 English, “`lang_zh`” Chinese), this language code (that is “`en`” or
  “`zh`”) is used for the download.
- words fo
-
 
 ### Supported languages
 
@@ -227,7 +246,7 @@ educational purposes, re-publishing, for example by uploading a shared
 deck to AnkiWeb, is most likely prohibited by those rights.
 
 As exceptions is wiktionary. Those files are usually available under
-the {Creative Commons Attribution/Share-Alike
+the [Creative Commons Attribution/Share-Alike
 License](http://creativecommons.org/licenses/by-sa/3.0/). See the
 [Wikimedia Terms of Use](http://wikimediafoundation.org/wiki/Terms_of_use).
 

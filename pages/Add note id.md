@@ -5,10 +5,13 @@ type: addon
 status: working
 status_color: green
 status_text_color: white
-abstract: The first field of cards should be unique. To make sure this is the case, this add-on adds a unique number to fields called `Note ID`.
+abstract: "The first field of cards should be unique. To make sure
+this is the case, this add-on adds a unique number to fields called
+`Note ID`."
 subtitle: Make all cards unique
 first_image: Note%20ID.png
-first_alt: The first field is called Note ID
+first_caption: "Name the first field is called Note ID"
+first_alt: "Name the first field is called Note ID"
 ankiweb_id: 1672832404
 
 A fix to the problem of synonyms.
@@ -27,7 +30,7 @@ Then, when adding content, this field is automatically filled with the
 note id when you move the cursor to another field.
 
 
-#### Menu
+## Menu
 There is also an item in the Tools menu that goes through the whole
 collection and adds note ids to all empty Note ID fields. This is
 useful when adding the field to decks you already

@@ -27,8 +27,8 @@
 	<div class="articleBody">
 
 		<figure>
-		  <img src="/anki-addons/images/{{page.first_image}}"
-		       alt="{{page.first_alt}}" />
+		  <img src="/anki-addons/images/{{page.first_image}}" alt="{{page.first_alt}}" />
+{% if page.first_caption %}		  <figcaption>{{page.first_caption}}</figcaption>{% endif%}
 		</figure>
 
                 {% block article%}

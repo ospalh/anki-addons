@@ -75,7 +75,7 @@ $(document).ready(function(){
 
     $('.sonya').qtip({
         content: {
-            text:'It get’<em>s on ya</em> nerves. Apologies to all people named Sonya.'
+            text:'It get<em>s on ya</em> nerves. Apologies to all people named Sonya.'
         }
     });
 

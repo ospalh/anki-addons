@@ -5,9 +5,11 @@ type: addon
 status: for desktop use only
 status_color: yellow
 status_text_color: black
-abstract: Improved way to parse kanji and readings, a way to render kanji the kana and a few other display hacks.
+abstract: "Improved way to parse kanji and readings, a way to render
+kanji the kana and a few other display hacks."
 first_image: furikanji.png
-first_alt: Furikanji demo
+first_alt: "Sceenshot of text ふりがな with 振り仮名 as ruby."
+first_caption: Furikanji demo
 
 This add-on adds support for furikanji, adds two other templates and
 slightly changes the way kanji and readings are parsed.
@@ -18,7 +20,7 @@ client only. Using features of this add-on with mobile clients or
 AnkiWeb may result in suboptimal layout.
 </blockquote>
 
-### Furikanji
+## Furikanji
 
 The template `furikanji` uses a standard reading field to
 render kanji *above* the kana. This is useful for listening comprehension.
@@ -30,7 +32,7 @@ The ruby element has the additional class `furikanji`. So special
 styling can be added. For example, markers that show the beginning and
 end of a specific block.
 
-<figure style="width:277px;">
+<figure>
 <img src="images/furikanji-desktop.png"
     alt="起きなよいい加減お きなよいいかげん">
 <figcaption>Example use of furigana and
@@ -57,21 +59,22 @@ as styling and
 &lt;div class="nhg redish lnsz">{{furikanji:Reading}}&lt;/div></code></pre></blockquote>
 as back template.
 
-<figure style="width:411px;"><img src="images/furikanji-web.png" alt="起きなよいい加減お
+<figure>
+<img src="images/furikanji-web.png" alt="起きなよいい加減お
 起[お]きなよいい 加減[かげん]"><figcaption>On AnkiWeb, the furikanji
 don’t work.</figcaption></figure>
-
 As the furikanji rendering is done on the fly by the desktop client,
 it naturally does not work with AnkiWeb or AnkiDroid (or, presumably,
 the iOS client). Here the text is rendered as it is seen in the edit
 screen, with the square brackets.
 
 
-### Boxed and boxkana
+## Boxed and boxkana
 
-<figure style="width:125px;"><img src="images/boxed.png"
-alt="ausruhen やすむ"><img src="images/boxkana.png"
-alt="ausruhen やすむ"><figcaption>Two ways to show the reading of a
+<figure>
+<img src="images/boxed.png" alt="ausruhen やすむ">
+<img src="images/boxkana.png" alt="ausruhen やすむ">
+<figcaption>Two ways to show the reading of a
 kanji you want to learn.
 </figcaption></figure>
 
@@ -84,7 +87,7 @@ template of a
 „[Die Kanji Lernen und Behalten](http://www.kanji-lernen.de/)“ deck,
 the German version of “Remembering the Kanji”.
 
-### Furigana, kanji and reading templates
+## Furigana, kanji and reading templates
 
 The `{{furigana:Field NN}}`, `{{kanji:Field NN}}` and `{{reading:Field
 NN}}` templates have been modified. The standard templates use ASCII
@@ -98,7 +101,8 @@ This means that commas, newlines,
 &c. can be used as separators between kanji and other, preceding text.
 
 The addon also adds the class `furigana` to the ruby element.
-#### Limitations
+
+### Limitations
 
 * Leading kana are not automatically separated. For example the
   reading for 「お釣り」 must still be written with an ASCII space or

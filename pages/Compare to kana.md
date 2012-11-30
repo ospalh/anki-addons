@@ -5,9 +5,13 @@ type: addon
 status: working
 status_color: green
 status_text_color: white
-abstract: When typing in Japanese readings, remove the kanji bit from the correct text, so that the red and green coloring of the answer works correctly.
+abstract: "When typing in Japanese readings, remove the kanji bit from
+the correct text, so that the red and green coloring of the answer
+works correctly."
 first_image: compare_to_kana.png
-first_alt: The typed-in answer was compared to the kana only.
+first_alt: "Anki review window. Three lines of Text: 1 Polizeirevier:
+2 警察署 with furigana けいさつしょ 3 けいさつしょ marked in green"
+first_caption: The typed-in answer was compared to the kana only.
 ankiweb_id: 4091556602
 
 A typical model for learning Japanese has a field called “Reading”. In
@@ -33,9 +37,11 @@ and the field name contains “Reading”. Use `{{type:Reading}}` or
 
 ## “Correct answer was:”
 
-<figure style="width:410px;"><img
-src="images/compare%20full%20reading.png" alt="Correctly typed reading and
-lots of red.">
+<figure>
+<img src="images/compare%20full%20reading.png" alt="Anki review
+window. Five lines of Text: 1 Polizeirevier: 2 警察署 with furigana
+けいさつしょ 3 -- in red, けい in green, --- in red, さつ in green, ---
+in red, しょ in green, - in red 4 Correct answer was: 5 警[けい]察[さつ]署[しょ]">
 <figcaption>Even though the reading was typed correctly there is a lot
 of red and extra text.</figcaption></figure>
 

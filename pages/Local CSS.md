@@ -8,7 +8,8 @@ status_color: green
 status_text_color: white
 abstract: Add styling from a local CSS file. With this, the card style can be adapted to time (night colors) and place (small fonts on small screens, big fonts on big screens, ...).
 first_image: three_styles.png
-first_alt: The same card with different styles
+first_caption: "The same card with different styles"
+first_alt: "An Anki review window, split and showing different fonts and color schemes in different parts."
 ankiweb_id: 2587372325
 
 This loads the local CSS file `user_style.css` and adds the style to

@@ -19,17 +19,20 @@ more details.
 
 ## Changing languages
 
-<figure style="width:477px;"><img src="images/click_on_gear.png"
-alt="Dialog: Set language: ">
-<figcaption>Set the code of the language you are learning on
-startup.</figcaption>
+<figure>
+<img src="images/click_on_gear.png"
+alt="The Anki deck list. To the right of the gear button to the right
+of the deck name a popup menu with the thre items Rename Options
+Delet. A mouse pointer over Options.">
+<figcaption>Click here to open the deck options.</figcaption>
 </figure>
 To change the language for an options group, first click on the gear
-button to the right of the deck name.
-<figure style="width:478px;"><img src="images/options_for.png"
-alt="Dialog: Set language: ">
-<figcaption>Set the code of the language you are learning on
-startup.</figcaption>
+button to the right of the deck name, then on Options.
+<figure>
+<img src="images/options_for.png"
+alt="A dialog window. A tab General is marked an selected. A text
+input box named language code is marked.">
+<figcaption>Change the code of the language you are learning here.</figcaption>
 </figure>
 This will open the “Options for NN” dialog. There, click on the
 “General” tab. On that sheet, change the language code in new input

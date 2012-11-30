@@ -7,31 +7,32 @@ status_color: yellow
 status_text_color: black
 abstract: A quick hack add-on to show (colored) stroke order diagrams.
 first_image: stroke%20color.png
-first_alt: Colored stroke order diagram for 休
+first_alt: "The word ausruhen: and a colored stroke order diagram for 休"
+first_caption: Write 休 in this order.
 
 This is a quick hack to show colored stroke order diagrams. You need
 to put stroke order diagram svgs in
 `Anki/addons/kanji-colorize-indexed`. Then they are shown when you use
 the template `{{kanjiColor:NN}}`.
 
-### Alternative
+## Alternative
 
 This add-on serves a similar purpose as
 [cayennes](http://cayennes.github.com)’
  [add-on](https://github.com/cayennes/kanji-colorize/tree/master/anki)
  part of the kanji-colorize project.
 
-#### Pros
+### Pros
 * Does not need another field in the model
 * Keeps the collection.media folder clean.
 * Somewhat simple to exchange the whole set with another color
   scheme. Just bend one link to another directory.
 
-#### Cons
+### Cons
 * The core function, color, is not working on AnkiWeb/AnkiDroid
 * The set-up of Cayennes' add-on may be easier on the add-on side.
 
-#### Without the add-on
+### Without the add-on
 
 When a construction like `<div
 class="strokes">{{kanjiColor:Kanji}}</div>` is used on the cards and
@@ -43,7 +44,7 @@ font-family:KanjiStrokeOrders;
 in the style, it isn’t too bad on AnkiWeb or mobile devices: The kanji
 will be shown with the kanji stroke order font, which uses the same
 data base.
-#### Ospalh-special
+### Ospalh-special
 Daring spirits can use my
 [variant](https://github.com/ospalh/Anki-Android/tree/stroke-color-addon)
 of [AnkiDroid](https://github.com/nicolas-raoul/Anki-Android). I have
@@ -51,7 +52,7 @@ added the equivalent of this addon, giving colored stoke order
 diagrams on AnkiDroid. You should merge this branch into the newest
 version of AnkiDroid, not just use that branch as-is.
 
-### Diagrams
+## Diagrams
 
 The diagrams can be produced with either Cayennes'
 [kanji-colorize](https://github.com/cayennes/kanji-colorize/) script

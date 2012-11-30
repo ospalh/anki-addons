@@ -5,9 +5,13 @@ type: addon
 status: working
 status_color: green
 status_text_color: white
-abstract: Compare a typed in number with the correct answer as a number, not as a string of digits. Color it yellow when it is close to the right number.
+abstract: "Compare a typed in number with the correct answer as a
+number, not as a string of digits. Color it yellow when it is close to
+the right number."
 first_image: scalar.png
-first_alt: The numbers are compared as numbers, not as single digits.
+first_caption: 50 is close to 48.
+first_alt: "Anki review window with text: Niedersachsen ist 48 tausend
+km² groß. 50. The 50 is marked in yellow."
 ankiweb_id: 333346658
 
 When learning some types of numbers, like the number of inhabitants of
@@ -15,7 +19,7 @@ a country, often close is good enough. This add-on makes Anki show
 that, it colors the answer in yellow when it was close to the
 original answer.
 
-#### Example
+## Example
 In the image correct answer is “48”, when you know it’s close to 50,
 you type that. The original behavior was to compare character by character,
 and show the typed answer in red, a 5 is no 4 and a 0 is no 8. With this add-on, the whole answer
@@ -32,17 +36,15 @@ With this add-on the 400 would be completely red.
 ## Setup
 
 ### Inside Anki
-To use, the
-name of the answer field (the `{{type:NN}}` bit) must contain the word
-“Scalar”. (E.g. “Area_Scalar” or “Inhabitants_Scalar” for a geography
-deck or “Atomic_Mass_Scalar” for a chemistry deck.)
+To use, the name of the answer field (the `{{type:NN}}` bit) must
+contain the word “Scalar”. (E.g. “Area_Scalar” or “Inhabitants_Scalar”
+for a geography deck or “Atomic_Mass_Scalar” for a chemistry deck.)
 
 For fields without
 “Scalar” in the name the behavior stays the same, doing the
 character-by-character comparison.
 
 ### Configuration
-
  To change the factor what counts as “close enough” change the
 `pass_factor` in the .py source file. There are also a few other
 things that can somewhat easily be changed. The comments in thy source
@@ -50,11 +52,12 @@ file should be a help.
 
 ## “Correct answer was:”
 
-<figure style="width:410px;"><img
-src="images/compare_by_char.png" alt="Very close answer and lots of red.">
+<figure>
+<img src="images/compare_by_char.png" alt="Anki review window with
+text: Niedersachsen ist 48 tausend km² groß. 50. Correct answer was:
+48. The 50 is marked in red.">
 <figcaption>Even though the typed in answer is close to the correct
 one, there is a lot of red and extra text.</figcaption></figure>
-
 When this add-on is working, the “Correct answer
 was:” text is not shown at all. This is partly due to the way the
 add-on operates, but i see this as a bonus, not a problem. At this

@@ -5,10 +5,13 @@ type: addon
 status: working
 status_color: green
 status_text_color: white
-abstract: Replace the top menu bar with the “Decks Study Add Browse” text buttons and the two rather drab sync and statistics buttons with a colorful icon toolbar like the one in Anki 1.
+abstract: "Replace the top menu bar with the “Decks Study Add Browse”
+text buttons and the two rather drab sync and statistics buttons with
+a colorful icon toolbar like the one in Anki 1."
 subtitle: Get back the Anki1 look
 first_image: Colorful%20toolbar.png
-first_alt: Anki 2 review window with two icon bars. The review area reads Die Hauptstadt von Niue ist
+first_alt: "Anki 2 review window with two icon bars. The review area
+reads Die Hauptstadt von Niue ist"
 ankiweb_id: 388296573
 
 Replace the top menu bar with the “Decks Study Add Browse” text
@@ -26,14 +29,18 @@ Study Add Browse” functions can also be reached through the "Go" menu.
 
 ## Variants
 
-<figure style="width:562px;" class="clear"><img src="images/toolbar%20netbook.png"
-alt="Anki 2 with the tool bar at the left and right.  The review area
-reads Die Hauptstadt von Niue ist"> <img src="images/toolbar%20ospalh.png"
-alt="Anki 2 with a study icon and an undo icon.  The
-review area reads Die Hauptstadt von Niue ist"> <figcaption>Two
-variants of the arrangement and selection of icons.</figcaption>
-</figure>
+<figure style="width:562px;" class="clear">
 
+<img src="images/toolbar%20netbook.png"
+alt="Anki 2 with the tool bar at the left and right.  The review area
+reads Die Hauptstadt von Niue ist">
+<img src="images/toolbar%20ospalh.png"
+alt="Anki 2 with a study icon and an undo icon.  The
+review area reads Die Hauptstadt von Niue ist">
+<figcaption>
+    Two variants of the arrangement and selection of icons.
+    </figcaption>
+</figure>
 Apart from the standard version, there is a
 [netbook version](http://beta.ankiweb.net/shared/info/1330596667)
 on the AnkiWeb
@@ -55,6 +62,6 @@ personal taste of the user.
 
 ## What *is* the capital of Niue?
 
-<figure style="width:562px;"><img src="images/Niue%20Alofi.png" alt="Anki
+<figure><img src="images/Niue%20Alofi.png" alt="Anki
 2. The review area reads Die Hauptstadt von Niue ist Alofi"> </figure>
 [Alofi](http://en.wikipedia.org/wiki/Alofi).

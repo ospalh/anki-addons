@@ -5,7 +5,8 @@ type: addon
 status: hackish
 status_color: yellow
 status_text_color: black
-abstract: Bypass the mplayer play queue. Like this, when you hit replay, the replay starts at once.
+abstract: "Bypass the mplayer play queue. Like this, when you hit
+replay, the replay starts at once."
 first_image: mplayer.png
 first_alt: Console output of mpg321
 

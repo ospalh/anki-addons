@@ -7,7 +7,9 @@ status_color: green
 status_text_color: white
 abstract: Quick hack to hide field content only on the desktop client.
 first_image: ipu.png
-first_alt: An SEP-field is an easy way to make things invisible
+first_alt: "This should be a unicorn that is both pink and invisible."
+first_caption: "An SEP-field is an easy way to make things
+invisible."
 
 This is a quick hack to hide field content only on the desktop client.
 

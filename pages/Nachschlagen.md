@@ -5,9 +5,13 @@ type: addon
 status: working
 status_color: green
 status_text_color: white
-abstract: Menu to look up words at a few web sites. Most useful for speakers of German learning Japanese
+abstract: "Menu to look up words at a few web sites. Most useful for speakers of German learning Japanese"
 first_image: nachschlagen.png
-first_alt: A menu called Nachschlagen under the Tools menu
+first_alt: "A menu called Nachschlagen under the Tools menu. Menu
+items: Japanisch bei Wadoku, Deutsch bei Wadoku, Auswahl bei Wadoku,
+Kanji bei Kanji-Lexikon, Kanjiauswahl bei Kanji-Lexikon, Ausdruck bei
+Forvo, Auswahl bei Forvo"
+first_caption: The new menu
 ankiweb_id: 1211332804
 
 Like the “Lookup” menu from the Japanese support add-on, this adds a
@@ -19,13 +23,15 @@ well. „Nachschlagen“ is German for “Lookup”.
 
 ## Set-up
 
-There is a configuration section at the head of the source file where
-a few things can be configured. Most of it is not too important and
-explained in the file itself. You may encounter the error message “No
-field found for lookup. Consider changing the field name lists in the
-plugin source.” That means that my guesses about what you use as
-field names were wrong. In this case you should add your favorite
-field names to the `expression_fields` and `meaning_fields` lists.
+There is a configuration section at the head of the
+[source file](https://github.com/ospalh/anki-addons/blob/master/Nachschlagen.py)
+where a few things can be configured. Most of it is not too
+important and explained in the file itself. You may encounter the
+error message “No field found for lookup. Consider changing the field
+name lists in the plugin source.” That means that my guesses about
+what you use as field names were wrong. In this case you should add
+your favorite field names to the `expression_fields` and
+`meaning_fields` lists.
 
 
 ## For learners of any spoken language

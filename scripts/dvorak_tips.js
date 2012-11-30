@@ -4,10 +4,9 @@
 
 $(document).ready(function(){
 
-    $('#pinky').qtip({
+    $('.pinky').qtip({
         content: {
-            text:'The semicolon “;” is mapped to “again”, too. Like this, \
-it should work out with the programmer dvorak variant as well.',
+            text:"The apostrophe “'” and semicolon “;” are both mapped to the little finger. For programmer dvorak these keys are swapped, so this is of no consequence.",
         },
         style: {
             classes: 'ui-tooltip-rounded ui-tooltip-shadow',
