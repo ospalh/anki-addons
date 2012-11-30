@@ -36,6 +36,11 @@ downloaders = [
     BeolingusDownloader(),
     GooglettsDownloader(),
     ]
-"""List of downloaders. The sites are tried in the order they appear here."""
+"""
+List of downloaders.
+
+These sites are tried in the order they appear here. Lines starting
+with a '#' are not tried.
+"""
 
 __all__ = [downloaders]
