@@ -40,7 +40,7 @@ When you had to pick a different field name when you
 [added the field](Add%20audio%20field.html) to the note, use that name
 inside the braces.
 
-While typing in, the text on the right should be visible on the right,
+While typing on the left, the text should be visible on the right,
 too. When the whole field, with the curly braces, has been entered, it
-should disappear. When `Unknown field NN` appears on the right,
+should disappear there. When `Unknown field NN` appears on the right,
 compare the spelling with the list in the “Edit Current” window.

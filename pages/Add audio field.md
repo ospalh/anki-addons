@@ -27,12 +27,13 @@ first card, try the menu item
 
 <span class="clear" />
 <figure>
-<img src="images/preview_audio.png" alt="Dialog window with text ">
-<figcaption>When you get this, the add-on will go fetch.</figcaption>
+<img src="images/preview_audio.png" alt="Dialog window with text
+starting Requests to send to the download sites">
+<figcaption>When you get this, dialog, the add-on will go fetch.</figcaption>
 </figure>
 When a dialog with
 “Requests to send to the download sites”, and with the right words in
-the edit boxes below, you are in luck and your
+the edit boxes below appears, you are in luck and your
 model already works with this add-on.
 
 <span class="clear" />

@@ -26,7 +26,6 @@ The tool bars can be shown and hidden via the "View" menu, the “Decks
 Study Add Browse” functions can also be reached through the "Go" menu.
 
 
-
 ## Variants
 
 <figure style="width:562px;" class="clear">
@@ -42,9 +41,10 @@ review area reads Die Hauptstadt von Niue ist">
     </figcaption>
 </figure>
 Apart from the standard version, there is a
-[netbook version](http://beta.ankiweb.net/shared/info/1330596667)
+
+[netbook version](https://ankiweb.net/shared/info/1330596667)
 on the AnkiWeb
-[download page](http://beta.ankiweb.net/shared/addons/), that places
+[download page](https://ankiweb.net/shared/addons/), that places
 the two icon bars to the left and right, to preserve vertical screen
 space. On github, there is also a branch and package named
 [`ospalh-special`](https://github.com/downloads/ospalh/anki-addons/colorful_toolbar_ospalh-special.zip)

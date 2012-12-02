@@ -5,9 +5,11 @@ status: breaks collections
 type: addon
 status_color: red
 status_text_color: white
-abstract: Rename media files with names that look like MD5 hashes.
+abstract: "Rename media files with names that look like MD5 hashes."
 first_image: hashes.png
-first_alt: Old and new file names.
+first_alt: "Text display window: These file names will be used and many
+lines like 59d4b8d8eddf0818.e9b228944ccfbca.wav → せ.wav"
+first_caption: Old and new file names.
 download_file: dehashilator.zip
 
 Rename media files with names that look like MD5 hashes.
