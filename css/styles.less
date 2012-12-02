@@ -301,7 +301,7 @@ blockquote {
     margin: 1em 2em;
     padding-left: 1em;
     display: table;
-    p:first-letter {
+    &:not(.lsting) p:first-letter {
         float: left;
         margin: .2em .3em .1em 0;
         font-size: 220%;
@@ -312,6 +312,7 @@ blockquote {
         -webkit-box-shadow:1px 2px 2px #4D7788;
         box-shadow:1px 1px 2px #4D7788;
     }
+
 
     &.nb:before {
         content:"N.B.:";
