@@ -7,6 +7,10 @@
 @aradius: 20px;
 @fradius: 10px;
 @slradius: 3px;
+/* @gradient-top: #dadada; */
+@gradient-top: #ccc;
+@gradient-bottom: #eee;
+
 
 @qt-color: desaturate(spin(@a-color, -60), 50%);
 
@@ -120,7 +124,19 @@ footer .line{
 }
 
 nav{
-    background:url(/anki-addons/images/gradient_light.jpg) repeat-x 50% 50% #f8f8f8;
+    /* fallback */
+    background-color: @gradient-top;
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%,
+                                 from(@gradient-top), to(@gradient-bottom));
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, @gradient-top, @gradient-bottom);
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, @gradient-top, @gradient-bottom);
+    /* IE 10 */
+    background: -ms-linear-gradient(top, @gradient-top, @gradient-bottom);
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, @gradient-top, @gradient-bottom);
 
     top:4em;
     top-margin:4em;
