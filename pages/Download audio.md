@@ -154,7 +154,7 @@ source, Hovering over the icon or the word shows some information
 about the file.
 
 Each row has a number of buttons, one or two play buttons and three or
-for radio buttons.
+four radio buttons.
 
 The left (or only) play button plays the newly retrieved file. If
 there is a second play button, the field where the new audio clip will
@@ -189,7 +189,7 @@ each line. They determine what happens to the downloaded file.
 
 After the start, the language code can be
 [changed in the deck options](Setting%20deck%20options.html),
-under the general tab. This can be done for separately for each
+under the general tab. This can be done separately for each
 options group. Like this, it is possible to use different download
 languages with different decks. See also the
 [Anki manual](http://ankisrs.net/docs/dev/manual.html#deckoptions).
@@ -276,8 +276,8 @@ every card. There are a few reasons for this:
 
 Bugs and other issues can be reported at the
 [github repository](https://github.com/ospalh/anki-addons/issues?state=open)
-(pull requests with patches welcome) or possibly at this
-[Google Groups thread](www.example.com/NN).
+(pull requests with patches welcome) or possibly at a
+[Google Groups thread](http://no.such-domain.nope/NN) i may start soon.
 
 ### Audio processing
 
@@ -288,10 +288,12 @@ But the add-on contains code to do some simple audio processing,
 normalising the files and changing the output format. This code is not
 used by default, as it requires two extra Python packages,
 [PyDub](http://pydub.com/) and
-[pysox](https://pypi.python.org/pypi/pysox/0.3.6.alpha). Pysox has
+[pysox](http://pypi.python.org/pypi/pysox/0.3.6.alpha). Pysox has
 still alpha status, and installing it isn’t always easy, either.
 Hackers that do manage that may then want to take a look at the
-content of the “`downloadaudio/processors`” directory.
+content of the
+“[`downloadaudio/processors`](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/processors)”
+directory.
 
 ### More ideas
 
@@ -301,7 +303,7 @@ Things that might be added in the future (but don’t hold your breath):
 * Automatically edit the information before the request is sent. I use
   what i call “electric” cards for Japanese verbs, where the different
   forms are formed automatically. That means that the whole word
-  doesn’t actually appear on the card. While it is no big problem to
+  doesn’t actually appear in the note. While it is no big problem to
   complete the word in the “Manual audio” dialog, the add-on could
   automatically add the 「る」 for 一段動詞.  This will most likely
   not by implemented any time soon.
@@ -309,6 +311,6 @@ Things that might be added in the future (but don’t hold your breath):
   dedicated
   [Google Groups thread](https://groups.google.com/forum/?fromgroups=#!topic/ankisrs-users/yyixoEYy8tc). Python
   files welcome. Take a look at
-  [`downloadaudio/processors`](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/downloaders),
-  write a new `AudioDownloader` and send me a pull request. Or just
-  the `.py`-file.
+  [`downloadaudio/downloaders`](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/downloaders),
+  write a new class derived from `AudioDownloader` and send me a pull
+  request. Or just the `.py`-file.

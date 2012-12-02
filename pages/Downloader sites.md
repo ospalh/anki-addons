@@ -16,7 +16,7 @@ dictionary provided by the
 The site provides German↔English, German↔Portuguese and German↔Spanish
 dictionaries and pronuctiations in English, German and Spanish.
 
-### <span id='gtts'>Google TTS</span>
+## <span id='gtts'>Google TTS</span>
 
 Goole TTS is the text-to-speech part of
 [Google Translate](http://translate.google.com/#auto/en/).  It is the
@@ -90,13 +90,13 @@ may be added at some point.
 ### Chinese
 
 The Chinese pronunciations use a version of pinyin with tone
-numbers. Learners of Chinese should install the [Chinese
-support](https://ankiweb.net/shared/info/3448800906) add-on. That
-add-on brings along the [cjklib](http://cjklib.org/), that
-automatically transforms the pinyin with accents that add-on produces
-first into the right form with numbers.
+numbers. Learners of Chinese should install the
+[Chinese support](https://ankiweb.net/shared/info/3448800906)
+add-on. That add-on brings along the [cjklib](http://cjklib.org/),
+which is then used to transforms pinyin with accents into the right
+form with numbers.
 
-### Macmillan
+## Macmillan
 
 This downloader gets  pronunciations from the
 [Macmillan Dictionary](http://www.macmillandictionary.com/) site.

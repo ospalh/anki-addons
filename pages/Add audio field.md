@@ -109,7 +109,7 @@ first field, just should use that field’s name, followed by
 
 In the example, sending pictures of birds to GoogleTTS would not
 work. So we look for interesting text in the “Edit Current”
-window: « l'oiseau », marked in red with a “1” in the image. That text
+window: «&nbsp;l'oiseau&nbsp;», marked in red with a “1” in the image. That text
 is in the field named “Back” (blue 2). That field name appears
 again in the “Fields for NN” dialog. (blue 3). Use this field name
 together with the word “Audio” as the new field name. In this case,
@@ -162,7 +162,7 @@ right a dialog with the field names. Französisch is marked in blue,
 Audio is selected and marked in yellow. Below a
 dialog. Text: New name. Text input: Französisch Audio. Französisch is
 marked in blue, Audio in yellow.">
-<figcaption>Change the name of the field “Audio” Add the name of the
+<figcaption>Change the name of the field “Audio”. Add the name of the
 source field to the name.</figcaption>
 </figure>
 

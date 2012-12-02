@@ -63,8 +63,8 @@ reading stored in the note. The detailed rules are:
     <li>“<span class="qtbase hanzipinyin">Hanzi</span>” or</li>
     <li>“Pinyin”.</li>
   </ul>
-* The sub-string rule is different for this case. For fields where
-  “Audio” or “Sound” is a sub-string, this word is not removed, but
+* The substring rule is different for this case. For fields where
+  “Audio” or “Sound” is a substring, this word is not removed, but
   the add-on looks for fields where that word has been
   *replaced* with  one from the “Reading” list. For example, when
   there is a field called “Japanese Reading”, add a field “Japanese
