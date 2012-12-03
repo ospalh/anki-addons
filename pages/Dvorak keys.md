@@ -35,7 +35,7 @@ finger for “good” and ring finger for “easy”.
 
 The third set is similar to the first set, but in the bottom row,
 here, too, going from <span class="qtbase pinky">little finger</span>,
-again, to the index finger, easy. (Some (German? international?)
+“again”, to the index finger, “easy”. (Some (German? international?)
 keyborads have a small left shift key and an extra key for “<” and
 “>”. That key is skipped.)
 
