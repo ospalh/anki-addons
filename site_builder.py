@@ -47,6 +47,15 @@ def page(path):
     elif 'subpage' in page.meta.get('type', []):
         return render_template('subpage.html', page=page)
 
+
+# Generate URLs for all the sub-page md files
+@freezer.register_generator
+def page():
+    for sub_page in pages:
+        if 'subpage' in sub_page.meta.get('type', []):
+            yield {'path': sub_page.path}
+
+
 @app.route('/anki-addons/images/<fname>.png')
 def get_png(fname):
     filename = 'images/' + fname + '.png'
@@ -85,6 +94,7 @@ def get_less(fname):
 
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == "build":
+        # freezer.run(debug=True)
         freezer.freeze()
     else:
         app.run(host='0.0.0.0', port=app.config.get('SERVER_PORT'))
