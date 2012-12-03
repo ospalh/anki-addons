@@ -43,7 +43,6 @@ href="http://subs2srs.sourceforge.net/">sub2srs</a> example deck 「時
 を掛ける少女」.
 </figcaption>
 </figure>
-
 To use furikanji, with the markers shown, i use
 <blockquote class=lsting><pre><code>.redish { color: #a00;}
 body:not(.mobile) .furikanji:before, body:not(.mobile) .furikanji:after {
@@ -134,7 +133,7 @@ kanji text. The modified version treats only characters in the word
 character class as kanji.
 
 This means that commas, newlines,
-[CJK](http://en.wikipedia.org/wiki/CJK characters)
+[CJK](http://en.wikipedia.org/wiki/CJK_characters)
 [spaces](http://www.fileformat.info/info/unicode/char/3000/index.htm)
 &c. can be used as separators between kanji and other, preceding text.
 
