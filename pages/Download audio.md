@@ -1,10 +1,10 @@
 title: Download audio
 id: dlaudio
 main_file: Download%20audio.py
-status: undocumented
+status: working
 type: addon
-status_color: yellow
-status_text_color: black
+status_color: green
+status_text_color: white
 abstract: "Automatically download audio from talking dictionaries or
 from Google TTS."
 first_image: Downloaded%20audio.png
