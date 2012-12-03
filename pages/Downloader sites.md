@@ -83,7 +83,7 @@ These audio files come from
 They offer “five ([sic](http://www.leo.org/index_en.html))
 dictionaries”, German↔Chinese, German↔English, German↔French,
 German↔Italian, German↔Russian and German↔Spanish. Of these seven
-languages, they have audio files for Chinese English, French, German
+languages, they have audio files for Chinese, English, French, German
 and Spanish. I could not find words for Italian and Russian, but they
 may be added at some point.
 
