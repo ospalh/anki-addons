@@ -37,7 +37,10 @@ The third set is similar to the first set, but in the bottom row,
 here, too, going from <span class="qtbase pinky">little finger</span>,
 “again”, to the index finger, “easy”. (Some (German? international?)
 keyborads have a small left shift key and an extra key for “<” and
-“>”. That key is skipped.)
+“>”. That key is skipped.) (The idea for this set of keys came from
+Peter Horwood, (“Madman Pierre”), who has released
+[his own add-on](https://ankiweb.net/shared/info/3196965470) which
+does this remapping.)
 
 These keys were selected so that they don't clash with other functions
 like add card or edit card.
