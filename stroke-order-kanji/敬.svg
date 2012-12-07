@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file has been modified from the original version by the kanji_colorize.py
+script (available at http://github.com/cayennes/kanji-colorize) with these
+settings:
+    mode: css
+    saturation: 0.95
+    value: 0.75
+    image_size: 327
+It remains under a Creative Commons-Attribution-Share Alike 3.0 License.
+
+The original SVG has the following copyright:
+Copyright (C) 2009/2010/2011 Ulrich Apel.
+This work is distributed under the conditions of the Creative Commons
+Attribution-Share Alike 3.0 Licence. This means you are free:
+* to Share - to copy, distribute and transmit the work
+* to Remix - to adapt the work
+
+Under the following conditions:
+* Attribution. You must attribute the work by stating your use of KanjiVG in
+  your own copyright header and linking to KanjiVG's website
+  (http://kanjivg.tagaini.net)
+* Share Alike. If you alter, transform, or build upon this work, you may
+  distribute the resulting work only under the same or similar license to this
+  one.
+
+See http://creativecommons.org/licenses/by-sa/3.0/ for more details.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+<!ATTLIST g
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:element CDATA #IMPLIED
+kvg:variant CDATA #IMPLIED
+kvg:partial CDATA #IMPLIED
+kvg:original CDATA #IMPLIED
+kvg:part CDATA #IMPLIED
+kvg:number CDATA #IMPLIED
+kvg:tradForm CDATA #IMPLIED
+kvg:radicalForm CDATA #IMPLIED
+kvg:position CDATA #IMPLIED
+kvg:radical CDATA #IMPLIED
+kvg:phon CDATA #IMPLIED >
+<!ATTLIST path
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:type CDATA #IMPLIED >
+]>
+<?xml-stylesheet type="text/css" href="_kanji_style.css"?>
+<svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
+<svg:g id="kvg:StrokePaths_0656c" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
+<svg:g id="kvg:0656c" kvg:element="&#25964;">
+	<svg:g class="stroke_group group_num1" id="kvg:0656c-g1" kvg:element="&#33503;" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0656c-g2" kvg:element="&#33401;" kvg:original="&#33400;" kvg:position="top" kvg:variant="true">
+			<svg:path class="stroke_path stroke_num1" d="M13.82,31.06c2.18,0.31,3.9,0.28,5.31,0.09c8.01-1.12,24.62-3.38,32.87-3.92c1.68-0.11,3.75-0.22,5.5,0.1" id="kvg:0656c-s1" kvg:type="&#12752;" />
+			<svg:path class="stroke_path stroke_num2" d="M26.2,19.93c0.62,0.62,1.21,1.45,1.29,2.14c0.88,7.68,1.67,14.02,1.93,16.35" id="kvg:0656c-s2" kvg:type="&#12753;a" />
+			<svg:path class="stroke_path stroke_num3" d="M45.35,15.46c0.59,0.59,0.81,1.74,0.63,2.77C45,24,44.25,29.88,42.86,36.45" id="kvg:0656c-s3" kvg:type="&#12753;a" />
+		</svg:g>
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0656c-g3" kvg:element="&#21477;" kvg:position="bottom">
+			<svg:g id="kvg:0656c-g4" kvg:element="&#21241;">
+				<svg:g id="kvg:0656c-g5" kvg:element="&#20031;">
+					<svg:path class="stroke_path stroke_num4" d="M22.99,40.38c0.07,1.06,0.01,2.34-0.34,3.37c-2.4,6.99-6.27,13.87-12.4,19.61" id="kvg:0656c-s4" kvg:type="&#12754;" />
+				</svg:g>
+				<svg:path class="stroke_path stroke_num5" d="M24.69,46.72c1.31,0.28,2.75,0.56,3.67,0.37c4.51-0.96,14.89-2.71,19.36-3.25c2.88-0.35,4.69,1.53,4.53,4.09C51.33,62.3,50,73,45.83,86.19c-2.06,6.53-4.46,4.56-7.13,1.38" id="kvg:0656c-s5" kvg:type="&#12742;" />
+			</svg:g>
+			<svg:g id="kvg:0656c-g6" kvg:element="&#21475;">
+				<svg:path class="stroke_path stroke_num6" d="M21.18,59.9c0.65,0.65,1.11,1.48,1.36,2.31c0.62,2.48,1.33,6.54,1.95,10c0.22,1.25,0.4,2.42,0.5,3.41" id="kvg:0656c-s6" kvg:type="&#12753;" />
+				<svg:path class="stroke_path stroke_num7" d="M22.91,60.42c5.03-1.09,10.18-1.95,13.09-2.41c2.48-0.39,3.08,0.27,2.67,2.75c-0.5,2.98-1.16,5.65-1.92,9.69" id="kvg:0656c-s7" kvg:type="&#12757;b" />
+				<svg:path class="stroke_path stroke_num8" d="M25.37,73.21c2.41-0.32,6.06-0.83,9.46-1.34c0.96-0.14,1.92-0.29,2.86-0.43" id="kvg:0656c-s8" kvg:type="&#12752;b" />
+			</svg:g>
+		</svg:g>
+	</svg:g>
+	<svg:g class="stroke_group group_num2" id="kvg:0656c-g7" kvg:element="&#25908;" kvg:original="&#25909;" kvg:position="right" kvg:radical="general" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0656c-g8" kvg:position="top">
+			<svg:path class="stroke_path stroke_num9" d="M69.19,16.64c0.31,0.98,0.45,1.97,0.19,3.13C67.72,27.2,63.74,41.1,58,51.37" id="kvg:0656c-s9" kvg:type="&#12754;" />
+			<svg:path class="stroke_path stroke_num10" d="M67.08,38.15c1.2,0.19,2.38,0.16,3.57-0.09c4.4-0.65,10.34-2.34,16.13-3.71c1.29-0.31,3.6-0.47,4.83-0.2" id="kvg:0656c-s10" kvg:type="&#12752;" />
+		</svg:g>
+		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0656c-g9" kvg:element="&#20034;" kvg:position="bottom">
+			<svg:g id="kvg:0656c-g10" kvg:element="&#20031;">
+				<svg:path class="stroke_path stroke_num11" d="M78.38,41.24c0.45,1.28,0.49,2.45-0.02,4.77C74,65.62,66.38,84.38,50.08,92.25" id="kvg:0656c-s11" kvg:type="&#12754;" />
+			</svg:g>
+			<svg:path class="stroke_path stroke_num12" d="M61,56.12c3.03,0,17.26,19.45,26.63,29.5c1.87,2,4.62,4.5,6.87,5.71" id="kvg:0656c-s12" kvg:type="&#12751;" />
+		</svg:g>
+	</svg:g>
+</svg:g>
+</svg:g>
+<svg:g id="kvg:StrokeNumbers_0656c" style="font-size:8;fill:#808080">
+	<svg:text class="stroke_number stroke_num1" transform="matrix(1 0 0 1 7.50 32.50)">1</svg:text>
+	<svg:text class="stroke_number stroke_num2" transform="matrix(1 0 0 1 17.25 20.50)">2</svg:text>
+	<svg:text class="stroke_number stroke_num3" transform="matrix(1 0 0 1 36.75 16.50)">3</svg:text>
+	<svg:text class="stroke_number stroke_num4" transform="matrix(1 0 0 1 15.50 43.50)">4</svg:text>
+	<svg:text class="stroke_number stroke_num5" transform="matrix(1 0 0 1 31.50 43.40)">5</svg:text>
+	<svg:text class="stroke_number stroke_num6" transform="matrix(1 0 0 1 15.75 68.83)">6</svg:text>
+	<svg:text class="stroke_number stroke_num7" transform="matrix(1 0 0 1 24.50 57.50)">7</svg:text>
+	<svg:text class="stroke_number stroke_num8" transform="matrix(1 0 0 1 27.50 70.18)">8</svg:text>
+	<svg:text class="stroke_number stroke_num9" transform="matrix(1 0 0 1 60.75 17.50)">9</svg:text>
+	<svg:text class="stroke_number stroke_num10" transform="matrix(1 0 0 1 70.50 34.55)">10</svg:text>
+	<svg:text class="stroke_number stroke_num11" transform="matrix(1 0 0 1 69.50 47.98)">11</svg:text>
+	<svg:text class="stroke_number stroke_num12" transform="matrix(1 0 0 1 63.75 55.41)">12</svg:text>
+</svg:g>
+<svg:script type="text/ecmascript" xlink:href="_kanji_script.js" /></svg:svg>
