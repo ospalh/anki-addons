@@ -1,0 +1,47 @@
+/*
+  This is part of kanji-colorize, which shows KanjiVG data as colored
+  stroke order diagrams.
+
+  This file defines the stroke colors. It is needed when the
+  kanji_colorizer was run with "--mode css".
+
+  This file copyright © 2012 Roland Sieker <ospalh@gmail.com>
+  License: GNU AGPL, version 3 or later;
+  http://www.gnu.org/licenses/agpl.html
+
+*/
+.stroke_num1 {stroke: #bf0909;}
+.stroke_num2 {stroke: #bf6409;}
+.stroke_num3 {stroke: #bfbf09;}
+.stroke_num4 {stroke: #09bf09;}
+.stroke_num5 {stroke: #09bfbf;}
+.stroke_num6 {stroke: #0964bf;}
+.stroke_num7 {stroke: #0909bf;}
+.stroke_num8 {stroke: #6409bf;}
+.stroke_num9 {stroke: #bf09bf;}
+.stroke_num10 {stroke: #bf0964;}
+.stroke_num11 {stroke: #ff8056;}
+.stroke_num12 {stroke: #ffd456;}
+.stroke_num13 {stroke: #d4ff56;}
+.stroke_num14 {stroke: #56ff80;}
+.stroke_num15 {stroke: #56d4ff;}
+.stroke_num16 {stroke: #5680ff;}
+.stroke_num17 {stroke: #8056ff;}
+.stroke_num18 {stroke: #d456ff;}
+.stroke_num19 {stroke: #ff56d4;}
+.stroke_num20 {stroke: #ff5680;}
+.stroke_num21 {stroke: #7f3f3f;}
+.stroke_num22 {stroke: #7f7f3f;}
+.stroke_num23 {stroke: #3f7f3f;}
+.stroke_num24 {stroke: #3f7f7f;}
+.stroke_num25 {stroke: #3f3f7f;}
+.stroke_num26 {stroke: #7f3f7f;}
+.stroke_num27 {stroke: #bf0909;}
+.stroke_num28 {stroke: #bf6409;}
+.stroke_num29 {stroke: #bfbf09;}
+.stroke_num30 {stroke: #09bf09;}
+.stroke_num31 {stroke: #09bfbf;}
+.stroke_num32 {stroke: #0964bf;}
+.stroke_num33 {stroke: #0909bf;}
+.stroke_num34 {stroke: #6409bf;}
+.stroke_num35 {stroke: #bf09bf;}
