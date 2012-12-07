@@ -38,7 +38,7 @@ else:
     # the code below becomes a bit more readable. The extra characters
     # in the kanji group are just to my personal taste. I learn those
     # characters as Japanese "words".
-    split_pat = u' ?(?P<kanji>[-+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
+    split_pat = u' ?(?P<kanji>[-〓+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
 
 furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
     '<rt>\g<kana></rt></ruby>'
