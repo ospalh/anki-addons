@@ -16,7 +16,7 @@ import re
 from anki import hooks
 from aqt import mw
 
-__version__ = '2.0.0'
+__version__ = '2.1.0'
 kanji_size = 200
 """The size the svg is scaled to"""
 
