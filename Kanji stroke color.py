@@ -63,10 +63,10 @@ def character_basename(c, var=''):
     """
     if not c.isalnum():
         return ascii_basename(c,var)
-    if c.isupper():
+    if c.islower():
         # This should trigger only for romaji, for kanji isupper()
         # and islower() are both False.
-        c = u'_' + c
+        c = c + u'_'
     if not var:
         return u'{0}.svg'.format(c)
     else:
@@ -132,7 +132,7 @@ def kanji_svg_var(txt, variant=[''], show_rest=False):
     rtxt = u''
     size = kanji_size
     if show_rest:
-        rtxt = u'<div>'
+        rtxt = u'<div class="strokevariants">'
         size = rest_size
     for c in txt:
         # Try to get the variant
