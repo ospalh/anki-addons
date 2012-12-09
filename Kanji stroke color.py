@@ -132,7 +132,7 @@ def kanji_svg_var(txt, variant=[''], show_rest=False):
     rtxt = u''
     size = kanji_size
     if show_rest:
-        rtxt = u'<div>'
+        rtxt = u'<div class="strokevariants">'
         size = rest_size
     for c in txt:
         # Try to get the variant
