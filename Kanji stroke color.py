@@ -1,6 +1,7 @@
 # -*- coding: utf-8 ; mode: Python -*-
 # © 2012 Roland Sieker <ospalh@gmail.com>
-# Origianl code: Damien Elmes <anki@ichi2.net>
+#
+# Origianl code: Damien Elmes <anki@ichi2.net>, Cayenne Boyer
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 """
@@ -36,6 +37,41 @@ variant_display_names = {
     '': 'title="Standard"', '-Jinmei': 'title="Jinmei"',
     '-Kaisho': 'title="Kaisho"'}
 """Mapping file name variants to display variants."""
+
+def ascii_basename(c, var=''):
+    u"""
+    An SVG filename in ASCII using the same format KanjiVG uses.
+
+    May raise TypeError for some kinds of invalid
+    character/variant combinations
+    """
+    code = '%05x' % ord(c)
+    # except TypeError:  # character not a character
+    if not var:
+        return code + u'.svg'
+    else:
+        return u'{0}-{1}.svg'.format(code, var)
+
+
+def character_basename(c, var=''):
+    u"""
+    An SVG filename that uses the unicode character
+
+    There are two exceptions:
+    * non-alphanumeric characters use the ascii_filename
+    * upper-case letters get an extra underscore at the beginning.
+    to avoid some (potential) file system problems.
+    """
+    if not c.isalnum():
+        return ascii_basename(c,var)
+    if c.islower():
+        # This should trigger only for romaji, for kanji isupper()
+        # and islower() are both False.
+        c = c + u'_'
+    if not var:
+        return u'{0}.svg'.format(c)
+    else:
+        return u'{0}-{1}.svg'.format(c, var)
 
 
 # I don't know how to do a lamba with the *args. So unroll the four.
@@ -97,7 +133,7 @@ def kanji_svg_var(txt, variant=[''], show_rest=False):
     rtxt = u''
     size = kanji_size
     if show_rest:
-        rtxt = u'<div>'
+        rtxt = u'<div class="strokevariants">'
         size = rest_size
     for c in txt:
         # Try to get the variant
@@ -121,11 +157,11 @@ def get_file_names_titles(c, variants, show_rest):
     if not show_rest:
         for var in variants:
             fname = os.path.join(mw.addonManager.addonsFolder(),
-                                 kanji_directory, c + var + '.svg')
+                                 kanji_directory, character_basename(c + var))
             if not os.path.exists(fname) and var and 1 == len(variants):
                 # Maybe we can save this by using the standard version.
                 fname = os.path.join(mw.addonManager.addonsFolder(),
-                                     kanji_directory, c + '.svg')
+                                     kanji_directory, character_basename(c))
             if os.path.exists(fname):
                 try:
                     title = variant_display_names[var]
@@ -133,7 +169,10 @@ def get_file_names_titles(c, variants, show_rest):
                     title = ''
                 name_title_list.append((fname, title))
     else:
-        # The thrue show-all style, show stroke order variants.
+        # The true show-all style, show stroke order variants.
+        # (We cheat a bit, this can't work for upper-case romaji
+        # letters and for non-alphanumeric characters. There aren't
+        # any variants for those, so no harm, no foul.)
         for fname in glob.glob(os.path.join(
                 mw.addonManager.addonsFolder(),
                 kanji_directory, c + u'-*.svg')):
