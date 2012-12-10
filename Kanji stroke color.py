@@ -27,7 +27,8 @@ kanji_directory = 'stroke-order-kanji'
 """Where the kanji are stored.
 
 Where the kanji svgs are stored in the add-ons folder, before they are
-copied to the media folder."""
+copied to the media folder.
+"""
 
 main_vars = ['', '-Jinmei', '-Kaisho']
 """The three main variants to try."""
