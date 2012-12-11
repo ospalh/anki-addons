@@ -31,12 +31,11 @@ Where the kanji svgs are stored in the add-ons folder, before they are
 copied to the media folder.
 """
 
-main_vars = ['', '-Jinmei', '-Kaisho']
-"""The three main variants to try."""
 variant_display_names = {
     '': 'title="Standard"', '-Jinmei': 'title="Jinmei"',
     '-Kaisho': 'title="Kaisho"'}
 """Mapping file name variants to display variants."""
+
 
 def ascii_basename(c, var=''):
     u"""
@@ -59,11 +58,11 @@ def character_basename(c, var=''):
 
     There are two exceptions:
     * non-alphanumeric characters use the ascii_filename
-    * upper-case letters get an extra underscore at the beginning.
+    * lower-case letters get an extra underscore at the end.
     to avoid some (potential) file system problems.
     """
     if not c.isalnum():
-        return ascii_basename(c,var)
+        return ascii_basename(c, var)
     if c.islower():
         # This should trigger only for romaji, for kanji isupper()
         # and islower() are both False.
@@ -82,7 +81,7 @@ def kanji_svg_jinmei(txt, *args):
     Display the text as colored stroke order svg diagram. This version
     uses the Jinmei (人名 or name, i guess) variant, if available.
     """
-    return kanji_svg_var(txt, variant=['-Jinmei'])
+    return kanji_svg_var(txt, variant='-Jinmei')
 
 
 def kanji_svg_kaisho(txt, *args):
@@ -92,7 +91,7 @@ def kanji_svg_kaisho(txt, *args):
     Display the text as colored stroke order svg diagram. This version
     uses the Kaisho (楷書 or square style) variant, if available.
     """
-    return kanji_svg_var(txt, variant=['-Kaisho'])
+    return kanji_svg_var(txt, variant='-Kaisho')
 
 
 def kanji_svg_kyoukasho(txt, *args):
@@ -104,11 +103,6 @@ def kanji_svg_kyoukasho(txt, *args):
     or 教科書/kyoukasho style.
     """
     return kanji_svg_var(txt)
-
-
-def kanji_svg_kyoukasho_kaisho_jinmei(txt, *args):
-    """Display the text as colored stroke order diagrams"""
-    return kanji_svg_var(txt, variant=main_vars)
 
 
 def kanji_svg_rest(txt, *args):
@@ -123,7 +117,7 @@ def kanji_svg_rest(txt, *args):
     return kanji_svg_var(txt, show_rest=True)
 
 
-def kanji_svg_var(txt, variant=[''], show_rest=False):
+def kanji_svg_var(txt, variant='', show_rest=False):
     """
     Replace kanji with SVG
 
@@ -133,7 +127,6 @@ def kanji_svg_var(txt, variant=[''], show_rest=False):
     rtxt = u''
     size = kanji_size
     if show_rest:
-        rtxt = u'<div class="strokevariants">'
         size = rest_size
     for c in txt:
         # Try to get the variant
@@ -146,28 +139,28 @@ def kanji_svg_var(txt, variant=[''], show_rest=False):
             # parameters don't)
         if not fn_title_list and not show_rest:
             rtxt += c
-    if show_rest:
-        rtxt += u'</div>'
+    if show_rest and rtxt:
+        rtxt = u'<div class="strokevariants">' + rtxt + u'</div>'
     return rtxt
 
 
-def get_file_names_titles(c, variants, show_rest):
+def get_file_names_titles(c, variant, show_rest):
     """ Return the file names of the svgs we should show. """
     name_title_list = []
     if not show_rest:
-        for var in variants:
+        fname = os.path.join(mw.addonManager.addonsFolder(),
+                             kanji_directory, character_basename(c, variant))
+        if variant and not os.path.exists(fname):
+            # Maybe we can save this by using the standard version.
             fname = os.path.join(mw.addonManager.addonsFolder(),
-                                 kanji_directory, character_basename(c + var))
-            if not os.path.exists(fname) and var and 1 == len(variants):
-                # Maybe we can save this by using the standard version.
-                fname = os.path.join(mw.addonManager.addonsFolder(),
-                                     kanji_directory, character_basename(c))
-            if os.path.exists(fname):
-                try:
-                    title = variant_display_names[var]
-                except KeyError:
-                    title = ''
-                name_title_list.append((fname, title))
+                                 kanji_directory, character_basename(c))
+
+        if os.path.exists(fname):
+            try:
+                title = variant_display_names[variant]
+            except KeyError:
+                title = ''
+            name_title_list.append((fname, title))
     else:
         # The true show-all style, show stroke order variants.
         # (We cheat a bit, this can't work for upper-case romaji
@@ -190,5 +183,4 @@ def get_file_names_titles(c, variants, show_rest):
 hooks.addHook('fmod_kanjiColor', kanji_svg_kyoukasho)
 hooks.addHook('fmod_kanjiColorJinmei', kanji_svg_jinmei)
 hooks.addHook('fmod_kanjiColorKaisho', kanji_svg_kaisho)
-hooks.addHook('fmod_kanjiColorMulti', kanji_svg_kyoukasho_kaisho_jinmei)
 hooks.addHook('fmod_kanjiColorRest', kanji_svg_rest)
