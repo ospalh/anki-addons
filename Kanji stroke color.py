@@ -32,8 +32,8 @@ copied to the media folder.
 """
 
 variant_display_names = {
-    '': 'title="Standard"', '-Jinmei': 'title="Jinmei"',
-    '-Kaisho': 'title="Kaisho"'}
+    '': 'title="Standard"', 'Jinmei': 'title="Jinmei"',
+    'Kaisho': 'title="Kaisho"'}
 """Mapping file name variants to display variants."""
 
 
@@ -81,7 +81,7 @@ def kanji_svg_jinmei(txt, *args):
     Display the text as colored stroke order svg diagram. This version
     uses the Jinmei (人名 or name, i guess) variant, if available.
     """
-    return kanji_svg_var(txt, variant='-Jinmei')
+    return kanji_svg_var(txt, variant='Jinmei')
 
 
 def kanji_svg_kaisho(txt, *args):
@@ -91,7 +91,7 @@ def kanji_svg_kaisho(txt, *args):
     Display the text as colored stroke order svg diagram. This version
     uses the Kaisho (楷書 or square style) variant, if available.
     """
-    return kanji_svg_var(txt, variant='-Kaisho')
+    return kanji_svg_var(txt, variant='Kaisho')
 
 
 def kanji_svg_kyoukasho(txt, *args):
