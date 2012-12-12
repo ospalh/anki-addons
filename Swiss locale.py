@@ -8,11 +8,29 @@
 Anki-2 add-on to format numbers just the way i like them.
 """
 
-import decimal
+
+# Usually Python comes with 'batteries included', that is, with the
+# Python standard library. Unfortunately, this is not the case for a
+# typical Anki install. So bring along some files that are
+# missing. Make sure we find them.
+from aqt import mw  # We need this to get to the path
+
+# These *are* available with standard Anki
+import os
+import sys
 import locale
 
 from anki.hooks import addHook
 from anki.utils import isMac
+
+# Add the path, but only once. (Other add-ons by YT contain similar
+# code.)
+if not [pe for pe in sys.path if 'batteries' in pe]:
+    sys.path.append(os.path.join(mw.pm.addonFolder(), "batteries"))
+
+# Now this should work. Include module to deal with numbers digit by
+# digit.
+import decimal
 
 # I personally like the Swiss use of the apostroph as thousands separator.
 # locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')

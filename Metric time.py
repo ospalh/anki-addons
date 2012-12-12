@@ -2,13 +2,30 @@
 # © 2012 Roland Sieker <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
+# Usually Python comes with 'batteries included', that is, with the
+# Python standard library. Unfortunately, this is not the case for a
+# typical Anki install. So bring along some files that are
+# missing. Make sure we find them.
+from aqt import mw  # We need this early to get to the path
 
+# These *are* available with standard Anki
 import math
-from decimal import Decimal
+import os
+import sys
+
 from anki import utils, sched, stats
 from anki.lang import _
 # To override fmtTimeSpan that are already loaded:
 from aqt import browser, deckbrowser, reviewer
+
+# Now add the path, but only once. (Other add-ons by YT contain
+# similar code.)
+if not [pe for pe in sys.path if 'batteries' in pe]:
+    sys.path.append(os.path.join(mw.pm.addonFolder(), "batteries"))
+
+# Now this should work. Include module to deal with numbers digit by
+# digit.
+from decimal import Decimal
 
 """Replace time values with just days or years."""
 
