@@ -106,7 +106,7 @@ The size of the displayed diagrams can be changed in the add-on’s
 Use the “Tools/Add-ons/Kanji stroke color/Edit...” menu item to open
 it. Set the size in the line “`kanji_size = 200`”. The size of the
 variants shown with the “kanjiColorRest” can be set in the “`rest_size
-= 120`” line.  line.
+= 120`” line.
 
 ### Colors
 
