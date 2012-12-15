@@ -8,6 +8,7 @@ import re
 import sys
 from anki.hooks import addHook
 
+__version__ = "1.1.0"
 
 tooOld = sys.version_info < (2, 7)
 
