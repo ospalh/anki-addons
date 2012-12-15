@@ -22,28 +22,32 @@ import re
 from anki import hooks
 
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 # Check which pattern we should use, with or without the re.UNICODE flag.
-if hasattr(re, 'UNICODE'):
+try:
+    # Just a dummy call to re.sub to see if the flags work. I think it
+    # works with python 2.7 and doesn't work with python 2.6, but i
+    # don't really care about verson numbers. (There may be a way to
+    # inspect the argument list, but doing it EAFP is fine by me.)
+    re.sub('test', 'for', 'flags', flags=re.UNICODE)
+except TypeError:
+    # Pattern close to the original one, but using named goups and
+    # excluding newlines.
+    split_pat = r' ?(?P<kanji>[^ >\n]+?)\[(?P<kana>.+?)\]'
+    # Use our own name for re.sub, so that bending the call below
+    # works.
+    re_sub_flag = re.sub
+else:
     # Pretty much what this is about. Use unicode word characters in
     # the pattern. Also name the groups so the code below becomes a
     # bit more readable. The extra characters in the kanji group are
     # just to my personal taste. I learn those characters as Japanese
     # "words".
     split_pat = u' ?(?P<kanji>[-〓+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
-    # Use re.UNICODE as flags parameter. Needed so that kanji/kana
-    # match r'\w', that is, makes those treated as word characters.
-    re_flag = re.UNICODE
-else:
-    # Pattern close to the original one, but using named goups and
-    # excluding newlines.
-    split_pat = r' ?(?P<kanji>[^ >\n]+?)\[(?P<kana>.+?)\]'
-    # We just tested. There is no re.UNICODE. (I think this is the
-    # case for standard Windows installs of Anki, or when using Python
-    # 2.6.) The docstring tells me that flags=0 is the default.
-    re_flag = 0
-
+    # Add flag parameter to calls to re.sub.
+    re_sub_flag = lambda pattern, repl, string, flags=re.UNICODE: \
+        re.sub(pattern, repl, string, flags=flags)
 
 furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
     '<rt>\g<kana></rt></ruby>'
@@ -71,24 +75,21 @@ def no_sound(repl):
         else:
             # I used another if here. Use different values for re_flag
             # in a variable now.
-            return re.sub(split_pat, repl, match.group(0), flags=re_flag)
+            return re_sub_flag(split_pat, repl, match.group(0))
 
     return func
 
 
 def kanji_word_re(txt, *args):
     """Strip kana and wrap base text in class kanji."""
-    return re.sub(
-        split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt,
-        flags=re_flag)
+    return re_sub_flag(
+        split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt)
 
 
 def kana_word_re(txt, *args):
     """Strip base text and wrap kana in class kana."""
-    return re.sub(
-        split_pat, no_sound(r'<span class="kana">\g<kana></span>'), txt,
-        flags=re_flag)
-
+    return re_sub_flag(
+        split_pat, no_sound(r'<span class="kana">\g<kana></span>'), txt)
 
 
 def furigana_word_re(txt, *args):
@@ -99,7 +100,7 @@ def furigana_word_re(txt, *args):
     the brackets as <rb>, the text in the brackets as <rt>. Add class
     furigana to the ruby tag.
     """
-    return re.sub(split_pat, no_sound(furigana_pat), txt, flags=re_flag)
+    return re_sub_flag(split_pat, no_sound(furigana_pat), txt)
 
 
 def furikanji(txt, *args):
@@ -111,7 +112,7 @@ def furikanji(txt, *args):
     furikanji to the ruby tag. This is reversed from the standard way
     and typically shows small kanji above their reading.
     """
-    return re.sub(split_pat, no_sound(furikanji_pat), txt, flags=re_flag)
+    return re_sub_flag(split_pat, no_sound(furikanji_pat), txt)
 
 
 def box_kana(txt, *args):
