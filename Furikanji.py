@@ -22,7 +22,7 @@ import re
 from anki import hooks
 
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 # Check which pattern we should use, with or without the re.UNICODE flag.
 try:
