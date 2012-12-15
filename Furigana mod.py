@@ -7,42 +7,52 @@
 # GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 
-import re
-from anki import hooks
-
 """
-Addon for Anki 2 srs to modify furigana display.
+Addon for Anki 2 for Furikanji and other purposes
 
-Addon to use the Unicode word character class to decide what to
+This provides a way to show kanji above the kana.
+The addon uses the Unicode word character class to decide what to
 display as base text and what as ruby. This bit works only with Python
 2.7.
 
 Also add a few other templates.
 """
 
+import re
+from anki import hooks
+
+
 __version__ = "1.0.2"
 
-try:
-    # Just a dummy call to re.sub to see if the flags work. I think it
-    # works with python 2.7 and doesn't work with python 2.6, but i
-    # don't really care about verson numbers.
-    re.sub('test', 'for', 'flags', flags=re.UNICODE)
-except TypeError:
-    # Pattern close to the original one, but using named goups and
-    # excluding ">", which often is part of an HTML tag, and
-    # newlines..
-    split_pat = r' ?(?P<kanji>[^ >\n]+?)\[(?P<kana>.+?)\]'
-else:
+# Check which pattern we should use, with or without the re.UNICODE flag.
+has_uflag = hasattr(re, 'UNICODE')
+
+if has_uflag:
     # Pretty much what this is about. Use unicode word characters in
     # the pattern and flags=re.UNICODE below. Also name the groups so
     # the code below becomes a bit more readable.
     split_pat = u' ?(?P<kanji>\w+?)\[(?P<kana>.+?)\]'
+else:
+    # Pattern close to the original one, but using named goups and
+    # excluding newlines.
+    split_pat = r' ?(?P<kanji>[^ >\n]+?)\[(?P<kana>.+?)\]'
 
 
 furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
     '<rt>\g<kana></rt></ruby>'
+"""
+Pattern to produce the furigana.
+
+What is called ruby in the old code, but using named groups and
+adding a class.
+"""
 furikanji_pat = r'<ruby class="furikanji"><rb>\g<kana></rb>'\
     '<rt>\g<kanji></rt></ruby>'
+"""
+Pattern to produce the furikanji.
+
+This is pretty much the reason for this add-on.
+"""
 
 
 def no_sound(repl):
@@ -52,33 +62,34 @@ def no_sound(repl):
             # return without modification
             return match.group(0)
         else:
-            try:
-                #EAFP
+            if has_uflag:
+                # We are back to using a variable.
                 return re.sub(split_pat, repl, match.group(0),
                               flags=re.UNICODE)
-            except TypeError:
+            else:
                 return re.sub(split_pat, repl, match.group(0))
+
     return func
 
 
 def kanji_word_re(txt, *args):
     """Strip kana and wrap base text in class kanji."""
-    try:
+    if has_uflag:
         return re.sub(
             split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'),
             txt, flags=re.UNICODE)
-    except TypeError:
+    else:
         return re.sub(
             split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt)
 
 
 def kana_word_re(txt, *args):
     """Strip base text and wrap kana in class kana."""
-    try:
+    if has_uflag:
         return re.sub(
             split_pat, no_sound(r'<span class="kana">\g<kana></span>'),
             txt, flags=re.UNICODE)
-    except TypeError:
+    else:
         return re.sub(split_pat,
                       no_sound(r'<span class="kana">\g<kana></span>'), txt)
 
@@ -92,9 +103,9 @@ def furigana_word_re(txt, *args):
     furigana to the ruby tag.
 
     """
-    try:
+    if has_uflag:
         return re.sub(split_pat, no_sound(furigana_pat), txt, flags=re.UNICODE)
-    except TypeError:
+    else:
         return re.sub(split_pat, no_sound(furigana_pat), txt)
 
 
@@ -106,12 +117,11 @@ def furikanji(txt, *args):
     the brackets as <rt>, the text in the brackets as <rb>. Add class
     furikanji to the ruby tag. This is reversed from the standard way
     and typically shows small kanji above their reading.
-
     """
-    try:
+    if has_uflag:
         return re.sub(split_pat, no_sound(furikanji_pat), txt,
                       flags=re.UNICODE)
-    except TypeError:
+    else:
         return re.sub(split_pat, no_sound(furikanji_pat), txt)
 
 
