@@ -101,7 +101,6 @@ def furigana_word_re(txt, *args):
     Put text with square brackets in <ruby> tags, using text before
     the brackets as <rb>, the text in the brackets as <rt>. Add class
     furigana to the ruby tag.
-
     """
     if has_uflag:
         return re.sub(split_pat, no_sound(furigana_pat), txt, flags=re.UNICODE)
@@ -132,7 +131,6 @@ def box_kana(txt, *args):
     Put text in a <ruby> block as <rt> with a an "IDEOGRAPHIC SPACE",
     "　" as <rb>, drawn with a frame. Add class boxkana to the ruby
     tag.
-
     """
     return u'<ruby class="boxkana">'\
         u'<rb style="border:dashed; border-width: 1px">　</rb>'\
@@ -145,7 +143,6 @@ def boxed(txt, *args):
 
     Draw a dashed box around the text and add class boxed to the span
     element.
-
     """
     return u'<span class="boxed" style="border:dashed; border-width: 1px">'\
         u'%s</span>' % txt
