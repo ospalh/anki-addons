@@ -25,19 +25,24 @@ from anki import hooks
 __version__ = "1.1.0"
 
 # Check which pattern we should use, with or without the re.UNICODE flag.
-has_uflag = hasattr(re, 'UNICODE')
-
-if has_uflag:
+if hasattr(re, 'UNICODE'):
     # Pretty much what this is about. Use unicode word characters in
-    # the pattern and flags=re.UNICODE below. Also name the groups so
-    # the code below becomes a bit more readable. The extra characters
-    # in the kanji group are just to my personal taste. I learn those
-    # characters as Japanese "words".
+    # the pattern. Also name the groups so the code below becomes a
+    # bit more readable. The extra characters in the kanji group are
+    # just to my personal taste. I learn those characters as Japanese
+    # "words".
     split_pat = u' ?(?P<kanji>[-〓+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
+    # Use re.UNICODE as flags parameter. Needed so that kanji/kana
+    # match r'\w', that is, makes those treated as word characters.
+    re_flag = re.UNICODE
 else:
     # Pattern close to the original one, but using named goups and
     # excluding newlines.
     split_pat = r' ?(?P<kanji>[^ >\n]+?)\[(?P<kana>.+?)\]'
+    # We just tested. There is no re.UNICODE. (I think this is the
+    # case for standard Windows installs of Anki, or when using Python
+    # 2.6.) The docstring tells me that flags=0 is the default.
+    re_flag = 0
 
 
 furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
@@ -64,36 +69,26 @@ def no_sound(repl):
             # return without modification
             return match.group(0)
         else:
-            if has_uflag:
-                # We are back to using a variable.
-                return re.sub(split_pat, repl, match.group(0),
-                              flags=re.UNICODE)
-            else:
-                return re.sub(split_pat, repl, match.group(0))
+            # I used another if here. Use different values for re_flag
+            # in a variable now.
+            return re.sub(split_pat, repl, match.group(0), flags=re_flag)
 
     return func
 
 
 def kanji_word_re(txt, *args):
     """Strip kana and wrap base text in class kanji."""
-    if has_uflag:
-        return re.sub(
-            split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'),
-            txt, flags=re.UNICODE)
-    else:
-        return re.sub(
-            split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt)
+    return re.sub(
+        split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt,
+        flags=re_flag)
 
 
 def kana_word_re(txt, *args):
     """Strip base text and wrap kana in class kana."""
-    if has_uflag:
-        return re.sub(
-            split_pat, no_sound(r'<span class="kana">\g<kana></span>'),
-            txt, flags=re.UNICODE)
-    else:
-        return re.sub(split_pat,
-                      no_sound(r'<span class="kana">\g<kana></span>'), txt)
+    return re.sub(
+        split_pat, no_sound(r'<span class="kana">\g<kana></span>'), txt,
+        flags=re_flag)
+
 
 
 def furigana_word_re(txt, *args):
@@ -104,10 +99,7 @@ def furigana_word_re(txt, *args):
     the brackets as <rb>, the text in the brackets as <rt>. Add class
     furigana to the ruby tag.
     """
-    if has_uflag:
-        return re.sub(split_pat, no_sound(furigana_pat), txt, flags=re.UNICODE)
-    else:
-        return re.sub(split_pat, no_sound(furigana_pat), txt)
+    return re.sub(split_pat, no_sound(furigana_pat), txt, flags=re_flag)
 
 
 def furikanji(txt, *args):
@@ -119,11 +111,7 @@ def furikanji(txt, *args):
     furikanji to the ruby tag. This is reversed from the standard way
     and typically shows small kanji above their reading.
     """
-    if has_uflag:
-        return re.sub(split_pat, no_sound(furikanji_pat), txt,
-                      flags=re.UNICODE)
-    else:
-        return re.sub(split_pat, no_sound(furikanji_pat), txt)
+    return re.sub(split_pat, no_sound(furikanji_pat), txt, flags=re_flag)
 
 
 def box_kana(txt, *args):
