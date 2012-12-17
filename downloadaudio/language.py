@@ -48,8 +48,14 @@ def get_language_code(card=None, note=None):
         try:
             did = note.model()['did']
         except (TypeError, KeyError):
-            did = 0
-    deck_conf = mw.col.decks.confForDid(did)
+            did = 1
+    try:
+        deck_conf = mw.col.decks.confForDid(did)
+    except AssertionError:
+        # Somehow it is possible to have notes with a did pointing
+        # nowhere. (When you have deleted the deck they were created
+        # in. Maybe there are more steps necessary.)
+        deck_conf = mw.col.decks.confForDid(1)
     try:
         return deck_conf[al_code_code]
     except (TypeError, KeyError):

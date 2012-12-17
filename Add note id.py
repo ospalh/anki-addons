@@ -4,17 +4,29 @@
 #
 # Portions of this file were originally written by
 # Damien Elmes <anki@ichi2.net>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+#
+# License: Most parts: GNU GPL, version 3 or later;
+# http://www.gnu.org/copyleft/gpl.html
+#
+# Licence progress: see below
 #
 # See the notes in the progress function
 
+"""
+Anki2 add-on to make notes unique
+
+Add the note id to a field named Note ID in
+"""
+
+from PyQt4.QtCore import QCoreApplication, SIGNAL
+from PyQt4.QtGui import QAction, QProgressDialog
 
 from anki.hooks import addHook
+from anki.lang import _
 from aqt import mw
-from aqt.qt import QProgressDialog, QAction, QCoreApplication, SIGNAL
 from aqt.utils import askUser
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 
 # Field names to use. Use only lower-case here. The field name can
 # have upper-case letters. (Use "Note ID" as the field name.)
@@ -61,14 +73,14 @@ def add_nids_to_all():
 
     Iterate over all notes and add the nid
     """
-    if not askUser("Add note id to all 'Note ID' fields?"):
+    if not askUser(_(u"Add note id to all 'Note ID' fields?")):
         return
     # Maybe there is a way to just select the notes which have a nid
     # field. But this should work and efficency isn't too much of an
     # issue.
     nids = mw.col.db.list("select id from notes")
     # Iterate over the cards
-    for nid in progress(nids, "Adding note ids.", "Stop that!"):
+    for nid in progress(nids, _(u"Adding note ids."), _(u"Stop that!")):
         n = mw.col.getNote(nid)
         # Go over the fields ...
         for name in mw.col.models.fieldNames(n.model()):
@@ -109,7 +121,7 @@ def onFocusLost(flag, n, fidx):
 if show_menu_item:
     add_nid = QAction(mw)
     mw.form.menuTools.addAction(add_nid)
-    add_nid.setText("Add note ids")
+    add_nid.setText(_(u"Add note ids"))
     mw.connect(add_nid, SIGNAL("triggered()"), add_nids_to_all)
 
 addHook('editFocusLost', onFocusLost)
