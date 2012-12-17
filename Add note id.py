@@ -26,7 +26,7 @@ from anki.lang import _
 from aqt import mw
 from aqt.utils import askUser
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 
 # Field names to use. Use only lower-case here. The field name can
 # have upper-case letters. (Use "Note ID" as the field name.)
