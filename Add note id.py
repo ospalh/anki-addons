@@ -25,6 +25,7 @@ from anki.hooks import addHook
 from anki.lang import _
 from aqt import mw
 from aqt.utils import askUser
+from aqt.addcards import AddCards
 
 __version__ = '1.2.1'
 
@@ -67,6 +68,15 @@ def progress(data, *args):
         yield(v)
 
 
+def is_idfield(f):
+    """Does string f name an id field?"""
+    fl = f.lower()
+    for idf in id_fields:
+        if fl == idf:
+            return True
+    return False
+
+
 def add_nids_to_all():
     """
     Add note id to all empty fields with the right names.
@@ -84,14 +94,10 @@ def add_nids_to_all():
         n = mw.col.getNote(nid)
         # Go over the fields ...
         for name in mw.col.models.fieldNames(n.model()):
-            # ... and the target field names ..
-            for f in id_fields:
-                # ... and compare the two
-                if f == name.lower():
-                    # Check if target is empty
-                    if not n[name]:
-                        n[name] = str(nid)
-                        n.flush()
+            # ... and if it's a nid fields
+            if is_idfield(name) and not n[name]:
+                n[name] = str(nid)
+                n.flush()
     mw.reset()
 
 
@@ -118,6 +124,19 @@ def onFocusLost(flag, n, fidx):
     return True
 
 
+def can_close_add_cards(self):
+    if self.forceClose or self.editor.fieldsAreBlank():
+        return True
+    # Work-alike for of Editor.fieldsAreBlank(), but skip the
+    # note id field.
+    n = self.editor.note
+    # Go over the fields ...
+    for name in mw.col.models.fieldNames(n.model()):
+        if not is_idfield(name) and n[name]:
+            return askUser(_("Close and lose current input?"))
+    return True
+
+
 if show_menu_item:
     add_nid = QAction(mw)
     mw.form.menuTools.addAction(add_nid)
@@ -125,3 +144,4 @@ if show_menu_item:
     mw.connect(add_nid, SIGNAL("triggered()"), add_nids_to_all)
 
 addHook('editFocusLost', onFocusLost)
+AddCards.canClose = can_close_add_cards
