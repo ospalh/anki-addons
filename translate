@@ -1,0 +1,19 @@
+#!/bin/tcsh
+#
+# update translation files
+#
+
+echo "Generating translations for add-ons..."
+
+xgettext -s --no-wrap --package-name="ospalhs-anki-addons" --output=locale/messages.pot "`find . -name \*py`"
+
+foreach  lang_po (locale/*.po)
+    echo -n $lang_po
+    set lang=`basename $lang_po .po`
+    msgmerge -s --no-wrap $lang_po locale/messages.pot > $lang_po.new && mv $lang_po.new $lang_po
+    set outdir=locale/$lang/LC_MESSAGES
+    set outfile="$outdir/ankiqt.mo"
+    mkdir -p $outdir
+    msgfmt $lang_po --output-file=$outfile
+end
+popd
