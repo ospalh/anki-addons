@@ -102,6 +102,7 @@ def toggle_more_tool_bar():
 
 def ask_delete():
     """Delete a note after asking the user."""
+    # This is redundant now. onDelete asks now.
     if askUser('Delete note?', defaultno=True):
         mw.reviewer.onDelete()
 
@@ -417,7 +418,7 @@ delete_action = QAction(mw)
 delete_action.setText(_(u"Delete note"))
 delete_action.setIcon(QIcon(os.path.join(icons_dir, 'delete.png')))
 delete_action.setToolTip(_(u"Delete this note."))
-mw.connect(delete_action, SIGNAL("triggered()"), ask_delete)
+mw.connect(delete_action, SIGNAL("triggered()"), mw.reviewer.onDelete)
 options_action = QAction(mw)
 options_action.setText(_(u"Study options"))
 options_action.setIcon(QIcon(os.path.join(icons_dir, 'options.png')))
