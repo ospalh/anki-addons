@@ -46,15 +46,15 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_05efe" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:05efe" kvg:element="&#24318;" kvg:radical="general">
-	<svg:g class="stroke_group group_num1" id="kvg:05efe-g1" kvg:element="&#21313;" kvg:part="1">
-		<svg:path class="stroke_path stroke_num1" d="M14.88,50.98c1.52,0.54,4.3,0.63,5.82,0.54c15.8-0.91,50.05-5.77,70.11-6.23c2.53-0.06,4.05,0.26,5.31,0.53" id="kvg:05efe-s1" kvg:type="&#12752;" />
+<svg:g id="kvg:05efe" kvg:element="廾" kvg:radical="general">
+	<svg:g class="stroke_group group_num1" id="kvg:05efe-g1" kvg:element="十" kvg:part="1">
+		<svg:path class="stroke_path stroke_num1" d="M14.88,50.98c1.52,0.54,4.3,0.63,5.82,0.54c15.8-0.91,50.05-5.77,70.11-6.23c2.53-0.06,4.05,0.26,5.31,0.53" id="kvg:05efe-s1" kvg:type="㇐" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:05efe-g2" kvg:element="&#20031;">
-		<svg:path class="stroke_path stroke_num2" d="M40.06,14.5c0.69,1.75,1.33,3.58,1.39,6.14C42,44,39.25,77.25,21,90" id="kvg:05efe-s2" kvg:type="&#12754;" />
+	<svg:g class="stroke_group group_num2" id="kvg:05efe-g2" kvg:element="丿">
+		<svg:path class="stroke_path stroke_num2" d="M40.06,14.5c0.69,1.75,1.33,3.58,1.39,6.14C42,44,39.25,77.25,21,90" id="kvg:05efe-s2" kvg:type="㇒" />
 	</svg:g>
-	<svg:g class="stroke_group group_num3" id="kvg:05efe-g3" kvg:element="&#21313;" kvg:part="2">
-		<svg:path class="stroke_path stroke_num3" d="M67.87,11.25c1.45,1.45,1.96,1.25,1.96,3.25c0,6.75,0,76.75-0.22,83" id="kvg:05efe-s3" kvg:type="&#12753;" />
+	<svg:g class="stroke_group group_num3" id="kvg:05efe-g3" kvg:element="十" kvg:part="2">
+		<svg:path class="stroke_path stroke_num3" d="M67.87,11.25c1.45,1.45,1.96,1.25,1.96,3.25c0,6.75,0,76.75-0.22,83" id="kvg:05efe-s3" kvg:type="㇑" />
 	</svg:g>
 </svg:g>
 </svg:g>

@@ -46,9 +46,9 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_0531a" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:0531a" kvg:element="&#21274;" kvg:radical="general">
-	<svg:path class="stroke_path stroke_num1" d="M18.38,17.98c1.52,0.54,4.3,0.63,5.82,0.54C40,17.61,65,14.29,82.31,14.29c2.53,0,4.05,0.26,5.31,0.53" id="kvg:0531a-s1" kvg:type="&#12752;" />
-	<svg:path class="stroke_path stroke_num2" d="M22.25,20c0,4,0,65,0,68.75c0,3,0.99,4.13,2.75,4C35,92,79.25,89,82.5,89s6,0.25,8,0.75" id="kvg:0531a-s2" kvg:type="&#12759;" />
+<svg:g id="kvg:0531a" kvg:element="匚" kvg:radical="general">
+	<svg:path class="stroke_path stroke_num1" d="M18.38,17.98c1.52,0.54,4.3,0.63,5.82,0.54C40,17.61,65,14.29,82.31,14.29c2.53,0,4.05,0.26,5.31,0.53" id="kvg:0531a-s1" kvg:type="㇐" />
+	<svg:path class="stroke_path stroke_num2" d="M22.25,20c0,4,0,65,0,68.75c0,3,0.99,4.13,2.75,4C35,92,79.25,89,82.5,89s6,0.25,8,0.75" id="kvg:0531a-s2" kvg:type="㇗" />
 </svg:g>
 </svg:g>
 <svg:g id="kvg:StrokeNumbers_0531a" style="font-size:8;fill:#808080">

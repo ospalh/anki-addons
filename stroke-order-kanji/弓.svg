@@ -46,10 +46,10 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_05f13" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:05f13" kvg:element="&#24339;" kvg:radical="general">
-	<svg:path class="stroke_path stroke_num1" d="M30.12,17.68c1.75,0.69,4.14,0.87,6.22,0.72c8.65-0.65,32.36-3.67,36.51-4.41c4.15-0.73,5.27,1.01,4.3,3.71c-0.85,2.37-3.43,9.69-4.31,13.31" id="kvg:05f13-s1" kvg:type="&#12757;c" />
-	<svg:path class="stroke_path stroke_num2" d="M32.88,35c1.72,0.49,3.26,0.61,5,0.46c8.37-0.71,26.62-2.59,31.16-3.21c1.84-0.25,4.09-0.5,5.96,0" id="kvg:05f13-s2" kvg:type="&#12752;" />
-	<svg:path class="stroke_path stroke_num3" d="M33.68,35.3c0.57,0.57,0.93,2.32,0.24,3.93c-1.18,2.77-5.39,11.18-7.37,14.46c-1.55,2.57-0.22,3.83,3.07,3.18c14-2.74,37.8-6.15,47.25-7.66c5.26-0.84,5.5,2.16,4.54,6.67c-2.29,10.75-10.27,29.08-15.74,36.67C61.75,98,55.64,92.39,53.75,90.5" id="kvg:05f13-s3" kvg:type="&#12745;" />
+<svg:g id="kvg:05f13" kvg:element="弓" kvg:radical="general">
+	<svg:path class="stroke_path stroke_num1" d="M30.12,17.68c1.75,0.69,4.14,0.87,6.22,0.72c8.65-0.65,32.36-3.67,36.51-4.41c4.15-0.73,5.27,1.01,4.3,3.71c-0.85,2.37-3.43,9.69-4.31,13.31" id="kvg:05f13-s1" kvg:type="㇕c" />
+	<svg:path class="stroke_path stroke_num2" d="M32.88,35c1.72,0.49,3.26,0.61,5,0.46c8.37-0.71,26.62-2.59,31.16-3.21c1.84-0.25,4.09-0.5,5.96,0" id="kvg:05f13-s2" kvg:type="㇐" />
+	<svg:path class="stroke_path stroke_num3" d="M33.68,35.3c0.57,0.57,0.93,2.32,0.24,3.93c-1.18,2.77-5.39,11.18-7.37,14.46c-1.55,2.57-0.22,3.83,3.07,3.18c14-2.74,37.8-6.15,47.25-7.66c5.26-0.84,5.5,2.16,4.54,6.67c-2.29,10.75-10.27,29.08-15.74,36.67C61.75,98,55.64,92.39,53.75,90.5" id="kvg:05f13-s3" kvg:type="㇉" />
 </svg:g>
 </svg:g>
 <svg:g id="kvg:StrokeNumbers_05f13" style="font-size:8;fill:#808080">

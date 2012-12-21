@@ -46,13 +46,13 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_0624d" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:0624d" kvg:element="&#25165;">
-	<svg:g class="stroke_group group_num1" id="kvg:0624d-g1" kvg:element="&#25164;" kvg:original="&#25163;" kvg:radical="tradit" kvg:variant="true">
-		<svg:path class="stroke_path stroke_num1" d="M18.62,38.5c2.62,0.62,4.54,0.53,7.82,0.25C41.25,37.5,67.62,35,84.75,34c3.28-0.19,5.86,0,8,0.5" id="kvg:0624d-s1" kvg:type="&#12752;" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0624d-g2" kvg:element="&#20101;" kvg:radical="nelson">
-			<svg:path class="stroke_path stroke_num2" d="M60.77,13.58c1.39,1.39,2.26,2.99,2.26,6.02c0,15.4-0.01,66.41-0.01,71.37c0,8.78-7.21,0.5-8.71-0.75" id="kvg:0624d-s2" kvg:type="&#12762;" />
+<svg:g id="kvg:0624d" kvg:element="才">
+	<svg:g class="stroke_group group_num1" id="kvg:0624d-g1" kvg:element="扌" kvg:original="手" kvg:radical="tradit" kvg:variant="true">
+		<svg:path class="stroke_path stroke_num1" d="M18.62,38.5c2.62,0.62,4.54,0.53,7.82,0.25C41.25,37.5,67.62,35,84.75,34c3.28-0.19,5.86,0,8,0.5" id="kvg:0624d-s1" kvg:type="㇐" />
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0624d-g2" kvg:element="亅" kvg:radical="nelson">
+			<svg:path class="stroke_path stroke_num2" d="M60.77,13.58c1.39,1.39,2.26,2.99,2.26,6.02c0,15.4-0.01,66.41-0.01,71.37c0,8.78-7.21,0.5-8.71-0.75" id="kvg:0624d-s2" kvg:type="㇚" />
 		</svg:g>
-		<svg:path class="stroke_path stroke_num3" d="M62.01,44.25c0.13,1.02-0.05,3.11-1,4.34c-7.51,9.66-23.13,25.16-44.39,37.1" id="kvg:0624d-s3" kvg:type="&#12754;" />
+		<svg:path class="stroke_path stroke_num3" d="M62.01,44.25c0.13,1.02-0.05,3.11-1,4.34c-7.51,9.66-23.13,25.16-44.39,37.1" id="kvg:0624d-s3" kvg:type="㇒" />
 	</svg:g>
 </svg:g>
 </svg:g>

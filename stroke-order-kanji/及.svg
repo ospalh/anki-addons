@@ -46,13 +46,13 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_053ca" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:053ca" kvg:element="&#21450;">
-	<svg:g class="stroke_group group_num1" id="kvg:053ca-g1" kvg:element="&#20031;" kvg:radical="general">
-		<svg:path class="stroke_path stroke_num1" d="M40.93,26.02c0.7,1.73,0.4,3.29,0.02,5.24C38.14,45.76,31,69.5,11.54,84.09" id="kvg:053ca-s1" kvg:type="&#12754;" />
+<svg:g id="kvg:053ca" kvg:element="及">
+	<svg:g class="stroke_group group_num1" id="kvg:053ca-g1" kvg:element="丿" kvg:radical="general">
+		<svg:path class="stroke_path stroke_num1" d="M40.93,26.02c0.7,1.73,0.4,3.29,0.02,5.24C38.14,45.76,31,69.5,11.54,84.09" id="kvg:053ca-s1" kvg:type="㇒" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:053ca-g2" kvg:element="&#21448;" kvg:variant="true">
-		<svg:path class="stroke_path stroke_num2" d="M23.85,24.07c2.99,1.06,4.72,0.77,7.78,0.29c7.13-1.11,28.5-4.77,33.29-6.09c4.79-1.32,6.04,0.99,4.28,4.18C53.5,51,51.62,45.75,72.5,42.11c3.07-0.54,4.5,1.14,3.34,4.2c-7.87,20.78-21.09,37.44-43.09,45.44" id="kvg:053ca-s2" kvg:type="&#12747;" />
-		<svg:path class="stroke_path stroke_num3" d="M38.48,49.63c7.57,5.89,28.17,27,39.47,35.85c3.41,2.67,6.67,5.06,10.65,6.76" id="kvg:053ca-s3" kvg:type="&#12751;" />
+	<svg:g class="stroke_group group_num2" id="kvg:053ca-g2" kvg:element="又" kvg:variant="true">
+		<svg:path class="stroke_path stroke_num2" d="M23.85,24.07c2.99,1.06,4.72,0.77,7.78,0.29c7.13-1.11,28.5-4.77,33.29-6.09c4.79-1.32,6.04,0.99,4.28,4.18C53.5,51,51.62,45.75,72.5,42.11c3.07-0.54,4.5,1.14,3.34,4.2c-7.87,20.78-21.09,37.44-43.09,45.44" id="kvg:053ca-s2" kvg:type="㇋" />
+		<svg:path class="stroke_path stroke_num3" d="M38.48,49.63c7.57,5.89,28.17,27,39.47,35.85c3.41,2.67,6.67,5.06,10.65,6.76" id="kvg:053ca-s3" kvg:type="㇏" />
 	</svg:g>
 </svg:g>
 </svg:g>
