@@ -1,6 +1,6 @@
-title: Modified furigana
-id: furiganamod
-main_file: Furigana%20mod.py
+title: Furikanji
+id: furikanji_and
+main_file: Furikanji.py
 type: addon
 status: for desktop use only
 status_color: yellow
@@ -10,6 +10,7 @@ kanji the kana and a few other display hacks."
 first_image: furikanji.png
 first_alt: "Sceenshot of text ふりがな with 振り仮名 as ruby."
 first_caption: Furikanji demo
+ankiweb_id: 2327947748
 
 This add-on adds support for furikanji, adds two other templates and
 slightly changes the way kanji and readings are parsed.
@@ -119,7 +120,7 @@ template of a
 the German version of “Remembering the Kanji”.
 
 These effects can be achieved by applying the formating set in the
-[source file](https://github.com/ospalh/anki-addons/blob/master/Furigana%20mod.py)
+[source file](https://github.com/ospalh/anki-addons/blob/master/Furikanji.py)
 directly, together with `{{kana:Field NN}}`. The simple box should work
 everywhere, the boxkana should work on AnkiDroid, and possibly in
 AnkiWeb, when the web browser supports `<ruby>` tags.
