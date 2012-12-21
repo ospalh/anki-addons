@@ -46,10 +46,10 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_05c71" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:05c71" kvg:element="&#23665;" kvg:radical="general">
-	<svg:path class="stroke_path stroke_num1" d="M52.49,15.5c1.38,1.38,2.26,3.5,2.26,5.75c0,0.75-0.22,58.3-0.25,59.25" id="kvg:05c71-s1" kvg:type="&#12753;a" />
-	<svg:path class="stroke_path stroke_num2" d="M21.49,54.5c0.88,0.88,1.39,2.25,1.26,3.75c-0.58,6.99-1,16-2.5,23c-0.7,3.26,0.11,4,2,3.75c17-2.25,47.12-5.12,65.5-6" id="kvg:05c71-s2" kvg:type="&#12740;a" />
-	<svg:path class="stroke_path stroke_num3" d="M89.24,49c0.94,0.94,1.64,2.38,1.51,4.25c-0.25,3.68-1.83,20.3-2.55,28.77c-0.22,2.64-0.39,4.51-0.45,4.98" id="kvg:05c71-s3" kvg:type="&#12753;" />
+<svg:g id="kvg:05c71" kvg:element="山" kvg:radical="general">
+	<svg:path class="stroke_path stroke_num1" d="M52.49,15.5c1.38,1.38,2.26,3.5,2.26,5.75c0,0.75-0.22,58.3-0.25,59.25" id="kvg:05c71-s1" kvg:type="㇑a" />
+	<svg:path class="stroke_path stroke_num2" d="M21.49,54.5c0.88,0.88,1.39,2.25,1.26,3.75c-0.58,6.99-1,16-2.5,23c-0.7,3.26,0.11,4,2,3.75c17-2.25,47.12-5.12,65.5-6" id="kvg:05c71-s2" kvg:type="㇄a" />
+	<svg:path class="stroke_path stroke_num3" d="M89.24,49c0.94,0.94,1.64,2.38,1.51,4.25c-0.25,3.68-1.83,20.3-2.55,28.77c-0.22,2.64-0.39,4.51-0.45,4.98" id="kvg:05c71-s3" kvg:type="㇑" />
 </svg:g>
 </svg:g>
 <svg:g id="kvg:StrokeNumbers_05c71" style="font-size:8;fill:#808080">

@@ -46,36 +46,36 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_0685f" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:0685f" kvg:element="&#26719;">
-	<svg:g class="stroke_group group_num1" id="kvg:0685f-g1" kvg:element="&#26408;" kvg:position="left" kvg:radical="general">
-		<svg:path class="stroke_path stroke_num1" d="M12.53,39.47c1.09,0.76,4.21,0.47,5.49,0.3c4.48-0.6,13.22-2.05,18.84-3.08c1.25-0.23,3.01-0.55,4.4-0.31" id="kvg:0685f-s1" kvg:type="&#12752;" />
-		<svg:path class="stroke_path stroke_num2" d="M29.11,16.25c1.19,1.19,1.54,2.62,1.54,4.17c0,0.81,0.04,48.92-0.01,67.45c-0.01,3.15-0.01,5.45-0.01,6.5" id="kvg:0685f-s2" kvg:type="&#12753;" />
-		<svg:path class="stroke_path stroke_num3" d="M29.94,39.78c0,1.22-1.4,5.37-1.82,6.37c-4.62,10.86-7.98,16.18-15.76,26.93" id="kvg:0685f-s3" kvg:type="&#12754;" />
-		<svg:path class="stroke_path stroke_num4" d="M33.72,45.15c2.16,1.46,5.71,5.28,7.53,8.1" id="kvg:0685f-s4" kvg:type="&#12756;/&#12751;" />
+<svg:g id="kvg:0685f" kvg:element="桟">
+	<svg:g class="stroke_group group_num1" id="kvg:0685f-g1" kvg:element="木" kvg:position="left" kvg:radical="general">
+		<svg:path class="stroke_path stroke_num1" d="M12.53,39.47c1.09,0.76,4.21,0.47,5.49,0.3c4.48-0.6,13.22-2.05,18.84-3.08c1.25-0.23,3.01-0.55,4.4-0.31" id="kvg:0685f-s1" kvg:type="㇐" />
+		<svg:path class="stroke_path stroke_num2" d="M29.11,16.25c1.19,1.19,1.54,2.62,1.54,4.17c0,0.81,0.04,48.92-0.01,67.45c-0.01,3.15-0.01,5.45-0.01,6.5" id="kvg:0685f-s2" kvg:type="㇑" />
+		<svg:path class="stroke_path stroke_num3" d="M29.94,39.78c0,1.22-1.4,5.37-1.82,6.37c-4.62,10.86-7.98,16.18-15.76,26.93" id="kvg:0685f-s3" kvg:type="㇒" />
+		<svg:path class="stroke_path stroke_num4" d="M33.72,45.15c2.16,1.46,5.71,5.28,7.53,8.1" id="kvg:0685f-s4" kvg:type="㇔/㇏" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:0685f-g2" kvg:element="&#25099;" kvg:original="&#25108;" kvg:phon="&#25099;/&#25108;V" kvg:position="right" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0685f-g3" kvg:element="&#19977;" kvg:part="1">
-			<svg:g id="kvg:0685f-g4" kvg:element="&#19968;" kvg:position="top">
-				<svg:path class="stroke_path stroke_num5" d="M47.99,30.65c2.63,0.48,4.77,0.41,6.91,0.1c6.87-0.98,16.92-3.08,24.48-4.69c2.04-0.43,3.74-0.69,5.61-0.47" id="kvg:0685f-s5" kvg:type="&#12752;" />
+	<svg:g class="stroke_group group_num2" id="kvg:0685f-g2" kvg:element="戋" kvg:original="戔" kvg:phon="戋/戔V" kvg:position="right" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0685f-g3" kvg:element="三" kvg:part="1">
+			<svg:g id="kvg:0685f-g4" kvg:element="一" kvg:position="top">
+				<svg:path class="stroke_path stroke_num5" d="M47.99,30.65c2.63,0.48,4.77,0.41,6.91,0.1c6.87-0.98,16.92-3.08,24.48-4.69c2.04-0.43,3.74-0.69,5.61-0.47" id="kvg:0685f-s5" kvg:type="㇐" />
 			</svg:g>
-			<svg:g id="kvg:0685f-g5" kvg:element="&#19968;" kvg:position="bottom">
-				<svg:path class="stroke_path stroke_num6" d="M48.98,44.47c2.21,0.9,5.44,0.56,7.65-0.1c7-2.12,17-4.87,24.5-5.68c1.87-0.2,3.33-0.3,5.14-0.3" id="kvg:0685f-s6" kvg:type="&#12752;" />
+			<svg:g id="kvg:0685f-g5" kvg:element="一" kvg:position="bottom">
+				<svg:path class="stroke_path stroke_num6" d="M48.98,44.47c2.21,0.9,5.44,0.56,7.65-0.1c7-2.12,17-4.87,24.5-5.68c1.87-0.2,3.33-0.3,5.14-0.3" id="kvg:0685f-s6" kvg:type="㇐" />
 			</svg:g>
-			<svg:g id="kvg:0685f-g6" kvg:element="&#25096;">
-				<svg:g id="kvg:0685f-g7" kvg:element="&#24331;" kvg:part="1">
-					<svg:g id="kvg:0685f-g8" kvg:element="&#19977;" kvg:part="2">
-						<svg:g id="kvg:0685f-g9" kvg:element="&#19968;">
-							<svg:path class="stroke_path stroke_num7" d="M44.89,59.59c2.68,0.96,5.74,0.52,8.39-0.18c9.09-2.41,24.09-6.03,36.48-7.2c2.1-0.2,4.61-0.33,6.4-0.03" id="kvg:0685f-s7" kvg:type="&#12752;" />
+			<svg:g id="kvg:0685f-g6" kvg:element="戈">
+				<svg:g id="kvg:0685f-g7" kvg:element="弋" kvg:part="1">
+					<svg:g id="kvg:0685f-g8" kvg:element="三" kvg:part="2">
+						<svg:g id="kvg:0685f-g9" kvg:element="一">
+							<svg:path class="stroke_path stroke_num7" d="M44.89,59.59c2.68,0.96,5.74,0.52,8.39-0.18c9.09-2.41,24.09-6.03,36.48-7.2c2.1-0.2,4.61-0.33,6.4-0.03" id="kvg:0685f-s7" kvg:type="㇐" />
 						</svg:g>
 					</svg:g>
-					<svg:path class="stroke_path stroke_num8" d="M59.98,12.5c1.54,1.79,2.17,3.54,2.5,7.4c2.65,30.85,9.9,59.1,27.41,72.56c5.67,4.36,5.19,0.02,4.42-7.93" id="kvg:0685f-s8" kvg:type="&#12738;" />
+					<svg:path class="stroke_path stroke_num8" d="M59.98,12.5c1.54,1.79,2.17,3.54,2.5,7.4c2.65,30.85,9.9,59.1,27.41,72.56c5.67,4.36,5.19,0.02,4.42-7.93" id="kvg:0685f-s8" kvg:type="㇂" />
 				</svg:g>
-				<svg:g id="kvg:0685f-g10" kvg:element="&#20031;">
-					<svg:path class="stroke_path stroke_num9" d="M84.95,59.28c0.1,0.76-0.21,1.74-0.71,2.79c-3.37,7.05-15.62,20.3-37.45,29.34" id="kvg:0685f-s9" kvg:type="&#12754;" />
+				<svg:g id="kvg:0685f-g10" kvg:element="丿">
+					<svg:path class="stroke_path stroke_num9" d="M84.95,59.28c0.1,0.76-0.21,1.74-0.71,2.79c-3.37,7.05-15.62,20.3-37.45,29.34" id="kvg:0685f-s9" kvg:type="㇒" />
 				</svg:g>
-				<svg:g id="kvg:0685f-g11" kvg:element="&#24331;" kvg:part="2">
-					<svg:g id="kvg:0685f-g12" kvg:element="&#20022;">
-						<svg:path class="stroke_path stroke_num10" d="M76.38,11.75c3.75,1.71,9.74,5.63,11.49,8.56" id="kvg:0685f-s10" kvg:type="&#12756;" />
+				<svg:g id="kvg:0685f-g11" kvg:element="弋" kvg:part="2">
+					<svg:g id="kvg:0685f-g12" kvg:element="丶">
+						<svg:path class="stroke_path stroke_num10" d="M76.38,11.75c3.75,1.71,9.74,5.63,11.49,8.56" id="kvg:0685f-s10" kvg:type="㇔" />
 					</svg:g>
 				</svg:g>
 			</svg:g>

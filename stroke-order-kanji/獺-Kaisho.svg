@@ -46,44 +46,44 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_0737a-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:0737a-Kaisho" kvg:element="&#29562;">
-	<svg:g class="stroke_group group_num1" id="kvg:0737a-Kaisho-g1" kvg:element="&#11944;" kvg:original="&#29356;" kvg:position="left" kvg:radical="general" kvg:variant="true">
-		<svg:path class="stroke_path stroke_num1" d="M35.06,15.25c0.06,0.68,0.29,1.99-0.13,2.72C29.66,27.32,24.3,33.93,11.5,44.04" id="kvg:0737a-Kaisho-s1" kvg:type="&#12754;" />
-		<svg:path class="stroke_path stroke_num2" d="M14.5,19.25c28.25,23.18,17.46,83.88,5.75,71.02" id="kvg:0737a-Kaisho-s2" kvg:type="&#12757;va" />
-		<svg:path class="stroke_path stroke_num3" d="M27.84,48c0.04,0.59,0.2,1.73-0.09,2.37C24.1,58.5,20.38,64.25,11.5,73.04" id="kvg:0737a-Kaisho-s3" kvg:type="&#12754;" />
+<svg:g id="kvg:0737a-Kaisho" kvg:element="獺">
+	<svg:g class="stroke_group group_num1" id="kvg:0737a-Kaisho-g1" kvg:element="⺨" kvg:original="犬" kvg:position="left" kvg:radical="general" kvg:variant="true">
+		<svg:path class="stroke_path stroke_num1" d="M35.06,15.25c0.06,0.68,0.29,1.99-0.13,2.72C29.66,27.32,24.3,33.93,11.5,44.04" id="kvg:0737a-Kaisho-s1" kvg:type="㇒" />
+		<svg:path class="stroke_path stroke_num2" d="M14.5,19.25c28.25,23.18,17.46,83.88,5.75,71.02" id="kvg:0737a-Kaisho-s2" kvg:type="㇕va" />
+		<svg:path class="stroke_path stroke_num3" d="M27.84,48c0.04,0.59,0.2,1.73-0.09,2.37C24.1,58.5,20.38,64.25,11.5,73.04" id="kvg:0737a-Kaisho-s3" kvg:type="㇒" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:0737a-Kaisho-g2" kvg:element="&#38972;" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0737a-Kaisho-g3" kvg:element="&#26463;" kvg:position="left">
-			<svg:g id="kvg:0737a-Kaisho-g4" kvg:element="&#26408;" kvg:part="1">
-				<svg:path class="stroke_path stroke_num4" d="M37.68,28.58c0.58,0.28,2.61,0.25,3.19,0.2c4.89-0.38,16.45-1.85,21.69-2.12c0.97-0.05,2.51,0.13,3,0.27" id="kvg:0737a-Kaisho-s4" kvg:type="&#12752;" />
+	<svg:g class="stroke_group group_num2" id="kvg:0737a-Kaisho-g2" kvg:element="頼" kvg:position="right">
+		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0737a-Kaisho-g3" kvg:element="束" kvg:position="left">
+			<svg:g id="kvg:0737a-Kaisho-g4" kvg:element="木" kvg:part="1">
+				<svg:path class="stroke_path stroke_num4" d="M37.68,28.58c0.58,0.28,2.61,0.25,3.19,0.2c4.89-0.38,16.45-1.85,21.69-2.12c0.97-0.05,2.51,0.13,3,0.27" id="kvg:0737a-Kaisho-s4" kvg:type="㇐" />
 			</svg:g>
-			<svg:g id="kvg:0737a-Kaisho-g5" kvg:element="&#21475;">
-				<svg:path class="stroke_path stroke_num5" d="M38.83,38.88c0.2,0.36,0.91,1.17,1,1.62c0.7,3.61,2.42,11.88,2.9,18.36" id="kvg:0737a-Kaisho-s5" kvg:type="&#12753;" />
-				<svg:path class="stroke_path stroke_num6" d="M40.09,40.85c8.16-1.6,20.42-3.18,22.79-3.42c1.87-0.19,2.9,1.84,2.51,3.93c-1.04,5.61-2.29,8.08-3.11,12.36" id="kvg:0737a-Kaisho-s6" kvg:type="&#12757;b" />
-				<svg:path class="stroke_path stroke_num7" d="M43.32,56.24c7.24-0.9,14.77-1.87,20.2-2.55" id="kvg:0737a-Kaisho-s7" kvg:type="&#12752;b" />
+			<svg:g id="kvg:0737a-Kaisho-g5" kvg:element="口">
+				<svg:path class="stroke_path stroke_num5" d="M38.83,38.88c0.2,0.36,0.91,1.17,1,1.62c0.7,3.61,2.42,11.88,2.9,18.36" id="kvg:0737a-Kaisho-s5" kvg:type="㇑" />
+				<svg:path class="stroke_path stroke_num6" d="M40.09,40.85c8.16-1.6,20.42-3.18,22.79-3.42c1.87-0.19,2.9,1.84,2.51,3.93c-1.04,5.61-2.29,8.08-3.11,12.36" id="kvg:0737a-Kaisho-s6" kvg:type="㇕b" />
+				<svg:path class="stroke_path stroke_num7" d="M43.32,56.24c7.24-0.9,14.77-1.87,20.2-2.55" id="kvg:0737a-Kaisho-s7" kvg:type="㇐b" />
 			</svg:g>
-			<svg:g id="kvg:0737a-Kaisho-g6" kvg:element="&#26408;" kvg:part="2">
-				<svg:path class="stroke_path stroke_num8" d="M50.89,12.5c0.97,0.48,1.55,2.18,1.74,3.15s-0.19,69.84-0.19,75.89c0,11.21-4.32,2.84-5.44,1.71" id="kvg:0737a-Kaisho-s8" kvg:type="&#12753;" />
-				<svg:path class="stroke_path stroke_num9" d="M52.39,55.52c-2.93,9.34-10.54,22.55-16.62,27.83" id="kvg:0737a-Kaisho-s9" kvg:type="&#12754;" />
-				<svg:path class="stroke_path stroke_num10" d="M55.2,64.13c4.42,2.22,7.98,6.59,10.2,11.02" id="kvg:0737a-Kaisho-s10" kvg:type="&#12751;" />
+			<svg:g id="kvg:0737a-Kaisho-g6" kvg:element="木" kvg:part="2">
+				<svg:path class="stroke_path stroke_num8" d="M50.89,12.5c0.97,0.48,1.55,2.18,1.74,3.15s-0.19,69.84-0.19,75.89c0,11.21-4.32,2.84-5.44,1.71" id="kvg:0737a-Kaisho-s8" kvg:type="㇑" />
+				<svg:path class="stroke_path stroke_num9" d="M52.39,55.52c-2.93,9.34-10.54,22.55-16.62,27.83" id="kvg:0737a-Kaisho-s9" kvg:type="㇒" />
+				<svg:path class="stroke_path stroke_num10" d="M55.2,64.13c4.42,2.22,7.98,6.59,10.2,11.02" id="kvg:0737a-Kaisho-s10" kvg:type="㇏" />
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0737a-Kaisho-g7" kvg:element="&#38913;" kvg:position="right" kvg:variant="true">
-			<svg:g id="kvg:0737a-Kaisho-g8" kvg:element="&#20992;">
-				<svg:path class="stroke_path stroke_num11" d="M67.25,16.75C68.5,17.25,70,17.5,72,17.37c4.01-0.26,19.57-3.19,21.77-3.41c1.43-0.14,1.83,1.65,1.75,2.65c-0.21,2.65-3.02,12.89-6.03,17.28c-1.51,2.2-3.5,0.86-4.32-0.72" id="kvg:0737a-Kaisho-s11" kvg:type="&#12742;" />
-				<svg:path class="stroke_path stroke_num12" d="M78.49,20.18c0.02,0.35,0.05,0.9-0.04,1.39c-0.73,3.68-2.99,9.55-7.8,13.33" id="kvg:0737a-Kaisho-s12" kvg:type="&#12754;" />
+		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0737a-Kaisho-g7" kvg:element="頁" kvg:position="right" kvg:variant="true">
+			<svg:g id="kvg:0737a-Kaisho-g8" kvg:element="刀">
+				<svg:path class="stroke_path stroke_num11" d="M67.25,16.75C68.5,17.25,70,17.5,72,17.37c4.01-0.26,19.57-3.19,21.77-3.41c1.43-0.14,1.83,1.65,1.75,2.65c-0.21,2.65-3.02,12.89-6.03,17.28c-1.51,2.2-3.5,0.86-4.32-0.72" id="kvg:0737a-Kaisho-s11" kvg:type="㇆" />
+				<svg:path class="stroke_path stroke_num12" d="M78.49,20.18c0.02,0.35,0.05,0.9-0.04,1.39c-0.73,3.68-2.99,9.55-7.8,13.33" id="kvg:0737a-Kaisho-s12" kvg:type="㇒" />
 			</svg:g>
-			<svg:g id="kvg:0737a-Kaisho-g9" kvg:element="&#35997;">
-				<svg:g id="kvg:0737a-Kaisho-g10" kvg:element="&#30446;" kvg:position="top">
-					<svg:path class="stroke_path stroke_num13" d="M71.69,41.71c0.35,0.97,0.85,1.7,0.85,2.96s-0.23,37.65-0.23,38.28" id="kvg:0737a-Kaisho-s13" kvg:type="&#12753;" />
-					<svg:path class="stroke_path stroke_num14" d="M73.12,43.48c1.96-0.05,18.15-2.43,19.94-2.52c1.49-0.07,1.78,1.19,1.78,3.02c0,1.51-0.44,36.34-0.44,37.28" id="kvg:0737a-Kaisho-s14" kvg:type="&#12757;a" />
-					<svg:path class="stroke_path stroke_num15" d="M73.09,55.6c3.43-0.5,6.89-0.88,10.34-1.25c1.09-0.12,2.19-0.24,3.25-0.34" id="kvg:0737a-Kaisho-s15" kvg:type="&#12752;a" />
-					<svg:path class="stroke_path stroke_num16" d="M72.99,67.07c3.75-0.15,7.48-0.63,11.2-1.1c0.93-0.12,1.85-0.23,2.75-0.34" id="kvg:0737a-Kaisho-s16" kvg:type="&#12752;a" />
-					<svg:path class="stroke_path stroke_num17" d="M72.74,80.56c5.8-0.37,15.42-1.86,21.12-2" id="kvg:0737a-Kaisho-s17" kvg:type="&#12752;a" />
+			<svg:g id="kvg:0737a-Kaisho-g9" kvg:element="貝">
+				<svg:g id="kvg:0737a-Kaisho-g10" kvg:element="目" kvg:position="top">
+					<svg:path class="stroke_path stroke_num13" d="M71.69,41.71c0.35,0.97,0.85,1.7,0.85,2.96s-0.23,37.65-0.23,38.28" id="kvg:0737a-Kaisho-s13" kvg:type="㇑" />
+					<svg:path class="stroke_path stroke_num14" d="M73.12,43.48c1.96-0.05,18.15-2.43,19.94-2.52c1.49-0.07,1.78,1.19,1.78,3.02c0,1.51-0.44,36.34-0.44,37.28" id="kvg:0737a-Kaisho-s14" kvg:type="㇕a" />
+					<svg:path class="stroke_path stroke_num15" d="M73.09,55.6c3.43-0.5,6.89-0.88,10.34-1.25c1.09-0.12,2.19-0.24,3.25-0.34" id="kvg:0737a-Kaisho-s15" kvg:type="㇐a" />
+					<svg:path class="stroke_path stroke_num16" d="M72.99,67.07c3.75-0.15,7.48-0.63,11.2-1.1c0.93-0.12,1.85-0.23,2.75-0.34" id="kvg:0737a-Kaisho-s16" kvg:type="㇐a" />
+					<svg:path class="stroke_path stroke_num17" d="M72.74,80.56c5.8-0.37,15.42-1.86,21.12-2" id="kvg:0737a-Kaisho-s17" kvg:type="㇐a" />
 				</svg:g>
 				<svg:g id="kvg:0737a-Kaisho-g11" kvg:position="bottom">
-					<svg:path class="stroke_path stroke_num18" d="M77.61,84.84c0.29,1.07,0.22,1.62-0.27,2.48c-1.61,2.8-5.91,7.01-10.34,9.86" id="kvg:0737a-Kaisho-s18" kvg:type="&#12754;" />
-					<svg:path class="stroke_path stroke_num19" d="M88.63,84.98c4.05,3.09,9.15,9.94,10.25,12.53" id="kvg:0737a-Kaisho-s19" kvg:type="&#12756;" />
+					<svg:path class="stroke_path stroke_num18" d="M77.61,84.84c0.29,1.07,0.22,1.62-0.27,2.48c-1.61,2.8-5.91,7.01-10.34,9.86" id="kvg:0737a-Kaisho-s18" kvg:type="㇒" />
+					<svg:path class="stroke_path stroke_num19" d="M88.63,84.98c4.05,3.09,9.15,9.94,10.25,12.53" id="kvg:0737a-Kaisho-s19" kvg:type="㇔" />
 				</svg:g>
 			</svg:g>
 		</svg:g>

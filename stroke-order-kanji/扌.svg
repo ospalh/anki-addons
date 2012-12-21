@@ -46,10 +46,10 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_0624c" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:0624c" kvg:element="&#25164;" kvg:original="&#25163;" kvg:radical="tradit" kvg:variant="true">
-	<svg:path class="stroke_path stroke_num1" d="M35.25,31.29c2.5,1.03,4.77,0.9,7.27,0.39c6.11-1.23,14.98-3.43,23.25-5.1c2.08-0.42,4.98-0.63,6.98-0.13" id="kvg:0624c-s1" kvg:type="&#12752;" />
-	<svg:path class="stroke_path stroke_num2" d="M54.77,7.28c1.2,1.2,1.76,3.04,1.76,5.52c0,14.56-0.01,70.41-0.01,75.37c0,11.16-6.52,3.41-10.21,0" id="kvg:0624c-s2" kvg:type="&#12762;" />
-	<svg:path class="stroke_path stroke_num3" d="M33.5,64.8c2.12,1.39,4.6,1.29,7.19-0.64c8.19-6.09,18.56-13.84,28.56-21.34" id="kvg:0624c-s3" kvg:type="&#12736;" />
+<svg:g id="kvg:0624c" kvg:element="扌" kvg:original="手" kvg:radical="tradit" kvg:variant="true">
+	<svg:path class="stroke_path stroke_num1" d="M35.25,31.29c2.5,1.03,4.77,0.9,7.27,0.39c6.11-1.23,14.98-3.43,23.25-5.1c2.08-0.42,4.98-0.63,6.98-0.13" id="kvg:0624c-s1" kvg:type="㇐" />
+	<svg:path class="stroke_path stroke_num2" d="M54.77,7.28c1.2,1.2,1.76,3.04,1.76,5.52c0,14.56-0.01,70.41-0.01,75.37c0,11.16-6.52,3.41-10.21,0" id="kvg:0624c-s2" kvg:type="㇚" />
+	<svg:path class="stroke_path stroke_num3" d="M33.5,64.8c2.12,1.39,4.6,1.29,7.19-0.64c8.19-6.09,18.56-13.84,28.56-21.34" id="kvg:0624c-s3" kvg:type="㇀" />
 </svg:g>
 </svg:g>
 <svg:g id="kvg:StrokeNumbers_0624c" style="font-size:8;fill:#808080">

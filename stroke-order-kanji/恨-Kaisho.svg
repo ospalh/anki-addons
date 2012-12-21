@@ -46,19 +46,19 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_06068-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:06068-Kaisho" kvg:element="&#24680;">
-	<svg:g class="stroke_group group_num1" id="kvg:06068-Kaisho-g1" kvg:element="&#24516;" kvg:original="&#24515;" kvg:position="left" kvg:radical="general" kvg:variant="true">
-		<svg:path class="stroke_path stroke_num1" d="M15.75,38.25c0,6.61-2.97,16.36-3.75,18.25" id="kvg:06068-Kaisho-s1" kvg:type="&#12756;" />
-		<svg:path class="stroke_path stroke_num2" d="M29.77,33.58c2.93,1.74,7.56,7.17,8.29,9.88" id="kvg:06068-Kaisho-s2" kvg:type="&#12756;" />
-		<svg:path class="stroke_path stroke_num3" d="M23.37,15.75c1.09,0.5,1.96,2.73,1.96,3.75c0,6,0,69.25-0.22,75.5" id="kvg:06068-Kaisho-s3" kvg:type="&#12753;" />
+<svg:g id="kvg:06068-Kaisho" kvg:element="恨">
+	<svg:g class="stroke_group group_num1" id="kvg:06068-Kaisho-g1" kvg:element="忄" kvg:original="心" kvg:position="left" kvg:radical="general" kvg:variant="true">
+		<svg:path class="stroke_path stroke_num1" d="M15.75,38.25c0,6.61-2.97,16.36-3.75,18.25" id="kvg:06068-Kaisho-s1" kvg:type="㇔" />
+		<svg:path class="stroke_path stroke_num2" d="M29.77,33.58c2.93,1.74,7.56,7.17,8.29,9.88" id="kvg:06068-Kaisho-s2" kvg:type="㇔" />
+		<svg:path class="stroke_path stroke_num3" d="M23.37,15.75c1.09,0.5,1.96,2.73,1.96,3.75c0,6,0,69.25-0.22,75.5" id="kvg:06068-Kaisho-s3" kvg:type="㇑" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:06068-Kaisho-g2" kvg:element="&#33390;" kvg:position="right">
-		<svg:path class="stroke_path stroke_num4" d="M49.46,20.37c2.05-0.12,22.56-2.86,24.43-3c1.56-0.12,2.45,1.29,2.44,2c-0.1,5-2.25,23.09-3.14,26.53" id="kvg:06068-Kaisho-s4" kvg:type="&#12757;" />
-		<svg:path class="stroke_path stroke_num5" d="M49.26,33.42c4.29-0.47,8.57-1.09,12.84-1.66c1.28-0.17,2.56-0.34,3.8-0.5" id="kvg:06068-Kaisho-s5" kvg:type="&#12752;a" />
-		<svg:path class="stroke_path stroke_num6" d="M49.7,46.8c7.07-0.9,16-2.19,23.68-3.05" id="kvg:06068-Kaisho-s6" kvg:type="&#12752;a" />
-		<svg:path class="stroke_path stroke_num7" d="M47.45,18.23c0.8,1.27,1.6,2.58,1.6,3.76c0,7.26,0.23,62.38,0.23,65.26c0,4.5,1.85,2.21,3.27,1.11c2.75-2.14,9.2-7.11,12.96-9.36" id="kvg:06068-Kaisho-s7" kvg:type="&#12761;" />
-		<svg:path class="stroke_path stroke_num8" d="M81.88,45.5c0.23,1.45,0.43,2.11-0.53,3.18c-4.1,4.57-8.85,9.32-13.19,13.51" id="kvg:06068-Kaisho-s8" kvg:type="&#12754;" />
-		<svg:path class="stroke_path stroke_num9" d="M55.76,53.01c4.72,0,27.65,28.01,33.32,31.86c3.22,2.19,6.38,3.24,9.16,3.95" id="kvg:06068-Kaisho-s9" kvg:type="&#12751;" />
+	<svg:g class="stroke_group group_num2" id="kvg:06068-Kaisho-g2" kvg:element="艮" kvg:position="right">
+		<svg:path class="stroke_path stroke_num4" d="M49.46,20.37c2.05-0.12,22.56-2.86,24.43-3c1.56-0.12,2.45,1.29,2.44,2c-0.1,5-2.25,23.09-3.14,26.53" id="kvg:06068-Kaisho-s4" kvg:type="㇕" />
+		<svg:path class="stroke_path stroke_num5" d="M49.26,33.42c4.29-0.47,8.57-1.09,12.84-1.66c1.28-0.17,2.56-0.34,3.8-0.5" id="kvg:06068-Kaisho-s5" kvg:type="㇐a" />
+		<svg:path class="stroke_path stroke_num6" d="M49.7,46.8c7.07-0.9,16-2.19,23.68-3.05" id="kvg:06068-Kaisho-s6" kvg:type="㇐a" />
+		<svg:path class="stroke_path stroke_num7" d="M47.45,18.23c0.8,1.27,1.6,2.58,1.6,3.76c0,7.26,0.23,62.38,0.23,65.26c0,4.5,1.85,2.21,3.27,1.11c2.75-2.14,9.2-7.11,12.96-9.36" id="kvg:06068-Kaisho-s7" kvg:type="㇙" />
+		<svg:path class="stroke_path stroke_num8" d="M81.88,45.5c0.23,1.45,0.43,2.11-0.53,3.18c-4.1,4.57-8.85,9.32-13.19,13.51" id="kvg:06068-Kaisho-s8" kvg:type="㇒" />
+		<svg:path class="stroke_path stroke_num9" d="M55.76,53.01c4.72,0,27.65,28.01,33.32,31.86c3.22,2.19,6.38,3.24,9.16,3.95" id="kvg:06068-Kaisho-s9" kvg:type="㇏" />
 	</svg:g>
 </svg:g>
 </svg:g>

@@ -46,10 +46,10 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_02ecc" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:02ecc" kvg:element="&#11980;" kvg:original="&#36790;" kvg:radical="tradit">
-	<svg:path class="stroke_path stroke_num1" d="M21.46,16c3.63,1.74,9.38,7.17,10.29,9.88" id="kvg:02ecc-s1" kvg:type="&#12756;" />
-	<svg:path class="stroke_path stroke_num2" d="M11.76227,48.784853C13.958616,49.92666,15.452132,49.510237,16.399001,49.066947C20.430518,47.186325,25.916505,44.714649,27.380735,44.150462C28.844967,43.572842,30.143252,45.762424,29.333044,47.643047C21.640949,65.495528,20.918595,58.107369,28.844967,70.452312C29.801598,71.943378,29.577083,73.273246,28.112851,74.710579C26.64862,76.147912,21.767849,79.613631,17.258017,82.797256" id="kvg:02ecc-s2" kvg:type="&#12747;" />
-	<svg:path class="stroke_path stroke_num3" d="M16,83.75C19,83.25,25,82,29.5,83C34,84,59.57,90.71,64,92C76,95.5,85.25,96.5,94.25,94.75" id="kvg:02ecc-s3" kvg:type="&#12751;a" />
+<svg:g id="kvg:02ecc" kvg:element="⻌" kvg:original="辶" kvg:radical="tradit">
+	<svg:path class="stroke_path stroke_num1" d="M21.46,16c3.63,1.74,9.38,7.17,10.29,9.88" id="kvg:02ecc-s1" kvg:type="㇔" />
+	<svg:path class="stroke_path stroke_num2" d="M11.76227,48.784853C13.958616,49.92666,15.452132,49.510237,16.399001,49.066947C20.430518,47.186325,25.916505,44.714649,27.380735,44.150462C28.844967,43.572842,30.143252,45.762424,29.333044,47.643047C21.640949,65.495528,20.918595,58.107369,28.844967,70.452312C29.801598,71.943378,29.577083,73.273246,28.112851,74.710579C26.64862,76.147912,21.767849,79.613631,17.258017,82.797256" id="kvg:02ecc-s2" kvg:type="㇋" />
+	<svg:path class="stroke_path stroke_num3" d="M16,83.75C19,83.25,25,82,29.5,83C34,84,59.57,90.71,64,92C76,95.5,85.25,96.5,94.25,94.75" id="kvg:02ecc-s3" kvg:type="㇏a" />
 </svg:g>
 </svg:g>
 <svg:g id="kvg:StrokeNumbers_02ecc" style="font-size:8;fill:#808080">
