@@ -94,7 +94,8 @@ you see them, too. For example the template for the images uses
 {{kanjiColorRest:Kanji}}</code></pre></blockquote>
 
 <blockquote class="nb">The <code>kanjiColorRest</code> template wraps the
-diagrams in a `<div>` element, if there are any.</blockquote>
+diagrams in <code>&ltdiv class="strokevariants">...&lt;/div></code>,
+ if there are any.</blockquote>
 
 
 ## Changing properties
