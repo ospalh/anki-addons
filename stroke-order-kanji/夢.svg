@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_05922" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:05922" kvg:element="夢">
 	<svg:g class="stroke_group group_num1" id="kvg:05922-g1" kvg:position="top">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05922-g2" kvg:element="艹" kvg:original="艸" kvg:radical="nelson" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05922-g2" kvg:element="艹" kvg:original="艸" kvg:radical="nelson" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num1" d="M24.28,21.48c1.77,0.72,4.35,0.71,6.23,0.51c12.23-1.36,34.88-3.62,47.86-4.25c2.7-0.13,5.44-0.32,8.09,0.33" id="kvg:05922-s1" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num2" d="M39.8,11.62c0.79,0.79,1.45,1.78,1.61,2.38c1.48,5.64,2.74,11.45,3.16,13.5" id="kvg:05922-s2" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num3" d="M69.48,10c0.52,0.75,0.62,1.89,0.32,2.87c-1.76,5.76-2.31,7.39-4.23,12.8" id="kvg:05922-s3" kvg:type="㇑a" />
@@ -60,7 +60,7 @@ kvg:type CDATA #IMPLIED >
 			<svg:path class="stroke_path stroke_num7" d="M64.75,33.47c0.37,0.65,0.44,1.55,0.24,2.54c-0.75,3.86-1,5.28-1.29,6.53" id="kvg:05922-s7" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num8" d="M34.24,46.12c9.38-0.99,36.38-2.99,45.84-3.21" id="kvg:05922-s8" kvg:type="㇐a" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05922-g4" kvg:element="冖">
+		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05922-g4" kvg:element="冖">
 			<svg:path class="stroke_path stroke_num9" d="M24.25,53.5c-1.5,7.25-4.25,12.62-6.75,15.75" id="kvg:05922-s9" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num10" d="M24.72,56c3.53,0,40.15-4,62.97-4.75c12.05-0.4,4.06,6-0.44,9.75" id="kvg:05922-s10" kvg:type="㇖b" />
 		</svg:g>

@@ -53,7 +53,7 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num3" d="M14.25,88.23c1.71,1.27,3.78,1.32,4.86-0.25c3.14-4.57,6.29-10.16,9.14-15.99" id="kvg:07063-s3" kvg:type="㇀" />
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:07063-g2" kvg:element="彎" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07063-g3" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07063-g3" kvg:position="top">
 			<svg:g id="kvg:07063-g4" kvg:element="糸">
 				<svg:path class="stroke_path stroke_num4" d="M58.78,10.75c1.95,1.04,5.04,4.28,5.53,5.9" id="kvg:07063-s4" kvg:type="㇜" />
 				<svg:path class="stroke_path stroke_num5" d="M54.73,22.3c0.45,0.16,2.13,0.19,2.58,0.16c5.48-0.29,9.08-1.35,13.07-1.49c0.74-0.03,1.85,0.08,2.22,0.16" id="kvg:07063-s5" kvg:type="㇜" />
@@ -82,7 +82,7 @@ kvg:type CDATA #IMPLIED >
 				<svg:path class="stroke_path stroke_num22" d="M90.56,41.28c2.53,1.9,4.48,6.33,5.07,8.05" id="kvg:07063-s22" kvg:type="㇔" />
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07063-g8" kvg:element="弓" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07063-g8" kvg:element="弓" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num23" d="M42.47,59.92c1.42,1.19,2.74,1.55,4.54,1.33c1.8-0.22,25.82-2.66,29.44-3.27c1.36-0.23,3.07,0.98,2.16,2.86c-0.8,1.66-1.48,3.66-2.02,6.65" id="kvg:07063-s23" kvg:type="㇕c" />
 			<svg:path class="stroke_path stroke_num24" d="M43.75,71.25c2.9,0,27.12-3,29.19-3s4.15-0.5,5.81-0.5" id="kvg:07063-s24" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num25" d="M43.24,69.7c0.26,1.05,0.03,2.15-0.31,3.69c-0.3,1.35-1.11,3.35-2.49,5.68c-0.73,1.23-0.44,2.66,0.96,2.66c3.48,0,34.23-3.39,39.42-3.39c2.37,0,3.58,1.75,2.72,4.04c-2.58,6.86-5.29,11.36-9.47,16.01c-3.15,3.5-4.93,0.6-6.64-2.86" id="kvg:07063-s25" kvg:type="㇉" />

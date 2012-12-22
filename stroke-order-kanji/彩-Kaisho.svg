@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_05f69-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:05f69-Kaisho" kvg:element="彩">
 	<svg:g class="stroke_group group_num1" id="kvg:05f69-Kaisho-g1" kvg:element="采" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05f69-Kaisho-g2" kvg:element="⺤" kvg:original="爪" kvg:position="top" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05f69-Kaisho-g2" kvg:element="⺤" kvg:original="爪" kvg:position="top" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num1" d="M46.33,13.43c0.08,0.29,0.17,0.75-0.17,1.17c-1.97,2.46-13.3,7.87-28.8,11.18" id="kvg:05f69-Kaisho-s1" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num2" d="M16.37,32.05c2.53,2.21,6.55,9.07,7.18,12.5" id="kvg:05f69-Kaisho-s2" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num3" d="M32.04,28.02c1.99,1.65,5.15,6.78,5.65,9.35" id="kvg:05f69-Kaisho-s3" kvg:type="㇔" />
@@ -62,10 +62,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:05f69-Kaisho-g4" kvg:element="彡" kvg:position="right" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05f69-Kaisho-g5" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05f69-Kaisho-g5" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num9" d="M86.2,18.25c0.07,0.4,0.28,1.09-0.15,1.61c-2.8,3.43-11.13,10.7-26.13,14.8" id="kvg:05f69-Kaisho-s9" kvg:type="㇒" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05f69-Kaisho-g6" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05f69-Kaisho-g6" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num10" d="M87.82,40.36c0.07,0.5,0.26,1.36-0.14,1.99c-2.75,4.36-11.34,14.26-25.19,19.07" id="kvg:05f69-Kaisho-s10" kvg:type="㇒" />
 		</svg:g>
 		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05f69-Kaisho-g7" kvg:element="丿">

@@ -53,7 +53,7 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num3" d="M13.75,83.71c1.5,1.31,3.31,1.36,4.25-0.25C20.75,78.75,23.5,73,26,67" id="kvg:06f64-KaishoVtLst-s3" kvg:type="㇀" />
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06f64-KaishoVtLst-g2" kvg:element="閏" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06f64-KaishoVtLst-g3" kvg:element="門" kvg:position="kamae">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06f64-KaishoVtLst-g3" kvg:element="門" kvg:position="kamae">
 			<svg:g id="kvg:06f64-KaishoVtLst-g4" kvg:position="left">
 				<svg:path class="stroke_path stroke_num4" d="M37.64,16.78c0.61,0.42,2.01,3.17,2.01,4.02c0,4.45-0.08,65.37-0.2,70.66" id="kvg:06f64-KaishoVtLst-s4" kvg:type="㇑" />
 				<svg:path class="stroke_path stroke_num5" d="M39.82,19.4c2.02-0.1,14.37-2.55,16.21-2.66c1.53-0.1,2.33,0.86,2.4,1.62c0.11,1.16-0.97,21.1-0.97,21.67" id="kvg:06f64-KaishoVtLst-s5" kvg:type="㇕a" />
@@ -67,7 +67,7 @@ kvg:type CDATA #IMPLIED >
 				<svg:path class="stroke_path stroke_num11" d="M74.19,37.67c7.19-0.4,12.14-1,18.63-1.25" id="kvg:06f64-KaishoVtLst-s11" kvg:type="㇐a" />
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06f64-KaishoVtLst-g6" kvg:element="王" kvg:original="玉" kvg:partial="true">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06f64-KaishoVtLst-g6" kvg:element="王" kvg:original="玉" kvg:partial="true">
 			<svg:path class="stroke_path stroke_num12" d="M51.5,52.43c0.45,0.29,1.92,0.03,2.38,0.02c5.62-0.19,18.2-1.08,23.31-1.38c0.7-0.04,1.33,0.06,1.91,0.3" id="kvg:06f64-KaishoVtLst-s12" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num13" d="M54.09,65.29c0.45,0.32,1.92,0.15,2.38,0.14c6.03-0.18,13.21-1.17,18.8-1.73c0.56-0.06,1.79-0.13,2.62,0.15" id="kvg:06f64-KaishoVtLst-s13" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num14" d="M49.78,79.21c0.4,0.18,2.47,0.5,3.15,0.46c6.32-0.42,17.07-1.17,25.2-2.26c1.07-0.14,2.39,0.29,2.93,0.57" id="kvg:06f64-KaishoVtLst-s14" kvg:type="㇐" />

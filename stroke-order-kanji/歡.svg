@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_06b61" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:06b61" kvg:element="歡">
 	<svg:g class="stroke_group group_num1" id="kvg:06b61-g1" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06b61-g2" kvg:element="艹" kvg:original="艸" kvg:position="top" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06b61-g2" kvg:element="艹" kvg:original="艸" kvg:position="top" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num1" d="M11,22.68c1.18,0.53,2.54,0.63,3.72,0.53c10.81-0.96,22.2-2.97,34.66-3.04c1.96-0.01,3.14,0.25,4.12,0.51" id="kvg:06b61-s1" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num2" d="M22.77,13.45c0.92,0.94,1.22,1.23,1.31,1.81c0.92,5.42,1.71,11,1.97,12.97" id="kvg:06b61-s2" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num3" d="M41.19,12.78c0.15,0.73,0.34,1.27,0.18,2.16c-0.97,5.24-1.42,7.86-2.48,12.79" id="kvg:06b61-s3" kvg:type="㇑a" />
@@ -79,11 +79,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06b61-g8" kvg:element="欠" kvg:position="right" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06b61-g9" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06b61-g9" kvg:position="top">
 			<svg:path class="stroke_path stroke_num18" d="M66.75,14.25c0.03,0.8,0.06,2.07-0.06,3.22c-0.76,6.78-5.11,21.67-11.06,30.78" id="kvg:06b61-s18" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num19" d="M64.22,32.99c0.91,0.36,3.14,0.43,4.51,0.11c1.67-0.39,16.68-3.15,18.26-3.35c8-1-1.33,11.09-3,13" id="kvg:06b61-s19" kvg:type="㇖a" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06b61-g10" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06b61-g10" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num20" d="M68.62,44c0.38,1.25,0.6,3.07,0.41,4.8C67.19,65.52,63.14,82.79,53,94.75" id="kvg:06b61-s20" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num21" d="M67.42,59c3.62,7.64,16.72,25.63,22.68,31.95c1.26,1.33,2.21,2.12,3.4,2.55" id="kvg:06b61-s21" kvg:type="㇏" />
 		</svg:g>

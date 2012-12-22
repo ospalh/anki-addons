@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_06577" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:06577" kvg:element="敷">
 	<svg:g class="stroke_group group_num1" id="kvg:06577-g1" kvg:element="旉" kvg:phon="旉" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06577-g2" kvg:element="甫" kvg:position="top" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06577-g2" kvg:element="甫" kvg:position="top" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num1" d="M15.17,26.02c1.7,0.74,4.05,0.38,5.83,0.25c6.03-0.46,16.79-1.94,22.42-2.74c1.68-0.24,3.38-0.6,5.06-0.17" id="kvg:06577-s1" kvg:type="㇐" />
 			<svg:g id="kvg:06577-g3" kvg:element="用" kvg:variant="true">
 				<svg:path class="stroke_path stroke_num2" d="M15.65,35.63c0.8,0.8,1.23,1.74,1.38,2.7c0.35,2.13,1.26,8.62,1.81,13.92c0.17,1.64,0.28,3.07,0.28,4.07" id="kvg:06577-s2" kvg:type="㇑" />
@@ -73,11 +73,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06577-g8" kvg:element="攴" kvg:original="攵" kvg:position="right" kvg:radical="general" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06577-g9" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06577-g9" kvg:position="top">
 			<svg:path class="stroke_path stroke_num12" d="M67.93,15.14c0.05,1.24,0.1,2.39-0.18,3.61c-1.98,8.58-6.74,22.49-13.25,32.62" id="kvg:06577-s12" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num13" d="M64.58,38.63c1.09,0.32,3.11,0,3.7-0.04c5.33-0.45,12.97-2.84,18.98-4.23c1.41-0.33,3.87-0.48,5.59-0.08" id="kvg:06577-s13" kvg:type="㇐" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06577-g10" kvg:element="乂" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06577-g10" kvg:element="乂" kvg:position="bottom">
 			<svg:g id="kvg:06577-g11" kvg:element="丿">
 				<svg:path class="stroke_path stroke_num14" d="M81.28,40.37c0.54,1.33,0.44,2.56-0.23,4.97C75,67,64.5,83.25,47.59,95.25" id="kvg:06577-s14" kvg:type="㇒" />
 			</svg:g>

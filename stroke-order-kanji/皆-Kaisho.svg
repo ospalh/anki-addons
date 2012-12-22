@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_07686-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:07686-Kaisho" kvg:element="皆">
 	<svg:g class="stroke_group group_num1" id="kvg:07686-Kaisho-g1" kvg:element="比" kvg:position="top" kvg:radical="nelson">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07686-Kaisho-g2" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07686-Kaisho-g2" kvg:position="left">
 			<svg:path class="stroke_path stroke_num1" d="M26.75,31.25c4.5-0.75,13.75-2.5,18.75-3.25c1.48-0.22,3-0.25,4,0" id="kvg:07686-Kaisho-s1" kvg:type="㇐b" />
 			<svg:path class="stroke_path stroke_num2" d="M63.5,29.73c4.99-0.8,15.26-2.66,20.81-3.45c1.65-0.24,3.33-0.27,4.44,0" id="kvg:07686-Kaisho-s2" kvg:type="㇙" />
 		</svg:g>
@@ -58,10 +58,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:07686-Kaisho-g4" kvg:position="bottom" kvg:radical="tradit">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07686-Kaisho-g5" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07686-Kaisho-g5" kvg:position="top">
 			<svg:path class="stroke_path stroke_num5" d="M52.47,49.25c0.48,0.61,0.56,1.36,0.44,1.89c-0.68,3.14-4.98,8.86-8.41,12.11" id="kvg:07686-Kaisho-s5" kvg:type="㇔" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07686-Kaisho-g6" kvg:element="日" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07686-Kaisho-g6" kvg:element="日" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num6" d="M34.51,63.47c0.61,0.85,1.23,1.28,1.23,2.41c0,1.13,1.4,25.28,1.65,30.87" id="kvg:07686-Kaisho-s6" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num7" d="M36.11,65.48c3.47-0.14,33.85-4.06,37.01-4.23c2.63-0.14,4.13,1.25,4.12,3.79c0,1.75-3.75,21.21-5.12,30.9" id="kvg:07686-Kaisho-s7" kvg:type="㇕a" />
 			<svg:path class="stroke_path stroke_num8" d="M37.72,79.07c6.53-0.32,15.03-0.82,24.4-1.32" id="kvg:07686-Kaisho-s8" kvg:type="㇐a" />

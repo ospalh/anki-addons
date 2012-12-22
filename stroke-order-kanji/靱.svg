@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09771" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09771" kvg:element="靱">
 	<svg:g class="stroke_group group_num1" id="kvg:09771-g1" kvg:element="革" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09771-g2" kvg:element="廿" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09771-g2" kvg:element="廿" kvg:position="top">
 			<svg:g id="kvg:09771-g3" kvg:element="十">
 				<svg:path class="stroke_path stroke_num1" d="M9.48,25.31c1.09,0.38,3.11,0.41,4.2,0.38c7.32-0.2,21.57-2.2,32.87-4.06c1.8-0.3,2.92,0.18,3.84,0.38" id="kvg:09771-s1" kvg:type="㇐" />
 				<svg:path class="stroke_path stroke_num2" d="M20.27,15.11c0.53,0.38,0.86,1.7,0.96,2.46c0.93,6.77,1.56,13.63,2.13,22.18" id="kvg:09771-s2" kvg:type="㇑" />
@@ -65,7 +65,7 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:09771-g5" kvg:element="刄" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09771-g6" kvg:element="刀">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09771-g6" kvg:element="刀">
 			<svg:path class="stroke_path stroke_num10" d="M57.15,24.4c1.49,0.83,3.35,0.65,4.66,0.45c10.18-1.6,19.21-3.74,25.09-4.59c3.83-0.55,5.53,1.66,5.32,5.55c-0.56,10.25-1.98,50.44-9.98,64.41c-4.65,8.12-5.99,5.81-8.85,0.26" id="kvg:09771-s10" kvg:type="㇆" />
 			<svg:g id="kvg:09771-g7" kvg:element="乂" kvg:part="1">
 				<svg:g id="kvg:09771-g8" kvg:element="丿">
@@ -73,7 +73,7 @@ kvg:type CDATA #IMPLIED >
 				</svg:g>
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09771-g9" kvg:element="乂" kvg:part="2">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09771-g9" kvg:element="乂" kvg:part="2">
 			<svg:path class="stroke_path stroke_num12" d="M53.77,39c1.4,0,2.37,0.42,2.88,1.27C64.25,53,80.25,72.25,91.91,80.29c2.26,1.56,3.63,2.88,5.59,3.46" id="kvg:09771-s12" kvg:type="㇏" />
 		</svg:g>
 	</svg:g>

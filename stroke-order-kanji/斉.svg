@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_06589" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:06589" kvg:element="斉" kvg:original="齊" kvg:radical="general" kvg:variant="true">
 	<svg:g class="stroke_group group_num1" id="kvg:06589-g1" kvg:element="文" kvg:position="top">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06589-g2" kvg:element="亠" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06589-g2" kvg:element="亠" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M52.29,10.5c1.17,1.17,1.64,2.5,1.64,4.37c0,1.63-0.06,4.63-0.06,6" id="kvg:06589-s1" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num2" d="M21.16,23.97c3.46,0.4,5.85,0.25,8.97,0.04c11.62-0.81,35.96-2.88,49.36-3.49c2.88-0.13,5.5-0.15,8.83,0.76" id="kvg:06589-s2" kvg:type="㇐" />
 		</svg:g>
@@ -59,7 +59,7 @@ kvg:type CDATA #IMPLIED >
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06589-g4" kvg:position="bottom">
 		<svg:path class="stroke_path stroke_num5" d="M33.75,53.25c0.81,0.81,1.2,2.13,1.25,3.5c0.88,22.87-2.38,32.62-11.25,40.75" id="kvg:06589-s5" kvg:type="㇒" />
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06589-g5" kvg:element="二">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06589-g5" kvg:element="二">
 			<svg:g id="kvg:06589-g6" kvg:position="top">
 				<svg:path class="stroke_path stroke_num6" d="M36.25,60.25c10.82-0.58,28.25-1.71,37.75-2" id="kvg:06589-s6" kvg:type="㇐a" />
 			</svg:g>

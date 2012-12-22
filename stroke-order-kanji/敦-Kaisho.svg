@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_06566-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:06566-Kaisho" kvg:element="敦">
 	<svg:g class="stroke_group group_num1" id="kvg:06566-Kaisho-g1" kvg:element="享" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06566-Kaisho-g2" kvg:element="亠" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06566-Kaisho-g2" kvg:element="亠" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M30.31,10.75c1.93,1.04,4.53,4.14,5.09,6.12" id="kvg:06566-Kaisho-s1" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num2" d="M13.05,25.17c0.79,0.06,2.6,0.38,3.36,0.31c6.21-0.64,25.75-3.5,34.6-3.94c1.3-0.06,1.97,0.03,2.94,0.39" id="kvg:06566-Kaisho-s2" kvg:type="㇐" />
 		</svg:g>
@@ -66,11 +66,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06566-Kaisho-g6" kvg:element="攵" kvg:original="攴" kvg:position="right" kvg:radical="general" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06566-Kaisho-g7" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06566-Kaisho-g7" kvg:position="top">
 			<svg:path class="stroke_path stroke_num9" d="M66.75,15.14c0.04,0.81,0.19,2.13-0.07,3.27C64.79,26.65,60.54,40.6,54,50.53" id="kvg:06566-Kaisho-s9" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num10" d="M61.37,39.32c1.06,0.24,3.03,0,3.61-0.03c5.95-0.38,15.18-2.82,24.26-3.43c1.02-0.07,1.65-0.02,1.91,0.06" id="kvg:06566-Kaisho-s10" kvg:type="㇐" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06566-Kaisho-g8" kvg:element="乂" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06566-Kaisho-g8" kvg:element="乂" kvg:position="bottom">
 			<svg:g id="kvg:06566-Kaisho-g9" kvg:element="丿">
 				<svg:path class="stroke_path stroke_num11" d="M77.28,43.43c0.53,1.25,0.82,2.15,0.26,4.43C72.53,68.64,61.2,86.52,44.63,95.25" id="kvg:06566-Kaisho-s11" kvg:type="㇒" />
 			</svg:g>

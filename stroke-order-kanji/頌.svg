@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_0980c" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:0980c" kvg:element="頌">
 	<svg:g class="stroke_group group_num1" id="kvg:0980c-g1" kvg:element="公" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0980c-g2" kvg:element="八" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:0980c-g2" kvg:element="八" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M25.08,21.19c0.35,1.16,0.08,2.26-0.3,3.36c-2.48,7.12-6.4,14.95-14.51,23.84" id="kvg:0980c-s1" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num2" d="M35.79,20.75c3.7,2.64,10.63,14.09,12.89,22.15" id="kvg:0980c-s2" kvg:type="㇏" />
 		</svg:g>
@@ -58,11 +58,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:0980c-g4" kvg:element="頁" kvg:position="right" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0980c-g5" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:0980c-g5" kvg:position="top">
 			<svg:path class="stroke_path stroke_num5" d="M54.6,17.9c3.03,0.85,5.67,0.51,8.04,0.22c9.28-1.14,18.1-1.88,26.36-2.44c2.05-0.14,3.91-0.23,5.91,0.34" id="kvg:0980c-s5" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num6" d="M73.32,20.43c0.06,0.74,0.04,1.49-0.27,2.16c-1.55,3.29-3.22,6.99-5.06,9.61" id="kvg:0980c-s6" kvg:type="㇒" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0980c-g6" kvg:element="貝" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0980c-g6" kvg:element="貝" kvg:position="bottom">
 			<svg:g id="kvg:0980c-g7" kvg:element="目" kvg:position="top">
 				<svg:path class="stroke_path stroke_num7" d="M58.87,33.11c0.95,0.95,1.16,1.94,1.16,3.36c0,1.09,0,21.69,0,33.79c0,3.67,0,6.46,0,7.55" id="kvg:0980c-s7" kvg:type="㇑" />
 				<svg:path class="stroke_path stroke_num8" d="M60.58,34.39c4.26-0.46,21.02-1.81,26.31-2.13c3.12-0.19,3.89,0.95,3.85,3.99c-0.04,3.73-0.07,22.18-0.09,32.5c0,3.96-0.01,6.73-0.01,7" id="kvg:0980c-s8" kvg:type="㇕a" />

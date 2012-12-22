@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_08d8a" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:08d8a" kvg:element="越">
 	<svg:g class="stroke_group group_num1" id="kvg:08d8a-g1" kvg:element="走" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08d8a-g2" kvg:element="土" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08d8a-g2" kvg:element="土" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M18.69,30.41c1.53,0.65,2.98,0.48,4.58,0.33c5.41-0.52,13.44-1.73,18.24-2.25c1.24-0.13,2.24-0.24,3.55-0.11" id="kvg:08d8a-s1" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num2" d="M32.9,13.83c1.02,1.02,1.23,2.16,1.23,3.42c0,8.38,0.02,22.77,0.02,25.62" id="kvg:08d8a-s2" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num3" d="M14.46,46.12c1.67,0.76,4.17,0.45,5.92,0.17c7.19-1.16,14.94-2.3,21.38-3.11c1.93-0.24,4.24-0.31,6.03,0.04" id="kvg:08d8a-s3" kvg:type="㇐" />
@@ -61,10 +61,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:08d8a-g4" kvg:element="戉" kvg:phon="戉">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08d8a-g5" kvg:element="厂" kvg:part="1" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08d8a-g5" kvg:element="厂" kvg:part="1" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num8" d="M53.77,36.45c0.83,0.83,1.18,1.93,1.18,3.05c0,0.79-0.22,30.03-0.37,31.98c-0.13,1.76,0.68,2.41,2.14,0.97c4.78-4.7,7.4-7.2,12.68-11.82" id="kvg:08d8a-s8" kvg:type="㇙" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08d8a-g6" kvg:element="戈">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08d8a-g6" kvg:element="戈">
 			<svg:g id="kvg:08d8a-g7" kvg:element="弋" kvg:part="1">
 				<svg:g id="kvg:08d8a-g8" kvg:element="厂" kvg:part="2" kvg:variant="true">
 					<svg:path class="stroke_path stroke_num9" d="M51.59,35.57C53.5,36,55.31,35.89,57,35.76C67,35,75.38,33.5,83.51,31.58c1.34-0.32,3.61-0.54,4.96-0.13" id="kvg:08d8a-s9" kvg:type="㇐" />

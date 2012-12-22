@@ -50,7 +50,7 @@ kvg:type CDATA #IMPLIED >
 	<svg:g class="stroke_group group_num1" id="kvg:09042-g1" kvg:phon="1+4+豕">
 		<svg:path class="stroke_path stroke_num1" d="M49.27,17.59c2.49,1.79,6.44,7.36,7.06,10.15" id="kvg:09042-s1" kvg:type="㇔" />
 		<svg:path class="stroke_path stroke_num2" d="M74.78,14.76c0.1,0.83-0.02,1.63-0.37,2.38c-0.98,3.04-2.44,6.53-5.85,11.21" id="kvg:09042-s2" kvg:type="㇒" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09042-g2" kvg:element="豕">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09042-g2" kvg:element="豕">
 			<svg:path class="stroke_path stroke_num3" d="M41.46,33.74c2.42,0.51,5.06,0.58,7.3,0.19c8.79-1.5,24.53-3.37,33.74-3.8c2.05-0.09,4.13-0.24,6.15,0.23" id="kvg:09042-s3" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num4" d="M62.37,34.35c0,1.15-0.51,1.89-1.44,2.83c-4.18,4.2-9.43,8.32-18.5,14.08" id="kvg:09042-s4" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num5" d="M60.63,41.37c6.95,3.82,14.87,24.38,7.9,39.81c-2.86,6.33-6.7,0.78-7.57,0.04" id="kvg:09042-s5" kvg:type="㇕v" />

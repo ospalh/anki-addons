@@ -49,7 +49,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:096c9" kvg:element="雉">
 	<svg:g class="stroke_group group_num1" id="kvg:096c9-g1" kvg:element="矢" kvg:position="left" kvg:radical="nelson" kvg:variant="true">
 		<svg:path class="stroke_path stroke_num1" d="M26.39,15.21c0.04,0.68,0.08,1.75-0.08,2.72c-0.97,5.74-4.91,17.77-12.05,27.22" id="kvg:096c9-s1" kvg:type="㇒" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:096c9-g2" kvg:element="天" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:096c9-g2" kvg:element="天" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num2" d="M22.41,31.72c1.75,0,2.14,0.14,3,0c4.34-0.72,9.96-0.93,16.21-2.91c1.41-0.45,2.83-0.23,3.55-0.04" id="kvg:096c9-s2" kvg:type="㇐" />
 			<svg:g id="kvg:096c9-g3" kvg:element="大" kvg:variant="true">
 				<svg:path class="stroke_path stroke_num3" d="M10.97,55.78c0.57,0.26,3.82,0.42,4.44,0.36c9.14-0.77,20.59-1.9,28.83-3.23c0.78-0.13,2.5-0.17,4.26,0.28" id="kvg:096c9-s3" kvg:type="㇐" />
@@ -59,7 +59,7 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:096c9-g4" kvg:element="隹" kvg:position="right" kvg:radical="tradit">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:096c9-g5" kvg:element="亻" kvg:original="人" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:096c9-g5" kvg:element="亻" kvg:original="人" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num6" d="M62.12,13.5c0.19,1.69-0.05,3.91-0.65,5.36C57.64,28.1,52.78,35.93,44,47.18" id="kvg:096c9-s6" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num7" d="M55.19,34.65c0.63,0.88,1.11,2.8,1.15,4.16c0.37,12.12-0.01,53.13,0.3,59.44" id="kvg:096c9-s7" kvg:type="㇑" />
 		</svg:g>

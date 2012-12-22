@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_08c3a" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:08c3a" kvg:element="谺">
 	<svg:g class="stroke_group group_num1" id="kvg:08c3a-g1" kvg:element="谷" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08c3a-g2" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08c3a-g2" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M26.17,18.26c0.04,0.38,0.08,0.98-0.07,1.53C25.24,23,20.29,30.05,13.51,34.37" id="kvg:08c3a-s1" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num2" d="M40.65,17.83c5.11,3.3,11.34,9.59,13.09,12.96" id="kvg:08c3a-s2" kvg:type="㇔" />
 		</svg:g>
@@ -65,10 +65,10 @@ kvg:type CDATA #IMPLIED >
 	<svg:g class="stroke_group group_num2" id="kvg:08c3a-g5" kvg:element="牙" kvg:position="right">
 		<svg:path class="stroke_path stroke_num8" d="M59.61,20.45c1.01,0.42,2.85,0.47,3.87,0.42c7.68-0.37,18.53-2.42,28.61-2.69c1.68-0.05,2.69,0.2,3.53,0.41" id="kvg:08c3a-s8" kvg:type="㇐" />
 		<svg:path class="stroke_path stroke_num9" d="M62.37,25.9c1.22,1.09,1.32,2.46,1.31,3.7c-0.9,6.53-3.22,15.81-4.47,19.07c-0.93,2.43,0.39,2.68,2.27,2.18c4.9-1.31,24.8-3.57,33.07-3.01c1.43,0.1,2.3,0.2,3.01,0.41" id="kvg:08c3a-s9" kvg:type="㇗" />
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08c3a-g6" kvg:element="亅">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08c3a-g6" kvg:element="亅">
 			<svg:path class="stroke_path stroke_num10" d="M80.48,22.96c0.98,0.97,1.81,2.84,1.88,6.3c0.34,16.61-0.22,53.19-0.22,58.85c0,11.31-5.99,2.83-8.18,0.72" id="kvg:08c3a-s10" kvg:type="㇚" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08c3a-g7" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08c3a-g7" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num11" d="M82,48.22c0.67,0.42,0.43,1.78,0.05,2.54C78.19,58.54,69.5,71.25,52.7,81.26" id="kvg:08c3a-s11" kvg:type="㇒" />
 		</svg:g>
 	</svg:g>

@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09190-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09190-Kaisho" kvg:element="醐">
 	<svg:g class="stroke_group group_num1" id="kvg:09190-Kaisho-g1" kvg:element="酉" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09190-Kaisho-g2" kvg:element="西" kvg:original="襾" kvg:part="1">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09190-Kaisho-g2" kvg:element="西" kvg:original="襾" kvg:part="1">
 			<svg:path class="stroke_path stroke_num1" d="M11.54,22.06c0.53,0.4,3.2,0.98,3.75,0.92c5.6-0.57,21.81-2.7,24.16-2.97c1.34-0.15,2.85-0.65,3.99-0.14" id="kvg:09190-Kaisho-s1" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num2" d="M13.18,39.83c0.36,0.72,0.49,2.46,0.49,3.42c0,0.96-0.12,48.05,0,49.01" id="kvg:09190-Kaisho-s2" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num3" d="M13.84,41.33c2.03-0.12,20.84-3.17,22.68-3.47c1.91-0.31,3.49,1.15,3.49,3.87c0,1.52-0.3,47.81-0.3,48.53" id="kvg:09190-Kaisho-s3" kvg:type="㇕a" />
@@ -58,12 +58,12 @@ kvg:type CDATA #IMPLIED >
 		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09190-Kaisho-g3" kvg:element="一">
 			<svg:path class="stroke_path stroke_num6" d="M18.85,74.19c0.47-0.04,1.32-0.12,2.4-0.22c2.26-0.21,5.51-0.52,8.27-0.77c2.24-0.21,4.16-0.38,4.97-0.46" id="kvg:09190-Kaisho-s6" kvg:type="㇐a" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09190-Kaisho-g4" kvg:element="西" kvg:original="襾" kvg:part="2">
+		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09190-Kaisho-g4" kvg:element="西" kvg:original="襾" kvg:part="2">
 			<svg:path class="stroke_path stroke_num7" d="M14.07,89.53c5.59-0.52,18.28-1.89,25.25-2.34" id="kvg:09190-Kaisho-s7" kvg:type="㇐a" />
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:09190-Kaisho-g5" kvg:element="胡" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09190-Kaisho-g6" kvg:element="古" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09190-Kaisho-g6" kvg:element="古" kvg:position="left">
 			<svg:g id="kvg:09190-Kaisho-g7" kvg:element="十">
 				<svg:path class="stroke_path stroke_num8" d="M46,38.47c0.27,0.02,0.83,0.07,3.01,0.05c4.74-0.03,12.49-1.77,17.64-2.91c0.69-0.15,2.65,0,3.1,0.03" id="kvg:09190-Kaisho-s8" kvg:type="㇐" />
 				<svg:path class="stroke_path stroke_num9" d="M55.51,12.38c0.75,0.55,1.34,2.44,1.34,3.56c0,19.19,0,36.86-0.15,43.71" id="kvg:09190-Kaisho-s9" kvg:type="㇑a" />
@@ -74,7 +74,7 @@ kvg:type CDATA #IMPLIED >
 				<svg:path class="stroke_path stroke_num12" d="M50.01,83.66c3.65-0.37,12.02-1.12,16.4-1.59" id="kvg:09190-Kaisho-s12" kvg:type="㇐b" />
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09190-Kaisho-g9" kvg:element="月" kvg:position="right">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09190-Kaisho-g9" kvg:element="月" kvg:position="right">
 			<svg:path class="stroke_path stroke_num13" d="M75.68,18.7c0.32,0.99,0.53,1.98,0.63,2.96c0.11,0.98-0.06,33.24-0.11,35.44c-0.28,10.52-2.65,24.84-10.13,34" id="kvg:09190-Kaisho-s13" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num14" d="M76.98,19.22c1.31-0.2,12.29-3.14,13.29-3.14c1.48,0,3.15,0.68,3.15,3.22c0,3.7-0.72,49.7-0.72,69.53c0,10.92-5.8,2.79-7.56,0.96" id="kvg:09190-Kaisho-s14" kvg:type="㇆a" />
 			<svg:path class="stroke_path stroke_num15" d="M76.75,38.6c2.71-0.55,5.45-0.93,8.2-1.26c0.73-0.09,1.46-0.17,2.17-0.25" id="kvg:09190-Kaisho-s15" kvg:type="㇐a" />

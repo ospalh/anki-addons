@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_0524f" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:0524f" kvg:element="剏">
 	<svg:g class="stroke_group group_num1" id="kvg:0524f-g1" kvg:element="并" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0524f-g2" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:0524f-g2" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M16.46,16.59c2.99,2.15,7.73,8.85,8.48,12.21" id="kvg:0524f-s1" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num2" d="M43.05,11.89c0.02,0.35,0.01,0.9-0.05,1.42c-0.5,4.44-3.25,11.94-7.04,17.55" id="kvg:0524f-s2" kvg:type="㇒" />
 		</svg:g>
@@ -68,7 +68,7 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:0524f-g8" kvg:element="刄" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0524f-g9" kvg:element="刀" kvg:radical="general">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:0524f-g9" kvg:element="刀" kvg:radical="general">
 			<svg:path class="stroke_path stroke_num7" d="M52.22,25.9c1.66,0.83,3.73,0.57,5.21,0.45C68,25.5,75,24.11,81.57,23.26c4.27-0.55,6.02,1.66,5.93,5.55c-0.25,11.69-0.75,41.44-7.87,61.91c-3.13,9.01-5.69,5.81-8.88,0.26" id="kvg:0524f-s7" kvg:type="㇆" />
 			<svg:g id="kvg:0524f-g10" kvg:element="乂" kvg:part="1">
 				<svg:g id="kvg:0524f-g11" kvg:element="丿">
@@ -76,7 +76,7 @@ kvg:type CDATA #IMPLIED >
 				</svg:g>
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0524f-g12" kvg:element="乂" kvg:part="2">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0524f-g12" kvg:element="乂" kvg:part="2">
 			<svg:path class="stroke_path stroke_num9" d="M51.5,39.5c1.5,0,2.4,0.58,3.09,1.41c8.08,9.74,28.24,36.73,37.9,44.27c2.35,1.84,3.91,3.19,6.01,3.82" id="kvg:0524f-s9" kvg:type="㇏" />
 		</svg:g>
 	</svg:g>

@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_05f71-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:05f71-Kaisho" kvg:element="影">
 	<svg:g class="stroke_group group_num1" id="kvg:05f71-Kaisho-g1" kvg:element="景" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05f71-Kaisho-g2" kvg:element="日" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05f71-Kaisho-g2" kvg:element="日" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M22.55,16.35c0.5,0.54,0.89,1.84,1.01,2.6c0.55,3.59,1.94,15.45,2.6,21.25" id="kvg:05f71-Kaisho-s1" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num2" d="M24.02,17.34c2.8-0.32,26.34-3.68,28.89-4c2.13-0.27,3.52,1.46,3.35,3.53c-0.35,4.22-3.75,20.44-3.74,21.02" id="kvg:05f71-Kaisho-s2" kvg:type="㇕a" />
 			<svg:path class="stroke_path stroke_num3" d="M24.95,27.99c4.53-0.36,9.55-1.14,14.05-1.75c1.51-0.2,3.04-0.41,4.55-0.61" id="kvg:05f71-Kaisho-s3" kvg:type="㇐a" />
@@ -74,10 +74,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:05f71-Kaisho-g8" kvg:element="彡" kvg:position="right" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05f71-Kaisho-g9" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05f71-Kaisho-g9" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num13" d="M90.18,19.2c0.05,0.41,0.23,1.12-0.11,1.63C88,24,77,33,70.67,35.86" id="kvg:05f71-Kaisho-s13" kvg:type="㇒" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05f71-Kaisho-g10" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05f71-Kaisho-g10" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num14" d="M88.79,46.47c0.05,0.37,0.19,1.01-0.1,1.49C86.72,51.21,78,59.25,70.65,62.19" id="kvg:05f71-Kaisho-s14" kvg:type="㇒" />
 		</svg:g>
 		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05f71-Kaisho-g11" kvg:element="丿">

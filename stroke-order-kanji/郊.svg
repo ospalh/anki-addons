@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_090ca" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:090ca" kvg:element="郊">
 	<svg:g class="stroke_group group_num1" id="kvg:090ca-g1" kvg:element="交" kvg:phon="交" kvg:position="left" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:090ca-g2" kvg:element="亠" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:090ca-g2" kvg:element="亠" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M37.99,12c1,1,1.28,2.25,1.28,4.04c0,3.77-0.03,6.96-0.03,9.84" id="kvg:090ca-s1" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num2" d="M17.84,29.16c1.84,0.18,3.3,0.26,5.17-0.02c10.24-1.52,20.38-2.66,26.48-3.45c1.61-0.21,4.26-0.32,5.88,0.12" id="kvg:090ca-s2" kvg:type="㇐" />
 		</svg:g>

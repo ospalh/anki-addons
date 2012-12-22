@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09dfa" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09dfa" kvg:element="鷺">
 	<svg:g class="stroke_group group_num1" id="kvg:09dfa-g1" kvg:element="路" kvg:position="top">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09dfa-g2" kvg:element="足" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09dfa-g2" kvg:element="足" kvg:position="left">
 			<svg:g id="kvg:09dfa-g3" kvg:element="口">
 				<svg:path class="stroke_path stroke_num1" d="M19.03,12.84c0.79,0.69,1.24,1.53,1.36,2.53c0.46,2,0.78,3.97,1.11,6.13c0.16,1.04,0.32,2.38,0.51,3.54" id="kvg:09dfa-s1" kvg:type="㇑" />
 				<svg:path class="stroke_path stroke_num2" d="M20.81,13.88c7.18-0.87,13.49-1.87,17.82-2.39c2.65-0.32,4.43,0.72,3.85,2.64c-0.97,3.23-1.22,3.87-2.01,6.09" id="kvg:09dfa-s2" kvg:type="㇕b" />
@@ -80,7 +80,7 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num18" d="M34.18,66.09c5.63-0.23,32.51-1.59,39.52-1.79" id="kvg:09dfa-s18" kvg:type="㇐a" />
 		<svg:path class="stroke_path stroke_num19" d="M33.99,73c10.36-0.7,37.24-1.89,47.76-2.47c3.06-0.31,6.12-0.29,9.18,0.07" id="kvg:09dfa-s19" kvg:type="㇐b" />
 		<svg:path class="stroke_path stroke_num20" d="M34.37,80.4c16.88-1.15,45.92-2.1,53.27-1.96C91,78.5,91.85,80.88,90.99,83c-2.38,5.88-4.49,9-7.82,13.97c-2.86,4.27-4.67,2.29-7.6-0.84" id="kvg:09dfa-s20" kvg:type="㇆a" />
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09dfa-g8" kvg:element="灬" kvg:original="火" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09dfa-g8" kvg:element="灬" kvg:original="火" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num21" d="M23.45,88.23c-0.7,3.52-3.7,8.77-6.56,11.02" id="kvg:09dfa-s21" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num22" d="M34.87,86.15c1.85,2.29,3.51,8.23,3.58,12.18" id="kvg:09dfa-s22" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num23" d="M49.04,85.7c1.36,1.71,3.5,7.04,3.84,9.7" id="kvg:09dfa-s23" kvg:type="㇔" />
