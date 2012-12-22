@@ -46,13 +46,13 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_05c6e" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:05c6e" kvg:element="&#23662;" kvg:radical="general">
-	<svg:g class="stroke_group group_num1" id="kvg:05c6e-g1" kvg:element="&#20981;">
-		<svg:path class="stroke_path stroke_num1" d="M22.6,33.16c0.9,0.46,2.3,1.71,2.3,4.41c0,3.13-1.15,17.8-1.65,23.3c-0.26,2.84-1,4.5,3.31,4.16c12.59-0.99,48.44-5.16,59.7-6.42" id="kvg:05c6e-s1" kvg:type="&#12759;a" />
-		<svg:path class="stroke_path stroke_num2" d="M86.48,27.75c0.77,0.62,2.42,2.62,2.3,3.91c-0.54,5.96-1.79,21.71-2.73,32.08" id="kvg:05c6e-s2" kvg:type="&#12753;" />
+<svg:g id="kvg:05c6e" kvg:element="屮" kvg:radical="general">
+	<svg:g class="stroke_group group_num1" id="kvg:05c6e-g1" kvg:element="凵">
+		<svg:path class="stroke_path stroke_num1" d="M22.6,33.16c0.9,0.46,2.3,1.71,2.3,4.41c0,3.13-1.15,17.8-1.65,23.3c-0.26,2.84-1,4.5,3.31,4.16c12.59-0.99,48.44-5.16,59.7-6.42" id="kvg:05c6e-s1" kvg:type="㇗a" />
+		<svg:path class="stroke_path stroke_num2" d="M86.48,27.75c0.77,0.62,2.42,2.62,2.3,3.91c-0.54,5.96-1.79,21.71-2.73,32.08" id="kvg:05c6e-s2" kvg:type="㇑" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:05c6e-g2" kvg:element="&#20031;">
-		<svg:path class="stroke_path stroke_num3" d="M53.07,10.12c1.18,1,2.25,3,2.25,4.63c0,13.95,0.05,22.37-0.18,35.38c-0.4,23.24-7.4,40.99-27.59,51.46" id="kvg:05c6e-s3" kvg:type="&#12754;" />
+	<svg:g class="stroke_group group_num2" id="kvg:05c6e-g2" kvg:element="丿">
+		<svg:path class="stroke_path stroke_num3" d="M53.07,10.12c1.18,1,2.25,3,2.25,4.63c0,13.95,0.05,22.37-0.18,35.38c-0.4,23.24-7.4,40.99-27.59,51.46" id="kvg:05c6e-s3" kvg:type="㇒" />
 	</svg:g>
 </svg:g>
 </svg:g>

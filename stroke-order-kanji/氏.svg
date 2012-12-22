@@ -46,11 +46,11 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_06c0f" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:06c0f" kvg:element="&#27663;" kvg:radical="general">
-	<svg:path class="stroke_path stroke_num1" d="M66.12,12.62c0,0.88-0.35,1.83-0.96,2.31C58,20.62,46.88,26.25,27,32.75" id="kvg:06c0f-s1" kvg:type="&#12754;" />
-	<svg:path class="stroke_path stroke_num2" d="M23.5,30c1.19,1.19,1.5,3,1.5,5.25c0,6-0.75,40.88-0.75,48.5c0,3.5,0.25,4.5,3.5,2S39.5,77,41.5,75.5" id="kvg:06c0f-s2" kvg:type="&#12761;" />
-	<svg:path class="stroke_path stroke_num3" d="M27.88,51.13c2.5,0.62,5.64,0.41,8.01-0.01c10.74-1.87,26.47-4.84,37.72-5.69c2.53-0.19,5.19-0.44,7.67,0.22" id="kvg:06c0f-s3" kvg:type="&#12752;" />
-	<svg:path class="stroke_path stroke_num4" d="M46.5,28.5c1,1.12,2,2.87,2.47,4.47C54.26,50.81,67.02,81.53,86.75,93c8.75,5.09,6.5-4,6.5-7" id="kvg:06c0f-s4" kvg:type="&#12738;" />
+<svg:g id="kvg:06c0f" kvg:element="氏" kvg:radical="general">
+	<svg:path class="stroke_path stroke_num1" d="M66.12,12.62c0,0.88-0.35,1.83-0.96,2.31C58,20.62,46.88,26.25,27,32.75" id="kvg:06c0f-s1" kvg:type="㇒" />
+	<svg:path class="stroke_path stroke_num2" d="M23.5,30c1.19,1.19,1.5,3,1.5,5.25c0,6-0.75,40.88-0.75,48.5c0,3.5,0.25,4.5,3.5,2S39.5,77,41.5,75.5" id="kvg:06c0f-s2" kvg:type="㇙" />
+	<svg:path class="stroke_path stroke_num3" d="M27.88,51.13c2.5,0.62,5.64,0.41,8.01-0.01c10.74-1.87,26.47-4.84,37.72-5.69c2.53-0.19,5.19-0.44,7.67,0.22" id="kvg:06c0f-s3" kvg:type="㇐" />
+	<svg:path class="stroke_path stroke_num4" d="M46.5,28.5c1,1.12,2,2.87,2.47,4.47C54.26,50.81,67.02,81.53,86.75,93c8.75,5.09,6.5-4,6.5-7" id="kvg:06c0f-s4" kvg:type="㇂" />
 </svg:g>
 </svg:g>
 <svg:g id="kvg:StrokeNumbers_06c0f" style="font-size:8;fill:#808080">

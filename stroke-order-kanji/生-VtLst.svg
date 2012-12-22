@@ -46,12 +46,12 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_0751f-VtLst" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:0751f-VtLst" kvg:element="&#29983;" kvg:radical="general">
-	<svg:path class="stroke_path stroke_num1" d="M31.02,27.14c0.03,0.57,0.07,1.47-0.07,2.28C30.13,34.23,25.43,44.79,19,51.25" id="kvg:0751f-VtLst-s1" kvg:type="&#12754;" />
-	<svg:path class="stroke_path stroke_num2" d="M30.88,40.92c0.94,0.38,2.66,0.46,3.6,0.38c6.77-0.55,34.52-6.8,40.36-7.38c1.56-0.16,2.21-0.09,3.03-0.02" id="kvg:0751f-VtLst-s2" kvg:type="&#12752;" />
-	<svg:path class="stroke_path stroke_num3" d="M30.88,64.53c0.94,0.28,2.66,0.34,3.6,0.28c6.77-0.4,35.52-4.99,41.36-5.42c1.56-0.11,2.21-0.06,3.03-0.02" id="kvg:0751f-VtLst-s3" kvg:type="&#12752;" />
-	<svg:path class="stroke_path stroke_num4" d="M17.88,91.25c1.47,0.3,4.15,0.36,5.62,0.3c10.56-0.43,52.41-5.34,61.52-5.8c2.43-0.12,4.48,0.25,6.73,0.98" id="kvg:0751f-VtLst-s4" kvg:type="&#12752;" />
-	<svg:path class="stroke_path stroke_num5" d="M51.81,12.88c0.76,0.52,2.36,3.93,2.51,4.98c0.15,1.05-0.1,63.46-0.25,70.02" id="kvg:0751f-VtLst-s5" kvg:type="&#12753;" />
+<svg:g id="kvg:0751f-VtLst" kvg:element="生" kvg:radical="general">
+	<svg:path class="stroke_path stroke_num1" d="M31.02,27.14c0.03,0.57,0.07,1.47-0.07,2.28C30.13,34.23,25.43,44.79,19,51.25" id="kvg:0751f-VtLst-s1" kvg:type="㇒" />
+	<svg:path class="stroke_path stroke_num2" d="M30.88,40.92c0.94,0.38,2.66,0.46,3.6,0.38c6.77-0.55,34.52-6.8,40.36-7.38c1.56-0.16,2.21-0.09,3.03-0.02" id="kvg:0751f-VtLst-s2" kvg:type="㇐" />
+	<svg:path class="stroke_path stroke_num3" d="M30.88,64.53c0.94,0.28,2.66,0.34,3.6,0.28c6.77-0.4,35.52-4.99,41.36-5.42c1.56-0.11,2.21-0.06,3.03-0.02" id="kvg:0751f-VtLst-s3" kvg:type="㇐" />
+	<svg:path class="stroke_path stroke_num4" d="M17.88,91.25c1.47,0.3,4.15,0.36,5.62,0.3c10.56-0.43,52.41-5.34,61.52-5.8c2.43-0.12,4.48,0.25,6.73,0.98" id="kvg:0751f-VtLst-s4" kvg:type="㇐" />
+	<svg:path class="stroke_path stroke_num5" d="M51.81,12.88c0.76,0.52,2.36,3.93,2.51,4.98c0.15,1.05-0.1,63.46-0.25,70.02" id="kvg:0751f-VtLst-s5" kvg:type="㇑" />
 </svg:g>
 </svg:g>
 <svg:g id="kvg:StrokeNumbers_0751f-VtLst" style="font-size:8;fill:#808080">

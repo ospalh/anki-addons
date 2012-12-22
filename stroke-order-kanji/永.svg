@@ -46,15 +46,15 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_06c38" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:06c38" kvg:element="&#27704;">
-	<svg:g class="stroke_group group_num1" id="kvg:06c38-g1" kvg:element="&#20022;" kvg:position="top" kvg:radical="nelson">
-		<svg:path class="stroke_path stroke_num1" d="M45.5,13.25c5.12,2.4,8.62,5.75,10.75,9" id="kvg:06c38-s1" kvg:type="&#12756;" />
+<svg:g id="kvg:06c38" kvg:element="永">
+	<svg:g class="stroke_group group_num1" id="kvg:06c38-g1" kvg:element="丶" kvg:position="top" kvg:radical="nelson">
+		<svg:path class="stroke_path stroke_num1" d="M45.5,13.25c5.12,2.4,8.62,5.75,10.75,9" id="kvg:06c38-s1" kvg:type="㇔" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:06c38-g2" kvg:element="&#27700;" kvg:position="bottom" kvg:radical="tradit" kvg:variant="true">
-		<svg:path class="stroke_path stroke_num2" d="M31.75,37.25c1.88,0.75,4.12,1,6.07,0.55c3.62-0.83,9.41-2.51,13.04-3.35c3-0.7,5.16,0.8,5.16,4.05c0,14.5-0.26,45.45-0.26,50c0,12-7.02,2.84-8.52,1.7" id="kvg:06c38-s2" kvg:type="&#12742;/&#12762;" />
-		<svg:path class="stroke_path stroke_num3" d="M14.25,58.68c1.75,0.45,3.46,0.3,5-0.02c2.5-0.53,12.84-3.54,15.34-4.49c2.5-0.95,4.65,0.77,3.75,2.85C33.5,68.25,25.75,79.75,16,86.37" id="kvg:06c38-s3" kvg:type="&#12743;" />
-		<svg:path class="stroke_path stroke_num4" d="M81.22,36.52c-0.1,1.11-0.78,2.03-1.52,2.7c-4.83,4.38-13.96,9.73-21.46,11.92" id="kvg:06c38-s4" kvg:type="&#12754;" />
-		<svg:path class="stroke_path stroke_num5" d="M58,52.74c9.88,9.52,20.02,18.85,29.07,24.84c2.01,1.33,4.05,2.66,6.43,3.56" id="kvg:06c38-s5" kvg:type="&#12751;" />
+	<svg:g class="stroke_group group_num2" id="kvg:06c38-g2" kvg:element="水" kvg:position="bottom" kvg:radical="tradit" kvg:variant="true">
+		<svg:path class="stroke_path stroke_num2" d="M31.75,37.25c1.88,0.75,4.12,1,6.07,0.55c3.62-0.83,9.41-2.51,13.04-3.35c3-0.7,5.16,0.8,5.16,4.05c0,14.5-0.26,45.45-0.26,50c0,12-7.02,2.84-8.52,1.7" id="kvg:06c38-s2" kvg:type="㇆/㇚" />
+		<svg:path class="stroke_path stroke_num3" d="M14.25,58.68c1.75,0.45,3.46,0.3,5-0.02c2.5-0.53,12.84-3.54,15.34-4.49c2.5-0.95,4.65,0.77,3.75,2.85C33.5,68.25,25.75,79.75,16,86.37" id="kvg:06c38-s3" kvg:type="㇇" />
+		<svg:path class="stroke_path stroke_num4" d="M81.22,36.52c-0.1,1.11-0.78,2.03-1.52,2.7c-4.83,4.38-13.96,9.73-21.46,11.92" id="kvg:06c38-s4" kvg:type="㇒" />
+		<svg:path class="stroke_path stroke_num5" d="M58,52.74c9.88,9.52,20.02,18.85,29.07,24.84c2.01,1.33,4.05,2.66,6.43,3.56" id="kvg:06c38-s5" kvg:type="㇏" />
 	</svg:g>
 </svg:g>
 </svg:g>

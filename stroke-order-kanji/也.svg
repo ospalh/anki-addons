@@ -46,13 +46,13 @@ kvg:type CDATA #IMPLIED >
 <?xml-stylesheet type="text/css" href="_kanji_style.css"?>
 <svg:svg xmlns:kvg="http://kanjivg.tagaini.net" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" id="kanjisvg" onload="init(evt)" viewBox="0 0 109 109" width="100%">
 <svg:g id="kvg:StrokePaths_04e5f" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<svg:g id="kvg:04e5f" kvg:element="&#20063;">
-	<svg:path class="stroke_path stroke_num1" d="M15,52.81c3.38,1.44,6.14,1.17,9.14,0.22C44.05,46.76,64.8,39.37,78,34.5c4.19-1.55,6.91-0.7,6.25,3.25c-1.75,10.5-2.99,14.6-5,19.27c-3.88,8.98-5.75,5.98-11.12-1" id="kvg:04e5f-s1" kvg:type="&#12742;v" />
-	<svg:g class="stroke_group group_num1" id="kvg:04e5f-g1" kvg:element="&#20008;" kvg:radical="nelson">
-		<svg:path class="stroke_path stroke_num2" d="M54.54,14.5c1.35,1.35,1.61,2.88,1.61,4.75c0,2.2-0.02,28.39-0.02,43.87c0,3.83,0,7,0,9" id="kvg:04e5f-s2" kvg:type="&#12753;" />
+<svg:g id="kvg:04e5f" kvg:element="也">
+	<svg:path class="stroke_path stroke_num1" d="M15,52.81c3.38,1.44,6.14,1.17,9.14,0.22C44.05,46.76,64.8,39.37,78,34.5c4.19-1.55,6.91-0.7,6.25,3.25c-1.75,10.5-2.99,14.6-5,19.27c-3.88,8.98-5.75,5.98-11.12-1" id="kvg:04e5f-s1" kvg:type="㇆v" />
+	<svg:g class="stroke_group group_num1" id="kvg:04e5f-g1" kvg:element="丨" kvg:radical="nelson">
+		<svg:path class="stroke_path stroke_num2" d="M54.54,14.5c1.35,1.35,1.61,2.88,1.61,4.75c0,2.2-0.02,28.39-0.02,43.87c0,3.83,0,7,0,9" id="kvg:04e5f-s2" kvg:type="㇑" />
 	</svg:g>
-	<svg:g class="stroke_group group_num2" id="kvg:04e5f-g2" kvg:element="&#20057;" kvg:radical="tradit" kvg:variant="true">
-		<svg:path class="stroke_path stroke_num3" d="M30.78,36.4c1.16,1.16,1.37,2.73,1.37,5.46c0,6.27-0.02,24.15-0.02,30.4C32.12,90.62,33.29,92,61.25,92c28.2,0,29.64-2.71,29.64-14.28" id="kvg:04e5f-s3" kvg:type="&#12767;" />
+	<svg:g class="stroke_group group_num2" id="kvg:04e5f-g2" kvg:element="乙" kvg:radical="tradit" kvg:variant="true">
+		<svg:path class="stroke_path stroke_num3" d="M30.78,36.4c1.16,1.16,1.37,2.73,1.37,5.46c0,6.27-0.02,24.15-0.02,30.4C32.12,90.62,33.29,92,61.25,92c28.2,0,29.64-2.71,29.64-14.28" id="kvg:04e5f-s3" kvg:type="㇟" />
 	</svg:g>
 </svg:g>
 </svg:g>
