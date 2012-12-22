@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_08c41-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:08c41-Kaisho" kvg:element="豁">
 	<svg:g class="stroke_group group_num1" id="kvg:08c41-Kaisho-g1" kvg:element="害" kvg:position="left" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08c41-Kaisho-g2" kvg:element="宀" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08c41-Kaisho-g2" kvg:element="宀" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M28.26,14c2.49,1.5,4.99,4.5,6.02,8.74" id="kvg:08c41-Kaisho-s1" kvg:type="㇑a" />
 			<svg:g id="kvg:08c41-Kaisho-g3" kvg:element="冖">
 				<svg:path class="stroke_path stroke_num2" d="M13.43,28.63c0,2.52-3.15,12.22-4.14,13.9" id="kvg:08c41-Kaisho-s2" kvg:type="㇔" />
@@ -68,11 +68,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:08c41-Kaisho-g6" kvg:element="谷" kvg:position="right" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08c41-Kaisho-g7" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08c41-Kaisho-g7" kvg:position="top">
 			<svg:path class="stroke_path stroke_num11" d="M67.6,17.48c0.03,0.38,0.07,0.97-0.07,1.52c-0.81,3.2-5.78,10.26-12.84,16.51" id="kvg:08c41-Kaisho-s11" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num12" d="M78.52,15.83c6.65,4.24,14.74,12.33,17.02,16.67" id="kvg:08c41-Kaisho-s12" kvg:type="㇔" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08c41-Kaisho-g8" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08c41-Kaisho-g8" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num13" d="M74.91,29.25c0.07,0.8,0.34,2.14-0.14,3.22c-4.02,9.01-13.16,21.98-25.35,30.78" id="kvg:08c41-Kaisho-s13" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num14" d="M74.72,34.33c5.25,8.48,15.03,20.59,19.83,25.09c1.19,1.12,2.57,1.85,3.7,2.22" id="kvg:08c41-Kaisho-s14" kvg:type="㇏" />
 			<svg:g id="kvg:08c41-Kaisho-g9" kvg:element="口">

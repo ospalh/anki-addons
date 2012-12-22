@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_07a18" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:07a18" kvg:element="稘">
 	<svg:g class="stroke_group group_num1" id="kvg:07a18-g1" kvg:element="禾" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07a18-g2" kvg:element="丿" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07a18-g2" kvg:element="丿" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M38.26,15.25c0.07,0.3,0.14,0.77-0.14,1.21C36.49,19,27.1,24.58,14.25,28" id="kvg:07a18-s1" kvg:type="㇒" />
 		</svg:g>
 		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07a18-g3" kvg:element="木" kvg:position="bottom">
@@ -59,7 +59,7 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:07a18-g4" kvg:element="其" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07a18-g5" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07a18-g5" kvg:position="top">
 			<svg:g id="kvg:07a18-g6" kvg:element="甘">
 				<svg:g id="kvg:07a18-g7" kvg:element="廿" kvg:part="1">
 					<svg:g id="kvg:07a18-g8" kvg:element="十">
@@ -75,7 +75,7 @@ kvg:type CDATA #IMPLIED >
 			</svg:g>
 			<svg:path class="stroke_path stroke_num11" d="M42.73,73.37c1.56,0.04,3.12,0.05,4.24,0c6.35-0.27,36.03-2.92,47.65-3.03c1.84-0.02,2.95,0.15,3.87,0.3" id="kvg:07a18-s11" kvg:type="㇐" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07a18-g10" kvg:element="八" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07a18-g10" kvg:element="八" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num12" d="M61.71,78.71c0.06,0.45,0.13,1.17-0.12,1.83C60.09,84.38,51.5,92.83,39.75,98" id="kvg:07a18-s12" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num13" d="M76.75,80.25c5.54,2.87,14.3,11.77,15.69,16.23" id="kvg:07a18-s13" kvg:type="㇔/㇏" />
 		</svg:g>

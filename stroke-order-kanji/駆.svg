@@ -54,7 +54,7 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num4" d="M19.38,32.75c5.13-0.45,15.26-2.14,19.88-2.87c1.35-0.21,3.25-0.63,4.85-0.32" id="kvg:099c6-s4" kvg:type="㇐b" />
 		<svg:path class="stroke_path stroke_num5" d="M19.26,46.12c5.29-0.5,15.27-1.65,19.99-2.24c1.37-0.17,3.5-0.64,4.94-0.28" id="kvg:099c6-s5" kvg:type="㇐b" />
 		<svg:path class="stroke_path stroke_num6" d="M18.74,60.15c6.89-0.9,19-2.86,22.43-3.13c3.33-0.26,4.83,1.24,4.45,5.95C44.79,73.3,42.87,83.51,39.25,90c-4.75,8.5-6.82,1.41-7.71,0.14" id="kvg:099c6-s6" kvg:type="㇆a" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:099c6-g2" kvg:element="灬" kvg:original="火" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:099c6-g2" kvg:element="灬" kvg:original="火" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num7" d="M12.75,72.25c0.12,7-1.88,10.75-3.15,13.57" id="kvg:099c6-s7" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num8" d="M19,68.88c0.84,2.88,1.55,6.5,1.74,11.62" id="kvg:099c6-s8" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num9" d="M26.25,67.88c0.48,1.27,2.19,5.47,2.4,9.62" id="kvg:099c6-s9" kvg:type="㇔" />
@@ -62,10 +62,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:099c6-g3" kvg:element="区" kvg:phon="区" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:099c6-g4" kvg:element="匚" kvg:part="1">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:099c6-g4" kvg:element="匚" kvg:part="1">
 			<svg:path class="stroke_path stroke_num11" d="M52.9,19.04c2.19,0.45,4.52,0.1,6.72-0.1c9.95-0.91,19.2-1.92,27.75-2.71c1.81-0.17,4.14-0.71,5.92-0.12" id="kvg:099c6-s11" kvg:type="㇐" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:099c6-g5" kvg:element="乂">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:099c6-g5" kvg:element="乂">
 			<svg:g id="kvg:099c6-g6" kvg:element="丿">
 				<svg:path class="stroke_path stroke_num12" d="M83.97,29.01c0.37,1.25,0.73,2.2,0.18,4.42c-4.53,18.2-10.78,34.32-22.73,46.94" id="kvg:099c6-s12" kvg:type="㇒" />
 			</svg:g>

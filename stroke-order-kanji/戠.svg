@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_06220" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:06220" kvg:element="戠">
 	<svg:g class="stroke_group group_num1" id="kvg:06220-g1" kvg:element="音">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06220-g2" kvg:element="立" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06220-g2" kvg:element="立" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="m29.367094,17.05221c1.187197,0.783808,2.224116,2.103385,2.224116,3.115391,0,3.333667-0.09017,5.317992-0.09017,8.602051" id="kvg:06220-s1" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num2" d="m15.105705,30.198366c0.886641,0.07937,4.373092,0.446473,5.244705,0.416709,7.063069,-0.287728,17.206839,-1.656912,25.472133,-2.272053,1.457697,-0.109138,2.314282,-0.138903,3.050645,-0.11906" id="kvg:06220-s2" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num3" d="m17.269709,38.51269c4.598509,3.581708,7.363626,8.086126,8.009822,10.596298" id="kvg:06220-s3" kvg:type="㇔" />
@@ -67,10 +67,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06220-g6" kvg:element="戈" kvg:part="2">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06220-g7" kvg:element="弋" kvg:part="2">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06220-g7" kvg:element="弋" kvg:part="2">
 			<svg:path class="stroke_path stroke_num10" d="m59.708236,13.331599c1.78831,1.180674,2.479589,2.599467,2.614839,5.357679,1.532836,30.608221,10.369187,65.214858,31.603478,76.952143,6.522067,3.601551,5.425038,1.260047,4.628565,-6.617725" id="kvg:06220-s10" kvg:type="㇂" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06220-g8" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06220-g8" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num11" d="m89.403183,55.895381c0.07514,0.734201-0.09017,2.152994-0.525973,3.184843-2.855283,6.587961-12.247663,19.734117-27.560998,29.02076" id="kvg:06220-s11" kvg:type="㇒" />
 		</svg:g>
 		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06220-g9" kvg:element="弋" kvg:part="3">

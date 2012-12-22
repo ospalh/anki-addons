@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_06baf" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:06baf" kvg:element="殯">
 	<svg:g class="stroke_group group_num1" id="kvg:06baf-g1" kvg:element="歹" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06baf-g2" kvg:element="一">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06baf-g2" kvg:element="一">
 			<svg:path class="stroke_path stroke_num1" d="M14.75,21.47c1,0.03,2.79,0.07,3.8,0.02c4.2-0.23,16.45-2.23,22.74-2.97c1.64-0.19,2.64,0.25,3.47,0.5" id="kvg:06baf-s1" kvg:type="㇐" />
 		</svg:g>
 		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06baf-g3" kvg:element="夕">
@@ -58,7 +58,7 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06baf-g4" kvg:element="賓" kvg:position="right" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06baf-g5" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06baf-g5" kvg:position="top">
 			<svg:g id="kvg:06baf-g6" kvg:element="宀">
 				<svg:path class="stroke_path stroke_num5" d="M67.65,11.05c0.87,0.34,2.11,2.02,2.09,3c-0.06,3.1-0.06,5.13-0.07,7.96" id="kvg:06baf-s5" kvg:type="㇑a" />
 				<svg:g id="kvg:06baf-g7" kvg:element="冖">
@@ -77,7 +77,7 @@ kvg:type CDATA #IMPLIED >
 				</svg:g>
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06baf-g11" kvg:element="貝" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06baf-g11" kvg:element="貝" kvg:position="bottom">
 			<svg:g id="kvg:06baf-g12" kvg:element="目" kvg:position="top">
 				<svg:path class="stroke_path stroke_num12" d="M56.05,56.98c0.77,1.08,1.17,1.84,1.17,3.59c0,3.99-0.35,14.2-0.35,25.72" id="kvg:06baf-s12" kvg:type="㇑" />
 				<svg:path class="stroke_path stroke_num13" d="M58.01,56.97c2.68-0.22,24.12-1.5,26.56-1.76c2.04-0.22,3.12,1.21,3.12,2.86c0,4.02-0.6,25.54-0.6,26.86" id="kvg:06baf-s13" kvg:type="㇕a" />

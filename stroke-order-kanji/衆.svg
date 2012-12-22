@@ -49,7 +49,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:08846" kvg:element="衆">
 	<svg:g class="stroke_group group_num1" id="kvg:08846-g1" kvg:element="血" kvg:position="top" kvg:radical="general">
 		<svg:path class="stroke_path stroke_num1" d="M53.75,10.25c0.25,1.12-0.12,2.12-0.75,3.06c-2.69,4.02-4.5,7.19-9.94,12.66" id="kvg:08846-s1" kvg:type="㇒" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08846-g2" kvg:element="皿">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08846-g2" kvg:element="皿">
 			<svg:path class="stroke_path stroke_num2" d="M30.19,27.42c0.88,0.64,1.45,2.09,1.58,2.91c1.06,6.5,1.23,9.17,1.99,14.97" id="kvg:08846-s2" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num3" d="M32.5,29.6c14.87-2.1,35.5-4.35,45.76-5.28c3.62-0.33,4.49,1.43,4.13,3.46c-0.66,3.77-1.91,9.28-3.1,13.88" id="kvg:08846-s3" kvg:type="㇕b" />
 			<svg:path class="stroke_path stroke_num4" d="M45.94,29.12c0.66,0.66,1.1,1.63,1.15,2.41C47.25,34.25,48,40,48.32,43.76" id="kvg:08846-s4" kvg:type="㇑a" />
@@ -60,7 +60,7 @@ kvg:type CDATA #IMPLIED >
 	<svg:g class="stroke_group group_num2" id="kvg:08846-g3" kvg:position="bottom">
 		<svg:path class="stroke_path stroke_num7" d="M31.54,55.39c0.11,1.05-0.03,1.67-0.55,2.6c-2.25,4.05-6.98,9.58-15.43,15.72" id="kvg:08846-s7" kvg:type="㇒" />
 		<svg:path class="stroke_path stroke_num8" d="M39.48,71.64c0.15,1.16-0.48,2.32-1.09,3.24c-3.72,5.57-12.81,14.53-25.58,20.83" id="kvg:08846-s8" kvg:type="㇒" />
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08846-g4" kvg:element="亻" kvg:original="人" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08846-g4" kvg:element="亻" kvg:original="人" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num9" d="M57.53,47.64c0.13,1.04-0.34,1.92-0.89,2.74c-2.65,4.01-8.59,10.23-16.96,14.58" id="kvg:08846-s9" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num10" d="M53.13,60.75c0.94,0.94,1.53,2.5,1.53,4.39c0,12.64,0.1,20.52,0.04,28.86c-0.02,2.13-0.03,4.27-0.03,6.5" id="kvg:08846-s10" kvg:type="㇑" />
 		</svg:g>

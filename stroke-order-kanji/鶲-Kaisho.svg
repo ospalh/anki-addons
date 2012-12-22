@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09db2-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09db2-Kaisho" kvg:element="鶲">
 	<svg:g class="stroke_group group_num1" id="kvg:09db2-Kaisho-g1" kvg:element="翁" kvg:position="left" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09db2-Kaisho-g2" kvg:element="公" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09db2-Kaisho-g2" kvg:element="公" kvg:position="top">
 			<svg:g id="kvg:09db2-Kaisho-g3" kvg:element="八" kvg:position="top">
 				<svg:path class="stroke_path stroke_num1" d="M24.85,17.12c0.22,0.56-0.01,1.21-0.31,1.88C22.42,23.87,18.43,31.09,12,35.8" id="kvg:09db2-Kaisho-s1" kvg:type="㇒" />
 				<svg:path class="stroke_path stroke_num2" d="M32.89,12.25c4.91,1,11.22,12.5,15.9,15.33c1.81,1.09,2.45,1.68,4.21,2.03" id="kvg:09db2-Kaisho-s2" kvg:type="㇏" />
@@ -79,7 +79,7 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num15" d="M62.47,46.12c3.88-0.14,16.05-2.48,20.88-2.5" id="kvg:09db2-Kaisho-s15" kvg:type="㇐a" />
 		<svg:path class="stroke_path stroke_num16" d="M62.19,57.36c8.55-0.84,27.46-2.86,31.13-3.38c1.28-0.19,3.45-0.35,4.1-0.11" id="kvg:09db2-Kaisho-s16" kvg:type="㇐b" />
 		<svg:path class="stroke_path stroke_num17" d="M61.74,69.25c9.1-1.63,25.63-3.42,30.67-3.9c3.28-0.31,4.97,0.89,4.38,4.57c-1.64,10.24-4.58,17.96-7.43,24.25c-2.86,6.33-5.97,1.04-7.3-0.24" id="kvg:09db2-Kaisho-s17" kvg:type="㇆a" />
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09db2-Kaisho-g9" kvg:element="灬" kvg:original="火" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09db2-Kaisho-g9" kvg:element="灬" kvg:original="火" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num18" d="M56.43,81.23c0.35,3.71-0.25,8.16-1.28,10.44" id="kvg:09db2-Kaisho-s18" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num19" d="M63.82,79.24c0.93,1.99,1.81,7.2,2.04,10.12" id="kvg:09db2-Kaisho-s19" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num20" d="M72.2,77.29c1.34,1.42,3.46,5.68,3.8,7.76" id="kvg:09db2-Kaisho-s20" kvg:type="㇔" />

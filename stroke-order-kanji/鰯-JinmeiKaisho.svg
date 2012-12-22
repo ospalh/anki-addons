@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09c2f-JinmeiKaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09c2f-JinmeiKaisho" kvg:element="鰯">
 	<svg:g class="stroke_group group_num1" id="kvg:09c2f-JinmeiKaisho-g1" kvg:element="魚" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09c2f-JinmeiKaisho-g2" kvg:element="𠂊" kvg:original="勹" kvg:position="top" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09c2f-JinmeiKaisho-g2" kvg:element="𠂊" kvg:original="勹" kvg:position="top" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num1" d="M26.82,12.25c0.1,1.49-0.05,2.85-0.47,4.28c-1.81,6.32-7.61,15.97-16.12,24.95" id="kvg:09c2f-JinmeiKaisho-s1" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num2" d="M23.83,24.21c1.42,0.29,2.3,0.31,3.96,0.01c4.42-0.8,10.88-2.8,12.4-2.99c1.79-0.23,2.2,1.98,1.45,3.1c-3.15,4.73-6.24,9.27-11.37,16.78" id="kvg:09c2f-JinmeiKaisho-s2" kvg:type="㇇" />
 		</svg:g>
@@ -69,12 +69,12 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:09c2f-JinmeiKaisho-g6" kvg:element="弱" kvg:position="right" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09c2f-JinmeiKaisho-g7" kvg:element="弓" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09c2f-JinmeiKaisho-g7" kvg:element="弓" kvg:position="left">
 			<svg:path class="stroke_path stroke_num12" d="M49.84,19.48c0.95,0.61,3.02,0.56,3.95,0.46c5.69-0.62,9.67-2.41,13.09-3.19c1.89-0.43,2.88-0.27,2.34,1.71c-0.43,1.56-1.44,7.34-2.5,11.83c-0.29,1.23-0.58,2.36-0.87,3.28" id="kvg:09c2f-JinmeiKaisho-s12" kvg:type="㇕c" />
 			<svg:path class="stroke_path stroke_num13" d="M56.75,36.25c1.75,0,6.5-1.5,7.75-1.5s2.5-0.5,3.5-0.5" id="kvg:09c2f-JinmeiKaisho-s13" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num14" d="M56.52,35.01c0.43,0.99,0.82,2.14,0.54,3.71c-0.32,1.79-2.81,7.28-5.02,11.59c-1.23,2.4,0.3,2.98,1.57,2.46c3.03-1.24,10.37-3.49,12.71-3.66c1.9-0.14,2.58,1.3,2.66,4.71c0.27,10.94,0.71,25.85-3.78,38.45c-1.55,4.35-4.95,4.74-6.94,0.93" id="kvg:09c2f-JinmeiKaisho-s14" kvg:type="㇉" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09c2f-JinmeiKaisho-g8" kvg:position="right">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09c2f-JinmeiKaisho-g8" kvg:position="right">
 			<svg:g id="kvg:09c2f-JinmeiKaisho-g9" kvg:element="冫" kvg:variant="true">
 				<svg:g id="kvg:09c2f-JinmeiKaisho-g10" kvg:position="top">
 					<svg:path class="stroke_path stroke_num15" d="M63.25,52.96c0.12,1.19-0.11,1.65-0.75,2.72c-2.6,4.34-6.89,8.8-12.94,13.46" id="kvg:09c2f-JinmeiKaisho-s15" kvg:type="㇒/㇔" />

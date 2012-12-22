@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09f72" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09f72" kvg:element="齲">
 	<svg:g class="stroke_group group_num1" id="kvg:09f72-g1" kvg:element="齒" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09f72-g2" kvg:element="止" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09f72-g2" kvg:element="止" kvg:position="top">
 			<svg:g id="kvg:09f72-g3" kvg:element="卜" kvg:original="ト">
 				<svg:path class="stroke_path stroke_num1" d="M30.59,10.5c0.65,0.51,1.17,2.25,1.17,3.29c0,5.31,0.17,12.92,0.17,17.98" id="kvg:09f72-s1" kvg:type="㇑a" />
 				<svg:path class="stroke_path stroke_num2" d="M32.39,21.1c5.06-0.95,9.35-1.78,14.67-2.41c1.24-0.15,1.55-0.32,2.32,0" id="kvg:09f72-s2" kvg:type="㇐b/㇔" />
@@ -85,10 +85,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:09f72-g12" kvg:element="禹" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09f72-g13" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09f72-g13" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num16" d="M90.92,13.5c0.07,0.29,0.29,0.84-0.15,1.17c-5.44,4.11-14.08,7.1-28.26,10.41" id="kvg:09f72-s16" kvg:type="㇒" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09f72-g14" kvg:element="虫" kvg:part="1">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09f72-g14" kvg:element="虫" kvg:part="1">
 			<svg:path class="stroke_path stroke_num17" d="M59.16,33.04c0.55,0.46,1.25,0.81,1.35,1.42c0.75,4.39,1.45,8.27,2.49,16.59" id="kvg:09f72-s17" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num18" d="M60.91,34.75c8.36-0.88,23.52-2.75,29.56-3.08c2.36-0.13,3.47,1.05,3.15,3.45c-0.66,4.97-0.74,4.24-2.37,11.74" id="kvg:09f72-s18" kvg:type="㇕" />
 			<svg:path class="stroke_path stroke_num19" d="M63.81,49.32c6.73-0.88,19.99-1.81,29.4-2.63" id="kvg:09f72-s19" kvg:type="㇐" />

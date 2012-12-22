@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_08e72" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:08e72" kvg:element="蹲">
 	<svg:g class="stroke_group group_num1" id="kvg:08e72-g1" kvg:element="足" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08e72-g2" kvg:element="口">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08e72-g2" kvg:element="口">
 			<svg:path class="stroke_path stroke_num1" d="M12.28,18.64c0.37,0.39,0.75,0.72,0.91,1.22c1.28,3.9,2.85,15.21,3.73,22.22" id="kvg:08e72-s1" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num2" d="M14.11,20.75c8.76-2.1,17.29-3.75,21.63-4.26c1.58-0.19,2.54,1.11,2.31,2.21C37,23.77,35.9,30.35,34.62,36.15" id="kvg:08e72-s2" kvg:type="㇕b" />
 			<svg:path class="stroke_path stroke_num3" d="M17.56,39.73c5.09-0.58,11.65-1.58,18.64-2.47" id="kvg:08e72-s3" kvg:type="㇐b" />
@@ -59,7 +59,7 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num7" d="M10.25,91.04c0.35,0.68,2.97,1.58,3.83,1.19c8.49-3.82,16.8-8.09,26.17-12.37" id="kvg:08e72-s7" kvg:type="㇀/㇏" />
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:08e72-g3" kvg:element="尊" kvg:position="right" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08e72-g4" kvg:element="酋" kvg:position="top" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08e72-g4" kvg:element="酋" kvg:position="top" kvg:variant="true">
 			<svg:g id="kvg:08e72-g5" kvg:element="八" kvg:position="top">
 				<svg:g id="kvg:08e72-g6" kvg:position="left">
 					<svg:path class="stroke_path stroke_num8" d="M57.14,13.15c0.04,0.39,0.07,1.02-0.07,1.58c-0.85,3.34-5.73,10.66-12.4,15.14" id="kvg:08e72-s8" kvg:type="㇒" />
@@ -84,7 +84,7 @@ kvg:type CDATA #IMPLIED >
 				</svg:g>
 			</svg:g>
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08e72-g12" kvg:element="寸" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08e72-g12" kvg:element="寸" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num17" d="M41.63,72.21c1.34,0.7,3.78,0.87,5.13,0.7C61.5,71,76.5,69.75,91.19,68.81c2.23-0.14,4.57,0.33,5.69,0.68" id="kvg:08e72-s17" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num18" d="M74.88,63.49c0.05,0.38,1.24,1.96,1.24,4.35c0,8.32,0.22,19.95,0.22,23.85c0,9.48-5.43,1.41-6.73,0.2" id="kvg:08e72-s18" kvg:type="㇚" />
 			<svg:path class="stroke_path stroke_num19" d="M53.86,78.23c2.15,1.86,5.56,7.66,6.09,10.56" id="kvg:08e72-s19" kvg:type="㇔" />

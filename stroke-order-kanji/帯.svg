@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_05e2f" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:05e2f" kvg:element="帯">
 	<svg:g class="stroke_group group_num1" id="kvg:05e2f-g1" kvg:element="丗" kvg:position="top">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05e2f-g2" kvg:element="卅">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05e2f-g2" kvg:element="卅">
 			<svg:g id="kvg:05e2f-g3" kvg:element="廾">
 				<svg:g id="kvg:05e2f-g4" kvg:element="廿" kvg:part="1" kvg:variant="true">
 					<svg:g id="kvg:05e2f-g5" kvg:element="十" kvg:part="1">
@@ -79,11 +79,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:05e2f-g14" kvg:position="bottom">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05e2f-g15" kvg:element="冖">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05e2f-g15" kvg:element="冖">
 			<svg:path class="stroke_path stroke_num6" d="M17.75,50.62c-0.15,3.93-3.73,16.28-5,18.62" id="kvg:05e2f-s6" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num7" d="M18.4,52.34c3.84-0.45,49.59-6.35,68.62-6.35c14.24,0,1.12,7.48-0.56,8.81" id="kvg:05e2f-s7" kvg:type="㇖b" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05e2f-g16" kvg:element="巾" kvg:radical="general">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05e2f-g16" kvg:element="巾" kvg:radical="general">
 			<svg:path class="stroke_path stroke_num8" d="M30.71,62.14c0.66,0.61,1.19,1.99,1.19,3.03c0,2.09,0.03,10.83,0.05,17.2c0,1.88,0.01,3.55,0.01,4.78" id="kvg:05e2f-s8" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num9" d="M32.43,64.79c5.07-0.92,39.64-4.98,42.37-5.13c3.22-0.18,3.88,3.04,3.8,4.63c-0.46,8.48-0.6,11.46-2,18.01c-0.86,4-4.22,2.82-6.62-0.41" id="kvg:05e2f-s9" kvg:type="㇆a" />
 			<svg:path class="stroke_path stroke_num10" d="M52.1,50.88c1.01,1.01,1.44,2.37,1.44,3.53c0,0.57,0.04,25.2,0.05,38.08c0,3.1,0.01,5.52,0.01,6.76" id="kvg:05e2f-s10" kvg:type="㇑" />

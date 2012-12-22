@@ -49,7 +49,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:081f4" kvg:element="致">
 	<svg:g class="stroke_group group_num1" id="kvg:081f4-g1" kvg:element="至" kvg:phon="至" kvg:position="left" kvg:radical="general">
 		<svg:path class="stroke_path stroke_num1" d="M13,26.44c1.56,0.79,4.41,0.34,6.03,0.13c7.15-0.92,16.3-2.5,24.36-3.1c1.77-0.13,3.64-0.16,5.37,0.37" id="kvg:081f4-s1" kvg:type="㇐" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:081f4-g2" kvg:element="厶">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:081f4-g2" kvg:element="厶">
 			<svg:path class="stroke_path stroke_num2" d="M31.67,28c0.45,0.88,0.4,1.8-0.29,2.79c-3.88,5.59-7.76,11.09-12.98,17.19c-1.48,1.74-0.97,2.62,1.24,2c8.35-2.35,15.72-4.73,25.39-7.64" id="kvg:081f4-s2" kvg:type="㇜" />
 			<svg:path class="stroke_path stroke_num3" d="M40.15,34.99c3.08,2.17,7.97,8.91,8.74,12.28" id="kvg:081f4-s3" kvg:type="㇔" />
 		</svg:g>
@@ -60,11 +60,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:081f4-g4" kvg:element="攴" kvg:original="攵" kvg:position="right" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:081f4-g5" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:081f4-g5" kvg:position="top">
 			<svg:path class="stroke_path stroke_num7" d="M64,19.39c0.04,0.82,0.21,2.16-0.08,3.31c-2.13,8.33-6.93,22.45-14.3,32.5" id="kvg:081f4-s7" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num8" d="M60.37,41.53c1.35,0.29,3.12,0.32,3.85,0.21c4.56-0.67,12.91-2.24,18.43-3.63c1.47-0.37,3.41-0.73,4.91-0.3" id="kvg:081f4-s8" kvg:type="㇐" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:081f4-g6" kvg:element="乂" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:081f4-g6" kvg:element="乂" kvg:position="bottom">
 			<svg:g id="kvg:081f4-g7" kvg:element="丿">
 				<svg:path class="stroke_path stroke_num9" d="M74.27,44.71c0.57,1.17,0.63,2.25,0.03,4.38C68.89,68.46,58.38,83.88,38.72,92.5" id="kvg:081f4-s9" kvg:type="㇒" />
 			</svg:g>

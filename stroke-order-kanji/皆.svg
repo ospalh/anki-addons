@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_07686" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:07686" kvg:element="皆">
 	<svg:g class="stroke_group group_num1" id="kvg:07686-g1" kvg:element="比" kvg:position="top" kvg:radical="nelson">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07686-g2" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07686-g2" kvg:position="left">
 			<svg:path class="stroke_path stroke_num1" d="M27.5,31c5.62-0.75,9.25-1.5,18-3c1.48-0.25,3-0.25,4,0" id="kvg:07686-s1" kvg:type="㇐b" />
 			<svg:path class="stroke_path stroke_num2" d="M25,14.89c0.87,0.87,1.26,2.11,1.26,3.8c0,6.81-0.01,27.43-0.01,31.81c0,3.14,0.75,3.62,3.75,1.68c6.31-4.09,8.83-5.85,13.25-8.43" id="kvg:07686-s2" kvg:type="㇙" />
 		</svg:g>
@@ -58,10 +58,10 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:07686-g4" kvg:position="bottom" kvg:radical="tradit">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07686-g5" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07686-g5" kvg:position="top">
 			<svg:path class="stroke_path stroke_num5" d="M52.72,49.5c0.28,0.88,0.16,1.88-0.59,3.09C49.7,56.54,48.88,58,45.5,62" id="kvg:07686-s5" kvg:type="㇒" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07686-g6" kvg:element="日" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07686-g6" kvg:element="日" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num6" d="M34.51,63.47c1.01,1.01,1.22,2.26,1.28,3.9c0.17,4.5,0.74,17.84,1.14,25.36c0.1,1.82,0.17,3.32,0.22,4.27" id="kvg:07686-s6" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num7" d="M36.11,64.73c5.52-0.48,33.1-2.81,36.26-2.98C75,61.61,76.5,63,76.5,65.54c0,1.5-2,15.47-3.65,25.69c-0.28,1.72-0.53,3.32-0.72,4.71" id="kvg:07686-s7" kvg:type="㇕a" />
 			<svg:path class="stroke_path stroke_num8" d="M37.22,78.82c7.41-0.45,31.48-1.91,36.79-1.91" id="kvg:07686-s8" kvg:type="㇐a" />

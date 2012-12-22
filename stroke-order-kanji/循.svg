@@ -49,17 +49,17 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:05faa" kvg:element="循">
 	<svg:g class="stroke_group group_num1" id="kvg:05faa-g1" kvg:element="彳" kvg:position="left" kvg:radical="general">
 		<svg:path class="stroke_path stroke_num1" d="M32.83,13c0.06,0.44-0.22,1.48-0.61,2.02C29.43,18.86,20.79,27.09,12.62,31" id="kvg:05faa-s1" kvg:type="㇒" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05faa-g2" kvg:element="亻" kvg:original="人" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05faa-g2" kvg:element="亻" kvg:original="人" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num2" d="M32.87,34.75c0.09,1.17-0.41,2.33-0.86,3.38c-2.9,6.73-10.21,19.57-19.5,28.62" id="kvg:05faa-s2" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num3" d="M26.22,52.5c0.58,0.58,0.9,1.75,0.9,2.91c0,0.42,0.02,26.45-0.03,38.34c-0.01,2.73-0.03,4.65-0.04,5.25" id="kvg:05faa-s3" kvg:type="㇑" />
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:05faa-g3" kvg:element="盾" kvg:phon="盾" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05faa-g4" kvg:element="厂" kvg:position="kamae" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05faa-g4" kvg:element="厂" kvg:position="kamae" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num4" d="M82.27,12.75c-0.14,1-0.88,1.95-1.8,2.5c-7.59,4.5-14.84,7.12-29.84,11.88" id="kvg:05faa-s4" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num5" d="M46.78,26.5c0.98,0.98,1.19,2.62,1.19,4.49c0,20.63,0.69,45.88-11.77,62.23" id="kvg:05faa-s5" kvg:type="㇒" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:05faa-g5" kvg:element="十">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05faa-g5" kvg:element="十">
 			<svg:path class="stroke_path stroke_num6" d="M51.31,39.33c2.57,0.42,4.36,0.16,6.32-0.08c10.92-1.33,23.48-3.05,31.76-3.58c2.07-0.13,4.1-0.21,6.12,0.31" id="kvg:05faa-s6" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num7" d="M68.5,26.38c0.81,0.81,1.16,2.12,1.16,3.55c0,0.96-0.04,13.69-0.04,20.07" id="kvg:05faa-s7" kvg:type="㇑a" />
 		</svg:g>

@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09d64" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09d64" kvg:element="鵤">
 	<svg:g class="stroke_group group_num1" id="kvg:09d64-g1" kvg:element="角" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09d64-g2" kvg:element="𠂊" kvg:original="勹" kvg:position="top" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09d64-g2" kvg:element="𠂊" kvg:original="勹" kvg:position="top" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num1" d="M27.22,10c0.05,0.56,0.1,1.44-0.09,2.25c-1.1,4.74-7.45,15.14-16.14,21.5" id="kvg:09d64-s1" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num2" d="M24.39,19c2,0,12.11-1.75,15.82-2.75c2.16-0.58,3.29,1.14,2,2.75c-4.21,5.25-5.49,10.25-8.65,16" id="kvg:09d64-s2" kvg:type="㇇a" />
 		</svg:g>
@@ -68,7 +68,7 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num12" d="M61.97,46.51c3.88-0.13,16.55-2.33,21.38-2.34" id="kvg:09d64-s12" kvg:type="㇐a" />
 		<svg:path class="stroke_path stroke_num13" d="M61.69,56.9c8.79-0.99,27.74-2.84,31.51-3.46c1.32-0.22,3.55-0.41,4.21-0.12" id="kvg:09d64-s13" kvg:type="㇐b" />
 		<svg:path class="stroke_path stroke_num14" d="M61.24,69.17c9.1-1.53,26.13-3.2,31.17-3.65c3.28-0.29,4.97,0.83,4.38,4.28c-1.64,9.58-4.08,18.68-6.93,24.57c-2.86,5.92-5.97,0.98-7.3-0.23" id="kvg:09d64-s14" kvg:type="㇆a" />
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09d64-g5" kvg:element="灬" kvg:original="火" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09d64-g5" kvg:element="灬" kvg:original="火" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num15" d="M55.93,79.85c0.42,4.01-0.3,8.82-1.55,11.27" id="kvg:09d64-s15" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num16" d="M63.07,78.97c1.5,1.97,2.92,7.13,3.29,10.02" id="kvg:09d64-s16" kvg:type="㇔" />
 			<svg:path class="stroke_path stroke_num17" d="M71.47,76.13c1.59,1.6,4.11,6.41,4.51,8.77" id="kvg:09d64-s17" kvg:type="㇔" />

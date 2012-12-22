@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_06b38" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:06b38" kvg:element="欸">
 	<svg:g class="stroke_group group_num1" id="kvg:06b38-g1" kvg:element="矣" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06b38-g2" kvg:element="厶" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06b38-g2" kvg:element="厶" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M32.04,15c0.05,0.71,0.1,2.07-0.25,2.61C27,25,22.31,32,16.79,37.27c-1.75,1.67-1.68,3.27,0.81,2.58c7.65-2.11,20.02-5.6,27.2-7.16" id="kvg:06b38-s1" kvg:type="㇜" />
 			<svg:path class="stroke_path stroke_num2" d="M39.26,25.95c3.93,2.55,10.16,10.47,11.14,14.43" id="kvg:06b38-s2" kvg:type="㇔" />
 		</svg:g>
@@ -65,11 +65,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:06b38-g6" kvg:element="欠" kvg:position="right" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06b38-g7" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:06b38-g7" kvg:position="top">
 			<svg:path class="stroke_path stroke_num8" d="M65.75,15c0.04,0.83,0.08,2.13-0.08,3.31C64.72,25.3,59.3,40.62,51.89,50" id="kvg:06b38-s8" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num9" d="M62.22,37.49c0.91,0.36,2.64,0.43,4.01,0.11c1.67-0.39,17.68-4.15,19.26-4.35c8-1,0,9.25-3,13" id="kvg:06b38-s9" kvg:type="㇖a" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:06b38-g8" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:06b38-g8" kvg:position="bottom">
 			<svg:path class="stroke_path stroke_num10" d="M66.6,46c0.4,1.75,0.59,2.56,0.37,4.3C64.75,68.25,60.5,84,44.25,96.25" id="kvg:06b38-s10" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num11" d="M66.42,57c3.7,8.36,17.04,28.04,23.11,34.96c1.28,1.46,2.25,2.33,3.46,2.79" id="kvg:06b38-s11" kvg:type="㇏" />
 		</svg:g>

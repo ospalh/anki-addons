@@ -49,7 +49,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:0520a-Kaisho" kvg:element="刊">
 	<svg:g class="stroke_group group_num1" id="kvg:0520a-Kaisho-g1" kvg:element="干" kvg:position="left" kvg:radical="nelson" kvg:variant="true">
 		<svg:path class="stroke_path stroke_num1" d="M17.79,26.53c0.65,0.39,2.91,0.42,3.56,0.35c4.52-0.46,18.29-2.86,26.01-3.63c1.09-0.11,3.37,0.34,3.92,0.53" id="kvg:0520a-Kaisho-s1" kvg:type="㇐" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0520a-Kaisho-g2" kvg:element="十">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:0520a-Kaisho-g2" kvg:element="十">
 			<svg:path class="stroke_path stroke_num2" d="M11.79,48.97c1.06,0.42,3,0.58,4.05,0.42C28.5,47.5,41.5,45.75,53.26,44.5c1.75-0.19,2.82,0.2,3.7,0.41" id="kvg:0520a-Kaisho-s2" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num3" d="M34.1,26.58c0.38,0.47,1.24,3.5,1.24,4.44c0,31.98,0.16,49.73-8.62,62.36" id="kvg:0520a-Kaisho-s3" kvg:type="㇒/㇑" />
 		</svg:g>

@@ -49,7 +49,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:05e8a" kvg:element="床">
 	<svg:g class="stroke_group group_num1" id="kvg:05e8a-g1" kvg:element="广" kvg:position="tare" kvg:radical="general">
 		<svg:path class="stroke_path stroke_num1" d="M51.31,11.13c1.09,1.09,1.51,2.74,1.51,4.65c0,0.79-0.07,4.34-0.07,7.46" id="kvg:05e8a-s1" kvg:type="㇑a" />
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:05e8a-g2" kvg:element="厂">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05e8a-g2" kvg:element="厂">
 			<svg:path class="stroke_path stroke_num2" d="M19.38,26.98c3.08,1.1,6.85,0.63,10,0.23c15.63-1.96,31-4.08,46.13-5.27c3-0.23,5.92-0.26,8.87,0.38" id="kvg:05e8a-s2" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num3" d="M22.75,28.25c0.88,0.88,0.99,2.25,0.92,4.2C23,49.88,21,71.5,9.56,86.22" id="kvg:05e8a-s3" kvg:type="㇒" />
 		</svg:g>

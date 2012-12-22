@@ -56,13 +56,13 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num6" d="M37.39,57.05c0.37,0.48,0.79,3.54,0.73,4.49c-0.36,5.81-0.24,9.77-0.84,20.6" id="kvg:07f4e-s6" kvg:type="㇑" />
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:07f4e-g2" kvg:element="曇" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07f4e-g3" kvg:element="日" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07f4e-g3" kvg:element="日" kvg:position="top">
 			<svg:path class="stroke_path stroke_num7" d="M52.08,12.39c0.25,0.28,0.25,0.48,0.39,0.84c1.1,2.94,2.54,12.26,3.22,17.74" id="kvg:07f4e-s7" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num8" d="M53.81,14.07c8.1-0.73,22.37-1.43,28.47-2.05c2.23-0.23,3.41,0.89,3.25,2.74c-0.25,2.97-1.83,9.6-2.85,14.52" id="kvg:07f4e-s8" kvg:type="㇕a" />
 			<svg:path class="stroke_path stroke_num9" d="M55.52,21.64c2.75-0.22,26.92-2.31,29.2-2.4" id="kvg:07f4e-s9" kvg:type="㇐a" />
 			<svg:path class="stroke_path stroke_num10" d="M56.66,29.58c5.74-0.34,18.09-1.79,26.02-2.35" id="kvg:07f4e-s10" kvg:type="㇐a" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07f4e-g4" kvg:element="雲" kvg:position="bottom">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07f4e-g4" kvg:element="雲" kvg:position="bottom">
 			<svg:g id="kvg:07f4e-g5" kvg:element="雨" kvg:position="top" kvg:variant="true">
 				<svg:path class="stroke_path stroke_num11" d="M51.68,36.92c1.48,0.16,3.39,0.2,4.74,0.13c5.83-0.3,21.08-2.05,28.22-3.02c1.86-0.25,3.44-0.14,5.17,0.09" id="kvg:07f4e-s11" kvg:type="㇐" />
 				<svg:path class="stroke_path stroke_num12" d="M47.4,44c-0.17,4.2-1.64,8.01-2.73,12.25" id="kvg:07f4e-s12" kvg:type="㇔/㇑" />

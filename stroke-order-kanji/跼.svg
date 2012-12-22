@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_08dfc" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:08dfc" kvg:element="跼">
 	<svg:g class="stroke_group group_num1" id="kvg:08dfc-g1" kvg:element="足" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08dfc-g2" kvg:element="口">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08dfc-g2" kvg:element="口">
 			<svg:path class="stroke_path stroke_num1" d="M14.78,20.21c0.37,0.32,0.75,0.58,0.91,0.97c1.28,3.13,2.35,15.7,3.23,21.32" id="kvg:08dfc-s1" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num2" d="M16.61,21.9c8.76-1.68,17.29-2.5,21.63-2.91c1.58-0.15,2.54,0.89,2.31,1.77c-1.04,4.06-2.15,12.35-3.43,17" id="kvg:08dfc-s2" kvg:type="㇕b" />
 			<svg:path class="stroke_path stroke_num3" d="M19.56,40.19c5.09-0.46,12.65-0.84,19.64-1.55" id="kvg:08dfc-s3" kvg:type="㇐b" />
@@ -59,11 +59,11 @@ kvg:type CDATA #IMPLIED >
 		<svg:path class="stroke_path stroke_num7" d="M11,88.07c1.25,1.43,3.37,1.35,4.2,0.9C23.41,84.5,30.94,81,40,75.99" id="kvg:08dfc-s7" kvg:type="㇀/㇏" />
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:08dfc-g3" kvg:element="局" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08dfc-g4" kvg:element="尸" kvg:part="1">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:08dfc-g4" kvg:element="尸" kvg:part="1">
 			<svg:path class="stroke_path stroke_num8" d="M51.99,19.88c1.18,0.53,3.46,0.8,4.73,0.7c6.79-0.57,31.23-3.32,33.95-3.76c1.34-0.22,2.94,1.97,2.46,3.69c-1.4,5-1.43,6.25-2.5,11.03" id="kvg:08dfc-s8" kvg:type="㇕" />
 			<svg:path class="stroke_path stroke_num9" d="M54.47,34.78c4.83-0.33,32.53-3.03,37.38-3.11" id="kvg:08dfc-s9" kvg:type="㇐" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:08dfc-g5" kvg:element="句">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:08dfc-g5" kvg:element="句">
 			<svg:g id="kvg:08dfc-g6" kvg:element="勹">
 				<svg:g id="kvg:08dfc-g7" kvg:element="尸" kvg:part="2">
 					<svg:g id="kvg:08dfc-g8" kvg:element="丿">

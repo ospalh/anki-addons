@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_07b54" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:07b54" kvg:element="答">
 	<svg:g class="stroke_group group_num1" id="kvg:07b54-g1" kvg:element="竹" kvg:position="top" kvg:radical="general" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07b54-g2" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07b54-g2" kvg:position="left">
 			<svg:path class="stroke_path stroke_num1" d="M29.08,12.17c0.08,1.18-0.06,2.21-0.41,3.34c-1.49,4.75-5.86,12.65-12.3,17.99" id="kvg:07b54-s1" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num2" d="M29.23,23.29c2.78,0,9.92-1.57,15.2-2.35c1.76-0.26,3.07-0.44,4.32-0.19" id="kvg:07b54-s2" kvg:type="㇐b" />
 			<svg:path class="stroke_path stroke_num3" d="M32.25,25.75c2.29,1.76,5.93,7.26,6.5,10" id="kvg:07b54-s3" kvg:type="㇔/㇑" />
@@ -60,11 +60,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:07b54-g4" kvg:element="合" kvg:position="bottom">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07b54-g5" kvg:element="人">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07b54-g5" kvg:element="人">
 			<svg:path class="stroke_path stroke_num7" d="M51.41,31.58c0.1,0.89-0.11,2.88-0.7,4.08c-4.85,9.78-14.34,21.24-33.33,33.83" id="kvg:07b54-s7" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num8" d="M52.5,34.25c5.35,3.93,21.23,16.97,33.57,25.51c3.02,2.09,5.79,3.54,9.43,4.24" id="kvg:07b54-s8" kvg:type="㇏" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07b54-g6" kvg:element="一">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07b54-g6" kvg:element="一">
 			<svg:path class="stroke_path stroke_num9" d="M39.43,60.93c1.45,0.44,2.84,0.5,4.98,0.21C53,60,59.25,59.25,64.52,58.72c1.24-0.12,3.05-0.15,3.67-0.04" id="kvg:07b54-s9" kvg:type="㇐" />
 		</svg:g>
 		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07b54-g7" kvg:element="口">

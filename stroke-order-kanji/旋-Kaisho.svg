@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_065cb-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:065cb-Kaisho" kvg:element="旋">
 	<svg:g class="stroke_group group_num1" id="kvg:065cb-Kaisho-g1" kvg:element="方" kvg:position="left" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:065cb-Kaisho-g2" kvg:element="亠" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:065cb-Kaisho-g2" kvg:element="亠" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M24.6,18.75c3.05,1.22,7.3,5.25,8.07,8.33" id="kvg:065cb-Kaisho-s1" kvg:type="㇑a" />
 			<svg:path class="stroke_path stroke_num2" d="M12.5,34.38c0.83,0.05,3.72,0.36,4.52,0.29c6.51-0.6,19.73-3.17,24.39-3.72c1.36-0.16,2.08-0.19,3.58-0.19" id="kvg:065cb-Kaisho-s2" kvg:type="㇐" />
 		</svg:g>
@@ -60,7 +60,7 @@ kvg:type CDATA #IMPLIED >
 	<svg:g class="stroke_group group_num2" id="kvg:065cb-Kaisho-g4" kvg:position="right">
 		<svg:path class="stroke_path stroke_num5" d="M59.78,14.5c0.03,0.66,0.17,1.72-0.07,2.64c-1.46,5.71-5.96,17.5-12.04,25.28" id="kvg:065cb-Kaisho-s5" kvg:type="㇒" />
 		<svg:path class="stroke_path stroke_num6" d="M55.75,30c1.16-0.04,2.95,0.34,4.32,0.15c7.55-1.01,16.79-2.92,22.93-4.4c1.21-0.29,3.25-0.5,4.75-0.25" id="kvg:065cb-Kaisho-s6" kvg:type="㇐" />
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:065cb-Kaisho-g5" kvg:element="疋" kvg:variant="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:065cb-Kaisho-g5" kvg:element="疋" kvg:variant="true">
 			<svg:path class="stroke_path stroke_num7" d="M51.22,44c1.28,0.75,2.49,1.04,5.28,0.5c10.25-2,18-2.75,27.69-4.25c2.03-0.31,2.79,1.43,1.05,2.86C81.75,46,72.88,53.56,72,54.25" id="kvg:065cb-Kaisho-s7" kvg:type="㇖" />
 			<svg:g id="kvg:065cb-Kaisho-g6" kvg:element="卜" kvg:original="ト">
 				<svg:path class="stroke_path stroke_num8" d="M66.87,53.75c1.09,0.5,1.74,2.25,1.96,3.25c0.22,1,0.5,21.25,0.28,27.5" id="kvg:065cb-Kaisho-s8" kvg:type="㇑" />

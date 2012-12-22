@@ -57,7 +57,7 @@ kvg:type CDATA #IMPLIED >
 	</svg:g>
 	<svg:g class="stroke_group group_num3" id="kvg:05f0f-g3" kvg:element="弋" kvg:part="2" kvg:phon="弋2" kvg:radical="general">
 		<svg:path class="stroke_path stroke_num5" d="M55.5,10.5c2,1.75,2.91,3.98,3.25,7.75c2.38,26.38,10,61.75,32,75.25c7.43,4.56,6.12,1.88,4.5-9.5" id="kvg:05f0f-s5" kvg:type="㇂" />
-		<svg:g class="stroke_subgroup subgroup_num4" id="kvg:05f0f-g4" kvg:element="丶">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:05f0f-g4" kvg:element="丶">
 			<svg:path class="stroke_path stroke_num6" d="M78,11.25c3.85,2.05,9.46,6.74,11.25,10.25" id="kvg:05f0f-s6" kvg:type="㇔" />
 		</svg:g>
 	</svg:g>

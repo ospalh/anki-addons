@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_065a1-Kaisho" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:065a1-Kaisho" kvg:element="斡">
 	<svg:g class="stroke_group group_num1" id="kvg:065a1-Kaisho-g1" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:065a1-Kaisho-g2" kvg:element="十" kvg:position="top" kvg:radical="nelson">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:065a1-Kaisho-g2" kvg:element="十" kvg:position="top" kvg:radical="nelson">
 			<svg:path class="stroke_path stroke_num1" d="M12.18,28.38c0.59,0.21,1.69,0.27,2.28,0.21c7.55-0.69,22.31-3.35,27.52-3.44c0.99-0.02,1.58,0.1,2.08,0.21" id="kvg:065a1-Kaisho-s1" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num2" d="M26.91,12.63c0.38,0.25,1.17,1.89,1.25,2.4c0.08,0.51-0.05,20.44-0.12,23.6" id="kvg:065a1-Kaisho-s2" kvg:type="㇑" />
 		</svg:g>
@@ -66,11 +66,11 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:065a1-Kaisho-g6" kvg:position="right">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:065a1-Kaisho-g7" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:065a1-Kaisho-g7" kvg:position="top">
 			<svg:path class="stroke_path stroke_num9" d="M69.59,12.25c0.05,0.79,0.22,2.06-0.11,3.17C67.5,22.25,61,36.75,50.62,45.75" id="kvg:065a1-Kaisho-s9" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num10" d="M69.84,17c3.57,5,18.96,21.31,22.89,24.97c1.34,1.24,3.05,1.77,4.39,2.13" id="kvg:065a1-Kaisho-s10" kvg:type="㇏" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:065a1-Kaisho-g8" kvg:element="斗" kvg:position="bottom" kvg:radical="tradit">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:065a1-Kaisho-g8" kvg:element="斗" kvg:position="bottom" kvg:radical="tradit">
 			<svg:g id="kvg:065a1-Kaisho-g9" kvg:element="丶">
 				<svg:path class="stroke_path stroke_num11" d="M60.07,44.48c2.65,1.23,6.85,5.04,7.52,6.95" id="kvg:065a1-Kaisho-s11" kvg:type="㇔" />
 			</svg:g>

@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_09598" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:09598" kvg:element="閘">
 	<svg:g class="stroke_group group_num1" id="kvg:09598-g1" kvg:element="門" kvg:position="kamae" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09598-g2" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09598-g2" kvg:position="left">
 			<svg:path class="stroke_path stroke_num1" d="M18.39,15.29c0.73,0.46,1.28,3.48,1.43,4.4c0.15,0.93-0.09,70.64-0.24,76.44" id="kvg:09598-s1" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num2" d="M20.02,16.58c2.44-0.1,17.27-2.16,19.49-2.28c1.85-0.1,2.81,0.91,2.9,1.71c0.14,1.23-1.54,25.82-1.54,26.42" id="kvg:09598-s2" kvg:type="㇕a" />
 			<svg:path class="stroke_path stroke_num3" d="M20.45,28.89c5.99-0.59,14.62-2.12,20.38-2.76" id="kvg:09598-s3" kvg:type="㇐a" />
@@ -62,13 +62,13 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:09598-g4" kvg:element="甲">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09598-g5" kvg:element="田" kvg:partial="true">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:09598-g5" kvg:element="田" kvg:partial="true">
 			<svg:path class="stroke_path stroke_num9" d="M33.66,48.68c0.26,0.4,0.7,1.26,0.83,1.75c1.31,4.99,3.06,14.3,3.75,21.71" id="kvg:09598-s9" kvg:type="㇑" />
 			<svg:path class="stroke_path stroke_num10" d="M35.32,50.14c10.08-0.92,26.56-2.78,33.5-3.17c2.55-0.14,4.08,0.71,3.99,2.38c-0.22,3.97-2.33,18.43-3.33,20.87" id="kvg:09598-s10" kvg:type="㇕" />
 			<svg:path class="stroke_path stroke_num11" d="M37.4,59.91c3.03-0.19,31.67-2.5,34.17-2.5" id="kvg:09598-s11" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num12" d="M38.73,70.26c8.78-0.9,21.65-1.76,31.25-2.14" id="kvg:09598-s12" kvg:type="㇐" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:09598-g6" kvg:element="丨">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:09598-g6" kvg:element="丨">
 			<svg:path class="stroke_path stroke_num13" d="M52.6,50.2c0.66,0.36,1.07,1.32,1.06,2.48c-0.02,5.84,0.22,42.64,0.22,44.54" id="kvg:09598-s13" kvg:type="㇑" />
 		</svg:g>
 	</svg:g>

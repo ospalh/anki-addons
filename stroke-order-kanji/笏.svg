@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_07b0f" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:07b0f" kvg:element="笏">
 	<svg:g class="stroke_group group_num1" id="kvg:07b0f-g1" kvg:element="竹" kvg:position="top" kvg:radical="general" kvg:variant="true">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07b0f-g2" kvg:position="left">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07b0f-g2" kvg:position="left">
 			<svg:path class="stroke_path stroke_num1" d="M29.49,11c0.04,0.56,0.09,1.46-0.09,2.27C28.35,18.06,22.29,28.57,14,35" id="kvg:07b0f-s1" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num2" d="M28.73,23.29C33,23.5,47.34,21,51.5,21" id="kvg:07b0f-s2" kvg:type="㇐b" />
 			<svg:path class="stroke_path stroke_num3" d="M35.02,24.83c2.66,1.79,6.88,7.35,7.54,10.13" id="kvg:07b0f-s3" kvg:type="㇔/㇑" />
@@ -60,13 +60,13 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:07b0f-g4" kvg:element="勿" kvg:position="bottom">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07b0f-g5" kvg:element="勹">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:07b0f-g5" kvg:element="勹">
 			<svg:g id="kvg:07b0f-g6" kvg:element="丿">
 				<svg:path class="stroke_path stroke_num7" d="M35,35c0.06,0.67,0.11,1.73-0.11,2.7c-1.31,5.69-8.84,18.16-19.15,25.8" id="kvg:07b0f-s7" kvg:type="㇒" />
 			</svg:g>
 			<svg:path class="stroke_path stroke_num8" d="M34.5,45.46c1.31,0.56,3.07,0.35,5.17,0.2c5.58-0.4,37.77-4.95,42.92-5.36c5.14-0.41,6.27,1.77,5.66,6.06c-0.6,4.29-5,36.4-14.5,50.9c-2.67,4.07-5.75-0.5-8.5-2.25" id="kvg:07b0f-s8" kvg:type="㇆" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07b0f-g7" kvg:element="丿">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:07b0f-g7" kvg:element="丿">
 			<svg:path class="stroke_path stroke_num9" d="M46.49,48.75c0.08,0.82,0.22,2.13-0.15,3.28C42.75,63.34,34.18,74.12,20,83.41" id="kvg:07b0f-s9" kvg:type="㇒" />
 		</svg:g>
 		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:07b0f-g8" kvg:element="丿">

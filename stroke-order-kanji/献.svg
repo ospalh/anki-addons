@@ -48,7 +48,7 @@ kvg:type CDATA #IMPLIED >
 <svg:g id="kvg:StrokePaths_0732e" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <svg:g id="kvg:0732e" kvg:element="献">
 	<svg:g class="stroke_group group_num1" id="kvg:0732e-g1" kvg:element="南" kvg:phon="南" kvg:position="left">
-		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0732e-g2" kvg:element="十" kvg:position="top">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:0732e-g2" kvg:element="十" kvg:position="top">
 			<svg:path class="stroke_path stroke_num1" d="M11.21,33.01c2.54,0.61,4.58,0.28,7.02-0.01c7.51-0.89,19.61-2.34,26.5-3.06c1.67-0.17,3.55-0.37,5.21,0.01" id="kvg:0732e-s1" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num2" d="M29.25,17.17c0.86,0.86,1.1,1.96,1.1,3.22c0,5.75,0,15.91,0,23.05" id="kvg:0732e-s2" kvg:type="㇑a" />
 		</svg:g>
@@ -69,12 +69,12 @@ kvg:type CDATA #IMPLIED >
 		</svg:g>
 	</svg:g>
 	<svg:g class="stroke_group group_num2" id="kvg:0732e-g7" kvg:element="犬" kvg:position="right" kvg:radical="general">
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0732e-g8" kvg:element="大">
+		<svg:g class="stroke_subgroup subgroup_num1" id="kvg:0732e-g8" kvg:element="大">
 			<svg:path class="stroke_path stroke_num10" d="M55.43,48.76c2.45,0.49,4.81,0.41,6.71,0.17c6.21-0.78,16.68-2.21,22.36-2.74c1.7-0.16,3.27-0.35,4.95,0.09" id="kvg:0732e-s10" kvg:type="㇐" />
 			<svg:path class="stroke_path stroke_num11" d="M67.79,17.75c0.92,0.92,1.25,2.13,1.32,4.26c0.82,27.81-2.57,58.15-16.35,70.49" id="kvg:0732e-s11" kvg:type="㇒" />
 			<svg:path class="stroke_path stroke_num12" d="M68.47,49.5c4.89,9.51,13.03,24.29,19.73,33.88c1.92,2.75,4.29,5.37,6.29,7.12" id="kvg:0732e-s12" kvg:type="㇏" />
 		</svg:g>
-		<svg:g class="stroke_subgroup subgroup_num3" id="kvg:0732e-g9" kvg:element="丶">
+		<svg:g class="stroke_subgroup subgroup_num2" id="kvg:0732e-g9" kvg:element="丶">
 			<svg:path class="stroke_path stroke_num13" d="M77.97,26c4.65,3.38,8.38,8.16,10.42,12.5" id="kvg:0732e-s13" kvg:type="㇔" />
 		</svg:g>
 	</svg:g>
