@@ -162,7 +162,7 @@ be added is not empty. Clicking this button plays the old field
 content.
 
 
-To the right, there are three or four radio buttons. Select one for
+To the right, there are three radio buttons. Select one for
 each line. They determine what happens to the downloaded file.
 
 * The *add* check mark. When this button is down the audio clip will
@@ -177,10 +177,6 @@ each line. They determine what happens to the downloaded file.
 * The *delete* cross mark button. When this button is down the audio
   clip will be deleted. This is the normal thing to do with a file you
   don’t like.
-* There may be a *blacklist* skull-and-bones button. When this is
-  down, the same file will be dropped in the future. See
-  [blacklist](Downloader%20sites.html#blacklist) for more information.
-
 
 
 ## Languages
@@ -215,7 +211,6 @@ At the moment, you can get pronunciations for
 * French (`fr`) from [LEO.org](http://leo.org)
 * German (`de`) from [BeoLingus](http://beolingus.org) and
   [LEO.org](http://leo.org)
-* Japanese (`ja`) fram [JapanesePod](japanesepod101.com)
 * Spanish (`es`) from [BeoLingus](http://beolingus.org)
 
 There is the potential for
@@ -267,8 +262,6 @@ every card. There are a few reasons for this:
   code to work around this problem, needed or not.)
 * As there may be many files downloaded for each word, i think  the
   review of the downloaded material should not be skipped.
-* This is especially true for Japanesepod, where you may want to
-  [blacklist](Downloader%20sites.html#blacklist) some downloads.
 * Contemplating the downloaded data when you get it note by note is
   also potentially useful in remembering the words.
 
@@ -299,6 +292,7 @@ directory.
 
 Things that might be added in the future (but don’t hold your breath):
 
+* Find out if Japanesepod downloading can be added again.
 * Switch off the menu items when not reviewing.
 * Automatically edit the information before the request is sent. I use
   what i call “electric” cards for Japanese verbs, where the different

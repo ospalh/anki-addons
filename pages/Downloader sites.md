@@ -32,47 +32,6 @@ version of the text enterend, even when it is misspelled.
 Another disadvantage is that it is a robot voice. It may hide
 idiosyncrasies of the phrase or word.
 
-## <span id="jpod">Japanesepod</span>
-
-Downloads audio provided by
-[JapanesePod101](http://www.japanesepod101.com/).  This is the same
-data source as
-[Jim Breen's WWWJDIC](http://www.csse.monash.edu.au/~jwb/cgi-bin/wwwjdic.cgi?1C)
-uses for its Japanese audio. WWWJDIC
-is the dictionary called “edict” by the
-[Japanese Support add-on](https://ankiweb.net/shared/info/3918629684).
-
-
-This was the main motivation for writing this add-on. By providing a
-way to download these pronunciations this add-on is a replacement for
-the Anki-1 plugins “Audio Download” and “Audio Download (Extension)”,
-as mentioned on
-[Google Groups](https://groups.google.com/forum/#!searchin/ankisrs/breen/ankisrs/UHGEpSkWf9k/3bFJ71AimCEJ).
-
-### <span id="blacklist">Blacklist</span>
-
-The download mechanism at Japanesepod can’t really say
-[“no”](nopagehere.html) in the usual way. Instead it sends you an
-audio clip that tells you “The audio for this clip is currently not
-available. It will be recorded and uploaded shortly. Thank you for
-your patience.”. While that is a nice gesture, after hearing that
-message two or three times the voice starts sounding a bit like <span
-class="qtbase sonya">Sonya</span>.
-
-
-<figure>
-<img src="images/blacklist.png"
-alt="Review dialog with a skull-and-bones button">
-<figcaption>Use the skull-and-bones button to blacklist a file.</figcaption>
-</figure>
-To deal with this phenomenon, this add-on provides another button in
-the download review dialog, called “blacklist”. Click this for each
-file where you get the “... currently not
-available...” spiel. The add-on will then store a
-[hash](http://en.wikipedia.org/wiki/Cryptographic_hash_function) for
-this file. When the same file is seen again, it is quietly dropped and
-you may receive a “Nothing downloaded” message.
-
 
 ## Leo
 
