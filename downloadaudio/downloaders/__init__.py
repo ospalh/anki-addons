@@ -44,4 +44,4 @@ These sites are tried in the order they appear here. Lines starting
 with a '#' are not tried.
 """
 
-__all__ = [downloaders]
+__all__ = ['downloaders']
