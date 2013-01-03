@@ -19,7 +19,7 @@ each site first.
 
 from .beolingus import BeolingusDownloader
 from .google_tts import GooglettsDownloader
-from .japanesepod import JapanesepodDownloader
+# from .japanesepod import JapanesepodDownloader
 from .leo import LeoDownloader
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
@@ -27,7 +27,8 @@ from .mw import MerriamWebsterDownloader
 from .wiktionary import WiktionaryDownloader
 
 downloaders = [
-    JapanesepodDownloader(),
+# Looks like Japanesepod doen't work any more. RAS 2013-01-03
+#    JapanesepodDownloader(),
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
