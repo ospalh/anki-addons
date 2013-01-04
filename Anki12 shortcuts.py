@@ -41,7 +41,7 @@ def replay_6(self, evt):
     """
     key = unicode(evt.text())
     print ('key: {}'.format(key))
-    if key == "6":
+    if key == "6" or key == 'i':
         self.replayAudio()
 
 
