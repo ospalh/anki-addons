@@ -40,7 +40,6 @@ def replay_6(self, evt):
     hand on the numeric key pad.
     """
     key = unicode(evt.text())
-    print ('key: {}'.format(key))
     if key == "6" or key == 'i':
         self.replayAudio()
 
