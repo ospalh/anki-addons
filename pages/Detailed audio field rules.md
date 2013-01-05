@@ -44,7 +44,8 @@ fields are:
   up the space to get “Example” and look for that field to get the
   text.
 
-To get  Chinese
+To get Japanese pronunciations from
+[JapanesePod101.com](http://japanesepod101.com) or Chinese
 pronunciations from [LEO.org](http://leo.org) there has to be the
 reading stored in the note. The detailed rules are:
 
@@ -72,8 +73,6 @@ reading stored in the note. The detailed rules are:
 
 All of these field names are not case sensitive. For example, “expression”,
 “auDIO” or “SOUND” will work.
-
-At the moment, there is no good source of Japanese pronunciations.
 
 The field names are defined in the lists in the file
 “[`downloadaudio/get_fields.py`](https://github.com/ospalh/anki-addons/blob/master/downloadaudio/get_fields.py)”
@@ -105,12 +104,13 @@ Applying the rules means that:
 * The plain rule matches the field  “Expression” to the field
   “Audio”. The GoogleTTS downloader will work from the expression and
   download into the audio field.
+* The readings rule matches the field  “Reading” to the field
+  “Audio”. The Japanesepod downloader will work from the reading and
+  download into the audio field, too.
 * The plain substring rule matches the field “”例文” to the field
   “例文 Audio”
 * For the fields “Deutsch” and “Zusatz” (and the audio fields
   themselves), nothing is downloaded.
-* Currently nothing is downloaded for the “Reading” field, as there is
-  no source for Japanese audio that uses split kanji/kana.
 
 ### Model “Land, state etc.”
 
