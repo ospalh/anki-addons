@@ -21,6 +21,8 @@ class JapanesepodDownloader(AudioDownloader):
     def __init__(self):
         AudioDownloader.__init__(self)
         self.file_extension = u'.mp3'
+        self.user_agent = '''Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:15.0) \
+Gecko/20100101 Firefox/15.0.1'''
         self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
