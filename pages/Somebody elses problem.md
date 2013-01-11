@@ -11,6 +11,7 @@ first_image_attributes: 'style="background-color: white;"'
 first_alt: "This should be a unicorn that is both pink and invisible."
 first_caption: "An SEP-field is an easy way to make things
 invisible."
+ankiweb_id: 4073019785
 
 This is a quick hack to hide field content only on the desktop client.
 
