@@ -328,6 +328,7 @@ def update_mark_action():
 def next_card_wrapper(self):
     if toggle_last_card_action.isChecked():
         self.mw.moveToState("overview")
+        toggle_last_card_action.setChecked(False)
     else:
         original_next_card(self)
 
