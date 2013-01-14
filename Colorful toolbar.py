@@ -40,8 +40,8 @@ qt_toolbar_movable = True
 # qt_toolbar_movable = False
 
 ## Do or do not show a button that lets this be the last card reviewed.
-# show_toggle_last = True
-show_toggle_last = False
+show_toggle_last = True
+# show_toggle_last = False
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
@@ -355,7 +355,9 @@ def update_mark_action():
 
 def next_card_wrapper(self):
     if toggle_last_card_action.isChecked():
-        self.mw.moveToState("overview")
+        # As elsewhere, skip the overview, go to the deck browser.
+        self.mw.col.reset()
+        self.mw.moveToState("deckBrowser")
     else:
         original_next_card(self)
 
