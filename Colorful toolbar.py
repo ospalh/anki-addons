@@ -217,6 +217,8 @@ def add_to_menus():
     go_menu.addAction(study_action)
     go_menu.addAction(add_notes_action)
     go_menu.addAction(browse_cards_action)
+    if show_toggle_last:
+        go_menu.addAction(toggle_last_card_action)
     # Stats. Maybe this should go to help. Seems somewhat help-ish to
     # me, but not too much.
     mw.form.menuTools.addAction(statistics_action)
@@ -228,8 +230,6 @@ def add_to_menus():
     edit_menu.addSeparator()
     edit_menu.addAction(bury_action)
     edit_menu.addAction(toggle_mark_action)
-    if show_toggle_last:
-        edit_menu.addAction(toggle_last_card_action)
     edit_menu.addAction(suspend_action)
     edit_menu.addAction(delete_action)
 
