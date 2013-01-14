@@ -20,6 +20,7 @@ import os
 from anki.hooks import wrap, addHook
 from anki.lang import _
 from aqt import mw, clayout
+from aqt.reviewer import Reviewer
 from aqt.utils import askUser
 
 """
@@ -30,7 +31,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.0.8os"
+__version__ = "1.1.0"
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -38,11 +39,16 @@ __version__ = "1.0.8os"
 qt_toolbar_movable = True
 # qt_toolbar_movable = False
 
+## Do or do not show a button that lets this be the last card reviewed.
+# show_toggle_last = True
+show_toggle_last = False
+
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
 # We basically use these two like Booleans
 dl_action = None
 sweep_action = None
+
 
 
 def go_deck_browse():
@@ -176,6 +182,8 @@ border-bottom: 1px solid #aaa;
     mw.reviewer.more_tool_bar.addAction(edit_current_action)
     mw.reviewer.more_tool_bar.addAction(edit_layout_action)
     mw.reviewer.more_tool_bar.addAction(toggle_mark_action)
+    if show_toggle_last:
+        mw.reviewer.more_tool_bar.addAction(toggle_last_card_action)
     mw.reviewer.more_tool_bar.addAction(bury_action)
     mw.reviewer.more_tool_bar.addAction(suspend_action)
     mw.reviewer.more_tool_bar.addAction(delete_action)
@@ -218,6 +226,8 @@ def add_to_menus():
     go_menu.addAction(study_action)
     go_menu.addAction(add_notes_action)
     go_menu.addAction(browse_cards_action)
+    if show_toggle_last:
+        go_menu.addAction(toggle_last_card_action)
     # Stats. Maybe this should go to help. Seems somewhat help-ish to
     # me, but not too much.
     mw.form.menuTools.addAction(statistics_action)
@@ -343,6 +353,13 @@ def update_mark_action():
     toggle_mark_action.setChecked(mw.reviewer.card.note().hasTag("marked"))
 
 
+def next_card_wrapper(self):
+    if toggle_last_card_action.isChecked():
+        self.mw.moveToState("overview")
+    else:
+        original_next_card(self)
+
+
 # Make all the actions top level, so we can use them for the menu and
 # the tool bar.
 
@@ -404,6 +421,16 @@ toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_on.png'), QSize(),
                          QIcon.Normal, QIcon.On)
 toggle_mark_action.setIcon(toggle_mark_icon)
 mw.connect(toggle_mark_action, SIGNAL("triggered()"), mw.reviewer.onMark)
+toggle_last_card_action = QAction(mw)
+toggle_last_card_action.setText(_(u"Last card"))
+toggle_last_card_action.setCheckable(True)
+toggle_last_card_action.setChecked(False)
+toggle_last_card_action.setToolTip(_(u"Make this card the last to review."))
+toggle_last_card_icon = QIcon()
+toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_off.png'))
+toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_on.png'),
+                              QSize(), QIcon.Normal, QIcon.On)
+toggle_last_card_action.setIcon(toggle_last_card_icon)
 bury_action = QAction(mw)
 bury_action.setText(_(u"Bury note"))
 bury_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
@@ -495,5 +522,10 @@ mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
 mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
 mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
 mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
+
+# Wrapper to not show a next card.
+original_next_card = Reviewer.nextCard
+Reviewer.nextCard = next_card_wrapper
+
 addHook("unloadProfile", save_toolbars_visible)
 addHook("profileLoaded", load_toolbars_visible)
