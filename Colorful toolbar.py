@@ -31,7 +31,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -358,6 +358,7 @@ def next_card_wrapper(self):
         # As elsewhere, skip the overview, go to the deck browser.
         self.mw.col.reset()
         self.mw.moveToState("deckBrowser")
+        toggle_last_card_action.setChecked(False)
     else:
         original_next_card(self)
 
