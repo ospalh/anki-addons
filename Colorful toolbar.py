@@ -333,7 +333,6 @@ def next_card_wrapper(self):
 
 
 def next_card_toggle_off():
-    print ('next orf')
     toggle_last_card_action.setChecked(False)
 
 # Make all the actions top level, so we can use them for the menu and
