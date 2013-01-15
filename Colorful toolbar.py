@@ -50,7 +50,6 @@ dl_action = None
 sweep_action = None
 
 
-
 def go_deck_browse():
     """Open the deck browser."""
     mw.moveToState("deckBrowser")
@@ -363,6 +362,10 @@ def next_card_wrapper(self):
         original_next_card(self)
 
 
+def next_card_toggle_off():
+    print ('next orf')
+    toggle_last_card_action.setChecked(False)
+
 # Make all the actions top level, so we can use them for the menu and
 # the tool bar.
 
@@ -529,6 +532,9 @@ mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
 # Wrapper to not show a next card.
 original_next_card = Reviewer.nextCard
 Reviewer.nextCard = next_card_wrapper
+
+# Make sure we don't leave a stale last card button switched on
+addHook("reviewCleanup", next_card_toggle_off)
 
 addHook("unloadProfile", save_toolbars_visible)
 addHook("profileLoaded", load_toolbars_visible)
