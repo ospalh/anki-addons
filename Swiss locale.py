@@ -106,7 +106,7 @@ def ch_millionen(txt, *args):
         # No need to do the swiss formating here. It is the point of
         # the billions exercise that we have <1000 million here. And we don't
         # really need it until 10 billions.
-        return str(int(dec_mega)) + millions_word
+        return arab_format_string.format(int(dec_mega)) + millions_word
     # Less than a million or something like 3.5 million.
     return swiss_format(int(dec_mega * 1000000))
 
@@ -138,7 +138,7 @@ def ch_t_sqkm(txt, *args):
         return arab_format_string.format(float(dec_kilo) / 1000.0) + \
             u' <span class="number_romaji">Mm<sup>2</sup></span>'
     if dke < -3:
-        return str(float(dec_kilo) * 1000.0) + \
+        return arab_format_string.format(millionfloat(dec_kilo) * 1000.0) + \
             u' <span class="number_romaji">km<sup>2</sup></span>'
     return swiss_format(int(dec_kilo * 1000)) + \
         u' <span class="number_romaji">km<sup>2</sup></span>'
