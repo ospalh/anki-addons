@@ -218,8 +218,19 @@ class AudioDownloader(object):
         the requests, checks that we got error code 200 and returns
         the raw data only when everything is OK.
         """
-        request = urllib2.Request(url_in)
-        request.add_header('User-agent', self.user_agent)
+        try:
+            # There have been reports that the request was send in a
+            # 32-bit encoding (UTF-32?). Avoid that. (The whole things
+            # is a bit curious, but there shouldn't really be any harm
+            # in this.)
+            request = urllib2.Request(url_in.encode('ascii'))
+        except UnicodeDecodeError:
+            request = urllib2.Request(url_in)
+        try:
+            # dto. But i guess this is even less necessary.
+            request.add_header('User-agent', self.user_agent.encode('ascii'))
+        except UnicodeDecodeError:
+            request.add_header('User-agent', self.user_agent)
         response = urllib2.urlopen(request)
         if 200 != response.code:
             raise ValueError(str(response.code) + ': ' + response.msg)
