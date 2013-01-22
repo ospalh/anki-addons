@@ -62,11 +62,13 @@ from anki.lang import _
 
 default_button_width = 18
 
-model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "note_name": u'Cloze',
-                  "button_width": 22},
-                 {"label": u'B', "shortcut": "Ctrl+2", "note_name": u'Basic',
-                  "button_width":22}]
-deck_buttons = [{"label": u'D', 'deck_name': u'Default'},]
+model_buttons = [{"label": u'和', 'note_name': u'Standard — Japanese'},
+                 {"label": u'動', 'note_name': u'Standard — Verb — Japanese'},
+                 {"label": u'一',
+                  'note_name': u'Standard — electric 一段 Verb — Japanese'},
+                 {"label": u'す',
+                  'note_name': u'Standard — electric する Verb — Japanese'}]
+deck_buttons = [{"label": u'Z', 'deck_name': u'ZZ'},]
 
 
 def setup_model_buttons(self):
