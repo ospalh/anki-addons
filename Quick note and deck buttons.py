@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Adds "Quick Access" buttons to quickly change between frequently used note
-#   types in the "Add" cards dialog.
+#
 # By default it adds two buttons to quickly switch between the Cloze and Basic
 #    notes, but edit the source below to add more buttons, or change the
 #    default buttons.
@@ -14,23 +13,37 @@
 """
 Anki2 add-on to add quick model change buttons to the edit screen.
 
-Set up the buttons in the two lists of Python dictionaries as in the
-example
+Adds "Quick Access" buttons to quickly change between frequently used
+note types and decks in the "Add" cards dialog.
+"""
 
-Use
+# Set up here...
+model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
+                  "button_width": 22},
+                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',
+                  "button_width":22}]
+"""
+List of dictionaries defining the model buttons to use.
+
+Each dictionary must conatin:
 * label: the text of the button
-* note_name:  the name of the note to change to in the note_buttons list
-* deck_name:  the name of the note to change to in the deck_buttons list
-Optional arguments:
+* name:  the name of the note or deck to change to
+Optional elements:
 * shortcut: the shortcut key
 * button_width: the width of the button
 
-N.B.: Closely follow the examples. Use the right symbols, brackets,
-      curly braces, use a u'' for strings that contain non-ascii
-      characters (u'Basic' and 'Basic' work, but you must use u'ベーシック',
-      not 'ベーシック').
+N.B.: Closely follow the examples. Use the correct symbols like
+      brackets, curly braces; use u'' for strings that contain
+      non-ascii characters (u'Basic' and 'Basic' work, but you must
+      use u'ベーシック', not 'ベーシック').
 
-Example 1.
+N.B.: When there is no model with the given name, you will get
+      errors. Set them carefully.
+
+Example 1 (minimal):
+model_buttons = [{"label": 'S', "name": 'Standard'}]
+
+Example 2.
 model_buttons = [{"label": u'和', 'note_name': u'Standard — Japanese'},
                  {"label": u'動', 'note_name': u'Standard — Verb — Japanese'},
                  {"label": u'一',
@@ -38,17 +51,48 @@ model_buttons = [{"label": u'和', 'note_name': u'Standard — Japanese'},
                  {"label": u'す',
                   'note_name': u'Standard — electric する Verb — Japanese'}]
 
-Example 2.
+Example 3:
+model_buttons = [{"label": u'C',
+                  'note_name': u'ClozeFieldAtTop',
+                  "button_width": 24},
+                 {"label": u'F',
+                  'note_name': u'FieldAtTop',
+                  "button_width": 24}]
+deck_buttons = [{"label": u'D', 'name': u'Default'},
+                {"label": u'G', 'name': u'Deutsch'},]
 
-model_buttons = [{"label": u'C', 'note_name': u'ClozeFieldAtTop',"button_width":24},
-                 {"label": u'F', 'note_name': u'FieldAtTop',"button_width":24}]
 
-Example 3. (default)
-
-model_buttons = [{"label":u'C',"shortcut":"Ctrl+1","note_name":u'Cloze' ,"button_width":22},
-				{"label":u'B',"shortcut":"Ctrl+2","note_name":u'Basic',"button_width":22}]
-
+Example 4 (default):
+model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
+                  "button_width": 22},
+                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',
+                  "button_width":22}]
 """
+
+# ... and here ...
+deck_buttons = [{"label": u'D', 'name': u'Default'},]
+"""
+List of dictionaries defining the model buttons to use.
+
+The rules are identical to those for the model buttons, "name" must
+name an existing deck.
+
+Example 1:
+deck_buttons = [{"label": u'Z', 'name': u'ZZ'},
+                {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen''},]
+
+Example 2 (default):
+deck_buttons = [{"label": u'D', 'name': u'Default'},]
+"""
+
+# ... and maybe here.
+default_button_width = 18
+"""
+Width of one button in pixel.
+"""
+
+## IAR, (or "practicality beats purity"). Put the stuff to change on
+## top, even before the imports.
 
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QHBoxLayout, QKeySequence, QPushButton, QShortcut
@@ -60,26 +104,17 @@ from anki.hooks import runHook
 from anki.lang import _
 
 
-default_button_width = 18
-
-model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "note_name": u'Cloze',
-                  "button_width": 22},
-                 {"label": u'B', "shortcut": "Ctrl+2", "note_name": u'Basic',
-                  "button_width":22}]
-deck_buttons = [{"label": u'D', 'deck_name': u'Default'},]
-
-
-def setup_model_buttons(self):
+def setup_buttons(chooser, buttons, text, do_function):
     bhbl = QHBoxLayout()
     bhbl.setSpacing(0)
-    for button_item in model_buttons:
+    for button_item in buttons:
         b = QPushButton(button_item["label"])
-        b.setToolTip(_("Change note type to {note_name}.").format(
-                note_name=button_item["note_name"]))
-        l = lambda s=self, nn=button_item["note_name"]: change_model_to(s, nn)
+        b.setToolTip(_("Change {what} to {name}.").format(
+                what=text, name=button_item["name"]))
+        l = lambda s=chooser, nn=button_item["name"]: do_function(s, nn)
         try:
             s = QShortcut(
-                QKeySequence(_(button_item["shortcut"])), self.widget)
+                QKeySequence(_(button_item["shortcut"])), chooser.widget)
         except KeyError:
             pass
         else:
@@ -89,54 +124,34 @@ def setup_model_buttons(self):
         except KeyError:
             b.setFixedWidth(default_button_width)
         bhbl.addWidget(b)
-        self.connect(b, SIGNAL("clicked()"), l)
-    self.addLayout(bhbl)
+        chooser.connect(b, SIGNAL("clicked()"), l)
+    chooser.addLayout(bhbl)
 
 
-def setup_deck_buttons(self):
-    bhbl = QHBoxLayout()
-    bhbl.setSpacing(0)
-    for button_item in deck_buttons:
-        b = QPushButton(button_item["label"])
-        b.setToolTip(_("Change deck to {deck_name}.").format(
-                deck_name=button_item["deck_name"]))
-        l = lambda s=self, nn=button_item["deck_name"]: change_deck_to(s, nn)
-        try:
-            s = QShortcut(
-                QKeySequence(_(button_item["shortcut"])), self.widget)
-        except KeyError:
-            pass
-        else:
-            s.connect(s, SIGNAL("activated()"), l)
-        try:
-            b.setFixedWidth(button_item["button_width"])
-        except KeyError:
-            b.setFixedWidth(default_button_width)
-        bhbl.addWidget(b)
-        self.connect(b, SIGNAL("clicked()"), l)
-    self.addLayout(bhbl)
-
-
-def change_model_to(self, model_name):
+def change_model_to(chooser, model_name):
     """Change to model with name model_name"""
     # Mostly just a copy and paste from the bottom of onModelChange()
-    m = self.deck.models.byName(model_name)
-    self.deck.conf['curModel'] = m['id']
-    cdeck = self.deck.decks.current()
+    m = chooser.deck.models.byName(model_name)
+    chooser.deck.conf['curModel'] = m['id']
+    cdeck = chooser.deck.decks.current()
     cdeck['mid'] = m['id']
-    self.deck.decks.save(cdeck)
+    chooser.deck.decks.save(cdeck)
     runHook("currentModelChanged")
-    self.mw.reset()
+    chooser.mw.reset()
 
 
-def change_deck_to(self, deck_name):
+def change_deck_to(chooser, deck_name):
     # Well, that is easy.
-    self.deck.setText(deck_name)
+    chooser.deck.setText(deck_name)
 
 
 ModelChooser.setupModels = wrap(
-    ModelChooser.setupModels, setup_model_buttons, "after")
+    ModelChooser.setupModels,
+    lambda mc=ModelChooser, b=model_buttons, t="note type" ,do=change_model_to:
+        setup_buttons(mc, b, t, do), "after")
 ModelChooser.change__model_to = change_model_to
 DeckChooser.setupDecks = wrap(
-    DeckChooser.setupDecks, setup_deck_buttons, "after")
+    DeckChooser.setupDecks,
+    lambda dc=DeckChooser, b=deck_buttons, t="deck", do=change_deck_to:
+        setup_buttons(dc, b, t, do), "after")
 DeckChooser.change_deck_to = change_deck_to
