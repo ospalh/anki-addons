@@ -26,15 +26,14 @@ freezer = Freezer(app)
 
 @app.route('/anki-addons/')
 def index():
-    green_addons = [p for p in pages if
-                    'green' in p.meta.get('status_color', [])
-                    and 'addon' in p.meta.get('type', [])]
-    yellow_addons = [p for p in pages if
-                     'yellow' in p.meta.get('status_color', [])
-                     and 'addon' in p.meta.get('type', [])]
-    red_addons = [p for p in pages if
-                  'red' in p.meta.get('status_color', [])
-                  and 'addon' in p.meta.get('type', [])]
+    addons = [p for p in pages if 'addon' in p.meta.get('type', [])]
+    addons = sorted(addons, reverse=True, key=lambda p: p.meta['date'])
+    green_addons = [p for p in addons if
+                    'green' in p.meta.get('status_color', [])]
+    yellow_addons = [p for p in addons if
+                     'yellow' in p.meta.get('status_color', [])]
+    red_addons = [p for p in addons if
+                  'red' in p.meta.get('status_color', [])]
     return render_template('index.html', green=green_addons,
                            yellow=yellow_addons, red=red_addons)
 
