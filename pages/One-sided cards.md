@@ -1,7 +1,7 @@
 title: One-sided cards
 id: oneside
 main_file: One-sided%20cards.py
-date: 2012-10-19
+date: 2012-10-11
 tags: [review answer]
 type: addon
 status: abandoned

@@ -1,9 +1,10 @@
 title: Edit media
 id: editmedia
 main_file: Edit%20media.py
-date: 2012-10-19
+date: 2012-11-16
 tags: [edit audio]
 type: addon
+date: 2012-11-16
 status: abandoned, working
 status_color: yellow
 status_text_color: black

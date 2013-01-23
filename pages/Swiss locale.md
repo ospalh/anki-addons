@@ -2,6 +2,7 @@ title: Swiss locale
 id: swisslocale
 main_file: Swiss%20locale.py
 type: addon
+date: 2013-01-16
 status: one-off, broken
 status_color: red
 status_text_color: white

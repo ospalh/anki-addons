@@ -2,6 +2,7 @@ title: Play with mpg123
 id: playwithmpg
 main_file: Play%20with%20mpgNN.py
 type: addon
+date: 2012-11-16
 status: obsolete
 status_color: red
 status_text_color: white

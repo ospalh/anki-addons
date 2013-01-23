@@ -4,6 +4,7 @@ main_file: Lean%20browser%20qa.py
 date: 2012-10-19
 tags: [browser display]
 type: addon
+date: 2012-10-11
 status: working
 status_color: green
 status_text_color: white

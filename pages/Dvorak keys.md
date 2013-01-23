@@ -3,6 +3,7 @@ id: dvorak
 main_file: Dvorak%20keys.py
 status: working
 type: addon
+date: 2012-10-17
 status_color: green
 status_text_color: white
 abstract: "Use keys easy to use for user of the <a

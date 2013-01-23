@@ -3,6 +3,7 @@ id: metrictime
 main_file: Metric%20time.py
 status: personal hobby horse, broken
 type: addon
+date: 2012-12-12
 status_color: red
 status_text_color: white
 abstract: Shows times in some spots as days or years.

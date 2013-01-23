@@ -2,6 +2,7 @@ title: Somebody else’s problem
 id: sep
 main_file: Somebody elses problem.py
 type: addon
+date: 2012-10-28
 status: working
 status_color: green
 status_text_color: white

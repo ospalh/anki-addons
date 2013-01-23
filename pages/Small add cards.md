@@ -3,6 +3,7 @@ id: smalladd
 main_file: Small%20add%20cards.py
 status: quick hack
 type: addon
+date: 2012-12-12
 status_color: yellow
 status_text_color: black
 abstract: Remove size limits from add card window

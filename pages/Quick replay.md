@@ -2,6 +2,7 @@ title: Quick replay
 id: playwithmpg
 main_file: Quick%20replay.py
 type: addon
+date: 2012-11-16
 status: hackish
 status_color: yellow
 status_text_color: black

@@ -2,6 +2,7 @@ title: Backdoor
 id: backdoor
 main_file: Backdoor.py
 type: addon
+date: 2012-05-14
 status: working
 status_color: green
 status_text_color: white

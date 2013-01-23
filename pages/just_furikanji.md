@@ -4,6 +4,7 @@ main_file: just_furikanji.py
 date: 2012-06-08
 tags: [Japanese, template, kanji, furigana, rubi]
 type: addon
+date: 2012-12-15
 status: obsolete
 status_color: red
 status_text_color: white

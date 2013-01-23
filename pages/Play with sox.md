@@ -3,6 +3,7 @@ id: sox
 main_file: Play%20wit%20sox.py
 status: useless
 type: addon
+date: 2012-08-02
 status_color: red
 status_text_color: white
 abstract: The idea was to make flac and ogg audio files usable on Windows systems.

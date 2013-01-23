@@ -3,6 +3,7 @@ id: title
 main_file: Deck%20name%20in%20title.py
 status: working
 type: addon
+date: 2012-07-31
 status_color: green
 status_text_color: white
 abstract: "Show the name of the deck you are currently learning in the

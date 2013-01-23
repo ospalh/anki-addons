@@ -2,6 +2,7 @@ title: Furikanji
 id: furikanji_and
 main_file: Furikanji.py
 type: addon
+date: 2012-12-15
 status: for desktop use only
 status_color: yellow
 status_text_color: black

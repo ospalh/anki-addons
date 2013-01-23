@@ -3,6 +3,7 @@ id: faenzaicons
 main_file: Faenza%20icons.py
 status: abandoned
 type: addon
+date: 2012-10-17
 status_color: red
 status_text_color: white
 abstract: Replace the sync and statistics icons

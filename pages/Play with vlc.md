@@ -3,6 +3,7 @@ id: vlc
 main_file: Play%20wit%20vlc.py
 status: useless
 type: addon
+date: 2012-11-16
 status_color: red
 status_text_color: white
 abstract: Another abandoned try to play everything.

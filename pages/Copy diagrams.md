@@ -1,7 +1,7 @@
 title: Copy diagrams
 id: copy_diagrams
 main_file: Copy%20diagrams.py
-date: 2013-01-21
+date: 2013-01-22
 tags: [svg, embed, abandoned]
 type: addon
 status: misleading, hackish

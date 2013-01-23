@@ -3,6 +3,7 @@ id: csod
 main_file: Show%20colored%20stroke%20order%20diagram.py
 status: abandoned
 type: addon
+date: 2012-08-01
 status_color: red
 status_text_color: white
 abstract: "Another take on displaying the KanjiVG stroke order

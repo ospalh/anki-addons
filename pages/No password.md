@@ -3,6 +3,7 @@ id: nopw
 main_file: No%20password.py
 status: obsolete
 type: addon
+date: 2012-10-17
 status_color: red
 status_text_color: white
 abstract: Open accounts with a password set without entering the password.

@@ -4,6 +4,7 @@ id: localcss
 main_file: Local%20CSS.py
 status: working
 type: addon
+date: 2012-10-30
 status_color: green
 status_text_color: white
 abstract: Add styling from a local CSS file. With this, the card style can be adapted to time (night colors) and place (small fonts on small screens, big fonts on big screens, ...).
