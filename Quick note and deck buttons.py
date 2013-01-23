@@ -1,14 +1,15 @@
-# -*- coding: utf-8 -*-
+# -*- mode: Python ; coding: utf-8 -*-
 #
-# By default it adds two buttons to quickly switch between the Cloze and Basic
-#    notes, but edit the source below to add more buttons, or change the
-#    default buttons.
+# Copyright © 2013–2013 Roland Sieker <ospalh@gmail.com>
 #
-# Copyright: Steve AW <steveawa@gmail.com>, Roland Sieker <ospalh@gmail.com>
+# Provenance:
+# The idea, original version and large parts of this code
+# written by Steve AW <steveawa@gmail.com>
+#
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
-# Support: Email me with any problems/suggestions: steveawa@gmail.com
-#  As a student, there are times in the year when I won't have time to respond,
-#  but I will try.
+#
+# Support: Report an issue at https://github.com/ospalh/anki-addons/
+# The more precise the report, the greater the chance i will do something.
 
 """
 Anki2 add-on to add quick model change buttons to the edit screen.
