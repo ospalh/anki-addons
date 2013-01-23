@@ -47,23 +47,20 @@ Example 1 (minimal):
 model_buttons = [{"label": 'S', "name": 'Standard'}]
 
 Example 2.
-model_buttons = [{"label": u'和', 'note_name': u'Standard — Japanese'},
-                 {"label": u'動', 'note_name': u'Standard — Verb — Japanese'},
+model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
+                 {"label": u'動', 'name': u'Standard — Verb — Japanese'},
                  {"label": u'一',
-                  'note_name': u'Standard — electric 一段 Verb — Japanese'},
+                  'name': u'Standard — electric 一段 Verb — Japanese'},
                  {"label": u'す',
-                  'note_name': u'Standard — electric する Verb — Japanese'}]
+                  'name': u'Standard — electric する Verb — Japanese'}]
 
 Example 3:
 model_buttons = [{"label": u'C',
-                  'note_name': u'ClozeFieldAtTop',
+                  'name': u'ClozeFieldAtTop',
                   "button_width": 24},
                  {"label": u'F',
-                  'note_name': u'FieldAtTop',
+                  'name': u'FieldAtTop',
                   "button_width": 24}]
-deck_buttons = [{"label": u'D', 'name': u'Default'},
-                {"label": u'G', 'name': u'Deutsch'},]
-
 
 Example 4 (default):
 model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
@@ -107,7 +104,7 @@ from anki.hooks import wrap
 from anki.hooks import runHook
 from anki.lang import _
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 
 
 def setup_buttons(chooser, buttons, text, do_function):
