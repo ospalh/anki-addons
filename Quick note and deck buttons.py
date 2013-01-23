@@ -101,7 +101,7 @@ from anki.hooks import wrap
 from anki.hooks import runHook
 from anki.lang import _
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 
 def setup_buttons(chooser, buttons, text, do_function):
     bhbl = QHBoxLayout()
