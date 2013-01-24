@@ -6,7 +6,8 @@
 
 import os
 import re
-import sys
+import unicodedata
+
 from aqt import mw
 from anki.utils import isWin, isMac, stripHTML
 
@@ -22,13 +23,17 @@ def free_media_name(base, end):
     base = stripHTML(base)
     # Basically stripping the 'invalidFilenameChars'. (Not tested too much).
     base = re.sub('[\\/:\*?\'"<>\|]', '', base)
+    if isMac:
+        # The file name will be normalized like this in the file
+        # system. Avoid problems when we send the file to other OSes.
+        base = unicodedata.normalize('NFD', base)
     mdir = mw.col.media.dir()
     if not exists_lc(mdir, base + end):
         return os.path.join(mdir, base + end), base + end
     for i in range(1, 10000):
         # Don't be silly. Give up after 9999 tries (by falling out of
         # this loop).
-        long_name = u'{0} ({1}){2}'.format(base, i, end)
+        long_name = u'{0}_{1}.{2}'.format(base, i, end)
         if not exists_lc(mdir, long_name):
             # New: return both full path and the file name (with ending).
             return os.path.join(mdir, long_name), long_name
