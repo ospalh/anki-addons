@@ -3,13 +3,14 @@ id: normalize
 main_file: Normalize.py
 date: 2013-01-22
 type: addon
-status: "working"
-status_color: green
+status: may add errors
+status_color: red
 status_text_color: white
 abstract: "Fix file name problems caused by Unicode normalization."
 first_image: tuebingen_tuebingen.png
 first_alt: 'Screen text: In media folder but not used by any cards:
-Tübingen_Neckarfront.jpg Used on cards but missing from media folder: Tübingen_Neckarfront.jpg.'
+Tübingen_Neckarfront.jpg Used on cards but missing from media folder:
+Tübingen_Neckarfront.jpg.'
 first_caption: "So, the file is there and it is missing‽"
 
 This can be used to fix a problem caused by adding files “sideways” on
@@ -52,19 +53,14 @@ cards.
 
 ## The solution
 
-When you suddenly don’t see or hear certain media on non-Apple
-machines or on AnkiWeb, and you also work with Apple hardware, this
-add-on may be the fix. Another indicator for the problem is that the
-“problem” file name include some form of
-[diacritic](http://en.wikipedia.org/wiki/Diacritic), such as umlauts,
-accented characters or voiced kana.
+The add-on goes through the media folder and renames files
+not in the NFC normalized form. NFC is often the more natural form,
+where umlauts, accented characters, and so on are stored as a single
+character each.
 
-In this case, download the add-on and restart Anki.
-
-There should be a “Tools/Normalize media file names” menu
-item. Activate that.
-
-This
+<blockquote class="nb">This add-on does not check the Anki collection
+to see which files have this kind of problem. Running it may
+introduce errors rather then fix them.</blockquote>
 
 ## See also
 
