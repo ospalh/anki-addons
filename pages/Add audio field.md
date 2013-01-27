@@ -21,7 +21,7 @@ Edit/Media/Manual audio. ">
 Edit/Media/Manual audio menu.</figcaption>
 </figure>
 When you downloaded a shared deck that already has some audio data,
-it may work without any change. Start reviewiing the new deck. On the
+it may work without any change. Start reviewing the new deck. On the
 first card, try the menu item
 “Edit/Media/Manual audio”.
 
@@ -104,7 +104,7 @@ name in the new field.</figcaption>
 </figure>
 
 Alternatively, when the field you want to download for is not the
-first field, just should use that field’s name, followed by
+first field, you should use that field’s name, followed by
 “Audio”. Then click  “OK” here, too.
 
 In the example, sending pictures of birds to GoogleTTS would not
