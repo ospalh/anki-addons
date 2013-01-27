@@ -56,9 +56,9 @@ def exists_lc(path, name):
     # do on Macs, then.
     if isMac:
         return os.path.exists(os.path.join(path, name))
+    ln_name = unicodedata.normalize('NFD', name.lower())
     for fname in os.listdir(path):
-        if unicodedata.normalize('NFD', fname.lower()) \
-                == unicodedata.normalize('NFD', name.lower()):
+        if unicodedata.normalize('NFD', fname.lower()) == ln_name:
             return True
-    # After the loop, none found
+    # After the loop, none found. (Could have used for: ... else: ...)
     return False
