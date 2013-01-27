@@ -33,7 +33,7 @@ def free_media_name(base, end):
     for i in range(1, 10000):
         # Don't be silly. Give up after 9999 tries (by falling out of
         # this loop).
-        long_name = u'{0}_{1}.{2}'.format(base, i, end)
+        long_name = u'{0}_{1}{2}'.format(base, i, end)
         if not exists_lc(mdir, long_name):
             # New: return both full path and the file name (with ending).
             return os.path.join(mdir, long_name), long_name
