@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyricht © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyricht © 2013 Roland Sieker, <ospalh@gmail.com>
 #
 
 """
-Unicode-normalize file names.
+Fix problems with the Mac's NFD normalizing file system.
 
-This can be used as a standalone script or as an Anki2 add-on.
+This is an Anki2 add-on that fixes file references that have been
+messed up by the Mac file system, that uses NDF normalized file
+systems.
 """
 
 
@@ -16,9 +18,15 @@ import shutil
 import sys
 import unicodedata
 
-__version__ = '0.0.1'
+from PyQt4.QtCore import QCoreApplication, SIGNAL
+from PyQt4.QtGui import QAction, QProgressDialog
 
-with_anki = False
+from anki import isMac
+from anki.lang import _
+from aqt import mw
+
+__version__ = '0.0.2'
+
 
 def progress(data, *args):
     """
@@ -34,69 +42,64 @@ def progress(data, *args):
     # http://creativecommons.org/licenses/by-nc-sa/2.5/
     # Added check for qt. RAS 2013-01-13
     it = iter(data)
-    if with_anki:
-        widget = QProgressDialog(*args + (0, it.__length_hint__()))
+    widget = QProgressDialog(*args + (0, it.__length_hint__()))
     c = 0
     for v in it:
-        if with_anki:
-            QCoreApplication.instance().processEvents()
-            if widget.wasCanceled():
-                raise StopIteration
-            c += 1
-            widget.setValue(c)
+        QCoreApplication.instance().processEvents()
+        if widget.wasCanceled():
+            raise StopIteration
+        c += 1
+        widget.setValue(c)
         yield(v)
 
 
-def normalize_files(dir_=None, file_list=None, form='NFC'):
-    if not file_list:
-        if not dir_:
-            dir_ = os.getcwd()
-        file_list = os.listdir(dir_)
-    for f in progress(file_list, _(u"Unicode normalizing files. (NFC)"),
-                      _(u"Stop that!")):
-        try:
-            f = unicode(f, sys.getfilesystemencoding())
-        except TypeError:
-            pass  # Most likely already unicode.
-        fn = unicodedata.normalize(form, f)
-        # if fn != f:
-        #     print(u'"{0}" may look like "{1}", but they are not the same.'
-        #           .format(f, fn))
-        #     if os.path.exists(os.path.join(dir_, fn)):
-        #         print(u'But {0} is already there.'
-        #              .format(os.path.join(dir_, fn)))
-        if fn != f and not os.path.exists(os.path.join(dir_, fn)):
-            shutil.move(os.path.join(dir_, f), os.path.join(dir_, fn))
+def unnormalize_files():
+    """
+    Fix collection that have issue #500.
 
+    Go through the collection and the media files, rename all
+    """
+    mdir = mw.col.media.dir()
+    try:
+        # A quirk of certain Pythons is that some os commands give
+        # different results when you put in a unicode object rather
+        # than a str.
+        mdir = unicode(mdir, sys.getfilesystemencoding())
+    except TypeError:
+        # Already unicode.
+        pass
+    media_in_col = mw.col.media.allMedia()
+    # Filter the files on disk. Drop all files that do not contain
+    # combining characters. Those should be no problem. (The Unicode
+    # web page describes a "quick test", we do an even quicker test.)
+    problem_files = []
+    try:
+        for f in progress(os.listdir(mdir), _(u"Checking files on disk."),
+                          _(u"Stop that!")):
+            for c in f:
+                if unicodedata.combinig(c):
+                    # We just assume that f is NFD-normalized. If not
+                    # we will just waste time later.
+                    problem_files.append(f)
+                    break
+    except StopIteration:
+        return
+    try:
+        for m in progress(media_in_col, _(u"Unicode unnormalizing files."),
+                          _(u"Stop that!")):
+            m_n = unicodedata.normalize('NFD', m)
+            if m == m_n:
+                continue
+            if m_n in problem_files:
+                # Debug outpu
+                print(u'''File name {n} may look like used media \
+{m}, but they are not the same'''.format(n=m_n, m=m))
+                shutil.move(os.path.join(mdir, m_n), os.path.join(mdir, m))
+    except StopIteration:
+        return
 
-def dummy(t):
-    return t
-
-
-try:
-    from anki.hooks import addHook
-    from anki.lang import _
-    from aqt import mw
-    from aqt.utils import askUser
-    from PyQt4.QtCore import QCoreApplication, SIGNAL
-    from PyQt4.QtGui import QAction, QProgressDialog
-except ImportError:
-    _ = dummy
-else:
-    with_anki = True
+if not isMac:
     nom_a = QAction(mw)
     mw.form.menuTools.addAction(nom_a)
-    nom_a.setText(_(u"Normalize media file names"))
-    mw.connect(nom_a, SIGNAL("triggered()"),
-               lambda: normalize_files(dir_=mw.col.media.dir()))
-
-
-
-if __name__ == '__main__':
-    try:
-        normalize_files(dir_=sys.argv[1], form=sys.argv[2])
-    except IndexError:
-        try:
-            normalize_files(sys.argv[1])
-        except IndexError:
-            normalize_files()
+    nom_a.setText(_(u"Unnormalize media files"))
+    mw.connect(nom_a, SIGNAL("triggered()"), unnormalize_files)
