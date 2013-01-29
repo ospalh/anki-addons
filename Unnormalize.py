@@ -21,7 +21,7 @@ import unicodedata
 from PyQt4.QtCore import QCoreApplication, SIGNAL
 from PyQt4.QtGui import QAction, QProgressDialog
 
-from anki import isMac
+from anki.utils import isMac
 from anki.lang import _
 from aqt import mw
 
@@ -77,7 +77,7 @@ def unnormalize_files():
         for f in progress(os.listdir(mdir), _(u"Checking files on disk."),
                           _(u"Stop that!")):
             for c in f:
-                if unicodedata.combinig(c):
+                if unicodedata.combining(c):
                     # We just assume that f is NFD-normalized. If not
                     # we will just waste time later.
                     problem_files.append(f)
@@ -91,9 +91,6 @@ def unnormalize_files():
             if m == m_n:
                 continue
             if m_n in problem_files:
-                # Debug outpu
-                print(u'''File name {n} may look like used media \
-{m}, but they are not the same'''.format(n=m_n, m=m))
                 shutil.move(os.path.join(mdir, m_n), os.path.join(mdir, m))
     except StopIteration:
         return
