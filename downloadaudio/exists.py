@@ -11,24 +11,12 @@ import unicodedata
 from aqt import mw
 from anki.utils import isMac, stripHTML
 
-normalize_file_names_on_cards = True
+normalize_file_names_on_cards = False
 """
 Store the field content NFD-normalized on Macs or not.
 
-This sets up whether words like „Tür“ or 「ぼうず」 are stored as
-three characters (= False) or as four or five (= True) in the cards.
-That is, whether the audio field is filled with, for example
-u'[sound:T\xfcr.mp3]' and
-u'[sound:\u574a\u4e3b_\u307c\u3046\u305a.mp3]', or with
-u'[sound:Tu\u0308r.mp3]' and
-u'[sound:\u574a\u4e3b_\u307b\u3099\u3046\u3059\u3099.mp3]'.
-
-I think NFD-normalized file names look ugly on Linux. On the other
-hand, when adding lots of pronunciation on a Mac and then using
-AnkiWeb, or a Linux or Windows box could cause problems untill issue
-#500 has been fixed. So turn this on for most people, but give me and
-others the possibility to turn it off and deal with the resulting
-problems by hand.
+As i said, i think NFD-normalized file names look ugly on Linux. I'll
+deal with the resulting problems by hand.
 """
 
 
