@@ -43,8 +43,10 @@ else:
     # the pattern. Also name the groups so the code below becomes a
     # bit more readable. The extra characters in the kanji group are
     # just to my personal taste. I learn those characters as Japanese
-    # "words".
-    split_pat = u' ?(?P<kanji>[-〓+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
+    # "words". (The ・ would be nice as word separator, but then
+    # again, it is commonly used with katakana, where i don't do
+    # furigana anyway.)
+    split_pat = u' ?(?P<kanji>[-〓・+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
     # Add flag parameter to calls to re.sub.
     re_sub_flag = lambda pattern, repl, string, flags=re.UNICODE: \
         re.sub(pattern, repl, string, flags=flags)
