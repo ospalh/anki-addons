@@ -196,7 +196,10 @@ def download_on():
 def editor_download_editing(self):
     self.saveNow()
     download_for_note(ask_user=True, note=self.note)
+    # Fix for issue #10.
+    self.stealFocus = True
     self.loadNote()
+    self.stealFocus = False
 
 
 def editor_add_download_editing_button(self):
