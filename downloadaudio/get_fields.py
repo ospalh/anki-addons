@@ -46,6 +46,15 @@ audio_field_keys = ['audio', 'sound']
 # Change this at your own risk.
 field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
 
+# Apparently some people use a 「・」 between the kana for different
+# kanji. Make it easier to switch removing them for the downloads on
+# or off
+strip_interpunct = False
+"""
+Do or do not remove katakana interpuncts 「・」 before sending requests.
+"""
+# strip_interpunct = True
+
 
 def uniqify_list(seq):
     """Return a copy of the list with every element appearing only once."""
@@ -93,6 +102,8 @@ def field_data(note, fname, readings, get_empty=False):
         # This is taken from aqt/browser.py.
         text = text.replace(u'<br>', u' ')
         text = text.replace(u'<br />', u' ')
+        if strip_interpunct:
+            text = text.replace(u'・', u'')
         text = stripHTML(text)
         text = stripSounds(text)
         # Reformat so we have exactly one space between words.
