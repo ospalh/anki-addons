@@ -31,40 +31,8 @@ To use this, put  `{{furikanji:Field name}}` instead of
 `{{furigana:Field name}}` in the template.
 
 The ruby element has the additional class `furikanji`. So special
-styling can be added. For example, markers that show the beginning and
-end of a specific block.
-
-<figure>
-<img src="images/furikanji-desktop.png" alt="Text: 起きなよいい加減お
-with きなよいいかげん as ruby and きなよいいかげん with 起きなよいい加
-減お as ruby. The kanji of the ruby are marked with vertical bars.">
-<figcaption>
-Example use of furigana and furikanji. The source of the text is an
-Anki-2-ified version of the <a
-href="http://subs2srs.sourceforge.net/">sub2srs</a> example deck 「時
-を掛ける少女」.
-</figcaption>
-</figure>
-To use furikanji, with the markers shown, i use
-<blockquote class=lsting><pre><code>.redish { color: #a00;}
-body:not(.mobile) .furikanji:before, body:not(.mobile) .furikanji:after {
-    font-size: 50%;
-    position: relative;
-    bottom: 2rem;
-    width: 0px;
-    vertical-align: baseline;
-}
-body:not(.mobile) .furikanji:before { content : "|"}
-body:not(.mobile) .furikanji:after { content : "|"}
-.mobile .furikanji {color: #268bd2;}</code></pre></blockquote>
-as styling and
-<blockquote class=lsting><pre><code>&lt;div>{{Image}}&lt;/div>
-{{Audio}}
-&lt;div class="nhg lnsz">{{furigana:Reading}}&lt;/div>
-&lt;div class="nhg redish lnsz">{{furikanji:Reading}}&lt;/div></code></pre></blockquote>
-as back template. The `body:not(.mobile)` bit of the selector and the
-setting for `.mobile` can be dropped when not using the
-[AnkiDroid patch](#droid).
+styling can be added. See the
+[complex classes](Complex%20classes.html) page for examples.
 
 <figure>
 <img src="images/furikanji-web.png" alt="Text: 起きなよいい加減お with
