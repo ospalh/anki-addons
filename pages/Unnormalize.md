@@ -1,6 +1,6 @@
-title: Normalize
-id: normalize
-main_file: Normalize.py
+title: Unnormalize
+id: unnormalize
+main_file: Unnormalize.py
 date: 2013-01-22
 type: addon
 status: may add errors
@@ -53,14 +53,19 @@ cards.
 
 ## The solution
 
-The add-on goes through the media folder and renames files
-not in the NFC normalized form. NFC is often the more natural form,
-where umlauts, accented characters, and so on are stored as a single
-character each.
+The add-on goes through the collection and renames media file to those
+used in the collection when the on-disk name is the Mac OSX version
+of that in the collection.
 
-<blockquote class="nb">This add-on does not check the Anki collection
-to see which files have this kind of problem. Running it may
-introduce errors rather then fix them.</blockquote>
+<blockquote class="nb">This add-on in a hack. It worked well for me,
+but might introduce errors in the collection. Caveat
+emptor.</blockquote>
+
+This can work only when run on non-Macs. When there is no non-Mac
+desktop client available, the only solution to this problem that i see
+is to go through the collection and fix the file names by hand. Or
+possibly re-download audio clips with a new version of Download audio,
+if that is what caused the problems.
 
 ## See also
 
