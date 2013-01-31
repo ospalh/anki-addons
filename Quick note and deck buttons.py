@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2013–2013 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–2013 Roland Sieker <ospalh@gmail.com>
 #
 # Provenance:
 # The idea, original version and large parts of this code
@@ -22,7 +22,7 @@ note types and decks in the "Add" cards dialog.
 model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
                   "button_width": 22},
                  {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',
-                  "button_width":22}]
+                  "button_width": 22}]
 """
 List of dictionaries defining the model buttons to use.
 
@@ -64,7 +64,7 @@ Example 4 (default):
 model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
                   "button_width": 22},
                  {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',
-                  "button_width":22}]
+                  "button_width": 22}]
 """
 
 # ... and here ...
@@ -148,7 +148,7 @@ ModelChooser.setupModels = wrap(
     ModelChooser.setupModels,
     lambda mc=ModelChooser, b=model_buttons, t="note type" ,do=change_model_to:
         setup_buttons(mc, b, t, do), "after")
-ModelChooser.change__model_to = change_model_to
+ModelChooser.change_model_to = change_model_to
 DeckChooser.setupDecks = wrap(
     DeckChooser.setupDecks,
     lambda dc=DeckChooser, b=deck_buttons, t="deck", do=change_deck_to:
