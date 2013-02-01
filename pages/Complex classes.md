@@ -80,19 +80,15 @@ To show furigana only when the mouse hovers above it use
 
 <blockquote class=lsting><pre><code>&lt;div class="kanjihover">{{furigana:Reading}}&lt;/div></code></pre></blockquote>
 
-<blockquote class=lsting><pre><code>.kanjihover rt{display: none;}
-.kanjihover ruby rb {display: block;  padding-top: 33%;}
-.kanjihover ruby:hover rb {padding-top: 0;}
-.kanjihover ruby:hover rt {display: block;}</blockquote></pre></code>
+<blockquote class=lsting><pre><code>.kanjihover rt{visibility: hidden;}
+.kanjihover ruby:hover rt {visibility: visible;}</blockquote></pre></code>
 
 or to activate this for all furigana everywhere, drop the extra class:
 
 <blockquote class=lsting><pre><code>{{furigana:Reading}}</code></pre></blockquote>
 
-<blockquote class=lsting><pre><code>rt{display: none;}
-ruby rb {display: block;  padding-top: 33%;}
-ruby:hover rb {padding-top: 0;}
-ruby:hover rt {display: block;}</blockquote></pre></code>
+<blockquote class=lsting><pre><code>rt{visibility: hidden;}
+ruby:hover rt {visibility: visible;}</blockquote></pre></code>
 
 The amount of padding may have to be adjusted stlightly to make the
 lines not jump when moving in or out with the mouse.
