@@ -49,6 +49,7 @@ icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 dl_action = None
 sweep_action = None
 
+
 def go_deck_browse():
     """Open the deck browser."""
     mw.moveToState("deckBrowser")
