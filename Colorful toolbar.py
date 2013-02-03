@@ -31,7 +31,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.1.2"
+__version__ = "1.2.0"
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -42,7 +42,6 @@ qt_toolbar_movable = True
 ## Do or do not show a button that lets this be the last card reviewed.
 # show_toggle_last = True
 show_toggle_last = False
-
 
 ## Show the suspend card button
 show_suspend_card = True
