@@ -17,6 +17,6 @@ discussed in the Google Code issue tracker. When you see negative
 review times, either in AnkiDroid or in the statistics window of the
 desktop client, go there for information.
 
-This add-on simly applies the
+This add-on simply applies the
 steps
 [described in the thread](http://code.google.com/p/ankidroid/issues/detail?id=1449#c23).
