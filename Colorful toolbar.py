@@ -31,7 +31,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.1.2"
+__version__ = "1.2.0"
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -42,6 +42,14 @@ qt_toolbar_movable = True
 ## Do or do not show a button that lets this be the last card reviewed.
 # show_toggle_last = True
 show_toggle_last = False
+
+## Show the suspend card button
+show_suspend_card = True
+# show_suspend_card = False
+
+## Show the suspend note button
+show_suspend_note = True
+# show_suspend_note = False
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
@@ -178,7 +186,10 @@ border-bottom: 1px solid #aaa;
     if show_toggle_last:
         mw.reviewer.more_tool_bar.addAction(toggle_last_card_action)
     mw.reviewer.more_tool_bar.addAction(bury_action)
-    mw.reviewer.more_tool_bar.addAction(suspend_action)
+    if show_suspend_card:
+        mw.reviewer.more_tool_bar.addAction(suspend_card_action)
+    if show_suspend_note:
+        mw.reviewer.more_tool_bar.addAction(suspend_note_action)
     mw.reviewer.more_tool_bar.addAction(delete_action)
     mw.reviewer.more_tool_bar.addSeparator()
     mw.reviewer.more_tool_bar.addAction(options_action)
@@ -229,7 +240,8 @@ def add_to_menus():
     edit_menu.addSeparator()
     edit_menu.addAction(bury_action)
     edit_menu.addAction(toggle_mark_action)
-    edit_menu.addAction(suspend_action)
+    edit_menu.addAction(suspend_card_action)
+    edit_menu.addAction(suspend_note_action)
     edit_menu.addAction(delete_action)
 
 
@@ -240,7 +252,8 @@ def edit_actions_off():
         edit_layout_action.setEnabled(False)
         bury_action.setEnabled(False)
         toggle_mark_action.setEnabled(False)
-        suspend_action.setEnabled(False)
+        suspend_card_action.setEnabled(False)
+        suspend_note_action.setEnabled(False)
         delete_action.setEnabled(False)
     except AttributeError:
         pass
@@ -260,7 +273,8 @@ def more_tool_bar_off():
     show_more_tool_bar_action.setEnabled(False)
     bury_action.setEnabled(False)
     toggle_mark_action.setEnabled(False)
-    suspend_action.setEnabled(False)
+    suspend_card_action.setEnabled(False)
+    suspend_note_action.setEnabled(False)
     delete_action.setEnabled(False)
     try:
         mw.reviewer.more_tool_bar.hide()
@@ -273,7 +287,8 @@ def maybe_more_tool_bar_on():
     show_more_tool_bar_action.setEnabled(True)
     bury_action.setEnabled(True)
     toggle_mark_action.setEnabled(True)
-    suspend_action.setEnabled(True)
+    suspend_card_action.setEnabled(True)
+    suspend_note_action.setEnabled(True)
     delete_action.setEnabled(True)
     if show_more_tool_bar_action.isChecked():
         try:
@@ -411,11 +426,17 @@ bury_action.setText(_(u"Bury note"))
 bury_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
 bury_action.setToolTip(_(u"Hide this note until the deck is closed."))
 mw.connect(bury_action, SIGNAL("triggered()"), mw.reviewer.onBuryNote)
-suspend_action = QAction(mw)
-suspend_action.setText(_(u"Suspend note"))
-suspend_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend.png')))
-suspend_action.setToolTip(_(u"Hide this note permanently."))
-mw.connect(suspend_action, SIGNAL("triggered()"), mw.reviewer.onSuspend)
+suspend_card_action = QAction(mw)
+suspend_card_action.setText(_(u"Suspend card"))
+suspend_card_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend_card.png')))
+suspend_card_action.setToolTip(_(u"Hide this card permanently."))
+mw.connect(
+    suspend_card_action, SIGNAL("triggered()"), mw.reviewer.onSuspendCard)
+suspend_note_action = QAction(mw)
+suspend_note_action.setText(_(u"Suspend note"))
+suspend_note_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend.png')))
+suspend_note_action.setToolTip(_(u"Hide this note permanently."))
+mw.connect(suspend_note_action, SIGNAL("triggered()"), mw.reviewer.onSuspend)
 delete_action = QAction(mw)
 delete_action.setText(_(u"Delete note"))
 delete_action.setIcon(QIcon(os.path.join(icons_dir, 'delete.png')))
