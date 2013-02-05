@@ -10,38 +10,24 @@
 Download pronunciations from Duden.
 '''
 
-import urllib
+import unicodedata
 import urlparse
-import re
 
 from .downloader import AudioDownloader
 
-# Make this work without PyQt
-with_pyqt = True
-try:
-    from PyQt4.QtGui import QImage
-    from PyQt4.QtCore import QSize, Qt
-except ImportError:
-    with_pyqt = False
+transliterations = [(u'Ä', 'Ae'), (u'Ö', 'Oe'), (u'Ü', 'Ue'), (u'ä', 'ae'),
+                    (u'ö', 'oe'), (u'ü', 'ue'), (u'ß', 'sz')]
+"""List of transliterations needed to get the correct url."""
+title_key = 'Als mp3 abspielen'
 
 
 class DudenDownloader(AudioDownloader):
     """Download audio from Duden"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.ogg'
-        self.icon_url = 'http://de.duden.org/'
-        self.full_icon_url = 'http://bits.wikimedia.org/favicon/piece.ico'
-        self.url = 'http://{0}.duden.org/wiki/{1}'
-        self.site_url = 'http://dict.tu-chemnitz.de/'
-        # This re should find only the 'real' files, not the file
-        # description pages. Mediawiki builds 256 (0x100) sub-folders
-        # in the style <hex_digit_1>/<hex_digit_1><hex_digit_2>. Look
-        # for that pattern.
-        self.word_ogg_re = r'/([a-f0-9])/\1[a-f0-9]/[^/]*\b{word}\b[^/]*\.ogg$'
-        # This seems to work to extract the url from a <button> tag's
-        # onclick attribute.
-        self.button_onclick_re = '"videoUrl":"([^"]+)"'
+        self.file_extension = u'.mp3'
+        self.icon_url = 'http://www.duden.de/'
+        self.url = 'http://www.duden.de/rechtschreibung/'
 
     def download_files(self, word, base, ruby, split):
         """
@@ -52,84 +38,47 @@ class DudenDownloader(AudioDownloader):
             # Avoid double downloads.
             return
         self.set_names(word, base, ruby)
+        if not self.language.lower().startswith('de'):
+            return
         if not word:
             return
-        u_word = urllib.quote(word.encode('utf-8'))
+        # TODO: below.
+        m_word = self.munge_word(word)
         self.maybe_get_icon()
-        self.language = self.language[:2]
-        word_soup = self.get_soup_from_url(
-            self.url.format(self.language, u_word))
-        # There are a number of ways the audio files can be present:
-        ogg_url_list = []
-        # As simple links:
-        a_list = word_soup.findAll('a')
-        for a in a_list:
-            try:
-                # Caveat. I have seen an <a> without a href! (It was '<a
-                # id="top"></a>', maybe they handle it with CSS.) So href_list
-                # = [a['href'] for a in a_list] might not work.
-                href = a['href']
-            except KeyError:
-                continue
-            # We look for links to ogg files (and not the description
-            # pages) that contain our word.
-            if re.search(self.word_ogg_re.format(word=re.escape(u_word)), href):
-                ogg_url_list.append(href)
-        # Next, look for source and src. Seen those inside audio tags.
-        # I'm not sure if this is any use, but i guess it does no harm.
-        source_list = word_soup.findAll('source')
-        for source in source_list:
-            try:
-                # Take the same precaution as above
-                src = source['src']
-            except KeyError:
-                continue
-            # We might have other source tags, for whatever. Use the
-            # same re as above. Should work out fine.
-            if re.search(self.word_ogg_re.format(word=re.escape(word)), src):
-                ogg_url_list.append(src)
-        # At least from fr.duden.org i got a <button>.
-        button_list = word_soup.findAll('button')
-        for button in button_list:
-            try:
-                video_url = re.search(
-                    self.button_onclick_re, button['onclick']).group(1)
-            except (KeyError, AttributeError):
-                continue
-            if re.search(self.word_ogg_re.format(
-                    word=re.escape(word)), video_url):
-                ogg_url_list.append(video_url)
-        ogg_url_list = self.uniqify_list(ogg_url_list)
-        for url_to_get in ogg_url_list:
-            # We may have to add a scheme or a scheme and host
-            # name (netloc). urlparse to the rescue!
-            word_url = urlparse.urljoin(
-                self.url.format(self.language, ''), url_to_get)
-            try:
-                word_data = self.get_data_from_url(word_url)
-            except:
-                continue
-            word_path, word_fname = self.get_file_name()
-            with open(word_path, 'wb') as word_file:
-                word_file.write(word_data)
-            self.downloads_list.append(
-                (word_path, word_fname, dict(Source="Duden")))
+        word_soup = self.get_soup_from_url(self.url + m_word)
+        blank_links = word_soup.findAll(name='a', target="_blank")
+        for link in blank_links:
+            # I expect no more than one result. So we don't catch
+            # anything here. When something goes wrong with the first
+            # word we don't try to get any later words. Also, when a
+            # link does not contain a title, we will fail.
+            if self.good_link(link):
+                word_data = self.get_data_from_url(link['href'])
+                word_path, word_fname = self.get_file_name()
+                with open(word_path, 'wb') as word_file:
+                    word_file.write(word_data)
+                self.downloads_list.append(
+                    (word_path, word_fname, dict(Source="Duden")))
 
-    def maybe_get_icon(self):
-        if self.site_icon:
-            return
-        if not with_pyqt:
-            self.site_icon = None
-            return
-        try:
-            icon_data = self.get_data_from_url(self.full_icon_url)
-        except:
-            AudioDownloader.maybe_get_icon(self)
-        else:
-            self.site_icon = QImage.fromData(icon_data)
-            max_size = QSize(self.max_icon_size, self.max_icon_size)
-            ico_size = self.site_icon.size()
-            if ico_size.width() > max_size.width() \
-                    or ico_size.height() > max_size.height():
-                self.site_icon = self.site_icon.scaled(
-                    max_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+    def munge_word(self, word):
+        u"""
+        Munge the word so that it matches the URL used by duden.de.
+
+        Replace umlauts by the Xe transcription, ß wit sz [sic], drop
+        other diacritics, hope the result is ASCII.
+
+        """
+        for f, t in transliterations:
+            # Is this efficent? Sure, writing it in a way that used
+            # less processer time would have taken much longer ;)
+            word = word.replace(f, t)
+        return ''.join(
+            (c for c in unicodedata.normalize('NFD', word)
+             if unicodedata.category(c) != 'Mn'))
+
+    def good_link(self, link):
+        """Check if link looks """
+        if not title_key in link['title']:
+            return False
+        return urlparse.urlsplit(link['href']).netloc \
+            == urlparse.urlsplit(self.url).netloc
