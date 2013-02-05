@@ -16,6 +16,14 @@ dictionary provided by the
 The site provides German↔English, German↔Portuguese and German↔Spanish
 dictionaries and pronuctiations in English, German and Spanish.
 
+## Duden
+
+The [Duden](http://www.duden.de) is pretty much the reference
+dictionary for Germany. Many of the audio files are from the
+[Aussprachedatenbank der ARD](http://www.ard.de/intern/abc/-/id=1643802/nid=1643802/did=1666544/2b9hfd/index.html#abcListItem_1666544).
+It looks like these are used as the reference by the German [newscast
+of record](http://www.tagesschau.de).
+
 ## <span id='gtts'>Google TTS</span>
 
 Goole TTS is the text-to-speech part of

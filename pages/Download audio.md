@@ -214,8 +214,8 @@ At the moment, you can get pronunciations for
   [Macmillan Dictionary](http://www.macmillandictionary.com/dictionary/) and
   [Merriam-Webster](http://merriam-webster.com)
 * French (`fr`) from [LEO.org](http://leo.org)
-* German (`de`) from [BeoLingus](http://beolingus.org) and
-  [LEO.org](http://leo.org)
+* German (`de`) from [BeoLingus](http://beolingus.org),
+  [Duden](http://www.duden.de) and [LEO.org](http://leo.org)
 * Japanese (`ja`) fram [JapanesePod](japanesepod101.com)
 * Spanish (`es`) from [BeoLingus](http://beolingus.org)
 
