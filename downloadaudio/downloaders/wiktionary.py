@@ -33,7 +33,6 @@ class WiktionaryDownloader(AudioDownloader):
         self.icon_url = 'http://de.wiktionary.org/'
         self.full_icon_url = 'http://bits.wikimedia.org/favicon/piece.ico'
         self.url = 'http://{0}.wiktionary.org/wiki/{1}'
-        self.site_url = 'http://dict.tu-chemnitz.de/'
         # This re should find only the 'real' files, not the file
         # description pages. Mediawiki builds 256 (0x100) sub-folders
         # in the style <hex_digit_1>/<hex_digit_1><hex_digit_2>. Look
