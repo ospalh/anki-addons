@@ -10,6 +10,7 @@
 Download pronunciations from Duden.
 '''
 
+import re
 import unicodedata
 import urlparse
 
@@ -53,12 +54,18 @@ class DudenDownloader(AudioDownloader):
             # word we don't try to get any later words. Also, when a
             # link does not contain a title, we will fail.
             if self.good_link(link):
+                extras = dict(Source="Duden")
+                try:
+                    extras[u'©'] = re.search(u'© (.*)', link['title']).group(1)
+                except AttributeError:
+                    # 'NoneType' object has no attribute 'group' ...
+                    pass
                 word_data = self.get_data_from_url(link['href'])
                 word_path, word_fname = self.get_file_name()
                 with open(word_path, 'wb') as word_file:
                     word_file.write(word_data)
                 self.downloads_list.append(
-                    (word_path, word_fname, dict(Source="Duden")))
+                    (word_path, word_fname, extras))
 
     def munge_word(self, word):
         u"""
