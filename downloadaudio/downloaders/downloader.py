@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -45,7 +45,8 @@ class AudioDownloader(object):
         """
         Store for downloaded data.
 
-        This is where self.download_files should
+        This is where self.download_files should store the
+        results. See that method's docstring.
         """
         self.display_text = u''
         """Text shown as source after download"""
@@ -71,8 +72,12 @@ class AudioDownloader(object):
         Whether to use files created by tempfiles or not.
 
         Where to write the downloaded files, in /tmp/ or into the Anki
-        media directory directly. (This is
+        media directory directly.
         """
+        # This is set to True by the "real" audio processor that does
+        # normalization but doesn't work for standard installs. On
+        # typical installs this is kept False.)
+
         self.download_directory = None
         """
         Where to write the downloaded files.
@@ -88,9 +93,9 @@ class AudioDownloader(object):
 
         Normal downloaders should leave this alone. The point of the
         whole blacklist mechanism is that JapanesePod can't say
-        now. Only when there is a chance that we have a file we want
-        to blacklist (that is, when we actually downloaded something
-        from Japanesepod) should we set this to True.
+        no. Only when there is a chance that we have a file we want to
+        blacklist (that is, when we actually downloaded something from
+        Japanesepod) should we set this to True.
         """
 
         self.site_icon = None
@@ -110,14 +115,12 @@ class AudioDownloader(object):
         This function should clear the self.downloads_list, call
         self.set_names(), and try to get pronunciation files from its
         source, put those into tempfiles, and add a (temp_file_path,
-        base_name, extras) pair to self_downloads_lists for each
-        downloaded file (which may of course be zero, e.g. when the
-        self.language is wrong). extras should be a dict with
-        interesting informations, like meaning numbers, name of
-        speaker &c.
+        base_name, extras) 3-tuple to self_downloads_lists for each of
+        the zero or more downloaded files. (Zero when the
+        self.language is wrong, there is no file, ...) extras should
+        be a dict with strings of interesting informations, like
+        meaning numbers or name of speaker, or an empty dict.
         """
-        # NB. Checking file hashes and audio processing is now
-        # done by the calling function.
         raise NotImplementedError("Use a class derived from this.")
 
     def set_names(self, text, base, ruby):
