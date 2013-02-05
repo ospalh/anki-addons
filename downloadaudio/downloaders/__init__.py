@@ -18,6 +18,7 @@ each site first.
 """
 
 from .beolingus import BeolingusDownloader
+from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
 from .leo import LeoDownloader
@@ -31,6 +32,7 @@ downloaders = [
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
+    DudenDownloader(),
     LeoDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
