@@ -43,8 +43,11 @@ audio_field_keys = ['audio', 'sound']
 """Fields we put our downloaded sounds in."""
 
 
-# Change this at your own risk.
-field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
+#Set this to True when the
+naked_reading = False
+"""Does a reading feald free of of kanji/hanzi?"""
+
+
 
 # Apparently some people use a 「・」 between the kana for different
 # kanji. Make it easier to switch removing them for the downloads on
@@ -54,6 +57,9 @@ strip_interpunct = False
 Do or do not remove katakana interpuncts 「・」 before sending requests.
 """
 # strip_interpunct = True
+
+# Change this at your own risk.
+field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
 
 
 def uniqify_list(seq):
@@ -228,18 +234,47 @@ def get_note_fields(note, get_empty=False):
     for afk in audio_field_keys:
         for fn in field_names:
             if afk in fn.lower():
-                try:
-                    # Here, too, first try reading, then try other
-                    # fields.
-                    field_data_list.append(field_data(
-                            note, fn, readings=True, get_empty=get_empty))
-                except (KeyError, ValueError):
-                    # No or empty readings field.
-                    pass
-                try:
-                    field_data_list.append(field_data(
-                            note, fn, readings=False, get_empty=get_empty))
-                except (KeyError, ValueError):
-                    # No or empty 'normal' field
-                    pass
+                if not naked_reading:
+                    try:
+                        # Here, too, first try reading, then try other
+                        # fields.
+                        field_data_list.append(field_data(
+                                note, fn, readings=True, get_empty=get_empty))
+                    except (KeyError, ValueError):
+                        # No or empty readings field.
+                        pass
+                    try:
+                        field_data_list.append(field_data(
+                                note, fn, readings=False, get_empty=get_empty))
+                    except (KeyError, ValueError):
+                        # No or empty 'normal' field
+                        pass
+                else:
+                    # We have to call field_data twice to get the base
+                    # text and reading. Avoiding a certain degree of
+                    # uglines is too much work for this branch.
+                    try:
+                        fd_base = field_data(
+                            note, fn, readings=False, get_empty=get_empty)
+                    except (KeyError, ValueError):
+                        continue
+                    try:
+                        fd_read = field_data(
+                                note, fn, readings=True, get_empty=get_empty)
+                    except (KeyError, ValueError):
+                        # No reading field after all.
+                        pass
+                    else:
+                        # Now we have to put together the two
+                        # results. I guess i could have used a named
+                        # tuple above. Oh, well. Kludge branch.
+                        field_data_list.append(
+                            (fd_base[0], fd_base[1], fd_base[2], fd_base[3],
+                             fd_read[4], True))
+                    # Use what we have from the first try, so that we
+                    # try GoogleTTS (wiktionary) as well.
+                    field_data_list.append(fd_base)
+
+
+
     return field_data_list
