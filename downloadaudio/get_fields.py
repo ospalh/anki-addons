@@ -48,7 +48,6 @@ naked_reading = False
 """Does a reading feald free of of kanji/hanzi?"""
 
 
-
 # Apparently some people use a 「・」 between the kana for different
 # kanji. Make it easier to switch removing them for the downloads on
 # or off
@@ -251,8 +250,7 @@ def get_note_fields(note, get_empty=False):
                         pass
                 else:
                     # We have to call field_data twice to get the base
-                    # text and reading. Avoiding a certain degree of
-                    # uglines is too much work for this branch.
+                    # text and reading.
                     try:
                         fd_base = field_data(
                             note, fn, readings=False, get_empty=get_empty)
@@ -260,7 +258,7 @@ def get_note_fields(note, get_empty=False):
                         continue
                     try:
                         fd_read = field_data(
-                                note, fn, readings=True, get_empty=get_empty)
+                            note, fn, readings=True, get_empty=get_empty)
                     except (KeyError, ValueError):
                         # No reading field after all.
                         pass
@@ -274,7 +272,4 @@ def get_note_fields(note, get_empty=False):
                     # Use what we have from the first try, so that we
                     # try GoogleTTS (wiktionary) as well.
                     field_data_list.append(fd_base)
-
-
-
     return field_data_list
