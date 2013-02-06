@@ -16,6 +16,7 @@ import dehashilator
 from aqt import mw
 from aqt.qt import *
 
+from dehashilator import __version__
 
 dhma = QAction(mw)
 dhma.setText("Dehashilate media")
