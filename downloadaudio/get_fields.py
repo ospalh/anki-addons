@@ -260,11 +260,10 @@ def get_note_fields(note, get_empty=False):
                         continue
                     try:
                         fd_read = field_data(
-                                note, fn, readings=False, get_empty=get_empty)
+                                note, fn, readings=True, get_empty=get_empty)
                     except (KeyError, ValueError):
-                        # No reading field after all. Use what we have
-                        # from the first try.
-                        field_data_list.append(fd_base)
+                        # No reading field after all.
+                        pass
                     else:
                         # Now we have to put together the two
                         # results. I guess i could have used a named
@@ -272,6 +271,10 @@ def get_note_fields(note, get_empty=False):
                         field_data_list.append(
                             (fd_base[0], fd_base[1], fd_base[2], fd_base[3],
                              fd_read[4], True))
+                    # Use what we have from the first try, so that we
+                    # try GoogleTTS (wiktionary) as well.
+                    field_data_list.append(fd_base)
+
 
 
     return field_data_list
