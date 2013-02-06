@@ -63,7 +63,7 @@ by hand, by adding an extra pair of square brackets and dragging the
 「なか」 into them.
 
 The adding of the interpunct can be done using two CSS pseudo-classes,
-“`:after`” and “`:last-child`”.:
+“`:after`” and “`:last-child`”:
 <blockquote class=lsting><pre><code>&lt;div class="interpuncts">{kana:Reading}}&lt;/div></code></pre></blockquote>
 
 <blockquote class=lsting><pre><code>.interpuncts .kana:after{content:"・";}
@@ -89,6 +89,3 @@ or to activate this for all furigana everywhere, drop the extra class:
 
 <blockquote class=lsting><pre><code>rt{visibility: hidden;}
 ruby:hover rt {visibility: visible;}</blockquote></pre></code>
-
-The amount of padding may have to be adjusted stlightly to make the
-lines not jump when moving in or out with the mouse.
