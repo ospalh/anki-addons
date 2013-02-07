@@ -44,12 +44,14 @@ show_toggle_last = True
 # show_toggle_last = False
 
 ## Show the suspend card button
-show_suspend_card = True
-# show_suspend_card = False
+# show_suspend_card = True
+show_suspend_card = False
 
 ## Show the suspend note button
-show_suspend_note = True
-# show_suspend_note = False
+# show_suspend_note = True
+show_suspend_note = False
+
+show_delete_note = False
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
 
@@ -196,7 +198,8 @@ border-bottom: 1px solid #aaa;
         mw.reviewer.more_tool_bar.addAction(suspend_card_action)
     if show_suspend_note:
         mw.reviewer.more_tool_bar.addAction(suspend_note_action)
-    mw.reviewer.more_tool_bar.addAction(delete_action)
+    if show_delete_note:
+        mw.reviewer.more_tool_bar.addAction(delete_action)
     mw.reviewer.more_tool_bar.addSeparator()
     mw.reviewer.more_tool_bar.addAction(mw.form.actionUndo)
     mw.reviewer.more_tool_bar.addSeparator()
@@ -468,7 +471,8 @@ suspend_note_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend.png')))
 suspend_note_action.setToolTip(_(u"Hide this note permanently."))
 mw.connect(suspend_note_action, SIGNAL("triggered()"), mw.reviewer.onSuspend)
 delete_action = QAction(mw)
-delete_action.setText(_(u"Delete note"))
+# There should be another "are you sure" question, so add dots.
+delete_action.setText(_(u"Delete note ..."))
 delete_action.setIcon(QIcon(os.path.join(icons_dir, 'delete.png')))
 delete_action.setToolTip(_(u"Delete this note."))
 mw.connect(delete_action, SIGNAL("triggered()"), mw.reviewer.onDelete)
