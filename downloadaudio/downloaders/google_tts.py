@@ -1,18 +1,27 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
 # Inspiration and source of the URL: Tymon Warecki
 #
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
 
-'''
+"""
 Download pronunciations from GoogleTTS
-'''
+"""
 
 import urllib
 
 from .downloader import AudioDownloader
+
+get_chinese = False
+"""
+Download for Chinese.
+
+The Chinese support add-on downloads the pronunciation from GoogleTTS.
+Using this for Chinese would lead to double downloads for most users,
+so skip this by default.
+"""
 
 
 class GooglettsDownloader(AudioDownloader):
@@ -30,11 +39,11 @@ class GooglettsDownloader(AudioDownloader):
         self.maybe_get_icon()
         self.downloads_list = []
         if split:
-            # Avoid double download, but not for chinese
-            if self.language.lower().startswith('zh'):
-                word = base
-            else:
+            return
+        if self.language.lower().startswith('zh'):
+            if not get_chinese:
                 return
+            word = base
         self.set_names(word, base, ruby)
         if not word:
             raise ValueError('Nothing to download')
