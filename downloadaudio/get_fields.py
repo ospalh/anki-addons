@@ -34,9 +34,8 @@ Fields we get our East Asian text from.
 
 For Japanese (Japanesepod) and Chinese (LEO with language code set to
 'zh'), we use these fields as source. They should be filled by the
-standard add-ons (Japanese Support and Chinese support version
-<=0.6.1) in a useful way (that is, with the reading in square
-brackets).
+standard add-ons (Japanese Support and Chinese support) in a useful
+way (that is, with the reading in square brackets).
 """
 
 audio_field_keys = ['audio', 'sound']

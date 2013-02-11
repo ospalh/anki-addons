@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# © 2012 Roland Sieker <ospalh@gmail.com>
+# © 2012–2013 Roland Sieker <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 import sys
@@ -18,16 +18,19 @@ title_separator = u' – '
 show_subdeck = True
 # show_subdeck = False
 
+# How to separate the clicked-on deck from the subdeck.
+subdeck_format = u'{parent}:–:{child}'
+# subdeck_format = u'{parent}(::{child})'  # Old style
+
 ## Use either "Anki" or the program file name.
 use_argv_0 = False
 # use_argv_0 = True
 
-__version__ = '1.1.3'
+__version__ = '1.2.0'
 
 
 class DeckNamer(object):
-    u"""Provide functions to set the title to the deck name in Anki2
-    """
+    """Functions to set the title to the deck name in Anki2 """
 
     def __init__(self):
         self.prog_name = self.get_prog_name()
@@ -71,10 +74,11 @@ class DeckNamer(object):
         if self.subdeck_name == self.deck_name:
             self.overview_title()
             return
-        mw.setWindowTitle(self.deck_name +
-                          '(' + self.subdeck_name[len(self.deck_name):] + ')' +
-                          title_separator + self.profile_string +
-                          self.prog_name)
+        mw.setWindowTitle(
+            subdeck_format.format(
+                parent=self.deck_name,
+                child=self.subdeck_name[(len(self.deck_name) + 2):])
+            + title_separator + self.profile_string + self.prog_name)
 
 
 deck_namer = DeckNamer()
