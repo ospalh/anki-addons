@@ -26,7 +26,7 @@ subdeck_format = u'{parent}:–:{child}'
 use_argv_0 = False
 # use_argv_0 = True
 
-__version__ = '1.1.3'
+__version__ = '1.2.0'
 
 
 class DeckNamer(object):
