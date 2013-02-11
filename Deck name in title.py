@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# © 2012 Roland Sieker <ospalh@gmail.com>
+# © 2012–2013 Roland Sieker <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 import sys
@@ -30,8 +30,7 @@ __version__ = '1.1.3'
 
 
 class DeckNamer(object):
-    u"""Provide functions to set the title to the deck name in Anki2
-    """
+    """Functions to set the title to the deck name in Anki2 """
 
     def __init__(self):
         self.prog_name = self.get_prog_name()
