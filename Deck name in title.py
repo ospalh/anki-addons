@@ -18,6 +18,10 @@ title_separator = u' – '
 show_subdeck = True
 # show_subdeck = False
 
+# How to separate the clicked-on deck from the subdeck.
+subdeck_format = u'{parent}:–:{child}'
+# subdeck_format = u'{parent}(::{child})'  # Old style
+
 ## Use either "Anki" or the program file name.
 use_argv_0 = False
 # use_argv_0 = True
@@ -71,10 +75,11 @@ class DeckNamer(object):
         if self.subdeck_name == self.deck_name:
             self.overview_title()
             return
-        mw.setWindowTitle(self.deck_name +
-                          '(' + self.subdeck_name[len(self.deck_name):] + ')' +
-                          title_separator + self.profile_string +
-                          self.prog_name)
+        mw.setWindowTitle(
+            subdeck_format.format(
+                parent=self.deck_name,
+                child=self.subdeck_name[(len(self.deck_name) + 2):])
+            + title_separator + self.profile_string + self.prog_name)
 
 
 deck_namer = DeckNamer()
