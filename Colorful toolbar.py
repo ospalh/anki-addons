@@ -503,7 +503,9 @@ mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir,
                                                      'preferences.png')))
 
 ## Hide the edit and nmore buttons.
-mw.reviewer._bottomCSS += ".stat {display:none;}"
+## Looks like the old code was too general. RAS 2013-02-12
+# mw.reviewer._bottomCSS += ".stat {display:none;}"
+mw.reviewer._bottomCSS += "td.stat button {display:none;}"
 
 
 # Create the menus
