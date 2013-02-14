@@ -31,7 +31,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -537,7 +537,7 @@ mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir,
                                                      'preferences.png')))
 
 ## Hide the edit and nmore buttons.
-mw.reviewer._bottomCSS += ".stat {display:none;}"
+mw.reviewer._bottomCSS += "td.stat button {display:none;}"
 
 
 # Create the menus
