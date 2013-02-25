@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
 # Inspiration and source of the URL: Tymon Warecki
 #
 # License: GNU AGPL, version 3 or later;
@@ -70,6 +70,8 @@ class LeoDownloader(AudioDownloader):
         self.language = self.language_dict[self.language[:2].lower()]
         # set_names also checks the language.
         self.set_names(word, base, ruby)
+        if self.chinese_code == self.language and not split:
+            return
         # Only get the icon when we have a word
         # self.maybe_get_icon()
         self.get_flag_icon()
