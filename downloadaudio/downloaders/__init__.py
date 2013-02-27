@@ -24,6 +24,7 @@ from .japanesepod import JapanesepodDownloader
 from .leo import LeoDownloader
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
+from .oaad import OaadDownloader
 from .mw import MerriamWebsterDownloader
 from .wiktionary import WiktionaryDownloader
 
@@ -32,6 +33,7 @@ downloaders = [
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
+    OaadDownloader(),
     DudenDownloader(),
     LeoDownloader(),
     WiktionaryDownloader(),
