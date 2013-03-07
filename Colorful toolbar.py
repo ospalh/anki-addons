@@ -14,7 +14,7 @@
 
 
 from PyQt4.QtCore import QSize, SIGNAL
-from PyQt4.QtGui import QAction, QIcon, QMenu, QToolBar
+from PyQt4.QtGui import QAction, QIcon, QMenu, QPalette, QToolBar
 import os
 
 from anki.hooks import wrap, addHook
@@ -51,7 +51,28 @@ show_suspend_card = True
 show_suspend_note = True
 # show_suspend_note = False
 
+do_gradient = True
+"""
+Show the tool bars with a gradient background
+
+In my opinion it looks a little bit nicer with gradient. The
+disadvantage is that with the gradient the tool bars don't follow
+color scheme changes untill you restart Anki.
+"""
+
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
+
+
+toolbar_gradient_form = u'''QToolBar:top, QToolBar:bottom {{
+background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 {bg}, stop:1 {bgg});
+}}
+QToolBar:left, QToolBar:right {{
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 {bg}, stop:1 {bgg});
+}}
+QToolBar:top {{border-bottom: 1px solid {bgl};}}
+QToolBar:bottom {{border-top: 1px solid {bgl};}}
+QToolBar:left {{border-right: 1px solid {bgl};}}
+QToolBar:right {{border-left: 1px solid {bgl};}} '''
 
 
 def go_deck_browse():
@@ -126,13 +147,6 @@ def add_tool_bar():
     # mw.qt_tool_bar.setAccessibleName('secondary tool bar')
     mw.qt_tool_bar.setObjectName('qt tool bar')
     mw.qt_tool_bar.setIconSize(QSize(32, 32))
-    mw.qt_tool_bar.setStyleSheet(
-        '''QToolBar{
-background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff, stop:1 #ddd);
-border: none;
-border-bottom: 1px solid #aaa;
-}
-''')
     # Conditional setup
     if qt_toolbar_movable:
         mw.qt_tool_bar.setFloatable(True)
@@ -142,6 +156,19 @@ border-bottom: 1px solid #aaa;
         mw.qt_tool_bar.setFloatable(False)
         mw.qt_tool_bar.setMovable(False)
         mw.mainLayout.insertWidget(1, mw.qt_tool_bar)
+    if do_gradient:
+        palette = mw.qt_tool_bar.palette()
+        fg = palette.color(QPalette.ButtonText)
+        bg = palette.color(QPalette.Button)
+        if bg.lightnessF() > fg.lightnessF():
+            bgg = bg.darker(108)
+            bgl = bg.darker()
+        else:
+            bgg = bg.lighter(120)
+            bgl = bg.lighter()
+        mw.qt_tool_bar.setStyleSheet(
+            toolbar_gradient_form.format(
+                bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
     # Add the actions here
     mw.qt_tool_bar.addAction(sync_action)
     # Put this in the more tool bar, closer to the old edit button
@@ -169,17 +196,23 @@ def add_more_tool_bar():
     # mw.reviewer.more_tool_bar.setAccessibleName('secondary tool bar')
     mw.reviewer.more_tool_bar.setObjectName('more options tool bar')
     mw.reviewer.more_tool_bar.setIconSize(QSize(24, 24))
-    mw.reviewer.more_tool_bar.setStyleSheet(
-        '''QToolBar{
-background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff, stop:1 #ddd);
-border: none;
-border-bottom: 1px solid #aaa;
-}
-''')
     mw.reviewer.more_tool_bar.setFloatable(False)
     mw.reviewer.more_tool_bar.setMovable(False)
     # Todo: get index of the bottom web button thingy.
     mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
+    if do_gradient:
+        palette = mw.reviewer.more_tool_bar.palette()
+        fg = palette.color(QPalette.ButtonText)
+        bg = palette.color(QPalette.Button)
+        if bg.lightnessF() > fg.lightnessF():
+            bgg = bg.darker(108)
+            bgl = bg.darker()
+        else:
+            bgg = bg.lighter(105)
+            bgl = bg.lighter()
+        mw.reviewer.more_tool_bar.setStyleSheet(
+            toolbar_gradient_form.format(
+                bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
     # Add the actions here
     mw.reviewer.more_tool_bar.addAction(edit_current_action)
     mw.reviewer.more_tool_bar.addAction(toggle_mark_action)
@@ -305,7 +338,7 @@ def save_toolbars_visible():
         show_more_tool_bar_action.isChecked()
 
 
-def  load_toolbars_visible():
+def load_toolbars_visible():
     """
     Show the right tool bars.
 
