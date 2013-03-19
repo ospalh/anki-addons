@@ -21,7 +21,8 @@ from .beolingus import BeolingusDownloader
 from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
-from .leo import LeoDownloader
+# from .leo import LeoDownloader
+# Doesn't work any more after site upgrade.
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
 from .oaad import OaadDownloader
@@ -35,7 +36,7 @@ downloaders = [
     MacmillanBritishDownloader(),
     OaadDownloader(),
     DudenDownloader(),
-    LeoDownloader(),
+#    LeoDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
     GooglettsDownloader(),
