@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+<!-- Article 1 start -->
+
+{%block htmltitle%} – {{ page.title }}{%endblock htmltitle%}
+
+{%block title%}
+    <h1>{{ page.title }}</h1>
+    {%if page.subtitle%}
+    <h3>{{page.subtitle}}</h3>
+    {%else%}
+    <h3>Information about Anki add-ons</h3>
+    {%endif%}
+{%endblock title%}
+
+{% block content %}
+<article id="{{page.id}}" class="clear">
+	<div class="articleBody">
+                {% block article%}
+                {{ page.html| safe }}
+                {% endblock article%}
+	</div>
+
+</article>
+{% endblock content %}
