@@ -9,7 +9,7 @@
 
 import sys
 from flask import Flask, render_template, send_file
-from flaskext.flatpages import FlatPages
+from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 
 DEBUG = True
@@ -45,6 +45,8 @@ def page(path):
         return render_template('addon.html', page=page)
     elif 'subpage' in page.meta.get('type', []):
         return render_template('subpage.html', page=page)
+    elif 'other_page' in page.meta.get('type', []):
+        return render_template('other.html', page=page)
 
 
 # Generate URLs for all the sub-page md files
