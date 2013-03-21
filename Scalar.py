@@ -1,5 +1,5 @@
 # -*- mode: Python ; coding: utf-8 -*-
-# Copyright: Roland Sieker ( ospalh@gmail.com )
+# Copyright © 2012–2013 Roland Sieker <ospalh@gmail.com>
 # Based in part on code by Damien Elmes <anki@ichi2.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
