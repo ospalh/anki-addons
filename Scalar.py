@@ -1,5 +1,5 @@
 # -*- mode: Python ; coding: utf-8 -*-
-# Copyright: Roland Sieker ( ospalh@gmail.com )
+# Copyright © 2012–2013 Roland Sieker <ospalh@gmail.com>
 # Based in part on code by Damien Elmes <anki@ichi2.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
@@ -9,9 +9,10 @@ import re
 
 from aqt.reviewer import Reviewer
 from anki.utils import stripHTML
+from anki.hooks import addHook
 
 
-__version__ = "1.0.2os"
+__version__ = "2.0.0"
 
 # Code word to look for in the field name to decide whether to do the
 # number comparison:
@@ -38,11 +39,10 @@ pass_class = 'scalarpass'
 exact_class = 'scalarexact'
 
 # Just for me: don't set background color (directly)
-scalar_format_string = """<span class=\"typedscalar {0}\" style=\"font-family:\
-'{1}'; font-size: {2} px;\">{4}</span>"""
+scalar_format_string = """<span class="typedscalar {cl}">{num}</span>"""
 
 
-def scalar_type_ans_answer_filter(self, buf):
+def correct_scalar(res, right, typed, card):
     """
     Return numeric answer in red, yellow or green.
 
@@ -50,59 +50,42 @@ def scalar_type_ans_answer_filter(self, buf):
     red, yellow or green, depending how close the given answer was to
     the correct one.
     """
-    # Redo bits of typeQuesAnswerFilter to get the field name typed in
-    # and most of the old typeAnsAnswerFilter.
-    m = re.search(self.typeAnsPat, buf)
-    if not self.typeCorrect:
-        return re.sub(self.typeAnsPat, "", buf)
-    # tell webview to call us back with the input content
-    # Copy-and-pasted. I guess it’s harmless
-    self.web.eval("_getTypedText();")
-    # munge correct value
-    cor = self.mw.col.media.strip(stripHTML(self.typeCorrect))
-    # Cascade of tests
     try:
-        fld = m.group(1)
+        fld = re.search('\[\[type:([^\]]+)\]\]', card.a()).group(1)
     except AttributeError:
-        # No typed answer field.
-        return old_type_ans_answer_filter(self, buf)
-    if scalar_field in fld.lower() and not fld.startswith("cq:"):
-        try:
-            color_string, class_string = \
-                scalar_color_class(cor, self.typedAnswer)
-        except ValueError:
-            # not floats
-            return old_type_ans_answer_filter(self, buf)
-        else:
-            return re.sub(
-                self.typeAnsPat,
-                scalar_format_string.format(class_string, self.typeFont,
-                                            self.typeSize, color_string,
-                                            self.typedAnswer),
-                buf)
-    # Still here not really scalar.:
-    return old_type_ans_answer_filter(self, buf)
+        # No typed answer to show at all.
+        return res
+    if not scalar_field in fld.lower() or fld.startswith("cq:"):
+        return res
+    try:
+        color_string, class_string = scalar_color_class(right, typed)
+    except ValueError:
+        # not floats
+        return res
+    else:
+        return scalar_format_string.format(
+            cl=class_string, bg=color_string, num=typed)
 
 
-def scalar_color_class(a, b):
+def scalar_color_class(t, g):
     """
     Return a color string and a class string.
 
-    Return a string that can be used to color a html text and a
-    string that can be used as css class. The color is a red, yellow
-    or green depending on how close the two numbers a and b are to
+    Return a string that can be used to color an html text and a
+    string that can be used as a css class. The color is red, yellow
+    or green depending on how close the two numbers t and g are to
     each other, the class describes this fact.
 
-    When a and b can't be converted to numbers, the ValueError of that
+    When t and g can't be converted to numbers, the ValueError of that
     conversion is not caught.
     """
     try:
-        target_value = int(a)
-        given_value = int(b)
+        target_value = int(t)
+        given_value = int(g)
     except ValueError:
         # New style: no try here. Catch that case higher up.
-        target_value = float(a)
-        given_value = float(b)
+        target_value = float(t)
+        given_value = float(g)
     # One of the two conversions worked: we have two valid numbers, two
     # ints or two floats. We don’t really care which.
     if target_value == given_value:
@@ -117,5 +100,4 @@ def scalar_color_class(a, b):
     return pass_color, pass_class
 
 
-old_type_ans_answer_filter = Reviewer.typeAnsAnswerFilter
-Reviewer.typeAnsAnswerFilter = scalar_type_ans_answer_filter
+addHook("filterTypedAnswer", correct_scalar)
