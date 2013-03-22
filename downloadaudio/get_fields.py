@@ -42,9 +42,8 @@ audio_field_keys = ['audio', 'sound']
 """Fields we put our downloaded sounds in."""
 
 
-#Set this to True when the
-naked_reading = False
-"""Does a reading feald free of of kanji/hanzi?"""
+# Set this to False when you don't have kanji in your reading field.
+meaning_in_reading_field = True
 
 
 # Apparently some people use a 「・」 between the kana for different
@@ -232,7 +231,7 @@ def get_note_fields(note, get_empty=False):
     for afk in audio_field_keys:
         for fn in field_names:
             if afk in fn.lower():
-                if not naked_reading:
+                if meaning_in_reading_field:
                     try:
                         # Here, too, first try reading, then try other
                         # fields.
