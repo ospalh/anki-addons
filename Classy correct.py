@@ -28,16 +28,12 @@ def classified_correct(res, right, typed, card):
     Remove the style that colors a typed answer red or green with css classes.
     It is up to the user to define styling for these classes.
     """
-    print('cc: r: {}, t: {}'.format(right, typed))
-    print('res {}'.format(res))
     if not res:
         res = mw.reviewer(res, right, typed, card)
-        print('res now {}'.format(res))
     if not res:
         return u''
     soup = BeautifulSoup(res)
     for tag in soup.findAll(name='span'):
-        print('tag: {}'.format(tag))
         try:
             style = tag['style']
         except KeyError:
