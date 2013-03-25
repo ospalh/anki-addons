@@ -3,7 +3,7 @@ id: dlaudio
 main_file: Download%20audio.py
 status: working
 type: addon
-date: 2013-02-05
+date: 2013-03-25
 status_color: green
 status_text_color: white
 abstract: "Automatically download audio from talking dictionaries or
