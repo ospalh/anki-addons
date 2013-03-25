@@ -2,5 +2,5 @@
 #!/usr/bin/env python
 #
 # Copyright © 2012–2013 Roland Sieker, <ospalh@gmail.com>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
-__version__ = "2.6.0"
+# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
+__version__ = "2.7.0"
