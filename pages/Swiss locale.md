@@ -14,10 +14,8 @@ This add-on provides a few hacks to make my personal German geography
 deck work.
 
 <blockquote class="nb">
-This add-on assumes that a complete Python is installed. It will not
-work with just Anki installed. Specifically, it uses the decimal
-module, which is part of the Python standard library, but not included
-with Anki.
+This add-on needs extra Python packages. See the
+“<a href="Batteries.html">Batteries</a>” page for details.
 </blockquote>
 
 The main problem this tries to fix is the vast span of inhabitants of

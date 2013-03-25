@@ -20,22 +20,24 @@ mass. (Or weight. Better not go
 [gallon](http://en.wikipedia.org/wiki/Gallon)‽)
 
 <blockquote class="nb">
-This add-on assumes that a complete Python is installed. It will not
-work with just Anki installed. Specifically, it uses the decimal
-module, which is part of the Python standard library, but not included
-with Anki.
+This add-on needs extra Python packages. See the
+“<a href="Batteries.html">Batteries</a>” page for details.
 </blockquote>
-
 
 This add-on replaces the standard time-formatting function with one
 that returns times shorter than a year as days – even times much
 shorter than a day. Longer times are written as years with one decimal
 place.
 
-### AnkiDroid
+## AnkiDroid
+
 Daring spirits can use my
-[variant](https://github.com/ospalh/Anki-Android/tree/metric-time) of
-[AnkiDroid](https://github.com/nicolas-raoul/Anki-Android). I have
-added the equivalent of this addon, showing times as fractional days in
-AnkiDroid. You should merge this branch into the newest version of
-AnkiDroid, not just use that branch as-is.
+[branch](https://github.com/ospalh/Anki-Android/tree/v2.1-dev-metric-time)
+of AnkiDroid
+[development branch](https://github.com/ankidroid/Anki-Android/tree/v2.1-dev).
+
+I have added the equivalent of this addon, showing times as fractional
+days in AnkiDroid. You should merge this branch into the newest
+version of AnkiDroid, not just use that branch as-is. I forked this of
+the the 2.1 branch. Merging it into the (more stable) 2.0 brach may or
+may not work.

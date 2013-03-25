@@ -26,3 +26,7 @@ The SVGs themselves are not copied. The paths in the collection are
 also wrong. I used it once to make my Kanji deck useable with an
 unpatched AnkiDroid and am done with this now. It will stay in this
 pretty much useles state.
+
+The add-on may also need extra Python packages. See the
+“<a href="Batteries.html">Batteries</a>” page for details on
+this.
