@@ -56,17 +56,18 @@ with きなよいいかげん as ruby and きなよいいかげん with 起き�
 AnkiDroid can be patched to use furikanji.
 </figcaption>
 </figure>
-Daring spirits can take a look at
-[my version](https://github.com/ospalh/Anki-Android/blob/ospalh-special/src/com/ichi2/libanki/hooks/FuriganaFilters.java)
-of the furigana filters in
-[AnkiDroid](https://github.com/nicolas-raoul/Anki-Android).  I have
-added the equivalent of this addon, providing furikanji on
-AnkiDroid. Unfortunately i forgot to put this change in an extra
-branch. As i have made a number of other changes to my branch of the
-program, you should probably just copy over this single file into your
-own version. (I was unable to get the furikanji marked with the
-horizontal bars as shown in the desktop client. I mark them with color
-instead.)
+Daring spirits can use my
+[branch](https://github.com/ospalh/Anki-Android/tree/v2.1-dev-furikanji) of
+AnkiDroid
+[development branch](https://github.com/ankidroid/Anki-Android/tree/v2.1-dev).
+I have added the equivalent of this addon, providing furikanji on
+AnkiDroid. You should merge this branch into the newest version of
+AnkiDroid, not just use that branch as-is. I forked this of the the
+2.1 branch. Merging it into the (more stable) 2.0 brach may or may not
+work.
+
+I was unable to get the furikanji marked with the horizontal bars as
+shown in the desktop client. I mark them with color instead.
 
 
 ## Boxed and boxkana
