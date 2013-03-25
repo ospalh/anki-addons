@@ -32,7 +32,10 @@ def classified_correct(res, right, typed, card):
         res = mw.reviewer.correct(res, right, typed, card)
     if not res:
         return u''
-    soup = BeautifulSoup(res)
+    try:
+        soup = BeautifulSoup(res)
+    except UnicodeEncodeError:
+        soup = BeautifulSoup(res.encode('utf-8'))
     for tag in soup.findAll(name='span'):
         try:
             style = tag['style']
