@@ -1,92 +1,49 @@
 # -*- mode: Python ; coding: utf-8 -*-
-# Copyright: Roland Sieker <ospalh@gmail.com>
+# © 2012–3 Roland Sieker <ospalh@gmail.com>
 # Based in part on code by Damien Elmes <anki@ichi2.net>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
-from aqt.reviewer import Reviewer
-from anki.utils import stripHTML
-import re
 """
-Add-on for Anki 2 to add css classes to typed in answer, numeric or
-othrwise.
+Add-on for Anki 2 to add css classes to the typed in answer.
 """
 
+from BeautifulSoup import BeautifulSoup
 
-# Code word to look for in the field name to decide whether to do the
-# number comparison:
-ScalarField = 'Scalar'
+from aqt import mw
+from anki.hooks import addHook
 
+good_class = 'typedgood'
+bad_class = 'typedbad'
 
-# This add-on doesn’t actually format the answer. It just adds an id,
-# like 'coransscalar' and one of three classes, 'typedgood' 'typedpass',
-# 'typedfail' to the element.
-
-
-# Factor to decide what counts as ‘good enough’. It should be > 1.0
-# (or at least >= 1.0). What you use here depends on how precisely you
-# want to remember your numbers.
-passFactor = 2.0
+mw.reviewer.calculateOkBadStyle()
+bad_style = mw.reviewer.styleBad
+good_style = mw.reviewer.styleOk
 
 
-def typeAnsAnswerFilterDispatcher(self, buf):
-    m = re.search(self.typeAnsPat, buf)
-
-
-def scalarTypeAnsAnswerFilter(self, buf):
-    # Redo bits of typeQuesAnswerFilter to get the field name typed in
-    # and most of the old typeAnsAnswerFilter.
-    m = re.search(self.typeAnsPat, buf)
-    typedClass = u''
-    scalarWorked = False
-    if not self.typeCorrect:
-        return re.sub(self.typeAnsPat, "", buf)
-    # tell webview to call us back with the input content
-    # Copy-and-pasted. I guess it’s harmless
-    self.web.eval("_getTypedText();")
-    # munge correct value
-    cor = self.mw.col.media.strip(stripHTML(self.typeCorrect))
-    # Cascade of tests
-    if m:
-        fld = m.group(1)
-        if not fld.startswith("cq:") and ScalarField in fld:
-            scalarWorked, typedClass = scalarColor(cor, self.typedAnswer)
-    if scalarWorked:
-        return re.sub(self.typeAnsPat, """
-<span id=coransscalar %s>%s</span>""" %
-                      (typedClass, self.typedAnswer), buf)
-    else:
-        return oldTypeAnsAnswerFilter(self, buf)
-
-
-def scalarColor(a, b):
+def classified_correct(res, right, typed, card):
     """
-    Return color for the answer
+    Remove the style and replace it with classes.
 
-    Return the color the answer should be, red, yellow or green,
-    depending on how close we are to the target.
+    Remove the style that colors a typed answer red or green with css classes.
+    It is up to the user to define styling for these classes.
     """
-    try:
-        target_value = int(a)
-        given_value = int(b)
-    except ValueError:
+    if not res:
+        res = mw.reviewer(res, right, typed, card)
+    if not res:
+        return u''
+    soup = BeautifulSoup(res)
+    for tag in soup.findAll(name='span'):
         try:
-            target_value = float(a)
-            given_value = float(b)
-        except ValueError:
-            return False, u''
-    # One of the two conversions worked: we have two valid numbers, two
-    # ints or two floats. We don’t really care which.
-    if target_value == given_value:
-        return True, 'class=typedgood'
-    # Now we know that they are not the same, so either red or yellow.
-    try:
-        factor = 1.0 * given_value / target_value
-    except ZeroDivisionError:
-        return True, 'class=typedfail'
-    if factor < 1.0 / passFactor or factor > passFactor:
-        return True, 'class=typedfail'
-    return True, 'class=typedpass'
+            style = tag['style']
+        except KeyError:
+            continue
+        if bad_style == style:
+            del tag['style']
+            tag['class'] = bad_class
+        if good_style == style:
+            del tag['style']
+            tag['class'] = good_class
+    return unicode(soup)
 
-
-oldTypeAnsAnswerFilter = Reviewer.typeAnsAnswerFilter
-Reviewer.typeAnsAnswerFilter = scalarTypeAnsAnswerFilter
+addHook("filterTypedAnswer", classified_correct)
