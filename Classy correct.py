@@ -29,7 +29,7 @@ def classified_correct(res, right, typed, card):
     It is up to the user to define styling for these classes.
     """
     if not res:
-        res = mw.reviewer(res, right, typed, card)
+        res = mw.reviewer.correct(res, right, typed, card)
     if not res:
         return u''
     soup = BeautifulSoup(res)
