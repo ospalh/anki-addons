@@ -45,8 +45,7 @@ fields are:
   text.
 
 To get Japanese pronunciations from
-[JapanesePod101.com](http://japanesepod101.com) or Chinese
-pronunciations from [LEO.org](http://leo.org) there has to be the
+[JapanesePod101.com](http://japanesepod101.com) there has to be the
 reading stored in the note. The detailed rules are:
 
 * When there is a field called
@@ -60,8 +59,6 @@ reading stored in the note. The detailed rules are:
     <li>“Kana”,</li>
     <li>「かな」,</li>
     <li>「仮名”」,</li>
-    <li>“<span class="qtbase hanzipinyin">Hanzi</span>” or</li>
-    <li>“Pinyin”.</li>
   </ul>
 * The substring rule is different for this case. For fields where
   “Audio” or “Sound” is a substring, this word is not removed, but
