@@ -52,9 +52,10 @@ def page(path):
 # Generate URLs for all the sub-page md files
 @freezer.register_generator
 def page():
-    for sub_page in pages:
-        if 'subpage' in sub_page.meta.get('type', []):
-            yield {'path': sub_page.path}
+    for some_page in pages:
+        if 'subpage' in some_page.meta.get('type', []) \
+                or 'other_page' in some_page.meta.get('type', []):
+            yield {'path': some_page.path}
 
 
 @app.route('/anki-addons/images/<fname>.png')
