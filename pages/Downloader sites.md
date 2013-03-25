@@ -40,6 +40,15 @@ version of the text enterend, even when it is misspelled.
 Another disadvantage is that it is a robot voice. It may hide
 idiosyncrasies of the phrase or word.
 
+For Chinese, the Google TTS download is skipped by default, because
+the [Chinese support](https://ankiweb.net/shared/info/3448800906)
+add-on downloads those, too. When you don’t use that add-on or want to
+download from Googl TTS with this add-on anyway, you can switch it
+back on by changing the `False` in the `get_chinese` line near the
+head of the
+[`googl_tts.py`](https://github.com/ospalh/anki-addons/blob/master/downloadaudio/downloaders/google_tts.py)
+file to `True`.
+
 ## <span id="jpod">Japanesepod</span>
 
 Downloads audio provided by
@@ -82,28 +91,6 @@ this file. When the same file is seen again, it is quietly dropped and
 you may receive a “Nothing downloaded” message.
 
 
-## Leo
-
-These audio files come from
-[LEO GmbH](http://www.leo.org/index_en.html), originaly founded by the
-[Department of Informatics](http://www.in.tum.de/en.html) of the
-[<span class="qtbase tu">TU</span> München](http://www.tum.de/en/homepage/).
-They offer “five ([sic](http://www.leo.org/index_en.html))
-dictionaries”, German↔Chinese, German↔English, German↔French,
-German↔Italian, German↔Russian and German↔Spanish. Of these seven
-languages, they have audio files for Chinese, English, French, German
-and Spanish. I could not find words for Italian and Russian, but they
-may be added at some point.
-
-### Chinese
-
-The Chinese pronunciations use a version of pinyin with tone
-numbers. Learners of Chinese should install the
-[Chinese support](https://ankiweb.net/shared/info/3448800906)
-add-on. That add-on brings along the [cjklib](http://cjklib.org/),
-which is then used to transforms pinyin with accents into the right
-form with numbers.
-
 ## Macmillan
 
 This downloader gets  pronunciations from the
@@ -127,6 +114,11 @@ American English pronunciations from the
 [Merriam-Webster](http://www.merriam-webster.com/info/index.htm)
 online dictionary.
 
+## Oxford Advanced American Dictionary
+
+American English pronunciations from
+[Oxford Advanced American Dictionary](http://oaadonline.oxfordlearnersdictionaries.com/).
+
 ## Wiktionary
 
 [Wiktionary](http://www.wiktionary.org) is the dictionary branch of Wikipedia.
@@ -137,9 +129,9 @@ any results is hard to say.
 As these sound files are all uploaded by users, it is possible (even
 if unlikely) that some files do not contain what the should. They
 *might* even contain obsecnities. The
-[Content disclaimer](http://en.wikipedia.org/wiki/Wikipedia:Content_disclaimer)
+[content disclaimer](http://en.wikipedia.org/wiki/Wikipedia:Content_disclaimer)
 from Wikipedia applies. If you encounter an incorrect file, the best
-way to proceed is to clean up the wiktionary page in
+way to proceed is to clean up the Wiktionary page in
 question.
 
 The different language versions of Wiktionary add audio clips in
