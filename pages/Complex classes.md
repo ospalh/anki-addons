@@ -53,14 +53,15 @@ Some people like to use the interpunct <span class="qtbase nakaguro">「
 </span> to separate the kana for different kanji. For example, for the
 word 「中黒」 the text 「`なか・ぐろ`」 is used in a reading field.
 
-An alternative is to use the [Japanese Support]() addon to automatically
-generated readings. THey are usually by word, and have to be
-rearranged slightly by hand. In the example, you would type the kanji
-「中黒」 into the “Expression” field. With a tab or mouse click, the
-“Reading” field would be filled with 「中黒[なかぐろ]」. For this
+An alternative is to use the
+[Japanese Support](https://ankiweb.net/shared/info/3918629684) addon
+to automatically generate readings. They are usually by word, and have
+to be rearranged slightly by hand. In the example, you would type the
+kanji「中黒」 into the “Expression” field. With a tab or mouse click,
+the “Reading” field would be filled with 「中黒[なかぐろ]」. For this
 trick to work, this string would have to changed to 「中[なか]黒[ぐろ]」
-by hand, by adding an extra pair of square brackets and dragging the
-「なか」 into them.
+by hand, by adding an extra pair of square brackets and dragging
+the「なか」 into them.
 
 The adding of the interpunct can be done using two CSS pseudo-classes,
 “`:after`” and “`:last-child`”:
@@ -76,8 +77,7 @@ method furigana can be used as well, with “`{{furigana:Reading}}`”.
 
 This method works without this add-on as well.
 
-To show furigana only when the mouse hovers above it use
-
+To show furigana only when the mouse hovers above it use:
 <blockquote class=lsting><pre><code>&lt;div class="kanjihover">{{furigana:Reading}}&lt;/div></code></pre></blockquote>
 
 <blockquote class=lsting><pre><code>.kanjihover rt{visibility: hidden;}
