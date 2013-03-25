@@ -21,29 +21,31 @@ Extract field data to download.
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
 expression_fields = [u'expression', u'word']
-"""
-Fields we get the 'normal download text from.
+u"""
+Fields we get the ‘normal’ download text from.
 
 Text from these fields is used by most downloaders. When no field is
 found here, we use the first field.
 """
 
-reading_keys = ['reading', 'kana', u'かな', u'仮名', 'hanzi', 'pinyin']
-"""
-Fields we get our East Asian text from.
+reading_keys = ['reading', 'kana', u'かな', u'仮名']
+u"""
+Fields we get our Japanese text from.
 
-For Japanese (Japanesepod) and Chinese (LEO with language code set to
-'zh'), we use these fields as source. They should be filled by the
-standard add-ons (Japanese Support and Chinese support) in a useful
-way (that is, with the reading in square brackets).
+For Japanesepod we use these fields as source. A ‘Reading’ field is
+typically filled automatically by the Japanese Support add-on in a
+useful way (that is, with the reading in square brackets).
 """
 
 audio_field_keys = ['audio', 'sound']
 """Fields we put our downloaded sounds in."""
 
 
-# Set this to False when you don't have kanji in your reading field.
+# Replace the True with a False when you don't have kanji in your reading field.
 meaning_in_reading_field = True
+u"""
+Use either kanji and reading from one field (True) or from two fields (False).
+"""
 
 
 # Apparently some people use a 「・」 between the kana for different
