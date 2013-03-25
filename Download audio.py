@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 #!/usr/bin/env python
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–3 Roland Sieker, <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 """
 Download audio.
