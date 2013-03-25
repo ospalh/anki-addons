@@ -46,8 +46,8 @@ should select the language you are learning, not your native language.
 
 <blockquote class="nb">When setting the language, use language
 codes. Do <em>not</em> use country domain names. For example, use
-<code>zh</code> for Chinese, <em>not</em>
-<code>cn</code>.</blockquote>
+<code>ja</code> for Japanese, <em>not</em>
+<code>jp</code>.</blockquote>
 
 A list of audio codes can – unsprprisingly – be found at
 [Wikipedia](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
@@ -121,13 +121,10 @@ window. Text: Requestst send to the download sites. Reading. Edit texts:
 夫 おっと, Text: Expression. Edit text 夫.">
 <figcaption>Edit Japanese text.</figcaption>
 </figure>
-When learning Japanese or Chinese, when there is a “Reading” field,
+When learning Japanese, when there is a “Reading” field,
 the text used as request and shown in the dialog is split into the
-base text and the reading.
-
-For Chinese the base text is usually just hanzi, the reading
-pinyin. For Japanese, the screen text calls the base text “kanji” for
-simplicity, but it often contains kana as well.
+base text and the reading. See the
+[split reading page](Split%20reading.html) for more deatils.
 
 For decks like that shown in in the first example
 you should use the “Note audio” mode: most dictionaries have
@@ -198,8 +195,8 @@ languages with different decks. See also the
 ### <span id="tags">Using tags</span>
 
 When a note has a tag in the form “`lang_<NN>`” (e.g. “`lang_en`” for
-English, “`lang_zh`” Chinese), this language code (that is “`en`” or
- “`zh`”) is used for the download.
+English, “`lang_fr`” for French), this language code (that is “`en`” or
+ “`fr`”) is used for the download.
 
 ### Supported languages
 
@@ -208,24 +205,17 @@ dictionaries used.
 
 At the moment, you can get pronunciations for
 
-* Chinese (Mandarin, i think) (`zh`)  from [LEO.org](http://leo.org),
 * English (`en`) from [BeoLingus](http://beolingus.org),
-  [LEO.org](http://leo.org),
-  [Macmillan Dictionary](http://www.macmillandictionary.com/dictionary/) and
-  [Merriam-Webster](http://merriam-webster.com)
-* French (`fr`) from [LEO.org](http://leo.org)
-* German (`de`) from [BeoLingus](http://beolingus.org),
-  [Duden](http://www.duden.de) and [LEO.org](http://leo.org)
-* Japanese (`ja`) fram [JapanesePod](japanesepod101.com)
+  [Macmillan Dictionary](http://www.macmillandictionary.com/dictionary/),
+  [Merriam-Webster](http://merriam-webster.com) and
+  [Oxford Advanced American Dictionary](http://oaadonline.oxfordlearnersdictionaries.com/).
+* German (`de`) from [BeoLingus](http://beolingus.org) and
+  [Duden](http://www.duden.de)
+* Japanese (`ja`) fram [JapanesePod](http://japanesepod101.com)
 * Spanish (`es`) from [BeoLingus](http://beolingus.org)
 
-There is the potential for
-
-* Italian  (`it`) and
-* Russian  (`ru`),
-
-but i think [LEO](http://leo.org) is only offering a text dictionary
-for those two languages, not their own audio files.
+There was a downloader for [LEO](http://leo.org), but since they
+updated their site in early 2013, it no longer works.
 
 Google translate list over 60 languages for text translations. It
 seems unlikely that they offer text-to-speech services for more. The
@@ -246,7 +236,7 @@ them. While i see no problem with using them privately, especially for
 educational purposes, re-publishing, for example by uploading a shared
 deck to AnkiWeb, is most likely prohibited by those rights.
 
-As exceptions is wiktionary. Those files are usually available under
+An exceptions is Wiktionary. Those files are usually available under
 the [Creative Commons Attribution/Share-Alike
 License](http://creativecommons.org/licenses/by-sa/3.0/). See the
 [Wikimedia Terms of Use](http://wikimediafoundation.org/wiki/Terms_of_use).
@@ -277,8 +267,8 @@ every card. There are a few reasons for this:
 
 Bugs and other issues can be reported at the
 [github repository](https://github.com/ospalh/anki-addons/issues?state=open)
-(pull requests with patches welcome) or possibly at a
-[Google Groups thread](http://no.such-domain.nope/NN) i may start soon.
+(pull requests with patches welcome) or the add-ons
+[Google Groups thread](https://groups.google.com/d/topic/anki-addons/DMgTHkhnhow/discussion).
 
 ### Audio processing
 
@@ -309,8 +299,7 @@ Things that might be added in the future (but don’t hold your breath):
   automatically add the 「る」 for 一段動詞.  This will most likely
   not by implemented any time soon.
 * More talking dictionaries. Links welcome. Mention them in the
-  dedicated
-  [Google Groups thread](https://groups.google.com/forum/?fromgroups=#!topic/ankisrs-users/yyixoEYy8tc). Python
+  [Google Groups thread](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/processors). Python
   files welcome. Take a look at
   [`downloadaudio/downloaders`](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/downloaders),
   write a new class derived from `AudioDownloader` and send me a pull
