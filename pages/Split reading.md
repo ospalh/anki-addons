@@ -28,31 +28,28 @@ between 「の」 and 「間」 and the square brackets around the 「あいだ�
 Most of the time these details are not important. This square-bracket
 style is exactly what is porduced by the Japanese Support add-on. When
 creating cards you typically just type the expression into its field,
-and when you go to the meaning field to typet the translation, the
+and when you go to the meaning field to type the translation, the
 reading field is filled automatically in the right format.
 
 
-## Chinese
+## Using two fields
 
-Similarly, when learning Chinese, you should install the
-[Chinese support](https://ankiweb.net/shared/info/3448800906) add-on.
+Some people store just the kana in the “Reading” field, for example by
+using `%r` instead of `%e[%r]` to fill the field in the settings of
+the [Yomichan](https://ankiweb.net/shared/info/934748696) add-on.
+With this set-up, downloads from Japanesepod will not work without
+change. By default the add-on expects to find the kanji in the reading
+field.
 
-The Chinese source text should follow a similar pattern, with the pinyin in
-square brackets after the hanzi. This output is produced automatically
-by the Chinese support add-on.
-
-There are a few more points to mention:
-
-* When adding cards, you should delete incorrect readings before
-  downloading.
-* Manual download: 中[zhōng]学[xué] reading OK for Google TTS
-* Leo: split
-* GoogleTTS Hanzi2 Audio, Leo Audio2
-* [Switch on GTTS](Downloader%20sites.html#gtts)
-
-
-## Use two fields
-
-Test: see [Battieries](Batteries.html)
-* pure kanji and pure kana work
-* option in sources
+<figure>
+<img src="images/update_kanji_kana.png" alt="Anki Download audio dialog
+window. Text: Requestst send to the download sites. Reading. Edit texts:
+夫 おっと, Text: Expression. Edit text 夫.">
+<figcaption>Kanji and kana in different edit fields.</figcaption>
+</figure>
+Set the `meaning_in_reading_field` switch to `False` in the
+[`get_fields.py`](https://github.com/ospalh/anki-addons/blob/master/downloadaudio/get_fields.py#L45)
+file when you use this set-up. With this the Japanesepod downloader
+takes the kanji and kana from separate fields. Check with the “Manual
+audio” menu item, there should be a line with two edit fields and the
+kanji in the left and the kana in the right field.
