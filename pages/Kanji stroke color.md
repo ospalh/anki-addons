@@ -3,9 +3,9 @@ id: kanjistrokecolor
 main_file: Kanji%20stroke%20color.py
 type: addon
 date: 2012-12-12
-status: hackish, desktop only
-status_color: yellow
-status_text_color: black
+status: hackish, desktop only, abandoned
+status_color: red
+status_text_color: white
 abstract: A quick hack add-on to show (colored) stroke order diagrams.
 first_image: stroke%20color.png
 first_alt: "The word Zustand: and a colored stroke order diagram for 況"
@@ -14,7 +14,7 @@ first_caption: Write 況 in this order.
 Show colored stroke order diagrams on the desktop client, including
 variants.
 
-## Alternative
+## Alternatives
 
 This add-on serves a similar purpose as
 [cayennes](http://cayennes.github.com)’ [Kanji
@@ -30,10 +30,13 @@ colorizer](https://ankiweb.net/shared/info/1964372878). (View the code
 
 * With this add-on, the core function, color, is not working on
   AnkiWeb/AnkiDroid/AnkiMobile.
+* Installing the add-on is somewhat tricky.
 
-### Difference
+<blockquote class="nb">
+This add-on needs extra Python packages. See the
+“<a href="Batteries.html">Batteries</a>” page for details.
+</blockquote>
 
-* This add-on shows all characters in the input field, not just the first.
 
 ### Without the add-on
 
@@ -55,6 +58,16 @@ of [AnkiDroid](https://github.com/nicolas-raoul/Anki-Android). I have
 added the equivalent of this addon, giving colored stoke order
 diagrams on AnkiDroid. You should merge this branch into the newest
 version of AnkiDroid, not just use that branch as-is.
+
+### Other alternative
+
+I have personally given up use of this add-on. While i still like my
+way of coloring the diagrams, with the actual colors defined via CSS,
+i did not like the changes to AnkiDroid needed.
+
+I have now copied the svgs to the media folder and added the kanji –
+with variants in an extra field – to my collection with the even more
+hackisch/broken [Copy diagrams](Copy%20diagrams.html) add-on.
 
 ## Usage
 
@@ -146,7 +159,7 @@ file.
 
 ### Diagrams
 
-New diagrams with can be produced with either Cayennes'
+New diagrams can be produced with either Cayennes'
 [kanji-colorize](https://github.com/cayennes/kanji-colorize/) script
 or with [my fork](https://github.com/ospalh/kanji-colorize) of it. The
 diagrams that are shipped with the add-on are done with the `--mode
@@ -156,6 +169,7 @@ css` switch.
 ### Restart
 
 For all of these changes to take effect, you must restart Anki.
+
 
 ## Data source
 
