@@ -17,7 +17,7 @@ button and the select deck button at the top of the add card dialog.
 Click on them to select your favourite model or note type.
 
 <blockquote class="nb">You will have to modify the add-on source to
-addapt this to your deck and model names.</blockquote>
+adapt this to your deck and model names.</blockquote>
 
 ## Setup
 
@@ -29,8 +29,10 @@ buttons/Edit...” to use Anki’s built-in editor.
 
 There are two bits of code that should be changed, marked with the
 commets `# Set up here...` and `# ... and here ...`. A knowledge of
-[Python](http://www.python.org/) [syntax](http://docs.python.org/2/tutorial/index.html) may be helpful to set this up, but following the
-examples and only changing text inside of quotation marks should work.
+[Python](http://www.python.org/)
+[syntax](http://docs.python.org/2/tutorial/index.html) may be helpful
+to set this up, but following the examples and only changing text
+inside of quotation marks should work.
 
 ### Lists of dictionaries
 
