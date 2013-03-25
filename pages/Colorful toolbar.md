@@ -60,7 +60,6 @@ review area reads Die Hauptstadt von Niue ist">
     </figcaption>
 </figure>
 Apart from the standard version, there is a
-
 [netbook version](https://ankiweb.net/shared/info/1330596667)
 on the AnkiWeb
 [download page](https://ankiweb.net/shared/addons/), that places
