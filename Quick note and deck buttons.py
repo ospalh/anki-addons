@@ -103,6 +103,7 @@ from aqt.deckchooser import DeckChooser
 from anki.hooks import wrap
 from anki.hooks import runHook
 from anki.lang import _
+from anki.utils import isMac
 
 __version__ = "2.0.2"
 
@@ -122,10 +123,11 @@ def setup_buttons(chooser, buttons, text, do_function):
             pass
         else:
             s.connect(s, SIGNAL("activated()"), l)
-        try:
-            b.setFixedWidth(button_item["button_width"])
-        except KeyError:
-            b.setFixedWidth(default_button_width)
+	if isMac:
+            try:
+                b.setFixedWidth(button_item["button_width"])
+            except KeyError:
+                b.setFixedWidth(default_button_width)
         bhbl.addWidget(b)
         chooser.connect(b, SIGNAL("clicked()"), l)
     chooser.addLayout(bhbl)
