@@ -9,9 +9,19 @@ Add-on for Anki 2 to compare typed-in text to just the kana.
 """
 
 import re
-from aqt import mw
+import sys
+
 from anki.hooks import addHook
 from anki.template.furigana import kana
+
+if not [pe for pe in sys.path if 'addons' in pe and not 'batteries' in pe]:
+    sys.path.append(mw.pm.addonFolder())
+
+try:
+    from classy_correct import classified_correct as _correct
+except ImportError:
+    from aqt import mw
+    _correct = mw.reviewer.correct
 
 # First code word to look for in the field name to decide whether to
 # do the kanji removal.
@@ -35,7 +45,7 @@ def correct_kana(res, right, typed, card):
         return res
     if not japanese_model in card.model()[u'name'].lower():
         return res
-    return mw.reviewer.correct(u'', kana(right), typed, card)
+    return _correct(u'', kana(right), typed, card)
 
 
 addHook("filterTypedAnswer", correct_kana)
