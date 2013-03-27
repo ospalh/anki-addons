@@ -1,6 +1,6 @@
 title: Classy correct
 id: classy_correct
-main_file: Classy%20correct.py
+main_file: classy_correct.py
 date: 2013-03-25
 tags: [class, css, future]
 type: addon
