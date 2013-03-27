@@ -20,6 +20,8 @@ mw.reviewer.calculateOkBadStyle()
 bad_style = mw.reviewer.styleBad
 good_style = mw.reviewer.styleOk
 
+space_replacement = u'␣'
+# space_replacement = None
 
 def classified_correct(res, right, typed, card):
     """
@@ -47,6 +49,11 @@ def classified_correct(res, right, typed, card):
         if good_style == style:
             del tag['style']
             tag['class'] = good_class
+        if space_replacement and tag.string:
+            if tag.string.startswith(' '):
+                tag.string = space_replacement + tag.string[1:]
+            if tag.string.endswith(' '):
+                tag.string = tag.string[:-1] + space_replacement
     return unicode(soup)
 
 addHook("filterTypedAnswer", classified_correct)
