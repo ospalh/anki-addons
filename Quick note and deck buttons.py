@@ -102,7 +102,7 @@ from anki.hooks import runHook
 from anki.lang import _
 from anki.utils import isMac
 
-__version__ = "2.0.2"
+__version__ = "2.0.3"
 
 def setup_buttons(chooser, buttons, text, do_function):
     bhbl = QHBoxLayout()
