@@ -17,7 +17,7 @@ from anki.sound import playFromText, play
 from anki.utils import isWin
 from aqt import moduleDir, utils, reviewer
 
-__version__ = "1.1.1"
+__version__ = "1.2.0"
 
 if isWin:
     # Looks like we should use these to hide the CMD/shell
