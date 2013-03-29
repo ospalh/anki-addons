@@ -106,7 +106,8 @@ __version__ = "2.0.2"
 
 def setup_buttons(chooser, buttons, text, do_function):
     bhbl = QHBoxLayout()
-    bhbl.setSpacing(0)
+    if not isMac:
+        bhbl.setSpacing(0)
     for button_item in buttons:
         b = QPushButton(button_item["label"])
         b.setToolTip(_("Change {what} to {name}.").format(
@@ -119,11 +120,7 @@ def setup_buttons(chooser, buttons, text, do_function):
             pass
         else:
             s.connect(s, SIGNAL("activated()"), l)
-	if isMac:
-            try:
-                b.setFixedWidth(button_item["button_width"])
-            except KeyError:
-                b.setFixedWidth(default_button_width)
+        b.setStyleSheet("padding: 5px; padding-right: 7px;")
         bhbl.addWidget(b)
         chooser.connect(b, SIGNAL("clicked()"), l)
     chooser.addLayout(bhbl)
