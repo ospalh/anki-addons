@@ -44,8 +44,8 @@ else:
     # bit more readable.
     split_pat = u' ?(?P<kanji>\w+?)\[(?P<kana>.+?)\]'
     # Add flag parameter to calls to re.sub.
-    re_sub_flag = lambda pattern, repl, string, flags=re.UNICODE: \
-        re.sub(pattern, repl, string, flags=flags)
+    re_sub_flag = lambda pattern, repl, string: \
+        re.sub(pattern, repl, string, flags=re.UNICODE)
 
 furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
     '<rt>\g<kana></rt></ruby>'
