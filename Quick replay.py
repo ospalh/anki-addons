@@ -1,6 +1,7 @@
 # -*- mode: Python ; coding: utf-8 -*-
 # Copyright: Roland Sieker ( ospalh@gmail.com )
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# License: GNU GPL, version 3 or later;
+# http://www.gnu.org/copyleft/gpl.html
 """
 Anki 2 add-on that changes the way sound and videos are played.
 """
@@ -20,6 +21,10 @@ sound_re = '\[sound:(.*?)\]'
 
 command_list = ['mplayer', '-really-quiet']
 
+is_win32 = sys.platform.startswith("win32")
+
+if is_win32:
+    command_list += ['-ao', 'win32']
 
 def patched_play_from_text(text):
     matches = re.findall(sound_re, text)
@@ -40,13 +45,18 @@ def play_with_mplayer(files):
     # We don't do the file name fixing. The point of this is to play
     # it quickly. When there is no easy way to do it on Windows, than
     # remove this add-on. So, just throw the names at mplayer.
+
+    if is_win32:
+	subprocess.STARTUPINFO.wShowWindow = subprocess.SW_HIDE
+	subprocess.STARTUPINFO.dwFlags = subprocess.STARTF_USESHOWWINDOW
+
     tmp_play_list = copy.copy(command_list)
     tmp_play_list.extend(files)
     try:
         subprocess.Popen(tmp_play_list,
                          shell=False, stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                         close_fds=True)
+                         close_fds=not is_win32)
     except OSError:
         # On Macs, we get ‘Interruppted system call’s. Just
         # ignore, like anki’s sound module does.
@@ -71,20 +81,19 @@ def which(program):
 
 
 def find_mplayer():
-    """
-    Try to find mplayer
+    """ Try to find mplayer
 
-    Look if we have mplayer. Fix it by adding an .exe on
-    windows first. Clear the commands when we don't have one.
+    Look if we have mplayer. Fix it by adding an .exe on windows first. Clear
+    the commands when we don't have one.
     """
     global command_list
     if command_list:
-        if sys.platform.startswith("win32"):
+	if is_win32:
             command_list[0] += '.exe'
         if not which(command_list[0]):
             # Complain,
-            warn_string = u'''Replay with mplayer add-on: Could not find {0} \
-in path. Please download and install it.'''
+	    warn_string = u'''Replay with mplayer add-on: Could not find {0} \
+		    in path. Please download and install it.'''
             utils.showWarning(warn_string.format(command_list[0]))
             # and clear the list
             command_list = None
@@ -100,3 +109,4 @@ playFromText = patched_play_from_text
 reviewer.playFromText = patched_play_from_text
 
 find_mplayer()
+
