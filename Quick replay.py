@@ -12,6 +12,7 @@ import copy
 import os
 import re
 import subprocess
+import sys
 
 from anki.sound import playFromText, play
 from anki.utils import isWin
