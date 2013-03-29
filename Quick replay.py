@@ -40,12 +40,12 @@ def patched_play_from_text(text):
         return
     matches = [mtch.encode(fse) for mtch in matches]
     if command_list:
-            play_with_mplayer(matches)
-            return
-    # Still here: no command list. I guess we didn't find
-    # mplayer. Good luck playing it with play...
-    for match in matches:
-        play(match)
+        play_with_mplayer(matches)
+    else:
+        # No command list. I guess we didn't find mplayer. Good luck
+        # playing it with play...
+        for match in matches:
+            play(match)
 
 
 def play_with_mplayer(files):
