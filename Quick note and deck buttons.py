@@ -12,7 +12,7 @@
 # The more precise the report, the greater the chance i will do something.
 
 """
-Anki2 add-on to add quick model change buttons to the edit screen.
+Anki2 add-on to add quick change buttons to the edit screen.
 
 Adds "Quick Access" buttons to quickly change between frequently used
 note types and decks in the "Add" cards dialog.
@@ -21,7 +21,7 @@ note types and decks in the "Add" cards dialog.
 # Set up here...
 model_buttons = [
     {"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
-    {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',}
+    {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'},
     ]
 """
 List of dictionaries defining the model buttons to use.
@@ -38,7 +38,8 @@ N.B.: Closely follow the examples. Use the correct symbols like
       use u'ベーシック', not 'ベーシック').
 
 N.B.: When there is no model with the given name, you will get
-      errors. Set them carefully.
+      an error ending with “TypeError: 'NoneType' object has no
+      attribute '__getitem__'”. Set the names carefully.
 
 Example 1 (minimal):
 model_buttons = [{"label": 'S', "name": 'Standard'}]
@@ -63,7 +64,9 @@ model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
 """
 
 # ... and here.
-deck_buttons = [{"label": u'D', 'name': u'Default'},]
+deck_buttons = [
+    {"label": u'D', 'name': u'Default'},
+    ]
 """
 List of dictionaries defining the model buttons to use.
 
@@ -95,13 +98,15 @@ from anki.utils import isMac
 
 __version__ = "2.0.4"
 
+
 def setup_buttons(chooser, buttons, text, do_function):
     bhbl = QHBoxLayout()
     if not isMac:
         bhbl.setSpacing(0)
     for button_item in buttons:
         b = QPushButton(button_item["label"])
-        b.setToolTip(_("Change {what} to {name}.").format(
+        b.setToolTip(
+            _("Change {what} to {name}.").format(
                 what=text, name=button_item["name"]))
         l = lambda s=chooser, nn=button_item["name"]: do_function(s, nn)
         try:
@@ -111,7 +116,8 @@ def setup_buttons(chooser, buttons, text, do_function):
             pass
         else:
             s.connect(s, SIGNAL("activated()"), l)
-        b.setStyleSheet("padding: 5px; padding-right: 7px;")
+        if isMac:
+            b.setStyleSheet("padding: 5px; padding-right: 7px;")
         bhbl.addWidget(b)
         chooser.connect(b, SIGNAL("clicked()"), l)
     chooser.addLayout(bhbl)
@@ -130,17 +136,20 @@ def change_model_to(chooser, model_name):
 
 
 def change_deck_to(chooser, deck_name):
+    """Change to deck with name deck_name"""
     # Well, that is easy.
     chooser.deck.setText(deck_name)
 
 
 ModelChooser.setupModels = wrap(
     ModelChooser.setupModels,
-    lambda mc=ModelChooser, b=model_buttons, t="note type" ,do=change_model_to:
-        setup_buttons(mc, b, t, do), "after")
+    lambda mc=ModelChooser: setup_buttons(
+        mc, model_buttons, "note type", change_model_to),
+    "after")
 ModelChooser.change_model_to = change_model_to
 DeckChooser.setupDecks = wrap(
     DeckChooser.setupDecks,
-    lambda dc=DeckChooser, b=deck_buttons, t="deck", do=change_deck_to:
-        setup_buttons(dc, b, t, do), "after")
+    lambda dc=DeckChooser: setup_buttons(
+        dc, deck_buttons, "deck", change_deck_to),
+    "after")
 DeckChooser.change_deck_to = change_deck_to
