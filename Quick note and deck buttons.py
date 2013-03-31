@@ -65,6 +65,7 @@ model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
                  {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]
 """
 
+<<<<<<< Temporary merge branch 1
 # ... and here ...
 deck_buttons = [{"label": u'Z', 'name': u'ZZ'},
                 {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}]
