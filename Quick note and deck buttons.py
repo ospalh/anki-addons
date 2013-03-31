@@ -143,13 +143,13 @@ def change_deck_to(chooser, deck_name):
 
 ModelChooser.setupModels = wrap(
     ModelChooser.setupModels,
-    lambda mc=ModelChooser: setup_buttons(
+    lambda mc: setup_buttons(
         mc, model_buttons, "note type", change_model_to),
     "after")
 ModelChooser.change_model_to = change_model_to
 DeckChooser.setupDecks = wrap(
     DeckChooser.setupDecks,
-    lambda dc=DeckChooser: setup_buttons(
+    lambda dc: setup_buttons(
         dc, deck_buttons, "deck", change_deck_to),
     "after")
 DeckChooser.change_deck_to = change_deck_to
