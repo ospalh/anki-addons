@@ -12,7 +12,7 @@
 # The more precise the report, the greater the chance i will do something.
 
 """
-Anki2 add-on to add quick model change buttons to the edit screen.
+Anki2 add-on to add quick change buttons to the edit screen.
 
 Adds "Quick Access" buttons to quickly change between frequently used
 note types and decks in the "Add" cards dialog.
@@ -31,9 +31,8 @@ List of dictionaries defining the model buttons to use.
 Each dictionary must conatin:
 * label: the text of the button
 * name:  the name of the note or deck to change to
-Optional elements:
+Optional element:
 * shortcut: the shortcut key
-* button_width: the width of the button
 
 N.B.: Closely follow the examples. Use the correct symbols like
       brackets, curly braces; use u'' for strings that contain
@@ -41,7 +40,8 @@ N.B.: Closely follow the examples. Use the correct symbols like
       use u'ベーシック', not 'ベーシック').
 
 N.B.: When there is no model with the given name, you will get
-      errors. Set them carefully.
+      an error ending with “TypeError: 'NoneType' object has no
+      attribute '__getitem__'”. Set the names carefully.
 
 Example 1 (minimal):
 model_buttons = [{"label": 'S', "name": 'Standard'}]
@@ -56,17 +56,13 @@ model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
 
 Example 3:
 model_buttons = [{"label": u'C',
-                  'name': u'ClozeFieldAtTop',
-                  "button_width": 24},
+                  'name': u'ClozeFieldAtTop'},
                  {"label": u'F',
-                  'name': u'FieldAtTop',
-                  "button_width": 24}]
+                  'name': u'FieldAtTop'}]
 
 Example 4 (default):
-model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
-                  "button_width": 22},
-                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',
-                  "button_width": 22}]
+model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]
 """
 
 # ... and here ...
@@ -86,11 +82,7 @@ Example 2 (default):
 deck_buttons = [{"label": u'D', 'name': u'Default'},]
 """
 
-# ... and maybe here.
-default_button_width = 18
-"""
-Width of one button in pixel.
-"""
+## Configuration section end
 
 ## IAR, (or "practicality beats purity"). Put the stuff to change on
 ## top, even before the imports.
@@ -105,7 +97,7 @@ from anki.hooks import runHook
 from anki.lang import _
 from anki.utils import isMac
 
-__version__ = "2.0.3"
+__version__ = "2.0.5"
 
 
 def setup_buttons(chooser, buttons, text, do_function):
@@ -114,7 +106,8 @@ def setup_buttons(chooser, buttons, text, do_function):
         bhbl.setSpacing(0)
     for button_item in buttons:
         b = QPushButton(button_item["label"])
-        b.setToolTip(_("Change {what} to {name}.").format(
+        b.setToolTip(
+            _("Change {what} to {name}.").format(
                 what=text, name=button_item["name"]))
         l = lambda s=chooser, nn=button_item["name"]: do_function(s, nn)
         try:
@@ -124,7 +117,8 @@ def setup_buttons(chooser, buttons, text, do_function):
             pass
         else:
             s.connect(s, SIGNAL("activated()"), l)
-        b.setStyleSheet("padding: 5px; padding-right: 7px;")
+        if isMac:
+            b.setStyleSheet("padding: 5px; padding-right: 7px;")
         bhbl.addWidget(b)
         chooser.connect(b, SIGNAL("clicked()"), l)
     chooser.addLayout(bhbl)
@@ -143,17 +137,20 @@ def change_model_to(chooser, model_name):
 
 
 def change_deck_to(chooser, deck_name):
+    """Change to deck with name deck_name"""
     # Well, that is easy.
     chooser.deck.setText(deck_name)
 
 
 ModelChooser.setupModels = wrap(
     ModelChooser.setupModels,
-    lambda mc=ModelChooser, b=model_buttons, t="note type" ,do=change_model_to:
-        setup_buttons(mc, b, t, do), "after")
+    lambda mc=ModelChooser: setup_buttons(
+        mc, model_buttons, "note type", change_model_to),
+    "after")
 ModelChooser.change_model_to = change_model_to
 DeckChooser.setupDecks = wrap(
     DeckChooser.setupDecks,
-    lambda dc=DeckChooser, b=deck_buttons, t="deck", do=change_deck_to:
-        setup_buttons(dc, b, t, do), "after")
+    lambda dc=DeckChooser: setup_buttons(
+        dc, deck_buttons, "deck", change_deck_to),
+    "after")
 DeckChooser.change_deck_to = change_deck_to
