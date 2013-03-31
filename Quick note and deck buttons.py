@@ -19,19 +19,18 @@ note types and decks in the "Add" cards dialog.
 """
 
 # Set up here...
-model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
-                  "button_width": 22},
-                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',
-                  "button_width": 22}]
+model_buttons = [
+    {"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+    {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',}
+    ]
 """
 List of dictionaries defining the model buttons to use.
 
 Each dictionary must conatin:
 * label: the text of the button
 * name:  the name of the note or deck to change to
-Optional elements:
+Optional element:
 * shortcut: the shortcut key
-* button_width: the width of the button
 
 N.B.: Closely follow the examples. Use the correct symbols like
       brackets, curly braces; use u'' for strings that contain
@@ -54,20 +53,16 @@ model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
 
 Example 3:
 model_buttons = [{"label": u'C',
-                  'name': u'ClozeFieldAtTop',
-                  "button_width": 24},
+                  'name': u'ClozeFieldAtTop'},
                  {"label": u'F',
-                  'name': u'FieldAtTop',
-                  "button_width": 24}]
+                  'name': u'FieldAtTop'}]
 
 Example 4 (default):
-model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze',
-                  "button_width": 22},
-                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic',
-                  "button_width": 22}]
+model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]
 """
 
-# ... and here ...
+# ... and here.
 deck_buttons = [{"label": u'D', 'name': u'Default'},]
 """
 List of dictionaries defining the model buttons to use.
@@ -83,11 +78,7 @@ Example 2 (default):
 deck_buttons = [{"label": u'D', 'name': u'Default'},]
 """
 
-# ... and maybe here.
-default_button_width = 18
-"""
-Width of one button in pixel.
-"""
+## Configuration section end
 
 ## IAR, (or "practicality beats purity"). Put the stuff to change on
 ## top, even before the imports.
