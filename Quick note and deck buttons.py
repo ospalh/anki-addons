@@ -129,6 +129,10 @@ def change_model_to(chooser, model_name):
     # Mostly just a copy and paste from the bottom of onModelChange()
     m = chooser.deck.models.byName(model_name)
     chooser.deck.conf['curModel'] = m['id']
+    # When you get a “TypeError: 'NoneType' object has no attribute
+    # '__getitem__'” directing you here, the most likely explanation
+    # is that the model names are not set up correctly in the
+    # model_buttons list of dictionaries above.
     cdeck = chooser.deck.decks.current()
     cdeck['mid'] = m['id']
     chooser.deck.decks.save(cdeck)
