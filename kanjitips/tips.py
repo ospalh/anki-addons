@@ -33,6 +33,16 @@ tip_kanji_diagram_template = u"""\
 data="{kanji}.svg"type="image/svg+xml">{kanji}</object>"""
 tip_base_template = u"""{}"""
 
+
+tip_script_source = u"""\
+$(document).ready(
+$(function() {
+$( ".showtips" ).tooltip({ content: "Awesome title!" });
+
+});
+) """
+
+
 bad_unicode_categories = 'C'  # Don’t even ask for the name of control
                               # characters.
 kanji_code = 'CJK UNIFIED IDEOGRAPH'
@@ -84,7 +94,7 @@ def maybe_make_tip(glyph):
     if not do_this(glyph):
         return None
     glyph_element = html.fragment_fromstring(glyph, create_parent='span')
-
+    glyph_element.set('title', glyph)
     print(u'Turning “{}” into “{}”.'.format(
             glyph, html.tostring(glyph_element, encoding='unicode')))
     return glyph_element
@@ -98,18 +108,18 @@ def show_tip_filter(qa, card):
     the correct one.
     """
     doc = html.fromstring(qa)
+    added_tip = False
     for el in doc.cssselect(tips_selector):
         for sub_el in el.iter():
             if sub_el.text is not None:
                 new_el = None
                 new_el_count = 0
-                print(u'text: ‘{}’ (length: {}'.format(
-                        sub_el.text, len(sub_el.text)))
                 tip_text = u''
                 sub_e_t = sub_el.text
                 for g in sub_e_t:
                     ge = maybe_make_tip(g)
                     if ge is not None:
+                        added_tip = True
                         if not new_el:
                             sub_el.text = tip_text
                         else:
@@ -125,13 +135,12 @@ def show_tip_filter(qa, card):
                     new_el.tail = tip_text
             if sub_el.tail is not None:
                 new_el = None
-                print(u'tail: ‘{}’ (length: {}'.format(
-                        sub_el.tail, len(sub_el.tail)))
                 tip_tail = u''
                 sub_e_t = sub_el.tail
                 for g in sub_e_t:
                     ge = maybe_make_tip(g)
                     if ge is not None:
+                        added_tip = True
                         if not new_el:
                             sub_el.tail = tip_tail
                         else:
@@ -143,6 +152,11 @@ def show_tip_filter(qa, card):
                         tip_tail += g
                 if new_el is not None:
                     new_el.tail = tip_text
+    print html.tostring(doc, encoding='unicode')
+    if added_tip:
+        doc[-1].append(html.fragment_fromstring(
+                tip_script_source, create_parent='script'))
+    print html.tostring(doc, encoding='unicode')
     return html.tostring(doc, encoding='unicode')
 
 def setup_tips():
