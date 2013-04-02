@@ -36,10 +36,10 @@ tip_base_template = u"""{}"""
 
 tip_script_source = u"""\
 $(document).ready(
-$(function() {
-$( ".showtips" ).tooltip({ content: "Awesome title!" });
+$(function() {{
+$( "{sel}" ).tooltip();
 
-});
+}});
 ) """
 
 
@@ -120,7 +120,7 @@ def show_tip_filter(qa, card):
                     ge = maybe_make_tip(g)
                     if ge is not None:
                         added_tip = True
-                        if not new_el:
+                        if new_el is None:
                             sub_el.text = tip_text
                         else:
                             # new_el is the old new element...
@@ -133,7 +133,10 @@ def show_tip_filter(qa, card):
                         tip_text += g
                 if new_el is not None:
                     new_el.tail = tip_text
-            if sub_el.tail is not None:
+            if sub_el is not el and sub_el.tail is not None:
+                # We have to skip the tail of the element that
+                # trigered the selector. That is *not* in the
+                # selector.
                 new_el = None
                 tip_tail = u''
                 sub_e_t = sub_el.tail
@@ -141,21 +144,25 @@ def show_tip_filter(qa, card):
                     ge = maybe_make_tip(g)
                     if ge is not None:
                         added_tip = True
-                        if not new_el:
+                        if new_el is None:
                             sub_el.tail = tip_tail
                         else:
                             new_el.tail = tip_tail
-                        sub_el.insert(-1, ge)
+                        # We have to inser this into the parent, not
+                        # this sub_el.
+                        par = sub_el.getparent()
+                        par.insert(par.index(sub_el) + 1, ge)
                         new_el = ge
                         tip_tail = u''
                     else:
                         tip_tail += g
                 if new_el is not None:
-                    new_el.tail = tip_text
+                    new_el.tail = tip_tail
     print html.tostring(doc, encoding='unicode')
     if added_tip:
         doc[-1].append(html.fragment_fromstring(
-                tip_script_source, create_parent='script'))
+                tip_script_source.format(sel=tips_selector),
+                create_parent='script'))
     print html.tostring(doc, encoding='unicode')
     return html.tostring(doc, encoding='unicode')
 
