@@ -44,6 +44,10 @@ data="{kanji}.svg"type="image/svg+xml">{kanji}</object>"""
 tip_base_template = u"""{}"""
 
 
+# None for English
+lang_code = None
+#lang_code = 'de'
+
 # jq_path =  'jquery-1.9.1.js'
 # jqui_path =  'jquery-ui.1.10.2.js'
 # tip_script_path = 'show_tips.js'
@@ -167,11 +171,23 @@ def maybe_make_tip(glyph):
         'class', format(u'kanjitip {g} {h}'.format(g=glyph, h=hex_code)))
     glyph_element.text = glyph
     if not hex_code in current_script:
-        ct = u'return "{c} ({h})";'.format(c=glyph, h=hex_code)
+        ct = u''
+        kd_lit = jdic2_root.xpath(
+            u'character/literal[text()="{}"]'.format(glyph))
+        try:
+            kd_element = kd_lit[0].getparent()
+        except IndexError:
+            ct = u'return "{c} ({h})";'.format(c=glyph, h=hex_code)
+        else:
+            mgs = u''
+            for mg in kd_element.findall('.//meaning'):
+                if mg.get('m_lang') is lang_code:
+                    mgs += "{}, ".format(mg.text)
+            mgs = mgs.rstrip(', ')
+            if mgs:
+                ct = u'return "{mgs}";'.format(mgs=mgs)
         current_script += character_script_template.format(
             content=ct, hex_code=hex_code)
-    print(u'Turning “{}” into “{}”.'.format(
-            glyph, html.tostring(glyph_element, encoding='unicode')))
     return glyph_element
 
 def show_tip_filter(qa, card):
