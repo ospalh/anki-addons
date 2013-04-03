@@ -1,2 +1,13 @@
 @charset "UTF-8";
 /* -*- mode: CSS ; coding: utf-8 -*- */
+
+.ui-tooltip{
+  font-family: 'Demos LT';
+  font-size: 15px;
+  color: #657b83;
+  background-color: #fdf6e3;
+}
+
+.ui-tooltip .nhg {
+    font-family: IPAPMincho;
+}
