@@ -5,7 +5,8 @@
 """Add-on for Anki 2 to show information on kanji."""
 
 import os
-from lxml import html
+import gzip
+from lxml import html, etree
 import unicodedata
 
 from aqt import mw
@@ -15,13 +16,13 @@ from anki.hooks import addHook
 # Tips are only shown for elements that match this selector, that is
 # have this class. So, in your template use something like <span
 # class="showtips">{{Back}}</span> instead of just {{Back}}.
-tips_selector = '.showtips'
+# tips_selector = '.showtips'
 
 ## This string is used as a "css selector". Pretty much everything
 ## that works in a CSS3 file should work as well. Some ideas:
 # tips_selector = 'rb'  # Or only show tips for rb (ruby base) elements,
                         # that is, for characters with furigana above.
-# tips_selector = '*'  # Everywhere
+tips_selector = '*'  # Everywhere
 
 # all should show stroke orders for latin characters/rōmaji as well.
 show_all_stroke_order = False
@@ -58,9 +59,28 @@ jqui_theme_style_path = u'file://' + os.path.join(
 tips_style_path = u'file://' + os.path.join(
     os.path.dirname(__file__), 'show_tips.css')
 
+kanjidic_path = os.path.join(os.path.dirname(__file__), 'kanjidic2.xml.gz')
+jdic2_root = None
+
 jquery_script = u''
 jquery_ui_script = u''
 show_tips_script = u''
+
+character_script_template = u'''
+$(function() {{
+    $( '.{hex_code}' ).tooltip({{
+        track: true,
+        hide: {{
+            effect: "fade",
+        }},
+        title: '二',
+        content: function() {{
+          {content}
+        }}
+    }});
+}});
+
+'''
 
 bad_unicode_categories = 'C'  # Don’t even ask for the name of control
                               # characters.
@@ -89,10 +109,14 @@ def read_scripts():
         show_tips_script = tf.read()
 
 
-
 def read_character_data():
     global character_data_list
-    print __file__
+    global jdic2_root
+    utf8_parser = etree.XMLParser(encoding='utf-8')
+    with gzip.open(kanjidic_path, 'rb') as kjdf:
+        s = kjdf.read()
+    jdic2_tree = etree.fromstring(s, parser=utf8_parser)
+    jdic2_root = jdic2_tree
     fname = os.path.join(os.path.dirname(__file__), character_data_file_name)
     try:
         with open(fname) as kanji_data:
@@ -102,6 +126,15 @@ def read_character_data():
                     character_data_list[ls[0]] = ls[1:]
     except IOError:
         pass
+
+
+def base_name(c):
+    """Return the base mame of the  svg"""
+    if not c.isalnum():
+        return '{:05x}'.format(ord(c))
+    if c.islower():
+        return c + '_'
+    return c
 
 
 def do_this(c):
@@ -124,13 +157,19 @@ def do_this(c):
 
 
 def maybe_make_tip(glyph):
+    global current_script
     if not do_this(glyph):
         return None
     glyph_element = html.Element('span')
     glyph_element.set('title', glyph)
-    glyph_element.set('class', format(u'kanjitip {g} hex_{h:05x}'.format(
-                g=glyph, h=ord(glyph))))
+    hex_code = 'hex_{h:05x}'.format(h=ord(glyph))
+    glyph_element.set(
+        'class', format(u'kanjitip {g} {h}'.format(g=glyph, h=hex_code)))
     glyph_element.text = glyph
+    if not hex_code in current_script:
+        ct = u'return "{c} ({h})";'.format(c=glyph, h=hex_code)
+        current_script += character_script_template.format(
+            content=ct, hex_code=hex_code)
     print(u'Turning “{}” into “{}”.'.format(
             glyph, html.tostring(glyph_element, encoding='unicode')))
     return glyph_element
@@ -145,7 +184,6 @@ def show_tip_filter(qa, card):
     """
     global do_show
     global current_script
-
     do_show = False
     current_script = show_tips_script
     doc = html.fromstring(qa)
