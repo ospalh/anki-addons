@@ -32,7 +32,10 @@ show_variant_stroke_order = True
 kanji_diagram_size = 200
 kanji_variant_diagram_size = 120
 
-
+# We do use a few file-wide variables. (I don't really want to put all
+# this in a class. Sholud work OK.
+do_show = False
+current_script = u''
 
 tip_kanji_diagram_template = u"""\
 <object width="{size}" height="{size}" title="{title}" \
@@ -47,6 +50,11 @@ tip_base_template = u"""{}"""
 jq_path = os.path.join(os.path.dirname(__file__), 'jquery-1.9.1.js')
 jqui_path = os.path.join(os.path.dirname(__file__), 'jquery-ui.1.10.2.js')
 tips_script_path = os.path.join(os.path.dirname(__file__), 'show_tips.js')
+
+jqui_style_path = u'file://' + os.path.join(
+    os.path.dirname(__file__), 'jquery-ui.css')
+jqui_theme_style_path = u'file://' + os.path.join(
+    os.path.dirname(__file__), 'jquery.ui.theme.css')
 tips_style_path = u'file://' + os.path.join(
     os.path.dirname(__file__), 'show_tips.css')
 
@@ -118,8 +126,11 @@ def do_this(c):
 def maybe_make_tip(glyph):
     if not do_this(glyph):
         return None
-    glyph_element = html.fragment_fromstring(glyph, create_parent='span')
+    glyph_element = html.Element('span')
     glyph_element.set('title', glyph)
+    glyph_element.set('class', format(u'kanjitip {g} hex_{h:05x}'.format(
+                g=glyph, h=ord(glyph))))
+    glyph_element.text = glyph
     print(u'Turning “{}” into “{}”.'.format(
             glyph, html.tostring(glyph_element, encoding='unicode')))
     return glyph_element
@@ -132,8 +143,12 @@ def show_tip_filter(qa, card):
     red, yellow or green, depending how close the given answer was to
     the correct one.
     """
+    global do_show
+    global current_script
+
+    do_show = False
+    current_script = show_tips_script
     doc = html.fromstring(qa)
-    added_tip = False
     for el in doc.cssselect(tips_selector):
         for sub_el in el.iter():
             if sub_el.text is not None:
@@ -144,7 +159,7 @@ def show_tip_filter(qa, card):
                 for g in sub_e_t:
                     ge = maybe_make_tip(g)
                     if ge is not None:
-                        added_tip = True
+                        do_show = True
                         if new_el is None:
                             sub_el.text = tip_text
                         else:
@@ -168,7 +183,7 @@ def show_tip_filter(qa, card):
                 for g in sub_e_t:
                     ge = maybe_make_tip(g)
                     if ge is not None:
-                        added_tip = True
+                        do_show = True
                         if new_el is None:
                             sub_el.tail = tip_tail
                         else:
@@ -183,19 +198,35 @@ def show_tip_filter(qa, card):
                         tip_tail += g
                 if new_el is not None:
                     new_el.tail = tip_tail
-    tt_style = html.Element('link')
-    tt_style.set('type','text/css')
-    tt_style.set('rel', 'stylesheet')
-    tt_style.set('href', tips_style_path)
-    tt_style.tail = '\n'
-    doc[1].append(tt_style)
+    if do_show:
+        head = doc[1]
+        jqui_style = html.Element('link')
+        jqui_style.set('type','text/css')
+        jqui_style.set('rel', 'stylesheet')
+        jqui_style.set('href', jqui_style_path)
+        jqui_style.tail = '\n'
+        head.append(jqui_style)
+        jqui_theme_style = html.Element('link')
+        jqui_theme_style.set('type','text/css')
+        jqui_theme_style.set('rel', 'stylesheet')
+        jqui_theme_style.set('href', jqui_theme_style_path)
+        jqui_theme_style.tail = '\n'
+        head.append(jqui_theme_style)
+        tt_style = html.Element('link')
+        tt_style.set('type','text/css')
+        tt_style.set('rel', 'stylesheet')
+        tt_style.set('href', tips_style_path)
+        tt_style.tail = '\n'
+        head.append(tt_style)
     return html.tostring(doc, encoding='unicode')
 
 
 def do_scripts():
+    if not do_show:
+        return
     mw.reviewer.web.eval(jquery_script)
     mw.reviewer.web.eval(jquery_ui_script)
-    mw.reviewer.web.eval(show_tips_script)
+    mw.reviewer.web.eval(current_script)
 
 
 def setup_tips():
