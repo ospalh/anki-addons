@@ -65,7 +65,7 @@ tips_style_path = u'file://' + os.path.join(
     os.path.dirname(__file__), 'show_tips.css')
 
 kanjidic_path = os.path.join(os.path.dirname(__file__), 'kanjidic2.xml.gz')
-jdic2_root = None
+jdic2_twigs = {}
 
 jquery_script = u''
 jquery_ui_script = u''
@@ -115,12 +115,15 @@ def read_scripts():
 
 def read_character_data():
     global character_data_list
-    global jdic2_root
+    global jdic2_twigs
     utf8_parser = etree.XMLParser(encoding='utf-8')
     with gzip.open(kanjidic_path, 'rb') as kjdf:
         s = kjdf.read()
     jdic2_tree = etree.fromstring(s, parser=utf8_parser)
-    jdic2_root = jdic2_tree
+    for el in jdic2_tree.findall('character'):
+        jdic2_twigs[el.find('literal').text] = el
+        # We turn the tree not into a loose-leaf collection, but a
+        # collcetion of the character-'twigs', (small sub-trees)
     fname = os.path.join(os.path.dirname(__file__), character_data_file_name)
     try:
         with open(fname) as kanji_data:
@@ -172,11 +175,9 @@ def maybe_make_tip(glyph):
     glyph_element.text = glyph
     if not hex_code in current_script:
         ct = u''
-        kd_lit = jdic2_root.xpath(
-            u'character/literal[text()="{}"]'.format(glyph))
         try:
-            kd_element = kd_lit[0].getparent()
-        except IndexError:
+            kd_element = jdic2_twigs[glyph]
+        except KeyError:
             ct = u'return "{c} ({h})";'.format(c=glyph, h=hex_code)
         else:
             mgs = u''
