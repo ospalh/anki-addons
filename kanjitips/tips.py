@@ -78,7 +78,6 @@ $(function() {{
         hide: {{
             effect: "fade",
         }},
-        title: '二',
         content: function() {{
           {content}
         }}
@@ -182,8 +181,16 @@ def maybe_make_tip(glyph):
         else:
             mgs = u''
             for mg in kd_element.findall('.//meaning'):
-                if mg.get('m_lang') is lang_code:
-                    mgs += "{}, ".format(mg.text)
+                try:
+                    if mg.get('m_lang') == lang_code:
+                        mgs += "{}, ".format(mg.text)
+                except TypeError:
+                    # Deal with the case that exactly one of the two
+                    # sides in the if is None. (Above, we may compare
+                    # None == None instead of None is None, which is
+                    # not recommendet, but works (at least in Python
+                    # 2.7 and 3.3) EAFP
+                    pass
             mgs = mgs.rstrip(', ')
             if mgs:
                 ct = u'return "{mgs}";'.format(mgs=mgs)
@@ -207,52 +214,54 @@ def show_tip_filter(qa, card):
     for el in doc.cssselect(tips_selector):
         for sub_el in el.iter():
             if sub_el.text is not None:
-                new_el = None
-                new_el_count = 0
+                new_index = 0
+                new_element = None
                 tip_text = u''
                 sub_e_t = sub_el.text
                 for g in sub_e_t:
                     ge = maybe_make_tip(g)
                     if ge is not None:
                         do_show = True
-                        if new_el is None:
+                        if new_element is None:
                             sub_el.text = tip_text
                         else:
-                            # new_el is the old new element...
-                            new_el.tail = tip_text
-                        sub_el.insert(new_el_count, ge)
-                        new_el = ge
+                            # new_element is the old new element...
+                            new_element.tail = tip_text
+                        sub_el.insert(new_index, ge)
+                        new_index += 1
+                        new_element = ge
                         tip_text = u''
-                        new_el_count += 1
                     else:
                         tip_text += g
-                if new_el is not None:
-                    new_el.tail = tip_text
+                if new_element is not None:
+                    new_element.tail = tip_text
             if sub_el is not el and sub_el.tail is not None:
                 # We have to skip the tail of the element that
                 # trigered the selector. That is *not* in the
                 # selector.
-                new_el = None
+                parent = sub_el.getparent()
+                new_index = parent.index(sub_el) + 1
+                new_element = None
                 tip_tail = u''
                 sub_e_t = sub_el.tail
                 for g in sub_e_t:
                     ge = maybe_make_tip(g)
                     if ge is not None:
                         do_show = True
-                        if new_el is None:
+                        if new_element is None:
                             sub_el.tail = tip_tail
                         else:
-                            new_el.tail = tip_tail
+                            new_element.tail = tip_tail
                         # We have to inser this into the parent, not
-                        # this sub_el.
-                        par = sub_el.getparent()
-                        par.insert(par.index(sub_el) + 1, ge)
-                        new_el = ge
+                        # into this sub_el.
+                        parent.insert(new_index, ge)
+                        new_index += 1
+                        new_element = ge
                         tip_tail = u''
                     else:
                         tip_tail += g
-                if new_el is not None:
-                    new_el.tail = tip_tail
+                if new_element is not None:
+                    new_element.tail = tip_tail
     if do_show:
         head = doc[1]
         jqui_style = html.Element('link')
