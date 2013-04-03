@@ -283,7 +283,7 @@ def show_tip_filter(qa, card):
         tt_style.set('href', tips_style_path)
         tt_style.tail = '\n'
         head.append(tt_style)
-    return html.tostring(doc, encoding='unicode')
+    return html.tostring(doc, encoding='unicode', method='xml')
 
 
 def do_scripts():
