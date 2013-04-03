@@ -8,14 +8,20 @@ import os
 from lxml import html
 import unicodedata
 
+from aqt import mw
 from anki.hooks import addHook
+
 
 # Tips are only shown for elements that match this selector, that is
 # have this class. So, in your template use something like <span
 # class="showtips">{{Back}}</span> instead of just {{Back}}.
 tips_selector = '.showtips'
+
+## This string is used as a "css selector". Pretty much everything
+## that works in a CSS3 file should work as well. Some ideas:
 # tips_selector = 'rb'  # Or only show tips for rb (ruby base) elements,
-                      # that is, for characters with furigana above.
+                        # that is, for characters with furigana above.
+# tips_selector = '*'  # Everywhere
 
 # all should show stroke orders for latin characters/rōmaji as well.
 show_all_stroke_order = False
@@ -34,14 +40,19 @@ data="{kanji}.svg"type="image/svg+xml">{kanji}</object>"""
 tip_base_template = u"""{}"""
 
 
-tip_script_source = u"""\
-$(document).ready(
-$(function() {{
-$( "{sel}" ).tooltip();
+# jq_path =  'jquery-1.9.1.js'
+# jqui_path =  'jquery-ui.1.10.2.js'
+# tip_script_path = 'show_tips.js'
+# tip_style_path = 'show_tips.css'
+jq_path = os.path.join(os.path.dirname(__file__), 'jquery-1.9.1.js')
+jqui_path = os.path.join(os.path.dirname(__file__), 'jquery-ui.1.10.2.js')
+tips_script_path = os.path.join(os.path.dirname(__file__), 'show_tips.js')
+tips_style_path = u'file://' + os.path.join(
+    os.path.dirname(__file__), 'show_tips.css')
 
-}});
-) """
-
+jquery_script = u''
+jquery_ui_script = u''
+show_tips_script = u''
 
 bad_unicode_categories = 'C'  # Don’t even ask for the name of control
                               # characters.
@@ -56,6 +67,20 @@ hiragana_code = 'HIRAGANA'
 character_data_list = {}
 character_data_file_name = u'character_data.txt'
 cd_separator = '\r'
+
+
+def read_scripts():
+    global jquery_script
+    global jquery_ui_script
+    global show_tips_script
+    with open(jq_path) as jqf:
+        jquery_script = jqf.read()
+    with open(jqui_path) as jqf:
+        jquery_ui_script = jqf.read()
+    with open(tips_script_path) as tf:
+        show_tips_script = tf.read()
+
+
 
 def read_character_data():
     global character_data_list
@@ -158,15 +183,27 @@ def show_tip_filter(qa, card):
                         tip_tail += g
                 if new_el is not None:
                     new_el.tail = tip_tail
-    print html.tostring(doc, encoding='unicode')
-    if added_tip:
-        doc[-1].append(html.fragment_fromstring(
-                tip_script_source.format(sel=tips_selector),
-                create_parent='script'))
-    print html.tostring(doc, encoding='unicode')
+    tt_style = html.Element('link')
+    tt_style.set('type','text/css')
+    tt_style.set('rel', 'stylesheet')
+    tt_style.set('href', tips_style_path)
+    tt_style.tail = '\n'
+    doc[1].append(tt_style)
     return html.tostring(doc, encoding='unicode')
+
+
+def do_scripts():
+    mw.reviewer.web.eval(jquery_script)
+    mw.reviewer.web.eval(jquery_ui_script)
+    mw.reviewer.web.eval(show_tips_script)
+
 
 def setup_tips():
     read_character_data()
+    read_scripts()
     addHook("filterAnswerText", show_tip_filter)
     addHook("filterQuestionText", show_tip_filter)
+    # Looks like we cant just load scripts. So eval them after we've
+    # done the rest of the card.
+    addHook("showAnswer", do_scripts)
+    addHook("showQuestion", do_scripts)
