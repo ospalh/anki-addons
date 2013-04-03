@@ -46,8 +46,8 @@ tip_base_template = u"""{}"""
 
 
 # None for English
-# lang_code = None
-lang_code = 'de'
+lang_code = None
+# lang_code = 'de'
 
 # jq_path =  'jquery-1.9.1.js'
 # jqui_path =  'jquery-ui.1.10.2.js'
