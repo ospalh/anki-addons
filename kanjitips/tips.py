@@ -16,13 +16,14 @@ from anki.hooks import addHook
 # Tips are only shown for elements that match this selector, that is
 # have this class. So, in your template use something like <span
 # class="showtips">{{Back}}</span> instead of just {{Back}}.
-# tips_selector = '.showtips'
+tips_selector = '.showtips'
 
 ## This string is used as a "css selector". Pretty much everything
 ## that works in a CSS3 file should work as well. Some ideas:
 # tips_selector = 'rb'  # Or only show tips for rb (ruby base) elements,
                         # that is, for characters with furigana above.
-tips_selector = '*'  # Everywhere
+# tips_selector = '*'  # Everywhere. NB: This WILL mess up audio/video
+                       # with kanji in the file name
 
 # all should show stroke orders for latin characters/rōmaji as well.
 show_all_stroke_order = False
