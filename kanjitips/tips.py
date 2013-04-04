@@ -208,7 +208,7 @@ def stroke_order_variant_tip(c):
 
 def characterdata_tip(c):
     """Add the string from the character data file or throw a KeyError."""
-    return u'            content += "<div>{cd}</div>";\n'.format(
+    return u'            content += "<h3>{cd}</h3>";\n'.format(
         cd=character_data_dict[c])
 
 
@@ -249,6 +249,10 @@ def maybe_make_tip(glyph):
             ct += characterdata_tip(glyph)
         except KeyError:
             pass
+        try:
+            ct += kanjidic_tip(glyph)
+        except KeyError:
+            pass
         if show_kanji_stroke_order:
             try:
                 ct += stroke_order_tip(glyph)
@@ -259,10 +263,6 @@ def maybe_make_tip(glyph):
                 ct += stroke_order_variant_tip(glyph)
             except:
                 pass
-        try:
-            ct += kanjidic_tip(glyph)
-        except KeyError:
-            pass
         current_script += character_script_template.format(
             content=ct, hex_code=hex_code)
     return glyph_element
