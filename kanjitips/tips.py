@@ -4,10 +4,12 @@
 
 """Add-on for Anki 2 to show information on kanji."""
 
-import codecs
-import os
-import gzip
 from lxml import html, etree
+import codecs
+import glob
+import gzip
+import os
+import re
 import unicodedata
 
 from aqt import mw
@@ -35,17 +37,6 @@ show_variant_stroke_order = True
 kanji_diagram_size = 200
 kanji_variant_diagram_size = 120
 
-# We do use a few file-wide variables. (I don't really want to put all
-# this in a class. Sholud work OK.
-do_show = False
-current_script = u''
-
-tip_kanji_diagram_template = u"""\
-<object width="{size}" height="{size}" title="{title}" \
-data="{kanji}.svg"type="image/svg+xml">{kanji}</object>"""
-tip_base_template = u"""{}"""
-
-
 # None for English
 lang_code = None
 # lang_code = 'fr'
@@ -63,6 +54,18 @@ tips_style_path = u'file://' + os.path.join(
 
 kanjidic_path = os.path.join(os.path.dirname(__file__), 'kanjidic2.xml.gz')
 jdic2_twigs = {}
+
+character_data_path = os.path.join(
+    os.path.dirname(__file__), u'kanji_info.txt')
+character_data_dict = {}
+
+kanjivg_path = os.path.join(os.path.dirname(__file__), 'kanji_vg')
+
+bad_unicode_categories = 'C'  # Don’t even ask for the name of control
+                              # characters.
+kanji_code = 'CJK UNIFIED IDEOGRAPH'
+katakana_code = 'KATAKANA'
+hiragana_code = 'HIRAGANA'
 
 jquery_script = u''
 jquery_ui_script = u''
@@ -85,19 +88,28 @@ $(function() {{
 
 '''
 
-bad_unicode_categories = 'C'  # Don’t even ask for the name of control
-                              # characters.
-kanji_code = 'CJK UNIFIED IDEOGRAPH'
-katakana_code = 'KATAKANA'
-hiragana_code = 'HIRAGANA'
+plain_kanji_template = u'''
+            content += "<div class=\\"kanjivg standard\\">";
+            content += kanji_object("{fn}", {size});
+            content += "</div>\\n";
+'''
 
+variant_kanji_wrapper_template = u'''
+            content += "<div class=\\"kanjivg variants\\">";\
+{vrs}\
+            content += "</div>\\n";
+
+'''
+
+single_variant_kanji_template = u'''
+            content += kanji_object("{fn}", {size}, "{var}");
+'''
+
+do_show = False
+current_script = u''
 
 # debug: rememeber:
 #pp(mw.reviewer.web.page().mainFrame().toHtml())
-
-character_data_path = os.path.join(
-    os.path.dirname(__file__), u'kanji_info.txt')
-character_data_dict = {}
 
 
 def read_scripts():
@@ -167,6 +179,39 @@ def do_this(c):
     return False
 
 
+def stroke_order_tip(c):
+    """Show the plain kanji c, it we have a file for it"""
+    fname = os.path.join(kanjivg_path, base_name(c) + '.svg')
+    if os.path.exists(fname):
+        return plain_kanji_template.format(
+            fn=fname, size=kanji_diagram_size)
+    return u''
+
+
+def stroke_order_variant_tip(c):
+    var_scriptext = u''
+    for fname in glob.glob(os.path.join(
+            kanjivg_path, base_name(c) + u'-*.svg')):
+        try:
+            variant = re.search(
+                u'/{0}-([^/]+).svg$'.format(re.escape(c)), fname).group(1)
+        except (AttributeError, KeyError):
+            # Shouldn't happen. We just got the names that match this
+            # pattern.
+            variant = 'Unknown'
+        var_scriptext += single_variant_kanji_template.format(
+            fn=fname, size=kanji_variant_diagram_size, var=variant)
+    if var_scriptext:
+        return variant_kanji_wrapper_template.format(vrs=var_scriptext)
+    return u''
+
+
+def characterdata_tip(c):
+    """Add the string from the character data file or throw a KeyError."""
+    return u'            content += "<div>{cd}</div>";\n'.format(
+        cd=character_data_dict[c])
+
+
 def kanjidic_tip(c):
     kd_element = jdic2_twigs[c]
     # This may throw. we catch one level higher
@@ -183,13 +228,9 @@ def kanjidic_tip(c):
             pass
     meanings = meanings.rstrip(', ')
     if meanings:
-        return u'content += "<div>{mgs}</div>";\n'.format(mgs=meanings)
+        return u'            content += "<div>{mgs}</div>";\n'.format(
+            mgs=meanings)
     return u''
-
-
-def characterdata_tip(c):
-    """Add the string from the character data file or throw a KeyError."""
-    return u'content += "<div>{cd}</div>";\n'.format(cd=character_data_dict[c])
 
 
 def maybe_make_tip(glyph):
@@ -208,6 +249,16 @@ def maybe_make_tip(glyph):
             ct += characterdata_tip(glyph)
         except KeyError:
             pass
+        if show_kanji_stroke_order:
+            try:
+                ct += stroke_order_tip(glyph)
+            except:
+                pass
+        if show_variant_stroke_order:
+            try:
+                ct += stroke_order_variant_tip(glyph)
+            except:
+                pass
         try:
             ct += kanjidic_tip(glyph)
         except KeyError:
