@@ -189,7 +189,7 @@ def kanjidic_tip(c):
 
 def characterdata_tip(c):
     """Add the string from the character data file or throw a KeyError."""
-    return u'content += "<div>{cd}</div>";\n'.format(cd=character_data_dict[c])
+    return u'content += "<h3>{cd}</h3>";\n'.format(cd=character_data_dict[c])
 
 
 def maybe_make_tip(glyph):
@@ -205,11 +205,11 @@ def maybe_make_tip(glyph):
     if not hex_code in current_script:
         ct = u''
         try:
-            ct += kanjidic_tip(glyph)
+            ct += characterdata_tip(glyph)
         except KeyError:
             pass
         try:
-            ct += characterdata_tip(glyph)
+            ct += kanjidic_tip(glyph)
         except KeyError:
             pass
         current_script += character_script_template.format(
