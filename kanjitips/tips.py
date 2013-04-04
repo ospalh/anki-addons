@@ -89,20 +89,19 @@ $(function() {{
 '''
 
 plain_kanji_template = u'''
-            content += "<div class=\\"kanjivg standard\\">";
             content += kanji_object("{fn}", {size});
-            content += "</div>\\n";
 '''
 
 variant_kanji_wrapper_template = u'''
-            content += "<div class=\\"kanjivg variants\\">";\
+            content += "<figure class=\\"kanjivg variants\\">";\
 {vrs}\
-            content += "</div>\\n";
+            content += "<figcaption>{fc}</figcaption>\\n";
+            content += "</figure>\\n";
 
 '''
 
 single_variant_kanji_template = u'''
-            content += kanji_object("{fn}", {size}, "{var}");
+            content += kanji_variant_object("{fn}", {size});
 '''
 
 do_show = False
@@ -190,6 +189,7 @@ def stroke_order_tip(c):
 
 def stroke_order_variant_tip(c):
     var_scriptext = u''
+    captions = []
     for fname in glob.glob(os.path.join(
             kanjivg_path, base_name(c) + u'-*.svg')):
         try:
@@ -198,11 +198,21 @@ def stroke_order_variant_tip(c):
         except (AttributeError, KeyError):
             # Shouldn't happen. We just got the names that match this
             # pattern.
-            variant = 'Unknown'
+            variant = u'Unknown'
         var_scriptext += single_variant_kanji_template.format(
-            fn=fname, size=kanji_variant_diagram_size, var=variant)
+            fn=fname, size=kanji_variant_diagram_size)
+        captions.append(variant)
+
     if var_scriptext:
-        return variant_kanji_wrapper_template.format(vrs=var_scriptext)
+        caption = u''
+        if len(captions) > 1:
+            for i, v in enumerate(captions):
+                caption += '{l}:&nbsp;{c}, '.format(l=unichr(ord('a') + i), c=v)
+        else:
+            caption = captions[0]
+        caption = caption.rstrip(', ')
+        return variant_kanji_wrapper_template.format(
+            vrs=var_scriptext, fc=caption)
     return u''
 
 
@@ -254,15 +264,9 @@ def maybe_make_tip(glyph):
         except KeyError:
             pass
         if show_kanji_stroke_order:
-            try:
-                ct += stroke_order_tip(glyph)
-            except:
-                pass
+            ct += stroke_order_tip(glyph)
         if show_variant_stroke_order:
-            try:
-                ct += stroke_order_variant_tip(glyph)
-            except:
-                pass
+            ct += stroke_order_variant_tip(glyph)
         current_script += character_script_template.format(
             content=ct, hex_code=hex_code)
     return glyph_element
