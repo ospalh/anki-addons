@@ -4,6 +4,7 @@
 
 """Add-on for Anki 2 to show information on kanji."""
 
+import codecs
 import os
 import gzip
 from lxml import html, etree
@@ -49,10 +50,6 @@ tip_base_template = u"""{}"""
 lang_code = None
 # lang_code = 'fr'
 
-# jq_path =  'jquery-1.9.1.js'
-# jqui_path =  'jquery-ui.1.10.2.js'
-# tip_script_path = 'show_tips.js'
-# tip_style_path = 'show_tips.css'
 jq_path = os.path.join(os.path.dirname(__file__), 'jquery-1.9.1.js')
 jqui_path = os.path.join(os.path.dirname(__file__), 'jquery-ui.1.10.2.js')
 tips_script_path = os.path.join(os.path.dirname(__file__), 'show_tips.js')
@@ -79,7 +76,9 @@ $(function() {{
             effect: "fade",
         }},
         content: function() {{
+          var content = "";
           {content}
+          return content;
         }}
     }});
 }});
@@ -96,9 +95,9 @@ hiragana_code = 'HIRAGANA'
 # debug: rememeber:
 #pp(mw.reviewer.web.page().mainFrame().toHtml())
 
-character_data_list = {}
-character_data_file_name = u'character_data.txt'
-cd_separator = '\r'
+character_data_path = os.path.join(
+    os.path.dirname(__file__), u'kanji_info.txt')
+character_data_dict = {}
 
 
 def read_scripts():
@@ -114,7 +113,7 @@ def read_scripts():
 
 
 def read_character_data():
-    global character_data_list
+    global character_data_dict
     global jdic2_twigs
     utf8_parser = etree.XMLParser(encoding='utf-8')
     with gzip.open(kanjidic_path, 'rb') as kjdf:
@@ -124,15 +123,19 @@ def read_character_data():
         jdic2_twigs[el.find('literal').text] = el
         # We turn the tree not into a loose-leaf collection, but a
         # collcetion of the character-'twigs', (small sub-trees)
-    fname = os.path.join(os.path.dirname(__file__), character_data_file_name)
+
     try:
-        with open(fname) as kanji_data:
-            for l in unicode(kanji_data.readlines(), 'utf-8'):
-                ls = l.split(cd_separator)
-                if len(ls) > 1 and len(ls[0]) == 1:
-                    character_data_list[ls[0]] = ls[1:]
+        with codecs.open(character_data_path, 'r', encoding='utf-8') \
+                as kanji_data:
+            for l in kanji_data.readlines():
+                l = l.rstrip()
+                try:
+                    if l[1] == ' ':
+                        character_data_dict[l[0]] = l[2:]
+                except IndexError:
+                    pass
     except IOError:
-        pass
+        raise
 
 
 def base_name(c):
@@ -145,6 +148,7 @@ def base_name(c):
 
 
 def do_this(c):
+    """Return whether we should do something for this character."""
     try:
         c = unicode(c, 'utf-8')
     except TypeError:
@@ -163,6 +167,31 @@ def do_this(c):
     return False
 
 
+def kanjidic_tip(c):
+    kd_element = jdic2_twigs[c]
+    # This may throw. we catch one level higher
+    meanings = u''
+    for meaning_element in kd_element.findall('.//meaning'):
+        try:
+            if meaning_element.get('m_lang') == lang_code:
+                meanings += "{}, ".format(meaning_element.text)
+        except TypeError:
+            # Deal with the case that exactly one of the two sides in
+            # the if is None. (Above, we may compare None == None
+            # instead of None is None, which is not recommendet, but
+            # works (at least in Python 2.7 and 3.3) EAFP
+            pass
+    meanings = meanings.rstrip(', ')
+    if meanings:
+        return u'content += "<div>{mgs}</div>";\n'.format(mgs=meanings)
+    return u''
+
+
+def characterdata_tip(c):
+    """Add the string from the character data file or throw a KeyError."""
+    return u'content += "<div>{cd}</div>";\n'.format(cd=character_data_dict[c])
+
+
 def maybe_make_tip(glyph):
     global current_script
     if not do_this(glyph):
@@ -176,28 +205,17 @@ def maybe_make_tip(glyph):
     if not hex_code in current_script:
         ct = u''
         try:
-            kd_element = jdic2_twigs[glyph]
+            ct += kanjidic_tip(glyph)
         except KeyError:
-            ct = u'return "{c} ({h})";'.format(c=glyph, h=hex_code)
-        else:
-            mgs = u''
-            for mg in kd_element.findall('.//meaning'):
-                try:
-                    if mg.get('m_lang') == lang_code:
-                        mgs += "{}, ".format(mg.text)
-                except TypeError:
-                    # Deal with the case that exactly one of the two
-                    # sides in the if is None. (Above, we may compare
-                    # None == None instead of None is None, which is
-                    # not recommendet, but works (at least in Python
-                    # 2.7 and 3.3) EAFP
-                    pass
-            mgs = mgs.rstrip(', ')
-            if mgs:
-                ct = u'return "{mgs}";'.format(mgs=mgs)
+            pass
+        try:
+            ct += characterdata_tip(glyph)
+        except KeyError:
+            pass
         current_script += character_script_template.format(
             content=ct, hex_code=hex_code)
     return glyph_element
+
 
 def show_tip_filter(qa, card):
     """
@@ -266,19 +284,19 @@ def show_tip_filter(qa, card):
     if do_show:
         head = doc[1]
         jqui_style = html.Element('link')
-        jqui_style.set('type','text/css')
+        jqui_style.set('type', 'text/css')
         jqui_style.set('rel', 'stylesheet')
         jqui_style.set('href', jqui_style_path)
         jqui_style.tail = '\n'
         head.append(jqui_style)
         jqui_theme_style = html.Element('link')
-        jqui_theme_style.set('type','text/css')
+        jqui_theme_style.set('type', 'text/css')
         jqui_theme_style.set('rel', 'stylesheet')
         jqui_theme_style.set('href', jqui_theme_style_path)
         jqui_theme_style.tail = '\n'
         head.append(jqui_theme_style)
         tt_style = html.Element('link')
-        tt_style.set('type','text/css')
+        tt_style.set('type', 'text/css')
         tt_style.set('rel', 'stylesheet')
         tt_style.set('href', tips_style_path)
         tt_style.tail = '\n'
@@ -297,9 +315,12 @@ def do_scripts():
 def setup_tips():
     read_character_data()
     read_scripts()
+    # addHook("filterQuestionText", show_tip_filter)
+    ## Uncomment the line above to also show tips on the question.
     addHook("filterAnswerText", show_tip_filter)
-    addHook("filterQuestionText", show_tip_filter)
-    # Looks like we cant just load scripts. So eval them after we've
-    # done the rest of the card.
+
+    ## Looks like we cant just load scripts. So eval them after we've
+    ## done the rest of the card.
+    # addHook("showQuestion", do_scripts)
+    ## Uncomment the line above to also show tips on the question.
     addHook("showAnswer", do_scripts)
-    addHook("showQuestion", do_scripts)
