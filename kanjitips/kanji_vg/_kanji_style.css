@@ -2,13 +2,15 @@
   This is part of Kanji tips, which shows KanjiVG data as colored
   stroke order diagrams in a tool tip.
 
-  This file defines the colors of the strokes and the numbers beside those strokes.
+  This file defines the colors of the strokes and the numbers beside
+  those strokes.
 
   This file copyright © 2012–13 Roland Sieker <ospalh@gmail.com>
   License: GNU AGPL, version 3 or later;
   http://www.gnu.org/licenses/agpl.html
 
 */
+.stroke_number {font-family: "Praxis LT";}
 
 .stroke_path.stroke_num1 {stroke: #bf0909;}
 .stroke_number.stroke_num1 {fill: #bf0909;}
