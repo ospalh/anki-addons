@@ -146,7 +146,7 @@ def read_character_data():
                 except IndexError:
                     pass
     except IOError:
-        raise
+        pass
 
 
 def base_name(c):
@@ -207,7 +207,8 @@ def stroke_order_variant_tip(c):
         caption = u''
         if len(captions) > 1:
             for i, v in enumerate(captions):
-                caption += '{l}:&nbsp;{c}, '.format(l=unichr(ord('a') + i), c=v)
+                caption += '{l}:&nbsp;{c}, '.format(
+                    l=unichr(ord('a') + i), c=v)
         else:
             caption = captions[0]
         caption = caption.rstrip(', ')
@@ -272,6 +273,13 @@ def maybe_make_tip(glyph):
     return glyph_element
 
 
+def media_characters(s):
+    mc = []
+    for m in re.finditer(u'sound:bla', s):
+        m.span()
+    return mc
+
+
 def show_tip_filter(qa, card):
     """
     Filter the questions and answers to add the kanji diagram pop-ups.
@@ -288,11 +296,14 @@ def show_tip_filter(qa, card):
     for el in doc.cssselect(tips_selector):
         for sub_el in el.iter():
             if sub_el.text is not None:
+                bad_chars = media_characters(sub_el.text)
                 new_index = 0
                 new_element = None
                 tip_text = u''
                 sub_e_t = sub_el.text
-                for g in sub_e_t:
+                for i, g in enumerate(sub_e_t):
+                    if i in bad_chars:
+                        continue
                     ge = maybe_make_tip(g)
                     if ge is not None:
                         do_show = True
@@ -313,12 +324,15 @@ def show_tip_filter(qa, card):
                 # We have to skip the tail of the element that
                 # trigered the selector. That is *not* in the
                 # selector.
+                bad_chars = media_characters(sub_el.tail)
                 parent = sub_el.getparent()
                 new_index = parent.index(sub_el) + 1
                 new_element = None
                 tip_tail = u''
                 sub_e_t = sub_el.tail
-                for g in sub_e_t:
+                for i, g in enumerate(sub_e_t):
+                    if i in bad_chars:
+                        continue
                     ge = maybe_make_tip(g)
                     if ge is not None:
                         do_show = True
