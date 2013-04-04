@@ -15,18 +15,17 @@ import unicodedata
 from aqt import mw
 from anki.hooks import addHook
 
-
-# Tips are only shown for elements that match this selector, that is
+# Tips are only shown for elements that match any of these selectors, that is
 # have this class. So, in your template use something like <span
 # class="showtips">{{Back}}</span> instead of just {{Back}}.
-tips_selector = '.showtips'
+# tip_selectors = ['.showtips']
+# tip_selectors = ['rb', '.showtips']
+tip_selectors = ['body']  # Everything
 
-## This string is used as a "css selector". Pretty much everything
-## that works in a CSS3 file should work as well. Some ideas:
-# tips_selector = 'rb'  # Or only show tips for rb (ruby base) elements,
-                        # that is, for characters with furigana above.
-# tips_selector = '*'  # Everywhere. NB: This WILL mess up audio/video
-                       # with kanji in the file name
+
+skip_selectors = ['html', 'head', 'script', 'style', 'link', '.notip']
+# Everything that should not get a tip. It is important to skip
+# scripts &c., especially when the tip_selectors are rather general.
 
 # all should show stroke orders for latin characters/rōmaji as well.
 show_all_stroke_order = False
@@ -109,6 +108,16 @@ current_script = u''
 
 # debug: rememeber:
 #pp(mw.reviewer.web.page().mainFrame().toHtml())
+
+sound_re = "\[sound:(.*?)\]"
+
+
+def uniqify_list(seq):
+    """Return a copy of the list with every element appearing only once."""
+    # From http://www.peterbe.com/plog/uniqifiers-benchmark
+    no_dupes = []
+    [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
+    return no_dupes
 
 
 def read_scripts():
@@ -275,8 +284,9 @@ def maybe_make_tip(glyph):
 
 def media_characters(s):
     mc = []
-    for m in re.finditer(u'sound:bla', s):
-        m.span()
+    for m in re.finditer(sound_re, s):
+        b, l = m.span()
+        mc += range(b, l)
     return mc
 
 
@@ -293,8 +303,18 @@ def show_tip_filter(qa, card):
     do_show = False
     current_script = show_tips_script
     doc = html.fromstring(qa)
-    for el in doc.cssselect(tips_selector):
+    elements = []
+    for ts in tip_selectors:
+        elements += doc.cssselect(ts)
+    elements = uniqify_list(elements)
+    for el in elements:
+        skip_elements = []
+        for skip_sel in skip_selectors:
+            skip_elements += el.cssselect(skip_sel)
+        skip_elements = uniqify_list(skip_elements)
         for sub_el in el.iter():
+            if sub_el in skip_elements:
+                continue
             if sub_el.text is not None:
                 bad_chars = media_characters(sub_el.text)
                 new_index = 0
@@ -303,6 +323,7 @@ def show_tip_filter(qa, card):
                 sub_e_t = sub_el.text
                 for i, g in enumerate(sub_e_t):
                     if i in bad_chars:
+                        tip_text += g
                         continue
                     ge = maybe_make_tip(g)
                     if ge is not None:
@@ -332,6 +353,7 @@ def show_tip_filter(qa, card):
                 sub_e_t = sub_el.tail
                 for i, g in enumerate(sub_e_t):
                     if i in bad_chars:
+                        tip_tail += g
                         continue
                     ge = maybe_make_tip(g)
                     if ge is not None:
