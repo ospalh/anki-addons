@@ -11,3 +11,23 @@
 .ui-tooltip .nhg {
     font-family: IPAPMincho;
 }
+
+.ui-tooltip .klbword:before {
+  content: "KLB: ";
+}
+
+.ui-tooltip .klbword:after {
+  content: ", ";
+}
+
+.ui-tooltip h3{
+    font-weight: normal;
+}
+
+.ui-tooltip .klbnum {
+  font-family: 'Demos X';
+}
+.ui-tooltip .klbnum:before {
+  font-family: 'Demos LT';
+  content: "Nummer ";
+}
