@@ -146,7 +146,7 @@ def read_character_data():
                 except IndexError:
                     pass
     except IOError:
-        raise
+        pass
 
 
 def base_name(c):
