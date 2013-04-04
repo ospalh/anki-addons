@@ -1,16 +1,18 @@
 /* -*- mode: Javascript ; coding: utf-8 -*- */
 
 
-function kanji_object(k, size, v) {
+
+function kanji_object(k, size) {
 
     var kanji = '<object width="' + size + ' " height="' + size +
         '" type="image/svg+xml" data="file://' + k + '">' +
         k + '</object>';
-    if (v == undefined || v == 'Standard') {
-        return '<figure>\n' + kanji + '\n</figure>';
-    } else {
-        return '<figure>\n' + kanji +
-            '\n<figcaption>' + v + '</ficaption>\n' +
-            '</figure>';
-    }
+    return '<figure class="kanjivg standard">\n' + kanji + '\n</figure>';
+}
+
+function kanji_variant_object(k, size) {
+
+    return '<object width="' + size + ' " height="' + size +
+        '" type="image/svg+xml" data="file://' + k + '">' +
+        k + '</object>';
 }
