@@ -205,11 +205,11 @@ def maybe_make_tip(glyph):
     if not hex_code in current_script:
         ct = u''
         try:
-            ct += kanjidic_tip(glyph)
+            ct += characterdata_tip(glyph)
         except KeyError:
             pass
         try:
-            ct += characterdata_tip(glyph)
+            ct += kanjidic_tip(glyph)
         except KeyError:
             pass
         current_script += character_script_template.format(
