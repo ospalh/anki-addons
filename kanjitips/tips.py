@@ -72,11 +72,16 @@ $(function() {{
     $('.{hex_code}').qtip( $.extend({{}}, shared, {{
 
             content: {{
+                title: function() {{
+                    var title = "";
+{title}
+                    return title;
+                }},  // title function
                 text: function() {{
-                    var content = "";
-{content}
-                    return content;
-                }}  // content function
+                    var text = "";
+{text}
+                    return text;
+                }}  // text function
             }}  // content
         }}));  // qtip extend
 }});  // function
@@ -84,19 +89,19 @@ $(function() {{
 '''
 
 plain_kanji_template = u'''
-                content += kanji_object("{fn}", {size});
+                text += kanji_object("{fn}", {size});
 '''
 
 variant_kanji_wrapper_template = u'''
-                content += "<figure class=\\"kanjivg variants\\">";\
+                text += "<figure class=\\"kanjivg variants\\">";\
 {vrs}\
-                content += "<figcaption>{fc}</figcaption>\\n";
-                content += "</figure>\\n";
+                text += "<figcaption>{fc}</figcaption>\\n";
+                text += "</figure>\\n";
 
 '''
 
 single_variant_kanji_template = u'''
-                content += kanji_variant_object("{fn}", {size});
+                text += kanji_variant_object("{fn}", {size});
 '''
 
 do_show = False
@@ -221,7 +226,7 @@ def stroke_order_variant_tip(c):
 
 def characterdata_tip(c):
     """Add the string from the character data file or throw a KeyError."""
-    return u'                content += "<h3>{cd}</h3>";\n'.format(
+    return u'                title += "{cd}";\n'.format(
         cd=character_data_dict[c])
 
 
@@ -241,7 +246,7 @@ def kanjidic_tip(c):
             pass
     meanings = meanings.rstrip(', ')
     if meanings:
-        return u'                content += "<div>{mgs}</div>";\n'.format(
+        return u'                text += "<div>{mgs}</div>";\n'.format(
             mgs=meanings)
     return u''
 
@@ -258,8 +263,9 @@ def maybe_make_tip(glyph):
     glyph_element.text = glyph
     if not hex_code in current_script:
         ct = u''
+        cl = u'Info for {}'.format(glyph)
         try:
-            ct += characterdata_tip(glyph)
+            cl = characterdata_tip(glyph)
         except KeyError:
             pass
         try:
@@ -271,7 +277,7 @@ def maybe_make_tip(glyph):
         if show_variant_stroke_order:
             ct += stroke_order_variant_tip(glyph)
         current_script += character_script_template.format(
-            content=ct, hex_code=hex_code)
+            text=ct, title=cl, hex_code=hex_code)
     return glyph_element
 
 

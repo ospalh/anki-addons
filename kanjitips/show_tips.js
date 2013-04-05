@@ -6,7 +6,8 @@ var shared = {
     show: 'mouseover',
     hide: 'mouseout',
     style: {
-        classes: 'ui-tooltip-red'
+        classes: 'qtip-shadow',
+        tip: false
     }
 }
 
