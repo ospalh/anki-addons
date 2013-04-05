@@ -62,7 +62,6 @@ kanjivg_path = os.path.join(os.path.dirname(__file__), 'kanji_vg')
 
 bad_unicode_categories = 'C'  # Don’t even ask for the name of control
                               # characters.
-# kanji_code = 'CJK UNIFIED IDEOGRAPH'
 kanji_code = 'IDEOGRAPH'
 katakana_code = 'KATAKANA'
 hiragana_code = 'HIRAGANA'
@@ -73,17 +72,13 @@ show_tips_script = u''
 
 character_script_template = u'''
 $(function() {{
-    $( '.{hex_code}' ).tooltip({{
-        track: true,
-        hide: {{
-            effect: "fade",
-        }},
+    $( '.{hex_code}' ).tooltip( $.extend({{}}, shared, {{
         content: function() {{
           var content = "";
           {content}
           return content;
         }}
-    }});
+    }}));
 }});
 
 '''
@@ -110,7 +105,7 @@ current_script = u''
 # debug: rememeber:
 #pp(mw.reviewer.web.page().mainFrame().toHtml())
 
-sound_re = "\[sound:(.*?)\]"
+skip_re = "\[(:?sound|type):(:?.*?)\]"
 
 
 def uniqify_list(seq):
@@ -168,7 +163,7 @@ def base_name(c):
     return c
 
 
-def do_this(c):
+def do_this(c, all_non_control):
     """Return whether we should do something for this character."""
     try:
         c = unicode(c, 'utf-8')
@@ -177,7 +172,7 @@ def do_this(c):
     if unicodedata.category(c)[0] in bad_unicode_categories:
         # Never show for control characters.
         return False
-    if show_all_stroke_order:
+    if all_non_control:
         return True
     c_name = unicodedata.name(c)
     if show_kana_stroke_order:
@@ -189,7 +184,14 @@ def do_this(c):
 
 
 def stroke_order_tip(c):
-    """Show the plain kanji c, it we have a file for it"""
+    """
+    Show plain stroke order diagram.
+
+    Show the plain stroke order diagram for kanji c, it we have a file
+    for it
+    """
+    if not do_this(c, all_non_control=False):
+        return u''
     fname = os.path.join(kanjivg_path, base_name(c) + '.svg')
     if os.path.exists(fname):
         return plain_kanji_template.format(
@@ -198,6 +200,8 @@ def stroke_order_tip(c):
 
 
 def stroke_order_variant_tip(c):
+    if not do_this(c, all_non_control=show_all_stroke_order):
+        return u''
     var_scriptext = u''
     captions = []
     for fname in glob.glob(os.path.join(
@@ -256,7 +260,7 @@ def kanjidic_tip(c):
 
 def maybe_make_tip(glyph):
     global current_script
-    if not do_this(glyph):
+    if not do_this(glyph, all_non_control=show_all_stroke_order):
         return None
     glyph_element = html.Element('span')
     glyph_element.set('title', glyph)
@@ -264,8 +268,8 @@ def maybe_make_tip(glyph):
     glyph_element.set(
         'class', format(u'kanjitip {g} {h}'.format(g=glyph, h=hex_code)))
     glyph_element.text = glyph
+    ct = u''
     if not hex_code in current_script:
-        ct = u''
         try:
             ct += characterdata_tip(glyph)
         except KeyError:
@@ -278,14 +282,20 @@ def maybe_make_tip(glyph):
             ct += stroke_order_tip(glyph)
         if show_variant_stroke_order:
             ct += stroke_order_variant_tip(glyph)
+    else:
+        # We already have a tip, so just return the decorated element.
+        return glyph_element
+    if ct:
+        # We have nothing to put in the tip, so don't return anything.
         current_script += character_script_template.format(
             content=ct, hex_code=hex_code)
-    return glyph_element
+        return glyph_element
+    # Fall out at the bottom: return None.
 
 
 def media_characters(s):
     mc = []
-    for m in re.finditer(sound_re, s):
+    for m in re.finditer(skip_re, s):
         b, l = m.span()
         mc += range(b, l)
     return mc

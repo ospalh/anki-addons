@@ -4,10 +4,34 @@
 .ui-tooltip{
   font-family: 'Demos LT';
   font-size: 15px;
+  max-width: 500px;
+  border-width: 0;
+  background-color:rgba(0,0,0,0);
+  -webkit-border-radius: 0;
+  -webkit-box-shadow: none;
+  border: none;
+}
+
+.ui-tooltip div div, .ui-tooltip div h3 , .ui-tooltip div figure {
   color: #657b83;
   background-color: #eee8d5;
-  max-width: 500px;
+  opacity: 0.93;
+  -webkit-border-radius: 20px;
+  -webkit-box-shadow: 2px 3px 5px #657b83;
+  border: 1px solid #aaaaaa;
+  margin: 8px 5px;  // outside the frame, topbottom leftright
+
 }
+.ui-tooltip div div, .ui-tooltip div h3 {
+  padding: 4px 8px; // inside the frame, topbottom leftright
+}
+.ui-tooltip figure {
+  padding: 0; // inside the frame
+}
+.ui-tooltip figcaption {
+ padding: 0 10px 10px 10px;  // clockwise
+}
+
 
 .ui-tooltip .nhg {
     font-family: IPAPMincho;

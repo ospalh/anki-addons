@@ -1,6 +1,11 @@
 /* -*- mode: Javascript ; coding: utf-8 -*- */
 
-
+var shared = {
+    track: true,
+    hide: {
+        effect: "fade"
+    }
+}
 
 function kanji_object(k, size) {
 
