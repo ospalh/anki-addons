@@ -14,7 +14,6 @@ import unicodedata
 
 from aqt import mw
 from anki.hooks import addHook
-from anki.js import jquery
 
 # Tips are only shown for elements that match any of these selectors, that is
 # have this class. So, in your template use something like <span
@@ -41,11 +40,14 @@ kanji_variant_diagram_size = 120
 lang_code = None
 # There is no German, so use English
 
-qtip_path = os.path.join(os.path.dirname(__file__), 'jquery.qtip.js')
+jq_path = os.path.join(os.path.dirname(__file__), 'jquery-1.9.1.js')
+jqui_path = os.path.join(os.path.dirname(__file__), 'jquery-ui.1.10.2.js')
 tips_script_path = os.path.join(os.path.dirname(__file__), 'show_tips.js')
 
-qtip_style_path = u'file://' + os.path.join(
-    os.path.dirname(__file__), 'jquery.qtip.css')
+jqui_style_path = u'file://' + os.path.join(
+    os.path.dirname(__file__), 'jquery-ui.css')
+jqui_theme_style_path = u'file://' + os.path.join(
+    os.path.dirname(__file__), 'jquery.ui.theme.css')
 tips_style_path = u'file://' + os.path.join(
     os.path.dirname(__file__), 'show_tips.css')
 
@@ -64,44 +66,37 @@ kanji_code = 'CJK UNIFIED IDEOGRAPH'
 katakana_code = 'KATAKANA'
 hiragana_code = 'HIRAGANA'
 
-qtip_script = u''
+jquery_script = u''
+jquery_ui_script = u''
 show_tips_script = u''
 
 character_script_template = u'''
 $(function() {{
-    $('.{hex_code}').qtip( $.extend({{}}, shared, {{
-
-            content: {{
-                title: function() {{
-                    var title = "";
-{title}
-                    return title;
-                }},  // title function
-                text: function() {{
-                    var text = "";
-{text}
-                    return text;
-                }}  // text function
-            }}  // content
-        }}));  // qtip extend
-}});  // function
+    $( '.{hex_code}' ).tooltip( $.extend({{}}, shared, {{
+        content: function() {{
+          var content = "";
+          {content}
+          return content;
+        }}
+    }}));
+}});
 
 '''
 
 plain_kanji_template = u'''
-                text += kanji_object("{fn}", {size});
+            content += kanji_object("{fn}", {size});
 '''
 
 variant_kanji_wrapper_template = u'''
-                text += "<figure class=\\"kanjivg variants\\">";\
+            content += "<figure class=\\"kanjivg variants\\">";\
 {vrs}\
-                text += "<figcaption>{fc}</figcaption>\\n";
-                text += "</figure>\\n";
+            content += "<figcaption>{fc}</figcaption>\\n";
+            content += "</figure>\\n";
 
 '''
 
 single_variant_kanji_template = u'''
-                text += kanji_variant_object("{fn}", {size});
+            content += kanji_variant_object("{fn}", {size});
 '''
 
 do_show = False
@@ -122,10 +117,13 @@ def uniqify_list(seq):
 
 
 def read_scripts():
-    global qtip_script
+    global jquery_script
+    global jquery_ui_script
     global show_tips_script
-    with open(qtip_path) as jqf:
-        qtip_script = jqf.read()
+    with open(jq_path) as jqf:
+        jquery_script = jqf.read()
+    with open(jqui_path) as jqf:
+        jquery_ui_script = jqf.read()
     with open(tips_script_path) as tf:
         show_tips_script = tf.read()
 
@@ -226,7 +224,7 @@ def stroke_order_variant_tip(c):
 
 def characterdata_tip(c):
     """Add the string from the character data file or throw a KeyError."""
-    return u'                title += "{cd}";\n'.format(
+    return u'            content += "<h3>{cd}</h3>";\n'.format(
         cd=character_data_dict[c])
 
 
@@ -246,7 +244,7 @@ def kanjidic_tip(c):
             pass
     meanings = meanings.rstrip(', ')
     if meanings:
-        return u'                text += "<div>{mgs}</div>";\n'.format(
+        return u'            content += "<div>{mgs}</div>";\n'.format(
             mgs=meanings)
     return u''
 
@@ -263,9 +261,8 @@ def maybe_make_tip(glyph):
     glyph_element.text = glyph
     if not hex_code in current_script:
         ct = u''
-        cl = u'Info for {}'.format(glyph)
         try:
-            cl = characterdata_tip(glyph)
+            ct += characterdata_tip(glyph)
         except KeyError:
             pass
         try:
@@ -277,7 +274,7 @@ def maybe_make_tip(glyph):
         if show_variant_stroke_order:
             ct += stroke_order_variant_tip(glyph)
         current_script += character_script_template.format(
-            text=ct, title=cl, hex_code=hex_code)
+            content=ct, hex_code=hex_code)
     return glyph_element
 
 
@@ -373,12 +370,18 @@ def show_tip_filter(qa, card):
                     new_element.tail = tip_tail
     if do_show:
         head = doc[1]
-        qtip_style = html.Element('link')
-        qtip_style.set('type', 'text/css')
-        qtip_style.set('rel', 'stylesheet')
-        qtip_style.set('href', qtip_style_path)
-        qtip_style.tail = '\n'
-        head.append(qtip_style)
+        jqui_style = html.Element('link')
+        jqui_style.set('type', 'text/css')
+        jqui_style.set('rel', 'stylesheet')
+        jqui_style.set('href', jqui_style_path)
+        jqui_style.tail = '\n'
+        head.append(jqui_style)
+        jqui_theme_style = html.Element('link')
+        jqui_theme_style.set('type', 'text/css')
+        jqui_theme_style.set('rel', 'stylesheet')
+        jqui_theme_style.set('href', jqui_theme_style_path)
+        jqui_theme_style.tail = '\n'
+        head.append(jqui_theme_style)
         tt_style = html.Element('link')
         tt_style.set('type', 'text/css')
         tt_style.set('rel', 'stylesheet')
@@ -391,8 +394,8 @@ def show_tip_filter(qa, card):
 def do_scripts():
     if not do_show:
         return
-    mw.reviewer.web.eval(jquery)
-    mw.reviewer.web.eval(qtip_script)
+    mw.reviewer.web.eval(jquery_script)
+    mw.reviewer.web.eval(jquery_ui_script)
     mw.reviewer.web.eval(current_script)
 
 

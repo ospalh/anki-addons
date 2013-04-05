@@ -1,13 +1,9 @@
 /* -*- mode: Javascript ; coding: utf-8 -*- */
 
-// A shared object containing all the values you want shared between
-// your tooltips
 var shared = {
-    show: 'mouseover',
-    hide: 'mouseout',
-    style: {
-        classes: 'qtip-shadow',
-        tip: false
+    track: true,
+    hide: {
+        effect: "fade"
     }
 }
 
