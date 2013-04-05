@@ -72,17 +72,13 @@ show_tips_script = u''
 
 character_script_template = u'''
 $(function() {{
-    $( '.{hex_code}' ).tooltip({{
-        track: true,
-        hide: {{
-            effect: "fade",
-        }},
+    $( '.{hex_code}' ).tooltip( $.extend({{}}, shared, {{
         content: function() {{
           var content = "";
           {content}
           return content;
         }}
-    }});
+    }}));
 }});
 
 '''
