@@ -313,7 +313,10 @@ def show_tip_filter(qa, card):
     global current_script
     do_show = False
     current_script = show_tips_script
-    doc = html.fromstring(qa)
+    try:
+        doc = html.fromstring(qa)
+    except:
+        return qa
     elements = []
     for ts in tip_selectors:
         elements += doc.cssselect(ts)
