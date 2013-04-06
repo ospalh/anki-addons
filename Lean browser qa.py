@@ -14,7 +14,12 @@ hide_class_selector = '.browserhide'
 
 
 def reduce_format_qa(self, text):
-    doc = html.fromstring(text)
+    try:
+        doc = html.fromstring(text)
+        # I got "lxml.etree.XMLSyntaxError" here once.
+    except:
+        # So bail out at the slightes provocation.
+        return text
     for el in doc.cssselect(hide_class_selector):
         el.drop_tree()
     return old_format_qa(
