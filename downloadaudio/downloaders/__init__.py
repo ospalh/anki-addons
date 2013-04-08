@@ -20,7 +20,8 @@ each site first.
 from .beolingus import BeolingusDownloader
 from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
-from .japanesepod import JapanesepodDownloader
+# from .japanesepod import JapanesepodDownloader
+# Seems to have stopped once more.
 # from .leo import LeoDownloader
 # Doesn't work any more after site upgrade.
 from .macmillan_american import MacmillanAmericanDownloader
