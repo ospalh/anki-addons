@@ -11,6 +11,7 @@ import gzip
 import os
 import re
 import unicodedata
+import urllib
 
 from aqt import mw
 from anki.hooks import addHook
@@ -406,7 +407,8 @@ def show_tip_filter(qa, card):
         tt_style.set('href', tips_style_path)
         tt_style.tail = '\n'
         head.append(tt_style)
-    return html.tostring(doc, encoding='unicode', method='xml')
+    return unicode(
+        urllib.unquote(html.tostring(doc, encoding='utf-8')), 'utf-8')
 
 
 def do_scripts():
