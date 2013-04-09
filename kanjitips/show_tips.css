@@ -6,11 +6,11 @@
 }
 
 .ui-tooltip figure {
-  display: table;
+  display: inline-table;
 }
 
 .ui-tooltip figure object{
-    display: inline-table;
+    display: table-cell;
 }
 
 .ui-tooltip figure figcaption{
