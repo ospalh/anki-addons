@@ -30,8 +30,7 @@ from .mw import MerriamWebsterDownloader
 from .wiktionary import WiktionaryDownloader
 
 downloaders = [
-#     JapanesepodDownloader(),
-# Seems to have stopped once more.
+    JapanesepodDownloader(),
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
