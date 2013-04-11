@@ -23,6 +23,20 @@
   margin: 8px 5px;  /* outside the frame, topbottom leftright */
 
 }
+
+.night .ui-tooltip div div, .night .ui-tooltip div h3,
+.night .ui-tooltip div figure, .night .ui-tooltip div figcaption {
+   color: #839496;
+  background-color: #073642;
+}
+
+.highc .ui-tooltip div div, .highc .ui-tooltip div h3,
+.highc .ui-tooltip div figure, .highc .ui-tooltip div figcaption {
+   color: black;
+  background-color: white;
+}
+
+
 .ui-tooltip div div, .ui-tooltip div h3 {
   padding: 4px 8px; /* inside the frame, topbottom leftright */
 }
