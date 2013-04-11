@@ -19,17 +19,17 @@
   -webkit-border-radius: 20px;
   -webkit-box-shadow: 2px 3px 5px #657b83;
   border: 1px solid #aaaaaa;
-  margin: 8px 5px;  // outside the frame, topbottom leftright
+  margin: 8px 5px;  /* outside the frame, topbottom leftright */
 
 }
 .ui-tooltip div div, .ui-tooltip div h3 {
-  padding: 4px 8px; // inside the frame, topbottom leftright
+  padding: 4px 8px; /* inside the frame, topbottom leftright */
 }
 .ui-tooltip figure {
-  padding: 0; // inside the frame
+  padding: 0; /* inside the frame */
 }
 .ui-tooltip figcaption {
- padding: 0 10px 10px 10px;  // clockwise
+ padding: 0 10px 10px 10px;  /* clockwise */
 }
 
 
@@ -61,10 +61,10 @@
 }
 
 .ui-tooltip figure object{
-    display: table-cell;
+    display: inline-block;
 }
 
 .ui-tooltip figure figcaption{
     display: table-caption;
-    caption-side: bottom ;
+    caption-side: bottom;
 }
