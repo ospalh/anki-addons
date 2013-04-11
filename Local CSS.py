@@ -15,6 +15,9 @@ Load the file 'user_style.css' from the user’s profile folder
 the style from the template.
 """
 
+from PyQt4.QtGui import QAction, QActionGroup, QIcon, QMenu
+from PyQt4.QtCore import SIGNAL
+
 import os
 import re
 from anki.cards import Card
@@ -23,7 +26,7 @@ from anki import hooks
 from aqt import mw
 
 
-__version__ = '1.2.4'
+__version__ = '1.3.0'
 
 user_css_name = 'user_style.css'
 """File name of the user's CSS"""
@@ -33,6 +36,12 @@ local_class = 'loc'
 """Class added to all cards"""
 
 user_css = u''
+
+extra_classes_list = [
+    {'class': 'night', 'display': u'Night mode'},
+    {'class': 'highc', 'display': u'High contrast mode'},
+    ]
+extra_class = None
 
 
 def fix_body_class():
@@ -57,6 +66,10 @@ def fix_body_class():
     body_class = '{0} card card{1} template_{2} model_{3}'.format(
         local_class, mw.reviewer.card.ord,
         template_class, model_class)
+    try:
+        body_class += ' ' + extra_class
+    except TypeError:
+        pass
     mw.web.eval("document.body.className = '{0}';".format(body_class))
 
 
@@ -81,8 +94,41 @@ def localized_card_css(self):
     return return_css + old_css(self)
 
 
+def set_extra_class(new_extra_class):
+    global extra_class
+    extra_class = new_extra_class
+
+def setup_menu():
+    u"""
+    Add a submenu to the edit menu.
+
+    Add a submenu that lists the available extra classes to the edit
+    menu.
+    """
+    if extra_classes_list:
+        mw.extra_class_submenu = QMenu(u"Mode (e&xtra class)", mw)
+        mw.form.menuEdit.addSeparator()
+        mw.form.menuEdit.addMenu(mw.extra_class_submenu)
+        action_group = QActionGroup(mw, exclusive=True)
+        no_class_action = action_group.addAction(
+            QAction('(none/standard)', mw, checkable=True))
+        no_class_action.setChecked(True)
+        mw.extra_class_submenu.addAction(no_class_action)
+        mw.connect(no_class_action, SIGNAL("triggered()"),
+                   lambda: set_extra_class(None))
+        for ecd in extra_classes_list:
+            nn_class_action = action_group.addAction(
+                QAction(ecd['display'], mw, checkable=True))
+            mw.extra_class_submenu.addAction(nn_class_action)
+            mw.connect(nn_class_action, SIGNAL("triggered()"),
+                       lambda ec=ecd['class']: set_extra_class(ec))
+
+
 old_css = Card.css
 Card.css = localized_card_css
 
+
 hooks.addHook("showQuestion", fix_body_class)
 hooks.addHook("profileLoaded", get_user_css)
+
+setup_menu()

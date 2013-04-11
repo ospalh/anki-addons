@@ -1,8 +1,8 @@
 # -*- mode: Python ; coding: utf-8 -*-
-# Copyright: Roland Sieker ( ospalh@gmail.com )
+# © 2012–3: Roland Sieker <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 """
-Anki 2 add-on that throws media at vlc instead of mplayer.
+Anki 2 add-on that opens sweep to edit the audio files.
 """
 
 import copy
