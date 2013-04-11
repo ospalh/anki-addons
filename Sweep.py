@@ -17,7 +17,7 @@ from aqt import mw
 from PyQt4.QtGui import QAction, QMenu
 from PyQt4.QtCore import SIGNAL
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 sound_re = '\[sound:(.*?)\]'
 
