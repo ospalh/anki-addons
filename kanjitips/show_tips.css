@@ -12,7 +12,8 @@
   border: none;
 }
 
-.ui-tooltip div div, .ui-tooltip div h3 , .ui-tooltip div figure {
+.ui-tooltip div div, .ui-tooltip div h3 , .ui-tooltip div figure,
+.ui-tooltip div figcaption {
   color: #657b83;
   background-color: #eee8d5;
   opacity: 0.93;
@@ -27,9 +28,6 @@
 }
 .ui-tooltip figure {
   padding: 0; /* inside the frame */
-}
-.ui-tooltip figcaption {
- padding: 0 10px 10px 10px;  /* clockwise */
 }
 
 
@@ -55,6 +53,7 @@
 .ui-tooltip .klbnum:before {
   font-family: 'Demos LT';
   content: "Nummer ";
+}
 
 .ui-tooltip figure {
   display: inline-table;
@@ -64,7 +63,8 @@
     display: inline-block;
 }
 
-.ui-tooltip figure figcaption{
+.ui-tooltip div figcaption {
     display: table-caption;
     caption-side: bottom;
+    padding: 4px 8px;
 }
