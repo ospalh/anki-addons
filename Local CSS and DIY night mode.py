@@ -26,7 +26,7 @@ from anki import hooks
 from aqt import mw
 
 
-__version__ = '1.3.0'
+__version__ = '1.3.1'
 
 user_css_name = 'user_style.css'
 """File name of the user's CSS"""
@@ -39,7 +39,6 @@ user_css = u''
 
 extra_classes_list = [
     {'class': 'night', 'display': u'Night mode'},
-    {'class': 'highc', 'display': u'High contrast mode'},
     ]
 extra_class = None
 
