@@ -39,7 +39,6 @@ user_css = u''
 
 extra_classes_list = [
     {'class': 'night', 'display': u'Night mode'},
-    {'class': 'highc', 'display': u'High contrast mode'},
     ]
 extra_class = None
 
