@@ -1,13 +1,16 @@
 title: Local CSS
 subtitle: Adapt card styles to time and place
 id: localcss
-main_file: Local%20CSS.py
+main_file: Local%20CSS%20and%20DIY%20night%20mode.py
 status: working
 type: addon
-date: 2012-10-30
+date: 2013-04-12
 status_color: green
 status_text_color: white
-abstract: Add styling from a local CSS file. With this, the card style can be adapted to time (night colors) and place (small fonts on small screens, big fonts on big screens, ...).
+abstract: "Add styling from a local CSS file. With this, the card
+style can be adapted to time (night colors) and place (small fonts on
+small screens, big fonts on big screens, ...). Also add classes for a
+DIY night mode."
 first_image: three_styles.png
 first_caption: "The same card with different styles"
 first_alt: "An Anki review window, split and showing different fonts and color schemes in different parts."
@@ -86,27 +89,98 @@ example, to change the style of the Japanese text, use <code>.loc
 
 Applying different styles to different cards works in a similar way.
 
-As an example, i use a standard style of black on light blue for
+As an example, in the past i used a standard style of black on light blue for
 standard cards and black and light red for grammar cards. In the
-alternative style i use light colored text on dark background, dark
+alternative style i used light colored text on dark background, dark
 green for normal cards and dark red for grammar cards. The standard
 cards use the the `.loc.card` selector described above. The model name
-of the grammar cards is “Grammatik VHS — Japanese” and so i use
+of the grammar cards is “Grammatik VHS — Japanese” and so i used
 <blockquote><pre><code>.loc.card.model_grammatikvhsjapanese{
     background-color: #64354c;
     color: #d9b7ce;}</code></pre></blockquote>
 to set up the pink-on-dark-red.
 
+## Night mode
 
-## Night and day
+The add-on adds a “Mode (extra class)” sub-menu to the “Edit” menu to
+switch between night mode and normal (day) mode.
 
-To use different styles at different times, for example a
-black-on-white scheme during the day and a light-on-dark scheme in the
-evening, simply have two style files like `day_user_style.css` and
-`night_user_style.css` handy and replace the file `user_style.css`
-with the fitting one. On file systems that support them (i.e. basically
-anywhere but on Windows systems), soft links can be used instead: `ln
--sf day_user_style.css user_style.css`.
+<blockquote class="nb">
+Without further set-up, this switch has no visible effect,
+all it does is add another class <code>night</code>. The user has to set up
+eir colection to make use of this.
+</blockquote>
+
+### Set-up
+
+The set-up is best done in the `user_style.css` file. To use
+white-on-black as a night mode alternative to standard black-on-white
+cards, you should add
+<blockquote><pre><code> .night.card.loc {
+  color: white;
+  background-color: black;
+}
+</code></pre></blockquote>
+
+
+It is also possible to add definitions for `.night` in the card
+templates themselves. This way it will probably work with the
+AnkiDroid code i intend to write to bring night mode there.
+
+### More modes
+
+More display modes can be used. Edit the
+[source file](https://github.com/ospalh/anki-addons/blob/master/Local%20CSS%20and%20DIY%20night%20mode.py).
+
+Look for “`extra_classes_list`” near the top. Duplicate the `Night
+mode` line and change the texts *after* the `class` and `display`
+bits.
+
+For example, i use the
+“[solarized](http://ethanschoonover.com/solarized)” color schemes. I
+use the light theme most of the thime but sometimes want the dark
+theme. I also sometimes want to see the cards in black-on-white.
+
+The point here is that the dark scheme can’t really be derived from
+the light mode, so it *has* to be set explicitly in a style sheet.
+
+As i intend to use these modes on AnkiDroid, i have added them to the
+several models of my collection, rather than to `user_style.css`.
+
+The relevant bits of my templates look like this:
+<blockquote><pre><code>.card {
+  color: #657b83;
+  background-color: #fdf6e3;
+}
+.night.card {
+  color: #839496;
+  background-color: #002b36;
+}
+.highc.card {
+  color: black;
+  background-color: white;
+}</code></pre></blockquote>
+
+And i have added “`highc`” as entry to the menu:
+<blockquote><pre><code>extra_classes_list = [
+    {'class': 'night', 'display': u'Night mode'},
+    {'class': 'highc', 'display': u'High contrast mode'},
+    ]</code></pre></blockquote>
+
+
+### No night mode
+
+Similarly, the mode switch menu can be turned off by deleting the
+night mode line of the `extra_classes_list` in the source.
+
+## Different styles through different files
+
+The old way to use different styles at different times was to have two
+style files like `day_user_style.css` and `night_user_style.css` handy
+and replace the file `user_style.css` with the fitting one. On file
+systems that support them (i.e. basically anywhere but on Windows
+systems), soft links can be used instead: `ln -sf day_user_style.css
+user_style.css`.
 
 ### Reloading
 
