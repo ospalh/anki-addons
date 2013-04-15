@@ -138,7 +138,7 @@ def ch_t_sqkm(txt, *args):
         return arab_format_string.format(float(dec_kilo) / 1000.0) + \
             u' <span class="number_romaji">Mm<sup>2</sup></span>'
     if dke < -3:
-        return arab_format_string.format(float(dec_kilo) * 1000.0) + \
+        return arab_format_string.format(millionfloat(dec_kilo) * 1000.0) + \
             u' <span class="number_romaji">km<sup>2</sup></span>'
     return swiss_format(int(dec_kilo * 1000)) + \
         u' <span class="number_romaji">km<sup>2</sup></span>'
