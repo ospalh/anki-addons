@@ -18,7 +18,7 @@ ankiweb_id: 4091556602
 A typical model for learning Japanese has a field called “Reading”. In
 that field, the reading (kana) is stored *along with the kanji*. For
 example, in a fact defining the Japanese word for police station, the
-reading field would look like 「警[けい]察[さつ]署[しょ]」. Like this,
+reading field would look like <q lang='ja'>警[けい]察[さつ]署[しょ]</q>. Like this,
 the standard templates `{{furigana:Reading}}` and `{{kana:Reading}}`
 work.
 
