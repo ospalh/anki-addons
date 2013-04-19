@@ -48,20 +48,22 @@ setting for `.mobile` can be dropped when not using the
 
 ## Separator for kana
 
-Some people like to use the interpunct <span class="qtbase nakaguro">「
-[・](http://www.fileformat.info/info/unicode/char/30fb/index.htm)」
-</span> to separate the kana for different kanji. For example, for the
-word 「中黒」 the text 「`なか・ぐろ`」 is used in a reading field.
+Some people like to use the interpunct <span class="qtbase
+nakaguro"><q
+lang='ja'>[・](http://www.fileformat.info/info/unicode/char/30fb/index.htm)</q></span>
+to separate the kana for different kanji. For example, for the word <q
+lang='ja'>中黒</q> the text <q lang='ja'>`なか・ぐろ`</q> is used in a
+reading field.
 
 An alternative is to use the
 [Japanese Support](https://ankiweb.net/shared/info/3918629684) addon
 to automatically generate readings. They are usually by word, and have
 to be rearranged slightly by hand. In the example, you would type the
-kanji「中黒」 into the “Expression” field. With a tab or mouse click,
-the “Reading” field would be filled with 「中黒[なかぐろ]」. For this
-trick to work, this string would have to changed to 「中[なか]黒[ぐろ]」
+kanji<q lang='ja'>中黒</q> into the “Expression” field. With a tab or mouse click,
+the “Reading” field would be filled with <q lang='ja'>中黒[なかぐろ]</q>. For this
+trick to work, this string would have to changed to <q lang='ja'>中[なか]黒[ぐろ]</q>
 by hand, by adding an extra pair of square brackets and dragging
-the「なか」 into them.
+the<q lang='ja'>なか</q> into them.
 
 The adding of the interpunct can be done using two CSS pseudo-classes,
 “`:after`” and “`:last-child`”:
