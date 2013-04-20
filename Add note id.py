@@ -71,7 +71,8 @@ def add_nids_to_all():
     """
     Add note id to all empty fields with the right names.
 
-    Iterate over all notes and add the nid
+    Iterate over all notes and add the nid minus 1’300’000’000’000. The
+    subtraction is done mostly for aesthetical reasons.
     """
     if not askUser(_(u"Add note id to all 'Note ID' fields?")):
         return
@@ -90,12 +91,15 @@ def add_nids_to_all():
                 if f == name.lower():
                     # Check if target is empty
                     if not n[name]:
-                        n[name] = str(nid)
+                        n[name] = str(nid - long(13e11))
                         n.flush()
     mw.reset()
 
 
 def onFocusLost(flag, n, fidx):
+    u"""
+    Add the nid minus 1’300’000’000’000 to the right field
+    """
     field_name = None
     for c, name in enumerate(mw.col.models.fieldNames(n.model())):
         for f in id_fields:
@@ -114,7 +118,7 @@ def onFocusLost(flag, n, fidx):
     if field_index != fidx:
         return flag
     # Got to here: We have an empty id field, so put in a number.
-    n[field_name] = str(n.id)
+    n[field_name] = str(n.id - long(13e11))
     return True
 
 
