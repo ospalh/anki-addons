@@ -32,5 +32,6 @@ pip-log.txt
 *#
 *~
 
-# The secret
-forvokey.py
+# The kanji text data.
+kanjitips/kanji_info.txt
+
