@@ -81,4 +81,6 @@
     display: table-caption;
     caption-side: bottom;
     padding: 4px 8px;
+    -webkit-border-radius: 10px;
+
 }
