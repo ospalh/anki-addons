@@ -35,7 +35,7 @@ import decimal
 # I personally like the Swiss use of the apostroph as thousands separator.
 # locale.setlocale(locale.LC_NUMERIC, 'de_CH.UTF-8')
 
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 
 millions_word = (u' <span class="number_romaji">Millionen</span>')
 billions_word = (u' <span class="number_romaji">Milliarden</span>')
@@ -138,7 +138,7 @@ def ch_t_sqkm(txt, *args):
         return arab_format_string.format(float(dec_kilo) / 1000.0) + \
             u' <span class="number_romaji">Mm<sup>2</sup></span>'
     if dke < -3:
-        return arab_format_string.format(millionfloat(dec_kilo) * 1000.0) + \
+        return arab_format_string.format(float(dec_kilo) * 1000.0) + \
             u' <span class="number_romaji">km<sup>2</sup></span>'
     return swiss_format(int(dec_kilo * 1000)) + \
         u' <span class="number_romaji">km<sup>2</sup></span>'
