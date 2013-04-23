@@ -59,21 +59,21 @@ An alternative is to use the
 [Japanese Support](https://ankiweb.net/shared/info/3918629684) addon
 to automatically generate readings. They are usually by word, and have
 to be rearranged slightly by hand. In the example, you would type the
-kanji<q lang='ja'>中黒</q> into the “Expression” field. With a tab or mouse click,
-the “Reading” field would be filled with <q lang='ja'>中黒[なかぐろ]</q>. For this
+kanji<q lang='ja'>中黒</q> into the <q>Expression</q> field. With a tab or mouse click,
+the <q>Reading</q> field would be filled with <q lang='ja'>中黒[なかぐろ]</q>. For this
 trick to work, this string would have to changed to <q lang='ja'>中[なか]黒[ぐろ]</q>
 by hand, by adding an extra pair of square brackets and dragging
 the<q lang='ja'>なか</q> into them.
 
 The adding of the interpunct can be done using two CSS pseudo-classes,
-“`:after`” and “`:last-child`”:
+<q>`:after`</q> and <q>`:last-child`</q>:
 <blockquote class=lsting><pre><code>&lt;div class="interpuncts">{kana:Reading}}&lt;/div></code></pre></blockquote>
 
 <blockquote class=lsting><pre><code>.interpuncts .kana:after{content:"・";}
 .interpuncts .kana:last-child:after{content: none;}</code></pre></blockquote>
 
 The advantage of this method over using a pure kana is that with this
-method furigana can be used as well, with “`{{furigana:Reading}}`”.
+method furigana can be used as well, with <q>`{{furigana:Reading}}`</q>.
 
 ## Furigana on hover
 
