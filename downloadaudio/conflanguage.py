@@ -12,19 +12,21 @@ from aqt.qt import QHBoxLayout, QLabel, QLineEdit
 from aqt.utils import getText, tooltip
 from anki.lang import _
 
-from language import default_audio_language_code, al_code_code
+from language import default_audio_language_code, fl_code_code, \
+    old_al_code_code
 
 
 def setup_ui(self, Dialog):
-    help_text = '''<p>This code is used for audio downloads.
- Set this to the two-letter code of the language you are learning.</p>'''
+    help_text = """<p>This code is used for audio or example sentence
+downloads.  Set this to the two-letter code of the language you are
+learning.</p>"""
     self.maxTaken.setMinimum(3)
     lc_layout = QHBoxLayout()
-    lc_label = QLabel(_("Language code"), self.tab_5)
+    lc_label = QLabel(_("Foreighn language code"), self.tab_5)
     lc_label.setToolTip(help_text)
     lc_layout.addWidget(lc_label)
-    self.audio_download_language = QLineEdit(default_audio_language_code,
-                                             self.tab_5)
+    self.audio_download_language = QLineEdit(
+        default_audio_language_code, self.tab_5)
     self.audio_download_language.setToolTip(help_text)
     lc_layout.addWidget(self.audio_download_language)
     lc_layout.addStretch()
@@ -33,22 +35,22 @@ def setup_ui(self, Dialog):
 
 def load_conf(self):
     self.form.audio_download_language.setText(
-        self.conf.get(al_code_code, default_audio_language_code))
+        self.conf.get(fl_code_code, default_audio_language_code))
 
 
 def save_conf(self):
-    self.conf[al_code_code] = self.form.audio_download_language.text()
+    self.conf[fl_code_code] = self.form.audio_download_language.text()
 
 
 def ask_and_set_language_code():
     lang_code, ok = getText(
-        prompt=u'''<h4>Set download language code</h4>
+        prompt=u"""<h4>Set download language code</h4>
 Set the <a
 href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">code</a>
 of the language you are learning.<br>
 (<code>zh</code> for Chinese,
 <code>en</code> for English ...)
-''',
+""",
         default=default_audio_language_code,
         title=u'Set language')
     if not ok or not lang_code:
@@ -60,23 +62,41 @@ of the language you are learning.<br>
     # Go through all configuration sets
     for conf in mw.col.decks.allConf():
         try:
-            conf[al_code_code]
+            conf[fl_code_code]
         except KeyError:
             # and set only where there is none already set
-            conf[al_code_code] = lang_code
+            conf[fl_code_code] = lang_code
             mw.col.decks.save(conf)
     mw.col.decks.flush()
 
 
+def rename_language_code():
+    old_code_found = False
+    for conf in mw.col.decks.allConf():
+        try:
+            conf[fl_code_code] = conf[old_al_code_code]
+        except KeyError:
+            continue
+        else:
+            del conf[old_al_code_code]
+            mw.col.decks.save(conf)
+            old_code_found = True
+    if old_code_found:
+        mw.col.decks.flush()
+    return old_code_found
+
+
 def maybe_ask_language():
+    # Just try to rename on every start. The delay should be rather
+    # slight, so i see no real problem.
+    name_language_code()
     try:
         # We just look at this to see if it is set.
-        mw.col.decks.confForDid(1)[al_code_code]
+        mw.col.decks.confForDid(1)[fl_code_code]
     except KeyError:
         ask_and_set_language_code()
-    #else:
-    #    # Really, we don't care about the language of the default deck
-    #    pass
+    # We don't care about the language of the default deck at this
+    # time, so don’t do anything when we don’t catch the key error.
 
 
 addHook("profileLoaded", maybe_ask_language)
