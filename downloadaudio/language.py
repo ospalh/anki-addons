@@ -26,31 +26,35 @@ learning Japanese.
 al_code_code = 'addon_audio_download_language'
 
 
-def get_language_code(card=None, note=None):
-    """
-    Return a language code.
-    """
-    if not note:
-        if not card:
-            return default_audio_language_code
-        note = card.note()
-    # First look at the tags
+def language_code_from_tags(note):
     for tag in note.tags:
         try:
             return re.search('^lang_([a-z]{2,3})$', tag,
                              flags=re.IGNORECASE).group(1).lower()
-        except:
+        except AttributeError:
             continue
-    # Then, look at the deck conf. First get it.
-    if card:
-        did = card.did
-    else:
-        try:
-            did = note.model()['did']
-        except (TypeError, KeyError):
-            did = 1
+    raise ValueError('No language tag found')
+
+
+def language_code_from_editor(note, card_edit):
+    print('Write me!')
+    return 'NN'
+
+
+def language_code_from_card(card):
+    """
+    Return a language code.
+    """
+    if not card:
+        return default_audio_language_code
+    note = card.note()
     try:
-        deck_conf = mw.col.decks.confForDid(did)
+        return language_code_from_tags(note)
+    except ValueError:
+        pass
+    # Look at the deck conf. First get it.
+    try:
+        deck_conf = mw.col.decks.confForDid(card.did)
     except AssertionError:
         # Somehow it is possible to have notes with a did pointing
         # nowhere. (When you have deleted the deck they were created
