@@ -61,17 +61,17 @@ result in no downloads. Do <em>not</em> use domain codes (E.g. use
         layout = QVBoxLayout()
         self.setLayout(layout)
         edit_text_head = QLabel()
-        kanji_et =_('''\
+        kanji_et = _('''\
 <h4>Requests to send to the download sites</h4>
 <p>In the split edit fields, set the kanji on the left, the
 kana on the right.</p>
 ''')
-        base_et =_('''\
+        base_et = _('''\
 <h4>Requests to send to the download sites</h4>
 <p>In split edit fields, set the expression (base) on the left, the
 reading (ruby) on the right.</p>
 ''')
-        single_et =_('''\
+        single_et = _('''\
 <h4>Requests to send to the download sites</h4>
 ''')
         # Now decide which help text to show.
@@ -138,7 +138,7 @@ reading (ruby) on the right.</p>
             if not split_reading:
                 gf_layout.addWidget(ledit, num, 1, 1, 2)
                 ledit.setToolTip(
-                _(u'''<h4>Text of the request.</h4>
+                    _(u'''<h4>Text of the request.</h4>
 <p>Edit this as appropriate.  Clear it to not download anything for
 this line.</p>'''))
                 bedit.hide()

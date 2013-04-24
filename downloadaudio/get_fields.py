@@ -41,7 +41,7 @@ audio_field_keys = ['audio', 'sound']
 """Fields we put our downloaded sounds in."""
 
 
-# Replace the True with a False when you don't have kanji in your reading field.
+# Replace ‘True’ with ‘False’ when you don't have kanji in your reading field.
 meaning_in_reading_field = True
 u"""
 Use either kanji and reading from one field (True) or from two fields (False).
@@ -237,13 +237,15 @@ def get_note_fields(note, get_empty=False):
                     try:
                         # Here, too, first try reading, then try other
                         # fields.
-                        field_data_list.append(field_data(
+                        field_data_list.append(
+                            field_data(
                                 note, fn, readings=True, get_empty=get_empty))
                     except (KeyError, ValueError):
                         # No or empty readings field.
                         pass
                     try:
-                        field_data_list.append(field_data(
+                        field_data_list.append(
+                            field_data(
                                 note, fn, readings=False, get_empty=get_empty))
                     except (KeyError, ValueError):
                         # No or empty 'normal' field
