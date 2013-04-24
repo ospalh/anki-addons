@@ -9,7 +9,7 @@ from aqt import mw
 from anki.consts import MODEL_STD
 from anki.hooks import addHook
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 def maybe_skip_question():
@@ -19,7 +19,6 @@ def maybe_skip_question():
         # don't skip.
         return
     back = model['tmpls'][mw.reviewer.card.ord]['afmt'].strip()
-    print 'back:', back
     if '{{FrontSide}}' == back:
         if not mw.reviewer._bottomReady:
             # Looking at the reviewer.py source code, this may not
