@@ -45,7 +45,7 @@ from anki.hooks import addHook
 from .blacklist import get_hash
 from .downloaders import downloaders
 from .get_fields import get_note_fields, get_side_fields
-from .language import get_language_code
+from .language import language_code_from_card, language_code_from_editor
 from .processors import processor
 from .review_gui import store_or_blacklist
 from .update_gui import update_data
@@ -139,10 +139,11 @@ def download_for_side():
         return
     note = card.note()
     field_data = get_side_fields(card, note)
-    do_download(note, field_data, get_language_code(card), hide_text=True)
+    do_download(
+        note, field_data, language_code_from_card(card), hide_text=True)
 
 
-def download_for_note(note=False, ask_user=False):
+def download_for_note(ask_user=False, note=None, editor=None):
     """
     Download audio for all fields.
 
@@ -150,19 +151,21 @@ def download_for_note(note=False, ask_user=False):
     note. When ask_user is true, show a dialog that lets the user
     modify these texts.
     """
-    card = None
     if not note:
         try:
             card = mw.reviewer.card
             note = card.note()
         except:
             return
+        language_code = language_code_from_card(card)
+    else:
+        language_code = language_code_from_editor(note, editor)
     field_data = get_note_fields(note, get_empty=ask_user)
     if not field_data:
         # Complain before we show the empty dialog.
         tooltip(u'Nothing to download.')
         return
-    language_code = get_language_code(card=card, note=note)
+
     if ask_user:
         try:
             field_data, language_code = update_data(field_data, language_code)
@@ -195,7 +198,7 @@ def download_on():
 
 def editor_download_editing(self):
     self.saveNow()
-    download_for_note(ask_user=True, note=self.note)
+    download_for_note(ask_user=True, note=self.note, editor=self)
     # Fix for issue #10.
     self.stealFocus = True
     self.loadNote()
@@ -204,12 +207,12 @@ def editor_download_editing(self):
 
 def editor_add_download_editing_button(self):
     """Add the download button to the editor"""
-    dl_button = self._addButton("download_audio",
-                                lambda self=self:
-                                    editor_download_editing(self),
-                                tip=u"Download audio...", text=" ")
-    dl_button.setIcon(QIcon(os.path.join(icons_dir,
-                                         'download_note_audio.png')))
+    dl_button = self._addButton(
+        "download_audio",
+        lambda self=self: editor_download_editing(self),
+        tip=u"Download audio...", text=" ")
+    dl_button.setIcon(
+        QIcon(os.path.join(icons_dir, 'download_note_audio.png')))
 
 
 # Either reuse an edit-media sub-menu created by another add-on
