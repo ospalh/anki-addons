@@ -9,12 +9,12 @@ status_text_color: black
 abstract: Quickly select a few models or decks.
 first_image: quick_buttons.png
 first_alt: The top of the add card dialog with a few extra buttons
-first_caption: Select your favourite model or deck.
+first_caption: Select your favorite model or deck.
 
 This add-on adds a few buttons to the right of the select note type
 button and the select deck button at the top of the add card dialog.
 
-Click on them to select your favourite model or note type.
+Click on them to select your favorite model or note type.
 
 <blockquote class="nb">You will have to modify the add-on source to
 adapt this to your deck and model names.</blockquote>
@@ -24,11 +24,11 @@ adapt this to your deck and model names.</blockquote>
 After downloading, you have to modify the `Quick note and deck
 buttons.py` file. Trigger the “Tools/Add-ons/Open Add-ons
 Folder...” menu item, pick out that file and open it with your
-favourite source editor or trigger “Tools/Add-ons/Quick note and deck
+favorite source editor or trigger “Tools/Add-ons/Quick note and deck
 buttons/Edit...” to use Anki’s built-in editor.
 
 There are two bits of code that should be changed, marked with the
-commets `# Set up here...` and `# ... and here ...`. A knowledge of
+comments `# Set up here...` and `# ... and here ...`. A knowledge of
 [Python](http://www.python.org/)
 [syntax](http://docs.python.org/2/tutorial/index.html) may be helpful
 to set this up, but following the examples and only changing text
@@ -39,13 +39,13 @@ inside of quotation marks should work.
 The parts that should be changed are called
 [lists](http://docs.python.org/2/tutorial/introduction.html#lists) of
 [dictionaries](http://docs.python.org/2/tutorial/datastructures.html#dictionaries). The
-lists are marked with square bracktets, `[` and `]`, the dictionaries
+lists are marked with square brackets, `[` and `]`, the dictionaries
 with curly braces, `{` `}`. Each dictionary describes one button.
 
-Each of these button dictonaries must contain at least two key-value
+Each of these button dictionaries must contain at least two key–value
 pairs:
 
-* A `"label"`. The vaule after the `:` sets up the name shown in the
+* A `"label"`. The value after the `:` sets up the name shown in the
   button. Use quotation marks with an extra `u` before them to define
   a unicode string. I would suggest using short texts, such as single
   characters.

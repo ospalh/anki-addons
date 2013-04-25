@@ -1,5 +1,5 @@
 title: Quick replay
-id: playwithmpg
+id: quickreplay
 main_file: Quick%20replay.py
 type: addon
 date: 2012-11-16

@@ -42,7 +42,7 @@ names of each card are reduced to the characters `a` to `z`, `A` to
 `Z`, `0` to `9` and `_` and added as classes as well, in the form of
 `model_NN` and `template_NN`. As an example, the second card (`card1`)
 of a model or note type called “Satz Japanese 日本語” and that is
-called “Hörübung” would have the css classes `loc card card1
+called “Hörübung” would have the CSS classes `loc card card1
 model_SatzJapanese template_Hrbung`. These classes can be used to
 build CSS selectors.
 
@@ -108,7 +108,7 @@ switch between night mode and normal (day) mode.
 <blockquote class="nb">
 Without further set-up, this switch has no visible effect,
 all it does is add another class <code>night</code>. The user has to set up
-eir colection to make use of this.
+eir collection to make use of this.
 </blockquote>
 
 ### Set-up
@@ -138,7 +138,7 @@ bits.
 
 For example, i use the
 “[solarized](http://ethanschoonover.com/solarized)” color schemes. I
-use the light theme most of the thime but sometimes want the dark
+use the light theme most of the time but sometimes want the dark
 theme. I also sometimes want to see the cards in black-on-white.
 
 The point here is that the dark scheme can’t really be derived from

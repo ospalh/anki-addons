@@ -5,7 +5,7 @@ ankiweb_id: 3100585138
 parent: Download audio
 extra_jq_script: audio_tips.js
 
-These sites are tried to rerieve audio clips:
+These sites are tried to retrieve audio clips:
 
 ## Beolingus
 
@@ -14,7 +14,7 @@ dictionary provided by the
 [<span class="qtbase tu">TU</span> Chemnitz](http://www.tu-chemnitz.de/en/).
 
 The site provides German↔English, German↔Portuguese and German↔Spanish
-dictionaries and pronuctiations in English, German and Spanish.
+dictionaries and pronunciations in English, German and Spanish.
 
 ## Duden
 
@@ -30,12 +30,12 @@ Goole TTS is the text-to-speech part of
 [Google Translate](http://translate.google.com/#auto/en/).  It is the
 only text-to-speech services among the downloaders. The advantage is
 that this will almost always get you an audio version of the text
-enterend – when Google TTS works for your language at all – and can be
+entered – when Google TTS works for your language at all – and can be
 used to get an audio version of whole sentences, not just single
 words.
 
 The disadvantage is that that this will almost always get you an audio
-version of the text enterend, even when it is misspelled.
+version of the text entered, even when it is misspelled.
 
 Another disadvantage is that it is a robot voice. It may hide
 idiosyncrasies of the phrase or word.
@@ -43,13 +43,13 @@ idiosyncrasies of the phrase or word.
 For Chinese, the Google TTS download is skipped by default, because
 the [Chinese support](https://ankiweb.net/shared/info/3448800906)
 add-on downloads those, too. When you don’t use that add-on or want to
-download from Googl TTS with this add-on anyway, you can switch it
+download from Google TTS with this add-on anyway, you can switch it
 back on by changing the `False` in the `get_chinese` line near the
 head of the
 [`googl_tts.py`](https://github.com/ospalh/anki-addons/blob/master/downloadaudio/downloaders/google_tts.py)
 file to `True`.
 
-## <span id="jpod">Japanesepod</span>
+## <span id="jpod">JapanesePod</span>
 
 Downloads audio provided by
 [JapanesePod101](http://www.japanesepod101.com/).  This is the same
@@ -68,7 +68,7 @@ as mentioned on
 
 ### <span id="blacklist">Blacklist</span>
 
-The download mechanism at Japanesepod can’t really say
+The download mechanism at JapanesePod can’t really say
 [“no”](nopagehere.html) in the usual way. Instead it sends you an
 audio clip that tells you “The audio for this clip is currently not
 available. It will be recorded and uploaded shortly. Thank you for
@@ -103,7 +103,7 @@ downloaded. Try downloading
 sound effects should be marked in the bubble help text in the review.
 
 Macmillan Dictionary is available in a British English and an American
-Engilsh version. To counterbalance the American English of
+English version. To counterbalance the American English of
 Merriam-Webster, the standard install of the add-on uses the British
 version. See [below](#sitesonoff) how to turn on the American English
 version instead.
@@ -128,7 +128,7 @@ any results is hard to say.
 
 As these sound files are all uploaded by users, it is possible (even
 if unlikely) that some files do not contain what the should. They
-*might* even contain obsecnities. The
+*might* even contain obscenities. The
 [content disclaimer](http://en.wikipedia.org/wiki/Wikipedia:Content_disclaimer)
 from Wikipedia applies. If you encounter an incorrect file, the best
 way to proceed is to clean up the Wiktionary page in
@@ -136,7 +136,7 @@ question.
 
 The different language versions of Wiktionary add audio clips in
 different ways to their word pages. When the add-on did not download a
-pronunciation that is present on a specifc Wiktionary page, please
+pronunciation that is present on a specific Wiktionary page, please
 [report this](https://github.com/ospalh/anki-addons/issues?state=open). I
 will then try to find a way to extract that word, so that it should be
 downloaded with an updated version of the add-on.
@@ -160,7 +160,7 @@ For example, to change the Macmillan downloads from British English to
 American English, add a “`#`” character to the line
 “`MacmillanBritishDownloader(),`” and remove it from the line “`#
 MacmillanAmericanDownloader(),`”. (Do not remove the comma or
-parantheses. Do not make other changes unless you know what you are
+parentheses. Do not make other changes unless you know what you are
 doing.)
 
 After you have made changes to the file and saved it, you need to

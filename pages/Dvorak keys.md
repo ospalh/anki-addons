@@ -10,7 +10,7 @@ abstract: "Use keys easy to use for user of the <a
 href=\"http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard\">Dvorak
 simplified keyboard</a> to answer a question."
 first_image: Dvorak_keys.png
-first_alt: "Colorcoded sketch of a keyboard and hands. The colors show
+first_alt: "Color-coded sketch of a keyboard and hands. The colors show
 which finger to use for which key. Some keys are marked as described
 in the text."
 first_caption: The keys to use.
@@ -37,7 +37,7 @@ finger for “good” and ring finger for “easy”.
 The third set is similar to the first set, but in the bottom row,
 here, too, going from <span class="qtbase pinky">little finger</span>,
 “again”, to the index finger, “easy”. (Some (German? international?)
-keyborads have a small left shift key and an extra key for “<” and
+keyboards have a small left shift key and an extra key for “<” and
 “>”. That key is skipped.) (The idea for this set of keys came from
 Peter Horwood, (“Madman Pierre”), who has released
 [his own add-on](https://ankiweb.net/shared/info/3196965470) which

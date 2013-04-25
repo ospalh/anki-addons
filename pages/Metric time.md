@@ -36,8 +36,8 @@ Daring spirits can use my
 of AnkiDroid
 [development branch](https://github.com/ankidroid/Anki-Android/tree/v2.1-dev).
 
-I have added the equivalent of this addon, showing times as fractional
+I have added the equivalent of this add-on, showing times as fractional
 days in AnkiDroid. You should merge this branch into the newest
-version of AnkiDroid, not just use that branch as-is. I forked this of
-the the 2.1 branch. Merging it into the (more stable) 2.0 brach may or
+version of AnkiDroid, not just use that branch as-is. I forked this off
+the the 2.1 branch. Merging it into the 2.0 branch may or
 may not work.

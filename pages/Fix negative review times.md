@@ -6,7 +6,7 @@ type: addon
 status: working
 status_color: green
 status_text_color: white
-abstract: "Fix negative rewiew times."
+abstract: "Fix negative review times."
 first_image: time_fix.png
 first_alt: 'The code to run. It is described in the link in the main text.'
 first_caption: "The code that is run."

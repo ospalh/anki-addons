@@ -102,7 +102,7 @@ Applying the rules means that:
   “Audio”. The GoogleTTS downloader will work from the expression and
   download into the audio field.
 * The readings rule matches the field  “Reading” to the field
-  “Audio”. The Japanesepod downloader will work from the reading and
+  “Audio”. The JapanesePod downloader will work from the reading and
   download into the audio field, too.
 * The plain substring rule matches the field “”例文” to the field
   “例文 Audio”

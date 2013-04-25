@@ -5,7 +5,7 @@ type: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 
-During startup, only one language code is set for all decks.
+During start-up, only one language code is set for all decks.
 
 To change this language later, or to use more than one foreign
 language, the language code can be changed in the deck options.
@@ -13,7 +13,7 @@ language, the language code can be changed in the deck options.
 ## Deck options
 
 Each deck has an options group,
-but these goups can be shared between decks. See the
+but these groups can be shared between decks. See the
 [Anki manual](http://ankisrs.net/docs/manual.html#deckoptions) for
 more details.
 
@@ -22,8 +22,8 @@ more details.
 <figure>
 <img src="images/click_on_gear.png"
 alt="The Anki deck list. To the right of the gear button to the right
-of the deck name a popup menu with the thre items Rename Options
-Delet. A mouse pointer over Options.">
+of the deck name a pop-up menu with the three items Rename Options
+Delete. A mouse pointer over Options.">
 <figcaption>Click here to open the deck options.</figcaption>
 </figure>
 To change the language for an options group, first click on the gear

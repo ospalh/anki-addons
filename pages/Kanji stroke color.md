@@ -17,9 +17,9 @@ variants.
 ## Alternatives
 
 This add-on serves a similar purpose as
-[cayennes](http://cayennes.github.com)’ [Kanji
-colorizer](https://ankiweb.net/shared/info/1964372878). (View the code
-[on githhub](https://github.com/cayennes/kanji-colorize/).)
+[Cayennes](http://cayennes.github.io)’
+[Kanji colorizer](https://ankiweb.net/shared/info/1964372878). (View
+the code on [GitHub](https://github.com/cayennes/kanji-colorize/).)
 
 ### Pros for this add-on
 * Can show stroke variants
@@ -55,7 +55,7 @@ data base.
 Daring spirits can use my
 [variant](https://github.com/ospalh/Anki-Android/tree/stroke-color-addon)
 of [AnkiDroid](https://github.com/nicolas-raoul/Anki-Android). I have
-added the equivalent of this addon, giving colored stoke order
+added the equivalent of this add-on, giving colored stoke order
 diagrams on AnkiDroid. You should merge this branch into the newest
 version of AnkiDroid, not just use that branch as-is.
 
@@ -65,9 +65,9 @@ I have personally given up use of this add-on. While i still like my
 way of coloring the diagrams, with the actual colors defined via CSS,
 i did not like the changes to AnkiDroid needed.
 
-I have now copied the svgs to the media folder and added the kanji –
+I have now copied the SVGs to the media folder and added the kanji –
 with variants in an extra field – to my collection with the even more
-hackisch/broken [Copy diagrams](Copy%20diagrams.html) add-on.
+hackish/broken [Copy diagrams](Copy%20diagrams.html) add-on.
 
 ## Usage
 
@@ -93,7 +93,7 @@ are shown, using the normal version when there is no variant.
 <img src="images/three_旺.png" alt="A larger colored  stroke order diagram of
 旺. Below two smaller diagrams of that character. In the bottom
 diagrams the third stroke is shorter. The bottom left diagram shows
-the vertical sroke on the rigt drawn last.">
+the vertical stroke on the right drawn last.">
 <figcaption>For 「旺」, there are two variant forms.</figcaption>
 </figure>
 

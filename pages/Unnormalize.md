@@ -30,7 +30,7 @@ clip icon, but through other ways,
 there may be a problem caused by a quirk of the Macs’ file system. In
 file names on Macs, many
 non-[ASCII](http://en.wikipedia.org/wiki/ASCII) characters are
-[depomposed](http://en.wikipedia.org/wiki/Precomposed_character#Comparing_precomposed_and_decomposed_characters).
+[decomposed](http://en.wikipedia.org/wiki/Precomposed_character#Comparing_precomposed_and_decomposed_characters).
 For example, the character
 “[ü](http://www.fileformat.info/info/unicode/char/00fc/index.htm)” is
 stored as
@@ -54,7 +54,7 @@ cards.
 ## The solution
 
 The add-on goes through the collection and renames media file to those
-used in the collection when the on-disk name is the Mac OSX version
+used in the collection when the on-disk name is the Mac OS X version
 of that in the collection.
 
 <blockquote class="nb">This add-on in a hack. It worked well for me,

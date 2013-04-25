@@ -12,5 +12,5 @@ first_alt: "Screen text: Not yet an Anki 2 add-on"
 first_caption: Nothing here yet.
 
 I had the idea that it would be nice to download example sentences
-from [Tatoeba](http://tatoeba.org). Maybe i will write an add-on that wil do
+from [Tatoeba](http://tatoeba.org). Maybe i will write an add-on that will do
 that.

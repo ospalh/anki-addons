@@ -11,7 +11,7 @@ approach has been called “batteries included”.
 Accordingly, when writing some of my add-ons i used functions from the
 standard library without second thought.
 
-As it turend out, a standard binary installation of Anki brings along
+As it turned out, a standard binary installation of Anki brings along
 only some of the files of the standard library. This means that some
 of my add-ons won’t run on typical Anki installs, even when they run
 on my system.

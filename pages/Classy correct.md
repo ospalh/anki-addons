@@ -7,7 +7,7 @@ type: addon
 status: future
 status_color: red
 status_text_color: white
-abstract: Add a css classes to the corrected answer.
+abstract: Add a CSS classes to the corrected answer.
 first_image: classy.png
 first_alt: "Sceenshot with three lines of text. 1, 2: „Die Hauptstadt
 von Mosambik ist Maputo.“, 3.:  „Mabuto“, the „b“ is red, the rest

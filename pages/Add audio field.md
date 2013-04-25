@@ -128,7 +128,7 @@ they will be lost. Continue?">
 </figure>
 At this point, a warning dialog may appear. If you are not sure about
 this, click “No”, sync changes from remote devices to this
-collecection and do the steps above again. If you are sure, click
+collection and do the steps above again. If you are sure, click
 “Yes”.
 
 

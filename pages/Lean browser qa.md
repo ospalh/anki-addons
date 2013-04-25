@@ -16,7 +16,7 @@ highlighted. Text: 人形; Japanisch-De...; にんぎょう"
 first_caption: "The text 「みんなの日本語：」 is shown on the card,
 but not in the browser."
 
-Hide text with the css class `browserhide` in the card browser. This
+Hide text with the CSS class `browserhide` in the card browser. This
 is useful for cards where there is a text repeated for every card.
 
 The effect of this add-on is similar to using the “Browser Appearance”

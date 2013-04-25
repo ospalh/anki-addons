@@ -17,7 +17,7 @@ This add-on adds support for furikanji, adds two other templates and
 slightly changes the way kanji and readings are parsed.
 
 <blockquote class=nb>
-This addon is for use with the desktop
+This add-on is for use with the desktop
 client only. Using features of this add-on with mobile clients or
 AnkiWeb may result in suboptimal layout.
 </blockquote>
@@ -57,18 +57,14 @@ AnkiDroid can be patched to use furikanji.
 </figcaption>
 </figure>
 Daring spirits can use my
-[branch](https://github.com/ospalh/Anki-Android/tree/v2.1-dev-furikanji) of
-AnkiDroid
+[branch](https://github.com/ospalh/Anki-Android/tree/v2.1-dev-furikanji)
+of the AnkiDroid
 [development branch](https://github.com/ankidroid/Anki-Android/tree/v2.1-dev).
-I have added the equivalent of this addon, providing furikanji on
+I have added the equivalent of this add-on, providing furikanji on
 AnkiDroid. You should merge this branch into the newest version of
-AnkiDroid, not just use that branch as-is. I forked this of the the
-2.1 branch. Merging it into the (more stable) 2.0 brach may or may not
+AnkiDroid, not just use that branch as-is. I forked this off the
+2.1 branch. Merging it into the 2.0 branch may or may not
 work.
-
-I was unable to get the furikanji marked with the horizontal bars as
-shown in the desktop client. I mark them with color instead.
-
 
 ## Boxed and boxkana
 
@@ -89,7 +85,7 @@ template of a
 „[Die Kanji Lernen und Behalten](http://www.kanji-lernen.de/)“ deck,
 the German version of “Remembering the Kanji”.
 
-These effects can be achieved by applying the formating set in the
+These effects can be achieved by applying the formatting set in the
 [source file](https://github.com/ospalh/anki-addons/blob/master/Furikanji.py)
 directly, together with `{{kana:Field NN}}`. The simple box should work
 everywhere, the boxkana should work on AnkiDroid, and possibly in

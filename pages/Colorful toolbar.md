@@ -64,7 +64,7 @@ Apart from the standard version, there is a
 on the AnkiWeb
 [download page](https://ankiweb.net/shared/addons/), that places
 the two icon bars to the left and right, to preserve vertical screen
-space. On github, there is also a branch and package named
+space. On GitHub, there is also a branch and package named
 [`ospalh-special`](https://github.com/downloads/ospalh/anki-addons/colorful_toolbar_ospalh-special.zip)
 with a slightly different icon selection more to my personal taste.
 

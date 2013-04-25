@@ -9,7 +9,7 @@ status_text_color: white
 abstract: "Show the name of the deck you are currently learning in the
 window title."
 first_image: deck_title.png
-first_alt: "A winwodw title: “Lernen::1 日本語::1 和独::VHS – Anki”"
+first_alt: "A window title: “Lernen::1 日本語::1 和独::VHS – Anki”"
 first_caption: The window title shows a deck name.
 ankiweb_id: 3895972296
 
