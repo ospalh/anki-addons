@@ -214,6 +214,11 @@ def stroke_order_variant_tip(c):
             # Shouldn't happen. We just got the names that match this
             # pattern.
             variant = u'Unknown'
+        # Replace two variants that are quite common.
+        variant = variant.replace(
+            'Kaisho', u'<ruby class=nhg><rb>楷書</rb><rt>かいしょ</rt></ruby>')
+        variant = variant.replace(
+            'Jinmei', u'<ruby class=nhg><rb>人名</rb><rt>じんめい</rt></ruby>')
         var_scriptext += single_variant_kanji_template.format(
             fn=fname, size=kanji_variant_diagram_size)
         captions.append(variant)
@@ -222,7 +227,7 @@ def stroke_order_variant_tip(c):
         caption = u''
         if len(captions) > 1:
             for i, v in enumerate(captions):
-                caption += '{l}:&nbsp;{c}, '.format(
+                caption += u'{l}:&nbsp;{c}, '.format(
                     l=unichr(ord('a') + i), c=v)
         else:
             caption = captions[0]
