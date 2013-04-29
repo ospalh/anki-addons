@@ -22,7 +22,7 @@ downloads.  Set this to the two-letter code of the language you are
 learning.</p>"""
     self.maxTaken.setMinimum(3)
     lc_layout = QHBoxLayout()
-    lc_label = QLabel(_("Foreighn language code"), self.tab_5)
+    lc_label = QLabel(_("Foreign language code"), self.tab_5)
     lc_label.setToolTip(help_text)
     lc_layout.addWidget(lc_label)
     self.audio_download_language = QLineEdit(
@@ -89,7 +89,7 @@ def rename_language_code():
 def maybe_ask_language():
     # Just try to rename on every start. The delay should be rather
     # slight, so i see no real problem.
-    name_language_code()
+    rename_language_code()
     try:
         # We just look at this to see if it is set.
         mw.col.decks.confForDid(1)[fl_code_code]
