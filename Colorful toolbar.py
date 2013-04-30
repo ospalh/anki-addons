@@ -13,6 +13,14 @@
 # Free: http://creativecommons.org/publicdomain/zero/1.0/
 
 
+"""
+Add a standard tool bar to Anki2.
+
+This Anki2 addon adds a standard tool bar (a QtToolBar) to the Anki
+main window. By default a few buttons (QActions) are added, more can
+be added by the user.
+"""
+
 from PyQt4.QtCore import QSize, SIGNAL
 from PyQt4.QtGui import QAction, QIcon, QMenu, QPalette, QToolBar
 import os
@@ -23,13 +31,6 @@ from aqt import mw, clayout
 from aqt.reviewer import Reviewer
 from aqt.utils import askUser
 
-"""
-Add a standard tool bar to Anki2.
-
-This Anki2 addon adds a standard tool bar (a QtToolBar) to the Anki
-main window. By default a few buttons (QActions) are added, more can
-be added by the user.
-"""
 
 __version__ = "1.2.1"
 
@@ -373,6 +374,7 @@ def update_mark_action():
 
 
 def next_card_wrapper(self):
+    u"""Go to the deck overview or show the next card."""
     if toggle_last_card_action.isChecked():
         self.mw.moveToState("overview")
         toggle_last_card_action.setChecked(False)
@@ -381,6 +383,7 @@ def next_card_wrapper(self):
 
 
 def next_card_toggle_off():
+    """Switch the next card action off."""
     toggle_last_card_action.setChecked(False)
 
 # Make all the actions top level, so we can use them for the menu and
