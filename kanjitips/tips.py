@@ -19,12 +19,14 @@ from anki.hooks import addHook
 # Tips are only shown for elements that match any of these selectors, that is
 # have this class. So, in your template use something like <span
 # class="showtips">{{Back}}</span> instead of just {{Back}}.
-tip_selectors = ['.showtips', 'rb', '.furikanji rt', '.kanji']
+tip_selectors = ['.showtips', '.furigana', '.furikanji rt', '.kanji']
 # tip_selectors = ['rb', '.showtips']
 # tip_selectors = ['body']  # Everything
 
 
-skip_selectors = ['html', 'head', 'script', 'style', 'link', '.notip', '.shd']
+skip_selectors = [
+    'html', 'head', 'script', 'style', 'link', '.notip', '.shd',
+    '.furigana rt']
 # Everything that should not get a tip. It is important to skip
 # scripts &c., especially when the tip_selectors are rather general.
 
