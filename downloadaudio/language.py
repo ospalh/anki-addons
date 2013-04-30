@@ -8,8 +8,14 @@
 Return a language code.
 """
 
+from collections import Counter
 import re
+
 from aqt import mw
+from aqt.addcards import AddCards
+from aqt.editcurrent import EditCurrent
+from aqt.browser import Browser
+
 
 
 default_audio_language_code = "ja"
@@ -26,6 +32,33 @@ learning Japanese.
 al_code_code = 'addon_audio_download_language'
 
 
+def elect_language(note):
+    u"""
+    Return the most popular foreign language of a note.
+
+    Go through the cards of the note and return the language most of
+    them use.
+    """
+    votes = Counter()
+    for card in note.cards():
+        try:
+            lang = mw.col.decks.confForDid(card.did)[fl_code_code]
+        except (TypeError, KeyError, AssertionError):
+            continue
+        else:
+            votes.update( (lang, ) )
+    # We assume that we have seen at least one language and we ignore
+    # ties. (Just return one of the equally popular languages.) I
+    # don’t see much use for elaborate tie breaking: The typical
+    # situation is that one note is used for one foreign language,
+    # then it should work even if that one note is spread over several
+    # decks.
+    # When someone a) uses one note for several languages, b) has that
+    # note spread over several decks and c) then tries to download
+    # from the card browser d) can, i think, be made to choose the
+    # language by hand.
+    return votes.most_common(1)[0][0]
+
 def language_code_from_tags(note):
     for tag in note.tags:
         try:
@@ -37,8 +70,36 @@ def language_code_from_tags(note):
 
 
 def language_code_from_editor(note, card_edit):
-    print('Write me!')
-    return 'NN'
+    u"""
+    Return a language code.
+
+    When the note has a lang_NN tag use that.
+    Otherwise, the method to get the language code depends on where
+    the card editor is:
+    * If it is inside the card browser, we use the most popular language
+    * If it is in edit current, we use the language for the current card
+    * If it is in add card, we look at the deck chooser.
+    * If something goes wrong, we return the default language code.
+    """
+    try:
+        return language_code_from_tags(note)
+    except ValueError:
+        pass
+    edit_parent = card_edit.parentWindow
+    if isinstance(edit_parent, Browser):
+        try:
+            return elect_language(note)
+        except IndexError:
+            return default_audio_language_code
+    if isinstance(edit_parent, EditCurrent):
+        return language_code_from_card(mw.reviewer.card)
+    if isinstance(edit_parent, AddCards):
+        try:
+            mw.col.decks.confForDid(
+                edit_parent.deckChooser.selectedId())[fl_code_code]
+        except (TypeError, KeyError):
+            return default_audio_language_code
+    return default_audio_language_code
 
 
 def language_code_from_card(card):
