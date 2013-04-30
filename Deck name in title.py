@@ -30,7 +30,7 @@ subdeck_format = u'{parent}:–:{child}'
 use_argv_0 = False
 # use_argv_0 = True
 
-__version__ = '1.2.0'
+__version__ = '1.3.0'
 
 def get_prog_name():
     """Return either "Anki" org argv[0]"""
