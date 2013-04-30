@@ -47,7 +47,7 @@ else:
     re_sub_flag = lambda pattern, repl, string: \
         re.sub(pattern, repl, string, flags=re.UNICODE)
 
-furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
+furigana_pat = r'<ruby class="furigana">\g<kanji>'\
     '<rt>\g<kana></rt></ruby>'
 """
 Pattern to produce the furigana.
@@ -55,7 +55,7 @@ Pattern to produce the furigana.
 What is called ruby in the old code, but using named groups and
 adding a class.
 """
-furikanji_pat = r'<ruby class="furikanji"><rb>\g<kana></rb>'\
+furikanji_pat = r'<ruby class="furikanji">\g<kana>'\
     '<rt>\g<kanji></rt></ruby>'
 """
 Pattern to produce the furikanji.
