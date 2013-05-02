@@ -32,6 +32,7 @@ use_argv_0 = False
 
 __version__ = '1.3.0'
 
+
 def get_prog_name():
     """Return either "Anki" org argv[0]"""
     if use_argv_0 and sys.argv[0]:
