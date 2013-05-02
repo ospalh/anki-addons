@@ -14,7 +14,7 @@ import urllib
 import urlparse
 import re
 
-from .downloader import AudioDownloader
+from .downloader import AudioDownloader, uniqify_list
 
 # Make this work without PyQt
 with_pyqt = True
@@ -72,7 +72,8 @@ class WiktionaryDownloader(AudioDownloader):
                 continue
             # We look for links to ogg files (and not the description
             # pages) that contain our word.
-            if re.search(self.word_ogg_re.format(word=re.escape(u_word)), href):
+            if re.search(self.word_ogg_re.format(
+                    word=re.escape(u_word)), href):
                 ogg_url_list.append(href)
         # Next, look for source and src. Seen those inside audio tags.
         # I'm not sure if this is any use, but i guess it does no harm.
@@ -98,7 +99,7 @@ class WiktionaryDownloader(AudioDownloader):
             if re.search(self.word_ogg_re.format(
                     word=re.escape(word)), video_url):
                 ogg_url_list.append(video_url)
-        ogg_url_list = self.uniqify_list(ogg_url_list)
+        ogg_url_list = uniqify_list(ogg_url_list)
         for url_to_get in ogg_url_list:
             # We may have to add a scheme or a scheme and host
             # name (netloc). urlparse to the rescue!

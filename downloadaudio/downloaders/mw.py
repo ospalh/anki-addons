@@ -16,6 +16,19 @@ import re
 from .downloader import AudioDownloader
 
 
+def join_strings(a, b):
+    """
+    Return joined string or None.
+
+    From two inputs which are both either a string or None, build a
+    return string if possible.
+    """
+    l = [a, b]
+    l = [i for i in l if i]
+    if l:
+        return ", ".join(l)
+
+
 class MerriamWebsterDownloader(AudioDownloader):
     """Download audio from Meriam-Webster"""
     def __init__(self):
@@ -26,7 +39,7 @@ class MerriamWebsterDownloader(AudioDownloader):
         self.popup_url = 'http://www.merriam-webster.com/audio.php?'
 
     def download_files(self, word, base, ruby, split):
-        """
+        ur"""
         Get pronunciations of a word from Meriam-Webster
 
         Look up a English word at merriam-webster.com, look for
@@ -95,7 +108,7 @@ class MerriamWebsterDownloader(AudioDownloader):
                 # We already have this word, at index other_index in the
                 # two lists. That meaning_no is None or a string. The
                 # same for this meaning_no.
-                meaning_no_list[other_index] = self.join_strings(
+                meaning_no_list[other_index] = join_strings(
                     meaning_no_list[other_index], meaning_no)
         if file_list:
             # Only get the icon when we (seem to) have a pronunciation
@@ -133,15 +146,3 @@ class MerriamWebsterDownloader(AudioDownloader):
         """Build url for the MW play audio pop-up."""
         qdict = dict(file=base_name, word=source)
         return self.popup_url + urllib.urlencode(qdict)
-
-    def join_strings(self, a, b):
-        """
-        Return joined string or None.
-
-        From two inputs which are both either a string or None, build a
-        return string if possible.
-        """
-        l = [a, b]
-        l = [i for i in l if i]
-        if l:
-            return ", ".join(l)

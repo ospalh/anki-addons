@@ -9,7 +9,7 @@
 Anki2 add-on to show ankit tooltips (bubble help).
 """
 
-from tips import setup_tips
+from .tips import setup_tips
 
 __version__ = '0.0a1'
 #__all__ = ['setup_tips', 'show_tips', '__version__']

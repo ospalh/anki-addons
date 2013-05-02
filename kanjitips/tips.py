@@ -108,7 +108,7 @@ current_script = u''
 # debug: rememeber:
 #pp(mw.reviewer.web.page().mainFrame().toHtml())
 
-skip_re = "\[(:?sound|type):(:?.*?)\]"
+skip_re = ur"\[(:?sound|type):(:?.*?)\]"
 
 
 def uniqify_list(seq):
@@ -120,6 +120,7 @@ def uniqify_list(seq):
 
 
 def read_scripts():
+    u"""Read standard scripts."""
     global jquery_script
     global jquery_ui_script
     global show_tips_script
@@ -132,6 +133,7 @@ def read_scripts():
 
 
 def read_character_data():
+    u"""Read data files containing information on characters."""
     global character_data_dict
     global jdic2_twigs
     utf8_parser = etree.XMLParser(encoding='utf-8')
@@ -203,6 +205,7 @@ def stroke_order_tip(c):
 
 
 def stroke_order_variant_tip(c):
+    u"""Return bits of a tooltip with stroke order diagrams."""
     if not do_this(c, all_non_control=show_all_stroke_order):
         return u''
     var_scriptext = u''
@@ -246,6 +249,7 @@ def characterdata_tip(c):
 
 
 def kanjidic_tip(c):
+    u"""Return bits of a tooltip containing kanjidic information."""
     kd_element = jdic2_twigs[c]
     # This may throw. we catch one level higher
     meanings = u''
@@ -267,6 +271,7 @@ def kanjidic_tip(c):
 
 
 def maybe_make_tip(glyph):
+    u"""Make a script to show tooltips, when we find suitable characters."""
     global current_script
     if not do_this(glyph, all_non_control=show_all_stroke_order):
         return None
@@ -302,6 +307,7 @@ def maybe_make_tip(glyph):
 
 
 def media_characters(s):
+    u"""Return positions of characters inside  media file."""
     mc = []
     for m in re.finditer(skip_re, s):
         b, l = m.span()
@@ -419,6 +425,7 @@ def show_tip_filter(qa, card):
 
 
 def do_scripts():
+    u"""When we have something to show, eval the scripts that do so."""
     if not do_show:
         return
     mw.reviewer.web.eval(jquery_script)
@@ -427,6 +434,13 @@ def do_scripts():
 
 
 def setup_tips():
+    u"""
+    Set up the kanjitp mechanism.
+
+    Load the character data.
+    Read the global scripts.
+    add the hooks.
+    """
     read_character_data()
     read_scripts()
     # addHook("filterQuestionText", show_tip_filter)

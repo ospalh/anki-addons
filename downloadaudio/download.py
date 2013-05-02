@@ -73,13 +73,13 @@ def do_download(note, field_data, language, hide_text=False):
     retrieved_files_list = []
     show_skull_and_bones = False
     for (source, dest, text, base, ruby, split) in field_data:
-        for downloader in downloaders:
+        for dloader in downloaders:
             # Use a public variable to set the language.
-            downloader.language = language
+            dloader.language = language
             try:
                 # Make it easer inside the downloader. If anything
                 # goes wrong, don't catch or rais whatever you want.
-                downloader.download_files(text, base, ruby, split)
+                dloader.download_files(text, base, ruby, split)
             except:
                 ## Uncomment this raise while testing a new
                 ## downloaders.  Also comment out all the others in the
@@ -87,8 +87,8 @@ def do_download(note, field_data, language, hide_text=False):
                 # raise
                 continue
             show_skull_and_bones = \
-                show_skull_and_bones or downloader.show_skull_and_bones
-            for word_path, file_name, extras in downloader.downloads_list:
+                show_skull_and_bones or dloader.show_skull_and_bones
+            for word_path, file_name, extras in dloader.downloads_list:
                 try:
                     item_hash = get_hash(word_path)
                 except ValueError:
@@ -105,8 +105,8 @@ def do_download(note, field_data, language, hide_text=False):
                         # downloader downloads to a temp file, so move
                         # here.
                         file_name = processor.process_and_move(
-                            word_path, downloader.base_name)
-                    except Exception:
+                            word_path, dloader.base_name)
+                    except:
                         # raise  # Use this to debug an audio processor.
                         os.remove(word_path)
                         continue
@@ -114,8 +114,8 @@ def do_download(note, field_data, language, hide_text=False):
                 #    file_name = file_name
                 # We pass the file name around for this case.
                 retrieved_files_list.append((
-                    source, dest, downloader.display_text,
-                    file_name, item_hash, extras, downloader.site_icon))
+                    source, dest, dloader.display_text,
+                    file_name, item_hash, extras, dloader.site_icon))
     try:
         store_or_blacklist(
             note, retrieved_files_list, show_skull_and_bones, hide_text)
@@ -155,7 +155,7 @@ def download_for_note(ask_user=False, note=None, editor=None):
         try:
             card = mw.reviewer.card
             note = card.note()
-        except:
+        except AttributeError:
             return
         language_code = language_code_from_card(card)
     else:
@@ -181,22 +181,26 @@ def download_for_note(ask_user=False, note=None, editor=None):
 
 
 def download_manual():
+    u"""Do the download with the dialog before we go."""
     download_for_note(ask_user=True)
 
 
 def download_off():
+    u"""Deactivate the download menus."""
     mw.note_download_action.setEnabled(False)
     mw.side_download_action.setEnabled(False)
     mw.manual_download_action.setEnabled(False)
 
 
 def download_on():
+    u"""Activate the download menus."""
     mw.note_download_action.setEnabled(True)
     mw.side_download_action.setEnabled(True)
     mw.manual_download_action.setEnabled(True)
 
 
 def editor_download_editing(self):
+    u"""Do the download when we are in the note editor."""
     self.saveNow()
     download_for_note(ask_user=True, note=self.note, editor=self)
     # Fix for issue #10.

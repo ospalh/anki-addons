@@ -4,6 +4,8 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+u"""Set the download language."""
+
 from aqt.deckconf import DeckConf
 from aqt.forms import dconf
 from anki.hooks import addHook, wrap
@@ -12,11 +14,12 @@ from aqt.qt import QHBoxLayout, QLabel, QLineEdit
 from aqt.utils import getText, tooltip
 from anki.lang import _
 
-from language import default_audio_language_code, fl_code_code, \
+from .language import default_audio_language_code, fl_code_code, \
     old_al_code_code
 
 
 def setup_ui(self, Dialog):
+    u"""Add a QLineEdit to the settings to set the dl language."""
     help_text = """<p>This code is used for audio or example sentence
 downloads.  Set this to the two-letter code of the language you are
 learning.</p>"""
@@ -34,15 +37,18 @@ learning.</p>"""
 
 
 def load_conf(self):
+    u"""Get the download language from the configuration."""
     self.form.audio_download_language.setText(
         self.conf.get(fl_code_code, default_audio_language_code))
 
 
 def save_conf(self):
+    u"""Save the download language tothe configuration."""
     self.conf[fl_code_code] = self.form.audio_download_language.text()
 
 
 def ask_and_set_language_code():
+    u"""Ask the user for the language code."""
     lang_code, ok = getText(
         prompt=u"""<h4>Set download language code</h4>
 Set the <a
@@ -71,6 +77,12 @@ of the language you are learning.<br>
 
 
 def rename_language_code():
+    u"""
+    Rename the language code.
+
+    Look for the old audio-only language code and change it to one
+    that can be used by the tatoeba add-on as well.
+    """
     old_code_found = False
     for conf in mw.col.decks.allConf():
         try:
@@ -87,6 +99,7 @@ def rename_language_code():
 
 
 def maybe_ask_language():
+    u"""Ask the user for the language code if neccessary."""
     # Just try to rename on every start. The delay should be rather
     # slight, so i see no real problem.
     rename_language_code()

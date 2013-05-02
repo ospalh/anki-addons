@@ -25,6 +25,14 @@ except ImportError:
     with_pyqt = False
 
 
+def uniqify_list(seq):
+    """Return a copy of the list with every element appearing only once."""
+    # From http://www.peterbe.com/plog/uniqifiers-benchmark
+    no_dupes = []
+    [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
+    return no_dupes
+
+
 class AudioDownloader(object):
     """
     Class to download a files from a dictionary or TTS service.
@@ -130,9 +138,9 @@ class AudioDownloader(object):
         Set self.display_text and self.base_name with the text used
         for download, formated in a form useful for display and for a
         file name, respectively.
-        This version uses just the text. It
-        should be reimplemented for Japanese (Chinese, ...)
-        downloaders that use the base and ruby.
+        This version uses just the text. It should be reimplemented
+        for Japanese (Chinese, ...)  downloaders that use the base and
+        ruby.
         """
         self.base_name = text
         self.display_text = text
@@ -272,10 +280,3 @@ class AudioDownloader(object):
             from ..exists import free_media_name
             return free_media_name(
                 self.base_name, self.file_extension)
-
-    def uniqify_list(self, seq):
-        """Return a copy of the list with every element appearing only once."""
-        # From http://www.peterbe.com/plog/uniqifiers-benchmark
-        no_dupes = []
-        [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
-        return no_dupes

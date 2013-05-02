@@ -4,6 +4,10 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 #
 
+u"""
+Helper function to deal with file names.
+"""
+
 import os
 import re
 import unicodedata
@@ -12,7 +16,7 @@ from aqt import mw
 from anki.utils import isMac, stripHTML
 
 normalize_file_names_on_cards = False
-"""
+ur"""
 Store the field content NFD-normalized on Macs or not.
 
 As i said, i think NFD-normalized file names look ugly on Linux. I'll
@@ -30,7 +34,7 @@ def free_media_name(base, end):
     """
     base = stripHTML(base)
     # Basically stripping the 'invalidFilenameChars'. (Not tested too much).
-    base = re.sub('[\\/:\*?\'"<>\|]', '', base)
+    base = re.sub(ur'[\\/:\*?\'"<>\|]', '', base)
     if normalize_file_names_on_cards and isMac:
         base = unicodedata.normalize('NFD', base)
     mdir = mw.col.media.dir()

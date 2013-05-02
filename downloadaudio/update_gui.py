@@ -14,7 +14,7 @@ from PyQt4.QtGui import QDialog, QDialogButtonBox, QFrame, QGridLayout, \
 
 from anki.lang import _
 
-from language import default_audio_language_code
+from .language import default_audio_language_code
 
 
 def update_data(data_fields, language_code):
@@ -49,6 +49,7 @@ class ReviewFields(QDialog):
         self.initUI()
 
     def initUI(self):
+        u"""Build the dialog box."""
         language_help = _(u'''<h4>Language code.</h4>
 <p>This will be transmitted as part of the requst sent to the
 sites. As some sites only support one language, this is also used to
@@ -116,6 +117,7 @@ reading (ruby) on the right.</p>
         layout.addWidget(dialog_buttons)
 
     def create_data_rows(self, layout):
+        u"""Build one line of the dialog box."""
         gf_layout = QGridLayout()
         for num, (source, dest, text, base, ruby, split_reading) \
                 in enumerate(self.data_fields):
