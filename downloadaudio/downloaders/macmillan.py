@@ -22,6 +22,7 @@ class MacmillanDownloader(AudioDownloader):
         AudioDownloader.__init__(self)
         self.file_extension = u'.mp3'
         self.icon_url = 'http://www.macmillandictionary.com/'
+        self.extras = {}  # Set in the derived classes.
 
     def download_files(self, word, base, ruby, split):
         """
@@ -79,7 +80,7 @@ class MacmillanDownloader(AudioDownloader):
             extras = self.extras
             try:
                 alt_string = sound_tag['alt']
-            except:
+            except KeyError:
                 pass
             else:
                 if not 'pronunciation' in alt_string.lower():

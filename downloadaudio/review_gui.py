@@ -29,7 +29,7 @@ from aqt import mw
 from anki.lang import _
 from anki.sound import play, playFromText
 
-from blacklist import add_black_hash
+from .blacklist import add_black_hash
 
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
@@ -39,6 +39,13 @@ action = {'add': 0, 'keep': 1, 'delete': 2, 'blacklist': 3}
 
 
 def store_or_blacklist(note, retrieved_data, show_skull_and_bones, hide_text):
+    u"""
+    Show a dialog box where the user decides what to do.
+
+    Show a dialog box where the user can listen to the downloaded
+    audio and to already present audio and then decide whether to add,
+    keep, delete, or blacklist the downloaded file.
+    """
     if not note or not retrieved_data:
         raise ValueError('Nothing downloaded')
     review_files = ReviewFiles(
@@ -67,7 +74,7 @@ def store_or_blacklist(note, retrieved_data, show_skull_and_bones, hide_text):
         rnote = None
         try:
             rnote = mw.reviewer.card.note()
-        except:
+        except AttributeError:
             # Could not get the note of the reviewer's card. Probably
             # not reviewing at all.
             return
@@ -79,6 +86,7 @@ def store_or_blacklist(note, retrieved_data, show_skull_and_bones, hide_text):
 
 
 def remove_all_files(files_etc):
+    u"""Remove all recently downloaded files."""
     for source, dest, text, dl_fname, dl_hash, extras, icon\
             in files_etc:
         os.remove(os.path.join(mw.col.media.dir(), dl_fname))
@@ -150,6 +158,7 @@ that they are sorry, will add this soon &c., click on this.""")
         self.initUI()
 
     def initUI(self):
+        u"""Build the dialog box."""
         self.setWindowTitle(_(u'Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QGridLayout()
@@ -205,6 +214,7 @@ that they are sorry, will add this soon &c., click on this.""")
                          len(self.buttons_groups) + 3, 0, 1, self.num_columns)
 
     def create_rows(self, layout):
+        u"""Build one row of the dialog box"""
         play_button_group = QButtonGroup(self)
         old_play_button_group = QButtonGroup(self)
         for num, (source, dest, text, dl_fname, dl_hash, extras, icon)\
@@ -287,6 +297,7 @@ that they are sorry, will add this soon &c., click on this.""")
                 self.note[self.list[old_play_button_group.id(button)][1]]))
 
     def build_text_help_label(self, text, source, extras):
+        u"""Build the bubble help text label."""
         ret_text = u''
         if not self.hide_text:
             ret_text += _(u'Source text: <b>{0}</b><br>') .format(text)

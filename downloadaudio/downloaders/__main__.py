@@ -4,15 +4,18 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+u"""
+Functions to use the downloader classes stand-alone.
+"""
 
-import argparse
-import sys
-
-from . import downloaders
 from .japanesepod import JapanesepodDownloader
 
 def move_here(dl):
+    """
+    Unwritten functon.
 
+    The plan was to copy downloaded files to the current direcotry.
+    """
     pass
 
 jpd = JapanesepodDownloader()

@@ -25,7 +25,7 @@ so skip this by default.
 
 
 class GooglettsDownloader(AudioDownloader):
-
+    u"""Class to get pronunciations from Google’s TTS service."""
     def __init__(self):
         AudioDownloader.__init__(self)
         self.file_extension = u'.mp3'
@@ -56,5 +56,6 @@ class GooglettsDownloader(AudioDownloader):
             (word_path, word_file_name, dict(Source='GoogleTTS')))
 
     def build_url(self, source):
+        u"""Return a string that can be used as the url."""
         qdict = dict(tl=self.language, q=source.encode('utf-8'))
         return self.url + urllib.urlencode(qdict)
