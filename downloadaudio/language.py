@@ -28,8 +28,11 @@ learning Japanese.
 """
 
 
-### Dont't change this!
-al_code_code = 'addon_audio_download_language'
+### Dont't change these.
+old_al_code_code = 'addon_audio_download_language'
+# Actually i don’t like the old name. I want to use this code in the
+# tatoeba downloader as well.
+fl_code_code = 'addon_foreign_language'
 
 
 def elect_language(note):
@@ -60,7 +63,6 @@ def elect_language(note):
     return votes.most_common(1)[0][0]
 
 def language_code_from_tags(note):
-    u"""Get the language set by the user for individual notes."""
     for tag in note.tags:
         try:
             return re.search('^lang_([a-z]{2,3})$', tag,
@@ -123,6 +125,6 @@ def language_code_from_card(card):
         # in. Maybe there are more steps necessary.)
         deck_conf = mw.col.decks.confForDid(1)
     try:
-        return deck_conf[al_code_code]
+        return deck_conf[fl_code_code]
     except (TypeError, KeyError):
         return default_audio_language_code
