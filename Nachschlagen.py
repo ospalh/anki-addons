@@ -55,7 +55,7 @@ meaning_fields = [u'Meaning', u'Deutsch', u'German', u'Front']
 ### End configuration block
 ### Ende Konfiguration
 
-__version__ = "1.0.1"
+__version__ = "2.0.0"
 
 
 # A few general-purpose helper functions.
