@@ -22,7 +22,7 @@ import re
 from anki import hooks
 
 
-__version__ = "1.2.1"
+__version__ = "1.3.0"
 
 # Check which pattern we should use, with or without the re.UNICODE flag.
 try:
@@ -47,17 +47,16 @@ else:
     re_sub_flag = lambda pattern, repl, string: \
         re.sub(pattern, repl, string, flags=re.UNICODE)
 
-furigana_pat = ur'<ruby class="furigana"><rb>\g<kanji></rb>'\
-    ur'<rt>\g<kana></rt></ruby>'
+furigana_pat = ur'<ruby class="furigana">\g<kanji>'\
+    '<rt>\g<kana></rt></ruby>'
 """
 Pattern to produce the furigana.
 
 What is called ruby in the old code, but using named groups and
 adding a class.
 """
-
-furikanji_pat = ur'<ruby class="furikanji"><rb>\g<kana></rb>'\
-    ur'<rt>\g<kanji></rt></ruby>'
+furikanji_pat = ur'<ruby class="furikanji">\g<kana>'\
+    '<rt>\g<kanji></rt></ruby>'
 """
 Pattern to produce the furikanji.
 
