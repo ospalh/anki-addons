@@ -63,6 +63,7 @@ def elect_language(note):
     return votes.most_common(1)[0][0]
 
 def language_code_from_tags(note):
+    u"""Get the language set by the user for individual notes."""
     for tag in note.tags:
         try:
             return re.search('^lang_([a-z]{2,3})$', tag,
