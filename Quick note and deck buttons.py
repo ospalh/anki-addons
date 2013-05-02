@@ -101,6 +101,7 @@ __version__ = "2.0.5"
 
 
 def setup_buttons(chooser, buttons, text, do_function):
+    u"""Set up the note type and deck buttons."""
     bhbl = QHBoxLayout()
     if not isMac:
         bhbl.setSpacing(0)

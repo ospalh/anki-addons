@@ -18,13 +18,19 @@ from PyQt4.QtCore import SIGNAL
 
 __version__ = "1.1.0"
 
-sound_re = '\[sound:(.*?)\]'
+sound_re = ur'\[sound:(.*?)\]'
 
 command_list = ['sweep-audio-editor']
 sound_ending_list = ['.mp3', '.wav', '.flac', '.ogg']
 
 
 def sound_ending(fname):
+    u"""
+    Return the sound-file-like ending of fname or None.
+
+    Check whether fname looks like the name of a sound file and return
+    the file ending if it does or None if it doesn’t.
+    """
     for ffts in sound_ending_list:
         if fname.lower().endswith(ffts):
             return ffts
@@ -40,10 +46,11 @@ def sweep_files(note):
     text = '@'.join(note.fields)
     matches = [fn for fn in re.findall(sound_re, text) if sound_ending(fn)]
     if command_list and matches:
-            call_sweep(matches)
+        call_sweep(matches)
 
 
 def call_sweep(files):
+    u"""Start the programme sweep to edit files."""
     # We don't do the file name fixing. The point of this is to edit
     # the files in place. I don't think there is a sweep version for
     # windows. Maybe for cygwin. As this is a quick hack for me, i
@@ -63,11 +70,11 @@ def call_sweep(files):
 
 def which(program):
     """Return path of command."""
-
     def is_exe(fpath):
+        u"""Return whether fpath points to an executable file."""
         return os.path.exists(fpath) and os.access(fpath, os.X_OK)
 
-    fpath, fname = os.path.split(program)
+    fpath, dummy_fname = os.path.split(program)
     if fpath:
         if is_exe(program):
             return program
@@ -101,9 +108,11 @@ in path. Please download and install it.'''
 
 
 def sweep_current_note():
+    u"""Call the action to edit the sound files of the current note."""
     try:
         sweep_files(mw.reviewer.card.note())
-    except:
+    except AttributeError:
+        # No note.
         pass
 
 

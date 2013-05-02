@@ -2,6 +2,10 @@
 # © 2012–2013 Roland Sieker <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
+"""
+Anki-2 add-on to show the deck name in the window title.
+"""
+
 import sys
 import os
 from anki.hooks import wrap, addHook
@@ -26,24 +30,27 @@ subdeck_format = u'{parent}:–:{child}'
 use_argv_0 = False
 # use_argv_0 = True
 
-__version__ = '1.2.0'
+__version__ = '1.3.0'
+
+
+def get_prog_name():
+    """Return either "Anki" org argv[0]"""
+    if use_argv_0 and sys.argv[0]:
+        return os.path.basename(sys.argv[0])
+    return u'Anki'
 
 
 class DeckNamer(object):
     """Functions to set the title to the deck name in Anki2 """
 
     def __init__(self):
-        self.prog_name = self.get_prog_name()
+        self.prog_name = get_prog_name()
         self.profile_string = u''
         self.deck_name = u''
         self.subdeck_name = u''
 
-    def get_prog_name(self):
-        if use_argv_0 and sys.argv[0]:
-            return os.path.basename(sys.argv[0])
-        return u'Anki'
-
     def get_deck_name(self):
+        """Return the deck name"""
         try:
             self.deck_name = mw.col.decks.current()['name']
             self.subdeck_name = self.deck_name
@@ -52,6 +59,12 @@ class DeckNamer(object):
         return self.deck_name
 
     def get_profile_string(self):
+        """
+        Return the profile name.
+
+        When there is more than one profile, return that name,
+        together with the title separator.
+        """
         if len(mw.pm.profiles()) > 1 and mw.pm.name:
             self.profile_string = mw.pm.name + title_separator
         else:
@@ -59,13 +72,16 @@ class DeckNamer(object):
         return self.profile_string
 
     def deck_browser_title(self):
+        """Set the window title when we are in the deck browser."""
         mw.setWindowTitle(self.get_profile_string() + self.prog_name)
 
     def overview_title(self):
+        """Set the window title when we are at the overview."""
         mw.setWindowTitle(self.get_deck_name() + title_separator +
                           self.profile_string + self.prog_name)
 
     def card_title(self):
+        """Set the window title when we are reviewing."""
         self.overview_title()
         old_subdeck_name = self.subdeck_name
         self.subdeck_name = mw.col.decks.get(mw.reviewer.card.did)['name']

@@ -26,7 +26,7 @@ if isWin:
     subprocess.STARTUPINFO.wShowWindow = subprocess.SW_HIDE
     subprocess.STARTUPINFO.dwFlags = subprocess.STARTF_USESHOWWINDOW
 
-sound_re = '\[sound:(.*?)\]'
+sound_re = ur'\[sound:(.*?)\]'
 command_list = ['mplayer', '-really-quiet']
 if isWin:
     command_list += ['-ao', 'win32']
@@ -34,6 +34,7 @@ if isWin:
 fse = sys.getfilesystemencoding()
 
 def patched_play_from_text(text):
+    u"""Play the list of files directly without play queue."""
     matches = re.findall(sound_re, text)
     if not matches:
         # Avoid any problems with calling the programs with zero
@@ -83,9 +84,10 @@ def which(program):
     the binary install brings along an mplayer of its own.
     """
     def is_exe(fpath):
+        u"""Return whether fpath is executable."""
         return os.path.exists(fpath) and os.access(fpath, os.X_OK)
 
-    fpath, fname = os.path.split(program)
+    fpath, fname_dummy = os.path.split(program)
     if fpath:
         if is_exe(program):
             return program

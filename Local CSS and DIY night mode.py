@@ -15,7 +15,7 @@ Load the file 'user_style.css' from the user’s profile folder
 the style from the template.
 """
 
-from PyQt4.QtGui import QAction, QActionGroup, QIcon, QMenu
+from PyQt4.QtGui import QAction, QActionGroup, QMenu
 from PyQt4.QtCore import SIGNAL
 
 import os
@@ -58,17 +58,17 @@ def fix_body_class():
         template_nr = mw.reviewer.card.ord
     else:
         template_nr = 0
-    template_class = re.sub('[\W_]+', '',
+    template_class = re.sub(ur'[\W_]+', u'',
                             model['tmpls'][template_nr]['name']).lower()
-    model_class = re.sub('[\W_]+', '', model['name']).lower()
-    body_class = '{0} card card{1} template_{2} model_{3}'.format(
+    model_class = re.sub(ur'[\W_]+', u'', model['name']).lower()
+    body_class = ur'{0} card card{1} template_{2} model_{3}'.format(
         local_class, mw.reviewer.card.ord,
         template_class, model_class)
     try:
         body_class += ' ' + extra_class
     except TypeError:
         pass
-    mw.web.eval("document.body.className = '{0}';".format(body_class))
+    mw.web.eval(u"document.body.className = '{0}';".format(body_class))
 
 
 def get_user_css():
@@ -93,8 +93,10 @@ def localized_card_css(self):
 
 
 def set_extra_class(new_extra_class):
+    u"""Set the varible so the extra class is used on the next card."""
     global extra_class
     extra_class = new_extra_class
+
 
 def setup_menu():
     u"""

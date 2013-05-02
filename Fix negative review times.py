@@ -20,9 +20,9 @@ from PyQt4.QtGui import QAction
 
 from anki.lang import _
 from aqt import mw
-from aqt.utils import askUser, tooltip
+from aqt.utils import tooltip
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
 def fix_review_times():

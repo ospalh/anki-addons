@@ -4,6 +4,8 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+u"""Anki-2 add-on to hide text in the card browser. """
+
 from lxml import html
 from aqt.browser import DataModel
 
@@ -14,6 +16,7 @@ hide_class_selector = '.browserhide'
 
 
 def reduce_format_qa(self, text):
+    u"""Remove elements with a given class before displaying."""
     try:
         doc = html.fromstring(text)
         # I got "lxml.etree.XMLSyntaxError" here once.

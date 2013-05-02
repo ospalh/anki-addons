@@ -2,6 +2,9 @@
 # © 2012 Roland Sieker <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
+
+u"""Anki-2 add-on to show some times as fractional days."""
+
 # Usually Python comes with 'batteries included', that is, with the
 # Python standard library. Unfortunately, this is not the case for a
 # typical Anki install. So bring along some files that are
@@ -97,6 +100,7 @@ def days_from_s(seconds, sigfig=2, short=False, maybe_show_years=True):
 
 
 def metric_time_span(time, pad=0, point=0, short=False, after=False, unit=99):
+    u"""Return a time span as a fraction of days."""
     return days_from_s(time, short=short, maybe_show_years=True)
 
 old_fmt_time_span = utils.fmtTimeSpan

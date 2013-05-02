@@ -4,15 +4,18 @@
 #
 # Dictionary lookup support for my favorite dictionaries
 #
-# © 2011–2012 Roland Sieker <ospalh@gmail.com>
+# © 2011–2013 Roland Sieker <ospalh@gmail.com>
 #
-# Based on lookup.py from the JapaneseSupport plugin
-# Original author: Damien Elmes <anki@ichi2.net>
+# Losely based on lookup.py from the JapaneseSupport plugin
+# © Damien Elmes <anki@ichi2.net>
+
+u"""Add a menu to Anki2 to look up words in a few more dictionaries. """
+
 
 import urllib
 from aqt import mw
 from aqt.qt import QDesktopServices, QUrl, QMenu, QAction, SIGNAL
-from aqt.utils import showInfo
+from aqt.utils import tooltip
 from aqt.webview import QWebPage
 
 
@@ -52,220 +55,260 @@ meaning_fields = [u'Meaning', u'Deutsch', u'German', u'Front']
 ### End configuration block
 ### Ende Konfiguration
 
-__version__ = "1.0.1"
+__version__ = "2.0.0"
 
 
-class Nachschlagen(object):
+# A few general-purpose helper functions.
 
-    def __init__(self, main):
-        self.main = main
 
-    def get_selection(self):
-        "Get the selected text."
-        # lazily acquire selection by copying it into clipboard
-        mw.web.triggerPageAction(QWebPage.Copy)
-        text = mw.app.clipboard().mimeData().text()
-        text = text.strip()
-        if not text:
-            raise ValueError(u'Empty selection.')
-        if "\n" in text:
-            raise ValueError("Can't look up a selection with a newline.")
-        return text
+def get_selection():
+    "Get the selected text."
+    # lazily acquire selection by copying it into clipboard
+    mw.web.triggerPageAction(QWebPage.Copy)
+    text = mw.app.clipboard().mimeData().text()
+    text = u' '.join(text.split())
+    if not text:
+        raise ValueError(u'Empty selection.')
+    return text
 
-    def wadoku(self, field_list=expression_fields):
-        "Look up TEXT with Wadoku (German-Japanese)."
-        if field_list:
-            text = self.get_text_from_fields(field_list)
-        else:
-            text = self.get_selection()
-        if len(text) == 0:
-            raise ValueError(u"Kein Text zum nachschlagen.")
-        base_url = "http://www.wadoku.de/wadoku/search/"
-        url = base_url + urllib.quote(text.encode("utf-8"))
-        qurl = QUrl()
-        qurl.setEncodedUrl(url)
-        QDesktopServices.openUrl(qurl)
 
-    def saiga(self, field_list=expression_fields):
-        """Look up first kanji in text on Saiga."""
-        # I don’t really use this dictionary any more. Feel free to
-        # add it to your menu again.
-        if field_list:
-            kanji = self.get_text_from_fields(field_list)
-        else:
-            kanji = self.get_selection()
-        kanji = self.get_first_han_character(kanji)
-        if len(kanji) == 0:
-            raise ValueError("No kanji found.")
-        new_text = urllib.quote(kanji.encode("utf-8"))
-        url = ("http://www.saiga-jp.com/cgi-bin/dic.cgi?m=search&sc=0&f=0&j=" +
-               new_text + "&g=&e=&s=&rt=0&start=1")
-        qurl = QUrl()
-        qurl.setEncodedUrl(url)
-        QDesktopServices.openUrl(qurl)
+def is_han_character(uchar):
+    u"""Return True if uchar is a unifed CJK ideograph/han character.
 
-    def kanjilexikon(self, field_list=expression_fields):
-        """Look up first kanji in text on Kanji-Lexikon."""
-        if field_list:
-            kanji = self.get_text_from_fields(field_list)
-        else:
-            kanji = self.get_selection()
-        kanji = self.get_han_characters(kanji)
-        if len(kanji) == 0:
-            raise ValueError("No kanji found.")
-        new_text = urllib.quote(kanji.encode("utf-8"))
-        url = ("http://lingweb.eva.mpg.de/kanji/index.html?kanji=" + new_text)
-        qurl = QUrl()
-        qurl.setEncodedUrl(url)
-        QDesktopServices.openUrl(qurl)
+    Return True if uchar is a unifed CJK ideograph/han character.
+    N.B. we only check the standard range in the BMP.
+    """
+    if uchar >= u'\u4e00' and uchar <= u'\u9fff':
+        # The code from the JapaneseSupport plugin compares
+        # ord(character) to a number. We compare one character
+        # with another. Don't know which method is
+        # 'better'. (And we skip u'\u2e00' to u'\u4dff', i
+        # guess the kana are somwhere in there.)
+        return True
+    return False
 
-    def forvo(self, field_list=expression_fields):
-        "Look up pronunciation on forvo."
-        if field_list:
-            text = self.get_text_from_fields(field_list)
-        else:
-            text = self.get_selection()
-        if len(text) == 0:
-            raise ValueError(u"No text to look up.")
-        new_text = urllib.quote(text.encode("utf-8"))
-        url = ("http://de.forvo.com/search/" + new_text)
-        qurl = QUrl()
-        qurl.setEncodedUrl(url)
-        QDesktopServices.openUrl(qurl)
 
-    def is_han_character(self, uchar):
-        if uchar >= u'\u4e00' and uchar <= u'\u9fff':
-            # The code from the JapaneseSupport plugin compares
-            # ord(character) to a number. We compare one character
-            # with another. Don't know which method is
-            # 'better'. (And we skip u'\u2e00' to u'\u4dff', i
-            # guess the kana are somwhere in there.)
-            return True
-        return False
+def get_han_characters(text):
+    u"""Return only the kanji/hanzi from text."""
+    ret = u''
+    # Maybe we got utf-8
+    try:
+        utext = unicode(text, 'utf-8')
+    except TypeError:
+        # Hope text is already unicode. If we put in
+        # a number or something, we'll fail in one of the
+        # next lines. EAFP
+        utext = text
+    for c in utext:
+        if is_han_character(c):
+            ret += c
+    return ret
 
-    def get_han_characters(self, text):
-        ret = u''
-        # Maybe we got utf-8
+
+def get_first_han_character(text):
+    u"""Return the first character from text that is a kani/hanzi."""
+    # Maybe we got utf-8
+    try:
+        utext = unicode(text, 'utf-8')
+    except TypeError:
+        # As above, hope this is unicode (EAFP).
+        utext = text
+    for c in utext:
+        if is_han_character(c):
+            return c
+    return u''
+
+
+def get_text_from_fields(fields):
+    u"""Return the content of fields of the current note."""
+    text = None
+    for field in fields:
         try:
-            utext = unicode(text, 'utf-8')
-        except TypeError:
-            # Hope text is already unicode. If we put in
-            # a number or something, we'll fail in one of the
-            # next lines. EAFP
-            utext = text
-        for c in utext:
-            if self.is_han_character(c):
-                ret += c
-        return ret
-
-    def get_first_han_character(self, text):
-        # Maybe we got utf-8
-        try:
-            utext = unicode(text, 'utf-8')
-        except TypeError:
-            # As above, hope this is unicode (EAFP).
-            utext = text
-        for c in utext:
-            if self.is_han_character(c):
-                return c
-        return u''
-
-    def get_text_from_fields(self, fields=expression_fields):
-        text = None
-        for field in fields:
-            try:
-                #text = mw.currentCard.fact[field]
-                text = mw.reviewer.card.note()[field]
-            except KeyError:
-                continue
-            if len(text):
-                return text
-        if not text:
-            raise ValueError("No field found for lookup. " +
-                             "Consider changing the field name lists " +
-                             "in the plugin source.")
+            #text = mw.currentCard.fact[field]
+            text = mw.reviewer.card.note()[field]
+        except KeyError:
+            continue
+        if len(text):
+            return text
+    if not text:
+        raise ValueError("No field found for lookup. " +
+                         "Consider changing the field name lists " +
+                         "in the plugin source.")
 
 
-def init_nachschlagen():
-    if not getattr(mw, "nachschlagen", None):
-        mw.nachschlagen = Nachschlagen(mw)
+# Now the lookup functions. Now strictly sorted by dictionary.
+
+
+def lookup_wadoku(field_list):
+    "Look up text with Wadoku (German-Japanese)."
+    if field_list:
+        text = get_text_from_fields(field_list)
+    else:
+        text = get_selection()
+    if len(text) == 0:
+        raise ValueError(u"Kein Text zum nachschlagen.")
+    base_url = "http://www.wadoku.de/wadoku/search/"
+    url = base_url + urllib.quote(text.encode("utf-8"))
+    qurl = QUrl()
+    qurl.setEncodedUrl(url)
+    QDesktopServices.openUrl(qurl)
 
 
 def on_lookup_wadoku_expression():
-    init_nachschlagen()
+    u"""Wrapper to look up the expression at Wadoku and catch value errors."""
     try:
-        # No argument means expression
-        mw.nachschlagen.wadoku()
+        lookup_wadoku(expression_fields)
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+    except AttributeError:
+        tooltip(u'Error during lookup. (No note?)')
 
 
 def on_lookup_wadoku_meaning():
-    init_nachschlagen()
+    u"""Wrapper to look up the expression at Wadoku and catch value errors."""
     try:
-        mw.nachschlagen.wadoku(meaning_fields)
+        lookup_wadoku(meaning_fields)
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+    except AttributeError:
+        tooltip(u'Error during lookup. (No note?)')
 
 
 def on_lookup_wadoku_selection():
-    init_nachschlagen()
+    u"""Wrapper to look up the expression at Wadoku and catch value errors."""
     try:
         # Empty list (or possibly 'None')  means selection
-        mw.nachschlagen.wadoku([])
+        lookup_wadoku([])
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+
+
+def lookup_saiga(field_list):
+    """Look up the first kanji in text on Saiga."""
+    # I don’t really use this dictionary any more. Feel free to
+    # add it to your menu again.
+    if field_list:
+        kanji = get_text_from_fields(field_list)
+    else:
+        kanji = get_selection()
+    kanji = get_first_han_character(kanji)
+    if len(kanji) == 0:
+        raise ValueError("No kanji found.")
+    new_text = urllib.quote(kanji.encode("utf-8"))
+    url = ("http://www.saiga-jp.com/cgi-bin/dic.cgi?m=search&sc=0&f=0&j=" +
+           new_text + "&g=&e=&s=&rt=0&start=1")
+    qurl = QUrl()
+    qurl.setEncodedUrl(url)
+    QDesktopServices.openUrl(qurl)
 
 
 def on_lookup_saiga_expression():
-    init_nachschlagen()
+    u"""
+    Wrapper to look up at saiga.
+
+    Wrapper to look up the first kanji from the expression at saiga and
+    catch value errors.
+    """
     try:
-        mw.nachschlagen.saiga()
+        lookup_saiga(expression_fields)
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+    except AttributeError:
+        tooltip(u'Error during lookup. (No note?)')
 
 
 def on_lookup_saiga_selection():
-    init_nachschlagen()
+    u"""
+    Wrapper to look up at saiga.
+
+    Wrapper to look up the first kanji from the selection at saiga and
+    catch value errors.
+    """
     try:
-        mw.nachschlagen.saiga([])
+        lookup_saiga([])
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+
+
+def lookup_kanjilexikon(field_list):
+    """Look up the kanji in text on Kanji-Lexikon."""
+    if field_list:
+        kanji = get_text_from_fields(field_list)
+    else:
+        kanji = get_selection()
+    kanji = get_han_characters(kanji)
+    if len(kanji) == 0:
+        raise ValueError("No kanji found.")
+    new_text = urllib.quote(kanji.encode("utf-8"))
+    url = ("http://lingweb.eva.mpg.de/kanji/index.html?kanji=" + new_text)
+    qurl = QUrl()
+    qurl.setEncodedUrl(url)
+    QDesktopServices.openUrl(qurl)
 
 
 def on_lookup_kl_expression():
-    init_nachschlagen()
+    u"""
+    Wrapper for lookup at Kanji-Lexikon.
+
+    Wrapper to look up the expression at Kanjilexikon and catch value
+    errors.
+    """
     try:
-        mw.nachschlagen.kanjilexikon()
+        lookup_kanjilexikon(expression_fields)
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+    except AttributeError:
+        tooltip(u'Error during lookup. (No note?)')
 
 
 def on_lookup_kl_selection():
-    init_nachschlagen()
+    u"""
+    Wrapper for lookup at Kanji-Lexikon.
+
+    Wrapper to look up the selection at Kanjilexikon and catch value
+    errors.
+    """
     try:
-        mw.nachschlagen.kanjilexikon([])
+        lookup_kanjilexikon([])
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+
+
+def lookup_forvo(field_list):
+    "Look up pronunciation on forvo."
+    if field_list:
+        text = get_text_from_fields(field_list)
+    else:
+        text = get_selection()
+    if len(text) == 0:
+        raise ValueError(u"No text to look up.")
+    new_text = urllib.quote(text.encode("utf-8"))
+    url = ("http://de.forvo.com/search/" + new_text)
+    qurl = QUrl()
+    qurl.setEncodedUrl(url)
+    QDesktopServices.openUrl(qurl)
 
 
 def on_lookup_forvo_expression():
-    init_nachschlagen()
+    u"""Wrapper to look up the expression at Forvo and catch value errors."""
     try:
-        mw.nachschlagen.forvo()
+        lookup_forvo(expression_fields)
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
+    except AttributeError:
+        tooltip(u'Error during lookup. (No note?)')
 
 
 def on_lookup_forvo_selection():
-    init_nachschlagen()
+    u"""Wrapper to look up the selection at Forvo and catch value errors."""
     try:
-        mw.nachschlagen.forvo([])
+        lookup_forvo([])
     except ValueError as ve:
-        showInfo(str(ve))
+        tooltip(str(ve))
 
 
 def create_menu():
+    u"""Set up the menu."""
     mn = QMenu()
     mn.setTitle("Nachschlagen")
     mw.form.menuTools.addAction(mn.menuAction())

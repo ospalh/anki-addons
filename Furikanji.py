@@ -22,7 +22,7 @@ import re
 from anki import hooks
 
 
-__version__ = "1.2.1"
+__version__ = "1.3.0"
 
 # Check which pattern we should use, with or without the re.UNICODE flag.
 try:
@@ -46,12 +46,12 @@ else:
     # "words". (The ・ would be nice as word separator, but then
     # again, it is commonly used with katakana, where i don't do
     # furigana anyway.)
-    split_pat = u' ?(?P<kanji>[-〓・+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
+    split_pat = ur' ?(?P<kanji>[-〓・+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
     # Add flag parameter to calls to re.sub.
     re_sub_flag = lambda pattern, repl, string: \
         re.sub(pattern, repl, string, flags=re.UNICODE)
 
-furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>'\
+furigana_pat = ur'<ruby class="furigana">\g<kanji>'\
     '<rt>\g<kana></rt></ruby>'
 """
 Pattern to produce the furigana.
@@ -59,7 +59,7 @@ Pattern to produce the furigana.
 What is called ruby in the old code, but using named groups and
 adding a class.
 """
-furikanji_pat = r'<ruby class="furikanji"><rb>\g<kana></rb>'\
+furikanji_pat = ur'<ruby class="furikanji">\g<kana>'\
     '<rt>\g<kanji></rt></ruby>'
 """
 Pattern to produce the furikanji.
@@ -71,6 +71,7 @@ This is pretty much the reason for this add-on.
 def no_sound(repl):
     """Do re replacement only when the text is not a media file."""
     def func(match):
+        """Do re replacement only when the text is not a media file."""
         if match.group('kana').startswith("sound:"):
             # return without modification
             return match.group(0)
@@ -85,13 +86,13 @@ def no_sound(repl):
 def kanji_word_re(txt, *args):
     """Strip kana and wrap base text in class kanji."""
     return re_sub_flag(
-        split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt)
+        split_pat, no_sound(ur'<span class="kanji">\g<kanji></span>'), txt)
 
 
 def kana_word_re(txt, *args):
     """Strip base text and wrap kana in class kana."""
     return re_sub_flag(
-        split_pat, no_sound(r'<span class="kana">\g<kana></span>'), txt)
+        split_pat, no_sound(ur'<span class="kana">\g<kana></span>'), txt)
 
 
 def furigana_word_re(txt, *args):
