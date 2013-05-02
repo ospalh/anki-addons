@@ -22,6 +22,22 @@ transliterations = [(u'Ä', 'Ae'), (u'Ö', 'Oe'), (u'Ü', 'Ue'), (u'ä', 'ae'),
 title_key = 'Als mp3 abspielen'
 
 
+def munge_word(word):
+    u"""
+    Munge the word so that it matches the URL used by duden.de.
+
+    Replace umlauts by the Xe transcription, ß wit sz [sic], drop
+    other diacritics, hope the result is ASCII.
+    """
+    for f, t in transliterations:
+        # Is this efficent? Sure, writing it in a way that used less
+        # processer time would have taken much longer ;)
+        word = word.replace(f, t)
+    return ''.join(
+        (c for c in unicodedata.normalize('NFD', word)
+         if unicodedata.category(c) != 'Mn'))
+
+
 class DudenDownloader(AudioDownloader):
     """Download audio from Duden"""
     def __init__(self):
@@ -43,8 +59,7 @@ class DudenDownloader(AudioDownloader):
             return
         if not word:
             return
-        # TODO: below.
-        m_word = self.munge_word(word)
+        m_word = munge_word(word)
         self.maybe_get_icon()
         word_soup = self.get_soup_from_url(self.url + m_word)
         blank_links = word_soup.findAll(name='a', target="_blank")
@@ -66,22 +81,6 @@ class DudenDownloader(AudioDownloader):
                     word_file.write(word_data)
                 self.downloads_list.append(
                     (word_path, word_fname, extras))
-
-    def munge_word(self, word):
-        u"""
-        Munge the word so that it matches the URL used by duden.de.
-
-        Replace umlauts by the Xe transcription, ß wit sz [sic], drop
-        other diacritics, hope the result is ASCII.
-
-        """
-        for f, t in transliterations:
-            # Is this efficent? Sure, writing it in a way that used
-            # less processer time would have taken much longer ;)
-            word = word.replace(f, t)
-        return ''.join(
-            (c for c in unicodedata.normalize('NFD', word)
-             if unicodedata.category(c) != 'Mn'))
 
     def good_link(self, link):
         """Check if link looks """

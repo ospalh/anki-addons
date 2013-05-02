@@ -77,7 +77,7 @@ class OaadDownloader(AudioDownloader):
             extras = self.extras
             try:
                 alt_string = sound_tag['alt']
-            except:
+            except KeyError:
                 pass
             else:
                 if not 'pronunciation' in alt_string.lower():

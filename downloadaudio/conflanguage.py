@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–13 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+
+u"""Set the download language."""
 
 from aqt.deckconf import DeckConf
 from aqt.forms import dconf
@@ -12,10 +14,11 @@ from aqt.qt import QHBoxLayout, QLabel, QLineEdit
 from aqt.utils import getText, tooltip
 from anki.lang import _
 
-from language import default_audio_language_code, al_code_code
+from .language import default_audio_language_code, al_code_code
 
 
 def setup_ui(self, Dialog):
+    u"""Add a QLineEdit to the settings to set the dl language."""
     help_text = '''<p>This code is used for audio downloads.
  Set this to the two-letter code of the language you are learning.</p>'''
     self.maxTaken.setMinimum(3)
@@ -32,15 +35,18 @@ def setup_ui(self, Dialog):
 
 
 def load_conf(self):
+    u"""Get the download language from the configuration."""
     self.form.audio_download_language.setText(
         self.conf.get(al_code_code, default_audio_language_code))
 
 
 def save_conf(self):
+    u"""Save the download language tothe configuration."""
     self.conf[al_code_code] = self.form.audio_download_language.text()
 
 
 def ask_and_set_language_code():
+    u"""Ask the user for the language code."""
     lang_code, ok = getText(
         prompt=u'''<h4>Set download language code</h4>
 Set the <a
@@ -69,6 +75,7 @@ of the language you are learning.<br>
 
 
 def maybe_ask_language():
+    u"""Ask the user for the language code if neccessary."""
     try:
         # We just look at this to see if it is set.
         mw.col.decks.confForDid(1)[al_code_code]

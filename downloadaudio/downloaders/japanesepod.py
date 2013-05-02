@@ -64,6 +64,7 @@ Gecko/20100101 Firefox/15.0.1'''
 
 
     def query_url(self, kanji, kana):
+        u"""Return a string that can be used as the url."""
         qdict = {}
         qdict['kanji'] = kanji.encode('utf-8')
         if kana:

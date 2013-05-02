@@ -4,15 +4,15 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+"""
+Extract field data to download.
+"""
+
 import re
 from aqt import mw
 from anki.template import furigana
 from anki.utils import stripHTML
 from anki.sound import stripSounds
-
-"""
-Extract field data to download.
-"""
 
 
 ## Change these to mach the field names of your decks. Make sure to
@@ -52,13 +52,13 @@ Use either kanji and reading from one field (True) or from two fields (False).
 # kanji. Make it easier to switch removing them for the downloads on
 # or off
 strip_interpunct = False
-"""
+u"""
 Do or do not remove katakana interpuncts 「・」 before sending requests.
 """
 # strip_interpunct = True
 
 # Change this at your own risk.
-field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
+field_name_re = ur'{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
 
 
 def uniqify_list(seq):
@@ -70,7 +70,7 @@ def uniqify_list(seq):
 
 
 def field_data(note, fname, readings, get_empty=False):
-    """
+    u"""
     Return a suitable source field name and the text in that field.
 
     Look for a suitable field to get the source text from and return it.
@@ -166,8 +166,9 @@ def field_data(note, fname, readings, get_empty=False):
             # Another_Audio_Example -> Another_Example, not Another_Example
             # While a bit tricky, this is not THAT hard to do. (Not
             # lookbehind needed.)
-            sources_list = [re.sub('[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
-                                   '', t_name, count=1)]
+            sources_list = [
+                re.sub(ur'[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
+                       '', t_name, count=1)]
         for cnd in sources_list:
             for idx, lname in enumerate(f_names):
                 if cnd == lname:
