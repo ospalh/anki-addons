@@ -30,16 +30,16 @@ from .mw import MerriamWebsterDownloader
 from .wiktionary import WiktionaryDownloader
 
 downloaders = [
-    JapanesepodDownloader(),
+#    JapanesepodDownloader(),
     MerriamWebsterDownloader(),
-#    MacmillanAmericanDownloader(),
-    MacmillanBritishDownloader(),
+    MacmillanAmericanDownloader(),
+#    MacmillanBritishDownloader(),
     OaadDownloader(),
-    DudenDownloader(),
+#    DudenDownloader(),
 #    LeoDownloader(),
-    WiktionaryDownloader(),
-    BeolingusDownloader(),
-    GooglettsDownloader(),
+#    WiktionaryDownloader(),
+#    BeolingusDownloader(),
+#    GooglettsDownloader(),
     ]
 """
 List of downloaders.
