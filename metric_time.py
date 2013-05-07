@@ -99,9 +99,7 @@ def days_from_s(seconds, sigfig=2, short=False, maybe_show_years=True):
     return out_string
 
 
-def metric_time_span(
-        time, dummy_pad=0, dummy_point=0, short=False, dummy_after=False,
-        dummy_unit=99):
+def metric_time_span(time, pad=0, point=0, short=False, after=False, unit=99):
     u"""Return a time span as a fraction of days."""
     return days_from_s(time, short=short, maybe_show_years=True)
 
