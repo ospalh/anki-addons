@@ -71,7 +71,7 @@ Gecko/20100101 Firefox/15.0.1'''
             qdict['kana'] = kana.encode('utf-8')
         return self.url + urllib.urlencode(qdict)
 
-    def set_names(self, text, base, ruby):
+    def set_names(self, dummy_text, base, ruby):
         """
         Set the display text and file base name variables.
         """
