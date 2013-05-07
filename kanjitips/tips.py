@@ -138,8 +138,8 @@ def read_character_data():
     global jdic2_twigs
     utf8_parser = etree.XMLParser(encoding='utf-8')
     with gzip.open(kanjidic_path, 'rb') as kjdf:
-        s = kjdf.read()
-    jdic2_tree = etree.fromstring(s, parser=utf8_parser)
+        kjd_string = kjdf.read()
+    jdic2_tree = etree.fromstring(kjd_string, parser=utf8_parser)
     for el in jdic2_tree.findall('character'):
         jdic2_twigs[el.find('literal').text] = el
         # We turn the tree not into a loose-leaf collection, but a
@@ -315,7 +315,7 @@ def media_characters(s):
     return mc
 
 
-def show_tip_filter(qa, card):
+def show_tip_filter(qa, dummy_card):
     """
     Filter the questions and answers to add the kanji diagram pop-ups.
 

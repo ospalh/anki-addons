@@ -131,7 +131,7 @@ class AudioDownloader(object):
         """
         raise NotImplementedError("Use a class derived from this.")
 
-    def set_names(self, text, base, ruby):
+    def set_names(self, text, dummy_base, dummy_ruby):
         """
         Set the display text and file base name variables.
 

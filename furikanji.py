@@ -28,7 +28,7 @@ __version__ = "1.3.0"
 try:
     # Just a dummy call to re.sub to see if the flags work. I think it
     # works with python 2.7 and doesn't work with python 2.6, but i
-    # don't really care about verson numbers. (There may be a way to
+    # don't really care about version numbers. (There may be a way to
     # inspect the argument list, but doing it EAFP is fine by me.)
     re.sub('test', 'for', 'flags', flags=re.UNICODE)
 except TypeError:
@@ -51,16 +51,15 @@ else:
     re_sub_flag = lambda pattern, repl, string: \
         re.sub(pattern, repl, string, flags=re.UNICODE)
 
-furigana_pat = ur'<ruby class="furigana">\g<kanji>'\
-    '<rt>\g<kana></rt></ruby>'
+furigana_pat = ur'<ruby class="furigana">\g<kanji><rt>\g<kana></rt></ruby>'
 """
 Pattern to produce the furigana.
 
 What is called ruby in the old code, but using named groups and
 adding a class.
 """
-furikanji_pat = ur'<ruby class="furikanji">\g<kana>'\
-    '<rt>\g<kanji></rt></ruby>'
+
+furikanji_pat = ur'<ruby class="furikanji">\g<kana><rt>\g<kanji></rt></ruby>'
 """
 Pattern to produce the furikanji.
 
@@ -83,55 +82,56 @@ def no_sound(repl):
     return func
 
 
-def kanji_word_re(txt, *args):
+def kanji_word_re(txt, *dummy_args):
     """Strip kana and wrap base text in class kanji."""
     return re_sub_flag(
         split_pat, no_sound(ur'<span class="kanji">\g<kanji></span>'), txt)
 
 
-def kana_word_re(txt, *args):
+def kana_word_re(txt, *dummy_args):
     """Strip base text and wrap kana in class kana."""
     return re_sub_flag(
         split_pat, no_sound(ur'<span class="kana">\g<kana></span>'), txt)
 
 
-def furigana_word_re(txt, *args):
+def furigana_word_re(txt, *dummy_args):
     """
     Format text for ruby display.
 
     Put text with square brackets in <ruby> tags, using text before
-    the brackets as <rb>, the text in the brackets as <rt>. Add class
-    furigana to the ruby tag.
+    the brackets as the base, the text in the brackets as <rt>, that
+    is, the ruby. Add class furigana to the ruby tag.
     """
     return re_sub_flag(split_pat, no_sound(furigana_pat), txt)
 
 
-def furikanji(txt, *args):
+def furikanji(txt, *dummy_args):
     """
     Format text for ruby display, kanji above kana.
 
     Put text with square brackets in <ruby> tags, using text before
-    the brackets as <rt>, the text in the brackets as <rb>. Add class
-    furikanji to the ruby tag. This is reversed from the standard way
-    and typically shows small kanji above their reading.
+    the brackets as <rt>, the ruby, and the text in the brackets as
+    the base. Add class furikanji to the ruby tag. This is reversed
+    from the standard way and typically shows small kanji above their
+    reading.
     """
     return re_sub_flag(split_pat, no_sound(furikanji_pat), txt)
 
 
-def box_kana(txt, *args):
+def box_kana(txt, *dummy_args):
     u"""
     Show text above an empty, dashed box.
 
     Put text in a <ruby> block as <rt> with a an "IDEOGRAPHIC SPACE",
-    "　" as <rb>, drawn with a frame. Add class boxkana to the ruby
+    "　" as the base, drawn with a frame. Add class boxkana to the ruby
     tag.
     """
     return u'<ruby class="boxkana">'\
-        u'<rb style="border:dashed; border-width: 1px">　</rb>'\
+        u'<span style="border:dashed; border-width: 1px">　</span>'\
         u'<rt>%s</rt></ruby>' % txt
 
 
-def boxed(txt, *args):
+def boxed(txt, *dummy_args):
     """
     Draw a dashed box around the text.
 
