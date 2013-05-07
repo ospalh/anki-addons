@@ -14,9 +14,9 @@
 
 
 """
-Add a standard tool bar to Anki2.
+Add standard tool bars to Anki2.
 
-This Anki2 addon adds a standard tool bar (a QtToolBar) to the Anki
+This Anki2 addon adds standard tool bars (QtToolBar) to the Anki
 main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
@@ -312,7 +312,7 @@ def more_tool_bar_off():
     delete_action.setEnabled(False)
     try:
         mw.reviewer.more_tool_bar.hide()
-    except:
+    except AttributeError:
         pass
 
 
@@ -327,7 +327,7 @@ def maybe_more_tool_bar_on():
     if show_more_tool_bar_action.isChecked():
         try:
             mw.reviewer.more_tool_bar.show()
-        except:
+        except AttributeError:
             pass
 
 
