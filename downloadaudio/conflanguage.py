@@ -20,12 +20,13 @@ from .language import default_audio_language_code, fl_code_code, \
 
 def setup_ui(self, Dialog):
     u"""Add a QLineEdit to the settings to set the dl language."""
-    help_text = """<p>This code is used for audio or example sentence
-downloads.  Set this to the two-letter code of the language you are
+    help_text = """<p>This code is used for audio downloads.  Set
+this to the two-letter (ISO-639-1) code of the language you are
 learning.</p>"""
     self.maxTaken.setMinimum(3)
     lc_layout = QHBoxLayout()
-    lc_label = QLabel(_("Foreign language code"), self.tab_5)
+    lc_label = QLabel(_("Audio download language code (two letters)"),
+                      self.tab_5)
     lc_label.setToolTip(help_text)
     lc_layout.addWidget(lc_label)
     self.audio_download_language = QLineEdit(
