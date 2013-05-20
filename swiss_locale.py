@@ -70,7 +70,7 @@ def swiss_format(num):
     return arab_format_string.format(num_string)
 
 
-def ch_millionen(txt, *args):
+def ch_millionen(txt, *dummy_args):
     """
     Return the text reformated for my geography deck.
 
@@ -94,7 +94,7 @@ def ch_millionen(txt, *args):
         # Case "0 Einwohner" == "0 Millionen Einwohner"
         return txt
 
-    dms, dmd, dme = dec_mega.as_tuple()
+    dummy_dms, dmd, dme = dec_mega.as_tuple()
     # order of magnitude +1
     omagp = len(dmd) + dme
     # billons
@@ -111,7 +111,7 @@ def ch_millionen(txt, *args):
     return swiss_format(int(dec_mega * 1000000))
 
 
-def ch_t_sqkm(txt, *args):
+def ch_t_sqkm(txt, *dummy_args):
     """
     Return the text reformated for my geography deck.
 
@@ -131,7 +131,7 @@ def ch_t_sqkm(txt, *args):
     except decimal.InvalidOperation:
         # No number
         return txt
-    dks, dkd, dke = dec_kilo.as_tuple()
+    dummy_dks, dkd, dke = dec_kilo.as_tuple()
     # order of magnitude +1
     omagp = len(dkd) + dke
     if omagp >= 4:
@@ -144,7 +144,7 @@ def ch_t_sqkm(txt, *args):
         u' <span class="number_romaji">km<sup>2</sup></span>'
 
 
-def jp_man(txt, *args):
+def jp_man(txt, *dummy_args):
     """
     Return the text reformated for my geography deck.
 
@@ -163,7 +163,7 @@ def jp_man(txt, *args):
     except decimal.InvalidOperation:
         # No number
         return txt
-    dks, dkd, dke = dec_kilo.as_tuple()
+    dummy_dks, dkd, dke = dec_kilo.as_tuple()
     # order of magnitude +1
     omagp = len(dkd) + dke
     # We cheat a bit. We know that we won’t have 一億km². No check for
@@ -174,7 +174,7 @@ def jp_man(txt, *args):
     return arab_format_string.format(int(dec_kilo * 1000))
 
 
-def ch_integer(txt, *args):
+def ch_integer(txt, *dummy_args):
     """
     Return text formated as a swiss integer if possible.
     """

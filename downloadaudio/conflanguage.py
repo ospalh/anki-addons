@@ -10,7 +10,7 @@ from aqt.deckconf import DeckConf
 from aqt.forms import dconf
 from anki.hooks import addHook, wrap
 from aqt import mw
-from aqt.qt import QHBoxLayout, QLabel, QLineEdit
+from aqt.qt import QGridLayout, QLabel, QLineEdit
 from aqt.utils import getText, tooltip
 from anki.lang import _
 
@@ -20,20 +20,26 @@ from .language import default_audio_language_code, fl_code_code, \
 
 def setup_ui(self, Dialog):
     u"""Add a QLineEdit to the settings to set the dl language."""
-    help_text = """<p>This code is used for audio or example sentence
-downloads.  Set this to the two-letter code of the language you are
+    help_text = """<p>This code is used for audio downloads.  Set
+this to the two-letter (ISO-639-1) code of the language you are
 learning.</p>"""
     self.maxTaken.setMinimum(3)
-    lc_layout = QHBoxLayout()
-    lc_label = QLabel(_("Foreign language code"), self.tab_5)
+    try:
+        self.addon_language_codes_layout
+    except AttributeError:
+        self.addon_language_codes_layout = QGridLayout()
+        self.verticalLayout_6.insertLayout(
+            1, self.addon_language_codes_layout)
+    lc_label = QLabel(_("Audio download language code (two letters)"),
+                      self.tab_5)
     lc_label.setToolTip(help_text)
-    lc_layout.addWidget(lc_label)
+    rows = self.addon_language_codes_layout.rowCount()
+    self.addon_language_codes_layout.addWidget(lc_label, rows, 0)
     self.audio_download_language = QLineEdit(
         default_audio_language_code, self.tab_5)
     self.audio_download_language.setToolTip(help_text)
-    lc_layout.addWidget(self.audio_download_language)
-    lc_layout.addStretch()
-    self.verticalLayout_6.insertLayout(1, lc_layout)
+    self.addon_language_codes_layout.addWidget(
+        self.audio_download_language, rows, 1)
 
 
 def load_conf(self):

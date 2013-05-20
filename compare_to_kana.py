@@ -3,7 +3,9 @@
 # Based in part on code by Damien Elmes <anki@ichi2.net> and Kieran
 # Clancy
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
-"""Add-on for Anki 2 to compare typed-in text to just the kana.
+
+"""
+Add-on for Anki 2 to compare typed-in text to just the kana.
 """
 
 import re

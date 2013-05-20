@@ -85,7 +85,7 @@ def which(program):
         u"""Return whether fpath is executable."""
         return os.path.exists(fpath) and os.access(fpath, os.X_OK)
 
-    fpath, fname_dummy = os.path.split(program)
+    fpath, dummy_fname = os.path.split(program)
     if fpath:
         if is_exe(program):
             return program
