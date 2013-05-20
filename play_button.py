@@ -35,8 +35,8 @@ def play_button_filter(qa, dummy_card, question):
         else:
             title = sound.group(1)
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
-title="{ttl}"><img src="{ip}" alt="play" style="display: inline; \
-max-height: 1em;" class="replaybutton"></a>""".format(
+title="{ttl}"><img src="{ip}" alt="play" style="max-width: 32px; \
+max-height: 1em; min-height:8px;" class="replaybutton"></a>""".format(
             orig=sound.group(0), fn=sound.group(1), ip=arrow_img_path,
             ttl=title)
     return re.sub(sound_re, add_button, qa)
