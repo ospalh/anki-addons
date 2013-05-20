@@ -17,17 +17,28 @@ arrow_img_path = os.path.join(
     os.path.dirname(__file__), 'play_button_icon', 'play.png')
 
 
-def play_button_filter(qa, dummy_card):
+def play_button_filter(qa, dummy_card, question):
     u"""
     Filter the questions and answers to add play buttons.
     """
 
     def add_button(sound):
-        u"""Add img link after the match."""
+        u"""
+        Add img link after the match.
+
+        Add an img link after the match to replay the audio. The title
+        is set to "Replay" on the question side to hide information or
+        to the file name on the answer.
+        """
+        if question:
+            title = u"Replay"
+        else:
+            title = sound.group(1)
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
-title="{fn}"><img src="{ip}" alt="play" style="display: inline; height: 1em; \
-vertical-align: center;"></a>""".format(
-            orig=sound.group(0), fn=sound.group(1), ip=arrow_img_path)
+title="{ttl}"><img src="{ip}" alt="play" style="display: inline; \
+max-height: 1em;" class="replaybutton"></a>""".format(
+            orig=sound.group(0), fn=sound.group(1), ip=arrow_img_path,
+            ttl=title)
     return re.sub(sound_re, add_button, qa)
 
 
@@ -42,5 +53,7 @@ def link_handler_wrapper(reviewer, url):
 original_link_handler = Reviewer._linkHandler
 Reviewer._linkHandler = link_handler_wrapper
 
-addHook("filterQuestionText", play_button_filter)
-addHook("filterAnswerText", play_button_filter)
+addHook("filterQuestionText", lambda q, card: play_button_filter(
+        qa=q, dummy_card=card, question=True))
+addHook("filterAnswerText", lambda a, card: play_button_filter(
+        qa=a, dummy_card=card, question=False))
