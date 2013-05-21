@@ -12,7 +12,7 @@ from anki.utils import stripHTML
 from anki.hooks import addHook
 
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 # Code word to look for in the field name to decide whether to do the
 # number comparison:
@@ -42,7 +42,7 @@ exact_class = 'scalarexact'
 scalar_format_string = """<span class="typedscalar {cl}">{num}</span>"""
 
 
-def correct_scalar(res, right, typed, card):
+def correct_scalar(res, typed, right, card):
     """
     Return numeric answer in red, yellow or green.
 
