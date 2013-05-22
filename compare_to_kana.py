@@ -28,8 +28,9 @@ __version__ = "1.0.1"
 
 
 def correct_kana(res, typed, right, card):
+    u"""Filter to compare the typed text to just the kana."""
     try:
-        fld = re.search('\[\[type:([^\]]+)\]\]', card.a()).group(1)
+        fld = re.search(r'\[\[type:([^\]]+)\]\]', card.a()).group(1)
     except AttributeError:
         print (u'no type in {}'.format(card.a()))
         # No typed answer to show at all.
