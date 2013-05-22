@@ -17,7 +17,8 @@ arrow_img_path = os.path.join(
     os.path.dirname(__file__), 'play_button_icon', 'play.png')
 
 
-def play_button_filter(qa, dummy_card, question):
+def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
+                       dummy_data, dummy_col):
     u"""
     Filter the questions and answers to add play buttons.
     """
@@ -30,7 +31,7 @@ def play_button_filter(qa, dummy_card, question):
         is set to "Replay" on the question side to hide information or
         to the file name on the answer.
         """
-        if question:
+        if 'q' == qa_type:
             title = u"Replay"
         else:
             title = sound.group(1)
@@ -39,7 +40,7 @@ title="{ttl}"><img src="{ip}" alt="play" style="display: inline; \
 max-height: 1em;" class="replaybutton"></a>""".format(
             orig=sound.group(0), fn=sound.group(1), ip=arrow_img_path,
             ttl=title)
-    return re.sub(sound_re, add_button, qa)
+    return re.sub(sound_re, add_button, qa_html)
 
 
 def link_handler_wrapper(reviewer, url):
@@ -53,7 +54,4 @@ def link_handler_wrapper(reviewer, url):
 original_link_handler = Reviewer._linkHandler
 Reviewer._linkHandler = link_handler_wrapper
 
-addHook("filterQuestionText", lambda q, card: play_button_filter(
-        qa=q, dummy_card=card, question=True))
-addHook("filterAnswerText", lambda a, card: play_button_filter(
-        qa=a, dummy_card=card, question=False))
+addHook("mungeQA", play_button_filter)
