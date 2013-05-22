@@ -24,7 +24,7 @@ japanese_model = 'japanese'
 
 ### End of configuration block.
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 
 
 def correct_kana(res, typed, right, card):
