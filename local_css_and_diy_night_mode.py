@@ -63,7 +63,7 @@ def fix_body_class():
                             model['tmpls'][template_nr]['name']).lower()
     model_class = re.sub(ur'[\W_]+', u'', model['name']).lower()
     body_class = ur'{0} card card{1} template_{2} model_{3}'.format(
-        local_class, mw.reviewer.card.ord,
+        local_class, mw.reviewer.card.ord + 1,
         template_class, model_class)
     try:
         body_class += ' ' + extra_class

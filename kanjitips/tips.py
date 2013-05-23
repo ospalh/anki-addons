@@ -21,10 +21,12 @@ from anki.hooks import addHook
 # class="showtips">{{Back}}</span> instead of just {{Back}}.
 # tip_selectors = ['.showtips']
 # tip_selectors = ['rb', '.showtips']
-tip_selectors = ['body']  # Everything
+tip_selectors = ['*']  # Everything
 
+question_tips = False
+# Set this to True to show tips on the question side as well.
 
-skip_selectors = ['html', 'head', 'script', 'style', 'link', '.notip']
+skip_selectors = [ 'script', 'style', 'link', '.notip']
 # Everything that should not get a tip. It is important to skip
 # scripts &c., especially when the tip_selectors are rather general.
 
@@ -308,22 +310,21 @@ def media_characters(s):
     return mc
 
 
-def show_tip_filter(qa, dummy_card):
+def show_tip_filter(qa_html, qa, dummy_fields, dummy_model, dummy_data,
+                    dummy_col):
     """
-    Filter the questions and answers to add the kanji diagram pop-ups.
-
-    When certain conditions are met, return the typed-in answer in
-    red, yellow or green, depending how close the given answer was to
-    the correct one.
+    Filter the answers to add the kanji diagram pop-ups.
     """
+    if not question_tips and not qa == 'a':
+        return qa_html
     global do_show
     global current_script
     do_show = False
     current_script = show_tips_script
     try:
-        doc = html.fromstring(qa)
+        doc = html.fromstring(qa_html)
     except:
-        return qa
+        return qa_html
     elements = []
     for ts in tip_selectors:
         elements += doc.cssselect(ts)
@@ -436,12 +437,7 @@ def setup_tips():
     """
     read_character_data()
     read_scripts()
-    # addHook("filterQuestionText", show_tip_filter)
-    ## Uncomment the line above to also show tips on the question.
-    addHook("filterAnswerText", show_tip_filter)
-
-    ## Looks like we cant just load scripts. So eval them after we've
-    ## done the rest of the card.
-    # addHook("showQuestion", do_scripts)
-    ## Uncomment the line above to also show tips on the question.
+    addHook("mungeQA", show_tip_filter)
+    if question_tips:
+        addHook("showQuestion", do_scripts)
     addHook("showAnswer", do_scripts)
