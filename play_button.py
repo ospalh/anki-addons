@@ -11,6 +11,8 @@ from anki.hooks import addHook
 from anki.sound import play
 from aqt.reviewer import Reviewer
 
+__version__ = "1.0.0"
+
 sound_re = "\[sound:(.*?)\]"
 
 arrow_img_path = os.path.join(
