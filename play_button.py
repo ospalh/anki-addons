@@ -7,13 +7,14 @@
 import os
 import re
 
-from anki.hooks import addHook
+from anki.hooks import addHook, wrap
 from anki.sound import play
 from aqt.reviewer import Reviewer
+from aqt.browser import Browser
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
-sound_re = "\[sound:(.*?)\]"
+sound_re = ur"\[sound:(.*?)\]"
 
 arrow_img_path = os.path.join(
     os.path.dirname(__file__), 'play_button_icon', 'play.png')
@@ -53,7 +54,19 @@ def link_handler_wrapper(reviewer, url):
         original_link_handler(reviewer, url)
 
 
+def preview_link_handler(url):
+    u"""Play the file."""
+    if url.startswith("ankiplay"):
+        play(url[8:])
+
+
+def add_preview_link_handler(browser):
+    u"""Make sure we play the files from the preview window."""
+    browser._previewWeb.setLinkHandler(preview_link_handler)
+
+
 original_link_handler = Reviewer._linkHandler
 Reviewer._linkHandler = link_handler_wrapper
 
 addHook("mungeQA", play_button_filter)
+Browser._openPreview = wrap(Browser._openPreview, add_preview_link_handler)
