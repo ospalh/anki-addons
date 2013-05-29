@@ -12,7 +12,7 @@ from anki.sound import play
 from aqt.reviewer import Reviewer
 from aqt.browser import Browser
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 sound_re = ur"\[sound:(.*?)\]"
 
