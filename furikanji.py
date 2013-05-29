@@ -46,7 +46,7 @@ else:
     # "words". (The ・ would be nice as word separator, but then
     # again, it is commonly used with katakana, where i don't do
     # furigana anyway.)
-    split_pat = ur' ?(?P<kanji>[-〓・+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
+    split_pat = ur' ?(?P<kanji>[-−〓・+×÷%\.\w]+?)\[(?P<kana>.+?)\]'
     # Add flag parameter to calls to re.sub.
     re_sub_flag = lambda pattern, repl, string: \
         re.sub(pattern, repl, string, flags=re.UNICODE)
