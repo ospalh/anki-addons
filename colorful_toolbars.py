@@ -258,23 +258,30 @@ def add_to_menus():
     # Add sync to the file memu. It was there in Anki 1.
     mw.form.menuCol.insertAction(mw.form.actionImport, sync_action)
     # Make a new top level menu and insert it.
-    view_menu = QMenu(_(u"&View"), mw)
-    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction(), view_menu)
-    view_menu.addAction(show_qt_tool_bar_action)
-    view_menu.addAction(show_text_tool_bar_action)
-    view_menu.addAction(show_more_tool_bar_action)
+    try:
+        mw.addon_view_menu.addSeparator()
+    except AttributeError:
+        mw.addon_view_menu = QMenu(_(u"&View"), mw)
+        mw.form.menubar.insertMenu(
+            mw.form.menuTools.menuAction(), mw.addon_view_menu)
+    mw.addon_view_menu.addAction(show_qt_tool_bar_action)
+    mw.addon_view_menu.addAction(show_text_tool_bar_action)
+    mw.addon_view_menu.addAction(show_more_tool_bar_action)
     # And another one
-    go_menu = QMenu(_(u"&Go"), mw)
-    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction(), go_menu)
+    try:
+        mw.addon_go_menu.addSeparator()
+    except AttributeError:
+        mw.addon_go_menu = QMenu(_(u"&Go"), mw)
+        mw.form.menubar.insertMenu(
+            mw.form.menuTools.menuAction(), mw.addon_go_menu)
     # Add DSAB to the new go menu
-    go_menu.addAction(decks_action)
-    # Another personal taste edit: i don't like the overview page.
-    go_menu.addAction(overview_action)
-    go_menu.addAction(study_action)
-    go_menu.addAction(add_notes_action)
-    go_menu.addAction(browse_cards_action)
+    mw.addon_go_menu.addAction(decks_action)
+    mw.addon_go_menu.addAction(overview_action)
+    mw.addon_go_menu.addAction(study_action)
+    mw.addon_go_menu.addAction(add_notes_action)
+    mw.addon_go_menu.addAction(browse_cards_action)
     if show_toggle_last:
-        go_menu.addAction(toggle_last_card_action)
+        mw.addon_go_menu.addAction(toggle_last_card_action)
     # Stats. Maybe this should go to help. Seems somewhat help-ish to
     # me, but not too much.
     mw.form.menuTools.addAction(statistics_action)
