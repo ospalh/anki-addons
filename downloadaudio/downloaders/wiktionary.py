@@ -98,8 +98,8 @@ class WiktionaryDownloader(AudioDownloader):
                     self.button_onclick_re, button['onclick']).group(1)
             except (KeyError, AttributeError):
                 continue
-            if re.search(self.word_ogg_re.format(
-                    word=re.escape(word)), video_url):
+            if re.search(self.word_ogg_re.format(word=re.escape(u_word)),
+                         video_url, flags=re.IGNORECASE):
                 ogg_url_list.append(video_url)
         ogg_url_list = uniqify_list(ogg_url_list)
         for url_to_get in ogg_url_list:
