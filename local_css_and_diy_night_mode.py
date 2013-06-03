@@ -110,7 +110,7 @@ def setup_menu():
         try:
             mw.addon_view_menu
         except AttributeError:
-            mw.addon_view_menu = QMenu(_(u"&Go"), mw)
+            mw.addon_view_menu = QMenu(_(u"&View"), mw)
             mw.form.menubar.insertMenu(
                 mw.form.menuTools.menuAction(), mw.addon_view_menu)
         mw.extra_class_submenu = QMenu(u"Mode (e&xtra class)", mw)
