@@ -14,6 +14,7 @@ from anki.template import furigana
 from anki.utils import stripHTML
 from anki.sound import stripSounds
 
+from .uniqify_list import uniqify_list
 
 ## Change these to mach the field names of your decks. Make sure to
 ## not use capital letters. We compare these to lower-case only
@@ -37,7 +38,7 @@ typically filled automatically by the Japanese Support add-on in a
 useful way (that is, with the reading in square brackets).
 """
 
-audio_field_keys = ['audio', 'sound']
+example_field_keys = ['example', 'sound']
 """Fields we put our downloaded sounds in."""
 
 
@@ -61,14 +62,6 @@ Do or do not remove katakana interpuncts 「・」 before sending requests.
 field_name_re = ur'{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
 
 
-def uniqify_list(seq):
-    """Return a copy of the list with every element appearing only once."""
-    # From http://www.peterbe.com/plog/uniqifiers-benchmark
-    no_dupes = []
-    [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
-    return no_dupes
-
-
 def field_data(note, fname, readings, get_empty=False):
     u"""
     Return a suitable source field name and the text in that field.
@@ -78,15 +71,15 @@ def field_data(note, fname, readings, get_empty=False):
 
     There are four ways the source field is determined:
     * First we look for a reading field:
-      * when fname is in one of the strings is audio_field_key,
+      * when fname is in one of the strings is example_field_key,
         expression_fields is used as list of candidates
-      * when the audio_field_key is only a substring of fname, that substring
+      * when the example_field_key is only a substring of fname, that substring
         and a trailing or leading ' ' or '_' is removed and that used
         as the candidate.
     * readings is True:
-      * when fname is in one of the strings is audio_field_key,
+      * when fname is in one of the strings is example_field_key,
         reading_keys is used as list of candidates
-      * when the audio_field_key is only a substring, that substring
+      * when the example_field_key is only a substring, that substring
         is replaced by the strings from reading_keys
 
     The first field that matches the candidate is used.  Comparisions
@@ -126,8 +119,8 @@ def field_data(note, fname, readings, get_empty=False):
     t_name = fname.lower()
     field_names = [item[0] for item in note.items()]
     f_names = [fn.lower() for fn in field_names]
-    # First, look for just audio fields
-    for afk in audio_field_keys:
+    # First, look for just example fields
+    for afk in example_field_keys:
         if t_name == afk:
             if readings:
                 sources_list = reading_keys
@@ -150,7 +143,7 @@ def field_data(note, fname, readings, get_empty=False):
         if not afk in t_name:
             # And not a substring either
             continue
-        # Here: the field name contains an audio or sound.
+        # Here: the field name contains an example or sound.
         # Mangle the name as described. For the readings case we get a
         # list. So do a list for the other case as well.
         if readings:
@@ -159,11 +152,11 @@ def field_data(note, fname, readings, get_empty=False):
         else:
             # Here the tricky bit is to remove the right number of '_'
             # or ' ' characters, 0 or 1, but not 2. What we want is:
-            # ExampleAudio -> Example
-            # Example_Audio -> Example
-            # Audio_Example -> Example
+            # ExampleExample -> Example
+            # Example_Example -> Example
+            # Example_Example -> Example
             # but
-            # Another_Audio_Example -> Another_Example, not Another_Example
+            # Another_Example_Example -> Another_Example, not Another_Example
             # While a bit tricky, this is not THAT hard to do. (Not
             # lookbehind needed.)
             sources_list = [
@@ -173,10 +166,10 @@ def field_data(note, fname, readings, get_empty=False):
             for idx, lname in enumerate(f_names):
                 if cnd == lname:
                     return return_data(idx)
-        # We do have audio or sound as sub-string but did not find a
+        # We do have example or sound as sub-string but did not find a
         # maching field.
         raise KeyError('No source field found. (case 2)')
-    # No audio field at all.
+    # No example field at all.
     raise KeyError('No source field found. (case 3)')
 
 
@@ -185,26 +178,26 @@ def get_side_fields(card, note):
     Get a list of field data for "visible" download fields.
 
     Check the visible side of the current card for fields that contain
-    a string from audio_field_keys.  Then check the note for these
+    a string from example_field_keys.  Then check the note for these
     fields and suitable data source fields.
     """
     if 'question' == mw.reviewer.state:
         template = card.template()[u'qfmt']
     else:
         template = card.template()[u'afmt']
-    audio_field_name_list = []
-    for afk in audio_field_keys:
+    example_field_name_list = []
+    for afk in example_field_keys:
         # Append all fields in the current template/side that contain
-        # 'audio' or 'sound'
-        audio_field_name_list += re.findall(field_name_re % (re.escape(afk), ),
+        # 'example' or 'sound'
+        example_field_name_list += re.findall(field_name_re % (re.escape(afk), ),
                                             template, flags=re.IGNORECASE)
-    audio_field_name_list = uniqify_list(audio_field_name_list)
+    example_field_name_list = uniqify_list(example_field_name_list)
     all_field_names = [item[0] for item in note.items()]
     # Filter out non-existing fields.
-    audio_field_name_list = [fn for fn in audio_field_name_list
+    example_field_name_list = [fn for fn in example_field_name_list
                              if fn in all_field_names]
     field_data_list = []
-    for fname in audio_field_name_list:
+    for fname in example_field_name_list:
         try:
             # This is changed a bit. Just look for readings for a
             # field, then for "normal" target for that field.
@@ -227,11 +220,11 @@ def get_note_fields(note, get_empty=False):
     Get a list of field data for download.
 
     Check all field names and return source and destination fields for
-    downloading audio.
+    downloading example.
     """
     field_names = [item[0] for item in note.items()]
     field_data_list = []
-    for afk in audio_field_keys:
+    for afk in example_field_keys:
         for fn in field_names:
             if afk in fn.lower():
                 if meaning_in_reading_field:

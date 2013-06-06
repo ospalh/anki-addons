@@ -15,122 +15,119 @@ from aqt.utils import getText, tooltip
 from anki.lang import _
 
 from .language import default_foreign_language_code, \
-    default_local_language_code, fl_code_code, ll_code_code
+    default_local_language_codes, fl_code_code, ll_codes_code
 
 
 def setup_ui(self, Dialog):
     u"""Add two QLineEdits to the settings to set the languages."""
-    help_text_foreighn = """<p>This code is used for example
-sentence downloads.  Set this to the three-letter code of the language
-you are learning.</p>"""
+    help_text_foreign = u"""<p>This code is used for example sentence
+downloads.  Set this to the three-letter code of the language you are
+learning.</p>"""
+    help_text_local = u"""<p>This code is used for the local
+translations of the examples. Use three letter language codes,
+separated by spaces. Leave this empty to not download
+translations. Add “uns” to download examples without
+translations.</p>"""
     self.maxTaken.setMinimum(3)
     try:
         self.addon_language_codes_layout
     except AttributeError:
-        pass
-    else:
         self.addon_language_codes_layout = QGridLayout()
-        self.verticalLayout_6.insertLayout(1, addon_language_codes_layout)
-    lc_label = QLabel(_("Foreign language code"), self.tab_5)
-        lc_label.setToolTip(help_text)
-        lc_layout.addWidget(lc_label)
-        self.audio_download_language = QLineEdit(
-            default_audio_language_code, self.tab_5)
-        self.audio_download_language.setToolTip(help_text)
-        lc_layout.addWidget(self.audio_download_language)
-        lc_layout.addStretch()
-        self.verticalLayout_6.insertLayout(1, lc_layout)
-    # TODO local language
-    lc_layout = QHBoxLayout()
-    lc_label = QLabel(_("Foreign language code"), self.tab_5)
-    lc_label.setToolTip(help_text)
-    lc_layout.addWidget(lc_label)
-    self.audio_download_language = QLineEdit(
-        default_audio_language_code, self.tab_5)
-    self.audio_download_language.setToolTip(help_text)
-    lc_layout.addWidget(self.audio_download_language)
-    lc_layout.addStretch()
-    self.verticalLayout_6.insertLayout(1, lc_layout)
-
+        self.verticalLayout_6.insertLayout(1, self.addon_language_codes_layout)
+    offset = self.addon_language_codes_layout.rows()
+    flc_label = QLabel(_("Tatoeba foreign language code"), self.tab_5)
+    flc_label.setToolTip(help_text_foreign)
+    self.addon_language_codes_layout.addWidget(flc_label, offset, 0)
+    self.example_download_language = QLineEdit(
+        default_foreign_language_code, self.tab_5)
+    self.example_download_language.setToolTip(help_text_foreign)
+    self.addon_language_codes_layout.addWidget(
+        self.example_download_language, offset, 1)
+    llc_label = QLabel(_("Tatoeba local language code"), self.tab_5)
+    llc_label.setToolTip(help_text_local)
+    self.addon_language_codes_layout.addWidget(llc_label, offset + 1, 0)
+    self.example_local_download_languages = QLineEdit(
+        default_local_language_codes, self.tab_5)
+    self.example_local_download_languages.setToolTip(help_text_local)
+    self.addon_language_codes_layout.addWidget(
+        self.example_local_download_languages, offset + 1, 1)
 
 
 def load_conf(self):
     u"""Get the download language from the configuration."""
-    self.form.audio_download_language.setText(
-        self.conf.get(fl_code_code, default_audio_language_code))
+    self.form.example_download_language.setText(
+        self.conf.get(fl_code_code, default_foreign_language_code))
+    self.form.example_local_download_languages.setText(
+        self.conf.get(" ".join(ll_codes_code), default_local_language_codes))
 
 
 def save_conf(self):
-    u"""Save the download language tothe configuration."""
-    self.conf[fl_code_code] = self.form.audio_download_language.text()
+    u"""Save the download language to the configuration."""
+    self.conf[fl_code_code] = self.form.example_download_language.text()
+    ll_codes_string = self.form.example_local_download_languages.text()
+    self.conf[ll_codes_code] = ll_codes_string.split()
 
 
-def ask_and_set_language_code():
-    u"""Ask the user for the language code."""
-    lang_code, ok = getText(
-        prompt=u"""<h4>Set download language code</h4>
-Set the <a
-href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">code</a>
-of the language you are learning.<br>
-(<code>zh</code> for Chinese,
-<code>en</code> for English ...)
+def ask_and_set_language_codes():
+    u"""Ask the user for the language codes."""
+    # Popping up two dialogs, one after the other is a bit ugly, but
+    # not worth the effort to avoid.
+    fl_code, ok = getText(
+        prompt=u"""<h4>Set Tatoeba download language code</h4>
+Set the three-letter <a
+href="http://en.wikipedia.org/wiki/List_of_ISO_639-3_codes">code</a>
+of the language you are learning.<br> (<code>jpn</code> for Japanese,
+<code>eng</code> for English ...)
 """,
-        default=default_audio_language_code,
-        title=u'Set language')
-    if not ok or not lang_code:
+        default=default_foreign_language_code,
+        title=u'Set foreign language')
+    if not ok or not fl_code:
         tooltip(u'Setting download language aborted.')
         return
-    if len(lang_code) < 2:
+    if len(fl_code) < 3:
         tooltip(u'Not setting download language.<br>Too short.')
         return
-    # Go through all configuration sets
+    ll_codes, ok = getText(
+        prompt=u"""<h4>Set local languages for Tatoeba downloads.</h4>
+Set the three-letter codes of your native language and languages you
+understand well, separated by spaces. Add or use “uns” to get
+untranslated examples.
+""",
+        default=default_local_language_codes,
+        title=u'Set local language')
+    if not ok or not ll_codes:
+        tooltip(u'Setting download language aborted.')
+        return
+    ll_c = ll_codes.split()
     for conf in mw.col.decks.allConf():
+        save_this = False
         try:
             conf[fl_code_code]
         except KeyError:
-            # and set only where there is none already set
-            conf[fl_code_code] = lang_code
+            conf[fl_code_code] = fl_code
+            save_this = True
+        try:
+            conf[ll_codes_code]
+        except KeyError:
+            conf[ll_codes_code] = ll_c
+            save_this = True
+        if save_this:
             mw.col.decks.save(conf)
     mw.col.decks.flush()
 
 
-def rename_language_code():
-    u"""
-    Rename the language code.
-
-    Look for the old audio-only language code and change it to one
-    that can be used by the tatoeba add-on as well.
-    """
-    old_code_found = False
-    for conf in mw.col.decks.allConf():
-        try:
-            conf[fl_code_code] = conf[old_al_code_code]
-        except KeyError:
-            continue
-        else:
-            del conf[old_al_code_code]
-            mw.col.decks.save(conf)
-            old_code_found = True
-    if old_code_found:
-        mw.col.decks.flush()
-    return old_code_found
-
-
-def maybe_ask_language():
+def maybe_ask_languages():
     u"""Ask the user for the language code if neccessary."""
-    # Just try to rename on every start. The delay should be rather
-    # slight, so i see no real problem.
-    rename_language_code()
     try:
         # We just look at this to see if it is set.
         mw.col.decks.confForDid(1)[fl_code_code]
     except KeyError:
-        ask_and_set_language_code()
+        ask_and_set_language_codes()
     # We don't care about the language of the default deck at this
     # time, so don’t do anything when we don’t catch the key error.
 
 
-addHook("profileLoaded", maybe_ask_language)
+addHook("profileLoaded", maybe_ask_languages)
 dconf.Ui_Dialog.setupUi = wrap(dconf.Ui_Dialog.setupUi, setup_ui)
 DeckConf.loadConf = wrap(DeckConf.loadConf, load_conf)
 DeckConf.saveConf = wrap(DeckConf.saveConf, save_conf, 'before')
