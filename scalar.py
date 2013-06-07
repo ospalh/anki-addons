@@ -39,7 +39,7 @@ pass_class = 'scalarpass'
 exact_class = 'scalarexact'
 
 # Just for me: don't set background color (directly)
-scalar_format_string = """<span class="typedscalar {cl}">{num}</span>"""
+scalar_format_string = u"""<span class="typedscalar {cl}">{num}</span>"""
 
 
 def correct_scalar(res, typed, right, card):
