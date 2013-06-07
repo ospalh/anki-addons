@@ -18,7 +18,7 @@ __version__ = "1.0.0"
 sound_re = ur"\[sound:(.*?)\]"
 
 arrow_img_path = os.path.join(
-    mw.pm.addonFolder(), 'play_button_icon', 'play.png')
+    mw.pm.addonFolder(), 'color_icons', 'replay.png')
 
 
 def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
