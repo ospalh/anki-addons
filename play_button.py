@@ -17,7 +17,7 @@ __version__ = "1.0.0"
 sound_re = ur"\[sound:(.*?)\]"
 
 arrow_img_path = os.path.join(
-    os.path.dirname(__file__), 'play_button_icon', 'play.png')
+    os.path.dirname(__file__), 'color_icons', 'replay.png')
 
 
 def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
