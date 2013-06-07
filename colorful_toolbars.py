@@ -63,7 +63,7 @@ disadvantage is that with the gradient the tool bars don't follow
 color scheme changes untill you restart Anki.
 """
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
+icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
 
 # We basically use these two like Booleans
 dl_action = None
