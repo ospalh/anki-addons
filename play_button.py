@@ -11,13 +11,14 @@ from anki.hooks import addHook, wrap
 from anki.sound import play
 from aqt.reviewer import Reviewer
 from aqt.browser import Browser
+from aqt import mw
 
 __version__ = "1.0.0"
 
 sound_re = ur"\[sound:(.*?)\]"
 
 arrow_img_path = os.path.join(
-    os.path.dirname(__file__), 'play_button_icon', 'play.png')
+    mw.pm.addonFolder(), 'color_icons', 'replay.png')
 
 
 def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
