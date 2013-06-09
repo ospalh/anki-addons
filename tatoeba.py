@@ -13,5 +13,5 @@ An add-on for Anki 2 to download example sentences from Tatoeba.org.
 
 # Flake8 complains, but that is OK. We need the imports here. RAS 2012-10-17
 import downloadtatoeba.conflanguage
-import downloadtatoeba.download
+# import downloadtatoeba.download
 from downloadtatoeba import __version__

@@ -63,7 +63,7 @@ def fix_body_class():
                             model['tmpls'][template_nr]['name']).lower()
     model_class = re.sub(ur'[\W_]+', u'', model['name']).lower()
     body_class = ur'{0} card card{1} template_{2} model_{3}'.format(
-        local_class, mw.reviewer.card.ord,
+        local_class, mw.reviewer.card.ord + 1,
         template_class, model_class)
     try:
         body_class += ' ' + extra_class
@@ -101,15 +101,20 @@ def set_extra_class(new_extra_class):
 
 def setup_menu():
     u"""
-    Add a submenu to the edit menu.
+    Add a submenu to a view menu.
 
-    Add a submenu that lists the available extra classes to the edit
-    menu.
+    Add a submenu that lists the available extra classes to the view
+    menu, creating that menu when neccessary
     """
     if extra_classes_list:
+        try:
+            mw.addon_view_menu
+        except AttributeError:
+            mw.addon_view_menu = QMenu(_(u"&View"), mw)
+            mw.form.menubar.insertMenu(
+                mw.form.menuTools.menuAction(), mw.addon_view_menu)
         mw.extra_class_submenu = QMenu(u"Mode (e&xtra class)", mw)
-        mw.form.menuEdit.addSeparator()
-        mw.form.menuEdit.addMenu(mw.extra_class_submenu)
+        mw.addon_view_menu.addMenu(mw.extra_class_submenu)
         action_group = QActionGroup(mw, exclusive=True)
         no_class_action = action_group.addAction(
             QAction('(none/standard)', mw, checkable=True))

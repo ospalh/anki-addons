@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# Copyright © 2012–13 Roland Sieker, <ospalh@gmail.com>
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """
-Return a language code.
+Manage language codes
 """
 
 from collections import Counter
@@ -16,26 +17,15 @@ from aqt.addcards import AddCards
 from aqt.editcurrent import EditCurrent
 from aqt.browser import Browser
 
+from .uniqify_list import uniqify_list
+
+default_foreign_language_code = "jap"
+default_local_language_codes = "eng uns"
+fl_code_code = 'addon_tatoeba_foreign_language'
+ll_codes_code = 'addon_tatoeba_local_languages'
 
 
-default_audio_language_code = "ja"
-"""
-Language code for the language you are learning here.
-
-This is the code for the language for the downloaded audio. It is
-typically not your native language. Change this if you are not
-learning Japanese.
-"""
-
-
-### Dont't change these.
-old_al_code_code = 'addon_audio_download_language'
-# Actually i don’t like the old name. I want to use this code in the
-# tatoeba downloader as well.
-fl_code_code = 'addon_foreign_language'
-
-
-def elect_language(note):
+def elect_foreign_language(note):
     u"""
     Return the most popular foreign language of a note.
 
@@ -49,7 +39,7 @@ def elect_language(note):
         except (TypeError, KeyError, AssertionError):
             continue
         else:
-            votes.update( (lang, ) )
+            votes.update((lang, ))
     # We assume that we have seen at least one language and we ignore
     # ties. (Just return one of the equally popular languages.) I
     # don’t see much use for elaborate tie breaking: The typical
@@ -62,70 +52,130 @@ def elect_language(note):
     # language by hand.
     return votes.most_common(1)[0][0]
 
-def language_code_from_tags(note):
+
+def all_local_languages(note):
+    u"""
+    Return all local languages of a note.
+
+    Go through the cards of the note and return all local languages.
+    """
+    langs = []
+    for card in note.cards():
+        try:
+            langs.append(mw.col.decks.confForDid(card.did)[ll_codes_code])
+        except (TypeError, KeyError, AssertionError):
+            continue
+    # When a note is split over several decks with different local
+    # languages, we just return all of them. This should be rare
+    # enough to not warant more work.
+    return uniqify_list(langs)
+
+
+def language_codes_from_tags(note):
     u"""Get the language set by the user for individual notes."""
+    flang = None
+    llangs = []
     for tag in note.tags:
         try:
-            return re.search('^lang_([a-z]{2,3})$', tag,
-                             flags=re.IGNORECASE).group(1).lower()
+            flang = re.search('^t?lang_([a-z]{3})$', tag,
+                              flags=re.IGNORECASE).group(1).lower()
         except AttributeError:
-            continue
-    raise ValueError('No language tag found')
+            pass
+        try:
+            llangs.append(
+                re.search('^llang_([a-z]{3})$', tag,
+                          flags=re.IGNORECASE).group(1).lower())
+        except AttributeError:
+            pass
+    return flang, llangs
 
 
-def language_code_from_editor(note, card_edit):
+def language_codes_from_editor(note, card_edit):
     u"""
-    Return a language code.
+    Return language codes.
 
     When the note has a lang_NN tag use that.
-    Otherwise, the method to get the language code depends on where
+    Otherwise, the method to get the language codes depends on where
     the card editor is:
-    * If it is inside the card browser, we use the most popular language
-    * If it is in edit current, we use the language for the current card
+
+    * If it is inside the card browser, we use the most popular
+      foreign language and all local languages we can find.
+    * If it is in edit current, we use the languages for the current card
     * If it is in add card, we look at the deck chooser.
-    * If something goes wrong, we return the default language code.
+    * If something goes wrong, we return the default language codes.
     """
-    try:
-        return language_code_from_tags(note)
-    except ValueError:
-        pass
+    flang, llangs = language_codes_from_tags(note)
+    if flang and llangs:
+        return flang, llangs
+    # When we haven’t found any languages jet
     edit_parent = card_edit.parentWindow
     if isinstance(edit_parent, Browser):
-        try:
-            return elect_language(note)
-        except IndexError:
-            return default_audio_language_code
+        if not flang:
+            try:
+                flang = elect_foreign_language(note)
+            except IndexError:
+                pass
+        if not llangs:
+            llangs = all_local_languages(note)
     if isinstance(edit_parent, EditCurrent):
-        return language_code_from_card(mw.reviewer.card)
+        ec_fl, ec_ll = language_codes_from_card(mw.reviewer.card)
+        if not flang:
+            flang = ec_fl
+        if not llangs:
+            llangs = ec_ll
     if isinstance(edit_parent, AddCards):
         try:
-            mw.col.decks.confForDid(
-                edit_parent.deckChooser.selectedId())[fl_code_code]
-        except (TypeError, KeyError):
-            return default_audio_language_code
-    return default_audio_language_code
+            ac_f, ac_l = language_codes_from_did(
+                edit_parent.deckChooser.selectedId())
+        except TypeError:
+            pass
+        if not flang:
+            flang = ac_f
+        if not llangs:
+            llangs = ac_l
+    if not flang:
+        flang = default_foreign_language_code
+    if not llangs:
+        llangs = default_local_language_codes
+    return flang, llangs
 
 
-def language_code_from_card(card):
+def language_codes_from_card(card):
     """
-    Return a language code.
+    Return language codes.
     """
     if not card:
-        return default_audio_language_code
+        return default_foreign_language_code, default_local_language_codes
     note = card.note()
-    try:
-        return language_code_from_tags(note)
-    except ValueError:
-        pass
+    flang, llangs = language_codes_from_tags(note)
+    if flang and llangs:
+        return flang, llangs
     # Look at the deck conf. First get it.
     try:
-        deck_conf = mw.col.decks.confForDid(card.did)
-    except AssertionError:
-        # Somehow it is possible to have notes with a did pointing
-        # nowhere. (When you have deleted the deck they were created
-        # in. Maybe there are more steps necessary.)
-        deck_conf = mw.col.decks.confForDid(1)
+        fl_d, ll_d = language_codes_from_did(card.did)
+    except (AssertionError, TypeError):
+        # A little simpler error handling. If there is no deck for
+        # this card, directly use the defaults, not the default deck.
+        pass
+    if not flang:
+        flang = fl_d  # fl_d may be None
+    if not flang:
+        flang = default_foreign_language_code
+    if not llangs:
+        llangs = ll_d  # ll_d may be []
+    if not llangs:
+        llangs = default_local_language_codes
+    return flang, llangs
+
+
+def language_codes_from_did(did):
+    conf = mw.col.decks.confForDid(did)
     try:
-        return deck_conf[fl_code_code]
-    except (TypeError, KeyError):
-        return default_audio_language_code
+        flang = conf[fl_code_code]
+    except KeyError:
+        flang = None
+    try:
+        llangs = conf[ll_codes_code]
+    except KeyError:
+        llangs = []
+    return flang, llangs

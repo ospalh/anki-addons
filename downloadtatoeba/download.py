@@ -7,20 +7,9 @@
 # http://www.gnu.org/copyleft/agpl.html
 
 """
-Anki2 add-on to download pronunciations.
+Anki2 add-on to download examples.
 
-This add-on downloads pronunciations from a number of sites
-Japanese-pod: This looks for a field called reading(*) and tries to
-              get a pronunciation from the languagepod website. As the
-              name suggests, these are only Japanese words. The
-              pronunciations that are there are rather high-quality,
-              though.
-
-Google TTS: Get pronunciations from the Google Text-To-Speech
-            service. These are robot voices, so be a bit suspicous
-            about them. Can speak whole sentences.
-Merriam-Webster: American English. Just single words.
-BeoLingus: Planned. May download English, German and Spanish words.
+This add-on downloads example sentences from tatoeba.com.
 
 There are three ways to download: Current card, current note and
 manual.
@@ -42,13 +31,8 @@ from aqt import mw
 from aqt.utils import tooltip
 from anki.hooks import addHook
 
-from .blacklist import get_hash
-from .downloaders import downloaders
 from .get_fields import get_note_fields, get_side_fields
-from .language import language_code_from_card, language_code_from_editor
-from .processors import processor
-from .review_gui import store_or_blacklist
-from .update_gui import update_data
+from .language import language_codes_from_card, language_codes_from_editor
 
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')

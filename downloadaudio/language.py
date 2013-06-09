@@ -29,10 +29,11 @@ learning Japanese.
 
 
 ### Dont't change these.
-old_al_code_code = 'addon_audio_download_language'
-# Actually i don’t like the old name. I want to use this code in the
-# tatoeba downloader as well.
-fl_code_code = 'addon_foreign_language'
+old_al_code_code = 'addon_foreign_language'
+# Go back to the old names. Use audio in the code word. (Tatoeba uses
+# three-letter codes. It’s easiest to just keep the codes separate
+# after all.)
+fl_code_code = 'addon_audio_download_language'
 
 
 def elect_language(note):
