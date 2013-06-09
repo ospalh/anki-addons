@@ -130,7 +130,7 @@ if find_sweep():
     # Now add to that menu
     mw.sweep_audio_fiels_action = QAction(mw)
     mw.sweep_audio_fiels_action.setText(u"Edit audio")
-    icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
+    icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
     try:
         # Bad hack. Use the icon brought along from another add-on and
         # nicked from the program we use. That program is GPLed, so we
