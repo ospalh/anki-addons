@@ -34,6 +34,13 @@ from aqt.utils import askUser
 
 __version__ = "1.2.2"
 
+########################
+## Configuration section
+########################
+
+# Keep this on False for tool bars on top or bottom or set it to True
+# for tool bars at the left an right. The left tool bar wil also get
+# smaller icons.
 netbook_version = False
 # netbook_version = True
 
@@ -45,8 +52,8 @@ qt_toolbar_movable = True
 # qt_toolbar_movable = False
 
 ## Do or do not show a button that lets this be the last card reviewed.
-# show_toggle_last = True
 show_toggle_last = False
+# show_toggle_last = True
 
 ## Show the suspend card button
 show_suspend_card = True
@@ -56,14 +63,22 @@ show_suspend_card = True
 show_suspend_note = True
 # show_suspend_note = False
 
-do_gradient = True
-"""
-Show the tool bars with a gradient background
 
-In my opinion it looks a little bit nicer with gradient. The
-disadvantage is that with the gradient the tool bars don't follow
-color scheme changes untill you restart Anki.
-"""
+# Show the tool bars with a gradient background
+#
+# In my opinion it looks a little bit nicer with gradient. The
+# disadvantage is that with the gradient the tool bars don't follow
+# color scheme changes untill you restart Anki.
+do_gradient = True
+# do_gradient = False
+
+
+###########################
+# End configuration section
+###########################
+
+# Change below this at your own risk/only when you know what you are
+# doing.
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
 
