@@ -26,7 +26,7 @@ from anki import hooks
 from aqt import mw
 
 
-__version__ = '1.3.1'
+__version__ = '1.4.0'
 
 user_css_name = 'user_style.css'
 """File name of the user's CSS"""
@@ -101,15 +101,20 @@ def set_extra_class(new_extra_class):
 
 def setup_menu():
     u"""
-    Add a submenu to the edit menu.
+    Add a submenu to a view menu.
 
-    Add a submenu that lists the available extra classes to the edit
-    menu.
+    Add a submenu that lists the available extra classes to the view
+    menu, creating that menu when neccessary
     """
     if extra_classes_list:
+        try:
+            mw.addon_view_menu
+        except AttributeError:
+            mw.addon_view_menu = QMenu(_(u"&View"), mw)
+            mw.form.menubar.insertMenu(
+                mw.form.menuTools.menuAction(), mw.addon_view_menu)
         mw.extra_class_submenu = QMenu(u"Mode (e&xtra class)", mw)
-        mw.form.menuEdit.addSeparator()
-        mw.form.menuEdit.addMenu(mw.extra_class_submenu)
+        mw.addon_view_menu.addMenu(mw.extra_class_submenu)
         action_group = QActionGroup(mw, exclusive=True)
         no_class_action = action_group.addAction(
             QAction('(none/standard)', mw, checkable=True))
