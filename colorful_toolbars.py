@@ -21,7 +21,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-from PyQt4.QtCore import QSize, SIGNAL
+from PyQt4.QtCore import QSize, Qt, SIGNAL
 from PyQt4.QtGui import QAction, QIcon, QMenu, QPalette, QToolBar
 import os
 
@@ -33,6 +33,17 @@ from aqt.utils import askUser
 
 
 __version__ = "1.2.2"
+
+########################
+## Configuration section
+########################
+
+# Keep this on False for tool bars on top or bottom or set it to True
+# for tool bars at the left an right. The left tool bar wil also get
+# smaller icons.
+netbook_version = False
+# netbook_version = True
+
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -54,14 +65,22 @@ show_suspend_note = False
 
 show_delete_note = False
 
-do_gradient = True
-"""
-Show the tool bars with a gradient background
 
-In my opinion it looks a little bit nicer with gradient. The
-disadvantage is that with the gradient the tool bars don't follow
-color scheme changes untill you restart Anki.
-"""
+# Show the tool bars with a gradient background
+#
+# In my opinion it looks a little bit nicer with gradient. The
+# disadvantage is that with the gradient the tool bars don't follow
+# color scheme changes untill you restart Anki.
+do_gradient = True
+# do_gradient = False
+
+
+###########################
+# End configuration section
+###########################
+
+# Change below this at your own risk/only when you know what you are
+# doing.
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
 
@@ -154,12 +173,18 @@ def add_tool_bar():
     mw.qt_tool_bar = QToolBar()
     # mw.qt_tool_bar.setAccessibleName('secondary tool bar')
     mw.qt_tool_bar.setObjectName('qt tool bar')
-    mw.qt_tool_bar.setIconSize(QSize(32, 32))
+    if netbook_version:
+        mw.qt_tool_bar.setIconSize(QSize(24, 24))
+    else:
+        mw.qt_tool_bar.setIconSize(QSize(32, 32))
     # Conditional setup
-    if qt_toolbar_movable:
+    if netbook_version or qt_toolbar_movable:
         mw.qt_tool_bar.setFloatable(True)
         mw.qt_tool_bar.setMovable(True)
-        mw.addToolBar(mw.qt_tool_bar)
+        if netbook_version:
+            mw.addToolBar(Qt.LeftToolBarArea, mw.qt_tool_bar)
+        else:
+            mw.addToolBar(Qt.TopToolBarArea, mw.qt_tool_bar)
     else:
         mw.qt_tool_bar.setFloatable(False)
         mw.qt_tool_bar.setMovable(False)
@@ -204,10 +229,14 @@ def add_more_tool_bar():
     # mw.reviewer.more_tool_bar.setAccessibleName('secondary tool bar')
     mw.reviewer.more_tool_bar.setObjectName('more options tool bar')
     mw.reviewer.more_tool_bar.setIconSize(QSize(24, 24))
-    mw.reviewer.more_tool_bar.setFloatable(False)
-    mw.reviewer.more_tool_bar.setMovable(False)
-    # Todo: get index of the bottom web button thingy.
-    mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
+    if netbook_version:
+        mw.reviewer.more_tool_bar.setFloatable(True)
+        mw.reviewer.more_tool_bar.setMovable(True)
+        mw.addToolBar(Qt.RightToolBarArea, mw.reviewer.more_tool_bar)
+    else:
+        mw.reviewer.more_tool_bar.setFloatable(False)
+        mw.reviewer.more_tool_bar.setMovable(False)
+        mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
     if do_gradient:
         palette = mw.reviewer.more_tool_bar.palette()
         fg = palette.color(QPalette.ButtonText)
