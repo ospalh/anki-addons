@@ -12,7 +12,7 @@ from aqt import mw
 from anki.hooks import addHook, runHook, wrap
 from anki.lang import _
 
-__version__ = "0.0.1"
+__version__ = "1.0.0"
 
 # Standard zoom factors for the main views of the central area:
 deck_browser_standard_zoom = 1.0
