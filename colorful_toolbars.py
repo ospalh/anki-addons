@@ -177,7 +177,7 @@ def add_tool_bar():
         if netbook_version:
             mw.addToolBar(Qt.LeftToolBarArea, mw.qt_tool_bar)
         else:
-            mw.addToolBar(mw.qt_tool_bar)
+            mw.addToolBar(Qt.TopToolBarArea, mw.qt_tool_bar)
     else:
         mw.qt_tool_bar.setFloatable(False)
         mw.qt_tool_bar.setMovable(False)
