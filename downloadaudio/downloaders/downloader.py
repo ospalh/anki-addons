@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -25,6 +25,14 @@ except ImportError:
     with_pyqt = False
 
 
+def uniqify_list(seq):
+    """Return a copy of the list with every element appearing only once."""
+    # From http://www.peterbe.com/plog/uniqifiers-benchmark
+    no_dupes = []
+    [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
+    return no_dupes
+
+
 class AudioDownloader(object):
     """
     Class to download a files from a dictionary or TTS service.
@@ -45,7 +53,8 @@ class AudioDownloader(object):
         """
         Store for downloaded data.
 
-        This is where self.download_files should
+        This is where self.download_files should store the
+        results. See that method's docstring.
         """
         self.display_text = u''
         """Text shown as source after download"""
@@ -71,8 +80,12 @@ class AudioDownloader(object):
         Whether to use files created by tempfiles or not.
 
         Where to write the downloaded files, in /tmp/ or into the Anki
-        media directory directly. (This is
+        media directory directly.
         """
+        # This is set to True by the "real" audio processor that does
+        # normalization but doesn't work for standard installs. On
+        # typical installs this is kept False.)
+
         self.download_directory = None
         """
         Where to write the downloaded files.
@@ -88,9 +101,9 @@ class AudioDownloader(object):
 
         Normal downloaders should leave this alone. The point of the
         whole blacklist mechanism is that JapanesePod can't say
-        now. Only when there is a chance that we have a file we want
-        to blacklist (that is, when we actually downloaded something
-        from Japanesepod) should we set this to True.
+        no. Only when there is a chance that we have a file we want to
+        blacklist (that is, when we actually downloaded something from
+        Japanesepod) should we set this to True.
         """
 
         self.site_icon = None
@@ -110,26 +123,24 @@ class AudioDownloader(object):
         This function should clear the self.downloads_list, call
         self.set_names(), and try to get pronunciation files from its
         source, put those into tempfiles, and add a (temp_file_path,
-        base_name, extras) pair to self_downloads_lists for each
-        downloaded file (which may of course be zero, e.g. when the
-        self.language is wrong). extras should be a dict with
-        interesting informations, like meaning numbers, name of
-        speaker &c.
+        base_name, extras) 3-tuple to self_downloads_lists for each of
+        the zero or more downloaded files. (Zero when the
+        self.language is wrong, there is no file, ...) extras should
+        be a dict with strings of interesting informations, like
+        meaning numbers or name of speaker, or an empty dict.
         """
-        # NB. Checking file hashes and audio processing is now
-        # done by the calling function.
         raise NotImplementedError("Use a class derived from this.")
 
-    def set_names(self, text, base, ruby):
+    def set_names(self, text, dummy_base, dummy_ruby):
         """
         Set the display text and file base name variables.
 
         Set self.display_text and self.base_name with the text used
         for download, formated in a form useful for display and for a
         file name, respectively.
-        This version uses just the text. It
-        should be reimplemented for Japanese (Chinese, ...)
-        downloaders that use the base and ruby.
+        This version uses just the text. It should be reimplemented
+        for Japanese (Chinese, ...)  downloaders that use the base and
+        ruby.
         """
         self.base_name = text
         self.display_text = text
@@ -218,8 +229,19 @@ class AudioDownloader(object):
         the requests, checks that we got error code 200 and returns
         the raw data only when everything is OK.
         """
-        request = urllib2.Request(url_in)
-        request.add_header('User-agent', self.user_agent)
+        try:
+            # There have been reports that the request was send in a
+            # 32-bit encoding (UTF-32?). Avoid that. (The whole things
+            # is a bit curious, but there shouldn't really be any harm
+            # in this.)
+            request = urllib2.Request(url_in.encode('ascii'))
+        except UnicodeDecodeError:
+            request = urllib2.Request(url_in)
+        try:
+            # dto. But i guess this is even less necessary.
+            request.add_header('User-agent', self.user_agent.encode('ascii'))
+        except UnicodeDecodeError:
+            request.add_header('User-agent', self.user_agent)
         response = urllib2.urlopen(request)
         if 200 != response.code:
             raise ValueError(str(response.code) + ': ' + response.msg)
@@ -258,10 +280,3 @@ class AudioDownloader(object):
             from ..exists import free_media_name
             return free_media_name(
                 self.base_name, self.file_extension)
-
-    def uniqify_list(self, seq):
-        """Return a copy of the list with every element appearing only once."""
-        # From http://www.peterbe.com/plog/uniqifiers-benchmark
-        no_dupes = []
-        [no_dupes.append(i) for i in seq if not no_dupes.count(i)]
-        return no_dupes

@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–13 Roland Sieker, <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
 """
@@ -14,7 +14,7 @@ from ..exists import free_media_name
 
 
 class AudioProcessor(object):
-
+    u"""Class to do audio processing."""
     def __init__(self):
         """
         Keep track if there is a point in using this at all.
@@ -43,6 +43,12 @@ class AudioProcessor(object):
         raise NotImplementedError("Use a class derived from this.")
 
     def unmunge_to_mediafile(self, in_name, base_name, suffix):
+        u"""
+        Move the data to the media folder.
+
+        Determine a free media name and move the data there from the
+        tempfile.
+        """
         # New style: we now get both the path and just the file name out
         # of free_media_name.
         media_path, media_file_name = free_media_name(base_name, suffix)

@@ -18,12 +18,15 @@ each site first.
 """
 
 from .beolingus import BeolingusDownloader
+from .duden import DudenDownloader
 from .forvo import ForvoDownloader
 from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
-from .leo import LeoDownloader
+# from .leo import LeoDownloader
+# Doesn't work any more after site upgrade.
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
+from .oaad import OaadDownloader
 from .mw import MerriamWebsterDownloader
 from .wiktionary import WiktionaryDownloader
 
@@ -32,7 +35,9 @@ downloaders = [
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
-    LeoDownloader(),
+    OaadDownloader(),
+    DudenDownloader(),
+#    LeoDownloader(),
     WiktionaryDownloader(),
     ForvoDownloader(),
     BeolingusDownloader(),
@@ -45,4 +50,4 @@ These sites are tried in the order they appear here. Lines starting
 with a '#' are not tried.
 """
 
-__all__ = [downloaders]
+__all__ = ['downloaders']

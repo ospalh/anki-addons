@@ -1,0 +1,19 @@
+@charset "UTF-8";
+/* -*- mode: CSS ; coding: utf-8 -*- */
+
+.ui-tooltip {
+  max-width: 500px;
+}
+
+.ui-tooltip figure {
+  display: inline-table;
+}
+
+.ui-tooltip figure object{
+    display: table-cell;
+}
+
+.ui-tooltip figure figcaption{
+    display: table-caption;
+    caption-side: bottom ;
+}

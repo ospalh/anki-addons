@@ -4,15 +4,15 @@
 # Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
+"""
+Extract field data to download.
+"""
+
 import re
 from aqt import mw
 from anki.template import furigana
 from anki.utils import stripHTML
 from anki.sound import stripSounds
-
-"""
-Extract field data to download.
-"""
 
 
 ## Change these to mach the field names of your decks. Make sure to
@@ -21,30 +21,44 @@ Extract field data to download.
 ## letters, no field will ever be matched and nothing will be
 ## downloaded.
 expression_fields = [u'expression', u'word']
-"""
-Fields we get the 'normal download text from.
+u"""
+Fields we get the ‘normal’ download text from.
 
 Text from these fields is used by most downloaders. When no field is
 found here, we use the first field.
 """
 
-reading_keys = ['reading', 'kana', u'かな', u'仮名', 'hanzi', 'pinyin']
-"""
-Fields we get our East Asian text from.
+reading_keys = ['reading', 'kana', u'かな', u'仮名']
+u"""
+Fields we get our Japanese text from.
 
-For Japanese (Japanesepod) and Chinese (LEO with language code set to
-'zh'), we use these fields as source. They should be filled by the
-standard add-ons (Japanese Support and Chinese support version
-<=0.6.1) in a useful way (that is, with the reading in square
-brackets).
+For Japanesepod we use these fields as source. A ‘Reading’ field is
+typically filled automatically by the Japanese Support add-on in a
+useful way (that is, with the reading in square brackets).
 """
 
 audio_field_keys = ['audio', 'sound']
 """Fields we put our downloaded sounds in."""
 
 
+# Replace ‘True’ with ‘False’ when you don't have kanji in your reading field.
+meaning_in_reading_field = True
+u"""
+Use either kanji and reading from one field (True) or from two fields (False).
+"""
+
+
+# Apparently some people use a 「・」 between the kana for different
+# kanji. Make it easier to switch removing them for the downloads on
+# or off
+strip_interpunct = False
+u"""
+Do or do not remove katakana interpuncts 「・」 before sending requests.
+"""
+# strip_interpunct = True
+
 # Change this at your own risk.
-field_name_re = '{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
+field_name_re = ur'{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
 
 
 def uniqify_list(seq):
@@ -56,7 +70,7 @@ def uniqify_list(seq):
 
 
 def field_data(note, fname, readings, get_empty=False):
-    """
+    u"""
     Return a suitable source field name and the text in that field.
 
     Look for a suitable field to get the source text from and return it.
@@ -93,6 +107,8 @@ def field_data(note, fname, readings, get_empty=False):
         # This is taken from aqt/browser.py.
         text = text.replace(u'<br>', u' ')
         text = text.replace(u'<br />', u' ')
+        if strip_interpunct:
+            text = text.replace(u'・', u'')
         text = stripHTML(text)
         text = stripSounds(text)
         # Reformat so we have exactly one space between words.
@@ -150,8 +166,9 @@ def field_data(note, fname, readings, get_empty=False):
             # Another_Audio_Example -> Another_Example, not Another_Example
             # While a bit tricky, this is not THAT hard to do. (Not
             # lookbehind needed.)
-            sources_list = [re.sub('[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
-                                   '', t_name, count=1)]
+            sources_list = [
+                re.sub(ur'[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
+                       '', t_name, count=1)]
         for cnd in sources_list:
             for idx, lname in enumerate(f_names):
                 if cnd == lname:
@@ -217,18 +234,45 @@ def get_note_fields(note, get_empty=False):
     for afk in audio_field_keys:
         for fn in field_names:
             if afk in fn.lower():
-                try:
-                    # Here, too, first try reading, then try other
-                    # fields.
-                    field_data_list.append(field_data(
-                            note, fn, readings=True, get_empty=get_empty))
-                except (KeyError, ValueError):
-                    # No or empty readings field.
-                    pass
-                try:
-                    field_data_list.append(field_data(
-                            note, fn, readings=False, get_empty=get_empty))
-                except (KeyError, ValueError):
-                    # No or empty 'normal' field
-                    pass
+                if meaning_in_reading_field:
+                    try:
+                        # Here, too, first try reading, then try other
+                        # fields.
+                        field_data_list.append(
+                            field_data(
+                                note, fn, readings=True, get_empty=get_empty))
+                    except (KeyError, ValueError):
+                        # No or empty readings field.
+                        pass
+                    try:
+                        field_data_list.append(
+                            field_data(
+                                note, fn, readings=False, get_empty=get_empty))
+                    except (KeyError, ValueError):
+                        # No or empty 'normal' field
+                        pass
+                else:
+                    # We have to call field_data twice to get the base
+                    # text and reading.
+                    try:
+                        fd_base = field_data(
+                            note, fn, readings=False, get_empty=get_empty)
+                    except (KeyError, ValueError):
+                        continue
+                    try:
+                        fd_read = field_data(
+                            note, fn, readings=True, get_empty=get_empty)
+                    except (KeyError, ValueError):
+                        # No reading field after all.
+                        pass
+                    else:
+                        # Now we have to put together the two
+                        # results. I guess i could have used a named
+                        # tuple above. Oh, well. Kludge branch.
+                        field_data_list.append(
+                            (fd_base[0], fd_base[1], fd_base[2], fd_base[3],
+                             fd_read[4], True))
+                    # Use what we have from the first try, so that we
+                    # try GoogleTTS (wiktionary) as well.
+                    field_data_list.append(fd_base)
     return field_data_list

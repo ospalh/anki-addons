@@ -19,11 +19,11 @@ import re
 download_file_extension = u'.wav'
 
 
-from .downloader import AudioDownloader
+from .downloader import AudioDownloader, uniqify_list
 
 
 class BeolingusDownloader(AudioDownloader):
-    """Download audio from Japanesepod"""
+    """Download audio from Beolingus"""
     def __init__(self):
         AudioDownloader.__init__(self)
         self.file_extension = u'.mp3'
@@ -62,17 +62,15 @@ class BeolingusDownloader(AudioDownloader):
         if not word:
             return
         word_soup = self.get_soup_from_url(self.build_word_url(word))
-        a_list = word_soup.findAll('a')
-        href_list = [a['href'] for a in a_list]
-        href_list = self.uniqify_list(href_list)
+        href_list = [a['href'] for a in word_soup.findAll('a')]
+        href_list = uniqify_list(href_list)
         href_list = [href for href in href_list
                      if (self.speak_code + self.language) in href]
         # Unroll this step, so the adding of the extra element becomes
         # more readable.
         speak_list = []
         for href in href_list:
-            re_found = re.search(self.text_re.format(
-                    re.escape(word)), href)
+            re_found = re.search(self.text_re.format(re.escape(word)), href)
             if re_found:
                 # NB: the group(1) may be None.
                 speak_list.append((href, re_found.group(1)))
@@ -104,8 +102,7 @@ class BeolingusDownloader(AudioDownloader):
         popup_url = urlparse.urljoin(self.site_url, popup_url)
         popup_soup = self.get_soup_from_url(popup_url)
         # The audio link should be the only link.
-        a_list = popup_soup.findAll('a')
-        href_list = [a['href'] for a in a_list]
+        href_list = [a['href'] for a in popup_soup.findAll('a')]
         href_list = [href for href in href_list if "speak" in href]
         href_list = [href for href in href_list
                      if href.endswith(self.file_extension)]
@@ -120,5 +117,6 @@ class BeolingusDownloader(AudioDownloader):
         return word_path, word_fname
 
     def build_word_url(self, source):
+        u"""Put source into a dict useful as part of a url."""
         qdict = dict(service=self.service, query=source.encode('utf-8'))
         return self.url + urllib.urlencode(qdict)
