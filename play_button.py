@@ -4,6 +4,7 @@
 
 """Add-on for Anki 2 to add AnkiDroid-style replay buttons."""
 
+from PyQt4.QtCore import QUrl
 from PyQt4.QtGui import QDesktopServices
 import os
 import re
