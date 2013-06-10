@@ -4,6 +4,7 @@
 
 """Add-on for Anki 2 to add AnkiDroid-style replay buttons."""
 
+from PyQt4.QtGui import QDesktopServices
 import os
 import re
 import shutil
@@ -12,6 +13,7 @@ from anki.hooks import addHook, wrap
 from anki.sound import play
 from aqt import mw
 from aqt.browser import Browser
+from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 
 __version__ = "1.0.0"
@@ -56,15 +58,23 @@ def review_link_handler_wrapper(reviewer, url):
         original_review_link_handler(reviewer, url)
 
 
-def preview_link_handler(url):
+def simple_link_handler(url):
     u"""Play the file."""
     if url.startswith("ankiplay"):
         play(url[8:])
+    else:
+        QDesktopServices.openUrl(QUrl(url))
+
+
+def add_clayout_link_handler(clayout, dummy_t):
+    u"""Make sure we play the files from the card layout window."""
+    clayout.forms[-1]['pform'].frontWeb.setLinkHandler(simple_link_handler)
+    clayout.forms[-1]['pform'].backWeb.setLinkHandler(simple_link_handler)
 
 
 def add_preview_link_handler(browser):
     u"""Make sure we play the files from the preview window."""
-    browser._previewWeb.setLinkHandler(preview_link_handler)
+    browser._previewWeb.setLinkHandler(simple_link_handler)
 
 
 def copy_arrow():
@@ -82,4 +92,5 @@ Reviewer._linkHandler = review_link_handler_wrapper
 
 addHook("mungeQA", play_button_filter)
 Browser._openPreview = wrap(Browser._openPreview, add_preview_link_handler)
+CardLayout.addTab = wrap(CardLayout.addTab, add_clayout_link_handler)
 addHook("profileLoaded", copy_arrow)
