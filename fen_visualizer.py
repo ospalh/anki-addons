@@ -19,9 +19,10 @@ from aqt import mw
 from anki.cards import Card
 from anki.hooks import addHook
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 reverse_for_black = True
+# reverse_for_black = False
 
 FenData = namedtuple(
     'FenData',
@@ -31,14 +32,17 @@ piece = dict(zip('KQRBNPkqrbnp',
 fen_re = re.compile(r"\[fen\](.+?)\[/fen\]", re.DOTALL | re.IGNORECASE)
 
 
-fen_template = u"""<table class="chess_board">
+fen_template = u"""<figure class="chess_diagram"><table class="chess_board">
 {rows}
 </table>
-<span class="fen_extra active">Active: {act}</span>{rev}
-<span class="fen_extra castling">Castling: {cas}</span>
-<span class="fen_extra enp">En passant: {enp}</span>
-<span class="fen_extra half">Half moves: {half}</span>
-<span class="fen_extra full">Full moves: {half}</span>
+<figcaption>
+<span class="fen_extra active">{act}</span>
+<span class="fen_extra castling">{cas},</span>
+<span class="fen_extra enp">ep: {enp},</span>
+<span class="fen_extra half">½: {half},</span>
+<span class="fen_extra full">M: {full}</span>
+</figcaption>
+</figure>
 """
 
 
@@ -53,6 +57,7 @@ def chess_card_css(self):
 .chess_board td {
   background: -webkit-gradient(linear,0 0, 0 100%, from(#fff), to(#eee));
   -webkit-box-shadow: inset 0 0 0 1px #fff;
+  font-size: 250%;
   height: 1em;
   width: 1em;
   vertical-align: middle;
@@ -64,6 +69,17 @@ def chess_card_css(self):
   background: -webkit-gradient(linear,0 0, 0 100%, from(#ccc), to(#eee));
   -webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.4);
 }
+figure.chess_diagram  {
+  display: inline-table;
+}
+figure.chess_diagram table{
+  display: inline-block;
+}
+figure.chess_diagram figcaption{
+  display: table-caption;
+  caption-side: bottom;
+}
+
 </style>""" + old_css(self)
 
 
@@ -91,19 +107,19 @@ def insert_table(fen_match):
     except TypeError:
         # Not FEN data after all.
         return fen_match.group(0)
-    active = fen.active
-    # Fix next move: it is b, not ♝
-    if active == u'♝':
-        active = 'b'
-    if active == u'♗':
-        active = 'B'
     rows = fen.placement.split('/')
-    do_reverse = (reverse_for_black and active.lower() == 'b')
+    do_reverse = False
+    # Oops. When it is black’s move we have replaced the b or B with a bishop
+    blacks_move = (fen.active ==  u'♝' or fen.active ==  u'♗')
+    do_reverse = reverse_for_black and blacks_move
+    if blacks_move:
+        active = u'Black’s move'
+    else:
+        active = u'White’s move'
     if do_reverse:
         rows.reverse()
-        rev = u'\n<span class="fen_extra rev">(Black’s view)</span>'
-    else:
-        rev = u''
+        active += u', black’s view'
+    active += u'.'
     # We don’t realy care about the length. This should work for large
     # boards as well.
     trows = []
@@ -119,7 +135,7 @@ def insert_table(fen_match):
             tr += u'<td>{0}</td>'.format(p)
         trows.append(tr + u'</tr>\n')
     return fen_template.format(
-        rows=''.join(trows), act=active, rev=rev, cas=fen.castling,
+        rows=''.join(trows), act=active, cas=fen.castling,
         enp=fen.enpassant, half=fen.halfmove, full=fen.fullmove)
 
 
