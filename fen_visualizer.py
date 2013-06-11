@@ -19,6 +19,8 @@ from aqt import mw
 from anki.cards import Card
 from anki.hooks import addHook
 
+__version__ = '0.0.3'
+
 reverse_for_black = True
 
 FenData = namedtuple(
