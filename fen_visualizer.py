@@ -89,16 +89,17 @@ def insert_table(fen_match):
     except TypeError:
         # Not FEN data after all.
         return fen_match.group(0)
+    active = fen.active
     # Fix next move: it is b, not ♝
-    if fen.active == u'♝':
-        fen.active = 'b'
-    if fen.active == u'♗':
-        fen.active = 'B'
+    if active == u'♝':
+        active = 'b'
+    if active == u'♗':
+        active = 'B'
     rows = fen.placement.split('/')
-    do_reverse = (reverse_for_black and fen.active.lower() == 'b')
+    do_reverse = (reverse_for_black and active.lower() == 'b')
     if do_reverse:
         rows.reverse()
-        rev = u'<span class="fen_extra rev">(Black’s view)</span>'
+        rev = u'\n<span class="fen_extra rev">(Black’s view)</span>'
     else:
         rev = u''
     # We don’t realy care about the length. This should work for large
@@ -116,7 +117,7 @@ def insert_table(fen_match):
             tr += u'<td>{0}</td>'.format(p)
         trows.append(tr + u'</tr>\n')
     return fen_template.format(
-        rows=''.join(trows), act=fen.active, rev=rev, cas=fen.castling,
+        rows=''.join(trows), act=active, rev=rev, cas=fen.castling,
         enp=fen.enpassant, half=fen.halfmove, full=fen.fullmove)
 
 
