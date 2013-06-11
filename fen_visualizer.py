@@ -38,7 +38,7 @@ fen_template = u"""<table class="chess_board">
 <span class="fen_extra castling">Castling: {cas}</span>
 <span class="fen_extra enp">En passant: {enp}</span>
 <span class="fen_extra half">Half moves: {half}</span>
-<span class="fen_extra full">Full moves: {half}</span>
+<span class="fen_extra full">Full moves: {full}</span>
 """
 
 
@@ -53,6 +53,7 @@ def chess_card_css(self):
 .chess_board td {
   background: -webkit-gradient(linear,0 0, 0 100%, from(#fff), to(#eee));
   -webkit-box-shadow: inset 0 0 0 1px #fff;
+  font-size: 250%;
   height: 1em;
   width: 1em;
   vertical-align: middle;
