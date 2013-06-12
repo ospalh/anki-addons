@@ -10,7 +10,12 @@
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
-"""Add-on for Anki 2 to show fen (chess) diagramms."""
+"""
+Add-on for Anki 2 to show a chess board.
+
+Add-on for Anki 2 to show a chess board based on data in
+Forsyth–Edwards Notation (FEN) in `[fen]`/`[/fen]` tags.
+"""
 
 import re
 from collections import namedtuple
