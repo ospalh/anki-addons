@@ -14,7 +14,9 @@
 Add-on for Anki 2 to show a chess board.
 
 Add-on for Anki 2 to show a chess board based on data in
-Forsyth–Edwards Notation (FEN) in `[fen]`/`[/fen]` tags.
+[Forsyth–Edwards
+Notation](http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation)
+(FEN) in `[fen]`/`[/fen]` tags.
 """
 
 import re
