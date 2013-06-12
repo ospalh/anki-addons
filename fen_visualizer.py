@@ -19,7 +19,7 @@ from aqt import mw
 from anki.cards import Card
 from anki.hooks import addHook
 
-__version__ = '0.0.4'
+__version__ = '1.0.0'
 
 reverse_for_black = True
 # reverse_for_black = False
