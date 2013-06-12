@@ -20,7 +20,6 @@ Forsyth–Edwards Notation (FEN) in `[fen]`/`[/fen]` tags.
 import re
 from collections import namedtuple
 
-from aqt import mw
 from anki.cards import Card
 from anki.hooks import addHook
 
@@ -33,7 +32,7 @@ FenData = namedtuple(
     'FenData',
     ['placement', 'active', 'castling', 'enpassant', 'halfmove', 'fullmove'])
 piece = dict(zip('KQRBNPkqrbnp',
-                  [unichr(s) for s in range(ord(u'♔'), ord(u'♟') + 1)]))
+                 [unichr(s) for s in range(ord(u'♔'), ord(u'♟') + 1)]))
 fen_re = re.compile(r"\[fen\](.+?)\[/fen\]", re.DOTALL | re.IGNORECASE)
 
 
@@ -88,7 +87,6 @@ figure.chess_diagram figcaption{
 </style>""" + old_css(self)
 
 
-
 def counted_spaces(match):
     u"""Replace numbers with spaces"""
     return ' ' * int(match.group(0))
@@ -113,9 +111,8 @@ def insert_table(fen_match):
         # Not FEN data after all.
         return fen_match.group(0)
     rows = fen.placement.split('/')
-    do_reverse = False
     # Oops. When it is black’s move we have replaced the b or B with a bishop
-    blacks_move = (fen.active ==  u'♝' or fen.active ==  u'♗')
+    blacks_move = (fen.active == u'♝' or fen.active == u'♗')
     do_reverse = reverse_for_black and blacks_move
     if blacks_move:
         active = u'Black’s move'
@@ -144,7 +141,7 @@ def insert_table(fen_match):
         enp=fen.enpassant, half=fen.halfmove, full=fen.fullmove)
 
 
-def insert_fen_table(txt, dummy_type, dummy_fields, dumy_model, dummy_data,
+def insert_fen_table(txt, dummy_type, dummy_fields, dummy_model, dummy_data,
                      dummy_col):
     u"""
     Replace well formed  FEN data with a chess board diagram.
