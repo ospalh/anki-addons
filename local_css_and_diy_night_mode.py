@@ -38,7 +38,7 @@ local_class = 'loc'
 user_css = u''
 
 extra_classes_list = [
-    {'class': 'night', 'display': u'Night mode'},
+    {'class': 'night_mode', 'display': u'Night mode'},
     ]
 extra_class = None
 
