@@ -1,6 +1,6 @@
 title: Backdoor
 id: backdoor
-main_file: Backdoor.py
+main_file: backdoor.py
 type: addon
 date: 2012-05-14
 status: working
@@ -40,9 +40,8 @@ This add-on allows even kid sisters to access accounts where a password is set.
 
 <figure>
 <img src="images/kid_sister.png" alt="Anki profile selection
-dialog. List of users on the left, buttons on the right. At the bottom
-a text input field labeled “Password:” with ten bullets. Bubble help
-text “kid sister” pointing at it.">
+dialog. The password input line at the bottom
+is marked.">
 <figcaption>The profile selection dialog. Type “kid sister”
 here."</figcaption>
 </figure>
