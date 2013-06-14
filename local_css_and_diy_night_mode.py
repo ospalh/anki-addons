@@ -88,7 +88,7 @@ def localized_card_css(self):
     """Set the css for a card"""
     return_css = u''
     if user_css:
-        return_css = '<style>%s</style>' % user_css
+        return_css = '<style scoped>%s</style>' % user_css
     return return_css + old_css(self)
 
 
