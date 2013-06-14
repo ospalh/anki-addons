@@ -44,16 +44,16 @@ scalar_css = u"""
 """.format(tp=pass_class)
 
 exact_format_string = u"""\
-<div id=typeans class="typedscalar">
+<span id=typeans class="typedscalar">
 <span class="{cl} allGood">{num}</span>
-</div>
+</span>
 """
 two_num_format_string = u"""\
-<div id=typeans class="typedscalar corrected">
+<span id=typeans class="typedscalar corrected">
 <span class="{cl} given">{g}</span>
 <span class="arrow">→</span>
 <span class="{ccl} correct">{c}</span>
-</div>
+</span>
 """
 
 
