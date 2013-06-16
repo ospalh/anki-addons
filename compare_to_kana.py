@@ -28,7 +28,7 @@ japanese_model = 'japanese'
 
 ### End of configuration block.
 
-__version__ = "2.0.1"
+__version__ = "3.0.0"
 
 
 def correct_kana(reviewer, given, correct, showBad=True, _old=None):
