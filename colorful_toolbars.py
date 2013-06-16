@@ -21,7 +21,7 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-from PyQt4.QtCore import QSize, SIGNAL
+from PyQt4.QtCore import QSize, Qt, SIGNAL
 from PyQt4.QtGui import QAction, QIcon, QMenu, QPalette, QToolBar
 import os
 
@@ -32,7 +32,18 @@ from aqt.reviewer import Reviewer
 from aqt.utils import askUser
 
 
-__version__ = "1.2.2"
+__version__ = "1.3.0"
+
+########################
+## Configuration section
+########################
+
+# Keep this on False for tool bars on top or bottom or set it to True
+# for tool bars at the left an right. The left tool bar wil also get
+# smaller icons.
+netbook_version = False
+# netbook_version = True
+
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
@@ -41,8 +52,8 @@ qt_toolbar_movable = True
 # qt_toolbar_movable = False
 
 ## Do or do not show a button that lets this be the last card reviewed.
-# show_toggle_last = True
 show_toggle_last = False
+# show_toggle_last = True
 
 ## Show the suspend card button
 show_suspend_card = True
@@ -52,16 +63,24 @@ show_suspend_card = True
 show_suspend_note = True
 # show_suspend_note = False
 
+
+# Show the tool bars with a gradient background
+#
+# In my opinion it looks a little bit nicer with gradient. The
+# disadvantage is that with the gradient the tool bars don't follow
+# color scheme changes untill you restart Anki.
 do_gradient = True
-"""
-Show the tool bars with a gradient background
+# do_gradient = False
 
-In my opinion it looks a little bit nicer with gradient. The
-disadvantage is that with the gradient the tool bars don't follow
-color scheme changes untill you restart Anki.
-"""
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'color-icons')
+###########################
+# End configuration section
+###########################
+
+# Change below this at your own risk/only when you know what you are
+# doing.
+
+icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
 
 
 toolbar_gradient_form = u'''QToolBar:top, QToolBar:bottom {{
@@ -147,12 +166,18 @@ def add_tool_bar():
     mw.qt_tool_bar = QToolBar()
     # mw.qt_tool_bar.setAccessibleName('secondary tool bar')
     mw.qt_tool_bar.setObjectName('qt tool bar')
-    mw.qt_tool_bar.setIconSize(QSize(32, 32))
+    if netbook_version:
+        mw.qt_tool_bar.setIconSize(QSize(24, 24))
+    else:
+        mw.qt_tool_bar.setIconSize(QSize(32, 32))
     # Conditional setup
-    if qt_toolbar_movable:
+    if netbook_version or qt_toolbar_movable:
         mw.qt_tool_bar.setFloatable(True)
         mw.qt_tool_bar.setMovable(True)
-        mw.addToolBar(mw.qt_tool_bar)
+        if netbook_version:
+            mw.addToolBar(Qt.LeftToolBarArea, mw.qt_tool_bar)
+        else:
+            mw.addToolBar(Qt.TopToolBarArea, mw.qt_tool_bar)
     else:
         mw.qt_tool_bar.setFloatable(False)
         mw.qt_tool_bar.setMovable(False)
@@ -197,10 +222,14 @@ def add_more_tool_bar():
     # mw.reviewer.more_tool_bar.setAccessibleName('secondary tool bar')
     mw.reviewer.more_tool_bar.setObjectName('more options tool bar')
     mw.reviewer.more_tool_bar.setIconSize(QSize(24, 24))
-    mw.reviewer.more_tool_bar.setFloatable(False)
-    mw.reviewer.more_tool_bar.setMovable(False)
-    # Todo: get index of the bottom web button thingy.
-    mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
+    if netbook_version:
+        mw.reviewer.more_tool_bar.setFloatable(True)
+        mw.reviewer.more_tool_bar.setMovable(True)
+        mw.addToolBar(Qt.RightToolBarArea, mw.reviewer.more_tool_bar)
+    else:
+        mw.reviewer.more_tool_bar.setFloatable(False)
+        mw.reviewer.more_tool_bar.setMovable(False)
+        mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
     if do_gradient:
         palette = mw.reviewer.more_tool_bar.palette()
         fg = palette.color(QPalette.ButtonText)
@@ -247,22 +276,30 @@ def add_to_menus():
     # Add sync to the file memu. It was there in Anki 1.
     mw.form.menuCol.insertAction(mw.form.actionImport, sync_action)
     # Make a new top level menu and insert it.
-    view_menu = QMenu(_(u"&View"), mw)
-    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction(), view_menu)
-    view_menu.addAction(show_qt_tool_bar_action)
-    view_menu.addAction(show_text_tool_bar_action)
-    view_menu.addAction(show_more_tool_bar_action)
+    try:
+        mw.addon_view_menu.addSeparator()
+    except AttributeError:
+        mw.addon_view_menu = QMenu(_(u"&View"), mw)
+        mw.form.menubar.insertMenu(
+            mw.form.menuTools.menuAction(), mw.addon_view_menu)
+    mw.addon_view_menu.addAction(show_qt_tool_bar_action)
+    mw.addon_view_menu.addAction(show_text_tool_bar_action)
+    mw.addon_view_menu.addAction(show_more_tool_bar_action)
     # And another one
-    go_menu = QMenu(_(u"&Go"), mw)
-    mw.form.menubar.insertMenu(mw.form.menuTools.menuAction(), go_menu)
+    try:
+        mw.addon_go_menu.addSeparator()
+    except AttributeError:
+        mw.addon_go_menu = QMenu(_(u"&Go"), mw)
+        mw.form.menubar.insertMenu(
+            mw.form.menuTools.menuAction(), mw.addon_go_menu)
     # Add DSAB to the new go menu
-    go_menu.addAction(decks_action)
-    go_menu.addAction(overview_action)
-    go_menu.addAction(study_action)
-    go_menu.addAction(add_notes_action)
-    go_menu.addAction(browse_cards_action)
+    mw.addon_go_menu.addAction(decks_action)
+    mw.addon_go_menu.addAction(overview_action)
+    mw.addon_go_menu.addAction(study_action)
+    mw.addon_go_menu.addAction(add_notes_action)
+    mw.addon_go_menu.addAction(browse_cards_action)
     if show_toggle_last:
-        go_menu.addAction(toggle_last_card_action)
+        mw.addon_go_menu.addAction(toggle_last_card_action)
     # Stats. Maybe this should go to help. Seems somewhat help-ish to
     # me, but not too much.
     mw.form.menuTools.addAction(statistics_action)
