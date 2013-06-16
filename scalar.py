@@ -14,7 +14,7 @@ from anki.cards import Card
 from anki.hooks import wrap
 
 
-__version__ = "2.1.0"
+__version__ = "3.0.0"
 
 # Code word to look for in the field name to decide whether to do the
 # number comparison:
