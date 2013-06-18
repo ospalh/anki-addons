@@ -38,7 +38,7 @@ local_class = 'loc'
 user_css = u''
 
 extra_classes_list = [
-    {'class': 'night', 'display': u'Night mode'},
+    {'class': 'night_mode', 'display': u'Night mode'},
     ]
 extra_class = None
 
@@ -89,7 +89,7 @@ def localized_card_css(self):
     """Set the css for a card"""
     return_css = u''
     if user_css:
-        return_css = '<style>%s</style>' % user_css
+        return_css = '<style scoped>%s</style>' % user_css
     return return_css + old_css(self)
 
 
