@@ -5,17 +5,17 @@
 #
 
 
-"""
+u"""
 Emulate some Anki 1.2 shortcuts. Add replay short-cut.
 
-Add-on for Anki2 that adds Ctrl-w to clase the deck and Ctr-f to open
+Add-on for Anki2 that adds Ctrl-w to close the deck and Ctr-f to open
 the card browser. These shortcuts worked in Anki 1.2. This part of the
-add-on is basically identical to the "Accept Anki 1.2 shortcuts to
-list decks, add cards and open browser" add-on, minus the add card.
+add-on is basically identical to the “Accept Anki 1.2 shortcuts to
+list decks, add cards and open browser” add-on, minus the add card.
 
-Also, replay audio when pressing 'i' or '6', outside a text entry
+Also, replay audio when pressing “i” or “6”, outside a text entry
 field.  This can be used to quickly review with either the left hand
-on a Dvorak keyboard (See also my "Dvorak keys" add-on.) or with the
+on a Dvorak keyboard (See also my “Dvorak keys” add-on.) or with the
 right hand on the numeric key-pad.
 """
 
