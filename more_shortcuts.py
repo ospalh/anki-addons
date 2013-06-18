@@ -26,7 +26,7 @@ from anki.hooks import wrap
 from aqt import mw
 from aqt.reviewer import Reviewer
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 mw.other_deck = QShortcut(QKeySequence("Ctrl+w"), mw)
 mw.other_browse = QShortcut(QKeySequence("Ctrl+f"), mw)
@@ -34,10 +34,11 @@ mw.other_browse = QShortcut(QKeySequence("Ctrl+f"), mw)
 
 def replay_6(self, evt):
     """
-    Use "6" to replay audio.
+    Use “6” and “i” to replay audio.
 
-    Use the 6 key to replay audio. Useful for reviewing with the right
-    hand on the numeric key pad.
+    Use the “6” key to replay audio, useful for reviewing with the
+    right hand on the numeric key pad, and the “i” key, useful when
+    reviewing with the left hand on a Dvorak keyboard.
     """
     key = unicode(evt.text())
     if key == "6" or key == 'i':

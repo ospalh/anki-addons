@@ -25,16 +25,12 @@ scalar_field = 'scalar'
 # Factor to decide what counts as ‘good enough’. It should be > 1.0
 # (or at least >= 1.0). What you use here depends on how precisely you
 # want to remember your numbers.
-
-
-pass_factor = 2.0
-"""Factor that defines what gets a yellow color."""
+pass_factor = 1.5
 
 # And the classes that are added.
 fail_class = 'typeBad'
 pass_class = 'typePass'
 exact_class = 'typeGood'
-
 
 
 scalar_css = u"""
@@ -44,16 +40,16 @@ scalar_css = u"""
 """.format(tp=pass_class)
 
 exact_format_string = u"""\
-<span id=typeans class="typedscalar">
+<div id=typeans class="typedscalar">
 <span class="{cl} allGood">{num}</span>
-</span>
+</div>
 """
 two_num_format_string = u"""\
-<span id=typeans class="typedscalar corrected">
+<div id=typeans class="typedscalar corrected">
 <span class="{cl} given">{g}</span>
 <span class="arrow">→</span>
 <span class="{ccl} correct">{c}</span>
-</span>
+</div>
 """
 
 
