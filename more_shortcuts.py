@@ -26,7 +26,7 @@ from anki.hooks import wrap
 from aqt import mw
 from aqt.reviewer import Reviewer
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 mw.other_deck = QShortcut(QKeySequence("Ctrl+w"), mw)
 mw.other_browse = QShortcut(QKeySequence("Ctrl+f"), mw)
