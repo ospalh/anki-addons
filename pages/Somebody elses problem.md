@@ -1,15 +1,15 @@
 title: Somebody else’s problem
 id: sep
-main_file: Somebody%20elses%20problem.py
+main_file: somebody_elses_problem.py
 type: addon
-date: 2012-10-28
+date: 2012-06-10
 status: working
 status_color: green
 status_text_color: white
 abstract: Quick hack to hide field content only on the desktop client.
 first_image: ipu.png
 first_image_attributes: 'style="background-color: white;"'
-first_alt: "This should be a unicorn that is both pink and invisible."
+first_alt: The Invisible Pink Unicorn.
 first_caption: "An SEP-field is an easy way to make things
 invisible."
 ankiweb_id: 4073019785
@@ -43,3 +43,10 @@ device to save FAT
 [directory entries](http://en.wikipedia.org/wiki/File_Allocation_Table#VFAT_long_file_names),
 which are in short supply if you have a collection with many files
 with long non-ASCII names.
+
+<blockquote class="NB">
+Due to a <a
+href="https://code.google.com/p/ankidroid/issues/detail?id=1458">problem
+in AnkiDroid</a>, you should make sure that the files copied to the
+Android device appear first on the cards.
+</blockquote>

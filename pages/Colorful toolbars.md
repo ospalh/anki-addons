@@ -1,8 +1,8 @@
-title: Colorful toolbar
+title: Colorful toolbars
 id: colorbar
-main_file: Colorful%20toolbar.py
+main_file: colorful_toolbars.py
 type: addon
-date: 2013-01-15
+date: 2013-06-10
 status: working
 status_color: green
 status_text_color: white
@@ -37,7 +37,7 @@ buttons (“Again”, “Good” &c.), takes you to the deck options screen
 instead of showing another card.
 
 To show this button, edit the add-on
-[source](https://github.com/ospalh/anki-addons/blob/master/Colorful%20toolbar.py)
+[source](https://github.com/ospalh/anki-addons/blob/master/colorful_toolbars.py)
 by activating the “Tools/Add-ons/Colorful toolbars/Edit...” menu item.
 
 Remove the `#` and the space at the beginning of the  `#
@@ -48,25 +48,23 @@ show_toggle_last = True`-line  and add a `#` (and a space) to the
 ## Variants
 
 <figure style="width:562px;" class="clear">
-
-<img src="images/toolbar%20netbook.png"
-alt="Anki 2 with the tool bar at the left and right.  The review area
-reads Die Hauptstadt von Niue ist">
-<img src="images/toolbar%20ospalh.png"
-alt="Anki 2 with a study icon and an undo icon.  The
-review area reads Die Hauptstadt von Niue ist">
-<figcaption>
+  <img src="images/toolbar%20netbook.png" alt="Now the icon tool bars
+  are at the left and right sides.">
+  <img src="images/toolbar%20ospalh.png" alt="A few different icons
+  appear in the top and bottom tool bars.">
+  <figcaption>
     Two variants of the arrangement and selection of icons.
-    </figcaption>
+  </figcaption>
 </figure>
-Apart from the standard version, there is a
-[netbook version](https://ankiweb.net/shared/info/1330596667)
-on the AnkiWeb
-[download page](https://ankiweb.net/shared/addons/), that places
-the two icon bars to the left and right, to preserve vertical screen
-space. On GitHub, there is also a branch and package named
-[`ospalh-special`](https://github.com/downloads/ospalh/anki-addons/colorful_toolbar_ospalh-special.zip)
-with a slightly different icon selection more to my personal taste.
+Another switch chages the add-on to
+“netbook”-mode. When the `netbook_version = True` line is active, the
+the two icon bars are on the left and right, to preserve vertical
+screen space. To get to my personal variant with differentbuttons in
+the bottom bar, take a look at the git branch
+[`develop-ospalh-special`](https://github.com/ospalh/anki-addons/blob/develop-ospalh-special/colorful_toolbars.py). Remember
+to also get the
+[icons directory](https://github.com/ospalh/anki-addons/tree/develop-ospalh-special/color_icons)
+when you get the add-on from github.
 
 
 [UTSL](http://www.jargon.net/jargonfile/u/UTSL.html) for further
@@ -75,7 +73,7 @@ changes to the icons shown.
 ## Replacing icons
 
 The icons used are stored in the folder
-`Anki/addons/color-icons`. They can be simply replaced by icons more to the
+`Anki/addons/color_icons`. They can be simply replaced by icons more to the
 personal taste of the user.
 
 ## What *is* the capital of Niue?

@@ -1,6 +1,6 @@
 title: Compare to kana
 id: comparekana
-main_file: Compare%20to%20kana.py
+main_file: compare_to_kana.py
 type: addon
 date: 2012-10-17
 status: working

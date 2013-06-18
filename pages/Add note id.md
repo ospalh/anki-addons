@@ -1,8 +1,8 @@
 title: Add note id
 id: add_nid
-main_file: Add%20note%20id.py
+main_file: add_note_id.py
 type: addon
-date: 2012-12-21
+date: 2013-05-07
 status: working
 status_color: green
 status_text_color: white

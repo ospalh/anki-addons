@@ -2,7 +2,7 @@ title: Backdoor
 id: backdoor
 main_file: backdoor.py
 type: addon
-date: 2012-05-14
+date: 2013-05-07
 status: working
 status_color: green
 status_text_color: white
@@ -25,7 +25,7 @@ This add-on allows even kid sisters to access accounts where a password is set.
 
 ### Installation
 * Method 1: Copy
-  [the file](https://github.com/ospalh/anki-addons/blob/master/Backdoor.py)
+  [the file](https://github.com/ospalh/anki-addons/blob/master/backdoor.py)
   to the Anki add-ons folder. I would suggest to rename it, so the name
   is less conspicuous. You probably also want to remove the comment
   about Bruce Schneier.
@@ -33,15 +33,14 @@ This add-on allows even kid sisters to access accounts where a password is set.
   end into another add-on already in the add-ons folder.
 * Method 3: If you are using a source installation, you may also patch
   the “`load`”-method from
-  “[`ankiqt/aqt/profiles.py`](https://github.com/dae/ankiqt/blob/master/aqt/profiles.py)”,
+  “[`ankiqt/aqt/profiles.py`](https://github.com/dae/anki/blob/master/aqt/profiles.py)”,
   so that it looks like “`shortLoad`” in the add-on file.
 
 ### Usage
 
 <figure>
-<img src="images/kid_sister.png" alt="Anki profile selection
-dialog. The password input line at the bottom
-is marked.">
+<img src="images/kid_sister.png" alt="The password input line at the
+bottom is marked.">
 <figcaption>The profile selection dialog. Type “kid sister”
 here."</figcaption>
 </figure>

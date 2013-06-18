@@ -1,10 +1,10 @@
-title: Copy diagrams
-id: copy_diagrams
-main_file: Copy%20diagrams.py
-date: 2013-01-22
+title: Add kanji embeds
+id: embed_kanji
+main_file: add_kanji_embeds.py
+date: 2013-06-07
 tags: [svg, embed, abandoned]
 type: addon
-status: misleading, hackish
+status: hackish, one-off
 status_color: red
 status_text_color: white
 abstract: "A quick hack to fill my collection with the code to display
@@ -17,9 +17,9 @@ first_caption: "Use <emded> tags to display SVGs."
 This is a chimera of parts of my
 [Kanji stroke color](Kanji%20stroke%20color.html) and Cayennens’
 original
-[Kanji Colorizer](https://ankiweb.net/shared/info/1964372878). The
-name is misleading, it does not copy anything, but fills the
-collection with embed tags for my version of the SVGs of the colored
+[Kanji Colorizer](https://ankiweb.net/shared/info/1964372878). When
+triggered, the add-on goes through the collection and fills the right
+fields with embed tags for my version of the SVGs of the colored
 stroke order diagrams.
 
 The SVGs themselves are not copied. The paths in the collection are
