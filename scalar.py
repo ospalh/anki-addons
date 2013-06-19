@@ -11,16 +11,14 @@ import re
 
 from aqt.reviewer import Reviewer
 from anki.cards import Card
-from anki.utils import stripHTML
 from anki.hooks import wrap
 
 
-__version__ = "2.1.0"
+__version__ = "3.0.0"
 
 # Code word to look for in the field name to decide whether to do the
 # number comparison:
 scalar_field = 'scalar'
-"""Code word needed to tread input as number"""
 
 # Factor to decide what counts as ‘good enough’. It should be > 1.0
 # (or at least >= 1.0). What you use here depends on how precisely you
@@ -57,6 +55,7 @@ def scalar_card_css(self):
     u"""Add the colors for this to the css."""
     return scalar_css + old_css(self)
 
+
 def correct_scalar(reviewer, given, correct, showBad=True, _old=None):
     u"""
     Return numeric answer with red, yellow or green background.
@@ -67,7 +66,7 @@ def correct_scalar(reviewer, given, correct, showBad=True, _old=None):
     correct one.
     """
     try:
-        fld = re.search('\[\[type:([^\]]+)\]\]', reviewer.card.a()).group(1)
+        fld = re.search(r'\[\[type:([^\]]+)\]\]', reviewer.card.a()).group(1)
     except AttributeError:
         # No typed answer to show at all.
         return _old(reviewer, given, correct, showBad)
@@ -101,7 +100,7 @@ def scalar_color_class(g, t):
         target_value = int(t)
         given_value = int(g)
     except ValueError:
-        # New style: no try here. Catch that case higher up.
+        # No try here. Catch that case higher up.
         target_value = float(t)
         given_value = float(g)
     # One of the two conversions worked: we have two valid numbers, two
