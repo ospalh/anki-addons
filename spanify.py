@@ -31,14 +31,8 @@ def add_span(editor, s_class):
 def setup_buttons(editor):
     u"""Add the buttons to the editor."""
     editor._addButton(
-        "span_button1", lambda ed=editor, sc=u"style1": add_span(ed, sc),
-        text=u"s1", tip="style1")
-    editor._addButton(
-        "span_button2", lambda ed=editor, sc=u"style2": add_span(ed, sc),
-        text=u"s2", tip="style2")
-    editor._addButton(
-        "span_button3", lambda ed=editor, sc=u"style3": add_span(ed, sc),
-        text=u"s3", tip="style3")
+        "boxed_button", lambda ed=editor, sc=u"boxed": add_span(ed, sc),
+        text=u"☐", tip="boxed")
 
 Editor.add_span = add_span
 Editor.setupButtons = wrap(Editor.setupButtons, setup_buttons)
