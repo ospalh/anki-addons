@@ -3,8 +3,8 @@
     <figure class="abstract">
       <img src="/anki-addons/images/{{page.first_image}}" alt="{{page.first_alt}}" {%if page.first_image_attributes%}{{page.first_image_attributes|safe}}{%endif%}/>
     </figure>
-  <h2><a href="{{ url_for("page", path=page.path) }}">{{ page.title
-  }}</a></h2>
+  <h2><a href="{{ url_for("page", path=page.path) }}">{{ page.title}}</a></h2>
+
     {%if page.subtitle%}
     <h4>{{page.subtitle}}</h4>
     {%endif%}
