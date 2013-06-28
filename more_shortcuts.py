@@ -32,9 +32,9 @@ mw.other_deck = QShortcut(QKeySequence("Ctrl+w"), mw)
 mw.other_browse = QShortcut(QKeySequence("Ctrl+f"), mw)
 
 
-def replay_6(self, evt):
+def replay_or_show(self, evt):
     """
-    Use “6” and “i” to replay audio.
+    Use “6” and “i” to replay audio, NN to show my hints.
 
     Use the “6” key to replay audio, useful for reviewing with the
     right hand on the numeric key pad, and the “i” key, useful when
@@ -43,9 +43,11 @@ def replay_6(self, evt):
     key = unicode(evt.text())
     if key == "6" or key == 'i':
         self.replayAudio()
+    if key == 'g':
+        mw.web.eval("$('.hnt').toggleClass('chint');")
 
 
-Reviewer._keyHandler = wrap(Reviewer._keyHandler, replay_6)
+Reviewer._keyHandler = wrap(Reviewer._keyHandler, replay_or_show)
 mw.connect(mw.other_deck, SIGNAL("activated()"),
            lambda: mw.moveToState("deckBrowser"))
 mw.connect(mw.other_browse, SIGNAL("activated()"), lambda: mw.onBrowse())
