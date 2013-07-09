@@ -23,15 +23,12 @@ scalar_field = 'scalar'
 # Factor to decide what counts as ‘good enough’. It should be > 1.0
 # (or at least >= 1.0). What you use here depends on how precisely you
 # want to remember your numbers.
-
-
 pass_factor = 2.0
 
 # And the classes that are added.
 fail_class = 'typeBad'
 pass_class = 'typePass'
 exact_class = 'typeGood'
-
 
 
 scalar_css = u"""
