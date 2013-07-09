@@ -28,7 +28,8 @@ class ForvoDownloader(AudioDownloader):
         self.path_code = 'pathogg'
         # Keep this secret:
         self.url = 'http://apifree.forvo.com/action/word-pronunciations/' \
-            'format/json/key/XXXXXXXXXX/word/'
+            'format/json/order/rate-desc/limit/3/' \
+            'key/XXXXXXXXXX/word/'
         self.icon_url = 'http://www.forvo.com/'
         self.sex_dict = {'f': u'♀', 'm': u'♂'}
 
@@ -83,7 +84,7 @@ class ForvoDownloader(AudioDownloader):
         # No clean-up
 
     def build_query_url(self, word):
-        builded_url = self.url + urllib.quote_plus(word.encode('utf-8'))
+        builded_url = self.url + urllib.quote(word.encode('utf-8'))
         if self.language:
             builded_url += '/language/' + self.language
         return builded_url + '/'
