@@ -43,7 +43,7 @@ def replay_or_show(self, evt):
     key = unicode(evt.text())
     if key == "6" or key == 'i':
         self.replayAudio()
-    if key == 'g':
+    if key == '5' or key == 'g':
         mw.web.eval("$('.hnt').toggleClass('chint');")
 
 
