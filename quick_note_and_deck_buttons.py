@@ -66,7 +66,7 @@ model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
 """
 
 # ... and here.
-deck_buttons = [{"label": u'Z', 'name': u'ZZ'},
+deck_buttons = [{"label": u'S', 'name': u'5 Standard'},
                 {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}]
 """
 List of dictionaries defining the model buttons to use.
