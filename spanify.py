@@ -15,7 +15,7 @@ with class style1, style2 or style3. The user can then set up eir card
 templates to modify the appearence of these texts.
 """
 
-from anki.hooks import wrap
+from anki.hooks import addHook
 from aqt.editor import Editor
 
 __version__ = "2.0.0"
@@ -35,4 +35,4 @@ def setup_buttons(editor):
         text=u"☐", tip="boxed")
 
 Editor.add_span = add_span
-Editor.setupButtons = wrap(Editor.setupButtons, setup_buttons)
+addHook("setupEditorButtons", setup_buttons)
