@@ -149,8 +149,7 @@ nav{
 
     ul li{
         display:inline;
-        a,
-        a:visited{
+        a, a:visited, span{
             color:#565656;
             display:block;
             float:left;
@@ -180,7 +179,7 @@ nav{
 
 /* The navigation styling: */
 
-nav, article, nav ul li a{
+nav, article, nav ul li a, nav ul li span{
     /* Applying CSS3 rounded corners: */
     -moz-border-radius:@aradius;
     -webkit-border-radius:@aradius;
@@ -326,6 +325,12 @@ blockquote {
         box-shadow:1px 1px 2px #4D7788;
     }
 
+    span.warn{
+        float: left;
+        margin: .2em .3em .1em 0;
+        font-size: 220%;
+        font-weight: bold;
+    }
 
     &.nb:before {
         content:"N.B.:";
