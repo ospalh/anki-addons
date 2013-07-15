@@ -31,11 +31,6 @@ Study Add Browse” functions can also be reached through the "Go" menu.
 The add-on has one feature that is normally hidden: a last card
 button.
 
-When the button between the “mark” and “bury” buttons has been clicked
-and the arrow is green instead of gray, clicking on one of the answer
-buttons (“Again”, “Good” &c.), takes you to the deck options screen
-instead of showing another card.
-
 To show this button, edit the add-on
 [source](https://github.com/ospalh/anki-addons/blob/master/colorful_toolbars.py)
 by activating the “Tools/Add-ons/Colorful toolbars/Edit...” menu item.
@@ -43,6 +38,12 @@ by activating the “Tools/Add-ons/Colorful toolbars/Edit...” menu item.
 Remove the `#` and the space at the beginning of the  `#
 show_toggle_last = True`-line  and add a `#` (and a space) to the
 `show_toggle_last = False` line. Click “Save” and restart Anki.
+
+When the button between, which should appear between the “mark” and
+“bury” buttons, has been clicked and the arrow is green instead of
+gray, clicking on one of the answer buttons (“Again”, “Good” &c.),
+takes you to the deck options screen instead of showing another card.
+
 
 
 ## Variants
@@ -56,11 +57,11 @@ show_toggle_last = True`-line  and add a `#` (and a space) to the
     Two variants of the arrangement and selection of icons.
   </figcaption>
 </figure>
-Another switch chages the add-on to
-“netbook”-mode. When the `netbook_version = True` line is active, the
-the two icon bars are on the left and right, to preserve vertical
-screen space. To get to my personal variant with differentbuttons in
-the bottom bar, take a look at the git branch
+Another switch chages the add-on to “netbook”-mode. When the
+`netbook_version = True` line is active, the the two icon bars are on
+the left and right, to preserve vertical screen space. To get to my
+personal variant with different buttons in the bottom bar, take a look
+at the git branch
 [`develop-ospalh-special`](https://github.com/ospalh/anki-addons/blob/develop-ospalh-special/colorful_toolbars.py). Remember
 to also get the
 [icons directory](https://github.com/ospalh/anki-addons/tree/develop-ospalh-special/color_icons)

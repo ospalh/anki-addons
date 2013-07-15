@@ -31,10 +31,9 @@ first card, try the menu item
 starting Requests to send to the download sites">
 <figcaption>When you get this, dialog, the add-on will go fetch.</figcaption>
 </figure>
-When a dialog with
-“Requests to send to the download sites”, and with the right words in
-the edit boxes below appears, you are in luck and your
-model already works with this add-on.
+When a dialog with “Requests to send to the download sites” and with
+the right word in the edit box appears you are in luck and your model
+already works with this add-on.
 
 <span class="clear" />
 <figure>

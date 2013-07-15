@@ -1,8 +1,8 @@
 title: Quick replay
 id: quickreplay
-main_file: Quick%20replay.py
+main_file: quick_replay.py
 type: addon
-date: 2012-11-16
+date: 2013-05-07
 status: hackish
 status_color: yellow
 status_text_color: black

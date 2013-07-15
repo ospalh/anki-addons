@@ -1,15 +1,15 @@
 title: Furikanji
-id: furikanji_and
-main_file: Furikanji.py
+id: furikanji
+main_file: furikanji.py
 type: addon
-date: 2012-12-15
+date: 2013-05-07
 status: for desktop use only
 status_color: yellow
 status_text_color: black
 abstract: "Improved way to parse kanji and readings, a way to render
 kanji the kana and a few other display hacks."
 first_image: furikanji.png
-first_alt: "Sceenshot of text ふりがな with 振り仮名 as ruby."
+first_alt: "Sceenshot of text ふりかんじ with 振り漢字 as ruby."
 first_caption: Furikanji demo
 ankiweb_id: 2327947748
 
@@ -25,7 +25,7 @@ AnkiWeb may result in suboptimal layout.
 ## Furikanji
 
 The template `furikanji` uses a standard reading field to
-render kanji *above* the kana. This is useful for listening comprehension.
+render kanji *above* the kana.
 
 To use this, put  `{{furikanji:Field name}}` instead of
 `{{furigana:Field name}}` in the template.
@@ -36,17 +36,16 @@ styling can be added. See the
 
 <figure>
 <img src="images/furikanji-web.png" alt="Text: 起きなよいい加減お with
-with きなよいいかげん as ruby and 起[お]きなよいい 加減[かげん], with square brackets.">
-<figcaption>
-On AnkiWeb, the furikanji don’t work.
-</figcaption>
+きなよいいかげん as ruby and 起[お]きなよいい 加減[かげん], with
+square brackets.">
+<figcaption> On AnkiWeb, the furikanji don’t work. </figcaption>
 </figure>
 As the furikanji rendering is done on the fly by the desktop client,
-it naturally does not work with AnkiWeb or AnkiDroid (or, presumably,
-the iOS client). Here the text is rendered as it is seen in the edit
-screen, with the square brackets.
+it does not work with AnkiWeb, AnkiDroid or AnkiMobile. There the text
+is rendered as it is seen in the edit screen, with the square
+brackets.
 
-### <span id="droid">Ospalh-special</span>
+### <span id="droid">feature-furikanji</span>
 
 <figure>
 <img src="images/furikanji-mydroid.png" alt="Text: 起きなよいい加減お
@@ -57,14 +56,14 @@ AnkiDroid can be patched to use furikanji.
 </figcaption>
 </figure>
 Daring spirits can use my
-[branch](https://github.com/ospalh/Anki-Android/tree/v2.1-dev-furikanji)
+[branch](https://github.com/ospalh/Anki-Android/tree/feature-furikanji)
 of the AnkiDroid
 [development branch](https://github.com/ankidroid/Anki-Android/tree/v2.1-dev).
 I have added the equivalent of this add-on, providing furikanji on
 AnkiDroid. You should merge this branch into the newest version of
-AnkiDroid, not just use that branch as-is. I forked this off the
-2.1 branch. Merging it into the 2.0 branch may or may not
-work.
+AnkiDroid, not just use that branch as-is.
+
+This may not work with Android versions < 3.0
 
 ## Boxed and boxkana
 
@@ -86,7 +85,7 @@ template of a
 the German version of “Remembering the Kanji”.
 
 These effects can be achieved by applying the formatting set in the
-[source file](https://github.com/ospalh/anki-addons/blob/master/Furikanji.py)
+[source file](https://github.com/ospalh/anki-addons/blob/master/furikanji.py)
 directly, together with `{{kana:Field NN}}`. The simple box should work
 everywhere, the boxkana should work on AnkiDroid, and possibly in
 AnkiWeb, when the web browser supports `<ruby>` tags.

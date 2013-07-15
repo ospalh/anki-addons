@@ -1,7 +1,7 @@
 title: Unnormalize
 id: unnormalize
-main_file: Unnormalize.py
-date: 2013-01-22
+main_file: unnormalize.py
+date: 2013-06-07
 type: addon
 status: may add errors
 status_color: red

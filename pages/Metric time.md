@@ -1,9 +1,9 @@
 title: Metric time
 id: metrictime
-main_file: Metric%20time.py
+main_file: metric_time.py
 status: personal hobby horse, broken
 type: addon
-date: 2012-12-12
+date: 2013-05-07
 status_color: red
 status_text_color: white
 abstract: Shows times in some spots as days or years.
@@ -32,7 +32,7 @@ place.
 ## AnkiDroid
 
 Daring spirits can use my
-[branch](https://github.com/ospalh/Anki-Android/tree/v2.1-dev-metric-time)
+[branch](https://github.com/ospalh/Anki-Android/tree/feature-metric-time)
 of AnkiDroid
 [development branch](https://github.com/ankidroid/Anki-Android/tree/v2.1-dev).
 

@@ -1,6 +1,7 @@
 title: Zoom cards
 id: zoom
 main_file: zoom.py
+ankiweb_id: 1956318463
 date: 2013-06-10
 type: addon
 status: working

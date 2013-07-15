@@ -1,10 +1,10 @@
 title: Lean browser question/answer
 id: leanqa
-main_file: Lean%20browser%20qa.py
+main_file: lean_browser_qa.py
 date: 2012-10-19
 tags: [browser display]
 type: addon
-date: 2012-10-11
+date: 2013-05-07
 status: working
 status_color: green
 status_text_color: white

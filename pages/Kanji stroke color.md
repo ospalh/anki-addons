@@ -1,8 +1,8 @@
 title: Kanji stroke color
 id: kanjistrokecolor
-main_file: Kanji%20stroke%20color.py
+main_file: kanji_stroke_color.py
 type: addon
-date: 2012-12-12
+date: 2013-06-17
 status: hackish, desktop only, abandoned
 status_color: red
 status_text_color: white
@@ -117,7 +117,7 @@ diagrams in <code>&ltdiv class="strokevariants">...&lt;/div></code>,
 ### Size
 
 The size of the displayed diagrams can be changed in the add-on’s
-[source file](https://github.com/ospalh/anki-addons/blob/master/Kanji%20stroke%20color.py).
+[source file](https://github.com/ospalh/anki-addons/blob/master/kanji_stroke_color.py).
 Use the “Tools/Add-ons/Kanji stroke color/Edit...” menu item to open
 it. Set the size in the line “`kanji_size = 200`”. The size of the
 variants shown with the “kanjiColorRest” can be set in the “`rest_size

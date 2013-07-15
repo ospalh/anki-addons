@@ -1,17 +1,16 @@
 title: Dvorak keys
 id: dvorak
-main_file: Dvorak%20keys.py
+main_file: dvorak_keys.py
 status: working
 type: addon
-date: 2012-10-17
+date: 2013-05-07
 status_color: green
 status_text_color: white
 abstract: "Use keys easy to use for user of the <a
 href=\"http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard\">Dvorak
 simplified keyboard</a> to answer a question."
 first_image: Dvorak_keys.png
-first_alt: "Color-coded sketch of a keyboard and hands. The colors show
-which finger to use for which key. Some keys are marked as described
+first_alt: "Sketch of a keyboard and hands. Some keys are marked as described
 in the text."
 first_caption: The keys to use.
 ankiweb_id: 2714331040
@@ -51,7 +50,7 @@ like add card or edit card.
 
 The keys that are used are defined in a Python dictionary. Read the
 comments in the
-[source file](https://github.com/ospalh/anki-addons/blob/master/Dvorak%20keys.py)
+[source file](https://github.com/ospalh/anki-addons/blob/master/dvorak_keys.py)
 for details.
 
 I tried to find good keys to use for QWERTY keyboards, but

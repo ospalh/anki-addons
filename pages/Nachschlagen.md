@@ -1,12 +1,13 @@
 title: Nachschlagen
 id: lookup
-main_file: Nachschlagen.py
+main_file: nachschlagen.py
 type: addon
-date: 2012-08-01
+date: 2013-05-07
 status: working
 status_color: green
 status_text_color: white
-abstract: "Menu to look up words at a few web sites. Most useful for speakers of German learning Japanese"
+abstract: "Menu to look up words at a few web sites. Most useful for
+speakers of German learning Japanese."
 first_image: nachschlagen.png
 first_alt: "A menu called Nachschlagen under the Tools menu. Menu
 items: Japanisch bei Wadoku, Deutsch bei Wadoku, Auswahl bei Wadoku,
@@ -25,7 +26,7 @@ well. „Nachschlagen“ is German for “look up”.
 ## Set-up
 
 There is a configuration section at the head of the
-[source file](https://github.com/ospalh/anki-addons/blob/master/Nachschlagen.py)
+[source file](https://github.com/ospalh/anki-addons/blob/master/nachschlagen.py)
 where a few things can be configured. Most of it is not too important
 and explained in the file itself. You may encounter the error message
 “No field found for look-up. Consider changing the field name lists in

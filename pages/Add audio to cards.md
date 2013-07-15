@@ -5,7 +5,8 @@ ankiweb_id: 3100585138
 parent: Download audio
 
 Without a bit of set-up, audio may be downloaded but not played during
-review. For that the audio field has to be added to a card template.
+review. To hear the words, the audio field has to be added to a card
+template.
 
 
 ## Template editor
@@ -32,7 +33,7 @@ have to decide to which card you want to add the audio. Add it to
 only one or to all, as you see fit.
 
 
-To add the audio to the question, add `{{Audio}}`, with a double pair
+To add the audio to the question, add `{{Audio}}`, with the double pair
 of curly braces, to the top left “Front Template” editor. To add it to
 the answer, type it into the bottom left “Back Template” editor.
 
@@ -44,3 +45,7 @@ While typing on the left, the text should be visible on the right,
 too. When the whole field, with the curly braces, has been entered, it
 should disappear there. When `Unknown field NN` appears on the right,
 compare the spelling with the list in the “Edit Current” window.
+
+For people that find typing a word and two pairs of curly braces too
+challenging, there is also the “Add Field” button, that takes this
+task off your hands.

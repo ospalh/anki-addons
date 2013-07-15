@@ -27,9 +27,8 @@ The solution is to add the number that Anki uses internally to
 identify the note to the note itself.
 
 To use, the first field in the card model must be named "Note ID".
-Then, when adding content, this field is automatically filled with the
-note id when you move the cursor to another field.
-
+Then, when adding content, this field is automatically filled with a
+number based on the note id when you move the cursor to another field.
 
 ## Menu
 There is also an item in the Tools menu that goes through the whole

@@ -1,9 +1,9 @@
 title: Dehashilator
 id: dehashilator
-main_file: Dehashilate.py
+main_file: dehashilate.py
 status: breaks collections
 type: addon
-date: 2012-11-07
+date: 2013-06-17
 status_color: red
 status_text_color: white
 abstract: "Rename media files with names that look like MD5 hashes."
