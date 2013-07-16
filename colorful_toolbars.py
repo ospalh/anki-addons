@@ -59,8 +59,8 @@ show_toggle_last = True
 ## sound/videos initially.
 ## NB. The mute is not absolute. When you push the replay button, the
 ## sound still gets played.
-# show_mute_button = False
-show_mute_button = True
+show_mute_button = False
+# show_mute_button = True
 
 ## Show the suspend card button
 # show_suspend_card = True
