@@ -45,7 +45,8 @@ def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
             title = sound.group(1)
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
 title="{ttl}"><img src="{ip}" alt="play" style="max-width: 32px; \
-max-height: 1em; min-height:8px;" class="replaybutton"></a>""".format(
+max-height: 1em; min-height:8px;" class="replaybutton browserhide">\
+</a>""".format(
             orig=sound.group(0), fn=sound.group(1), ip=collection_arrow_name,
             ttl=title)
     return re.sub(sound_re, add_button, qa_html)
