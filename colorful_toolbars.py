@@ -55,6 +55,13 @@ qt_toolbar_movable = True
 show_toggle_last = False
 # show_toggle_last = True
 
+## Do or do not show a mute button that stops Anki from playing
+## sound/videos initially.
+## NB. The mute is not absolute. When you push the replay button, the
+## sound still gets played.
+show_mute_button = False
+# show_mute_button = True
+
 ## Show the suspend card button
 show_suspend_card = True
 # show_suspend_card = False
@@ -248,6 +255,8 @@ def add_more_tool_bar():
     mw.reviewer.more_tool_bar.addAction(toggle_mark_action)
     if show_toggle_last:
         mw.reviewer.more_tool_bar.addAction(toggle_last_card_action)
+    if show_mute_button:
+        mw.reviewer.more_tool_bar.addAction(mute_action)
     mw.reviewer.more_tool_bar.addAction(bury_action)
     if show_suspend_card:
         mw.reviewer.more_tool_bar.addAction(suspend_card_action)
@@ -300,6 +309,7 @@ def add_to_menus():
     mw.addon_go_menu.addAction(browse_cards_action)
     if show_toggle_last:
         mw.addon_go_menu.addAction(toggle_last_card_action)
+    mw.addon_view_menu.addAction(mute_action)
     # Stats. Maybe this should go to help. Seems somewhat help-ish to
     # me, but not too much.
     mw.form.menuTools.addAction(statistics_action)
@@ -423,6 +433,19 @@ def next_card_toggle_off():
     """Switch the next card action off."""
     toggle_last_card_action.setChecked(False)
 
+
+def maybe_autoplay(reviewer, card):
+    u"""
+    Return whether we should play the sound on card flips.
+
+    Return False when we have swiched on mute, the standard autoplay
+    state otherwise.
+    """
+    if mute_action.isChecked():
+        return False
+    return reviewer.mw.col.decks.confForDid(card.odid or card.did)['autoplay']
+
+
 # Make all the actions top level, so we can use them for the menu and
 # the tool bar.
 
@@ -494,6 +517,16 @@ toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_off.png'))
 toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_on.png'),
                               QSize(), QIcon.Normal, QIcon.On)
 toggle_last_card_action.setIcon(toggle_last_card_icon)
+mute_action = QAction(mw)
+mute_action.setText(_(u"Mute"))
+mute_action.setCheckable(True)
+mute_action.setChecked(False)
+mute_action.setToolTip(_(u"Temporarily switch off playing sounds."))
+mute_icon = QIcon()
+mute_icon.addFile(os.path.join(icons_dir, 'unmute.png'))
+mute_icon.addFile(os.path.join(icons_dir, 'mute.png'),
+                  QSize(), QIcon.Normal, QIcon.On)
+mute_action.setIcon(mute_icon)
 bury_action = QAction(mw)
 bury_action.setText(_(u"Bury note"))
 bury_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
@@ -595,6 +628,7 @@ mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
 # Wrapper to not show a next card.
 original_next_card = Reviewer.nextCard
 Reviewer.nextCard = next_card_wrapper
+Reviewer.autoplay = maybe_autoplay
 
 # Make sure we don't leave a stale last card button switched on
 addHook("reviewCleanup", next_card_toggle_off)
