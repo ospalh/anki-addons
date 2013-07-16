@@ -307,8 +307,7 @@ def add_to_menus():
     mw.addon_go_menu.addAction(study_action)
     mw.addon_go_menu.addAction(add_notes_action)
     mw.addon_go_menu.addAction(browse_cards_action)
-    if show_toggle_last:
-        mw.addon_go_menu.addAction(toggle_last_card_action)
+    mw.addon_go_menu.addAction(toggle_last_card_action)
     mw.addon_view_menu.addAction(mute_action)
     # Stats. Maybe this should go to help. Seems somewhat help-ish to
     # me, but not too much.
