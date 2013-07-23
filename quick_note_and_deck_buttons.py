@@ -116,8 +116,7 @@ def setup_buttons(chooser, buttons, text, do_function):
                 QKeySequence(_(button_item["shortcut"])), chooser.widget)
         except KeyError:
             pass
-        else:
-            s.connect(s, SIGNAL("activated()"), l)
+        s.connect(s, SIGNAL("activated()"), l)
         if isMac:
             b.setStyleSheet("padding: 5px; padding-right: 7px;")
         bhbl.addWidget(b)
