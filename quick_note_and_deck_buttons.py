@@ -97,7 +97,7 @@ from anki.hooks import runHook
 from anki.lang import _
 from anki.utils import isMac
 
-__version__ = "2.0.6"
+__version__ = "2.0.7"
 
 
 def setup_buttons(chooser, buttons, text, do_function):
@@ -116,7 +116,8 @@ def setup_buttons(chooser, buttons, text, do_function):
                 QKeySequence(_(button_item["shortcut"])), chooser.widget)
         except KeyError:
             pass
-        s.connect(s, SIGNAL("activated()"), l)
+        else:
+            s.connect(s, SIGNAL("activated()"), l)
         if isMac:
             b.setStyleSheet("padding: 5px; padding-right: 7px;")
         bhbl.addWidget(b)
