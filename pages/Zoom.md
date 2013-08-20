@@ -9,7 +9,7 @@ status_color: green
 status_text_color: white
 abstract: Zoom the card content
 first_image: nana.png
-first_alt: "Very large 成 character with large な as ruby."
+first_alt: "Huge 成 character with very large な as ruby."
 first_caption: OK, this is overdoing it
 
 A simple add-on to zoom in and out the card content (text).  There are

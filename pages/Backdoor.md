@@ -42,7 +42,7 @@ This add-on allows even kid sisters to access accounts where a password is set.
 <img src="images/kid_sister.png" alt="The password input line at the
 bottom is marked.">
 <figcaption>The profile selection dialog. Type “kid sister”
-here."</figcaption>
+here.</figcaption>
 </figure>
 In the profile selection dialog, when prompted for a password, type
 “`kid sister`”.

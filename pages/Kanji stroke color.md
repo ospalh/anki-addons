@@ -67,7 +67,7 @@ i did not like the changes to AnkiDroid needed.
 
 I have now copied the SVGs to the media folder and added the kanji –
 with variants in an extra field – to my collection with the even more
-hackish/broken [Copy diagrams](Copy%20diagrams.html) add-on.
+hackish/broken [Add kanji embeds](Add%20kanji%20embeds.html) add-on.
 
 ## Usage
 

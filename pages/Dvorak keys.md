@@ -23,11 +23,11 @@ simplified keyboard</a> to answer a question.
 The point is to remember the key positions, rather than the characters
 the keys usually produce.
 
-There are three sets of keys to use, with the four typing fingers of the
-left hand in the row above the home row, going from “again” with the
-<span class="qtbase pinky">little finger</span>, through “hard”
-with the ring finger, “good” for the middle finger to “easy” for the
-index finger.
+There are three sets of keys to use. The first is with the four typing
+fingers of the left hand in the row above the home row, going from
+“again” with the <span class="qtbase pinky">little finger</span>,
+through “hard” with the ring finger, “good” for the middle finger to
+“easy” for the index finger.
 
 The second set is in the home position. Left index finger for “again”
 and three fingers of the right hand: index finger for “hard”, middle
@@ -54,6 +54,6 @@ comments in the
 for details.
 
 I tried to find good keys to use for QWERTY keyboards, but
-couldn't. My best idea was to use the four keys for the index fingers,
+could not. My best idea was to use the four keys for the index fingers,
 in the home positions or reaching towards each other. These are there
 in a commented-out alternative version of the dictionary.

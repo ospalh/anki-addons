@@ -42,7 +42,7 @@ was that i didn’t want to copy a bunch of video files to my Android
 device to save FAT
 [directory entries](http://en.wikipedia.org/wiki/File_Allocation_Table#VFAT_long_file_names),
 which are in short supply if you have a collection with many files
-with long non-ASCII names.
+with long names.
 
 <blockquote class="nb">
 Due to a <a

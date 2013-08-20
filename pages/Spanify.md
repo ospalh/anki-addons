@@ -16,7 +16,7 @@ Another add-on to add buttons to the note editor. This adds buttons to
 wrap text in spans.
 
 By default there are three buttons, “s1”, “s2” and “s3”, that wrap the
-text selected in a note’s field in `<span class="sN">`/`</span>`
+text selected in a note’s field in `<span class="styleN">`/`</span>`
 tags. (`N` = 1, 2, 3). It is up to the user to set up the card
 styling to make use these classes.
 
@@ -25,6 +25,11 @@ The changes made by the add-on are invisible in the card editor, and
 on the cards, unless styling for the classes is added.
 </blockquote>
 
-This add-on is based on Thomas Tempé
+<blockquote class="nb">
+Unlike the italic or bold buttons, clicking theese buttons twice does
+not un-wrap the text, but adds a second span.
+</blockquote>
+
+This add-on is based on Thomas Tempé’s
 [strikethrough button](https://ankiweb.net/shared/info/999886206)
 add-on.

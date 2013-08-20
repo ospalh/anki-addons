@@ -27,9 +27,9 @@ facts (now notes) they were used on.
 For decks that were created on these versions, those file names are
 still present in Anki 2 collections.
 
-While this is no real problem, it prevents you to identify a specific
-file without starting Anki, for example to edit a picture. It also
-bugged me personally.
+While this is no real problem, it prevents you from identifying a
+specific file without starting Anki, for example to edit a picture. It
+also bugged me personally.
 
 ## Installation
 

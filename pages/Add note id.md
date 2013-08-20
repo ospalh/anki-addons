@@ -17,9 +17,9 @@ ankiweb_id: 1672832404
 
 A fix to the problem of synonyms.
 
-When adding new cards, the first field must be unique. But what about
+When adding new cards, the first field must be unique, but what about
 synonyms? Of course it is possible to add an explanation to the word
-to specify which is the meaning in this case. But a more elegant
+to specify which is the meaning in this case. A more elegant
 way is to add more fields to show which is the correct meaning in this
 case, for example with an example sentence.
 
