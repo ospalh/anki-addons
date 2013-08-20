@@ -1,7 +1,7 @@
 title: More shortcuts
 id: moreshortcuts
 main_file: more_shortcuts.py
-date: 2013-07-06
+date: 2013-06-07
 tags: [anki1, shortcut]
 type: addon
 status: working
@@ -17,8 +17,8 @@ Reactivate two Anki 1 shortcuts:
 - *Ctrl+w* Deck overview
 
 During reviews, the audio is replayed with the “6” or “i” keys. Those
-are convenient when using the numpad or a Dvorak keyboard with
-[Dvorak keys](Dvorak%20keys.html)
+are convenient when using the numpad or a Dvorak keyboard with the
+[Dvorak keys](Dvorak%20keys.html) add-on.
 
 This add-on is based on
 [oldshortcuts.py](https://github.com/dae/ankiplugins/blob/master/oldshortcuts.py),

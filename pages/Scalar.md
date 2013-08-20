@@ -1,8 +1,8 @@
 title: Scalar
 id: scalar
-main_file: Scalar.py
+main_file: scalar.py
 type: addon
-date: 2012-10-30
+date: 2013-05-07
 status: working
 status_color: green
 status_text_color: white
@@ -10,33 +10,44 @@ abstract: "Compare a typed in number with the correct answer as a
 number, not as a string of digits. Color it yellow when it is close to
 the right number."
 first_image: scalar.png
-first_caption: 50 is close to 48.
-first_alt: "Anki review window with text: Niedersachsen ist 48 tausend
-km² groß. 50. The 50 is marked in yellow."
+first_caption: 70 is close to 65.
+first_alt: "Two lines of Text: 1: Frankreich hat 65 Millionen
+Einwohner. 2: 70 → 65. The 70 is blue, the 65 green."
 ankiweb_id: 333346658
 
 When learning some types of numbers, like the number of inhabitants of
-a country, often close is good enough. This add-on makes Anki show
-that, it colors the answer in yellow when it was close to the
-original answer.
+a country, getting it almost right is good enough. This add-on colors
+the answer in yellow when it was close to the original answer.
+
+The answer is also re-arranged into a single line, and typically shown
+with the standard font, not a monospace one.
+
 
 ## Example
-In the image correct answer is “48”, when you know it’s close to 50,
-you type that. The original behavior was to compare character by character,
-and show the typed answer in red, a 5 is no 4 and a 0 is no 8. With this add-on, the whole answer
-would be yellow, as it is  close to the correct answer.
 
-On the
-other hand, if you had typed  “400” as the answer, with the original
-behavior, you would get the “4” in green and “00” in red, showing more
-green, even though the answer is farther from the correct one than the
-“50”.
+<figure>
+<img src="images/compare_by_char.png" alt="Similar to the image
+above. The 70 and 65 are in two lines. The 70 is gray on red, the 65
+gray on gray.">
+<figcaption>
+Without this add-on: even though the typed in answer is close to the
+correct one, it is marked in red.
+</figcaption>
+</figure>
+In the image, the correct answer is “65”, when you know it is close to
+70, you type that. The original behavior is to compare character by
+character, and mark the typed answer red: a 7 is no 6 and a 0 is no
+5. With this add-on, the whole answer would be yellow, as it is close
+to the correct answer.
 
-With this add-on the 400 would be completely red.
+On the other hand, if you had typed “650” as the answer, with the
+original behavior, you would get the “65” marked green and “0” marked
+red, showing more green, even though the answer is farther from the
+correct one.  With this add-on the 650 would be completely red.
 
 ## Setup
 
-### Inside Anki
+### Fields
 To use, the name of the answer field (the `{{type:NN}}` bit) must
 contain the word “Scalar”. (E.g. “Area_Scalar” or “Inhabitants_Scalar”
 for a geography deck or “Atomic_Mass_Scalar” for a chemistry deck.)
@@ -45,23 +56,37 @@ For fields without
 “Scalar” in the name the behavior stays the same, doing the
 character-by-character comparison.
 
-### Configuration
- To change the factor what counts as “close enough” change the
-`pass_factor` in the .py source file. There are also a few other
-things that can somewhat easily be changed. The comments in thy source
-file should be a help.
+### CSS
 
-## “Correct answer was:”
+Like Anki itself, this add-on is doing the coloring with CSS
+classes. It reuses two of the standard classes, `typeGood` and
+`typeBad`, and uses the class `typePass` for the yellow close-enough
+bits. To modify the display, styling for these classes should be added
+to the card styling. The `div` containing the numbers also has the
+class `typedscalar`, so that these numbers can be styled differently
+from typed-in text.
 
-<figure>
-<img src="images/compare_by_char.png" alt="Anki review window with
-text: Niedersachsen ist 48 tausend km² groß. 50. Correct answer was:
-48. The 50 is marked in red.">
-<figcaption>Even though the typed in answer is close to the correct
-one, there is a lot of red and extra text.</figcaption></figure>
-When this add-on is working, the “Correct answer
-was:” text is not shown at all. This is partly due to the way the
-add-on operates, but i see this as a bonus, not a problem. At this
-time, people who really want this text could possibly add it to their
-own copy of the add-on. (In other words,
-[UTSL](http://www.jargon.net/jargonfile/u/UTSL.html).)
+The example images where taken with a somewhat complex note
+type, using this type of CSS setup. In this case:
+<blockquote class=lsting><pre><code><span>.card {color: #657b83; background-color: #fdf6e3;}
+\#typeans span {background-color: #fdf6e3;}
+.typeBad {color: #dc322f;}
+.typeMissed, .typePass {  color: #268bd2;}
+.typeGood{color: #859900;} </code></pre></blockquote>
+
+This also changes the “pass”/“close enough” color from the yellow
+mentioned in the text to blue.
+
+The basic color scheme is called
+[Solarized](http://ethanschoonover.com/solarized).
+
+
+### Close enough factor
+
+To change what counts as “close enough” change the `pass_factor` in
+the .py source file.
+
+## Anki version
+
+Please make sure that you are running a version of Anki ≥ 2.0.9, as
+the comparison mechanism was changed for that release.

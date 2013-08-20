@@ -57,8 +57,8 @@ reading stored in the note. The detailed rules are:
   <ul>
     <li>“Reading”,</li>
     <li>“Kana”,</li>
-    <li>「かな」,</li>
-    <li>「仮名”」,</li>
+    <li>「かな」 or</li>
+    <li>「仮名」</li>
   </ul>
 * The substring rule is different for this case. For fields where
   “Audio” or “Sound” is a substring, this word is not removed, but

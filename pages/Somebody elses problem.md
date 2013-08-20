@@ -2,7 +2,7 @@ title: Somebody else’s problem
 id: sep
 main_file: somebody_elses_problem.py
 type: addon
-date: 2012-06-10
+date: 2013-06-07
 status: working
 status_color: green
 status_text_color: white
@@ -42,9 +42,9 @@ was that i didn’t want to copy a bunch of video files to my Android
 device to save FAT
 [directory entries](http://en.wikipedia.org/wiki/File_Allocation_Table#VFAT_long_file_names),
 which are in short supply if you have a collection with many files
-with long non-ASCII names.
+with long names.
 
-<blockquote class="NB">
+<blockquote class="nb">
 Due to a <a
 href="https://code.google.com/p/ankidroid/issues/detail?id=1458">problem
 in AnkiDroid</a>, you should make sure that the files copied to the

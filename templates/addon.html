@@ -1,40 +1,41 @@
 {% extends "base.html" %}
 <!-- Article 1 start -->
 
-{%block htmltitle%} – {{ page.title }}{%endblock htmltitle%}
+{%block htmltitle%}{{ page.title }} – {%endblock htmltitle%}
 
 {%block morelinks%}
-            <li><a href="https://github.com/ospalh/anki-addons/blob/master/{{page.main_file}}" class="code">Add-on source</a></li>
+      <li><a href="https://github.com/ospalh/anki-addons/blob/master/{{page.main_file}}" class="code">Add-on source</a></li>
 {% if page.ankiweb_id %}
-            <li><a href="https://ankiweb.net/shared/info/{{page.ankiweb_id}}" class="code">AnkiWeb download</a></li>
+      <li><a href="https://ankiweb.net/shared/info/{{page.ankiweb_id}}">AnkiWeb</a></li>
+      <li><span>ID: {{page.ankiweb_id}}</span></li>
 {% endif %}
 {% if page.download_file %}
-            <li><a href="https://github.com/downloads/ospalh/anki-addons/{{page.download_file}}" class="code">Package download</a></li>
+      <li><a href="https://github.com/downloads/ospalh/anki-addons/{{page.download_file}}">Package download</a></li>
 {% endif %}{%endblock morelinks%}
 
 
 {%block title%}
-    <h1>{{ page.title }}</h1>
-    {%if page.subtitle%}
-    <h3>{{page.subtitle}}</h3>
-    {%else%}
-    <h3>An Anki2 add-on</h3>
-    {%endif%}
+  <h1>{{ page.title }}</h1>
+  {%if page.subtitle%}
+  <h3>{{page.subtitle}}</h3>
+  {%else%}
+  <h3>An Anki2 add-on</h3>
+  {%endif%}
 {%endblock title%}
 
 {% block content %}
 <article id="{{page.id}}" class="clear">
-	<div class="articleBody">
+  <div class="articleBody">
 
-		<figure>
-		  <img src="/anki-addons/images/{{page.first_image}}" alt="{{page.first_alt}}" {%if page.first_image_attributes%}{{page.first_image_attributes|safe}}{%endif%}/>
-{% if page.first_caption %}		  <figcaption>{{page.first_caption}}</figcaption>{% endif%}
-		</figure>
+    <figure>
+      <img src="/anki-addons/images/{{page.first_image}}" alt="{{page.first_alt}}" {%if page.first_image_attributes%}{{page.first_image_attributes|safe}}{%endif%}/>
+{% if page.first_caption %}     <figcaption>{{page.first_caption}}</figcaption>{% endif%}
+    </figure>
 
-                {% block article%}
-                {{ page.html| safe }}
-                {% endblock article%}
-	</div>
+    {% block article%}
+    {{ page.html| safe }}
+    {% endblock article%}
+  </div>
 
 </article>
 {% endblock content %}

@@ -1,11 +1,12 @@
 title: Quick note and deck buttons
 id: quick_buttons
-main_file: "Quick note and deck buttons.py"
+main_file: quick_note_and_deck_buttons.py
 status: working
 type: addon
-date: 2013-01-23
-status_color: yellow
-status_text_color: black
+date: 2013-05-07
+ankiweb_id: 2181333594
+status_color: green
+status_text_color: white
 abstract: Quickly select a few models or decks.
 first_image: quick_buttons.png
 first_alt: The top of the add card dialog with a few extra buttons
@@ -28,7 +29,7 @@ favorite source editor or trigger “Tools/Add-ons/Quick note and deck
 buttons/Edit...” to use Anki’s built-in editor.
 
 There are two bits of code that should be changed, marked with the
-comments `# Set up here...` and `# ... and here ...`. A knowledge of
+comments `# Set up here...` and `# ... and here.` A knowledge of
 [Python](http://www.python.org/)
 [syntax](http://docs.python.org/2/tutorial/index.html) may be helpful
 to set this up, but following the examples and only changing text
@@ -38,9 +39,10 @@ inside of quotation marks should work.
 
 The parts that should be changed are called
 [lists](http://docs.python.org/2/tutorial/introduction.html#lists) of
-[dictionaries](http://docs.python.org/2/tutorial/datastructures.html#dictionaries). The
-lists are marked with square brackets, `[` and `]`, the dictionaries
-with curly braces, `{` `}`. Each dictionary describes one button.
+[dictionaries](http://docs.python.org/2/tutorial/datastructures.html#dictionaries).
+The lists are marked with square brackets, `[` and `]`, the
+dictionaries with curly braces, `{` and `}`. Each dictionary describes one
+button.
 
 Each of these button dictionaries must contain at least two key–value
 pairs:
@@ -49,20 +51,18 @@ pairs:
   button. Use quotation marks with an extra `u` before them to define
   a unicode string. I would suggest using short texts, such as single
   characters.
-* A `"name"`. This is the name of the model for dicts in the
+* A `"name"`. This is the name of the model in the
   `model_buttons` list and the name of the deck in the `deck_buttons`
   list. Make sure that these names are correct. Cut-and-paste
   the names if possible.
 
 
 For more options read the comments in the
-[source file](https://github.com/ospalh/anki-addons/blob/master/Quick%20note%20and%20deck%20buttons.py).
+[source file](https://github.com/ospalh/anki-addons/blob/master/quick_note_and_deck_buttons.py).
 
 ## Notes
 
-<blockquote class="nb">At the moment, it looks ugly on
-Macs.</blockquote>
-
-This add-on is an expansion of the Quick change Note buttons add-on. The code
-is based on that version, by Steve AW. Many thanks, for the code and
-also for the idea in the first place.
+This add-on is an expansion of the
+[Quick change Note buttons](https://ankiweb.net/shared/info/1720844055)
+add-on. The code is based on that version, by Steve AW. Many thanks,
+for the code and also for the idea in the first place.

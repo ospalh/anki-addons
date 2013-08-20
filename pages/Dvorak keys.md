@@ -1,17 +1,16 @@
 title: Dvorak keys
 id: dvorak
-main_file: Dvorak%20keys.py
+main_file: dvorak_keys.py
 status: working
 type: addon
-date: 2012-10-17
+date: 2013-05-07
 status_color: green
 status_text_color: white
 abstract: "Use keys easy to use for user of the <a
 href=\"http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard\">Dvorak
 simplified keyboard</a> to answer a question."
 first_image: Dvorak_keys.png
-first_alt: "Color-coded sketch of a keyboard and hands. The colors show
-which finger to use for which key. Some keys are marked as described
+first_alt: "Sketch of a keyboard and hands. Some keys are marked as described
 in the text."
 first_caption: The keys to use.
 ankiweb_id: 2714331040
@@ -24,11 +23,11 @@ simplified keyboard</a> to answer a question.
 The point is to remember the key positions, rather than the characters
 the keys usually produce.
 
-There are three sets of keys to use, with the four typing fingers of the
-left hand in the row above the home row, going from “again” with the
-<span class="qtbase pinky">little finger</span>, through “hard”
-with the ring finger, “good” for the middle finger to “easy” for the
-index finger.
+There are three sets of keys to use. The first is with the four typing
+fingers of the left hand in the row above the home row, going from
+“again” with the <span class="qtbase pinky">little finger</span>,
+through “hard” with the ring finger, “good” for the middle finger to
+“easy” for the index finger.
 
 The second set is in the home position. Left index finger for “again”
 and three fingers of the right hand: index finger for “hard”, middle
@@ -51,10 +50,10 @@ like add card or edit card.
 
 The keys that are used are defined in a Python dictionary. Read the
 comments in the
-[source file](https://github.com/ospalh/anki-addons/blob/master/Dvorak%20keys.py)
+[source file](https://github.com/ospalh/anki-addons/blob/master/dvorak_keys.py)
 for details.
 
 I tried to find good keys to use for QWERTY keyboards, but
-couldn't. My best idea was to use the four keys for the index fingers,
+could not. My best idea was to use the four keys for the index fingers,
 in the home positions or reaching towards each other. These are there
 in a commented-out alternative version of the dictionary.

@@ -141,6 +141,25 @@ pronunciation that is present on a specific Wiktionary page, please
 will then try to find a way to extract that word, so that it should be
 downloaded with an updated version of the add-on.
 
+## <span id="not_forvo">*Not* Forvo</span>
+
+A number of people have asked for the crowd-sourced pronunciation site
+[Forvo](http://forvo.com) to be added. While the pronunciations
+offered are usually quite useful (even if sometimes of a low audio
+quality), adding the site to this add-on does *not* work. Downloading
+from Forvo requires what is called an “API-key”. This key would have
+to be both kept secret and included in the published add-on source. A
+contardiction.
+
+(The way Forvo apparently intends this kind of key to be used is to
+add a service to a web site, rather than to a bit of free, published
+software. The web service owner would than keep eir hands on the key
+and hand out just the pronunciations. This add-on does not work this
+way.)
+
+My “[Nachschlagen](Nachschlagen.html)” add-on adds a menu item too look
+up, but not download, words at Forvo.
+
 ## <span id="sitesonoff">Using different sites</span>
 
 The add-on loads the different downloaders through the list

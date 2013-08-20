@@ -22,16 +22,16 @@ more details.
 <figure>
 <img src="images/click_on_gear.png"
 alt="The Anki deck list. To the right of the gear button to the right
-of the deck name a pop-up menu with the three items Rename Options
-Delete. A mouse pointer over Options.">
+of the deck name a pop-up menu with the item “Options”
+marked.">
 <figcaption>Click here to open the deck options.</figcaption>
 </figure>
 To change the language for an options group, first click on the gear
-button to the right of the deck name, then on Options.
+button to the right of the deck name, then on “Options”.
 <figure>
 <img src="images/options_for.png"
-alt="A dialog window. A tab General is marked an selected. A text
-input box named language code is marked.">
+alt="The “Options for deck NN” window. The tab “General” has a line-edit
+“Language code”.">
 <figcaption>Change the code of the language you are learning here.</figcaption>
 </figure>
 This will open the “Options for NN” dialog. There, click on the

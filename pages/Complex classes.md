@@ -26,30 +26,21 @@ href="http://subs2srs.sourceforge.net/">sub2srs</a> example deck 「時
 </figure>
 To use furikanji, with the markers shown, i use
 <blockquote class=lsting><pre><code>.redish { color: #a00;}
-body:not(.mobile) .furikanji:before, body:not(.mobile) .furikanji:after {
+.furikanji:before, .furikanji:after {
     font-size: 50%;
     position: relative;
     bottom: 2rem;
     width: 0px;
     vertical-align: baseline;
 }
-body:not(.mobile) .furikanji:before { content : "|"}
-body:not(.mobile) .furikanji:after { content : "|"}
-.mobile .furikanji {color: #268bd2;}</code></pre></blockquote>
+.furikanji:before { content : "|"}
+.furikanji:after { content : "|"}</code></pre></blockquote>
 as styling and
 <blockquote class=lsting><pre><code>&lt;div>{{Image}}&lt;/div>
 {{Audio}}
 &lt;div class="nhg lnsz">{{furigana:Reading}}&lt;/div>
 &lt;div class="nhg redish lnsz">{{furikanji:Reading}}&lt;/div></code></pre></blockquote>
 as back template.
-
-The `body:not(.mobile)` bit of the selector and the setting for
-`.mobile` can be dropped when not using the
-[AnkiDroid patch](Furikanji.html#droid) or when using a newer version
-of Android. Those selectors are a hack to mark the kanji that is only
-needed on older versions of Android (up to about version 3.0). For
-newer versions of Android and the newest versions of AnkiDroid, the
-CSS used for the desktop client should work.
 
 
 ## Separator for kana

@@ -1,10 +1,10 @@
-title: Local CSS
+title: Local CSS and DIY night mode
 subtitle: Adapt card styles to time and place
 id: localcss
-main_file: Local%20CSS%20and%20DIY%20night%20mode.py
+main_file: local_css_and_diy_night_mode.py
 status: working
 type: addon
-date: 2013-04-12
+date: 2013-06-14
 status_color: green
 status_text_color: white
 abstract: "Add styling from a local CSS file. With this, the card
@@ -40,9 +40,9 @@ as before.
 The add-on adds the classes `loc` to all cards. The model and template
 names of each card are reduced to the characters `a` to `z`, `A` to
 `Z`, `0` to `9` and `_` and added as classes as well, in the form of
-`model_NN` and `template_NN`. As an example, the second card (`card1`)
-of a model or note type called “Satz Japanese 日本語” and that is
-called “Hörübung” would have the CSS classes `loc card card1
+`model_NN` and `template_NN`. As an example, the second card of a
+model or note type called “Satz Japanese 日本語” and that is called
+“Hörübung” would have the CSS classes `loc card card2
 model_SatzJapanese template_Hrbung`. These classes can be used to
 build CSS selectors.
 
@@ -52,9 +52,9 @@ To apply a style to the whole card only on a specific computer, use the
 `user_sytle.css` file on that computer. You should use the CSS selector
 `.loc.card`. The example in the bottom of the image was done with
 <blockquote><pre><code>.loc.card{
-    font-family: Linux Biolinum O;
-    background-color: #ededff;
-    font-size: 58px;}</code></pre></blockquote>
+  font-family: Linux Biolinum O;
+  background-color: #ededff;
+  font-size: 58px;}</code></pre></blockquote>
 
 <blockquote class=nb> The selector in the style file must be more
 specific than the one used in the template in the collection. When a
@@ -96,8 +96,8 @@ green for normal cards and dark red for grammar cards. The standard
 cards use the the `.loc.card` selector described above. The model name
 of the grammar cards is “Grammatik VHS — Japanese” and so i used
 <blockquote><pre><code>.loc.card.model_grammatikvhsjapanese{
-    background-color: #64354c;
-    color: #d9b7ce;}</code></pre></blockquote>
+  background-color: #64354c;
+  color: #d9b7ce;}</code></pre></blockquote>
 to set up the pink-on-dark-red.
 
 ## Night mode
@@ -116,10 +116,9 @@ eir collection to make use of this.
 The set-up is best done in the `user_style.css` file. To use
 white-on-black as a night mode alternative to standard black-on-white
 cards, you should add
-<blockquote><pre><code> .night.card.loc {
+<blockquote><pre><code>.night.card.loc {
   color: white;
-  background-color: black;
-}
+  background-color: black;}
 </code></pre></blockquote>
 
 
@@ -130,7 +129,7 @@ AnkiDroid code i intend to write to bring night mode there.
 ### More modes
 
 More display modes can be used. Edit the
-[source file](https://github.com/ospalh/anki-addons/blob/master/Local%20CSS%20and%20DIY%20night%20mode.py).
+[source file](https://github.com/ospalh/anki-addons/blob/master/local_css_and_diy_night_mode.py).
 
 Look for “`extra_classes_list`” near the top. Duplicate the `Night
 mode` line and change the texts *after* the `class` and `display`
@@ -143,9 +142,6 @@ theme. I also sometimes want to see the cards in black-on-white.
 
 The point here is that the dark scheme can’t really be derived from
 the light mode, so it *has* to be set explicitly in a style sheet.
-
-As i intend to use these modes on AnkiDroid, i have added them to the
-several models of my collection, rather than to `user_style.css`.
 
 The relevant bits of my templates look like this:
 <blockquote><pre><code>.card {
@@ -187,3 +183,17 @@ user_style.css`.
 The user style is loaded when the profile is opened. To reload the
 style after a change go to the “Switch Profiles” dialog and re-open the
 profile.
+
+
+## AnkiDroid
+
+People that like to build their own AnkiDroid version can take a look
+at the
+[branch](https://github.com/ospalh/Anki-Android/tree/feature-diy-night-mode)
+i have made a that sets extra classes for the night mode. That patch
+switches off the normal color reversal of the AnkiDroid night mode and
+entirely relies on the colors being changed in the notes’ CSS. Take a
+look at the code changes for details on how to set up the classes.
+
+It is probably a good idea to merge the branch into the newest
+AnkiDroid development branch rather than to use it as is.

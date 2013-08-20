@@ -1,16 +1,16 @@
 title: Download audio
 id: dlaudio
-main_file: Download%20audio.py
+main_file: download_audio.py
 status: working
 type: addon
-date: 2013-03-25
+date: 2013-06-07
 status_color: green
 status_text_color: white
 abstract: "Automatically download audio from talking dictionaries or
 from Google TTS."
 first_image: Downloaded%20audio.png
-first_caption: "One word where non-native speakers should look up the
-pronunciation."
+first_caption: "Do you pronounce the –ear– like in hear? Or like
+earth? ..."
 first_alt: "A dialog window. Six lines with different site icons, the
 word “hearth” and some more buttons. A bubble help with the text
 Source text: hearth From field: Front Source: Macmillan Variant: British"
@@ -75,9 +75,8 @@ Here, too, more sophisticated uses are described on an
 ## Downloading
 
 <figure>
-<img src="images/manual_audio.png" alt="Anki with a card shown and the
-mouse pointing to the menu item
-Edit/Media/Manual audio.">
+<img src="images/manual_audio.png" alt="The sub-menu Edit/Media is
+highlighted in Anki.">
 <figcaption>Use these menus when reviewing.</figcaption>
 </figure>
 When reviewing, select one of the three “Edit/Media/Note audio”,
@@ -125,12 +124,6 @@ When learning Japanese, when there is a “Reading” field,
 the text used as request and shown in the dialog is split into the
 base text and the reading. See the
 [split reading page](Split%20reading.html) for more details.
-
-For decks like that shown in in the first example
-you should use the “Note audio” mode: most dictionaries have
-pronunciations for verbs without “to” and for nouns without
-article. Delete these in the note audio dialog. For example download for
-“annex”, not for “to annex”.
 
 Along with the edit field or fields for the request text, the edit
 dialog also as a field to set the  language code. This can be used to
@@ -195,8 +188,8 @@ languages with different decks. See also the
 ### <span id="tags">Using tags</span>
 
 When a note has a tag in the form “`lang_<NN>`” (e.g. “`lang_en`” for
-English, “`lang_fr`” for French), this language code (that is “`en`” or
- “`fr`”) is used for the download.
+English, “`lang_fr`” for French), this language code is used for the
+download.
 
 ### Supported languages
 
@@ -214,15 +207,12 @@ At the moment, you can get pronunciations for
 * Japanese (`ja`) from [JapanesePod](http://japanesepod101.com)
 * Spanish (`es`) from [BeoLingus](http://beolingus.org)
 
-There was a downloader for [LEO](http://leo.org), but since they
-updated their site in early 2013, it no longer works.
-
 Google translate list over 60 languages for text translations. It
 seems unlikely that they offer text-to-speech services for more. The
 simplest way to see if GoogleTTS works for your target language is to
 send a request or two and see (hear) if you get a useful reply.
 
-Lastly, [Wiktionary](wiktionary.org) is asked with any language
+Lastly, [Wiktionary](http://wiktionary.org) is asked with any language
 code. The add-on may or may not find anything useful.
 
 More information in the [list of sites](Downloader%20sites.html) used.
@@ -252,7 +242,7 @@ This add-on does not do bulk downloads. That is, there is no way to
 let it go through the whole collection and download something for
 every card. There are a few reasons for this:
 
-* It appears that the Google TTS service throttles the number of reply
+* It appears that the Google TTS service throttles the number of replies
   it delivers when they requests are send too quickly. (At least the
   [AwesomTTS add-on](https://ankiweb.net/shared/info/301952613) has
   code to work around this problem, needed or not.)
@@ -267,8 +257,13 @@ every card. There are a few reasons for this:
 
 Bugs and other issues can be reported at the
 [GitHub repository](https://github.com/ospalh/anki-addons/issues?state=open)
-(pull requests with patches welcome) or the add-ons
+or the add-ons
 [Google Groups thread](https://groups.google.com/d/topic/anki-addons/DMgTHkhnhow/discussion).
+
+Github pull requests with patches are welcome. The preferred way is to use
+git-flow and create a `feature` branch off the
+[`develop`](https://github.com/ospalh/anki-addons/tree/develop)
+branch.
 
 ### Audio processing
 
@@ -283,7 +278,7 @@ used by default, as it requires two extra Python packages,
 still alpha status, and installing it isn’t always easy, either.
 Hackers that do manage that may then want to take a look at the
 content of the
-“[`downloadaudio/processors`](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/processors)”
+“[`downloadaudio/processors`](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/processors)”
 directory.
 
 ### More ideas
@@ -299,8 +294,10 @@ Things that might be added in the future (but don’t hold your breath):
   automatically add the 「る」 for 一段動詞.  This will most likely
   not by implemented any time soon.
 * More talking dictionaries. Links welcome. Mention them in the
-  [Google Groups thread](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/processors). Python
-  files welcome. Take a look at
-  [`downloadaudio/downloaders`](https://github.com/ospalh/anki-addons/tree/master/downloadaudio/downloaders),
+  [Google Groups thread](https://groups.google.com/d/topic/anki-addons/DMgTHkhnhow/discussion).
+  Python files welcome. Take a look at
+  [`downloadaudio/downloaders`](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/downloaders),
   write a new class derived from `AudioDownloader` and send me a pull
-  request. Or just the `.py`-file.
+  request. Or just the `.py`-file. There are already quite a number
+  of sources for English, so i will probably not add any more for that
+  language.

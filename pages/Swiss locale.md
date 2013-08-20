@@ -1,8 +1,8 @@
 title: Swiss locale
 id: swisslocale
-main_file: Swiss%20locale.py
+main_file: swiss_locale.py
 type: addon
-date: 2013-01-16
+date: 2013-05-07
 status: one-off, broken
 status_color: red
 status_text_color: white
@@ -41,9 +41,9 @@ all its glory. I like to use SI prefixes even when they are not
 common. So, an area of a million square kilometers, that is just one
 megameter times one megameter, 1 Mm<sup>2</sup>.
 
-The `Swiss` part comes from the fact that i just personally like the
-Swiss way of writing large numbers, with an apostrophe as thousands
-separator, and have included this in the add-on. The Swiss formatting
+The “Swiss” part comes from the fact that i just personally like the
+Swiss way of writing large numbers with an apostrophe as thousands
+separator and have included this in the add-on. The Swiss formatting
 will only work on Linux systems.
 
 While this add-on only works with the desktop client, the deck for
