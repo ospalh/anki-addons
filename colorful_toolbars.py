@@ -215,7 +215,7 @@ def add_tool_bar():
     # Put this in the more tool bar, closer to the old edit button
     #    mw.qt_tool_bar.addAction(edit_current_action)
     mw.qt_tool_bar.addAction(decks_action)
-    #mw.qt_tool_bar.addAction(overview_action)
+    mw.qt_tool_bar.addAction(overview_action)
     mw.qt_tool_bar.addAction(study_action)
     mw.qt_tool_bar.addAction(add_notes_action)
     mw.qt_tool_bar.addAction(browse_cards_action)
