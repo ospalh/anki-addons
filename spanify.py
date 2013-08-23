@@ -15,10 +15,10 @@ with class style1, style2 or style3. The user can then set up eir card
 templates to modify the appearence of these texts.
 """
 
-from anki.hooks import wrap
+from anki.hooks import addHook
 from aqt.editor import Editor
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 
 def add_span(editor, s_class):
@@ -41,4 +41,4 @@ def setup_buttons(editor):
         text=u"s3", tip="style3")
 
 Editor.add_span = add_span
-Editor.setupButtons = wrap(Editor.setupButtons, setup_buttons)
+addHook("setupEditorButtons", setup_buttons)
