@@ -17,7 +17,7 @@ from aqt.browser import Browser
 from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 sound_re = ur"\[sound:(.*?)\]"
 
