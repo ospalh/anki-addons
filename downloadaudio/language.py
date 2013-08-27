@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–2013 Roland Sieker, <ospalh@gmail.com>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
 """
@@ -100,7 +100,7 @@ def language_code_from_editor(note, card_edit):
         return language_code_from_card(mw.reviewer.card)
     if isinstance(edit_parent, AddCards):
         try:
-            mw.col.decks.confForDid(
+            return mw.col.decks.confForDid(
                 edit_parent.deckChooser.selectedId())[fl_code_code]
         except (TypeError, KeyError):
             return default_audio_language_code
