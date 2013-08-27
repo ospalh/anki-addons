@@ -18,7 +18,7 @@ templates to modify the appearence of these texts.
 from anki.hooks import addHook
 from aqt.editor import Editor
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 
 def add_span(editor, s_class):
