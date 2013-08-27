@@ -100,7 +100,7 @@ def language_code_from_editor(note, card_edit):
         return language_code_from_card(mw.reviewer.card)
     if isinstance(edit_parent, AddCards):
         try:
-            mw.col.decks.confForDid(
+            return mw.col.decks.confForDid(
                 edit_parent.deckChooser.selectedId())[fl_code_code]
         except (TypeError, KeyError):
             return default_audio_language_code
