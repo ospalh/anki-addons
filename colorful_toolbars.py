@@ -43,40 +43,32 @@ __version__ = "1.4.0"
 # for tool bars at the left an right. The left tool bar wil also get
 # smaller icons.
 netbook_version = False
-# netbook_version = True
 
 
 ## Position of the new toolbar: either starting out above the old tool
 ## bar and movable, or below the old tool bar. In that case it can't
 ## be dragged to another position.
 qt_toolbar_movable = True
-# qt_toolbar_movable = False
 
 ## Do or do not show a button that lets this be the last card reviewed.
 show_toggle_last = True
-# show_toggle_last = False
 
 ## Do or do not show a mute button that stops Anki from playing
 ## sound/videos initially.
 ## NB. The mute is not absolute. When you push the replay button, the
 ## sound still gets played.
 show_mute_button = False
-# show_mute_button = True
 
 ## Show the bury card button
-show_bury_card = False
-# show_bury_card = True
+show_bury_card = True
 
 ## Show the bury note button
-show_bury_note = True
-# show_bury_note = False
+show_bury_note = False
 
 ## Show the suspend card button
-# show_suspend_card = True
 show_suspend_card = False
 
 ## Show the suspend note button
-# show_suspend_note = True
 show_suspend_note = False
 
 show_delete_note = False
@@ -305,7 +297,6 @@ def add_to_menus():
     menus. Sync to the file menu, stats to the tools menu, the DASB,
     together with a study-withouts-overview item to a new go
     menu. Also add items to, d'uh, edit stuff to the edit menu.
-
     """
     # Add sync to the file memu. It was there in Anki 1.
     mw.form.menuCol.insertAction(mw.form.actionImport, sync_action)
