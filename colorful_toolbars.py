@@ -27,9 +27,10 @@ import os
 
 from anki.hooks import wrap, addHook
 from anki.lang import _
+from anki.utils import intTime
 from aqt import mw, clayout
 from aqt.reviewer import Reviewer
-from aqt.utils import askUser
+from aqt.utils import askUser, tooltip
 
 
 __version__ = "1.4.0"
@@ -61,6 +62,14 @@ show_toggle_last = True
 ## sound still gets played.
 show_mute_button = False
 # show_mute_button = True
+
+## Show the bury card button
+show_bury_card = False
+# show_bury_card = True
+
+## Show the bury note button
+show_bury_note = True
+# show_bury_note = False
 
 ## Show the suspend card button
 # show_suspend_card = True
@@ -267,11 +276,14 @@ def add_more_tool_bar():
         mw.reviewer.more_tool_bar.addAction(toggle_last_card_action)
     if show_mute_button:
         mw.reviewer.more_tool_bar.addAction(mute_action)
-    mw.reviewer.more_tool_bar.addAction(bury_action)
-    if show_suspend_card:
-        mw.reviewer.more_tool_bar.addAction(suspend_card_action)
+    if show_bury_note:
+        mw.reviewer.more_tool_bar.addAction(bury_note_action)
+    if show_bury_card:
+        mw.reviewer.more_tool_bar.addAction(bury_card_action)
     if show_suspend_note:
         mw.reviewer.more_tool_bar.addAction(suspend_note_action)
+    if show_suspend_card:
+        mw.reviewer.more_tool_bar.addAction(suspend_card_action)
     if show_delete_note:
         mw.reviewer.more_tool_bar.addAction(delete_action)
     mw.reviewer.more_tool_bar.addSeparator()
@@ -331,10 +343,11 @@ def add_to_menus():
     edit_menu.addAction(edit_current_action)
     edit_menu.addAction(edit_layout_action)
     edit_menu.addSeparator()
-    edit_menu.addAction(bury_action)
+    edit_menu.addAction(bury_note_action)
+    edit_menu.addAction(bury_card_action)
     edit_menu.addAction(toggle_mark_action)
-    edit_menu.addAction(suspend_card_action)
     edit_menu.addAction(suspend_note_action)
+    edit_menu.addAction(suspend_card_action)
     edit_menu.addAction(delete_action)
 
 
@@ -343,7 +356,7 @@ def edit_actions_off():
     try:
         edit_current_action.setEnabled(False)
         edit_layout_action.setEnabled(False)
-        bury_action.setEnabled(False)
+        bury_note_action.setEnabled(False)
         toggle_mark_action.setEnabled(False)
         suspend_card_action.setEnabled(False)
         suspend_note_action.setEnabled(False)
@@ -364,7 +377,7 @@ def edit_actions_on():
 def more_tool_bar_off():
     """Hide the more tool bar."""
     show_more_tool_bar_action.setEnabled(False)
-    bury_action.setEnabled(False)
+    bury_note_action.setEnabled(False)
     toggle_mark_action.setEnabled(False)
     suspend_card_action.setEnabled(False)
     suspend_note_action.setEnabled(False)
@@ -379,7 +392,7 @@ def maybe_more_tool_bar_on():
     """Show the more tool bar when we should."""
     global dl_action, sweep_action
     show_more_tool_bar_action.setEnabled(True)
-    bury_action.setEnabled(True)
+    bury_note_action.setEnabled(True)
     toggle_mark_action.setEnabled(True)
     suspend_card_action.setEnabled(True)
     suspend_note_action.setEnabled(True)
@@ -479,6 +492,24 @@ def maybe_autoplay(reviewer, card):
     return reviewer.mw.col.decks.confForDid(card.odid or card.did)['autoplay']
 
 
+def bury_card():
+    """
+    Bury a card.
+
+    This hides a card for the day or until it is disitered
+    (unburied). The code is based on aqt.reviewer.Reviewer.onBuryNote
+    and anki.sched.Scheduler.buryNote.
+    """
+    mw.checkpoint(_("Bury"))
+    cid = mw.reviewer.card.id
+    mw.col.sched.removeLrn((cid, ))  # That function expects a list of ids.
+    mw.col.db.execute(
+        "update cards set queue=-2,mod=?,usn=? where id={0}".format(cid),
+        intTime(), mw.col.usn())
+    mw.reset()
+    tooltip(_("Card buried."))
+
+
 # Make all the actions top level, so we can use them for the menu and
 # the tool bar.
 
@@ -560,11 +591,16 @@ mute_icon.addFile(os.path.join(icons_dir, 'unmute.png'))
 mute_icon.addFile(os.path.join(icons_dir, 'mute.png'),
                   QSize(), QIcon.Normal, QIcon.On)
 mute_action.setIcon(mute_icon)
-bury_action = QAction(mw)
-bury_action.setText(_(u"Bury note"))
-bury_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
-bury_action.setToolTip(_(u"Hide this note for today."))
-mw.connect(bury_action, SIGNAL("triggered()"), mw.reviewer.onBuryNote)
+bury_note_action = QAction(mw)
+bury_note_action.setText(_(u"Bury note"))
+bury_note_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
+bury_note_action.setToolTip(_(u"Hide this note for today."))
+mw.connect(bury_note_action, SIGNAL("triggered()"), mw.reviewer.onBuryNote)
+bury_card_action = QAction(mw)
+bury_card_action.setText(_(u"Bury card"))
+bury_card_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
+bury_card_action.setToolTip(_(u"Hide this card for today."))
+mw.connect(bury_card_action, SIGNAL("triggered()"), bury_card)
 suspend_card_action = QAction(mw)
 suspend_card_action.setText(_(u"Suspend card"))
 suspend_card_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend_card.png')))
