@@ -14,6 +14,7 @@ Standard models that work reasonably well with the add-on.
 import os
 
 import anki.stdmodels
+from aqt import mw
 
 remove_arial = True
 # Personally, i think Arial is ugly. So just don’t set a standard font
@@ -28,7 +29,7 @@ def add_standard_model(col):
     have less problems getting started.
     """
     mm = col.models
-    m = mm.new(_("Standard  with audio fields"))
+    m = mm.new(_("Standard with audio fields"))
     fm = mm.newField(_("Word"))
     mm.addField(m, fm)
     fm = mm.newField(_("Meaning"))
@@ -53,7 +54,7 @@ def add_standard_model(col):
     # Recall card
     rev = mm.newTemplate(_("Recall"))
     rev['qfmt'] = "{{Meaning}}"
-    rev['afmt'] = """
+    rev['afmt'] = """\
 {{FrontSide}}
 
 <hr id=answer>
@@ -63,9 +64,9 @@ def add_standard_model(col):
     mm.addTemplate(m, rev)
     # Audio card
     aud = mm.newTemplate(_("Audio"))
-    aud['qfmt'] = """ Listen.
+    aud['qfmt'] = """Listen.
 {{Audio}}"""
-    aud['afmt'] = """
+    aud['afmt'] = """\
 {{Audio}}
 <span id=answer></span>
 <div>{{Word}}</div>
@@ -84,7 +85,7 @@ def add_japanese_model(col):
     have less problems getting started.
     """
     mm = col.models
-    m = mm.new(_("Japanese  with audio fields"))
+    m = mm.new(_("Japanese with audio fields"))
     fm = mm.newField(_("Expression"))
     mm.addField(m, fm)
     fm = mm.newField(_("Meaning"))
@@ -118,7 +119,7 @@ def add_japanese_model(col):
     # Recall card
     rev = mm.newTemplate(_("Recall"))
     rev['qfmt'] = "{{Meaning}}"
-    rev['afmt'] = """
+    rev['afmt'] = """\
 {{FrontSide}}
 
 <hr id=answer>
@@ -129,9 +130,9 @@ def add_japanese_model(col):
     mm.addTemplate(m, rev)
     # Audio card
     aud = mm.newTemplate(_("Audio"))
-    aud['qfmt'] = """ Listen.
+    aud['qfmt'] = """Listen.
 {{Audio}}"""
-    aud['afmt'] = """
+    aud['afmt'] = """\
 {{Audio}}
 <span id=answer></span>
 <div class=jp> {{Expression}} </div>
