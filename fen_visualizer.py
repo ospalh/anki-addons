@@ -30,8 +30,8 @@ __version__ = '1.0.1'
 reverse_for_black = True
 # reverse_for_black = False
 
-row_notation = [1, 2, 3, 4, 5, 6, 7, 8]
-col_notation = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+row_notation = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+col_notation = [1, 2, 3, 4, 5, 6, 7, 8]
 
 FenData = namedtuple(
     'FenData',
