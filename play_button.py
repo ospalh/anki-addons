@@ -1,19 +1,25 @@
 # -*- mode: Python ; coding: utf-8 -*-
+#
 # Copyright © 2013 Roland Sieker <ospalh@gmail.com>
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
+#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """Add-on for Anki 2 to add AnkiDroid-style replay buttons."""
 
-from PyQt4.QtCore import QUrl
-from PyQt4.QtGui import QDesktopServices
 import os
 import re
 import shutil
+
+from BeautifulSoup import BeautifulSoup
+from PyQt4.QtCore import QUrl
+from PyQt4.QtGui import QDesktopServices
 
 from anki.hooks import addHook, wrap
 from anki.sound import play
 from aqt import mw
 from aqt.browser import Browser
+from aqt.browser import DataModel
 from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 
@@ -23,7 +29,7 @@ sound_re = ur"\[sound:(.*?)\]"
 
 original_arrow_name = 'replay.png'
 collection_arrow_name = '_inline_replay_button.png'
-
+hide_class_name = u'browserhide'
 
 def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
                        dummy_data, dummy_col):
@@ -79,6 +85,15 @@ def add_preview_link_handler(browser):
     browser._previewWeb.setLinkHandler(simple_link_handler)
 
 
+def reduce_format_qa(self, text):
+    u"""Remove elements with a given class before displaying."""
+    soup = BeautifulSoup(text)
+    for hide in soup.findAll(True, {'class': re.compile(
+                '\\b' + hide_class_name + '\\b')}):
+        hide.extract()
+    return original_format_qa(self, unicode(soup))
+
+
 def copy_arrow():
     u"""Copy the image file to the collection."""
     if not os.path.exists(os.path.join(
@@ -91,6 +106,9 @@ def copy_arrow():
 
 original_review_link_handler = Reviewer._linkHandler
 Reviewer._linkHandler = review_link_handler_wrapper
+
+original_format_qa = DataModel.formatQA
+DataModel.formatQA = reduce_format_qa
 
 addHook("mungeQA", play_button_filter)
 Browser._openPreview = wrap(Browser._openPreview, add_preview_link_handler)
