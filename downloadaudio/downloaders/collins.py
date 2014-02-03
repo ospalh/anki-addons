@@ -50,9 +50,6 @@ class CollinsDownloader(AudioDownloader):
         # The audio clips are stored as img tags with class sound
         word_audio_img = word_soup.findAll(
             name='img', attrs={'class': 'sound'})
-        onclick_audio = [wimg['onclick'] for wimg in word_audio_img
-                         if  and
-                         ]
         link_list = []
         for wai in word_audio_img:
             # Filter out a number of wrong (i.e. other language)
@@ -68,6 +65,7 @@ class CollinsDownloader(AudioDownloader):
                 # the word. Surely not what we want.
                 continue
             # Looks good so far.
+            oclick = wai['onclick']
             link_list = wai  # TODO: actually extract the link.
         if link_list:
             # Only get the icon when we (seem to) have a pronunciation
@@ -97,8 +95,3 @@ class CollinsDownloader(AudioDownloader):
         with open(word_path, 'wb') as word_file:
             word_file.write(word_data)
         return word_path, word_fname
-
-    def get_popup_url(self, base_name, source):
-        """Build url for the MW play audio pop-up."""
-        qdict = dict(file=base_name, word=source)
-        return self.popup_url + urllib.urlencode(qdict)
