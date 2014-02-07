@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–2014 Roland Sieker <ospalh@gmail.com>
 #
 # Provenance:
 # The idea, original version and large parts of this code
@@ -100,7 +100,7 @@ from anki.hooks import runHook
 from anki.lang import _
 from anki.utils import isMac
 
-__version__ = "2.0.7"
+__version__ = "2.0.8"
 
 
 def setup_buttons(chooser, buttons, text, do_function):
