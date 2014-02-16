@@ -1,9 +1,9 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–2014 Roland Sieker <ospalh@gmail.com>
 #
 # Provenance:
-# The idea, original version and large parts of this code
+# The idea, original version and parts of this code
 # written by Steve AW <steveawa@gmail.com>
 #
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
@@ -18,6 +18,7 @@ Adds "Quick Access" buttons to quickly change between frequently used
 note types and decks in the "Add" cards dialog.
 """
 
+###############################
 # Set up here...
 model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
                  {"label": u'動', 'name': u'Standard — Verb — Japanese'},
@@ -25,64 +26,67 @@ model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
                   'name': u'Standard — electric 一段 Verb — Japanese'},
                  {"label": u'す',
                   'name': u'Standard — electric する Verb — Japanese'}]
-"""
-List of dictionaries defining the model buttons to use.
+###############################
+# List of dictionaries defining the model buttons to use.
+#
+# Each dictionary must conatin:
+# * label: the text of the button
+# * name:  the name of the note or deck to change to
+# Optional element:
+# * shortcut: the shortcut key
+#
+# N.B.: Closely follow the examples. Use the correct symbols like
+#       brackets, curly braces; use u'' for strings that contain
+#       non-ascii characters (u'Basic' and 'Basic' work, but you must
+#       use u'ベーシック', not 'ベーシック').
+#
+# N.B.: When there is no model with the given name, you will get
+#       an error ending with “TypeError: 'NoneType' object has no
+#       attribute '__getitem__'”. Set the names carefully.
+#
+# Example 1 (minimal):
+# model_buttons = [{"label": 'S', "name": 'Standard'}]
+#
+# Example 2.
+# model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
+#                  {"label": u'動', 'name': u'Standard — Verb — Japanese'},
+#                  {"label": u'一',
+#                   'name': u'Standard — electric 一段 Verb — Japanese'},
+#                  {"label": u'す',
+#                   'name': u'Standard — electric する Verb — Japanese'}]
+#
+# Example 3:
+# model_buttons = [{"label": u'C',
+#                   'name': u'ClozeFieldAtTop'},
+#                  {"label": u'F',
+#                   'name': u'FieldAtTop'}]
+#
+# Example 4:
+# model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+#                  {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]
 
-Each dictionary must conatin:
-* label: the text of the button
-* name:  the name of the note or deck to change to
-Optional element:
-* shortcut: the shortcut key
 
-N.B.: Closely follow the examples. Use the correct symbols like
-      brackets, curly braces; use u'' for strings that contain
-      non-ascii characters (u'Basic' and 'Basic' work, but you must
-      use u'ベーシック', not 'ベーシック').
-
-N.B.: When there is no model with the given name, you will get
-      an error ending with “TypeError: 'NoneType' object has no
-      attribute '__getitem__'”. Set the names carefully.
-
-Example 1 (minimal):
-model_buttons = [{"label": 'S', "name": 'Standard'}]
-
-Example 2.
-model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
-                 {"label": u'動', 'name': u'Standard — Verb — Japanese'},
-                 {"label": u'一',
-                  'name': u'Standard — electric 一段 Verb — Japanese'},
-                 {"label": u'す',
-                  'name': u'Standard — electric する Verb — Japanese'}]
-
-Example 3:
-model_buttons = [{"label": u'C',
-                  'name': u'ClozeFieldAtTop'},
-                 {"label": u'F',
-                  'name': u'FieldAtTop'}]
-
-Example 4 (default):
-model_buttons = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
-                 {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]
-"""
-
+###############################
 # ... and here.
-deck_buttons = [{"label": u'S', 'name': u'5 Standard'},
+deck_buttons = [{"label": u'Z', 'name': u'ZZ Standard'},
                 {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}]
-"""
-List of dictionaries defining the model buttons to use.
+###############################
+# List of dictionaries defining the deck buttons to use.
+#
+# The rules are identical to those for the model buttons, "name" must
+# name an existing deck.
+#
+# Example 1:
+# deck_buttons = [{"label": u'Z', 'name': u'ZZ'},
+#                 {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'},]
+#
+# Example 2 (default):
+# deck_buttons = [{"label": u'D', 'name': u'Default'},]
 
-The rules are identical to those for the model buttons, "name" must
-name an existing deck.
 
-Example 1:
-deck_buttons = [{"label": u'Z', 'name': u'ZZ'},
-                {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'},]
-
-Example 2 (default):
-deck_buttons = [{"label": u'D', 'name': u'Default'},]
-"""
-
-## Configuration section end
+###############################
+## Configuration section end ##
+###############################
 
 ## IAR, (or "practicality beats purity"). Put the stuff to change on
 ## top, even before the imports.
@@ -97,7 +101,7 @@ from anki.hooks import runHook
 from anki.lang import _
 from anki.utils import isMac
 
-__version__ = "2.0.7"
+__version__ = "2.0.8"
 
 
 def setup_buttons(chooser, buttons, text, do_function):
