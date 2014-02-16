@@ -68,7 +68,7 @@ model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
 
 ###############################
 # ... and here.
-deck_buttons = [{"label": u'S', 'name': u'5 Standard'},
+deck_buttons = [{"label": u'Z', 'name': u'ZZ Standard'},
                 {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}]
 ###############################
 # List of dictionaries defining the deck buttons to use.
