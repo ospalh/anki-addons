@@ -21,6 +21,7 @@ note types and decks in the "Add" cards dialog.
 ###############################
 # Set up here...
 model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
+                 {"label": u'P', 'name': u'Person'},
                  {"label": u'動', 'name': u'Standard — Verb — Japanese'},
                  {"label": u'一',
                   'name': u'Standard — electric 一段 Verb — Japanese'},
@@ -69,6 +70,7 @@ model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
 ###############################
 # ... and here.
 deck_buttons = [{"label": u'Z', 'name': u'ZZ Standard'},
+                {"label": u'L', 'name': u'5 Leute'},
                 {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}]
 ###############################
 # List of dictionaries defining the deck buttons to use.
