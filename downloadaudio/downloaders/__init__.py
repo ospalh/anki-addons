@@ -20,18 +20,26 @@ each site first.
 """
 
 from .beolingus import BeolingusDownloader
+from .collins_french import CollinsFrenchDownloader
+from .collins_german import CollinsGermanDownloader
+from .collins_italian import CollinsItalianDownloader
+from .collins_spanish import CollinsSpanishDownloader
 from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
 from .lexin import LexinDownloader
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
-from .oaad import OaadDownloader
 from .mw import MerriamWebsterDownloader
+from .oaad import OaadDownloader
 from .wiktionary import WiktionaryDownloader
 
 downloaders = [
     JapanesepodDownloader(),
+    CollinsFrenchDownloader(),
+    CollinsGermanDownloader(),
+    CollinsItalianDownloader(),
+    CollinsSpanishDownloader(),
     LexinDownloader(),
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
@@ -48,5 +56,10 @@ downloaders = [
 # with a '#' are not tried. Change the order, or which lines get the
 # '#' to taste
 
+
+# # For testing.
+# downloaders = [
+#    DictNNDownloader()
+#]
 
 __all__ = ['downloaders']
