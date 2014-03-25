@@ -17,9 +17,10 @@ class CollinsGermanDownloader(CollinsDownloader):
     """Download German audio from Collins Dictionary."""
     def __init__(self):
         CollinsDownloader.__init__(self)
-        self.url = None
-        self.lang = None  # e.g. u'french'
-        self.lang_code = None  # e.g. u'/fr_/'
+        self.url \
+            = 'http://www.collinsdictionary.com/dictionary/german-english/'
+        self.lang = 'de'
+        self.lang_code = u'/de_/'
         self.icon_url = self.url
         self.extras = dict(Source="Collins German")
 

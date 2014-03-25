@@ -11,9 +11,8 @@ Download pronunciations from Merriam-Webster.
 """
 
 import urllib
-import re
 
-from .downloader import AudioDownloader
+from .downloader import AudioDownloader, uniqify_list
 
 
 class CollinsDownloader(AudioDownloader):
@@ -23,8 +22,10 @@ class CollinsDownloader(AudioDownloader):
         # self.url = 'http://www.collinsdictionary.com/dictionary/NN-english/'
         # The url is set in the derived French or Spanish classes.
         self.url = None
-        self.lang = None  # e.g. u'french'
+        self.base_url = u'http://www.collinsdictionary.com'
+        self.lang = None  # e.g. u'fr'
         self.lang_code = None  # e.g. u'/fr_/'
+        self.file_extension = u'.mp3'
         # self.icon_url = self.url
         # self.extras = dict(Source="Collins German")
         # Here the word page url works to get the favicon.
@@ -60,40 +61,33 @@ class CollinsDownloader(AudioDownloader):
                 if not self.lang_code in wai['onclick']:
                     # Wrong language
                     continue
-            if not lword in wai['title'].lower():
-                continue
+                # print(u'look at “{}”'.format(wai['title']))
+                if not (wai['title'] == "Pronunciation for "
+                        or wai['title'].lower().endswith(lword)):
+                    # print('not good')
+                    continue
             except KeyError:
                 # Not an onclick element after all. Or no title with
                 # the word. Surely not what we want.
                 continue
             # Looks good so far.
-            oclick = wai['onclick']
-            link_list = wai  # TODO: actually extract the link.
-        if link_list:
-            # Only get the icon when we (seem to) have a pronunciation
-            self.maybe_get_icon()
-        for clink in enumerate(link_list):
-            # extras = dict(Source="Collins")
-            try:
-                word_path, word_file = self.get_word_file(mw_fn, word)
-            except ValueError:
-                continue
-            self.downloads_list.append((word_path, word_file, self.extras))
+            # print(u'adding link with title “{}”'.format(wai['title']))
+            link_list.append(self.get_link(wai['onclick']))
+        if not link_list:
+            return
+        link_list = uniqify_list(link_list)
+        self.maybe_get_icon()
+        for lnk in link_list:
+            word_data = self.get_data_from_url(lnk)
+            word_path, word_fname = self.get_file_name()
+            with open(word_path, 'wb') as word_file:
+                word_file.write(word_data)
+            self.downloads_list.append(
+                (word_path, word_fname, self.extras))
 
-    def get_word_file(self, base_name, word):
-        """
-        Get an audio file from Collins.
-
-        Load what would be shown as the Collins play audio browser pop-up,
-        isolate the "Use your default player" link from that, get the
-        file that points to and get that.
-        """
-        popup_soup = self.get_soup_from_url(
-            self.get_popup_url(base_name, word))
-        # The audio clip is the only embed tag.
-        popup_embed = popup_soup.find(name='embed')
-        word_data = self.get_data_from_url(popup_embed['src'])
-        word_path, word_fname = self.get_file_name()
-        with open(word_path, 'wb') as word_file:
-            word_file.write(word_data)
-        return word_path, word_fname
+    def get_link(self, onclick_string):
+        # Wrote these bits for ooad
+        onclick_string = onclick_string.lstrip('playSoundFromFlash(')
+        onclick_string = onclick_string.rstrip(')')
+        audio_url = onclick_string.split(', ')[1]
+        return self.base_url + audio_url.lstrip("'").rstrip("'")
