@@ -1,6 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
-# © 2012–2013 Roland Sieker <ospalh@gmail.com>
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
+#
+# Copyright © 2012–2014 Roland Sieker <ospalh@gmail.com>
+#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/licenses/agpl.html
 
 """
 Anki-2 add-on to show the learn count in the deck browser
@@ -9,7 +12,7 @@ Anki-2 add-on to show the learn count in the deck browser
 from aqt.deckbrowser import DeckBrowser
 from anki.lang import _
 
-__version__ = '0.0.1'
+__version__ = '0.1.0'
 
 hide_big_numbers = True
 
