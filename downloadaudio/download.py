@@ -78,7 +78,7 @@ def do_download(note, field_data, language, hide_text=False):
             dloader.language = language
             try:
                 # Make it easer inside the downloader. If anything
-                # goes wrong, don't catch or rais whatever you want.
+                # goes wrong, don't catch, or raise whatever you want.
                 dloader.download_files(text, base, ruby, split)
             except:
                 ## Uncomment this raise while testing a new
