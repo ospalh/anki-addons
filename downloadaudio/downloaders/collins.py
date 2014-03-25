@@ -26,14 +26,16 @@ class CollinsDownloader(AudioDownloader):
         self.lang = None  # e.g. u'french'
         self.lang_code = None  # e.g. u'/fr_/'
         # self.icon_url = self.url
+        # self.extras = dict(Source="Collins German")
         # Here the word page url works to get the favicon.
 
     def download_files(self, word, base, ruby, split):
         u"""
-        Get pronunciations of a word from the Collins dictionary.
+        Get pronunciations of a word from a Collins dictionary.
 
         Look up a word at collins.com. There are a few derived classes
-        for French, Spanish, German and Italian.  """
+        for English, French, Spanish, German and Italian.
+        """
         self.downloads_list = []
         if split:
             # Avoid double downloads
@@ -71,18 +73,18 @@ class CollinsDownloader(AudioDownloader):
             # Only get the icon when we (seem to) have a pronunciation
             self.maybe_get_icon()
         for clink in enumerate(link_list):
-            extras = dict(Source="Collins")
+            # extras = dict(Source="Collins")
             try:
                 word_path, word_file = self.get_word_file(mw_fn, word)
             except ValueError:
                 continue
-            self.downloads_list.append((word_path, word_file, extras))
+            self.downloads_list.append((word_path, word_file, self.extras))
 
     def get_word_file(self, base_name, word):
         """
-        Get an audio file from MW.
+        Get an audio file from Collins.
 
-        Load what would be shown as the MW play audio browser pop-up,
+        Load what would be shown as the Collins play audio browser pop-up,
         isolate the "Use your default player" link from that, get the
         file that points to and get that.
         """
