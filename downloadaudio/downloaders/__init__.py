@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# Copyright © 2012–2014 Roland Sieker, <ospalh@gmail.com>
+#
+# License: GNU GPL, version 3 or later;
+# http://www.gnu.org/copyleft/gpl.html
 
 """
 A list of audio downloaders.
@@ -18,34 +20,46 @@ each site first.
 """
 
 from .beolingus import BeolingusDownloader
+from .collins_french import CollinsFrenchDownloader
+from .collins_german import CollinsGermanDownloader
+from .collins_italian import CollinsItalianDownloader
+from .collins_spanish import CollinsSpanishDownloader
 from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .japanesepod import JapanesepodDownloader
-# from .leo import LeoDownloader
-# Doesn't work any more after site upgrade.
+from .lexin import LexinDownloader
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
-from .oaad import OaadDownloader
 from .mw import MerriamWebsterDownloader
+from .oaad import OaadDownloader
 from .wiktionary import WiktionaryDownloader
 
 downloaders = [
     JapanesepodDownloader(),
+    CollinsFrenchDownloader(),
+    CollinsGermanDownloader(),
+    CollinsItalianDownloader(),
+    CollinsSpanishDownloader(),
+    LexinDownloader(),
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
     OaadDownloader(),
     DudenDownloader(),
-#    LeoDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
     GooglettsDownloader(),
     ]
-"""
-List of downloaders.
+# This is the list of downloaders.
+#
+# These sites are tried in the order they appear here. Lines starting
+# with a '#' are not tried. Change the order, or which lines get the
+# '#' to taste
 
-These sites are tried in the order they appear here. Lines starting
-with a '#' are not tried.
-"""
+
+# # For testing.
+# downloaders = [
+#    DictNNDownloader()
+#]
 
 __all__ = ['downloaders']
