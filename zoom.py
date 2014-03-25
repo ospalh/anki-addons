@@ -15,7 +15,8 @@ from anki.lang import _
 __version__ = "1.0.0"
 
 # Standard zoom factors for the main views of the central area:
-deck_browser_standard_zoom = 2.0**0.25
+# deck_browser_standard_zoom = 2.0**0.25
+deck_browser_standard_zoom = 2.0**0.0
 overview_standard_zoom = 2.0**0.5
 reset_required_standard_zoom = 2.0
 review_standard_zoom = 1.0
