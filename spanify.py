@@ -32,7 +32,13 @@ def setup_buttons(editor):
     u"""Add the buttons to the editor."""
     editor._addButton(
         "boxed_button", lambda ed=editor, sc=u"boxed": add_span(ed, sc),
-        text=u"☐", tip="boxed")
+        text=u"☐", tip=u"boxed")
+    editor._addButton(
+        "nhg_button", lambda ed=editor, sc=u"nhg": add_span(ed, sc),
+        text=u"和", tip=u"日本語")
+    editor._addButton(
+        "rmj_button", lambda ed=editor, sc=u"rmj": add_span(ed, sc),
+        text=u"aA", tip=u"Rōmaji")
 
 Editor.add_span = add_span
 addHook("setupEditorButtons", setup_buttons)
