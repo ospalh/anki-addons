@@ -1,8 +1,12 @@
 # -*- mode: Python ; coding: utf-8 -*-
-# Copyright: Roland Sieker ( ospalh@gmail.com )
+#
+# Copyright © 2013–2014  Roland Sieker <ospalh@gmail.com>
+#
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 # Images:
+#
 # most icons from Anki1
+#
 # Exceptions:
 # study.png,
 # Found at http://www.vectorarts.net/vector-icons/free-study-book-icons/ ,
@@ -11,6 +15,8 @@
 # A few others, notably the 'bury', 'suspend', 'options', 'record' and
 # 'play recorded' icons were found at openclipart.org:
 # Free: http://creativecommons.org/publicdomain/zero/1.0/
+#
+# Others from other “public domain” images libraries.
 
 
 """
@@ -32,7 +38,7 @@ from aqt.reviewer import Reviewer
 from aqt.utils import askUser
 
 
-__version__ = "1.4.0"
+__version__ = "1.5.0"
 
 ########################
 ## Configuration section
@@ -559,12 +565,12 @@ replay_action.setToolTip(_(u"Replay card’s audio or video."))
 mw.connect(replay_action, SIGNAL("triggered()"), mw.reviewer.replayAudio)
 record_own_action = QAction(mw)
 record_own_action.setText(_(u"Record own voice"))
-record_own_action.setIcon(QIcon(os.path.join(icons_dir, 'record_own.png')))
+record_own_action.setIcon(QIcon(os.path.join(icons_dir, 'blue_mic.png')))
 record_own_action.setToolTip(_(u"Record your own voice."))
 mw.connect(record_own_action, SIGNAL("triggered()"), mw.reviewer.onRecordVoice)
 replay_own_action = QAction(mw)
 replay_own_action.setText(_(u"Replay own voice"))
-replay_own_action.setIcon(QIcon(os.path.join(icons_dir, 'replay_own.png')))
+replay_own_action.setIcon(QIcon(os.path.join(icons_dir, 'play_green.png')))
 replay_own_action.setToolTip(_(u"Replay your recorded voice."))
 mw.connect(replay_own_action, SIGNAL("triggered()"),
            mw.reviewer.onReplayRecorded)
