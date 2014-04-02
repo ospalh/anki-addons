@@ -31,8 +31,9 @@ original_arrow_name = 'replay.png'
 collection_arrow_name = '_inline_replay_button.png'
 hide_class_name = u'browserhide'
 
-def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
-                       dummy_data, dummy_col):
+
+def play_button_filter(
+        qa_html, qa_type, dummy_fields, dummy_model, dummy_data, dummy_col):
     u"""
     Filter the questions and answers to add play buttons.
     """
@@ -56,8 +57,7 @@ max-height: 1em; min-height:8px;" class="replaybutton browserhide">\
             orig=sound.group(0), fn=sound.group(1), ip=collection_arrow_name,
             ttl=title)
         # The &#91; &#93; are the square brackets that we want to
-        # appear as brackets and not triggering the playing of the
-        # sound.
+        # appear as brackets and not trigger the playing of the sound.
     return re.sub(sound_re, add_button, qa_html)
 
 
@@ -92,7 +92,7 @@ def reduce_format_qa(self, text):
     u"""Remove elements with a given class before displaying."""
     soup = BeautifulSoup(text)
     for hide in soup.findAll(True, {'class': re.compile(
-                '\\b' + hide_class_name + '\\b')}):
+            '\\b' + hide_class_name + '\\b')}):
         hide.extract()
     return original_format_qa(self, unicode(soup))
 
