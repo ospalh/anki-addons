@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2013 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2013–14 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -23,7 +23,7 @@ from aqt.browser import DataModel
 from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 
 sound_re = ur"\[sound:(.*?)\]"
 
