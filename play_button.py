@@ -52,9 +52,12 @@ def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
 title="{ttl}"><img src="{ip}" alt="play" style="max-width: 32px; \
 max-height: 1em; min-height:8px;" class="replaybutton browserhide">\
-</a>""".format(
+</a><span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
             orig=sound.group(0), fn=sound.group(1), ip=collection_arrow_name,
             ttl=title)
+        # The &#91; &#93; are the square brackets that we want to
+        # appear as brackets and not triggering the playing of the
+        # sound.
     return re.sub(sound_re, add_button, qa_html)
 
 
