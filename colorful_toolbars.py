@@ -1,8 +1,12 @@
 # -*- mode: Python ; coding: utf-8 -*-
-# Copyright: Roland Sieker ( ospalh@gmail.com )
+#
+# Copyright © 2013–2014  Roland Sieker <ospalh@gmail.com>
+#
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 # Images:
+#
 # most icons from Anki1
+#
 # Exceptions:
 # study.png,
 # Found at http://www.vectorarts.net/vector-icons/free-study-book-icons/ ,
@@ -11,6 +15,8 @@
 # A few others, notably the 'bury', 'suspend', 'options', 'record' and
 # 'play recorded' icons were found at openclipart.org:
 # Free: http://creativecommons.org/publicdomain/zero/1.0/
+#
+# Others from other “public domain” images libraries.
 
 
 """
