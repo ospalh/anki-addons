@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2013 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2013–14 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -24,7 +24,7 @@ from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 from aqt import mw
 
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 
 sound_re = ur"\[sound:(.*?)\]"
 
@@ -32,8 +32,9 @@ original_arrow_name = 'replay.png'
 collection_arrow_name = '_inline_replay_button.png'
 hide_class_name = u'browserhide'
 
-def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
-                       dummy_data, dummy_col):
+
+def play_button_filter(
+        qa_html, qa_type, dummy_fields, dummy_model, dummy_data, dummy_col):
     u"""
     Filter the questions and answers to add play buttons.
     """
@@ -53,9 +54,11 @@ def play_button_filter(qa_html, qa_type, dummy_fields, dummy_model,
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
 title="{ttl}"><img src="{ip}" alt="play" style="max-width: 32px; \
 max-height: 1em; min-height:8px;" class="replaybutton browserhide">\
-</a>""".format(
+</a><span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
             orig=sound.group(0), fn=sound.group(1), ip=collection_arrow_name,
             ttl=title)
+        # The &#91; &#93; are the square brackets that we want to
+        # appear as brackets and not trigger the playing of the sound.
     return re.sub(sound_re, add_button, qa_html)
 
 
@@ -90,7 +93,7 @@ def reduce_format_qa(self, text):
     u"""Remove elements with a given class before displaying."""
     soup = BeautifulSoup(text)
     for hide in soup.findAll(True, {'class': re.compile(
-                '\\b' + hide_class_name + '\\b')}):
+            '\\b' + hide_class_name + '\\b')}):
         hide.extract()
     return original_format_qa(self, unicode(soup))
 
