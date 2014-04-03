@@ -34,11 +34,11 @@ def setup_buttons(editor):
         "boxed_button", lambda ed=editor, sc=u"boxed": add_span(ed, sc),
         text=u"☐", tip=u"boxed")
     editor._addButton(
-        "nhg_button", lambda ed=editor, sc=u"nhg": add_span(ed, sc),
-        text=u"和", tip=u"日本語")
+        "houji_button", lambda ed=editor, sc=u"houji": add_span(ed, sc),
+        text=u"字", tip=u"邦字")
     editor._addButton(
         "rmj_button", lambda ed=editor, sc=u"rmj": add_span(ed, sc),
-        text=u"aA", tip=u"Rōmaji")
+        text=u"aA", tip=u"lateinische Schrift")
 
 Editor.add_span = add_span
 addHook("setupEditorButtons", setup_buttons)
