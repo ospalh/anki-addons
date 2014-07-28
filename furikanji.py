@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# © 2012 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–14 Roland Sieker <ospalh@gmail.com>
 # Provenance:
 # Via libanki/anki/template/furigana.py by Damien Elmes <anki@ichi2.net>
 # Based off Kieran Clancy's initial implementation.
@@ -22,7 +22,7 @@ import re
 from anki import hooks
 
 
-__version__ = "1.3.0"
+__version__ = "2.0.0"
 
 # Check which pattern we should use, with or without the re.UNICODE flag.
 try:
@@ -47,20 +47,16 @@ else:
     re_sub_flag = lambda pattern, repl, string: \
         re.sub(pattern, repl, string, flags=re.UNICODE)
 
-furigana_pat = ur'<ruby class="furigana">\g<kanji><rt>\g<kana></rt></ruby>'
-"""
-Pattern to produce the furigana.
+furigana_pat = ur'<ruby class="furigana"><span class="rb">\g<kanji></span>' + \
+               ur'<rt>\g<kana></rt></ruby>'
+# The pattern to produce the furigana. What is called ruby in the old
+# code, but using named groups and adding a class.
 
-What is called ruby in the old code, but using named groups and
-adding a class.
-"""
-
-furikanji_pat = ur'<ruby class="furikanji">\g<kana><rt>\g<kanji></rt></ruby>'
-"""
-Pattern to produce the furikanji.
-
-This is pretty much the reason for this add-on.
-"""
+furikanji_pat = \
+    ur'<ruby class="furikanji"><span class="rb">\g<kana></span>' + \
+    ur'<rt>\g<kanji></rt></ruby>'
+# Pattern to produce the furikanji.  This is pretty much the reason
+# for this add-on.
 
 
 def no_sound(repl):
@@ -114,33 +110,7 @@ def furikanji(txt, *dummy_args):
     return re_sub_flag(split_pat, no_sound(furikanji_pat), txt)
 
 
-def box_kana(txt, *dummy_args):
-    u"""
-    Show text above an empty, dashed box.
-
-    Put text in a <ruby> block as <rt> with a an "IDEOGRAPHIC SPACE",
-    "　" as the base, drawn with a frame. Add class boxkana to the ruby
-    tag.
-    """
-    return u'<ruby class="boxkana">'\
-        u'<span style="border:dashed; border-width: 1px">　</span>'\
-        u'<rt>%s</rt></ruby>' % txt
-
-
-def boxed(txt, *dummy_args):
-    """
-    Draw a dashed box around the text.
-
-    Draw a dashed box around the text and add class boxed to the span
-    element.
-    """
-    return u'<span class="boxed" style="border:dashed; border-width: 1px">'\
-        u'%s</span>' % txt
-
-
 hooks.addHook('fmod_furikanji', furikanji)
-hooks.addHook('fmod_boxkana', box_kana)
-hooks.addHook('fmod_boxed', boxed)
 if hooks._hooks['fmod_kanji']:
     hooks._hooks['fmod_kanji'][0] = kanji_word_re
 if hooks._hooks['fmod_kana']:

@@ -26,6 +26,7 @@ from .collins_italian import CollinsItalianDownloader
 from .collins_spanish import CollinsSpanishDownloader
 from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
+from .howjsay import HowJSayDownloader
 from .japanesepod import JapanesepodDownloader
 from .lexin import LexinDownloader
 from .macmillan_american import MacmillanAmericanDownloader
@@ -46,6 +47,7 @@ downloaders = [
     MacmillanBritishDownloader(),
     OaadDownloader(),
     DudenDownloader(),
+    HowJSayDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
     GooglettsDownloader(),
@@ -59,7 +61,7 @@ downloaders = [
 
 # # For testing.
 # downloaders = [
-#    DictNNDownloader()
+#     DictNNDownloader(),
 #]
 
 __all__ = ['downloaders']
