@@ -17,15 +17,14 @@ $(document).ready(function(){
     });
 
 
-    $('.or_replay_button').qtip({
+    $('.andprofile').qtip({
         content: {
-            text:"Or the play button from <a href=\"Play%20button.html\">the add-on</a>.",
+            text:"And the profile name, when there is more than one.",
         }
     });
-
-    $('.left_or_top').qtip({
+    $('.orprofile').qtip({
         content: {
-            text:"It may appear at the top under certain circumstances. Drag-and-drop it to the left.",
+            text:"or profile",
         }
     });
 

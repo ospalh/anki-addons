@@ -61,7 +61,7 @@ item.
 
 The file contains a switch to chage the add-on to “netbook”-mode. When
 the `netbook_version = True` line is active the the two icon bars are
-on the left and right, to preserve vertical screen space. To get to my
+on the <span class="qtbase left_or_top">left</span> and right, to preserve vertical screen space. To get to my
 personal variant with different buttons in the bottom bar, take a look
 at the git branch
 [`develop-ospalh-special`](https://github.com/ospalh/anki-addons/blob/develop-ospalh-special/colorful_toolbars.py). Remember

@@ -3,9 +3,9 @@ id: fix_neg_times
 main_file: fix_negative_review_times.py
 date: 2013-05-07
 type: addon
-status: working
-status_color: green
-status_text_color: white
+status: obsolete
+status_color: yellow
+status_text_color: black
 abstract: "Fix negative review times."
 first_image: time_fix.png
 first_alt: 'Some Python code'
@@ -24,3 +24,6 @@ steps
 
 <blockquote class="nb">This only resets the times. It does not prevent
 the same problem from occuring again.</blockquote>
+
+It looks like AnkiDroid is no longer producing this problem, so there
+seems to remain little need for this add-on.

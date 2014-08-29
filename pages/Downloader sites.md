@@ -16,6 +16,11 @@ dictionary provided by the
 The site provides German↔English, German↔Portuguese and German↔Spanish
 dictionaries and pronunciations in English, German and Spanish.
 
+## Collins
+
+[Collins Dictoonaries](http://www.collinsdictionary.com/) are used for
+French, German, Italian and Spanish
+
 ## Duden
 
 The [Duden](http://www.duden.de) is pretty much the reference
@@ -49,6 +54,10 @@ head of the
 [`googl_tts.py`](https://github.com/ospalh/anki-addons/blob/master/downloadaudio/downloaders/google_tts.py)
 file to `True`.
 
+## Howjsay
+
+Requests for English words are sent to [howjsay.com](http://howjsay.com/).
+
 ## <span id="jpod">JapanesePod</span>
 
 Downloads audio provided by
@@ -62,9 +71,7 @@ is the dictionary called “edict” by the
 
 This was the main motivation for writing this add-on. By providing a
 way to download these pronunciations this add-on is a replacement for
-the Anki-1 plugins “Audio Download” and “Audio Download (Extension)”,
-as mentioned on
-[Google Groups](https://groups.google.com/forum/#!searchin/ankisrs/breen/ankisrs/UHGEpSkWf9k/3bFJ71AimCEJ).
+the Anki 1 plugins “Audio Download” and “Audio Download (Extension)”.
 
 ### <span id="blacklist">Blacklist</span>
 
@@ -90,6 +97,12 @@ available...” spiel. The add-on will then store a
 this file. When the same file is seen again, it is quietly dropped and
 you may receive a “Nothing downloaded” message.
 
+## Lexin
+
+Swedish pronunciation from the
+[lexikon för invandrare](http://lexin.nada.kth.se/lexin/) of the
+[Institutet för språk och folkminnen](http://www.sprakochfolkminnen.se/)
+and the [Kungliga Tekniska högskolan](https://www.kth.se/).
 
 ## Macmillan
 

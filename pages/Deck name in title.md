@@ -11,14 +11,13 @@ window title."
 first_image: deck_title.png
 first_alt: "A window title: “Lernen::1 日本語::1 和独::VHS – Anki”"
 ankiweb_id: 3895972296
+extra_jq_script: dit_tips.js
 
-Show the name of the deck you are currently learning in the window
-title.
+Show the name of the deck you are currently <span class="qtbase
+andprofile">learning</span> in the window title.
 
-When there is only one profile, its name is not shown.
-
-Taking a hint from some other applications, the deck name or profile
-name is shown *before* the application name.
+Taking a hint from some other applications, the <span class="qtbase
+orprofile">deck</span> name name is shown *before* the application name.
 
 ### Setup
 

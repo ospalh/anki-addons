@@ -188,12 +188,8 @@ profile.
 ## AnkiDroid
 
 People that like to build their own AnkiDroid version can take a look
-at the
-[branch](https://github.com/ospalh/Anki-Android/tree/feature-diy-night-mode)
-i have made a that sets extra classes for the night mode. That patch
-switches off the normal color reversal of the AnkiDroid night mode and
-entirely relies on the colors being changed in the notes’ CSS. Take a
-look at the code changes for details on how to set up the classes.
-
-It is probably a good idea to merge the branch into the newest
-AnkiDroid development branch rather than to use it as is.
+at my
+[patched branch](https://github.com/ospalh/Anki-Android/tree/develop-ospalh-special)
+where one of the changes is a re-implementation of extra classes for
+the night mode mechanism. This isn’t a specific branch any more. You
+have to look through the commits.

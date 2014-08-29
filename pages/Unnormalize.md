@@ -3,7 +3,7 @@ id: unnormalize
 main_file: unnormalize.py
 date: 2013-06-07
 type: addon
-status: may add errors
+status: may add errors, broken
 status_color: red
 status_text_color: white
 abstract: "Fix file name problems caused by Unicode normalization."
@@ -15,6 +15,11 @@ first_caption: "So, the file is there and it is missing‽"
 
 This can be used to fix a problem caused by adding files “sideways” on
 Macs.
+
+<blockquote class="nb">
+This add-on does not work with newer versions of Anki. On the other
+hand it should not be needed any more.
+</blockquote>
 
 ## The problem
 

@@ -4,9 +4,9 @@ main_file: fen_visualizer.py
 date: 2013-06-12
 tags: [chess fen unicode]
 type: addon
-status: working
-status_color: green
-status_text_color: white
+status: abandoned
+status_color: yellow
+status_text_color: black
 abstract: Display FEN data as a chess board.
 first_image: excelsior.png
 first_alt: "Chess board with the chess problem “excelsior”. See text for
@@ -49,3 +49,9 @@ This was a quick hack. I am neither playing chess nor terribly
 interested in this, i just stumbled across the code that does the
 equivalent for AnkiDroid. If anybody thinks ey can do a better job,
 ey’s welcome to take over this add-on.
+
+## Chess deck
+
+This [shared deck](https://ankiweb.net/shared/info/1176122148)
+that should work on AnkiWeb as well, can be used instead. While that
+deck does not allow black’s view, it is otherwise more flexible.

@@ -53,24 +53,22 @@ A list of audio codes can – unsurprisingly – be found at
 [Wikipedia](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 
 
-## Setup – Fields
+## Setup – Models
 
-This add-on adds the pronunciation to a field named “Audio”. You will
-probably have to [add this field](Add%20audio%20field.html) to your notes.
-This has to be done for each note type you use.
 
-More sophisticated uses are also possible. Interested users can look
-at the [detailed rules](Detailed%20audio%20field%20rules.html) on field
+Use the [models](Audio%20models.html) the add-on brings along can be
+used for simple cards and new material.
+
+### Changes to existing models
+
+When the already existing notes use a more complex model, this model
+should be modified instead. An audio field should be added to the
+[model](Add%20audio%20field.html)  and the [cards](Add%20audio%20to%20cards.html)
+
+Interested users can look at the
+[detailed rules](Detailed%20audio%20field%20rules.html) on field
 selection for hints on how to use more then one pronunciation per
-note.
-
-## Setup – Cards
-
-To use the downloaded data, you have to
-[add the field](Add%20audio%20to%20cards.html) to a card.
-
-Here, too, more sophisticated uses are described on an
-[extra page](More%20audio%20cards.html).
+note, and how to [create audio cards](More%20audio%20cards.html).
 
 ## Downloading
 
@@ -198,14 +196,18 @@ dictionaries used.
 
 At the moment, you can get pronunciations for
 
-* English (`en`) from [BeoLingus](http://beolingus.org),
+* English (`en`) from
   [Macmillan Dictionary](http://www.macmillandictionary.com/dictionary/),
-  [Merriam-Webster](http://merriam-webster.com) and
-  [Oxford Advanced American Dictionary](http://oaadonline.oxfordlearnersdictionaries.com/).
+  [Merriam-Webster](http://merriam-webster.com),
+  [Oxford Advanced American Dictionary](http://oaadonline.oxfordlearnersdictionaries.com/) &c.
+* French (`fr`) from [Collins](http://www.collinsdictionary.com/dictionary/english-french)
 * German (`de`) from [BeoLingus](http://beolingus.org) and
   [Duden](http://www.duden.de)
+* Italian (`it`) from
+  [Collins](http://www.collinsdictionary.com/dictionary/english-italian)
 * Japanese (`ja`) from [JapanesePod](http://japanesepod101.com)
 * Spanish (`es`) from [BeoLingus](http://beolingus.org)
+* Swedish (`sv`) from [Lexin](http://lexin.nada.kth.se/lexin/)
 
 Google translate list over 60 languages for text translations. It
 seems unlikely that they offer text-to-speech services for more. The
@@ -222,14 +224,17 @@ More information in the [list of sites](Downloader%20sites.html) used.
 
 These audio files can be freely downloaded without registering or
 agreeing to a license, but they keep the copyright of those providing
-them. While i see no problem with using them privately, especially for
-educational purposes, re-publishing, for example by uploading a shared
-deck to AnkiWeb, is most likely prohibited by those rights.
+them. While i see no problem with using them privately, re-publishing,
+for example by uploading a shared deck to AnkiWeb, is most likely
+prohibited by those rights.
 
-An exception is Wiktionary. Those files are usually available under
-the [Creative Commons Attribution/Share-Alike
-License](http://creativecommons.org/licenses/by-sa/3.0/). See the
-[Wikimedia Terms of Use](http://wikimediafoundation.org/wiki/Terms_of_use).
+Even words downloaded from Wiktionary should not simply be
+re-published. Those files *are* usually available under the
+[Creative Commons Attribution/Share-Alike License](http://creativecommons.org/licenses/by-sa/3.0/),
+but the add-on does not correctly attribute the files to their
+authors. See the
+[Wikimedia Terms of Use](http://wikimediafoundation.org/wiki/Terms_of_use)
+for details.
 
 <blockquote class="nb">
 Do not publish decks with audio clips downloaded with this add-on
@@ -258,7 +263,8 @@ every card. There are a few reasons for this:
 Bugs and other issues can be reported at the
 [GitHub repository](https://github.com/ospalh/anki-addons/issues?state=open)
 or the add-ons
-[Google Groups thread](https://groups.google.com/d/topic/anki-addons/DMgTHkhnhow/discussion).
+[issue tracker](https://anki.tenderapp.com/discussions/add-ons).
+
 
 Github pull requests with patches are welcome. The preferred way is to use
 git-flow and create a `feature` branch off the
@@ -293,11 +299,10 @@ Things that might be added in the future (but don’t hold your breath):
   complete the word in the “Manual audio” dialog, the add-on could
   automatically add the 「る」 for 一段動詞.  This will most likely
   not by implemented any time soon.
-* More talking dictionaries. Links welcome. Mention them in the
-  [Google Groups thread](https://groups.google.com/d/topic/anki-addons/DMgTHkhnhow/discussion).
-  Python files welcome. Take a look at
+* More non-English talking dictionaries. Links welcome.  Python files
+  welcome. Take a look at
   [`downloadaudio/downloaders`](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/downloaders),
   write a new class derived from `AudioDownloader` and send me a pull
-  request. Or just the `.py`-file. There are already quite a number
-  of sources for English, so i will probably not add any more for that
+  request. Or just the `.py`-file. There are already quite a number of
+  sources for English, so i will probably not add any more for that
   language.

@@ -18,3 +18,9 @@ Edit audio files with
 Trigger the `Edit/Media/Edit audio` menu item to start sweep with the
 audio files of the current card. Then edit them there and save. Replay
 in Anki to hear the effect.
+
+<blockquote class="nb">
+The audio editor itself isn’t all that
+stable. Complain to the authors of that piece of software when you
+encounter problems with it, not to me. When you can get hold of them.
+</blockquote>
