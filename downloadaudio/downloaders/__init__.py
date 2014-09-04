@@ -6,14 +6,13 @@
 # License: GNU GPL, version 3 or later;
 # http://www.gnu.org/copyleft/gpl.html
 
-"""
-A list of audio downloaders.
+"""A list of audio downloaders.
 
 They are intended for use with the Anki2 audiodownload add-on, but can
 possibly be used alone. For each downloader in the list, setting its
-language variable and then calling download_files(text, base, ruby)
-downloads audio files to temp files and fills its downloads_list with
-the file names.
+language variable and then calling download_files(text, base, ruby,
+split) downloads audio files to temp files and fills its
+downloads_list with the file names.
 
 When PyQt4 is installed, this downolads the site icon (favicon) for
 each site first.
@@ -32,7 +31,7 @@ from .lexin import LexinDownloader
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
 from .mw import MerriamWebsterDownloader
-from .oaad import OaadDownloader
+from .oald import OaldDownloader
 from .wiktionary import WiktionaryDownloader
 
 downloaders = [
@@ -45,13 +44,13 @@ downloaders = [
     MerriamWebsterDownloader(),
 #    MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
-    OaadDownloader(),
+    OaldDownloader(),
     DudenDownloader(),
     HowJSayDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
     GooglettsDownloader(),
-    ]
+]
 # This is the list of downloaders.
 #
 # These sites are tried in the order they appear here. Lines starting
@@ -62,6 +61,6 @@ downloaders = [
 # # For testing.
 # downloaders = [
 #     DictNNDownloader(),
-#]
+# ]
 
 __all__ = ['downloaders']
