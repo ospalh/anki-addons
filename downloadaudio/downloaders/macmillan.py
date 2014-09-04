@@ -11,9 +11,13 @@ Download pronunciations from  Macmillan Dictionary.
 """
 
 from copy import copy
+import re
 import urllib
 
 from .downloader import AudioDownloader
+
+# Work-around for broken BeautifulSoup
+sound_class = re.compile(r'\bsound\b')
 
 
 class MacmillanDownloader(AudioDownloader):
@@ -48,30 +52,11 @@ class MacmillanDownloader(AudioDownloader):
             self.url + urllib.quote(word.encode('utf-8')))
         # The audio clips are stored as images with class sound and
         # the link hidden in the onclick bit.
-        sounds = word_soup.findAll(attrs={'class': 'sound'})
-        # The interesting bit it the onclick attribute and looks like
-        # """playSoundFromFlash('http://www.macmillandictionary.com/',
-        # 'http://www.macmillandictionary.com/media/british/uk_pron/\
-        # c/cas/case_/case_law_British_English_pronunciation.mp3',
-        # this)""" Isolate those. Make it readable. We do the whole
-        # processing EAFP style. When they change the format, the
-        # processing will raise an exception that we will catch in
-        # download.py.
-        # I think they typically have exatly one pronunciation on a
-        # real result page. Anyway, with lists we have no problems
-        # with 0 or >1 results.
+        sounds = word_soup.findAll(True, {'class': sound_class})
         for sound_tag in sounds:
-            onclick_string = sound_tag['onclick']
-            # Now cut off the bits on the left and right that should
-            # be there. If not, this will fail. (Most likely the
-            # split.)  (This file is based on the MW downloader. There
-            # we had special code to deal with apostrops inside the
-            # onclick string. As we get naked url here, Macmillan.com
-            # is dealing with that for us.)
-            onclick_string = onclick_string.lstrip('playSoundFromFlash(')
-            onclick_string = onclick_string.rstrip(')')
-            audio_url = onclick_string.split(', ')[1]
-            audio_url = audio_url.lstrip("'").rstrip("'")
+            audio_url = sound_tag.get('data-src-mp3')
+            if not audio_url:
+                continue
             word_data = self.get_data_from_url(audio_url)
 
             word_file_path, word_file_name = self.get_file_name()
