@@ -24,7 +24,7 @@ from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 from aqt import mw
 
-__version__ = "1.4.0"
+__version__ = "1.5.0"
 
 sound_re = ur"\[sound:(.*?)\]"
 
@@ -52,13 +52,15 @@ def play_button_filter(
         else:
             title = sound.group(1)
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
-title="{ttl}"><img src="{ip}" alt="play" style="max-width: 32px; \
-max-height: 1em; min-height:8px;" class="replaybutton browserhide">\
-</a><span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
+title="{ttl}" class="replaybutton browserhide"><span><img src="{ip}" \
+alt="play" style="max-width: 32px; max-height: 1em; min-height:8px;" />\
+</span></a><span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
             orig=sound.group(0), fn=sound.group(1), ip=collection_arrow_name,
             ttl=title)
         # The &#91; &#93; are the square brackets that we want to
-        # appear as brackets and not trigger the playing of the sound.
+        # appear as brackets and not trigger the playing of the
+        # sound. The span inside the a around the img is to bring this
+        # closer in line with AnkiDroid.
     return re.sub(sound_re, add_button, qa_html)
 
 
