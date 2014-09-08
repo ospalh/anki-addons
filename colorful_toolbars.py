@@ -100,7 +100,7 @@ icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
 
 # We basically use these two like Booleans
 dl_action = None
-sweep_action = None
+edit_action = None
 
 
 toolbar_gradient_form = u'''QToolBar:top, QToolBar:bottom {{
@@ -387,7 +387,7 @@ def more_tool_bar_off():
 
 def maybe_more_tool_bar_on():
     """Show the more tool bar when we should."""
-    global dl_action, sweep_action
+    global dl_action, edit_action
     show_more_tool_bar_action.setEnabled(True)
     bury_note_action.setEnabled(True)
     toggle_mark_action.setEnabled(True)
@@ -404,15 +404,15 @@ def maybe_more_tool_bar_on():
                 # Move out of try so we see problems here
                 mw.reviewer.more_tool_bar.addSeparator()
                 mw.reviewer.more_tool_bar.addAction(dl_action)
-        if not sweep_action:
+        if not edit_action:
             try:
-                sweep_action = mw.sweep_audio_fiels_action
+                edit_action = mw.edit_audio_fiels_action
             except:
                 pass
             else:
                 # Move out of try so we see problems here
                 mw.reviewer.more_tool_bar.addSeparator()
-                mw.reviewer.more_tool_bar.addAction(sweep_action)
+                mw.reviewer.more_tool_bar.addAction(edit_action)
         try:
             mw.reviewer.more_tool_bar.show()
         except AttributeError:
