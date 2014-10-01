@@ -70,7 +70,7 @@ def correct_scalar(reviewer, given, correct, showBad=True, _old=None):
     except AttributeError:
         # No typed answer to show at all.
         return _old(reviewer, given, correct, showBad)
-    if not scalar_field in fld.lower() or fld.startswith("cq:"):
+    if fld.startswith("cq:") or scalar_field not in fld.lower():
         return _old(reviewer, given, correct, showBad)
     try:
         class_string = scalar_color_class(given, correct)
