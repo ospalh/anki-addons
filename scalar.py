@@ -38,10 +38,13 @@ scalar_css = u"""
 """.format(tp=pass_class)
 
 exact_format_string = u"""\
+<span class="typeGood allgood typedscalar"></span>
 <span id=typeans class="typedscalar">
-<span class="{cl} allGood">{num}</span>
-</span>
+<span class="checkmark decoration typeGood">
+✔
+</span></span>
 """
+
 two_num_format_string = u"""\
 <span id=typeans class="typedscalar corrected">
 <span class="{cl} given">{g}</span>
@@ -78,7 +81,7 @@ def correct_scalar(reviewer, given, correct, showBad=True, _old=None):
         return _old(reviewer, given, correct, showBad)
     else:
         if class_string == exact_class:
-            return exact_format_string.format(cl=class_string, num=given)
+            return exact_format_string
         else:
             return two_num_format_string.format(
                 cl=class_string, g=given, c=correct, ccl=exact_class)
