@@ -1,8 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2014 Roland Sieker <ospalh@gmail.com>
 #
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 
 """
@@ -31,7 +32,7 @@ class ForvoDownloader(AudioDownloader):
             'format/json/order/rate-desc/limit/3/' \
             'key/XXXXXXXXXX/word/'
         self.icon_url = 'http://www.forvo.com/'
-        self.sex_dict = {'f': u'♀', 'm': u'♂'}
+        self.gender_dict = {'f': u'♀', 'm': u'♂'}
 
     def download_files(self, word, base, ruby, split):
         """
@@ -61,7 +62,7 @@ class ForvoDownloader(AudioDownloader):
                 pass
             else:
                 try:
-                    user_str += u' ({0})'.format(self.sex_dict[itm['sex']])
+                    user_str += u' ({0})'.format(self.gender_dict[itm['sex']])
                 except KeyError:
                     pass
                 extras['User'] = user_str
