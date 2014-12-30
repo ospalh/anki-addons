@@ -217,6 +217,7 @@ def editor_add_download_editing_button(self):
         tip=u"Download audio...", text=" ")
     dl_button.setIcon(
         QIcon(os.path.join(icons_dir, 'download_note_audio.png')))
+    dl_button.setText("")
 
 
 # Either reuse an edit-media sub-menu created by another add-on
