@@ -214,15 +214,15 @@ def editor_add_download_editing_button(self):
     dl_button = self._addButton(
         "download_audio",
         lambda self=self: editor_download_editing(self),
-        tip=u"Download audio...", text=" ")
+        tip=u"Download audio…")
     dl_button.setIcon(
         QIcon(os.path.join(icons_dir, 'download_note_audio.png')))
 
 
 # Either reuse an edit-media sub-menu created by another add-on
-# (probably by Y.T., notably the external edit add-on that is in the
-# works) or create that menu. When we already have that menu, add a
-# separator, otherwise create that menu.
+# (probably the mhwave (ex sweep) add-on by Y.T.) or create that
+# menu. When we already have that menu, add a separator, otherwise
+# create that menu.
 try:
     mw.edit_media_submenu.addSeparator()
 except AttributeError:
