@@ -39,7 +39,7 @@ class MerriamWebsterDownloader(AudioDownloader):
         self.popup_url = 'http://www.merriam-webster.com/audio.php?'
 
     def download_files(self, word, base, ruby, split):
-        ur"""
+        u"""
         Get pronunciations of a word from Meriam-Webster
 
         Look up a English word at merriam-webster.com, look for
