@@ -10,7 +10,7 @@
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
-"""
+u"""
 Add-on for Anki 2 to show a chess board.
 
 Add-on for Anki 2 to show a chess board based on data in
