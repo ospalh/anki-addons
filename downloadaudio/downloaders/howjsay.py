@@ -13,6 +13,7 @@ Download pronunciations from HowJSay.
 import urllib
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 
 class HowJSayDownloader(AudioDownloader):
@@ -29,19 +30,19 @@ class HowJSayDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith('en'):
             return
         if not word:
             return
         # Replace special characters with ISO-8859-1 oct codes
-        extras = dict(Source="HowJSay")
         self.maybe_get_icon()
         audio_url = self.url + urllib.quote(word.encode('utf-8')) \
             + self.file_extension
         word_data = self.get_data_from_url(audio_url)
-        word_file_path, word_file_name = self.get_file_name()
+        word_file_path, word_file_name = self.get_file_name(
+            word, self.file_extension)
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
-        self.downloads_list.append(
-            (word_file_path, word_file_name, extras))
+        self.downloads_list.append(DownloadEntry(
+            word_file_path, word_file_name, base_name=word, display_text=word,
+            file_extension=self.file_extension, extras=dict(Source="HowJSay")))

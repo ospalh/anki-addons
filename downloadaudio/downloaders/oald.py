@@ -16,6 +16,7 @@ import re
 import urllib
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 
 # Work-around for broken BeautifulSoup
@@ -42,7 +43,6 @@ class OaldDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith('en'):
             return
         if not word:
@@ -61,7 +61,8 @@ class OaldDownloader(AudioDownloader):
             if not audio_url:
                 continue
             word_data = self.get_data_from_url(audio_url)
-            word_file_path, word_file_name = self.get_file_name()
+            word_file_path, word_file_name = self.get_file_name(
+                word, self.file_extension)
             with open(word_file_path, 'wb') as word_file:
                 word_file.write(word_data)
             extras = self.extras
@@ -74,5 +75,7 @@ class OaldDownloader(AudioDownloader):
                 if title_string:
                     extras = copy(self.extras)
                     extras['Title'] = title_string
-            self.downloads_list.append(
-                (word_file_path, word_file_name, extras))
+            self.downloads_list.append(DownloadEntry(
+                word_file_path, word_file_name, base_name=word,
+                display_text=word, file_extension=self.file_extension,
+                extras=extras))

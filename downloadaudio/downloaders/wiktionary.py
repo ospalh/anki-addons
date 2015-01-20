@@ -15,6 +15,7 @@ import urlparse
 import re
 
 from .downloader import AudioDownloader, uniqify_list
+from ..download_entry import DownloadEntry
 
 # Make this work without PyQt
 with_pyqt = True
@@ -51,7 +52,6 @@ class WiktionaryDownloader(AudioDownloader):
         if split:
             # Avoid double downloads.
             return
-        self.set_names(word, base, ruby)
         if not word:
             return
         u_word = urllib.quote(word.encode('utf-8'))
@@ -111,11 +111,14 @@ class WiktionaryDownloader(AudioDownloader):
                 word_data = self.get_data_from_url(word_url)
             except:
                 continue
-            word_path, word_fname = self.get_file_name()
+            word_path, word_fname = self.get_file_name(
+                word, self.file_extension)
             with open(word_path, 'wb') as word_file:
                 word_file.write(word_data)
-            self.downloads_list.append(
-                (word_path, word_fname, dict(Source="Wiktionary")))
+            self.downloads_list.append(DownloadEntry(
+                word_path, word_fname, base_name=word, display_text=word,
+                file_extension=self.file_extension,
+                extras=dict(Source="Wiktionary")))
 
     def maybe_get_icon(self):
         if self.site_icon:

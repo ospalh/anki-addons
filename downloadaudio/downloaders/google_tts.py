@@ -13,6 +13,7 @@ Download pronunciations from GoogleTTS
 import urllib
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 get_chinese = False
 """
@@ -44,16 +45,18 @@ class GooglettsDownloader(AudioDownloader):
             if not get_chinese:
                 return
             word = base
-        self.set_names(word, base, ruby)
         if not word:
             raise ValueError('Nothing to download')
         word_data = self.get_data_from_url(self.build_url(word))
-        word_path, word_file_name = self.get_file_name()
+        word_path, word_file_name = self.get_file_name(
+            word, self.file_extension)
         with open(word_path, 'wb') as word_file:
             word_file.write(word_data)
         # We have a file, but not much to say about it.
-        self.downloads_list.append(
-            (word_path, word_file_name, dict(Source='GoogleTTS')))
+        self.downloads_list.append(DownloadEntry(
+            word_path, word_file_name, base_name=word, display_text=word,
+            file_extension=self.file_extension,
+            extras=dict(Source='GoogleTTS')))
 
     def build_url(self, source):
         u"""Return a string that can be used as the url."""

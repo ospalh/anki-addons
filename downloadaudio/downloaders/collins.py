@@ -8,11 +8,14 @@
 
 """
 Download pronunciations from Merriam-Webster.
+
+Abstract base class, derived for several languages.
 """
 
 import urllib
 
 from .downloader import AudioDownloader, uniqify_list
+from ..download_entry import DownloadEntry
 
 
 class CollinsDownloader(AudioDownloader):
@@ -41,7 +44,6 @@ class CollinsDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith(self.lang):
             return
         if not word:
@@ -79,11 +81,13 @@ class CollinsDownloader(AudioDownloader):
         self.maybe_get_icon()
         for lnk in link_list:
             word_data = self.get_data_from_url(lnk)
-            word_path, word_fname = self.get_file_name()
+            word_path, word_fname = self.get_file_name(
+                word, self.file_extension)
             with open(word_path, 'wb') as word_file:
                 word_file.write(word_data)
-            self.downloads_list.append(
-                (word_path, word_fname, self.extras))
+            self.downloads_list.append(DownloadEntry(
+                word_path, word_fname, base_name=word, display_text=word,
+                file_extension=self.file_extension, extras=self.extras))
 
     def get_link(self, onclick_string):
         # Wrote these bits for ooad

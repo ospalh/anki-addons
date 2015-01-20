@@ -52,8 +52,8 @@ Gecko/20100101 Firefox/15.0.1'''
         # Reason why we don't just do the get_data_.. bit inside the
         # with: Like this we don't have to clean up the temp file.
         word_data = self.get_data_from_url(self.query_url(base, ruby))
-        word_file_path, word_file_name = self.get_file_name(base_name,
-                                                            file_extension)
+        word_file_path, word_file_name = self.get_file_name(
+            base_name, file_extension)
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
         # We have a file, but not much to say about it.

@@ -105,14 +105,11 @@ class AudioDownloader(object):
         whole text (for most languages) or split into kanji and kana,
         base and ruby.
 
-        This function should clear the self.downloads_list, call
-        self.set_names(), and try to get pronunciation files from its
-        source, put those into tempfiles, and add a (temp_file_path,
-        base_name, extras) 3-tuple to self_downloads_lists for each of
+        This function should clear the self.downloads_list and try to
+        get pronunciation files from its source, put those into tempfiles,
+        and add a DownloadEntry object to self_downloads_lists for each of
         the zero or more downloaded files. (Zero when the
-        self.language is wrong, there is no file, ...) extras should
-        be a dict with strings of interesting informations, like
-        meaning numbers or name of speaker, or an empty dict.
+        self.language is wrong, there is no file, ...)
         """
         raise NotImplementedError("Use a class derived from this.")
 

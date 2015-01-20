@@ -23,6 +23,7 @@ except ImportError:
     with_pyqt = False
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 
 class LeoDownloader(AudioDownloader):
@@ -68,8 +69,8 @@ class LeoDownloader(AudioDownloader):
         self.downloads_list = []
         # Fix the language. EAFP.
         self.language = self.language_dict[self.language[:2].lower()]
-        # set_names also checks the language.
-        self.set_names(word, base, ruby)
+        # get_names also checks the language.
+        base_name, display_text = self.get_names(word, base, ruby)
         if self.chinese_code == self.language and not split:
             return
         # Only get the icon when we have a word
@@ -79,12 +80,14 @@ class LeoDownloader(AudioDownloader):
         word_url = self.query_url(word, ruby)
         # ... then the get_data will blow up
         word_data = self.get_data_from_url(word_url)
-        word_file_path, word_file_name = self.get_file_name()
+        word_file_path, word_file_name = self.get_file_name(
+            word, self.file_extension)
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
         # We have a file, but not much to say about it.
-        self.downloads_list.append(
-            (word_file_path, word_file_name, dict(Source='Leo')))
+        self.downloads_list.append(DownloadEntry(
+            word_file_path, word_file_name, base_name, display_text,
+            file_extension=self.file_extension, extras=dict(Source='Leo')))
 
     def query_url(self, word, ruby):
         """Build query URL"""
@@ -149,17 +152,18 @@ class LeoDownloader(AudioDownloader):
                     self.icon_url_dict[self.language]))
             self.site_icon = self.site_icon_dict[self.language]
 
-    def set_names(self, text, base, ruby):
+    def get_names(self, text, base, ruby):
         """
-        Set the display text and file base name variables.
+        Get the file base name and display text variables.
         """
         if self.language == self.chinese_code:
             if not ruby:
                 raise ValueError('Nothing to download')
-            self.base_name = u"{0}_{1}".format(base, ruby)
-            self.display_text = u"{1} ({0})".format(base, ruby)
+            base_name = u"{0}_{1}".format(base, ruby)
+            display_text = u"{1} ({0})".format(base, ruby)
         else:
             if not text:
                 raise ValueError('Nothing to download')
-            self.base_name = text
-            self.display_text = text
+            base_name = text
+            display_text = text
+        return base_name, display_text

@@ -6,8 +6,8 @@
 
 class DownloadEntry(object):
     def __init__(self, word_file_path, word_file_name, base_name, display_text,
-                 file_extension = u'.wav', extras = {},
-                 show_skull_and_bones = False):
+                 file_extension=u'.wav', extras={},
+                 show_skull_and_bones=False):
         self.word_file_path = word_file_path
         """Absolute file path of the downloaded audio file"""
         self.word_file_name = word_file_name
@@ -21,7 +21,9 @@ class DownloadEntry(object):
         self.file_extension = file_extension
         """The file extension (with dot)"""
         self.extras = extras
-        """Dictionary with extra information shown in the tooltip"""
+        """A dict with strings of interesting informations, like
+        meaning numbers or name of speaker, or an empty dict.
+        (shown in the tooltip)"""
         self.show_skull_and_bones = show_skull_and_bones
         """
         Should we show the skull and crossbones in the review dialog?
