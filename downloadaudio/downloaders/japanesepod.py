@@ -14,6 +14,7 @@ Download Japanese pronunciations from Japanesepod
 import urllib
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 
 class JapanesepodDownloader(AudioDownloader):
@@ -35,10 +36,6 @@ Gecko/20100101 Firefox/15.0.1'''
         self.language is ja.
         """
         self.downloads_list = []
-        self.set_names(word, base, ruby)
-        # We need to reset this. It could be True from the last dl,
-        # and we may not download anything later.
-        self.show_skull_and_bones = False
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
         # download, not from a reading field...
@@ -48,19 +45,23 @@ Gecko/20100101 Firefox/15.0.1'''
             return
         if not split:
             return
+        file_extension = u'.mp3'
+        base_name, display_text = self.get_names(base, ruby)
         # Only get the icon when we are using Japanese.
         self.maybe_get_icon()
         # Reason why we don't just do the get_data_.. bit inside the
         # with: Like this we don't have to clean up the temp file.
         word_data = self.get_data_from_url(self.query_url(base, ruby))
-        word_file_path, word_file_name = self.get_file_name()
+        word_file_path, word_file_name = self.get_file_name(base_name,
+                                                            file_extension)
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
         # We have a file, but not much to say about it.
-        self.downloads_list.append(
-            (word_file_path, word_file_name, dict(Source='JapanesePod')))
-        # Who knows, maybe we want to blacklsit what we just got.
-        self.show_skull_and_bones = True
+
+        self.downloads_list.append(DownloadEntry(
+            word_file_path, word_file_name, base_name, display_text,
+            file_extension, extras=dict(Source='JapanesePod'),
+            show_skull_and_bones=True))
 
 
     def query_url(self, kanji, kana):
@@ -71,12 +72,14 @@ Gecko/20100101 Firefox/15.0.1'''
             qdict['kana'] = kana.encode('utf-8')
         return self.url + urllib.urlencode(qdict)
 
-    def set_names(self, dummy_text, base, ruby):
+    def get_names(self, base, ruby):
         """
-        Set the display text and file base name variables.
+        Get the display text and file base name variables.
         """
-        self.base_name = base
-        self.display_text = base
+        base_name = base
+        display_text = base
         if ruby:
-            self.base_name += u'_' + ruby
-            self.display_text += u' (' + ruby + u')'
+            base_name += u'_' + ruby
+            display_text += u' (' + ruby + u')'
+        return base_name, display_text
+
