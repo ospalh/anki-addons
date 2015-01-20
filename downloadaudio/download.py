@@ -82,9 +82,9 @@ def do_download(note, field_data, language, hide_text=False):
                 # goes wrong, don't catch, or raise whatever you want.
                 dloader.download_files(text, base, ruby, split)
             except:
-                ## Uncomment this raise while testing a new
-                ## downloaders.  Also comment out all the others in the
-                ## downloaders list in downloaders.__init__
+                #  # Uncomment this raise while testing a new
+                #  # downloaders.  Also comment out all the others in the
+                #  # downloaders list in downloaders.__init__
                 # raise
                 continue
             for entry in dloader.downloads_list:
@@ -123,7 +123,7 @@ def do_download(note, field_data, language, hide_text=False):
     except ValueError as ve:
         tooltip(str(ve))
     except RuntimeError as rte:
-        if not 'cancel' in str(rte):
+        if 'cancel' not in str(rte):
             raise
         # else: quietly drop out on user cancel
 
