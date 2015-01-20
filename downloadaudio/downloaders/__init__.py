@@ -42,7 +42,7 @@ downloaders = [
     CollinsSpanishDownloader(),
     LexinDownloader(),
     MerriamWebsterDownloader(),
-#    MacmillanAmericanDownloader(),
+    # MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
     OaldDownloader(),
     DudenDownloader(),

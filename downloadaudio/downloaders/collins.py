@@ -61,7 +61,7 @@ class CollinsDownloader(AudioDownloader):
             # Filter out a number of wrong (i.e. other language)
             # links.
             try:
-                if not self.lang_code in wai['onclick']:
+                if self.lang_code not in wai['onclick']:
                     # Wrong language
                     continue
                 # print(u'look at “{}”'.format(wai['title']))

@@ -58,12 +58,10 @@ Gecko/20100101 Firefox/15.0.1'''
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
         # We have a file, but not much to say about it.
-
         self.downloads_list.append(DownloadEntry(
             word_file_path, word_file_name, base_name, display_text,
             file_extension, extras=dict(Source='JapanesePod'),
             show_skull_and_bones=True))
-
 
     def query_url(self, kanji, kana):
         u"""Return a string that can be used as the url."""

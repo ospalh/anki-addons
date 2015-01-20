@@ -72,7 +72,7 @@ class MacmillanDownloader(AudioDownloader):
             except KeyError:
                 pass
             else:
-                if not 'pronunciation' in alt_string.lower():
+                if 'pronunciation' not in alt_string.lower():
                     extras = copy(self.extras)
                     extras['Alt text'] = alt_string
             self.downloads_list.append(DownloadEntry(
