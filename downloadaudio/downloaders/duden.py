@@ -15,6 +15,7 @@ import unicodedata
 import urlparse
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 transliterations = [(u'Ä', 'Ae'), (u'Ö', 'Oe'), (u'Ü', 'Ue'), (u'ä', 'ae'),
                     (u'ö', 'oe'), (u'ü', 'ue'), (u'ß', 'sz')]
@@ -54,7 +55,6 @@ class DudenDownloader(AudioDownloader):
         if split:
             # Avoid double downloads.
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith('de'):
             return
         if not word:
@@ -76,11 +76,13 @@ class DudenDownloader(AudioDownloader):
                     # 'NoneType' object has no attribute 'group' ...
                     pass
                 word_data = self.get_data_from_url(link['href'])
-                word_path, word_fname = self.get_file_name()
+                word_path, word_fname = self.get_file_name(
+                    word, self.file_extension)
                 with open(word_path, 'wb') as word_file:
                     word_file.write(word_data)
-                self.downloads_list.append(
-                    (word_path, word_fname, extras))
+                self.downloads_list.append(DownloadEntry(
+                    word_path, word_fname, base_name=word, display_text=word,
+                    file_extension=self.file_extension, extras=extras))
 
     def good_link(self, link):
         """Check if link looks """

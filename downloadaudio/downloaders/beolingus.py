@@ -20,6 +20,7 @@ download_file_extension = u'.wav'
 
 
 from .downloader import AudioDownloader, uniqify_list
+from ..download_entry import DownloadEntry
 
 
 class BeolingusDownloader(AudioDownloader):
@@ -55,10 +56,10 @@ class BeolingusDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
-        # EAFP. When we call this with a wrong language we fly right
-        # out of this with a KeyError.
-        self.service = self.services_dict[self.language[:2].lower()]
+        lang = self.language[:2].lower()
+        if not lang in self.services_dict:
+            return
+        self.service = self.services_dict[lang]
         if not word:
             return
         word_soup = self.get_soup_from_url(self.build_word_url(word))
@@ -87,7 +88,9 @@ class BeolingusDownloader(AudioDownloader):
                 word_path, word_fname = self.get_word_file(url_to_get, word)
             except ValueError:
                 continue
-            self.downloads_list.append((word_path, word_fname, extras))
+            self.downloads_list.append(DownloadEntry(
+                word_path, word_fname, base_name=word, display_text=word,
+                file_extension=self.file_extension, extras=extras))
 
     def get_word_file(self, popup_url, word):
         """
@@ -97,8 +100,8 @@ class BeolingusDownloader(AudioDownloader):
         pop-up, isolate the "Listen with your default mp3 player" link
         from that, get the file that points to and get that.
         """
-        word = urllib.quote(word.encode('utf-8'))
-        popup_url = re.sub(';text=.*$', ';text=' + word, popup_url)
+        word_encoded = urllib.quote(word.encode('utf-8'))
+        popup_url = re.sub(';text=.*$', ';text=' + word_encoded, popup_url)
         popup_url = urlparse.urljoin(self.site_url, popup_url)
         popup_soup = self.get_soup_from_url(popup_url)
         # The audio link should be the only link.
@@ -111,7 +114,7 @@ class BeolingusDownloader(AudioDownloader):
         word_url = href_list[0]
         word_url = urlparse.urljoin(self.site_url, word_url)
         word_data = self.get_data_from_url(word_url)
-        word_path, word_fname = self.get_file_name()
+        word_path, word_fname = self.get_file_name(word, self.file_extension)
         with open(word_path, 'wb') as word_file:
             word_file.write(word_data)
         return word_path, word_fname

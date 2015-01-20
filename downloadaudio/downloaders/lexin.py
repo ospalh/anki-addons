@@ -17,6 +17,7 @@ download_file_extension = u'.mp3'
 
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 transliterations = [
     (u'å', '0345'), (u'ä', '0344'), (u'ö', '0366'), (u'é', '0351'),
@@ -56,19 +57,19 @@ class LexinDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith('sv'):
             return
         if not word:
             return
         # Replace special characters with ISO-8859-1 oct codes
         m_word = munge_word(word)
-        extras = dict(Source="Lexin")
         self.maybe_get_icon()
         audio_url = self.url + m_word + self.file_extension
         word_data = self.get_data_from_url(audio_url)
-        word_file_path, word_file_name = self.get_file_name()
+        word_file_path, word_file_name = self.get_file_name(
+            word, self.file_extension)
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
-        self.downloads_list.append(
-            (word_file_path, word_file_name, extras))
+        self.downloads_list.append(DownloadEntry(
+            word_file_path, word_file_name, base_name=word, display_text=word,
+            file_extension=self.file_extension, extras=dict(Source="Lexin")))

@@ -86,16 +86,14 @@ def do_download(note, field_data, language, hide_text=False):
                 ## downloaders list in downloaders.__init__
                 # raise
                 continue
-            show_skull_and_bones = \
-                show_skull_and_bones or dloader.show_skull_and_bones
-            for word_path, file_name, extras in dloader.downloads_list:
+            for entry in dloader.downloads_list:
                 try:
-                    item_hash = get_hash(word_path)
+                    item_hash = get_hash(entry.word_file_path)
                 except ValueError:
                     # Now the downloader downloads, doesn't remove
                     # files with bad hashes. So do it here.
                     # print 'bad hash'
-                    os.remove(word_path)
+                    os.remove(entry.word_file_path)
                     continue
                 if processor.useful:
                     # if not processor.useful we write directly to the
@@ -105,17 +103,19 @@ def do_download(note, field_data, language, hide_text=False):
                         # downloader downloads to a temp file, so move
                         # here.
                         file_name = processor.process_and_move(
-                            word_path, dloader.base_name)
+                            entry.word_file_path, entry.base_name)
                     except:
                         # raise  # Use this to debug an audio processor.
-                        os.remove(word_path)
+                        os.remove(entry.word_file_path)
                         continue
-                # else:
-                #    file_name = file_name
+                else:
+                    file_name = entry.word_file_name
+                show_skull_and_bones = \
+                    show_skull_and_bones or entry.show_skull_and_bones
                 # We pass the file name around for this case.
                 retrieved_files_list.append((
-                    source, dest, dloader.display_text,
-                    file_name, item_hash, extras, dloader.site_icon))
+                    source, dest, entry.display_text,
+                    file_name, item_hash, entry.extras, dloader.site_icon))
     try:
         store_or_blacklist(
             note, retrieved_files_list, show_skull_and_bones, hide_text)

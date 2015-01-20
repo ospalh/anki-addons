@@ -54,13 +54,8 @@ class AudioDownloader(object):
         Store for downloaded data.
 
         This is where self.download_files should store the
-        results. See that method's docstring.
+        results (type DownloadEntry).
         """
-        self.display_text = u''
-        """Text shown as source after download"""
-        self.base_name = u''
-        """Base of the final file name."""
-        self.file_extension = u'.wav'
         # A typical downloaders will need something like this.
         self.url = ''
         """The base URL used for (the first step of) the download."""
@@ -95,16 +90,6 @@ class AudioDownloader(object):
         (and self.use_temp_files == False)
         we use the current directory.
         """
-        self.show_skull_and_bones = False
-        """
-        Should we show the skull and crossbones in the review dialog?
-
-        Normal downloaders should leave this alone. The point of the
-        whole blacklist mechanism is that JapanesePod can't say
-        no. Only when there is a chance that we have a file we want to
-        blacklist (that is, when we actually downloaded something from
-        Japanesepod) should we set this to True.
-        """
 
         self.site_icon = None
         """The sites's favicon."""
@@ -120,30 +105,13 @@ class AudioDownloader(object):
         whole text (for most languages) or split into kanji and kana,
         base and ruby.
 
-        This function should clear the self.downloads_list, call
-        self.set_names(), and try to get pronunciation files from its
-        source, put those into tempfiles, and add a (temp_file_path,
-        base_name, extras) 3-tuple to self_downloads_lists for each of
+        This function should clear the self.downloads_list and try to
+        get pronunciation files from its source, put those into tempfiles,
+        and add a DownloadEntry object to self_downloads_lists for each of
         the zero or more downloaded files. (Zero when the
-        self.language is wrong, there is no file, ...) extras should
-        be a dict with strings of interesting informations, like
-        meaning numbers or name of speaker, or an empty dict.
+        self.language is wrong, there is no file, ...)
         """
         raise NotImplementedError("Use a class derived from this.")
-
-    def set_names(self, text, dummy_base, dummy_ruby):
-        """
-        Set the display text and file base name variables.
-
-        Set self.display_text and self.base_name with the text used
-        for download, formated in a form useful for display and for a
-        file name, respectively.
-        This version uses just the text. It should be reimplemented
-        for Japanese (Chinese, ...)  downloaders that use the base and
-        ruby.
-        """
-        self.base_name = text
-        self.display_text = text
 
     def maybe_get_icon(self):
         """
@@ -255,7 +223,7 @@ class AudioDownloader(object):
         """
         return soup(self.get_data_from_url(url_in))
 
-    def get_file_name(self):
+    def get_file_name(self, base_name, file_extension):
         """
         Get a free file name.
 
@@ -265,7 +233,7 @@ class AudioDownloader(object):
         """
         if self.use_temp_files:
             tfile = tempfile.NamedTemporaryFile(
-                delete=False, suffix=self.file_extension)
+                delete=False, suffix=file_extension)
             tfile.close()
             # Hack, free_media_name returns full path and file name,
             # so return two files here as well. But there is no real
@@ -279,4 +247,4 @@ class AudioDownloader(object):
             # which are imported by ..exists.
             from ..exists import free_media_name
             return free_media_name(
-                self.base_name, self.file_extension)
+                base_name, file_extension)
