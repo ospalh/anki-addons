@@ -56,10 +56,10 @@ class BeolingusDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        lang = self.language[:2].lower()
-        if not lang in self.services_dict:
+        try:
+            self.service = self.services_dict[self.language[:2].lower()]
+        except KeyError:
             return
-        self.service = self.services_dict[lang]
         if not word:
             return
         word_soup = self.get_soup_from_url(self.build_word_url(word))
