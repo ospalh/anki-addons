@@ -87,7 +87,7 @@ class DudenDownloader(AudioDownloader):
 
     def good_link(self, link):
         """Check if link looks """
-        if not title_key in link['title']:
+        if title_key not in link['title']:
             return False
         return urlparse.urlsplit(link['href']).netloc \
             == urlparse.urlsplit(self.url).netloc

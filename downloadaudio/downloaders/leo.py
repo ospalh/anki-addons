@@ -96,7 +96,7 @@ class LeoDownloader(AudioDownloader):
             word = self.fix_pinyin(ruby)
         return self.url.format(
             language=self.language, word=urllib.quote(word.encode(
-                    self.site_file_name_encoding)))
+                self.site_file_name_encoding)))
 
     def fix_pinyin(self, pinyin):
         # Hacks. It is overkill to ship cjklib with this add-on. But
