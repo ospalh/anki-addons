@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 # Inspiration and source of the URL: Tymon Warecki
 #
 # License: GNU AGPL, version 3 or later;
@@ -82,4 +83,3 @@ Gecko/20100101 Firefox/15.0.1'''
             base_name += u'_' + ruby
             display_text += u' (' + ruby + u')'
         return base_name, display_text
-

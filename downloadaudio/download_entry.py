@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -34,5 +35,3 @@ class DownloadEntry(object):
         blacklist (that is, when we actually downloaded something from
         Japanesepod) should we set this to True.
         """
-
-

@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 # Inspiration and source of the URL: Tymon Warecki
 #
 # License: GNU AGPL, version 3 or later;
