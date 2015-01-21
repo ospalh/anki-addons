@@ -8,7 +8,7 @@
 
 
 """
-Download pronunciations from Merriam-Webster.
+Download pronunciations from Collins dictionary
 
 Abstract base class, derived for several languages.
 """
@@ -20,7 +20,7 @@ from ..download_entry import DownloadEntry
 
 
 class CollinsDownloader(AudioDownloader):
-    """Download audio from Meriam-Webster"""
+    """Download audio from Collins"""
     def __init__(self):
         AudioDownloader.__init__(self)
         # self.url = 'http://www.collinsdictionary.com/dictionary/NN-english/'

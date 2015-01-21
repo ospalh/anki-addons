@@ -51,66 +51,52 @@ class AudioDownloader(object):
         This is used as a public variable and set for every download.
         """
         self.downloads_list = []
-        """
-        Store for downloaded data.
-
-        This is where self.download_files should store the
-        results (type DownloadEntry).
-        """
-        # A typical downloaders will need something like this.
+        # Store for downloaded data.
+        # This is where self.download_files should store the results
+        # (type DownloadEntry).
         self.url = ''
-        """The base URL used for (the first step of) the download."""
+        # The base URL used for (the first step of) the download.
         self.icon_url = ''
-        """URL to get the address of the site icon from."""
+        # URL to get the address of the site icon from.
         self.max_icon_size = 20
-        """Max size we scale the site icon down to, if larger."""
+        # Max size we scale the site icon down to, if larger.
         self.user_agent = 'Mozilla/5.0'
-        """
-        User agent string that can be used for requests.
-
-        At least Google TTS won't give out their translations unless
-        we pretend to be some typical browser.
-        """
+        # User agent string that can be used for requests.
+        # At least Google TTS won't give out their translations unless
+        # we pretend to be some typical browser.
         self.use_temp_files = False
-        """
-        Whether to use files created by tempfiles or not.
-
-        Where to write the downloaded files, in /tmp/ or into the Anki
-        media directory directly.
-        """
+        # Whether to use files created by tempfiles or not.
+        # Where to write the downloaded files, in /tmp/ or into the Anki
+        # media directory directly.
         # This is set to True by the "real" audio processor that does
         # normalization but doesn't work for standard installs. On
         # typical installs this is kept False.)
-
         self.download_directory = None
-        """
-        Where to write the downloaded files.
-
-        If this is None or empty
-        (i.e. "if not self.download_directory:...")
-        (and self.use_temp_files == False)
-        we use the current directory.
-        """
-
+        # Where to write the downloaded files.
+        # If this is None or empty (i.e. "if not
+        # self.download_directory:...")  (and self.use_temp_files ==
+        # False) we use the current directory.
         self.site_icon = None
-        """The sites's favicon."""
+        # The sites's favicon.
 
     def download_files(self, word, base, ruby, split):
-        """
-        Downloader functon.
+        """Downloader functon.
 
         This is the main worker function. It has to be reimplemented
         by the derived classes.
 
-        The input is the text to use for the download, either the
-        whole text (for most languages) or split into kanji and kana,
-        base and ruby.
+        The input is the text to use for the download, the whole text
+        (for most languages) and the text split into base (kanji) and
+        ruby (reading, kana). split is set to true when we got the
+        text from a reading field and should use base and ruby rather
+        than word.
 
         This function should clear the self.downloads_list and try to
         get pronunciation files from its source, put those into tempfiles,
         and add a DownloadEntry object to self_downloads_lists for each of
         the zero or more downloaded files. (Zero when the
-        self.language is wrong, there is no file, ...)
+        self.language is wrong, there is no file &c.)
+
         """
         raise NotImplementedError("Use a class derived from this.")
 
