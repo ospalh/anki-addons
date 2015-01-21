@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2015 Roland Sieker, ospalh@gmail.com
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
@@ -39,12 +39,18 @@ class BeolingusDownloader(AudioDownloader):
         # match wasn't good enough.
         # self.text_code = 'text='
         self.text_re = u'text={0}(?:%20{{([a-zA-Z ]+)}})?$'
-        self.services_dict = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
-        """
-        Mapping of languages to "services".
-
-        We can get pronunciations for the three keys in this dictionary.
-        """
+        # self.services_dict = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
+        # Mapping of languages to "services".
+        #
+        # We can get pronunciations for the keys in this
+        # dictionary.
+        #
+        # I have found that some of the English pronunciation were
+        # bad, maybe not by a native speaker. I guess it may be
+        # similar for Spanish, so switch off those two. Not a problem
+        # for English, but there are not that many Spanish
+        # sources. Better no than bad pronunciations.
+        self.services_dict = {'de': 'de-en'}
         self.service = None
 
     def download_files(self, word, base, ruby, split):
