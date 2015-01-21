@@ -2,6 +2,7 @@
 #
 # Copyright © 2012–2014 Roland Sieker, ospalh@gmail.com
 # Copyright © 2014 Daniel Eriksson, p.e.d.eriksson@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html

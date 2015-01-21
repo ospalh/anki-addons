@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -60,7 +61,7 @@ class CollinsDownloader(AudioDownloader):
             # Filter out a number of wrong (i.e. other language)
             # links.
             try:
-                if not self.lang_code in wai['onclick']:
+                if self.lang_code not in wai['onclick']:
                     # Wrong language
                     continue
                 # print(u'look at “{}”'.format(wai['title']))

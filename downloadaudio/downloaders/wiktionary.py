@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -10,9 +11,9 @@
 Download pronunciations from Wiktionary.
 '''
 
+import re
 import urllib
 import urlparse
-import re
 
 from .downloader import AudioDownloader, uniqify_list
 from ..download_entry import DownloadEntry

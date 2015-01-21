@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2015 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html

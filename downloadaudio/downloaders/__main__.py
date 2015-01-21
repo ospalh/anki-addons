@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# Copyright © 2012–2013 Roland Sieker, <ospalh@gmail.com>
+#
+# License: GNU GPL, version 3 or later;
+# http://www.gnu.org/copyleft/gpl.html
 
 u"""
 Functions to use the downloader classes stand-alone.
 """
 
 from .japanesepod import JapanesepodDownloader
+
 
 def move_here(dl):
     """

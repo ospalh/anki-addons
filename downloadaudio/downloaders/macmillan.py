@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -71,7 +72,7 @@ class MacmillanDownloader(AudioDownloader):
             except KeyError:
                 pass
             else:
-                if not 'pronunciation' in alt_string.lower():
+                if 'pronunciation' not in alt_string.lower():
                     extras = copy(self.extras)
                     extras['Alt text'] = alt_string
             self.downloads_list.append(DownloadEntry(

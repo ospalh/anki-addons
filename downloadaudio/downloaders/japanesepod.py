@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 # Inspiration and source of the URL: Tymon Warecki
 #
 # License: GNU AGPL, version 3 or later;
@@ -73,11 +74,11 @@ class JapanesepodDownloader(AudioDownloader):
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
         extras['Source']='JapanesePod'
+        # We have a file, but not much to say about it.
         self.downloads_list.append(DownloadEntry(
             word_file_path, word_file_name, base_name, display_text,
             file_extension=self.file_extension, extras=extras,
             show_skull_and_bones=True))
-
 
     def jpod_url(self, kanji, kana):
         u"""Return a string that can be used as the url."""

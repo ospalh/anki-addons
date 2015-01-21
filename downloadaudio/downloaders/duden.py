@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -86,7 +87,7 @@ class DudenDownloader(AudioDownloader):
 
     def good_link(self, link):
         """Check if link looks """
-        if not title_key in link['title']:
+        if title_key not in link['title']:
             return False
         return urlparse.urlsplit(link['href']).netloc \
             == urlparse.urlsplit(self.url).netloc
