@@ -1,6 +1,7 @@
-#!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
+#
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
+# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -8,17 +9,19 @@
 
 class DownloadEntry(object):
     u"""Data about a single file downloaded by a downloader"""
-    def __init__(self, word_file_path, word_file_name, base_name, display_text,
-                 file_extension=u'.wav', extras={},
-                 show_skull_and_bones=False):
+    def __init__(
+            self, word_file_path, word_file_name, base_name, display_text,
+            file_extension=u'.wav', extras={},
+            show_skull_and_bones=False):
         self.word_file_path = word_file_path
         # Absolute file path of the downloaded audio file
         self.word_file_name = word_file_name
         # The file name of the downloaded audio file (the
         # last component of word_file_path
-        self.base_name = u''
-        # What you want the base name of the file to be when moved to
-        # the media directory. (without file extension)
+        self.base_name = base_name
+        # Base of the file name in the media direcotry, without file
+        # extension or number. (A number gets added later when we have
+        # several files for one word.)
         self.display_text = display_text
         # Text shown as source after download
         self.file_extension = file_extension
