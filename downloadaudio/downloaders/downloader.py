@@ -45,11 +45,8 @@ class AudioDownloader(object):
     """
     def __init__(self):
         self.language = ''
-        """
-        The language used.
-
-        This is used as a public variable and set for every download.
-        """
+        # The language used.
+        # This is used as a public variable and set for every download.
         self.downloads_list = []
         # Store for downloaded data.
         # This is where self.download_files should store the results

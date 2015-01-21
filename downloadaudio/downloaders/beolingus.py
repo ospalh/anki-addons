@@ -73,7 +73,7 @@ class BeolingusDownloader(AudioDownloader):
         href_list = [a['href'] for a in word_soup.findAll('a')]
         href_list = uniqify_list(href_list)
         href_list = [href for href in href_list
-                     if (self.speak_code + self.language) in href]
+                     if self.speak_code + self.language in href]
         # Unroll this step, so the adding of the extra element becomes
         # more readable.
         speak_list = []

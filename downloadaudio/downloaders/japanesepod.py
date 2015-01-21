@@ -21,8 +21,17 @@ import urlparse
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
 
-# dict translating katakana to corresponding hiragana codepoints
-katakana_to_hiragana = dict((i, i - 0x60) for i in range(0x30A1, 0x30F7))
+
+def equals_kana(kana1, kana2):
+    """
+    Compare two strings - a string in hiragana is considered equal
+    to the corresponding katakana string.
+    """
+    # dict translating katakana to corresponding hiragana codepoints
+    katakana_to_hiragana = dict((i, i - 0x60) for i in range(0x30A1, 0x30F7))
+    return kana1.translate(katakana_to_hiragana) == \
+        kana2.translate(katakana_to_hiragana)
+
 
 class JapanesepodDownloader(AudioDownloader):
     """Download audio from Japanesepod"""
@@ -66,14 +75,14 @@ class JapanesepodDownloader(AudioDownloader):
 
     def get_word_from_japanesepod(self, kanji, kana, extras):
         base_name, display_text = self.get_names(kanji, kana)
-        # Reason why we don't just do the get_data_ bit inside the
-        # with: Like this we don't have to clean up the temp file.
+        # Reason why we don’t just do the get_data_ bit inside the
+        # with: Like this we don’t have to clean up the temp file.
         word_data = self.get_data_from_url(self.jpod_url(kanji, kana))
         word_file_path, word_file_name = self.get_file_name(
             base_name, self.file_extension)
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
-        extras['Source']='JapanesePod'
+        extras['Source'] = 'JapanesePod'
         # We have a file, but not much to say about it.
         self.downloads_list.append(DownloadEntry(
             word_file_path, word_file_name, base_name, display_text,
@@ -91,41 +100,35 @@ class JapanesepodDownloader(AudioDownloader):
 
     def get_words_from_wwwjdic(self, kana):
         soup = self.get_soup_from_url(
-                self.wwwjdic_url
-                + urllib2.quote(kana.encode('utf-8'))
-                + '_2_50') # get 50 entries (no idea what the 2 means)
+            self.wwwjdic_url + urllib2.quote(kana.encode('utf-8'))
+            + '_2_50')  # get 50 entries (no idea what the 2 means)
         labels = soup.findAll('label')
         hits = OrderedDict()
-        for l in labels:
-            audio = l.find('script')
-            entry = l.find('font')
+        for lbl in labels:
+            audio = lbl.find('script')
+            entry = lbl.find('font')
             if not audio or not entry or not entry.has_key('size') \
-                or entry['size'] != '+1':
+                    or entry['size'] != '+1':
+                # entry is a BeautifulSoup.Tag. Looks like “'a'
+                # not in tag” does not work instead of “not
+                # tag.has_key('a')”
                 continue
-            audio.extract() # remove from label element
+            audio.extract()  # remove from label element
             entry.extract()
-            # leaving just the definition
-            definition = l.text
             audio = re.search(r'm\("(.*)"\);', audio.text).group(1)
             # string is quoted twice, so unquote it once
             audio = urllib2.unquote(audio)
             entry = entry.text
-            popular = u'(P)' in entry or u'(P)' in definition
+            popular = u'(P)' in entry or u'(P)' in lbl.text
             # strip "(P)" and similar markers
             entry = re.sub(r'\(.*?\)', '', entry)
-            # convert brackets to delimiter
-            entry = re.sub(u'[\s\u300a\u300b\u3010\u3011]', ';', entry)
-            # popular marker not needed in definition, will be indicated in
-            # a separate extras entry
-            definition = re.sub(r'(; )?\(P\)', '', definition).strip()
-            if len(definition) > 80:
-                definition = definition[:75] + ' ...'
+            # convert brackets to delimiter (Treat “　” as a space)
+            entry = re.sub(u'[\s《》【】]', ';', entry, flags=re.UNICODE)
             for reading in entry.split(';'):
                 if reading == kana:
-                    hits[audio] = (definition, popular)
+                    hits[audio] = popular
                     break
-        
-        for audio, (definition, popular) in hits.items():
+        for audio, popular in hits.items():
             args = urlparse.parse_qs(audio.encode('utf-8'))
             audio_kanji = args['kanji'][0].decode('utf-8') \
                 if 'kanji' in args else None
@@ -133,17 +136,16 @@ class JapanesepodDownloader(AudioDownloader):
                 if 'kana' in args else None
             # Sometimes there are multiple readings. Check that the audio
             # file is actually for the reading that we want.
-            if audio_kana and not self.equals_kana(audio_kana, kana):
+            if audio_kana and not equals_kana(audio_kana, kana):
                 continue
             if not audio_kanji or audio_kana == audio_kanji:
                 # Probably got this file already in the first round.
                 continue
             extras = OrderedDict()
-            extras['Translation (WWWJDIC)'] = definition
             if popular:
-                extras['Common (WWWJDIC)'] = 'Yes'
+                extras['Frequency'] = 'popular'
             self.get_word_from_japanesepod(audio_kanji, audio_kana, extras)
-    
+
     def get_names(self, base, ruby):
         """
         Get the display text and file base name variables.
@@ -158,11 +160,3 @@ class JapanesepodDownloader(AudioDownloader):
             base_name = ruby
             display_text = ruby
         return base_name, display_text
-
-    def equals_kana(self, kana1, kana2):
-        """
-        Compare two strings - a string in hiragana is considered equal
-        to the corresponding katakana string.
-        """
-        return kana1.translate(katakana_to_hiragana) == \
-            kana2.translate(katakana_to_hiragana)

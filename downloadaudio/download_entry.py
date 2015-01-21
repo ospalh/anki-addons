@@ -33,7 +33,6 @@ class DownloadEntry(object):
         self.show_skull_and_bones = show_skull_and_bones
         # Should we show the skull and crossbones in the review
         # dialog?
-        #
         # Normal downloaders should leave this alone. The point of the
         # whole blacklist mechanism is that JapanesePod can't say
         # no. Only when there is a chance that we have a file we want
