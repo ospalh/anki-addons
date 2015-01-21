@@ -11,6 +11,7 @@
 Download Japanese pronunciations from Japanesepod
 '''
 
+from collections import OrderedDict
 import re
 import urllib
 import urllib2
@@ -54,7 +55,7 @@ class JapanesepodDownloader(AudioDownloader):
             return
         # Only get the icon when we are using Japanese.
         self.maybe_get_icon()
-        self.get_word_from_japanesepod(base, ruby, False)
+        self.get_word_from_japanesepod(base, ruby, {})
         # First get from Japanesepod directly
         # Maybe add other words via wwwjdic
         if base == ruby:
@@ -62,7 +63,7 @@ class JapanesepodDownloader(AudioDownloader):
             # word. Look it up at WWWJDIC to get kanji spelling.
             self.get_words_from_wwwjdic(ruby)
 
-    def get_word_from_japanesepod(self, kanji, kana, mark_wwwjdic):
+    def get_word_from_japanesepod(self, kanji, kana, extras):
         base_name, display_text = self.get_names(kanji, kana)
         # Reason why we don't just do the get_data_ bit inside the
         # with: Like this we don't have to clean up the temp file.
@@ -71,10 +72,7 @@ class JapanesepodDownloader(AudioDownloader):
             base_name, self.file_extension)
         with open(word_file_path, 'wb') as word_file:
             word_file.write(word_data)
-        extras = dict(Source='JapanesePod')
-        if mark_wwwjdic and kanji:
-            extras['Kanji'] = kanji
-            extras['Kanji source'] = 'WWWJDIC'
+        extras['Source']='JapanesePod'
         self.downloads_list.append(DownloadEntry(
             word_file_path, word_file_name, base_name, display_text,
             file_extension=self.file_extension, extras=extras,
@@ -91,33 +89,42 @@ class JapanesepodDownloader(AudioDownloader):
         return self.url + urllib.urlencode(qdict)
 
     def get_words_from_wwwjdic(self, kana):
-    
         soup = self.get_soup_from_url(
                 self.wwwjdic_url
                 + urllib2.quote(kana.encode('utf-8'))
                 + '_2_50') # get 50 entries (no idea what the 2 means)
         labels = soup.findAll('label')
-        hits = set()
+        hits = OrderedDict()
         for l in labels:
             audio = l.find('script')
             entry = l.find('font')
             if not audio or not entry or not entry.has_key('size') \
                 or entry['size'] != '+1':
                 continue
+            audio.extract() # remove from label element
+            entry.extract()
+            # leaving just the definition
+            definition = l.text
             audio = re.search(r'm\("(.*)"\);', audio.text).group(1)
             # string is quoted twice, so unquote it once
             audio = urllib2.unquote(audio)
             entry = entry.text
+            popular = u'(P)' in entry or u'(P)' in definition
             # strip "(P)" and similar markers
             entry = re.sub(r'\(.*?\)', '', entry)
             # convert brackets to delimiter
             entry = re.sub(u'[\s\u300a\u300b\u3010\u3011]', ';', entry)
+            # popular marker not needed in definition, will be indicated in
+            # a separate extras entry
+            definition = re.sub(r'(; )?\(P\)', '', definition).strip()
+            if len(definition) > 80:
+                definition = definition[:75] + ' ...'
             for reading in entry.split(';'):
                 if reading == kana:
-                    hits.add(audio)
+                    hits[audio] = (definition, popular)
                     break
         
-        for audio in hits:
+        for audio, (definition, popular) in hits.items():
             args = urlparse.parse_qs(audio.encode('utf-8'))
             audio_kanji = args['kanji'][0].decode('utf-8') \
                 if 'kanji' in args else None
@@ -130,7 +137,11 @@ class JapanesepodDownloader(AudioDownloader):
             if not audio_kanji or audio_kana == audio_kanji:
                 # Probably got this file already in the first round.
                 continue
-            self.get_word_from_japanesepod(audio_kanji, audio_kana, True)
+            extras = OrderedDict()
+            extras['Translation (WWWJDIC)'] = definition
+            if popular:
+                extras['Common (WWWJDIC)'] = 'Yes'
+            self.get_word_from_japanesepod(audio_kanji, audio_kana, extras)
     
     def get_names(self, base, ruby):
         """
