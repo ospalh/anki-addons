@@ -59,25 +59,25 @@ class AudioDownloader(object):
         # Max size we scale the site icon down to, if larger.
         self.user_agent = 'Mozilla/5.0'
         # User agent string that can be used for requests.
-        # At least Google TTS won't give out their translations unless
+        # At least Google TTS won’t give out their translations unless
         # we pretend to be some typical browser.
         self.use_temp_files = False
         # Whether to use files created by tempfiles or not.
         # Where to write the downloaded files, in /tmp/ or into the Anki
         # media directory directly.
-        # This is set to True by the "real" audio processor that does
-        # normalization but doesn't work for standard installs. On
+        # This is set to True by the “real” audio processor that does
+        # normalization but doesn’t work for standard installs. On
         # typical installs this is kept False.)
         self.download_directory = None
         # Where to write the downloaded files.
-        # If this is None or empty (i.e. "if not
-        # self.download_directory:...")  (and self.use_temp_files ==
+        # If this is None or empty (i.e. “if not
+        # self.download_directory”)  (and self.use_temp_files ==
         # False) we use the current directory.
         self.site_icon = None
-        # The sites's favicon.
+        # The sites’s favicon.
 
     def download_files(self, word, base, ruby, split):
-        """Downloader functon.
+        """Downloader functon
 
         This is the main worker function. It has to be reimplemented
         by the derived classes.
@@ -98,8 +98,8 @@ class AudioDownloader(object):
         raise NotImplementedError("Use a class derived from this.")
 
     def maybe_get_icon(self):
-        """
-        Get icon for the site as a QImage if we haven't already.
+        u"""
+        Get icon for the site as a QImage if we haven’t already.
 
         Get the site icon, either the 'rel="icon"' or the favicon, for
         the web page at url or passed in as page_html and store it as
@@ -145,11 +145,11 @@ class AudioDownloader(object):
                 max_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
 
     def get_favicon(self):
-        """
+        u"""
         Get favicon for the site.
 
-        This is called when the site_url can't be loaded or when that
-        page doesn't contain a link tag with rel set to icon (the new
+        This is called when the site_url can’t be loaded or when that
+        page doesn’t contain a link tag with rel set to icon (the new
         way of doing site icons.)
         """
         if self.site_icon:
@@ -184,7 +184,7 @@ class AudioDownloader(object):
         try:
             # There have been reports that the request was send in a
             # 32-bit encoding (UTF-32?). Avoid that. (The whole things
-            # is a bit curious, but there shouldn't really be any harm
+            # is a bit curious, but there shouldn’t really be any harm
             # in this.)
             request = urllib2.Request(url_in.encode('ascii'))
         except UnicodeDecodeError:
@@ -224,7 +224,7 @@ class AudioDownloader(object):
             # need to split off the file name from the direcotry bit.
             return tfile.name, tfile.name
         else:
-            # IAR, specifically PEP8. When we don't use temp files, we
+            # IAR, specifically PEP8. When we don’t use temp files, we
             # should clean up the request string a bit, and that is
             # best done with Anki functions. So, when
             # self.use_temp_files is False, we need anki, bits of

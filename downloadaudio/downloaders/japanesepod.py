@@ -18,14 +18,15 @@ import urllib
 import urllib2
 import urlparse
 
-from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
+from .downloader import AudioDownloader
 
 
 def equals_kana(kana1, kana2):
-    """
-    Compare two strings - a string in hiragana is considered equal
-    to the corresponding katakana string.
+    u"""Check whether two kana strings represent the same sound
+
+    Compare two strings, converting katakana to hiragana first. That
+    means that for example equals_kana(u'キ', u'き') is True.
     """
     # dict translating katakana to corresponding hiragana codepoints
     katakana_to_hiragana = dict((i, i - 0x60) for i in range(0x30A1, 0x30F7))
