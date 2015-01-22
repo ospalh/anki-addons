@@ -1,22 +1,26 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
 
 """
-Download pronunciations from Merriam-Webster.
+Download pronunciations from Collins dictionary
+
+Abstract base class, derived for several languages.
 """
 
 import urllib
 
 from .downloader import AudioDownloader, uniqify_list
+from ..download_entry import DownloadEntry
 
 
 class CollinsDownloader(AudioDownloader):
-    """Download audio from Meriam-Webster"""
+    """Download audio from Collins"""
     def __init__(self):
         AudioDownloader.__init__(self)
         # self.url = 'http://www.collinsdictionary.com/dictionary/NN-english/'
@@ -41,7 +45,6 @@ class CollinsDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith(self.lang):
             return
         if not word:
@@ -58,7 +61,7 @@ class CollinsDownloader(AudioDownloader):
             # Filter out a number of wrong (i.e. other language)
             # links.
             try:
-                if not self.lang_code in wai['onclick']:
+                if self.lang_code not in wai['onclick']:
                     # Wrong language
                     continue
                 # print(u'look at “{}”'.format(wai['title']))
@@ -79,11 +82,13 @@ class CollinsDownloader(AudioDownloader):
         self.maybe_get_icon()
         for lnk in link_list:
             word_data = self.get_data_from_url(lnk)
-            word_path, word_fname = self.get_file_name()
+            word_path, word_fname = self.get_file_name(
+                word, self.file_extension)
             with open(word_path, 'wb') as word_file:
                 word_file.write(word_data)
-            self.downloads_list.append(
-                (word_path, word_fname, self.extras))
+            self.downloads_list.append(DownloadEntry(
+                word_path, word_fname, base_name=word, display_text=word,
+                file_extension=self.file_extension, extras=self.extras))
 
     def get_link(self, onclick_string):
         # Wrote these bits for ooad

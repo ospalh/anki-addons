@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2015 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -14,6 +15,7 @@ import urllib
 import re
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 
 def join_strings(a, b):
@@ -33,13 +35,14 @@ class MerriamWebsterDownloader(AudioDownloader):
     """Download audio from Meriam-Webster"""
     def __init__(self):
         AudioDownloader.__init__(self)
+        self.file_extension = u'.wav'
         self.url = 'http://www.merriam-webster.com/dictionary/'
         # Here the word page url works to get the favicon.
         self.icon_url = self.url
         self.popup_url = 'http://www.merriam-webster.com/audio.php?'
 
     def download_files(self, word, base, ruby, split):
-        ur"""
+        u"""
         Get pronunciations of a word from Meriam-Webster
 
         Look up a English word at merriam-webster.com, look for
@@ -52,7 +55,6 @@ class MerriamWebsterDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith('en'):
             return
         if not word:
@@ -122,7 +124,9 @@ class MerriamWebsterDownloader(AudioDownloader):
                 word_path, word_file = self.get_word_file(mw_fn, word)
             except ValueError:
                 continue
-            self.downloads_list.append((word_path, word_file, extras))
+            self.downloads_list.append(DownloadEntry(
+                word_path, word_file, base_name=word, display_text=word,
+                file_extension=self.file_extension, extras=extras))
 
     def get_word_file(self, base_name, word):
         """
@@ -137,7 +141,7 @@ class MerriamWebsterDownloader(AudioDownloader):
         # The audio clip is the only embed tag.
         popup_embed = popup_soup.find(name='embed')
         word_data = self.get_data_from_url(popup_embed['src'])
-        word_path, word_fname = self.get_file_name()
+        word_path, word_fname = self.get_file_name(word, self.file_extension)
         with open(word_path, 'wb') as word_file:
             word_file.write(word_data)
         return word_path, word_fname

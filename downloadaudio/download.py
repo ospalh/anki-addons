@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–2015 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -81,21 +82,19 @@ def do_download(note, field_data, language, hide_text=False):
                 # goes wrong, don't catch, or raise whatever you want.
                 dloader.download_files(text, base, ruby, split)
             except:
-                ## Uncomment this raise while testing a new
-                ## downloaders.  Also comment out all the others in the
-                ## downloaders list in downloaders.__init__
+                #  # Uncomment this raise while testing a new
+                #  # downloaders.  Also comment out all the others in the
+                #  # downloaders list in downloaders.__init__
                 # raise
                 continue
-            show_skull_and_bones = \
-                show_skull_and_bones or dloader.show_skull_and_bones
-            for word_path, file_name, extras in dloader.downloads_list:
+            for entry in dloader.downloads_list:
                 try:
-                    item_hash = get_hash(word_path)
+                    item_hash = get_hash(entry.word_file_path)
                 except ValueError:
                     # Now the downloader downloads, doesn't remove
                     # files with bad hashes. So do it here.
                     # print 'bad hash'
-                    os.remove(word_path)
+                    os.remove(entry.word_file_path)
                     continue
                 if processor.useful:
                     # if not processor.useful we write directly to the
@@ -105,24 +104,26 @@ def do_download(note, field_data, language, hide_text=False):
                         # downloader downloads to a temp file, so move
                         # here.
                         file_name = processor.process_and_move(
-                            word_path, dloader.base_name)
+                            entry.word_file_path, entry.base_name)
                     except:
                         # raise  # Use this to debug an audio processor.
-                        os.remove(word_path)
+                        os.remove(entry.word_file_path)
                         continue
-                # else:
-                #    file_name = file_name
+                else:
+                    file_name = entry.word_file_name
+                show_skull_and_bones = \
+                    show_skull_and_bones or entry.show_skull_and_bones
                 # We pass the file name around for this case.
                 retrieved_files_list.append((
-                    source, dest, dloader.display_text,
-                    file_name, item_hash, extras, dloader.site_icon))
+                    source, dest, entry.display_text,
+                    file_name, item_hash, entry.extras, dloader.site_icon))
     try:
         store_or_blacklist(
             note, retrieved_files_list, show_skull_and_bones, hide_text)
     except ValueError as ve:
         tooltip(str(ve))
     except RuntimeError as rte:
-        if not 'cancel' in str(rte):
+        if 'cancel' not in str(rte):
             raise
         # else: quietly drop out on user cancel
 
@@ -214,15 +215,15 @@ def editor_add_download_editing_button(self):
     dl_button = self._addButton(
         "download_audio",
         lambda self=self: editor_download_editing(self),
-        tip=u"Download audio...", text=" ")
+        tip=u"Download audio…")
     dl_button.setIcon(
         QIcon(os.path.join(icons_dir, 'download_note_audio.png')))
 
 
 # Either reuse an edit-media sub-menu created by another add-on
-# (probably by Y.T., notably the external edit add-on that is in the
-# works) or create that menu. When we already have that menu, add a
-# separator, otherwise create that menu.
+# (probably the mhwave (ex sweep) add-on by Y.T.) or create that
+# menu. When we already have that menu, add a separator, otherwise
+# create that menu.
 try:
     mw.edit_media_submenu.addSeparator()
 except AttributeError:
