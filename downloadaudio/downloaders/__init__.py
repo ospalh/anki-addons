@@ -34,6 +34,10 @@ from .mw import MerriamWebsterDownloader
 from .oald import OaldDownloader
 from .wiktionary import WiktionaryDownloader
 
+# There was a leo downloader, but that stopped working a while
+# ago. Look in the repo history to find the file. (tag: leo.py).
+
+
 downloaders = [
     JapanesepodDownloader(),
     CollinsFrenchDownloader(),
@@ -42,14 +46,14 @@ downloaders = [
     CollinsSpanishDownloader(),
     LexinDownloader(),
     MerriamWebsterDownloader(),
-#    MacmillanAmericanDownloader(),
+    # MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
     OaldDownloader(),
     DudenDownloader(),
     HowJSayDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
-    GooglettsDownloader(),
+    # GooglettsDownloader(),
 ]
 # This is the list of downloaders.
 #

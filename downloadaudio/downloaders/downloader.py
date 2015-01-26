@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -44,110 +45,61 @@ class AudioDownloader(object):
     """
     def __init__(self):
         self.language = ''
-        """
-        The language used.
-
-        This is used as a public variable and set for every download.
-        """
+        # The language used.
+        # This is used as a public variable and set for every download.
         self.downloads_list = []
-        """
-        Store for downloaded data.
-
-        This is where self.download_files should store the
-        results. See that method's docstring.
-        """
-        self.display_text = u''
-        """Text shown as source after download"""
-        self.base_name = u''
-        """Base of the final file name."""
-        self.file_extension = u'.wav'
-        # A typical downloaders will need something like this.
+        # Store for downloaded data.
+        # This is where self.download_files should store the results
+        # (type DownloadEntry).
         self.url = ''
-        """The base URL used for (the first step of) the download."""
+        # The base URL used for (the first step of) the download.
         self.icon_url = ''
-        """URL to get the address of the site icon from."""
+        # URL to get the address of the site icon from.
         self.max_icon_size = 20
-        """Max size we scale the site icon down to, if larger."""
+        # Max size we scale the site icon down to, if larger.
         self.user_agent = 'Mozilla/5.0'
-        """
-        User agent string that can be used for requests.
-
-        At least Google TTS won't give out their translations unless
-        we pretend to be some typical browser.
-        """
+        # User agent string that can be used for requests.
+        # At least Google TTS won’t give out their translations unless
+        # we pretend to be some typical browser.
         self.use_temp_files = False
-        """
-        Whether to use files created by tempfiles or not.
-
-        Where to write the downloaded files, in /tmp/ or into the Anki
-        media directory directly.
-        """
-        # This is set to True by the "real" audio processor that does
-        # normalization but doesn't work for standard installs. On
+        # Whether to use files created by tempfiles or not.
+        # Where to write the downloaded files, in /tmp/ or into the Anki
+        # media directory directly.
+        # This is set to True by the “real” audio processor that does
+        # normalization but doesn’t work for standard installs. On
         # typical installs this is kept False.)
-
         self.download_directory = None
-        """
-        Where to write the downloaded files.
-
-        If this is None or empty
-        (i.e. "if not self.download_directory:...")
-        (and self.use_temp_files == False)
-        we use the current directory.
-        """
-        self.show_skull_and_bones = False
-        """
-        Should we show the skull and crossbones in the review dialog?
-
-        Normal downloaders should leave this alone. The point of the
-        whole blacklist mechanism is that JapanesePod can't say
-        no. Only when there is a chance that we have a file we want to
-        blacklist (that is, when we actually downloaded something from
-        Japanesepod) should we set this to True.
-        """
-
+        # Where to write the downloaded files.
+        # If this is None or empty (i.e. “if not
+        # self.download_directory”)  (and self.use_temp_files ==
+        # False) we use the current directory.
         self.site_icon = None
-        """The sites's favicon."""
+        # The sites’s favicon.
 
     def download_files(self, word, base, ruby, split):
-        """
-        Downloader functon.
+        """Downloader functon
 
         This is the main worker function. It has to be reimplemented
         by the derived classes.
 
-        The input is the text to use for the download, either the
-        whole text (for most languages) or split into kanji and kana,
-        base and ruby.
+        The input is the text to use for the download, the whole text
+        (for most languages) and the text split into base (kanji) and
+        ruby (reading, kana). split is set to true when we got the
+        text from a reading field and should use base and ruby rather
+        than word.
 
-        This function should clear the self.downloads_list, call
-        self.set_names(), and try to get pronunciation files from its
-        source, put those into tempfiles, and add a (temp_file_path,
-        base_name, extras) 3-tuple to self_downloads_lists for each of
+        This function should clear the self.downloads_list and try to
+        get pronunciation files from its source, put those into tempfiles,
+        and add a DownloadEntry object to self_downloads_lists for each of
         the zero or more downloaded files. (Zero when the
-        self.language is wrong, there is no file, ...) extras should
-        be a dict with strings of interesting informations, like
-        meaning numbers or name of speaker, or an empty dict.
+        self.language is wrong, there is no file &c.)
+
         """
         raise NotImplementedError("Use a class derived from this.")
 
-    def set_names(self, text, dummy_base, dummy_ruby):
-        """
-        Set the display text and file base name variables.
-
-        Set self.display_text and self.base_name with the text used
-        for download, formated in a form useful for display and for a
-        file name, respectively.
-        This version uses just the text. It should be reimplemented
-        for Japanese (Chinese, ...)  downloaders that use the base and
-        ruby.
-        """
-        self.base_name = text
-        self.display_text = text
-
     def maybe_get_icon(self):
-        """
-        Get icon for the site as a QImage if we haven't already.
+        u"""
+        Get icon for the site as a QImage if we haven’t already.
 
         Get the site icon, either the 'rel="icon"' or the favicon, for
         the web page at url or passed in as page_html and store it as
@@ -193,11 +145,11 @@ class AudioDownloader(object):
                 max_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
 
     def get_favicon(self):
-        """
+        u"""
         Get favicon for the site.
 
-        This is called when the icon_url can't be loaded or when that
-        page doesn't contain a link tag with rel set to icon (the new
+        This is called when the site_url can’t be loaded or when that
+        page doesn’t contain a link tag with rel set to icon (the new
         way of doing site icons.)
         """
         if self.site_icon:
@@ -232,7 +184,7 @@ class AudioDownloader(object):
         try:
             # There have been reports that the request was send in a
             # 32-bit encoding (UTF-32?). Avoid that. (The whole things
-            # is a bit curious, but there shouldn't really be any harm
+            # is a bit curious, but there shouldn’t really be any harm
             # in this.)
             request = urllib2.Request(url_in.encode('ascii'))
         except UnicodeDecodeError:
@@ -255,7 +207,7 @@ class AudioDownloader(object):
         """
         return soup(self.get_data_from_url(url_in))
 
-    def get_file_name(self):
+    def get_file_name(self, base_name, file_extension):
         """
         Get a free file name.
 
@@ -265,18 +217,18 @@ class AudioDownloader(object):
         """
         if self.use_temp_files:
             tfile = tempfile.NamedTemporaryFile(
-                delete=False, suffix=self.file_extension)
+                delete=False, suffix=file_extension)
             tfile.close()
             # Hack, free_media_name returns full path and file name,
             # so return two files here as well. But there is no real
             # need to split off the file name from the direcotry bit.
             return tfile.name, tfile.name
         else:
-            # IAR, specifically PEP8. When we don't use temp files, we
+            # IAR, specifically PEP8. When we don’t use temp files, we
             # should clean up the request string a bit, and that is
             # best done with Anki functions. So, when
             # self.use_temp_files is False, we need anki, bits of
             # which are imported by ..exists.
             from ..exists import free_media_name
             return free_media_name(
-                self.base_name, self.file_extension)
+                base_name, file_extension)
