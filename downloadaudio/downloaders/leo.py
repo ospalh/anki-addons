@@ -37,36 +37,26 @@ class LeoDownloader(AudioDownloader):
             'tolerMode=nof&lp={lang}de&lang=de&rmWords=off&rmSearch=on' \
             '&search={word}&searchLoc={direction}&resultOrder=basic' \
             '&multiwordShowSingle=on&sectLenMax=16'
-        self.SEARCH_DIRECTION = { 'from_german': '1', 'to_german': '-1' }
+        self.SEARCH_DIRECTION = {'from_german': '1', 'to_german': '-1'}
         self.audio_url = 'http://dict.leo.org/media/audio/{id}.mp3'
         # And, yes, they use ch for Chinese.
-        self.language_dict = {'de': 'de', 'en': 'en', 'fr': 'fr', 'es': 'es',
-                              # at time of writing, leo.org has no audio for the
-                              # following languages
-                              #'it': 'it', 'zh': 'ch', 'ru': 'ru', 'pt': 'pt',
-                              #'pl': 'pl'
-                              }
+        self.language_dict = {'de': 'de', 'en': 'en', 'fr': 'fr', 'es': 'es'}
+        # As of 2015-01-26, leo.org has no audio for these languages:
+        # 'it': 'it', 'zh': 'ch', 'ru': 'ru', 'pt': 'pt', 'pl': 'pl'
+        self.site_icon_dict = {}
         # We should keep a number of site icons handy, with the right
         # flag for the request.
-        self.site_icon_dict = {}
         self.icon_url_dict = {
             'de': 'http://dict.leo.org/img/favicons/ende.ico',
             'en': 'http://dict.leo.org/img/favicons/ende.ico',
             'fr': 'http://dict.leo.org/img/favicons/frde.ico',
-            'es': 'http://dict.leo.org/img/favicons/esde.ico',
-            #'it': 'http://dict.leo.org/img/favicons/itde.ico',
-            # # When we use this dict, we have already munged the 'zh' to 'ch'
-            #'ch': 'http://dict.leo.org/img/favicons/chde.ico',
-            #'ru': 'http://dict.leo.org/img/favicons/rude.ico',
-            #'pt': 'http://dict.leo.org/img/favicons/ptde.ico',
-            #'pl': 'http://dict.leo.org/img/favicons/plde.ico'
-            }
+            'es': 'http://dict.leo.org/img/favicons/esde.ico'}
+        # No icon URLs for the languages where they have translations,
+        # but no audio.
 
     def download_files(self, word, base, ruby, split):
-        """
-        Download a word from LEO
-        """
-#        from aqt.qt import debug; debug()
+        """ Download a word from LEO"""
+        # from aqt.qt import debug; debug()
         self.downloads_list = []
         if split:
             # Avoid double downloads
@@ -76,12 +66,10 @@ class LeoDownloader(AudioDownloader):
             self.language = self.language_dict[self.language[:2].lower()]
         except KeyError:
             return
-
         self.get_flag_icon()
-
-        # To find the audio links, look up dictionary entries, which are
-        # en<->de, fr<->de, es<->de, etc.
-        # For German entries, use de->en.
+        # To find the audio links, look up dictionary entries, which
+        # are en↔de, fr↔de, es↔de, etc.  For German entries, use
+        # de→en.
         if self.language == 'de':
             query_lang = 'en'
             direction = self.SEARCH_DIRECTION['from_german']
@@ -89,19 +77,20 @@ class LeoDownloader(AudioDownloader):
             query_lang = self.language
             direction = self.SEARCH_DIRECTION['to_german']
 
-        xml = self.get_data_from_url(self.dic_url.format(lang=query_lang,
-            word=urllib.quote_plus(word.encode('utf-8')), direction=direction))
+        xml = self.get_data_from_url(self.dic_url.format(
+            lang=query_lang, word=urllib.quote_plus(word.encode('utf-8')),
+            direction=direction))
         root = ElementTree.fromstring(xml)
         hits = OrderedDict()
         for section in root.findall('sectionlist/section'):
             for entry in section.findall('entry'):
                 if self.language == 'de':
-                     # Second side is always German.
+                    # Second side is always German.
                     side = entry.findall('side')[1]
                 else:
-                     # And the first side the other requested language.
+                    # And the first side the other requested language.
                     side = entry.findall('side')[0]
-                if side.attrib['lang'] != self.language: # consistency check
+                if side.attrib['lang'] != self.language:  # consistency check
                     raise ValueError()
 
                 matching_word = None
@@ -119,7 +108,7 @@ class LeoDownloader(AudioDownloader):
                     continue
                 pron = side.find('ibox/pron')
                 if pron is None:
-                    continue # no audio file for this entry
+                    continue  # no audio file for this entry
                 audio_id = pron.attrib['url']
                 hits[audio_id] = matching_word
         for audio_id, matching_word in hits.items():
@@ -206,4 +195,3 @@ class LeoDownloader(AudioDownloader):
             word = re.sub('^{} '.format(a), '', word)
             word = re.sub(',? {}$'.format(a), '', word)
         return word
-
