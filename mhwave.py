@@ -5,16 +5,17 @@
 # http://www.gnu.org/copyleft/gpl.html
 u"""Anki 2 add-on that opens an audio editor."""
 
+from PyQt4.QtCore import SIGNAL
+from PyQt4.QtGui import QAction, QIcon, QMenu
 import copy
 import os
 import re
 import subprocess
 import sys
 
-from aqt import utils
-from aqt import mw
-from PyQt4.QtGui import QAction, QIcon, QMenu
-from PyQt4.QtCore import SIGNAL
+from anki.hooks import addHook
+from aqt import mw, utils
+from aqt.editor import Editor
 
 __version__ = "2.0.0"
 
@@ -41,7 +42,12 @@ def edit_files(note):
     u"""Call the audio editor with all sounds from the note"""
     # First, join all fields. Use some random field delimiter. (Could
     # be '', i guess.) EAFP, raise stuff when we don't have a note.
-    text = '@'.join(note.fields)
+    try:
+        text = '@'.join(note.fields)
+    except AttributeError:
+        # Maybe we don’t have a note
+        print('debug: editfiles w/o note')
+        return
     matches = [fn for fn in re.findall(sound_re, text) if sound_ending(fn)]
     if command_list and matches:
         call_edit(matches)
@@ -109,6 +115,12 @@ def edit_current_note():
         # No note.
         pass
 
+def setup_button(editor):
+    u"""Add the buttons to the editor."""
+    editor._addButton(
+        "wave_button", lambda nt=editor.note: edit_files(nt),
+        tip=u"wave", text='W')
+
 
 if find_editor():
     # Either reuse an edit-media sub-menu created by another add-on
@@ -125,6 +137,7 @@ if find_editor():
     mw.edit_audio_fiels_action = QAction(mw)
     mw.edit_audio_fiels_action.setText(u"Edit audio")
     icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
+    addHook("setupEditorButtons", setup_button)
     try:
         # Bad hack. Use the icon brought along from another add-on and
         # nicked from the program we use. That program is GPLed, so we
