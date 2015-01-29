@@ -27,6 +27,7 @@ from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .howjsay import HowJSayDownloader
 from .japanesepod import JapanesepodDownloader
+from .leo import LeoDownloader
 from .lexin import LexinDownloader
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
@@ -44,6 +45,7 @@ downloaders = [
     CollinsGermanDownloader(),
     CollinsItalianDownloader(),
     CollinsSpanishDownloader(),
+    LeoDownloader(),
     LexinDownloader(),
     MerriamWebsterDownloader(),
     # MacmillanAmericanDownloader(),
