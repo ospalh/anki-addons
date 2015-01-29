@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2014 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–2015 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -17,6 +17,7 @@ try:
 except ImportError:
     import json
 
+from ..download_entry import DownloadEntry
 from .downloader import AudioDownloader
 
 
@@ -39,7 +40,6 @@ class ForvoDownloader(AudioDownloader):
         Get pronunciations of a word from Forvo
         """
         self.downloads_list = []
-        self.set_names(word, base, ruby)
         if split:
             # Here, too, just avoid double downloads.
             return
@@ -74,14 +74,18 @@ class ForvoDownloader(AudioDownloader):
                 extras['Rating'] = itm['rate']
             except KeyError:
                 pass
-            word_path, word_fname = self.get_file_name()
+            word_path, word_fname = self.get_file_name(
+                word, self.file_extension)
             try:
                 with open(word_path, 'wb') as word_file:
                     word_file.write(
                         self.get_data_from_url(itm[self.path_code]))
             except (ValueError, KeyError):
                 continue
-            self.downloads_list.append((word_path, word_fname, extras))
+            dl_entry = DownloadEntry(
+                word_path, word_fname, base_name=word, display_text=word,
+                file_extension=self.file_extension, extras=extras)
+            self.downloads_list.append(dl_entry)
         # No clean-up
 
     def build_query_url(self, word):
