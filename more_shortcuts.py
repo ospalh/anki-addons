@@ -5,17 +5,17 @@
 #
 
 
-"""
+u"""
 Emulate some Anki 1.2 shortcuts. Add replay short-cut.
 
-Add-on for Anki2 that adds Ctrl-w to clase the deck and Ctr-f to open
+Add-on for Anki2 that adds Ctrl-w to close the deck and Ctr-f to open
 the card browser. These shortcuts worked in Anki 1.2. This part of the
-add-on is basically identical to the "Accept Anki 1.2 shortcuts to
-list decks, add cards and open browser" add-on, minus the add card.
+add-on is basically identical to the “Accept Anki 1.2 shortcuts to
+list decks, add cards and open browser” add-on, minus the add card.
 
-Also, replay audio when pressing 'i' or '6', outside a text entry
+Also, replay audio when pressing “i” or “6”, outside a text entry
 field.  This can be used to quickly review with either the left hand
-on a Dvorak keyboard (See also my "Dvorak keys" add-on.) or with the
+on a Dvorak keyboard (See also my “Dvorak keys” add-on.) or with the
 right hand on the numeric key-pad.
 """
 
@@ -26,7 +26,7 @@ from anki.hooks import wrap
 from aqt import mw
 from aqt.reviewer import Reviewer
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 mw.other_deck = QShortcut(QKeySequence("Ctrl+w"), mw)
 mw.other_browse = QShortcut(QKeySequence("Ctrl+f"), mw)
@@ -34,10 +34,11 @@ mw.other_browse = QShortcut(QKeySequence("Ctrl+f"), mw)
 
 def replay_6(self, evt):
     """
-    Use "6" to replay audio.
+    Use “6” and “i” to replay audio.
 
-    Use the 6 key to replay audio. Useful for reviewing with the right
-    hand on the numeric key pad.
+    Use the “6” key to replay audio, useful for reviewing with the
+    right hand on the numeric key pad, and the “i” key, useful when
+    reviewing with the left hand on a Dvorak keyboard.
     """
     key = unicode(evt.text())
     if key == "6" or key == 'i':

@@ -26,7 +26,7 @@ from anki import hooks
 from aqt import mw
 
 
-__version__ = '1.3.1'
+__version__ = '1.4.0'
 
 user_css_name = 'user_style.css'
 """File name of the user's CSS"""
@@ -89,7 +89,7 @@ def localized_card_css(self):
     """Set the css for a card"""
     return_css = u''
     if user_css:
-        return_css = '<style>%s</style>' % user_css
+        return_css = '<style scoped>%s</style>' % user_css
     return return_css + old_css(self)
 
 

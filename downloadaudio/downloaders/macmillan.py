@@ -1,6 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -8,12 +9,19 @@
 
 """
 Download pronunciations from  Macmillan Dictionary.
+
+Abstract base class, derived for American and British English.
 """
 
 from copy import copy
+import re
 import urllib
 
 from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
+
+# Work-around for broken BeautifulSoup
+sound_class = re.compile(r'\bsound\b')
 
 
 class MacmillanDownloader(AudioDownloader):
@@ -36,7 +44,6 @@ class MacmillanDownloader(AudioDownloader):
         if split:
             # Avoid double downloads
             return
-        self.set_names(word, base, ruby)
         if not self.language.lower().startswith('en'):
             return
         if not word:
@@ -48,33 +55,15 @@ class MacmillanDownloader(AudioDownloader):
             self.url + urllib.quote(word.encode('utf-8')))
         # The audio clips are stored as images with class sound and
         # the link hidden in the onclick bit.
-        sounds = word_soup.findAll(attrs={'class': 'sound'})
-        # The interesting bit it the onclick attribute and looks like
-        # """playSoundFromFlash('http://www.macmillandictionary.com/',
-        # 'http://www.macmillandictionary.com/media/british/uk_pron/\
-        # c/cas/case_/case_law_British_English_pronunciation.mp3',
-        # this)""" Isolate those. Make it readable. We do the whole
-        # processing EAFP style. When they change the format, the
-        # processing will raise an exception that we will catch in
-        # download.py.
-        # I think they typically have exatly one pronunciation on a
-        # real result page. Anyway, with lists we have no problems
-        # with 0 or >1 results.
+        sounds = word_soup.findAll(True, {'class': sound_class})
         for sound_tag in sounds:
-            onclick_string = sound_tag['onclick']
-            # Now cut off the bits on the left and right that should
-            # be there. If not, this will fail. (Most likely the
-            # split.)  (This file is based on the MW downloader. There
-            # we had special code to deal with apostrops inside the
-            # onclick string. As we get naked url here, Macmillan.com
-            # is dealing with that for us.)
-            onclick_string = onclick_string.lstrip('playSoundFromFlash(')
-            onclick_string = onclick_string.rstrip(')')
-            audio_url = onclick_string.split(', ')[1]
-            audio_url = audio_url.lstrip("'").rstrip("'")
+            audio_url = sound_tag.get('data-src-mp3')
+            if not audio_url:
+                continue
             word_data = self.get_data_from_url(audio_url)
 
-            word_file_path, word_file_name = self.get_file_name()
+            word_file_path, word_file_name = self.get_file_name(
+                word, self.file_extension)
             with open(word_file_path, 'wb') as word_file:
                 word_file.write(word_data)
             extras = self.extras
@@ -83,8 +72,10 @@ class MacmillanDownloader(AudioDownloader):
             except KeyError:
                 pass
             else:
-                if not 'pronunciation' in alt_string.lower():
+                if 'pronunciation' not in alt_string.lower():
                     extras = copy(self.extras)
                     extras['Alt text'] = alt_string
-            self.downloads_list.append(
-                (word_file_path, word_file_name, extras))
+            self.downloads_list.append(DownloadEntry(
+                word_file_path, word_file_name, base_name=word,
+                display_text=word, file_extension=self.file_extension,
+                extras=extras))

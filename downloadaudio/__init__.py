@@ -1,7 +1,7 @@
-# -*- mode: python ; coding: utf-8 -*-
 #!/usr/bin/env python
+# -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–2014 Roland Sieker, <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
 
 u"""
@@ -11,4 +11,4 @@ This is an add-on for Anki-2 that downloads spoken version of the
 words in the cards.
 """
 
-__version__ = "2.8.1"
+__version__ = "2.12.0"
