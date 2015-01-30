@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
 # Copyright © 2012–2015 Roland Sieker, <ospalh@gmail.com>
@@ -45,25 +44,19 @@ from anki.hooks import addHook
 
 from .blacklist import get_hash
 from .downloaders import downloaders
+from .download_entry import DownloadEntry, Action
 from .get_fields import get_note_fields, get_side_fields
 from .language import language_code_from_card, language_code_from_editor
 from .processors import processor
-from .review_gui import store_or_blacklist
+from .review_gui import review_entries
 from .update_gui import update_data
 
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
-"""Place were we keep our megaphone icon.."""
-
-# A bit of set-up
-for downloader in downloaders:
-    # We have two audio "processors". One that is actually processing,
-    # and one where we would have to move files around, but where we
-    # can skip that step. Let the downloaders know which one we have.
-    downloader.use_temp_files = processor.useful
+# Place were we keep our megaphone icon.
 
 
-def do_download(note, field_data, language, hide_text=False):
+def do_download(note, field_data_list, language, hide_text=False):
     """
     Download audio data.
 
@@ -71,61 +64,92 @@ def do_download(note, field_data, language, hide_text=False):
     word from each site. Then call a function that asks the user what
     to do.
     """
-    retrieved_files_list = []
-    show_skull_and_bones = False
-    for (source, dest, text, base, ruby, split) in field_data:
+    retrieved_entries = []
+    for field_data in field_data_list:
+        if field_data.empty:
+            continue
         for dloader in downloaders:
             # Use a public variable to set the language.
             dloader.language = language
             try:
                 # Make it easer inside the downloader. If anything
                 # goes wrong, don't catch, or raise whatever you want.
-                dloader.download_files(text, base, ruby, split)
+                dloader.download_files(field_data)
             except:
                 #  # Uncomment this raise while testing a new
                 #  # downloaders.  Also comment out all the others in the
                 #  # downloaders list in downloaders.__init__
                 # raise
                 continue
-            for entry in dloader.downloads_list:
+            retrieved_entries += dloader.downloads_list
+        # Significantly changed the logic. Put all entries in one
+        # list, do stuff with that list of DownloadEntries.
+        for entry in retrieved_entries:
+            if processor.useful:
+                # if not processor.useful we write directly to the
+                # media dir.
                 try:
-                    item_hash = get_hash(entry.word_file_path)
-                except ValueError:
-                    # Now the downloader downloads, doesn't remove
-                    # files with bad hashes. So do it here.
-                    # print 'bad hash'
+                    # As above. Audio processing/file moving. The
+                    # downloader downloads to a temp file, so move
+                    # here.
+                    file_name = processor.process_and_move(
+                        entry.word_file_path, entry.base_name)
+                except:
+                    # raise  # Use this to debug an audio processor.
                     os.remove(entry.word_file_path)
                     continue
-                if processor.useful:
-                    # if not processor.useful we write directly to the
-                    # media dir.
-                    try:
-                        # As above. Audio processing/file moving. The
-                        # downloader downloads to a temp file, so move
-                        # here.
-                        file_name = processor.process_and_move(
-                            entry.word_file_path, entry.base_name)
-                    except:
-                        # raise  # Use this to debug an audio processor.
-                        os.remove(entry.word_file_path)
-                        continue
-                else:
-                    file_name = entry.word_file_name
-                show_skull_and_bones = \
-                    show_skull_and_bones or entry.show_skull_and_bones
-                # We pass the file name around for this case.
-                retrieved_files_list.append((
-                    source, dest, entry.display_text,
-                    file_name, item_hash, entry.extras, dloader.site_icon))
+            else:
+                file_name = entry.word_file_name
+            show_skull_and_bones = \
+                show_skull_and_bones or entry.show_skull_and_bones
+            # We pass the file name around for this case.
+            retrieved_files_list.append((
+                source, dest, entry.display_text,
+                file_name, item_hash, entry.extras, dloader.site_icon))
     try:
-        store_or_blacklist(
-            note, retrieved_files_list, show_skull_and_bones, hide_text)
+        retrieved_entries = review_entries(note, retrieved_entries, hide_text)
+        # Now just the dialog, which sets the fields in the entries
     except ValueError as ve:
         tooltip(str(ve))
     except RuntimeError as rte:
-        if 'cancel' not in str(rte):
+        if 'cancel' in str(rte):
+            # Set all to delete
+            for entry in retrieved_entries:
+                entry.action = Action.Delete
+        else:
             raise
-        # else: quietly drop out on user cancel
+    for entry in retrieved_entries:
+        entry.dispatch(note)
+        # Now the adding &c. is done by the download_entry class
+        if entry.action == Action.Add:
+            processor.process_and_move(entry)
+            note[dest] +=
+        if entry.action == Action.Keep:
+            entry.process
+            processor.process_and_move(entry)
+        if entry.action == Action.Delete:
+
+        if action_id == Action.Blacklist:
+
+    if any(entry.action == Action.Add for entry in retrieved_entries):
+        note.flush()
+        # We have to do different things here, for download during
+        # review, we should reload the card and replay. When we are in
+        # the add dialog, we do a field update there.
+        rnote = None
+        try:
+            rnote = mw.reviewer.card.note()
+        except AttributeError:
+            # Could not get the note of the reviewer's card. Probably
+            # not reviewing at all.
+            return
+        if note == rnote:
+            # The note we have is the one we were reviewing, so,
+            # reload and replay
+            mw.reviewer.card.load()
+            mw.reviewer.replayAudio()
+
+
 
 
 def download_for_side():
@@ -161,7 +185,7 @@ def download_for_note(ask_user=False, note=None, editor=None):
         language_code = language_code_from_card(card)
     else:
         language_code = language_code_from_editor(note, editor)
-    field_data = get_note_fields(note, get_empty=ask_user)
+    field_data = get_note_fields(note)
     if not field_data:
         # Complain before we show the empty dialog.
         tooltip(u'Nothing to download.')

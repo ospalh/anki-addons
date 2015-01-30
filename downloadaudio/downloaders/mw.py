@@ -41,7 +41,7 @@ class MerriamWebsterDownloader(AudioDownloader):
         self.icon_url = self.url
         self.popup_url = 'http://www.merriam-webster.com/audio.php?'
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         u"""
         Get pronunciations of a word from Meriam-Webster
 
@@ -52,16 +52,15 @@ class MerriamWebsterDownloader(AudioDownloader):
         \ˈrau̇\), so return a list.
         """
         self.downloads_list = []
-        if split:
-            # Avoid double downloads
-            return
         if not self.language.lower().startswith('en'):
             return
-        if not word:
+        if field_data.split:
+            return
+        if not field_data.word:
             return
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
-            self.url + urllib.quote(word.encode('utf-8')))
+            self.url + urllib.quote(field_data.word.encode('utf-8')))
         # The audio clips are stored as input tags with class au
         word_input_aus = word_soup.findAll(name='input', attrs={'class': 'au'})
         # The interesting bit it the onclick attribute and looks like
@@ -87,7 +86,8 @@ class MerriamWebsterDownloader(AudioDownloader):
             # There may be a meaning number, as in "1row" "3row" in the
             # title..
             match = re.search(
-                "Listen to the pronunciation of ([0-9]+)" + re.escape(word),
+                "Listen to the pronunciation of ([0-9]+)"
+                + re.escape(field_data.word),
                 input_tag['title'])
             try:
                 meaning_no = match.group(1)
@@ -103,7 +103,7 @@ class MerriamWebsterDownloader(AudioDownloader):
                 # looking for. For example if you ask mw for rower, you
                 # get the "row" page, which has pronunciations for "row",
                 # "rower" and the other "row".
-                if mw_audio_word == word:
+                if mw_audio_word == field_data.word:
                     file_list.append(mw_audio_fn_base)
                     meaning_no_list.append(meaning_no)
             else:
@@ -121,12 +121,14 @@ class MerriamWebsterDownloader(AudioDownloader):
             if meaning_no:
                 extras['Meaning #'] = meaning_no
             try:
-                word_path, word_file = self.get_word_file(mw_fn, word)
+                word_path = self.get_word_file(mw_fn, field_data.word)
             except ValueError:
                 continue
-            self.downloads_list.append(DownloadEntry(
-                word_path, word_file, base_name=word, display_text=word,
-                file_extension=self.file_extension, extras=extras))
+            entry = DownloadEntry(
+                field_data, word_path, extras, self.site_icon)
+            entry.file_extension = self.file_extension
+            # .wav. The only one where we don’t get mp3s.
+            self.downloads_list.append(entry)
 
     def get_word_file(self, base_name, word):
         """
@@ -140,11 +142,7 @@ class MerriamWebsterDownloader(AudioDownloader):
             self.get_popup_url(base_name, word))
         # The audio clip is the only embed tag.
         popup_embed = popup_soup.find(name='embed')
-        word_data = self.get_data_from_url(popup_embed['src'])
-        word_path, word_fname = self.get_file_name(word, self.file_extension)
-        with open(word_path, 'wb') as word_file:
-            word_file.write(word_data)
-        return word_path, word_fname
+        return self.get_tempfile_from_url(popup_embed['src'])
 
     def get_popup_url(self, base_name, source):
         """Build url for the MW play audio pop-up."""

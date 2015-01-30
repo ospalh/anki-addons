@@ -18,7 +18,7 @@ import urllib
 import urllib2
 import urlparse
 
-from ..download_entry import DownloadEntry
+from ..jpod_download_entry import JpodDownloadEntry
 from .downloader import AudioDownloader
 
 
@@ -38,7 +38,6 @@ class JapanesepodDownloader(AudioDownloader):
     """Download audio from Japanesepod"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.user_agent = 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:15.0) ' \
             'Gecko/20100101 Firefox/15.0.1'
         self.icon_url = 'http://www.japanesepod101.com/'
@@ -47,48 +46,54 @@ class JapanesepodDownloader(AudioDownloader):
         self.wwwjdic_url = 'http://www.csse.monash.edu.au/~jwb/' \
             'cgi-bin/wwwjdic.cgi?1MUJ'
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
         Downloader functon.
 
-        Get text for the base and ruby (kanji and kana) when
+        Get text for the kanji and kana when
         self.language is ja.
         """
         self.downloads_list = []
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
         # download, not from a reading field...
+        if not field_data.split:
+            return
         if not self.language.lower().startswith('ja'):
             return
-        if not base:
-            return
-        if not split:
-            return
-        # Only get the icon when we are using Japanese.
+        # We will fail when field_data is not JapaneseFieldData. No
+        # reason t ocheck for the ex split.
         self.maybe_get_icon()
-        self.get_word_from_japanesepod(base, ruby, {})
-        # First get from Japanesepod directly
-        # Maybe add other words via wwwjdic
-        if base == ruby:
-            # The base and the ruby are the same: probably a kana
-            # word. Look it up at WWWJDIC to get kanji spelling.
-            self.get_words_from_wwwjdic(ruby)
+        try:
+            # First get from Japanesepod directly
+            self.get_word_from_japanesepod(
+                field_data.kanji, field_data.kanji, {})
+        except ValueError as ve:
+            if 'blacklist' not in str(ve):
+                # Some *other* ValueError, not our blacklist.
+                raise
+            # We got what should have been error 404, JapanesePod does
+            # not have what we want, so maybe ask wwwjdic.
+            if field_data.kanji == field_data.kana:
+                # The base and the ruby are the same: probably a kana
+                # word. Look it up at Wwwjdic to get kanji spelling.
+                self.get_words_from_wwwjdic(field_data.kana)
 
     def get_word_from_japanesepod(self, kanji, kana, extras):
-        base_name, display_text = self.get_names(kanji, kana)
-        # Reason why we don’t just do the get_data_ bit inside the
-        # with: Like this we don’t have to clean up the temp file.
-        word_data = self.get_data_from_url(self.jpod_url(kanji, kana))
-        word_file_path, word_file_name = self.get_file_name(
-            base_name, self.file_extension)
-        with open(word_file_path, 'wb') as word_file:
-            word_file.write(word_data)
+        file_path = self.get_tempfile_from_url(self.jpod_url(kanji, kana))
+        try:
+            item_hash = get_hash(file_path)
+        except ValueError:
+            # Clean up
+            os.remove(file_path)
+            # and give up
+            raise
         extras['Source'] = 'JapanesePod'
-        # We have a file, but not much to say about it.
-        self.downloads_list.append(DownloadEntry(
-            word_file_path, word_file_name, base_name, display_text,
-            file_extension=self.file_extension, extras=extras,
-            show_skull_and_bones=True))
+        entry = JpodDownloadEntry(
+                field_data, file_path, extras, self.site_icon, item_hash)
+        entry.kanji = kanji
+        entry.kana = kana
+        self.downloads_list.append(entry)
 
     def jpod_url(self, kanji, kana):
         u"""Return a string that can be used as the url."""
@@ -146,18 +151,3 @@ class JapanesepodDownloader(AudioDownloader):
             if popular:
                 extras['Frequency'] = 'popular'
             self.get_word_from_japanesepod(audio_kanji, audio_kana, extras)
-
-    def get_names(self, base, ruby):
-        """
-        Get the display text and file base name variables.
-        """
-        if base:
-            base_name = base
-            display_text = base
-            if ruby:
-                base_name += u'_' + ruby
-                display_text += u' (' + ruby + u')'
-        else:
-            base_name = ruby
-            display_text = ruby
-        return base_name, display_text

@@ -1,40 +1,90 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
-# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2015 Roland Sieker, ospalh@gmail.com
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
+from .blacklist import add_black_hash
+from .processors import processor
 
 class DownloadEntry(object):
     u"""Data about a single file downloaded by a downloader"""
-    def __init__(
-            self, word_file_path, word_file_name, base_name, display_text,
-            file_extension=u'.wav', extras={},
-            show_skull_and_bones=False):
-        self.word_file_path = word_file_path
+    def __init__(self, field_data, file_path, extras, icon):
+        self.file_path = file_path
         # Absolute file path of the downloaded audio file
-        self.word_file_name = word_file_name
-        # The file name of the downloaded audio file (the
-        # last component of word_file_path
-        self.base_name = base_name
-        # Base of the file name in the media direcotry, without file
-        # extension or number. (A number gets added later when we have
-        # several files for one word.)
-        self.display_text = display_text
-        # Text shown as source after download
-        self.file_extension = file_extension
+        self.word = field_data.word
+        self.word_field_name = field_data.word_field_name
+        self.audio_field_name = field_data.audio_field_name
+        self.file_extension = u'.mp3'
         # The file extension (with dot)
         self.extras = extras
         # A dict with strings of interesting informations, like
-        # meaning numbers or name of speaker, or an empty dict.
-        # (shown in the tooltip)
-        self.show_skull_and_bones = show_skull_and_bones
-        # Should we show the skull and crossbones in the review
-        # dialog?
-        # Normal downloaders should leave this alone. The point of the
-        # whole blacklist mechanism is that JapanesePod can't say
-        # no. Only when there is a chance that we have a file we want
-        # to blacklist (that is, when we actually downloaded something
-        # from Japanesepod) should we set this to True.
+        # meaning numbers or name of speaker. Usually contains the
+        # source.
+        self.icon = icon
+        # The downloader’s favicon
+        self.action = Action.Add
+
+        @property
+        def display_name(self):
+            return self.word
+
+        @property
+        def base_name(self):
+            return self.word
+
+        @property
+        def entry_hash(self):
+            return None
+            # We are back to the way where the downloader checks
+            # whether the file has a bad hash. This now doubles as the
+            # old show_skull_and_bones. We show that button when this
+            # has an interesting value. And that is set in JpodDownleadEntry
+
+        def dispatch(self, note):
+            u"""Do what should be done with the downloaded file
+
+            Depending on self.action, do that action.
+
+            * That is, move the file do the media folder if we want it
+              on the note or just want to keep it.
+            * Add it to the note if that’s what we want.
+            * Delete it if we want just delete or blacklist it.
+            * Blacklist the hash if that’s what we want."""
+            if self.action == Action.Add or self.action == Action.Keep:
+                media_fn = process.process_and_move(self)
+                if self.action == Action.Add:
+                    note[self.audio_field_name] += '[sound:' + media_fn + ']'
+            if self.action == Action.Delete or self.action == Action.Blacklist:
+                os.remove(self.file_path)
+            if self.action == Action.Blacklist:
+                add_black_hash(self.entry_hash)
+
+
+class JpodDownloadEntry(DownloadEntry):
+    u"""Data about a single file downloaded by a downloader"""
+    def __init__(
+            self, japanese_field_data, file_path, extras, icon, file_hash):
+        DownloadEntry.__init__(
+            self, japanese_field_data, file_path, extras, icon)
+        self.kanji = japanese_field_data.kanji
+        self.kana = japanese_field_data.kana
+        self.hash_ = file_hash
+
+        @property
+        def base_name(self):
+            return u"{kanji}_{kana}".format(kanji=self.kanji, kana=self.kana)
+
+        @property
+        def display_name(self):
+            return u"{kanji}（{kana}）".format(kanji=self.kanji, kana=self.kana)
+            # N.B.: those are “full width” (read, CJK) parentheses
+
+        @property
+        def entry_hash(self):
+            return self.hash_
+
+class Action(object):
+    Add, Keep, Delete, Blacklist = range(0, 4)

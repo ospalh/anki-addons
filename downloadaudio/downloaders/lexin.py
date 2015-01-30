@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012–2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2015 Roland Sieker, ospalh@gmail.com
 # Copyright © 2014 Daniel Eriksson, p.e.d.eriksson@gmail.com
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
@@ -13,9 +13,6 @@ Download pronunciations from Lexin.
 """
 
 import unicodedata
-
-download_file_extension = u'.mp3'
-
 
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -48,29 +45,22 @@ class LexinDownloader(AudioDownloader):
     """Download audio from Lexin"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.icon_url = 'http://lexin.nada.kth.se/lexin/'
         self.url = 'http://lexin.nada.kth.se/sound/'
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """Get pronunciations of a word in Swedish from Lexin"""
         self.downloads_list = []
-        if split:
-            # Avoid double downloads
-            return
         if not self.language.lower().startswith('sv'):
             return
-        if not word:
+        if field_data.split:
+            return
+        if not field__data.word:
             return
         # Replace special characters with ISO-8859-1 oct codes
-        m_word = munge_word(word)
         self.maybe_get_icon()
-        audio_url = self.url + m_word + self.file_extension
-        word_data = self.get_data_from_url(audio_url)
-        word_file_path, word_file_name = self.get_file_name(
-            word, self.file_extension)
-        with open(word_file_path, 'wb') as word_file:
-            word_file.write(word_data)
-        self.downloads_list.append(DownloadEntry(
-            word_file_path, word_file_name, base_name=word, display_text=word,
-            file_extension=self.file_extension, extras=dict(Source="Lexin")))
+        file_path = self.get_data_from_url(
+            self.url + munge_word(field_data.word) + self.file_extension)
+        self.downloads_list.append(
+            DownloadEntry(
+                field_data, file_path, dict(Source="Lexin"), self.site_icon))

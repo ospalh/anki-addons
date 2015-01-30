@@ -21,29 +21,23 @@ class HowJSayDownloader(AudioDownloader):
     """Download audio from HowJSay"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.icon_url = 'http://howjsay.com'
         self.url = 'http://howjsay.com/mp3/'
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """Get pronunciations of a word in English from HowJSay"""
         self.downloads_list = []
-        if split:
-            # Avoid double downloads
+        if field_data.split:
             return
         if not self.language.lower().startswith('en'):
             return
-        if not word:
+        if not field_data.word:
             return
         # Replace special characters with ISO-8859-1 oct codes
         self.maybe_get_icon()
-        audio_url = self.url + urllib.quote(word.encode('utf-8')) \
-            + self.file_extension
-        word_data = self.get_data_from_url(audio_url)
-        word_file_path, word_file_name = self.get_file_name(
-            word, self.file_extension)
-        with open(word_file_path, 'wb') as word_file:
-            word_file.write(word_data)
-        self.downloads_list.append(DownloadEntry(
-            word_file_path, word_file_name, base_name=word, display_text=word,
-            file_extension=self.file_extension, extras=dict(Source="HowJSay")))
+        word_path = self.get_tempfile_from_url(
+            self.url + urllib.quote(field_data.word.encode('utf-8')) +
+            self.file_extension)
+        self.downloads_list.append(
+            DownloadEntry(
+                field_data, word_path, dict(Source="HowJSay"), self.site_icon))

@@ -1,9 +1,9 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–2015 Roland Sieker <ospalh@gmail.com>
 #
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
-#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 
 '''
@@ -39,8 +39,8 @@ def get_hash(file_name):
         load_hashes()
     retrieved_hash = hashlib.sha256(file(file_name, 'rb').read())
     if retrieved_hash.hexdigest() in blacklist_hashes:
-        raise ValueError('Retrieved file is in blacklist. ' +
-                         '(No pronunciation found.)')
+        raise ValueError(
+            'Retrieved file is in blacklist. (No pronunciation found.)')
     return retrieved_hash
 
 
