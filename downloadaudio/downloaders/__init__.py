@@ -27,6 +27,7 @@ from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .howjsay import HowJSayDownloader
 from .japanesepod import JapanesepodDownloader
+from .leo import LeoDownloader
 from .lexin import LexinDownloader
 from .macmillan_american import MacmillanAmericanDownloader
 from .macmillan_british import MacmillanBritishDownloader
@@ -34,22 +35,24 @@ from .mw import MerriamWebsterDownloader
 from .oald import OaldDownloader
 from .wiktionary import WiktionaryDownloader
 
+
 downloaders = [
     JapanesepodDownloader(),
     CollinsFrenchDownloader(),
     CollinsGermanDownloader(),
     CollinsItalianDownloader(),
     CollinsSpanishDownloader(),
+    LeoDownloader(),
     LexinDownloader(),
     MerriamWebsterDownloader(),
-#    MacmillanAmericanDownloader(),
+    # MacmillanAmericanDownloader(),
     MacmillanBritishDownloader(),
     OaldDownloader(),
     DudenDownloader(),
     HowJSayDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
-    GooglettsDownloader(),
+    # GooglettsDownloader(),
 ]
 # This is the list of downloaders.
 #
