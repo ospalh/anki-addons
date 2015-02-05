@@ -103,7 +103,8 @@ class LeoDownloader(AudioDownloader):
                     # Make everything unicode.
                     if type(cur_word) == str:
                         cur_word = cur_word.decode('utf-8')
-                    if self.normalize(cur_word) == self.normalize(word):
+                    if self.normalize(cur_word) == self.normalize(
+                            field_data.word):
                         matching_word = cur_word
                         break
                 if not matching_word:

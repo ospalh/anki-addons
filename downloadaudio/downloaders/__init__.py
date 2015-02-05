@@ -52,7 +52,7 @@ downloaders = [
     HowJSayDownloader(),
     WiktionaryDownloader(),
     BeolingusDownloader(),
-    # GooglettsDownloader(),
+    GooglettsDownloader(),
 ]
 # This is the list of downloaders.
 #

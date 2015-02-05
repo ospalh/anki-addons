@@ -42,7 +42,6 @@ from aqt import mw
 from aqt.utils import tooltip
 from anki.hooks import addHook
 
-from .blacklist import get_hash
 from .downloaders import downloaders
 from .download_entry import DownloadEntry, Action
 from .get_fields import get_note_fields, get_side_fields
@@ -82,30 +81,8 @@ def do_download(note, field_data_list, language, hide_text=False):
                 # raise
                 continue
             retrieved_entries += dloader.downloads_list
-        # Significantly changed the logic. Put all entries in one
-        # list, do stuff with that list of DownloadEntries.
-        for entry in retrieved_entries:
-            if processor.useful:
-                # if not processor.useful we write directly to the
-                # media dir.
-                try:
-                    # As above. Audio processing/file moving. The
-                    # downloader downloads to a temp file, so move
-                    # here.
-                    file_name = processor.process_and_move(
-                        entry.word_file_path, entry.base_name)
-                except:
-                    # raise  # Use this to debug an audio processor.
-                    os.remove(entry.word_file_path)
-                    continue
-            else:
-                file_name = entry.word_file_name
-            show_skull_and_bones = \
-                show_skull_and_bones or entry.show_skull_and_bones
-            # We pass the file name around for this case.
-            retrieved_files_list.append((
-                source, dest, entry.display_text,
-                file_name, item_hash, entry.extras, dloader.site_icon))
+    # Significantly changed the logic. Put all entries in one
+    # list, do stuff with that list of DownloadEntries.
     try:
         retrieved_entries = review_entries(note, retrieved_entries, hide_text)
         # Now just the dialog, which sets the fields in the entries
@@ -113,24 +90,12 @@ def do_download(note, field_data_list, language, hide_text=False):
         tooltip(str(ve))
     except RuntimeError as rte:
         if 'cancel' in str(rte):
-            # Set all to delete
             for entry in retrieved_entries:
                 entry.action = Action.Delete
         else:
             raise
     for entry in retrieved_entries:
         entry.dispatch(note)
-        # Now the adding &c. is done by the download_entry class
-        if entry.action == Action.Add:
-            processor.process_and_move(entry)
-            note[dest] +=
-        if entry.action == Action.Keep:
-            entry.process
-            processor.process_and_move(entry)
-        if entry.action == Action.Delete:
-
-        if action_id == Action.Blacklist:
-
     if any(entry.action == Action.Add for entry in retrieved_entries):
         note.flush()
         # We have to do different things here, for download during
@@ -148,8 +113,6 @@ def do_download(note, field_data_list, language, hide_text=False):
             # reload and replay
             mw.reviewer.card.load()
             mw.reviewer.replayAudio()
-
-
 
 
 def download_for_side():

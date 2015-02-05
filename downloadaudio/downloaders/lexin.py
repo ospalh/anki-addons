@@ -55,11 +55,11 @@ class LexinDownloader(AudioDownloader):
             return
         if field_data.split:
             return
-        if not field__data.word:
+        if not field_data.word:
             return
         # Replace special characters with ISO-8859-1 oct codes
         self.maybe_get_icon()
-        file_path = self.get_data_from_url(
+        file_path = self.get_tempfile_from_url(
             self.url + munge_word(field_data.word) + self.file_extension)
         self.downloads_list.append(
             DownloadEntry(

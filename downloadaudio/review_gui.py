@@ -49,13 +49,11 @@ def review_entries(note, retrieved_data, hide_text):
         raise ValueError('Nothing downloaded')
     review_files = ReviewFiles(note, retrieved_data, hide_text)
     if not review_files.exec_():
-        remove_all_files(retrieved_data)
         raise RuntimeError('User cancel')
     # Go through the list and set the Action.
     for idx, entry in enumerate(retrieved_data):
-        entry.Action = review_files.buttons[idx]
-    for idx, dl_entry in enumerate(retrieved_data):
-        dl_entry.action = review_files.buttons_groups[idx].checkedId()
+        entry.action = review_files.buttons_groups[idx].checkedId()
+    return retrieved_data
 
 
 class ReviewFiles(QDialog):
@@ -75,7 +73,7 @@ class ReviewFiles(QDialog):
         self.delete_column = 6
         self.blacklist_column = 7
         self.show_skull_and_bones = any(
-            entry.text is None for entry in self.entries_list)
+            entry.entry_hash for entry in self.entries_list)
         if not self.show_skull_and_bones:
             self.num_columns -= 1
         self.hide_text = hide_text
@@ -194,7 +192,7 @@ that they are sorry, will add this soon &c., click on this.""")
             if entry.icon:
                 ico_label.setPixmap(QPixmap.fromImage(entry.icon))
             layout.addWidget(ico_label, num, 0)
-            tt_label = QLabel(entry.word, self)
+            tt_label = QLabel(entry.display_word, self)
             tt_label.setToolTip(tt_text)
             layout.addWidget(tt_label, num, 1)
             if self.hide_text:
@@ -226,19 +224,18 @@ that they are sorry, will add this soon &c., click on this.""")
             # Now the four buttons
             t_add_button = QPushButton(self)
             t_add_button.setCheckable(True)
-            t_add_button.setChecked(True)
             t_add_button.setFlat(True)
             t_add_button.setToolTip(self.add_help_text_short)
             t_add_button.setIcon(QIcon(os.path.join(icons_dir, 'add.png')))
             layout.addWidget(t_add_button, num, self.add_column)
-            t_button_group.addButton(t_add_button, Action.add)
+            t_button_group.addButton(t_add_button, Action.Add)
             t_keep_button = QPushButton(self)
             t_keep_button.setCheckable(True)
             t_keep_button.setFlat(True)
             t_keep_button.setToolTip(self.keep_help_text_short)
             t_keep_button.setIcon(QIcon(os.path.join(icons_dir, 'keep.png')))
             layout.addWidget(t_keep_button, num, self.keep_column)
-            t_button_group.addButton(t_keep_button,  Action.keep)
+            t_button_group.addButton(t_keep_button, Action.Keep)
             t_delete_button = QPushButton(self)
             t_delete_button.setCheckable(True)
             t_delete_button.setFlat(True)
@@ -246,20 +243,24 @@ that they are sorry, will add this soon &c., click on this.""")
             t_delete_button.setIcon(
                 QIcon(os.path.join(icons_dir, 'delete.png')))
             layout.addWidget(t_delete_button, num, self.delete_column)
-            t_button_group.addButton(t_delete_button,  Action.delete)
-            if entry.item_hash:
-                t_blacklist_button = QPushButton(self)
-                t_blacklist_button.setCheckable(True)
-                t_blacklist_button.setFlat(True)
-                t_blacklist_button.setToolTip(self.blacklist_help_text_short)
-                t_blacklist_button.setIcon(
+            t_button_group.addButton(t_delete_button,  Action.Delete)
+            t_blacklist_button = QPushButton(self)
+            t_blacklist_button.setCheckable(True)
+            t_blacklist_button.setFlat(True)
+            t_blacklist_button.setToolTip(self.blacklist_help_text_short)
+            t_blacklist_button.setIcon(
                 QIcon(os.path.join(icons_dir, 'blacklist.png')))
+            if entry.entry_hash:
                 layout.addWidget(
                     t_blacklist_button, num, self.blacklist_column)
             else:
+                t_blacklist_button.hide()
                 dummy_label_bl = QLabel('', self)
                 dummy_label_bl.setToolTip(self.blacklist_empty_line_help)
                 layout.addWidget(dummy_label_bl, num, self.blacklist_column)
+            t_button_group.button(entry.action).setChecked(True)
+            # New: check a button based on how good the downloader is.
+            t_button_group.addButton(t_blacklist_button, Action.Blacklist)
             self.buttons_groups.append(t_button_group)
         play_button_group.buttonClicked.connect(
             lambda button: play(
@@ -276,7 +277,7 @@ that they are sorry, will add this soon &c., click on this.""")
     def build_text_help_label(self, entry):
         u"""Build the bubble help text label."""
         ret_text = u'Text field: {0}'.format(entry.word_field_name)
-        ret_text = u'Audio field: {0}'.format(entry.audio_field_name)
+        ret_text += u'<br>Audio field: {0}'.format(entry.audio_field_name)
         for key, value in entry.extras.items():
             ret_text += u'<br>{0}: {1}'.format(key, value)
         return ret_text

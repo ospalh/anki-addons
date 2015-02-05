@@ -10,6 +10,7 @@
 Download French pronunciations from  Collins Dictionary.
 """
 
+from ..download_entry import Action
 from .collins import CollinsDownloader
 
 
@@ -23,5 +24,6 @@ class CollinsFrenchDownloader(CollinsDownloader):
         self.lang_code = u'/fr_/'
         self.icon_url = self.url
         self.extras = dict(Source="Collins French")
+        self.action = Action.Delete  # Reported to be bad sometimes.
 
     # Use CollinsDownloader for the real work.

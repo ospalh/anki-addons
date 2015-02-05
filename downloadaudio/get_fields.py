@@ -12,19 +12,16 @@ Extract field data to download.
 from collections import namedtuple
 import re
 
-from anki.sound import stripSounds
-from anki.template import furigana
-from anki.utils import stripHTML
 from aqt import mw
 
 from .field_data import FieldData, JapaneseFieldData
 
 
-## Change these to mach the field names of your decks. Make sure to
-## not use capital letters. We compare these to lower-case only
-## versions of the field names. When these lists contain upper-case
-## letters, no field will ever be matched and nothing will be
-## downloaded.
+# # Change these to mach the field names of your decks. Make sure to
+# # not use capital letters. We compare these to lower-case only
+# # versions of the field names. When these lists contain upper-case
+# # letters, no field will ever be matched and nothing will be
+# # downloaded.
 expression_fields = [u'expression', u'word']
 # Fields we get the ‘normal’ download text from.
 #
@@ -72,13 +69,13 @@ def field_data(note, audio_field, reading=False):
             return FieldData(
                 source_name, audio_field, note[source_name])
 
-    t_name = fname.lower()
+    a_name = audio_field.lower()
     field_names = [item[0] for item in note.items()]
     f_names = [fn.lower() for fn in field_names]
     # First, look for just audio fields
     for afk in audio_field_keys:
-        if t_name == afk:
-            if readings:
+        if a_name == afk:
+            if reading:
                 sources_list = reading_keys
             else:
                 sources_list = expression_fields
@@ -88,7 +85,7 @@ def field_data(note, audio_field, reading=False):
                         return return_data(idx)
             # At this point: The target name is good, but we found no
             # source name.
-            if not readings:
+            if not reading:
                 # Don't give for most languages. Simply use the first
                 # field. That should work for a lot of people
                 return return_data(0)
@@ -96,15 +93,14 @@ def field_data(note, audio_field, reading=False):
                 # But that doesn't really work for Japanese.
                 raise KeyError('No source name found (case 1)')
         # This point: target name is not exactly the field name
-        if not afk in t_name:
+        if afk not in a_name:
             # And not a substring either
             continue
         # Here: the field name contains an audio or sound.
-        # Mangle the name as described. For the readings case we get a
+        # Mangle the name as described. For the reading case we get a
         # list. So do a list for the other case as well.
-        if readings:
-            sources_list = [t_name.replace(afk, rk)
-                            for rk in reading_keys]
+        if reading:
+            sources_list = [a_name.replace(afk, rk) for rk in reading_keys]
         else:
             # Here the tricky bit is to remove the right number of '_'
             # or ' ' characters, 0 or 1, but not 2. What we want is:
@@ -117,7 +113,7 @@ def field_data(note, audio_field, reading=False):
             # lookbehind needed.)
             sources_list = [
                 re.sub(ur'[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
-                       '', t_name, count=1, flags=re.UNICODE)]
+                       '', a_name, count=1, flags=re.UNICODE)]
         for cnd in sources_list:
             for idx, lname in enumerate(f_names):
                 if cnd == lname:
@@ -156,14 +152,14 @@ def get_side_fields(card, note):
         # Append all fields in the current template/side that contain
         # 'audio' or 'sound'
         audio_field_names += re.findall(
-            field_name_re % afk, text, flags=re.IGNORECASE)
+            field_name_re % afk, template, flags=re.IGNORECASE)
         # We use the (old style) % operator rather than
         # unicode.format() because we look for {}s in the re, which
         # would get more complicated with format().
     audio_field_names = uniqify_list(audio_field_names)
     # Filter out non-existing fields.
-    audio_field_names =  [
-        fn for fn in audio_field_names if fn in all_audio_field_names]
+    audio_field_names = [
+        fn for fn in audio_field_names if fn in all_field_names]
     field_data_list = []
     for audio_field in audio_field_names:
         try:

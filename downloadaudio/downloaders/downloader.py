@@ -26,6 +26,7 @@ try:
 except ImportError:
     with_pyqt = False
 
+
 def uniqify_list(seq):
     """Return a copy of the list with every element appearing only once."""
     # From http://www.peterbe.com/plog/uniqifiers-benchmark
@@ -77,7 +78,6 @@ class AudioDownloader(object):
         # The sites’s favicon.
         self.file_extension = u'.mp3'
         # Most sites have mp3 files.
-
 
     def download_files(self, field_data):
         """Downloader functon
@@ -222,7 +222,7 @@ class AudioDownloader(object):
         # get_data raises all kinds of exceptions that fly through
         # here.)
         tfile = tempfile.NamedTemporaryFile(
-                delete=False, suffix=self.file_extension)
+            delete=False, prefix=u'anki_audio_', suffix=self.file_extension)
         tfile.write(data)
         tfile.close()
         return tfile.name

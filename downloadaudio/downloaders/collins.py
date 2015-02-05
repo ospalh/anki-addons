@@ -16,7 +16,7 @@ Abstract base class, derived for several languages.
 import urllib
 
 from .downloader import AudioDownloader, uniqify_list
-from ..download_entry import DownloadEntry
+from ..download_entry import Action, DownloadEntry
 
 
 class CollinsDownloader(AudioDownloader):
@@ -32,6 +32,7 @@ class CollinsDownloader(AudioDownloader):
         # self.icon_url = self.url
         # self.extras = dict(Source="Collins German")
         # Here the word page url works to get the favicon.
+        self.action = Action.Add
 
     def download_files(self, field_data):
         u"""
@@ -63,17 +64,14 @@ class CollinsDownloader(AudioDownloader):
                 if self.lang_code not in wai['onclick']:
                     # Wrong language
                     continue
-                # print(u'look at “{}”'.format(wai['title']))
                 if not (wai['title'] == "Pronunciation for "
                         or wai['title'].lower().endswith(lword)):
-                    # print('not good')
                     continue
             except KeyError:
                 # Not an onclick element after all. Or no title with
                 # the word. Surely not what we want.
                 continue
             # Looks good so far.
-            # print(u'adding link with title “{}”'.format(wai['title']))
             link_list.append(self.get_link(wai['onclick']))
         if not link_list:
             return
@@ -81,9 +79,10 @@ class CollinsDownloader(AudioDownloader):
         self.maybe_get_icon()
         for lnk in link_list:
             word_path = self.get_tempfile_from_url(lnk)
-            self.downloads_list.append(
-                DownloadEntry(
-                    field_data, word_path, self.extras, self.site_icon))
+            entry = DownloadEntry(
+                field_data, word_path, self.extras, self.site_icon)
+            entry.action = self.action
+            self.downloads_list.append(entry)
 
     def get_link(self, onclick_string):
         # Wrote these bits for ooad

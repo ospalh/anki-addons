@@ -35,7 +35,6 @@ class BeolingusDownloader(AudioDownloader):
         self.text_re = u'text={0}(?:%20{{([a-zA-Z ]+)}})?$'
         self.services_dict = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
         # Mapping of languages to "services".
-        #
         # We can get pronunciations for the keys in this
         # dictionary.
         self.service = None
@@ -82,13 +81,13 @@ class BeolingusDownloader(AudioDownloader):
                 word_path = self.get_word_file(url_to_get, word)
             except ValueError:
                 continue
-            entry = DownloadEntry(word, word_path, extras)
+            entry = DownloadEntry(
+                field_data, word_path, extras, self.site_icon)
             if self.service != 'de-en':
                 entry.action = Action.Delete
                 # Some of the English pronunciations are bad. Switch
                 # English and Spanish to Delete by default.
             self.downloads_list.append(entry)
-
 
     def get_word_file(self, popup_url, word):
         """

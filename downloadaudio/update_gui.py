@@ -29,7 +29,7 @@ def update_data(field_data_list, language_code):
         else:
             field_data.word = review_fields.word_lineedits[num].text()
     language_code = review_fields.language_code_lineedit.text()
-    return review_fields, language_code
+    return field_data_list, language_code
 
 
 class ReviewFields(QDialog):
@@ -77,7 +77,6 @@ reading (ruby) on the right.</p>
         # Now decide which help text to show.
         # First, decide if we have any split fields.
         if any(f_data.split for f_data in self.field_data_list):
-        if [itm for itm in self.field_data_list if itm[5]]:
             if self.language_code and self.language_code.startswith('ja'):
                 # Japanese
                 edit_word_head.setText(kanji_et)

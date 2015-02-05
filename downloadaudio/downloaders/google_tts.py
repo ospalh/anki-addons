@@ -13,10 +13,10 @@ Download pronunciations from GoogleTTS
 
 import urllib
 
-from .downloader import AudioDownloader
-from ..download_entry import Action, DownloadEntry
-
 from anki.template import furigana
+
+from ..download_entry import Action, DownloadEntry
+from .downloader import AudioDownloader
 
 get_chinese = False
 """
@@ -40,7 +40,7 @@ class GooglettsDownloader(AudioDownloader):
         Get text from GoogleTTS.
         """
         self.downloads_list = []
-        if field_data.word.split:
+        if field_data.split:
             return
         if self.language.lower().startswith('zh'):
             if not get_chinese:

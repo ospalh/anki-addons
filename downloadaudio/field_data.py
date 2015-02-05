@@ -9,6 +9,10 @@
 Two classes to store information for the downloader
 """
 
+from anki.sound import stripSounds
+from anki.template import furigana
+from anki.utils import stripHTML
+
 # Apparently some people use a 「・」 between the kana for different
 # kanji. Make it easier to switch removing them for the downloads on
 # or off
@@ -41,7 +45,7 @@ class FieldData(object):
 
 class JapaneseFieldData(FieldData):
     def __init__(self, w_field, a_field, word):
-        FieldData.__init__(w_field, a_field, word)
+        FieldData.__init__(self, w_field, a_field, word)
         self.kanji = furigana.kanji(self.word)
         self.kana = furigana.kana(self.word)
 
