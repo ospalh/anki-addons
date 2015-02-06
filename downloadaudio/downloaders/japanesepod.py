@@ -13,12 +13,15 @@ Download Japanese pronunciations from Japanesepod
 '''
 
 from collections import OrderedDict
+from copy import copy
+import os
 import re
 import urllib
 import urllib2
 import urlparse
 
-from ..download_entry import DownloadEntry
+from ..blacklist import get_hash
+from ..download_entry import JpodDownloadEntry
 from .downloader import AudioDownloader
 
 
@@ -38,57 +41,76 @@ class JapanesepodDownloader(AudioDownloader):
     """Download audio from Japanesepod"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.user_agent = 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:15.0) ' \
             'Gecko/20100101 Firefox/15.0.1'
         self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
         self.wwwjdic_url = 'http://www.csse.monash.edu.au/~jwb/' \
-            'cgi-bin/wwwjdic.cgi?1MUJ'
+            'cgi-bin/wwwjdic.cgi?1MUJ{kana}_2_50'
+        self.extras = {'Source': 'JapanesePod'}
+        self.field_data = None
 
-    def download_files(self, word, base, ruby, split):
+
+    def download_files(self, field_data):
         """
         Downloader functon.
 
-        Get text for the base and ruby (kanji and kana) when
+        Get text for the kanji and kana when
         self.language is ja.
         """
+        self.field_data = field_data
         self.downloads_list = []
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
-        # download, not from a reading field...
+        # download, not from a reading field…
+        if not field_data.split:
+            return
         if not self.language.lower().startswith('ja'):
             return
-        if not base:
-            return
-        if not split:
-            return
-        # Only get the icon when we are using Japanese.
+        # We will fail when field_data is not JapaneseFieldData. No
+        # reason t ocheck for the ex split.
         self.maybe_get_icon()
-        self.get_word_from_japanesepod(base, ruby, {})
-        # First get from Japanesepod directly
-        # Maybe add other words via wwwjdic
-        if base == ruby:
-            # The base and the ruby are the same: probably a kana
-            # word. Look it up at WWWJDIC to get kanji spelling.
-            self.get_words_from_wwwjdic(ruby)
+        try:
+            # First get from Japanesepod directly
+            self.get_word_from_japanesepod()
+        except ValueError as ve:
+            if 'blacklist' not in str(ve):
+                # Some *other* ValueError, not our blacklist.
+                raise
+            # We got what should have been error 404, JapanesePod does
+            # not have what we want, so maybe ask wwwjdic.
+            if field_data.kanji == field_data.kana:
+                # The base and the ruby are the same: probably a kana
+                # word. Look it up at Wwwjdic to get kanji spelling.
+                self.get_words_from_wwwjdic()
 
-    def get_word_from_japanesepod(self, kanji, kana, extras):
-        base_name, display_text = self.get_names(kanji, kana)
-        # Reason why we don’t just do the get_data_ bit inside the
-        # with: Like this we don’t have to clean up the temp file.
-        word_data = self.get_data_from_url(self.jpod_url(kanji, kana))
-        word_file_path, word_file_name = self.get_file_name(
-            base_name, self.file_extension)
-        with open(word_file_path, 'wb') as word_file:
-            word_file.write(word_data)
-        extras['Source'] = 'JapanesePod'
-        # We have a file, but not much to say about it.
-        self.downloads_list.append(DownloadEntry(
-            word_file_path, word_file_name, base_name, display_text,
-            file_extension=self.file_extension, extras=extras,
-            show_skull_and_bones=True))
+    def get_word_from_japanesepod(
+            self, kanji=None, kana=None, extra_extras=None):
+        if not kanji:
+            kanji = self.field_data.kanji
+        if not kana:
+            kana = self.field_data.kana
+        file_path = self.get_tempfile_from_url(self.jpod_url(kanji, kana))
+        try:
+            item_hash = get_hash(file_path)
+        except ValueError:
+            # Clean up
+            os.remove(file_path)
+            # and give up
+            raise
+        entry = JpodDownloadEntry(
+            self.field_data, file_path, self.extras, self.site_icon, item_hash)
+        if kanji:
+            entry.kanji = kanji
+        if kana:
+            entry.kana = kana
+        if extra_extras:
+            extras =  copy(self.extras)
+            for key in extra_extras:
+                extras[key] = extra_extras[key]
+            entry.extras = extras
+        self.downloads_list.append(entry)
 
     def jpod_url(self, kanji, kana):
         u"""Return a string that can be used as the url."""
@@ -99,10 +121,11 @@ class JapanesepodDownloader(AudioDownloader):
             qdict['kana'] = kana.encode('utf-8')
         return self.url + urllib.urlencode(qdict)
 
-    def get_words_from_wwwjdic(self, kana):
+    def get_words_from_wwwjdic(self):
         soup = self.get_soup_from_url(
-            self.wwwjdic_url + urllib2.quote(kana.encode('utf-8'))
-            + '_2_50')  # get 50 entries (no idea what the 2 means)
+            self.wwwjdic_url.format(
+                kana=urllib2.quote(self.field_data.kana.encode('utf-8'))))
+        # get 50 entries (no idea what the 2 means)
         labels = soup.findAll('label')
         hits = OrderedDict()
         for lbl in labels:
@@ -110,9 +133,10 @@ class JapanesepodDownloader(AudioDownloader):
             entry = lbl.find('font')
             if not audio or not entry or not entry.has_key('size') \
                     or entry['size'] != '+1':
-                # entry is a BeautifulSoup.Tag. Looks like “'a'
-                # not in tag” does not work instead of “not
-                # tag.has_key('a')”
+                # entry is a BeautifulSoup.Tag. Looks like “'a' not in
+                # tag” does not work instead of “not
+                # tag.has_key('a')”. Ignore the pep8 warning, it’s a
+                # fales positive.
                 continue
             audio.extract()  # remove from label element
             entry.extract()
@@ -126,7 +150,7 @@ class JapanesepodDownloader(AudioDownloader):
             # convert brackets to delimiter (Treat “　” as a space)
             entry = re.sub(u'[\s《》【】]', ';', entry, flags=re.UNICODE)
             for reading in entry.split(';'):
-                if reading == kana:
+                if reading == self.field_data.kana:
                     hits[audio] = popular
                     break
         for audio, popular in hits.items():
@@ -137,7 +161,8 @@ class JapanesepodDownloader(AudioDownloader):
                 if 'kana' in args else None
             # Sometimes there are multiple readings. Check that the audio
             # file is actually for the reading that we want.
-            if audio_kana and not equals_kana(audio_kana, kana):
+            if audio_kana and not equals_kana(
+                    audio_kana, self.field_data.kana):
                 continue
             if not audio_kanji or audio_kana == audio_kanji:
                 # Probably got this file already in the first round.
@@ -145,19 +170,5 @@ class JapanesepodDownloader(AudioDownloader):
             extras = OrderedDict()
             if popular:
                 extras['Frequency'] = 'popular'
-            self.get_word_from_japanesepod(audio_kanji, audio_kana, extras)
-
-    def get_names(self, base, ruby):
-        """
-        Get the display text and file base name variables.
-        """
-        if base:
-            base_name = base
-            display_text = base
-            if ruby:
-                base_name += u'_' + ruby
-                display_text += u' (' + ruby + u')'
-        else:
-            base_name = ruby
-            display_text = ruby
-        return base_name, display_text
+            self.get_word_from_japanesepod(
+                audio_kanji, audio_kana, extras)

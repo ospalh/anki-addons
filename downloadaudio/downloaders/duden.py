@@ -44,23 +44,21 @@ class DudenDownloader(AudioDownloader):
     """Download audio from Duden"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.icon_url = 'http://www.duden.de/'
         self.url = 'http://www.duden.de/rechtschreibung/'
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
-        Get pronunciations of a word from the right duden.
+        Get pronunciations of a word from Duden.
         """
         self.downloads_list = []
-        if split:
-            # Avoid double downloads.
+        if field_data.split:
             return
         if not self.language.lower().startswith('de'):
             return
-        if not word:
+        if not field_data.word:
             return
-        m_word = munge_word(word)
+        m_word = munge_word(field_data.word)
         self.maybe_get_icon()
         word_soup = self.get_soup_from_url(self.url + m_word)
         blank_links = word_soup.findAll(name='a', target="_blank")
@@ -74,16 +72,12 @@ class DudenDownloader(AudioDownloader):
                 try:
                     extras[u'©'] = re.search(u'© (.*)', link['title']).group(1)
                 except AttributeError:
-                    # 'NoneType' object has no attribute 'group' ...
+                    # 'NoneType' object has no attribute 'group' …
                     pass
-                word_data = self.get_data_from_url(link['href'])
-                word_path, word_fname = self.get_file_name(
-                    word, self.file_extension)
-                with open(word_path, 'wb') as word_file:
-                    word_file.write(word_data)
-                self.downloads_list.append(DownloadEntry(
-                    word_path, word_fname, base_name=word, display_text=word,
-                    file_extension=self.file_extension, extras=extras))
+                word_path = self.get_tempfile_from_url(link['href'])
+                self.downloads_list.append(
+                    DownloadEntry(
+                        field_data, word_path, extras, self.site_icon))
 
     def good_link(self, link):
         """Check if link looks """

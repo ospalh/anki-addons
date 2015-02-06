@@ -54,7 +54,7 @@ downloaders = [
     WiktionaryDownloader(),
     ForvoDownloader(),
     BeolingusDownloader(),
-    # GooglettsDownloader(),
+    GooglettsDownloader(),
 ]
 # This is the list of downloaders.
 #
