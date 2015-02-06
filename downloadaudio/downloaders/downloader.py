@@ -11,6 +11,7 @@
 Class to download a files from a speaking dictionary or TTS service.
 '''
 
+
 import tempfile
 import urllib
 import urllib2
@@ -75,8 +76,10 @@ class AudioDownloader(object):
         # False) we use the current directory.
         self.site_icon = None
         # The sites’s favicon.
+        self.file_extension = u'.mp3'
+        # Most sites have mp3 files.
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """Downloader functon
 
         This is the main worker function. It has to be reimplemented
@@ -207,28 +210,19 @@ class AudioDownloader(object):
         """
         return soup(self.get_data_from_url(url_in))
 
-    def get_file_name(self, base_name, file_extension):
+    def get_tempfile_from_url(self, url_in):
         """
-        Get a free file name.
+        Download raw data from url and put into a tempfile
 
-        Determine where we should write the data and build a free name
-        based on that. This looks at self.use_temp_files and
-        self.download_diretory. Read their docstrings.
+        Wrapper helper function aronud self.get_data_from_url().
         """
-        if self.use_temp_files:
-            tfile = tempfile.NamedTemporaryFile(
-                delete=False, suffix=file_extension)
-            tfile.close()
-            # Hack, free_media_name returns full path and file name,
-            # so return two files here as well. But there is no real
-            # need to split off the file name from the direcotry bit.
-            return tfile.name, tfile.name
-        else:
-            # IAR, specifically PEP8. When we don’t use temp files, we
-            # should clean up the request string a bit, and that is
-            # best done with Anki functions. So, when
-            # self.use_temp_files is False, we need anki, bits of
-            # which are imported by ..exists.
-            from ..exists import free_media_name
-            return free_media_name(
-                base_name, file_extension)
+        data = self.get_data_from_url(url_in)
+        # We put the data into RAM first so that we don’t have to
+        # clean up the temp file when the get does not work. (Bad
+        # get_data raises all kinds of exceptions that fly through
+        # here.)
+        tfile = tempfile.NamedTemporaryFile(
+            delete=False, prefix=u'anki_audio_', suffix=self.file_extension)
+        tfile.write(data)
+        tfile.close()
+        return tfile.name

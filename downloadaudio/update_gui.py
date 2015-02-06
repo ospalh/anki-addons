@@ -17,33 +17,32 @@ from anki.lang import _
 from .language import default_audio_language_code
 
 
-def update_data(data_fields, language_code):
+def update_data(field_data_list, language_code):
     """Return updated download information"""
-    review_fields = ReviewFields(data_fields, language_code)
+    review_fields = ReviewFields(field_data_list, language_code)
     if not review_fields.exec_():
         raise RuntimeError('User cancel')
-    for num, (source, dest, old_text, old_base, old_ruby, split_reading) \
-            in enumerate(data_fields):
-        data_fields[num] = (source, dest,
-                            review_fields.text_lineedits[num].text(),
-                            review_fields.base_lineedits[num].text(),
-                            review_fields.ruby_lineedits[num].text(),
-                            split_reading)
+    for num, field_data in enumerate(field_data_list):
+        if field_data.split:
+            field_data.kanji = review_fields.kanji_lineedits[num].text()
+            field_data.kana = review_fields.kana_lineedits[num].text()
+        else:
+            field_data.word = review_fields.word_lineedits[num].text()
     language_code = review_fields.language_code_lineedit.text()
-    return data_fields, language_code
+    return field_data_list, language_code
 
 
 class ReviewFields(QDialog):
     """
     A Dialog to let the user edit the texts or change the language.
     """
-    def __init__(self, data_fields, language_code):
-        self.data_fields = data_fields
+    def __init__(self, field_data_list, language_code):
+        self.field_data_list = field_data_list
         self.language_code = language_code  # possibly None
         self.language_code_lineedit = None
-        self.text_lineedits = []
-        self.base_lineedits = []
-        self.ruby_lineedits = []
+        self.word_lineedits = []
+        self.kanji_lineedits = []
+        self.kana_lineedits = []
         # super(ReviewFields, self).__init__()  # Cut-and-pasted
         QDialog.__init__(self)
         self.initUI()
@@ -61,7 +60,7 @@ result in no downloads. Do <em>not</em> use domain codes (E.g. use
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
         self.setLayout(layout)
-        edit_text_head = QLabel()
+        edit_word_head = QLabel()
         kanji_et = _('''\
 <h4>Requests to send to the download sites</h4>
 <p>In the split edit fields, set the kanji on the left, the
@@ -76,18 +75,17 @@ reading (ruby) on the right.</p>
 <h4>Requests to send to the download sites</h4>
 ''')
         # Now decide which help text to show.
-        # First, decide if we have any split fields. (Don't care about
-        # performance. This may not be the quickest way).
-        if [itm for itm in self.data_fields if itm[5]]:
-            # Yes, the list of all items with split fields is not empty.
-            # A bit C-ish test. language_code may be None:
+        # First, decide if we have any split fields.
+        if any(f_data.split for f_data in self.field_data_list):
             if self.language_code and self.language_code.startswith('ja'):
-                edit_text_head.setText(kanji_et)
+                # Japanese
+                edit_word_head.setText(kanji_et)
             else:
-                edit_text_head.setText(base_et)
+                # Chinese should not happen at the moment
+                edit_word_head.setText(base_et)
         else:
-            edit_text_head.setText(single_et)
-        layout.addWidget(edit_text_head)
+            edit_word_head.setText(single_et)
+        layout.addWidget(edit_word_head)
         self.create_data_rows(layout)
         line = QFrame(self)
         line.setFrameShape(QFrame.HLine)
@@ -119,25 +117,29 @@ reading (ruby) on the right.</p>
     def create_data_rows(self, layout):
         u"""Build one line of the dialog box."""
         gf_layout = QGridLayout()
-        for num, (source, dest, text, base, ruby, split_reading) \
-                in enumerate(self.data_fields):
+        for num, field_data in enumerate(self.field_data_list):
             # We create all three QTextEdits for each item and hide
-            # empty text fields and base, ruby fields when text is not
-            # empty.
-            label = QLabel(u'{0}:'.format(source))
+            # some according to field_data.split.
+            label = QLabel(u'{0}:'.format(field_data.word_field_name))
             label.setToolTip(_(u'Source of the request text'))
             gf_layout.addWidget(label, num, 0)
-            ledit = QLineEdit(text)
-            self.text_lineedits.append(ledit)
-            bedit = QLineEdit(base)
-            self.base_lineedits.append(bedit)
-            redit = QLineEdit(ruby)
-            self.ruby_lineedits.append(redit)
-            # We did use "if text:" for the test for a while. That was
-            # no good. We should show an empty field here. So we have
-            # to bring along the info whetehr we should show one or
-            # two line edits.
-            if not split_reading:
+            ledit = QLineEdit(field_data.word)
+            self.word_lineedits.append(ledit)
+            try:
+                bedit = QLineEdit(field_data.kanji)
+            except AttributeError:
+                # Happens when FieldData is not a
+                # JapaneseFieldData. LBYL would be to use
+                # field_data.split
+                bedit = QLineEdit('')
+            self.kanji_lineedits.append(bedit)
+            try:
+                redit = QLineEdit(field_data.kana)
+            except AttributeError:
+                # dto.
+                redit = QLineEdit('')
+            self.kana_lineedits.append(redit)
+            if not field_data.split:
                 gf_layout.addWidget(ledit, num, 1, 1, 2)
                 ledit.setToolTip(
                     _(u'''<h4>Text of the request.</h4>

@@ -144,7 +144,6 @@ def add_japanese_model(col):
     return m
 
 
-
 anki.stdmodels.models.append(
     (_("Standard with audio fields"), add_standard_model))
 if os.path.exists(
