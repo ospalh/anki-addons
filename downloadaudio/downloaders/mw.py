@@ -38,7 +38,7 @@ class MerriamWebsterDownloader(AudioDownloader):
         self.file_extension = u'.wav'
         self.url = 'http://www.merriam-webster.com/dictionary/'
         # Here the word page url works to get the favicon.
-        self.icon_url = self.url
+        self.icon_url = 'http://www.merriam-webster.com/'
         self.popup_url = 'http://www.merriam-webster.com/audio.php?'
 
     def download_files(self, field_data):
