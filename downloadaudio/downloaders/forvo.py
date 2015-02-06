@@ -75,7 +75,7 @@ class ForvoDownloader(AudioDownloader):
             except KeyError:
                 pass
             try:
-                file_path = self.get_file_from_url(itm[self.path_code])
+                file_path = self.get_tempfile_from_url(itm[self.path_code])
                 # I guess the try is not really necessary. Anyway.
             except (ValueError, KeyError):
                 continue
