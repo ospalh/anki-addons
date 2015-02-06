@@ -28,7 +28,6 @@ class OaldDownloader(AudioDownloader):
     """Download audio from Oxford Advanced Learner’s Dictionary."""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.icon_url = 'http://www.oxfordlearnersdictionaries.com/'
         self.url = \
             'http://www.oxfordlearnersdictionaries.com/definition/english/'
@@ -36,19 +35,18 @@ class OaldDownloader(AudioDownloader):
         self.extras = dict(
             Source=u"Oxford Advanced Learner’s Dictionary")
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
         Get pronunciations of a word from Oxford Advanced Learner’s Dictionary.
         """
         self.downloads_list = []
-        if split:
-            # Avoid double downloads
-            return
         if not self.language.lower().startswith('en'):
             return
-        if not word:
+        if not field_data.word:
             return
-        word = word.replace("'", "-")
+        if field_data.split:
+            return
+        word = field_data.word.replace("'", "-")
         self.maybe_get_icon()
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
@@ -61,11 +59,7 @@ class OaldDownloader(AudioDownloader):
             audio_url = sound_tag.get('data-src-mp3')
             if not audio_url:
                 continue
-            word_data = self.get_data_from_url(audio_url)
-            word_file_path, word_file_name = self.get_file_name(
-                word, self.file_extension)
-            with open(word_file_path, 'wb') as word_file:
-                word_file.write(word_data)
+            word_path = self.get_tempfile_from_url(audio_url)
             extras = self.extras
             try:
                 title_string = sound_tag['title'].replace(
@@ -76,7 +70,5 @@ class OaldDownloader(AudioDownloader):
                 if title_string:
                     extras = copy(self.extras)
                     extras['Title'] = title_string
-            self.downloads_list.append(DownloadEntry(
-                word_file_path, word_file_name, base_name=word,
-                display_text=word, file_extension=self.file_extension,
-                extras=extras))
+            self.downloads_list.append(
+                DownloadEntry(field_data, word_path, extras, self.site_icon))

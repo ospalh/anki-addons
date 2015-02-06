@@ -31,7 +31,6 @@ class LeoDownloader(AudioDownloader):
     """Download audio from LEO"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.dic_url = \
             'http://dict.leo.org/dictQuery/m-vocab/{lang}de/query.xml?' \
             'tolerMode=nof&lp={lang}de&lang=de&rmWords=off&rmSearch=on' \
@@ -53,14 +52,15 @@ class LeoDownloader(AudioDownloader):
             'es': 'http://dict.leo.org/img/favicons/esde.ico'}
         # No icon URLs for the languages where they have translations,
         # but no audio.
+        self.field_data = None
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """ Download a word from LEO"""
         # from aqt.qt import debug; debug()
         self.downloads_list = []
-        if split:
-            # Avoid double downloads
+        if field_data.split:
             return
+        self.field_data = field_data
         # Fix the language. EAFP.
         try:
             self.language = self.language_dict[self.language[:2].lower()]
@@ -77,9 +77,11 @@ class LeoDownloader(AudioDownloader):
             query_lang = self.language
             direction = self.SEARCH_DIRECTION['to_german']
 
-        xml = self.get_data_from_url(self.dic_url.format(
-            lang=query_lang, word=urllib.quote_plus(word.encode('utf-8')),
-            direction=direction))
+        xml = self.get_data_from_url(
+            self.dic_url.format(
+                lang=query_lang,
+                word=urllib.quote_plus(field_data.word.encode('utf-8')),
+                direction=direction))
         root = ElementTree.fromstring(xml)
         hits = OrderedDict()
         for section in root.findall('sectionlist/section'):
@@ -101,7 +103,8 @@ class LeoDownloader(AudioDownloader):
                     # Make everything unicode.
                     if type(cur_word) == str:
                         cur_word = cur_word.decode('utf-8')
-                    if self.normalize(cur_word) == self.normalize(word):
+                    if self.normalize(cur_word) == self.normalize(
+                            field_data.word):
                         matching_word = cur_word
                         break
                 if not matching_word:
@@ -118,15 +121,12 @@ class LeoDownloader(AudioDownloader):
         """
         Download audio file with a given id from leo.org.
         """
-        word_data = self.get_data_from_url(self.audio_url.format(id=audio_id))
-        word_file_path, word_file_name = self.get_file_name(
-            word, self.file_extension)
-        with open(word_file_path, 'wb') as word_file:
-            word_file.write(word_data)
-        # We have a file, but not much to say about it.
-        self.downloads_list.append(DownloadEntry(
-            word_file_path, word_file_name, base_name=word, display_text=word,
-            file_extension=self.file_extension, extras=dict(Source='Leo')))
+        word_path = self.get_tempfile_from_url(
+            self.audio_url.format(id=audio_id))
+        entry = DownloadEntry(
+            self.field_data, word_path, dict(Source='Leo'), self.site_icon)
+        entry.word = word
+        self.downloads_list.append(entry)
 
     def get_flag_icon(self):
         """

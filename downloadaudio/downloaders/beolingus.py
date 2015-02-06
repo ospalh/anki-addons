@@ -16,14 +16,13 @@ import urlparse
 import re
 
 from .downloader import AudioDownloader, uniqify_list
-from ..download_entry import DownloadEntry
+from ..download_entry import Action, DownloadEntry
 
 
 class BeolingusDownloader(AudioDownloader):
     """Download audio from Beolingus (TU Chemnitz)"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.icon_url = 'http://dict.tu-chemnitz.de/'
         self.url = 'http://dict.tu-chemnitz.de/dings.cgi?'
         self.site_url = 'http://dict.tu-chemnitz.de/'
@@ -34,36 +33,28 @@ class BeolingusDownloader(AudioDownloader):
         # match wasn't good enough.
         # self.text_code = 'text='
         self.text_re = u'text={0}(?:%20{{([a-zA-Z ]+)}})?$'
-        # self.services_dict = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
+        self.services_dict = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
         # Mapping of languages to "services".
-        #
         # We can get pronunciations for the keys in this
         # dictionary.
-        #
-        # I have found that some of the English pronunciation were
-        # bad, maybe not by a native speaker. I guess it may be
-        # similar for Spanish, so switch off those two. Not a problem
-        # for English, but there are not that many Spanish
-        # sources. Better no than bad pronunciations.
-        self.services_dict = {'de': 'de-en'}
         self.service = None
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
         Get pronunciations of a word from BeoLingus
 
         Get pronunciations for words in one of three languages.
         """
         self.downloads_list = []
-        if split:
-            # Avoid double downloads
-            return
         try:
             self.service = self.services_dict[self.language[:2].lower()]
         except KeyError:
             return
-        if not word:
+        if field_data.split:
             return
+        if not field_data.word:
+            return
+        word = field_data.word
         word_soup = self.get_soup_from_url(self.build_word_url(word))
         href_list = [a['href'] for a in word_soup.findAll('a')]
         href_list = uniqify_list(href_list)
@@ -87,12 +78,16 @@ class BeolingusDownloader(AudioDownloader):
                 # As said above, the bit in the curly braces may not be there.
                 extras['Part of speech'] = part_of_speech
             try:
-                word_path, word_fname = self.get_word_file(url_to_get, word)
+                word_path = self.get_word_file(url_to_get, word)
             except ValueError:
                 continue
-            self.downloads_list.append(DownloadEntry(
-                word_path, word_fname, base_name=word, display_text=word,
-                file_extension=self.file_extension, extras=extras))
+            entry = DownloadEntry(
+                field_data, word_path, extras, self.site_icon)
+            if self.service != 'de-en':
+                entry.action = Action.Delete
+                # Some of the English pronunciations are bad. Switch
+                # English and Spanish to Delete by default.
+            self.downloads_list.append(entry)
 
     def get_word_file(self, popup_url, word):
         """
@@ -113,13 +108,8 @@ class BeolingusDownloader(AudioDownloader):
                      if href.endswith(self.file_extension)]
         # If we don't have exactly one url, something's wrong. Assume
         # we have at least one.
-        word_url = href_list[0]
-        word_url = urlparse.urljoin(self.site_url, word_url)
-        word_data = self.get_data_from_url(word_url)
-        word_path, word_fname = self.get_file_name(word, self.file_extension)
-        with open(word_path, 'wb') as word_file:
-            word_file.write(word_data)
-        return word_path, word_fname
+        return self.get_tempfile_from_url(
+            urlparse.urljoin(self.site_url, href_list[0]))
 
     def build_word_url(self, source):
         u"""Put source into a dict useful as part of a url."""
