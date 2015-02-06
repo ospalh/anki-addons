@@ -34,26 +34,26 @@ class ForvoDownloader(AudioDownloader):
             'key/XXXXXXXXXX/word/'
         self.icon_url = 'http://www.forvo.com/'
         self.gender_dict = {'f': u'♀', 'm': u'♂'}
+        self.field_data = None
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
         Get pronunciations of a word from Forvo
         """
         self.downloads_list = []
-        if split:
-            # Here, too, just avoid double downloads.
+        self.field_data = field_data
+        if field_data.split:
             return
-        if not word:
+        if not field_data.word:
             return
         self.maybe_get_icon()
-        get_url = self.build_query_url(word)
         # Caveat! The old code used json.load(response) with a
         # file-like object.  now we ues json.loads(get_data()) with a
         # string. Don't confuse load() with loads()!
-        reply_dict = json.loads(self.get_data_from_url(get_url))
-        self.get_items(reply_dict['items'], word)
+        reply_dict = json.loads(self.get_data_from_url(self.query_url()))
+        self.get_items(reply_dict['items'])
 
-    def get_items(self, items_list, word):
+    def get_items(self, items_list):
         for itm in items_list:
             extras = dict(Source='Forvo.com')
             try:
@@ -74,22 +74,19 @@ class ForvoDownloader(AudioDownloader):
                 extras['Rating'] = itm['rate']
             except KeyError:
                 pass
-            word_path, word_fname = self.get_file_name(
-                word, self.file_extension)
             try:
-                with open(word_path, 'wb') as word_file:
-                    word_file.write(
-                        self.get_data_from_url(itm[self.path_code]))
+                file_path = self.get_file_from_url(itm[self.path_code])
+                # I guess the try is not really necessary. Anyway.
             except (ValueError, KeyError):
                 continue
-            dl_entry = DownloadEntry(
-                word_path, word_fname, base_name=word, display_text=word,
-                file_extension=self.file_extension, extras=extras)
-            self.downloads_list.append(dl_entry)
+            self.downloads_list.append(
+                DownloadEntry(
+                    self.field_data, file_path, extras, self.site_icon))
         # No clean-up
 
-    def build_query_url(self, word):
-        builded_url = self.url + urllib.quote(word.encode('utf-8'))
+    def query_url(self):
+        builded_url = self.url + urllib.quote(
+            self.field_data.word.encode('utf-8'))
         if self.language:
             builded_url += '/language/' + self.language
         return builded_url + '/'
