@@ -194,11 +194,6 @@ def get_note_fields(note):
         for fn in field_names:
             if afk not in fn.lower():
                 continue
-            try:
-                field_data_list.append(field_data(note, fn))
-            except (KeyError, ValueError):
-                # No or empty source field.
-                pass
             if not split_kanji_kana:
                 try:
                     field_data_list.append(field_data(note, fn, reading=True))
@@ -212,4 +207,9 @@ def get_note_fields(note):
                 except (KeyError, ValueError):
                     # No or empty source field.
                     pass
+            try:
+                field_data_list.append(field_data(note, fn))
+            except (KeyError, ValueError):
+                # No or empty source field.
+                pass
     return field_data_list
