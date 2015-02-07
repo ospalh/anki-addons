@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2014–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -23,5 +23,6 @@ class CollinsItalianDownloader(CollinsDownloader):
         self.lang_code = u'/it_/'
         self.icon_url = self.url
         self.extras = dict(Source="Collins Italian")
+        self.action = Action.Delete  # Couldn’t get good downloads from them.
 
     # Use CollinsDownloader for the real work.

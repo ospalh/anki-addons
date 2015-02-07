@@ -1,8 +1,9 @@
-#!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker, <ospalh@gmail.com>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
+#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """
 Return a language code.
@@ -20,9 +21,7 @@ from aqt.editcurrent import EditCurrent
 default_audio_language_code = "ja"
 # Language code for the language you are learning here.
 # This is the code for the language for the downloaded audio. It is
-# typically not your native language. Change this if you are not
-# learning Japanese.
-
+# typically not your native language.
 
 # ## Dont't change these.
 old_al_code_code = 'addon_foreign_language'
@@ -73,7 +72,7 @@ def language_code_from_tags(note):
 
 def language_code_from_editor(note, card_edit):
     u"""
-    Return a language code.
+    Return a language code
 
     When the note has a lang_NN tag use that.
     Otherwise, the method to get the language code depends on where

@@ -1,7 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012–14  Roland Sieker <ospalh@gmail.com>,
-# Copyright © Albert Lyubarsky <albert.lyubarsky@gmail.com>
+# Copyright © 2012–15  Roland Sieker <ospalh@gmail.com>,
+# Copyright © 2013 Albert Lyubarsky <albert.lyubarsky@gmail.com>
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;

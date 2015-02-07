@@ -1,10 +1,9 @@
-#!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
 # Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 #
-# License: GNU GPL, version 3 or later;
-# http://www.gnu.org/copyleft/gpl.html
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """A list of audio downloaders.
 
