@@ -59,7 +59,6 @@ class JapanesepodDownloader(AudioDownloader):
         Get text for the kanji and kana when
         self.language is ja.
         """
-        self.field_data = field_data
         self.downloads_list = []
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
@@ -68,8 +67,9 @@ class JapanesepodDownloader(AudioDownloader):
             return
         if not self.language.lower().startswith('ja'):
             return
-        # We will fail when field_data is not JapaneseFieldData. No
-        # reason t ocheck for the ex split.
+        if not field_data.kana:
+            field_data.kana = field_data.kanji
+        self.field_data = field_data
         self.maybe_get_icon()
         try:
             # First get from Japanesepod directly
