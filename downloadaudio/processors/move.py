@@ -1,12 +1,12 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2015 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
 u"""
-Class to move audio files from point a to point b.
+Class to move files from point a to point b.
 """
 
 import os
@@ -16,7 +16,7 @@ from .audio_processor import AudioProcessor
 
 class AudioMover(AudioProcessor):
     u"""
-    Class to move audio files from point a to point b.
+    Class to move files from point a to point b.
 
     The point is that this has the same interface as the
     AudoNormaliser that does something useful.

@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
-# Copyright © 2012–2015 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -78,12 +78,16 @@ class JpodDownloadEntry(DownloadEntry):
 
     @property
     def base_name(self):
-        return u"{kanji}_{kana}".format(kanji=self.kanji, kana=self.kana)
+        if self.kana and self.kana != self.kanji:
+            return u"{kanji}_{kana}".format(kanji=self.kanji, kana=self.kana)
+        return u"{kanji}".format(kanji=self.kanji)
 
     @property
     def display_word(self):
-        return u"{kanji}（{kana}）".format(kanji=self.kanji, kana=self.kana)
-        # N.B.: those are “full width” (read, CJK) parentheses
+        if self.kana and self.kana != self.kanji:
+            return u"{kanji}（{kana}）".format(kanji=self.kanji, kana=self.kana)
+            # N.B.: those are “full width” (CJK/quad) parentheses
+        return u"{kanji}".format(kanji=self.kanji)
 
     @property
     def entry_hash(self):

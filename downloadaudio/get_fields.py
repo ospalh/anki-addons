@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2015 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -194,11 +194,6 @@ def get_note_fields(note):
         for fn in field_names:
             if afk not in fn.lower():
                 continue
-            try:
-                field_data_list.append(field_data(note, fn))
-            except (KeyError, ValueError):
-                # No or empty source field.
-                pass
             if not split_kanji_kana:
                 try:
                     field_data_list.append(field_data(note, fn, reading=True))
@@ -212,4 +207,9 @@ def get_note_fields(note):
                 except (KeyError, ValueError):
                     # No or empty source field.
                     pass
+            try:
+                field_data_list.append(field_data(note, fn))
+            except (KeyError, ValueError):
+                # No or empty source field.
+                pass
     return field_data_list

@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–15 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
