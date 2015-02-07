@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2014 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU GPL, version 3 or later;
 # http://www.gnu.org/copyleft/gpl.html
@@ -38,10 +38,7 @@ from .wiktionary import WiktionaryDownloader
 
 downloaders = [
     JapanesepodDownloader(),
-    CollinsFrenchDownloader(),
-    CollinsGermanDownloader(),
-    CollinsItalianDownloader(),
-    CollinsSpanishDownloader(),
+    WiktionaryDownloader(),
     LeoDownloader(),
     LexinDownloader(),
     MerriamWebsterDownloader(),
@@ -50,15 +47,16 @@ downloaders = [
     OaldDownloader(),
     DudenDownloader(),
     HowJSayDownloader(),
-    WiktionaryDownloader(),
+    CollinsFrenchDownloader(),
+    CollinsGermanDownloader(),
+    CollinsItalianDownloader(),
+    CollinsSpanishDownloader(),
     BeolingusDownloader(),
     GooglettsDownloader(),
 ]
-# This is the list of downloaders.
-#
-# These sites are tried in the order they appear here. Lines starting
-# with a '#' are not tried. Change the order, or which lines get the
-# '#' to taste
+# For each word field, these downloader sites are tried in the order
+# they appear here. Lines starting with a “#” are not tried. Change
+# the order, or which lines get the “#”, to taste
 
 
 # # For testing.
