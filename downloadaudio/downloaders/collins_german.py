@@ -10,6 +10,7 @@
 Download German pronunciations from  Collins Dictionary.
 """
 
+from ..download_entry import Action
 from .collins import CollinsDownloader
 
 
