@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2014 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2014–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -23,5 +23,6 @@ class CollinsGermanDownloader(CollinsDownloader):
         self.lang_code = u'/de_/'
         self.icon_url = self.url
         self.extras = dict(Source="Collins German")
+        self.action = Action.Delete  # We have enough sources from Germany
 
     # Use CollinsDownloader for the real work.
