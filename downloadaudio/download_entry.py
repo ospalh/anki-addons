@@ -78,12 +78,16 @@ class JpodDownloadEntry(DownloadEntry):
 
     @property
     def base_name(self):
-        return u"{kanji}_{kana}".format(kanji=self.kanji, kana=self.kana)
+        if self.kana and self.kana != self.kanji:
+            return u"{kanji}_{kana}".format(kanji=self.kanji, kana=self.kana)
+        return u"{kanji}".format(kanji=self.kanji)
 
     @property
     def display_word(self):
-        return u"{kanji}（{kana}）".format(kanji=self.kanji, kana=self.kana)
-        # N.B.: those are “full width” (read, CJK) parentheses
+        if self.kana and self.kana != self.kanji:
+            return u"{kanji}（{kana}）".format(kanji=self.kanji, kana=self.kana)
+            # N.B.: those are “full width” (CJK/quad) parentheses
+        return u"{kanji}".format(kanji=self.kanji)
 
     @property
     def entry_hash(self):
