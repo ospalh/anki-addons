@@ -46,7 +46,7 @@ class JapanesepodDownloader(AudioDownloader):
         self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
-        self.wwwjdic_url = u'http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic' \
+        self.wwwjdic_url = u'http://wwwjdic.biz/cgi-bin/wwwjdic' \
             u'?1MUJ{kana}_2_50'
         self.extras = {'Source': 'JapanesePod'}
         self.field_data = None
