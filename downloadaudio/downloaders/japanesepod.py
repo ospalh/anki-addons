@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 # Inspiration and source of the URL: Tymon Warecki
 #
@@ -46,11 +46,10 @@ class JapanesepodDownloader(AudioDownloader):
         self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
-        self.wwwjdic_url = 'http://www.csse.monash.edu.au/~jwb/' \
-            'cgi-bin/wwwjdic.cgi?1MUJ{kana}_2_50'
+        self.wwwjdic_url = u'http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic' \
+            u'?1MUJ{kana}_2_50'
         self.extras = {'Source': 'JapanesePod'}
         self.field_data = None
-
 
     def download_files(self, field_data):
         """
@@ -59,7 +58,6 @@ class JapanesepodDownloader(AudioDownloader):
         Get text for the kanji and kana when
         self.language is ja.
         """
-        self.field_data = field_data
         self.downloads_list = []
         # We return (without adding files to the list) at the slightes
         # provocation: wrong language, no kanji, problems with the
@@ -68,8 +66,9 @@ class JapanesepodDownloader(AudioDownloader):
             return
         if not self.language.lower().startswith('ja'):
             return
-        # We will fail when field_data is not JapaneseFieldData. No
-        # reason t ocheck for the ex split.
+        if not field_data.kana:
+            field_data.kana = field_data.kanji
+        self.field_data = field_data
         self.maybe_get_icon()
         try:
             # First get from Japanesepod directly

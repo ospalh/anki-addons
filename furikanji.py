@@ -1,8 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
-# Copyright © 2012–14 Roland Sieker <ospalh@gmail.com>
+#
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 # Provenance:
 # Via libanki/anki/template/furigana.py by Damien Elmes <anki@ichi2.net>
 # Based off Kieran Clancy's initial implementation.
+#
 # License:
 # GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
