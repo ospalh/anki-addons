@@ -6,7 +6,7 @@ Usually, [Python](http://python.org), the programming language Anki
 and Anki add-ons are written in, comes with a number of functions
 useful for programmers, the
 [Python Standard Library](http://docs.python.org/2/library/). This
-approach has been called “batteries included”.
+approach has been called <q>batteries included</q>.
 
 Accordingly, when writing some of my add-ons i used functions from the
 standard library without second thought.
@@ -32,8 +32,8 @@ The other add-ons should not need this.
 
 I have identified the files that my add-ons need that are not part of
 an Anki installation and gathered them together in the folder
-“[`batteries`](https://github.com/ospalh/anki-addons/tree/master/batteries)”. Put
-a copy of this folder into your “`Anki/add-ons`” folder to run
+<q>[`batteries`](https://github.com/ospalh/anki-addons/tree/master/batteries)</q>. Put
+a copy of this folder into your <q>`Anki/add-ons`</q> folder to run
 
 ## Solution 2: Run from source
 

@@ -5,8 +5,8 @@ ankiweb_id: 3100585138
 parent: Download audio
 extra_jq_script: audio_tips.js
 
-The add-on requires a field called “Audio”, or that contains the word
-“Audio”, to put the downloaded data.
+The add-on requires a field called <q>Audio</q>, or that contains the word
+<q>Audio</q>, to put the downloaded data.
 
 While adding or renaming fields in Anki isn’t too hard, a short guide
 might be helpful.
@@ -23,7 +23,7 @@ Edit/Media/Manual audio menu.</figcaption>
 When you downloaded a shared deck that already has some audio data,
 it may work without any change. Start reviewing the new deck. On the
 first card, try the menu item
-“Edit/Media/Manual audio”.
+<q>Edit/Media/Manual audio</q>.
 
 <span class="clear" />
 <figure>
@@ -55,7 +55,7 @@ client. Only then start checking the field list.</blockquote>
 
 ## Checking the field list
 
-When the download test didn’t work, you should click on the  “Edit”
+When the download test didn’t work, you should click on the  <q>Edit</q>
 button in the bottom left.
 
 <figure style="width: 333px;">
@@ -64,18 +64,18 @@ Front and Back. ">
 <img src="images/id_franz_de.png" alt="Edit current window with fields
 Französisch, Deutsch ...">
 <figcaption>Candidates for downloading are the first field or the
-field named „Französisch“.</figcaption>
+field named <q lang='de'>Französisch</q>.</figcaption>
 </figure>
 
 Take a look at the field list and decide for which field or
 fields you would like to download data.
 
-Then click on the “Fields...” button.
+Then click on the <q>Fields...</q> button.
 
 
 ## Adding an audio field
 
-In the “Fields for NN” dialog, click on “Add”
+In the <q>Fields for NN</q> dialog, click on <q>Add</q>
 
 <span class="clear" />
 ### Add for the first field
@@ -86,8 +86,8 @@ and input text Audio.">
 <figcaption>Here we want to download for the first field</figcaption>
 </figure>
 
-When you want to download for the first field, just type “Audio” for
-the new field name. Then click  “OK”.
+When you want to download for the first field, just type <q>Audio</q> for
+the new field name. Then click  <q>OK</q>.
 
 <span class="clear" />
 ### <span id="otherfield">Add for <span class="qtbase orfirst">other</span> field</span>
@@ -105,15 +105,16 @@ name in the new field.</figcaption>
 
 Alternatively, when the field you want to download for is not the
 first field, you should use that field’s name, followed by
-“Audio”. Then click  “OK” here, too.
+<q>Audio</q>. Then click  <q>OK</q> here, too.
 
 In the example, sending pictures of birds to GoogleTTS would not
-work. So we look for interesting text in the “Edit Current”
-window: «&nbsp;l'oiseau&nbsp;», marked in red with a “1” in the image. That text
-is in the field named “Back” (blue 2). That field name appears
-again in the “Fields for NN” dialog. (blue 3). Use this field name
-together with the word “Audio” as the new field name. In this case,
-use “Back Audio”. (blue 4)
+work. So we look for interesting text in the <q>Edit Current</q>
+window: <q lang='fr'>l'oiseau</q>, marked in red with a <q>1</q> in
+the image. That text is in the field named <q>Back</q> (blue 2). That
+field name appears again in the <q>Fields for NN</q>
+dialog. (blue 3). Use this field name together with the word
+<q>Audio</q> as the new field name. In this case, use <q>Back
+Audio</q>. (blue 4)
 
 <span class="clear" />
 ### <span id="thewarning">The warning</span>
@@ -127,9 +128,9 @@ they will be lost. Continue?">
 <figcaption>Read and decide.</figcaption>
 </figure>
 At this point, a warning dialog may appear. If you are not sure about
-this, click “No”, sync changes from remote devices to this
+this, click <q>No</q>, sync changes from remote devices to this
 collection and do the steps above again. If you are sure, click
-“Yes”.
+<q>Yes</q>.
 
 
 ### More fields
@@ -143,14 +144,16 @@ step.
 ## <span id="renamefields">Rename fields</span>
 
 <figure>
-<img src="images/00906.png" alt="Anki review window. Text: Übersetzen
-Ja, mein Herr. Oui monsieur. 00906. Below, a dialog window. Text:
-Requests send to the download sites ID 00906">
-<figcaption>No Sir. I do not want to learn to pronounce “00906”.</figcaption>
+
+<img src="images/00906.png" alt="Anki review window. Text:
+Übersetzen Ja, mein Herr. Oui monsieur. 00906. Below, a dialog
+window. Text: Requests send to the download sites ID 00906">
+<figcaption>No Sir. I do not want to learn to pronounce
+<q>00906</q>.</figcaption>
 </figure>
-When the [test above](#one_try) tried to download from a wrong field,
-you have to rename the audio field. Doing this is similar to [adding
-an audio field](#otherfield).
+When the [test above](#one_try)
+tried to download from a wrong field, you have to rename the audio
+field. Doing this is similar to [adding an audio field](#otherfield).
 
 <figure>
 <img src="images/change_name.png" alt="On the left: Window with a list
@@ -162,30 +165,30 @@ right a dialog with the field names. Französisch is marked in blue,
 Audio is selected and marked in yellow. Below a
 dialog. Text: New name. Text input: Französisch Audio. Französisch is
 marked in blue, Audio in yellow.">
-<figcaption>Change the name of the field “Audio”. Add the name of the
-source field to the name.</figcaption>
+<figcaption>Change the name of the field <q>Audio</q>. Add
+the name of the source field to the name.</figcaption>
 </figure>
 
 * Start reviewing.
-* From the main window, click the “Edit” button in the bottom left.
-* Look at the field list:
-  <ul>
-    <li>There should be a field named “Audio” or “Sound”. (yellow in
-  the image)</li>
-    <li>Identify the interesting text (« Oui monsieur. », red). Note the
-  field name („Französisch“, blue)</li>
+* From the main window, click the <q>Edit</q> button in the
+  bottom left.
+* Look at the field list: <ul> <li>There should be a field named
+  <q>Audio</q> or <q>Sound</q>. (yellow in the image)</li>
+  <li>Identify the interesting text (<q lang='fr'>Oui monsieur.</q>,
+  red). Note the field name (<q lang='de'>Französisch</q>, blue)</li>
   </ul>
-* Click the “Fields...” button
-* The two field names, („Französisch“ and “Audio”), appear in the list
-  and are marked in blue and yellow.
-* Click on “Audio” to select the field.
-* Then click the “Rename” button.
+* Click the <q>Fields...</q> button
+* The two field names, (<q lang='de'>Französisch</q> and
+  <q>Audio</q>), appear in the list and are marked in blue and yellow.
+* Click on <q>Audio</q> to select the field.
+* Then click the <q>Rename</q> button.
 * As the new name, add the other field’s name to the old
-  name. (“Französisch Audio”  or “Audio Französisch”, either will work.)
-* Click “OK”. [The warning](#thewarning) may pop up.
+  name. (<q>Französisch Audio</q> or <q>Audio Französisch</q>, either
+  will work.)
+* Click <q>OK</q>. [The warning](#thewarning) may pop up.
 
 ## Go back
 
 When you are finished with setting up the fields, simply click
-“Close” in the “Fields for NN” dialog  and “Close” again in the “Edit
-Current” dialog.
+<q>Close</q> in the <q>Fields for NN</q> dialog and <q>Close</q> again
+in the <q>Edit Current</q> dialog.
