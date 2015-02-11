@@ -26,7 +26,7 @@ class AudioMover(AudioProcessor):
         """Move temp_file_name to a file in the media directory.
 
         Move to a file in the media directory with a name based on the
-        data in the downolad entry.
+        data in the downolad entry and return the file name.
         """
-        self.unmunge_to_mediafile(
+        return self.unmunge_to_mediafile(
             dl_entry.file_path, dl_entry.base_name, dl_entry.file_extension)
