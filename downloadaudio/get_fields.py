@@ -131,8 +131,9 @@ def field_data_from_kanji_kana(note, fn):
     # base_fd contains the kanji
     read_fd = field_data(note, fn, True)
     # read_fd is the right type but needs to be updated.
-    read_fd.kanji = base_fd.text
-    read_fd.text_field = base_df.text_field
+    read_fd.kanji = base_fd.word
+    read_fd.word = base_fd.word  # Not used, Set anyway.
+    read_fd.word_field_name = base_fd.word_field_name
     return read_fd
 
 
