@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 # Inspiration and source of the URL: Tymon Warecki
 #
@@ -13,8 +13,10 @@ Download pronunciations from GoogleTTS
 
 import urllib
 
+from anki.template import furigana
+
+from ..download_entry import Action, DownloadEntry
 from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
 
 get_chinese = False
 """
@@ -30,34 +32,32 @@ class GooglettsDownloader(AudioDownloader):
     u"""Class to get pronunciations from Google’s TTS service."""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.icon_url = 'http://translate.google.com/'
         self.url = 'http://translate.google.com/translate_tts?'
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
         Get text from GoogleTTS.
         """
-        self.maybe_get_icon()
         self.downloads_list = []
-        if split:
+        if field_data.split:
             return
         if self.language.lower().startswith('zh'):
             if not get_chinese:
                 return
-            word = base
-        if not word:
+            word = furigana.kanji(field_data.word)
+        else:
+            word = field_data.word
+        self.maybe_get_icon()
+        if not field_data.word:
             raise ValueError('Nothing to download')
-        word_data = self.get_data_from_url(self.build_url(word))
-        word_path, word_file_name = self.get_file_name(
-            word, self.file_extension)
-        with open(word_path, 'wb') as word_file:
-            word_file.write(word_data)
-        # We have a file, but not much to say about it.
-        self.downloads_list.append(DownloadEntry(
-            word_path, word_file_name, base_name=word, display_text=word,
-            file_extension=self.file_extension,
-            extras=dict(Source='GoogleTTS')))
+        word_path = self.get_tempfile_from_url(self.build_url(word))
+        entry = DownloadEntry(
+            field_data, word_path, dict(Source='GoogleTTS'), self.site_icon)
+        entry.action = Action.Delete
+        # Google is a robot voice. The pronunciations are usually
+        # bad. Default to not keeping them.
+        self.downloads_list.append(entry)
 
     def build_url(self, source):
         u"""Return a string that can be used as the url."""

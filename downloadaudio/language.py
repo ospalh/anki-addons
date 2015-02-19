@@ -1,8 +1,9 @@
-#!/usr/bin/env python
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker, <ospalh@gmail.com>
-# License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
+#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """
 Return a language code.
@@ -13,22 +14,16 @@ import re
 
 from aqt import mw
 from aqt.addcards import AddCards
-from aqt.editcurrent import EditCurrent
 from aqt.browser import Browser
-
+from aqt.editcurrent import EditCurrent
 
 
 default_audio_language_code = "ja"
-"""
-Language code for the language you are learning here.
+# Language code for the language you are learning here.
+# This is the code for the language for the downloaded audio. It is
+# typically not your native language.
 
-This is the code for the language for the downloaded audio. It is
-typically not your native language. Change this if you are not
-learning Japanese.
-"""
-
-
-### Dont't change these.
+# ## Dont't change these.
 old_al_code_code = 'addon_foreign_language'
 # Go back to the old names. Use audio in the code word. (Tatoeba uses
 # three-letter codes. It’s easiest to just keep the codes separate
@@ -50,7 +45,7 @@ def elect_language(note):
         except (TypeError, KeyError, AssertionError):
             continue
         else:
-            votes.update( (lang, ) )
+            votes.update((lang, ))
     # We assume that we have seen at least one language and we ignore
     # ties. (Just return one of the equally popular languages.) I
     # don’t see much use for elaborate tie breaking: The typical
@@ -62,6 +57,7 @@ def elect_language(note):
     # from the card browser d) can, i think, be made to choose the
     # language by hand.
     return votes.most_common(1)[0][0]
+
 
 def language_code_from_tags(note):
     u"""Get the language set by the user for individual notes."""
@@ -76,7 +72,7 @@ def language_code_from_tags(note):
 
 def language_code_from_editor(note, card_edit):
     u"""
-    Return a language code.
+    Return a language code
 
     When the note has a lang_NN tag use that.
     Otherwise, the method to get the language code depends on where

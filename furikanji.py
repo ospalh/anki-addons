@@ -1,8 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
-# Copyright © 2012–14 Roland Sieker <ospalh@gmail.com>
+#
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 # Provenance:
 # Via libanki/anki/template/furigana.py by Damien Elmes <anki@ichi2.net>
 # Based off Kieran Clancy's initial implementation.
+#
 # License:
 # GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
@@ -47,14 +49,13 @@ else:
     re_sub_flag = lambda pattern, repl, string: \
         re.sub(pattern, repl, string, flags=re.UNICODE)
 
-furigana_pat = ur'<ruby class="furigana"><span class="rb">\g<kanji></span>' + \
+furigana_pat = ur'<ruby class="furigana"><rb>\g<kanji></rb>' + \
                ur'<rt>\g<kana></rt></ruby>'
 # The pattern to produce the furigana. What is called ruby in the old
 # code, but using named groups and adding a class.
 
 furikanji_pat = \
-    ur'<ruby class="furikanji"><span class="rb">\g<kana></span>' + \
-    ur'<rt>\g<kanji></rt></ruby>'
+    ur'<ruby class="furikanji"><rb>\g<kana></rb><rt>\g<kanji></rt></ruby>'
 # Pattern to produce the furikanji.  This is pretty much the reason
 # for this add-on.
 

@@ -1,7 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, <ospalh@gmail.com>
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
+#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 u"""
 Move and normalise audio files.
@@ -20,11 +22,9 @@ class AudioNormaliser(AudioProcessor):
     Class that moves and normalises audio files.
     """
     def __init__(self):
-        AudioProcessor.__init__(self)
         self.output_format = ".flac"
-        self.useful = True
 
-    def process_and_move(self, in_name, base_name):
+    def process_and_move(self, dl_entry):
         """
         Make new audio file in the media directory.
 
@@ -34,7 +34,8 @@ class AudioNormaliser(AudioProcessor):
         """
         # NB. We don't check the sox import *here*. We only use this
         # when the import worked in __init.py__.
-        suffix = os.path.splitext(in_name)[1]
+        suffix = dl_entry.file_extension
+        in_name = dl_entry.file_path
         try:
             sox_in_file = pysox.CSoxStream(in_name)
         except IOError:
@@ -55,8 +56,8 @@ class AudioNormaliser(AudioProcessor):
             # Now we should be pretty much at the point we were at the
             # except IOError. With the data in the sox_in_file object.
         # Now do the processing with pysox.
-        tof = tempfile.NamedTemporaryFile(delete=False,
-                                          suffix=self.output_format)
+        tof = tempfile.NamedTemporaryFile(
+            delete=False, suffix=self.output_format)
         # Use a(nother) temp file here, because pysox seemst to have
         # problems with files with non-ASCII names.
         temp_out_file_name = tof.name
@@ -78,4 +79,4 @@ class AudioNormaliser(AudioProcessor):
         sox_out_file.close()
         os.remove(in_name)
         return self.unmunge_to_mediafile(
-            temp_out_file_name, base_name, self.output_format)
+            temp_out_file_name, dl_entry.base_name, self.output_format)

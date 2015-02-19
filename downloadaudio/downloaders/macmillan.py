@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012–2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
@@ -28,11 +28,10 @@ class MacmillanDownloader(AudioDownloader):
     """Download audio from Macmillan Dictionary."""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.mp3'
         self.icon_url = 'http://www.macmillandictionary.com/'
         self.extras = {}  # Set in the derived classes.
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
         Get pronunciations of a word from Macmillan Dictionary.
 
@@ -41,14 +40,13 @@ class MacmillanDownloader(AudioDownloader):
 
         """
         self.downloads_list = []
-        if split:
-            # Avoid double downloads
-            return
         if not self.language.lower().startswith('en'):
             return
-        if not word:
+        if not field_data.word:
             return
-        word = word.replace("'", "-")
+        if field_data.split:
+            return
+        word = field_data.word.replace("'", "-")
         self.maybe_get_icon()
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
@@ -60,12 +58,7 @@ class MacmillanDownloader(AudioDownloader):
             audio_url = sound_tag.get('data-src-mp3')
             if not audio_url:
                 continue
-            word_data = self.get_data_from_url(audio_url)
-
-            word_file_path, word_file_name = self.get_file_name(
-                word, self.file_extension)
-            with open(word_file_path, 'wb') as word_file:
-                word_file.write(word_data)
+            file_path = self.get_tempfile_from_url(audio_url)
             extras = self.extras
             try:
                 alt_string = sound_tag['alt']
@@ -75,7 +68,5 @@ class MacmillanDownloader(AudioDownloader):
                 if 'pronunciation' not in alt_string.lower():
                     extras = copy(self.extras)
                     extras['Alt text'] = alt_string
-            self.downloads_list.append(DownloadEntry(
-                word_file_path, word_file_name, base_name=word,
-                display_text=word, file_extension=self.file_extension,
-                extras=extras))
+            self.downloads_list.append(
+                DownloadEntry(field_data, file_path, extras, self.site_icon))

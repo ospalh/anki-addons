@@ -1,5 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
-# Copyright © 2013 Roland Sieker <ospalh@gmail.com>
+#
+# Copyright © 2013–15 Roland Sieker <ospalh@gmail.com>
 # Inspired by the Japanese Support add-on,
 # Copyright: Damien Elmes <anki@ichi2.net>
 #
@@ -7,14 +8,12 @@
 # http://www.gnu.org/copyleft/agpl.html
 #
 
-u"""
-Standard models that work reasonably well with the add-on.
-"""
+u"""Standard models that work reasonably well with the add-on"""
 
 import os
 
-import anki.stdmodels
 from aqt import mw
+import anki.stdmodels
 
 remove_arial = True
 # Personally, i think Arial is ugly. So just don’t set a standard font
@@ -142,7 +141,6 @@ def add_japanese_model(col):
     mm.addTemplate(m, aud)
     mm.add(m)
     return m
-
 
 
 anki.stdmodels.models.append(

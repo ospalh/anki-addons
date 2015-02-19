@@ -1,11 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2014 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–14 Roland Sieker <ospalh@gmail.com>
 #
 # Based on deurl-files.py by  Damien Elmes <anki@ichi2.net>
 #
-# License: GNU GPL, version 3 or later;
-# http://www.gnu.org/copyleft/gpl.html
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 #
 
 u"""
@@ -21,7 +21,7 @@ from anki.utils import isMac, stripHTML
 
 
 def free_media_name(base, end):
-    u"""Return a useful media name.
+    u"""Return a useful media name
 
     Return a pair of a file name that can be used for the media file,
     and the whole file path. The name is based on the base name and
@@ -66,5 +66,5 @@ def exists_lc(path, name):
     for fname in os.listdir(path):
         if unicodedata.normalize('NFC', fname.lower()) == ln_name:
             return True
-    # After the loop, none found. (Could have used for: ... else: ...)
+    # After the loop, none found.
     return False

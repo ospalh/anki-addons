@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2012 Roland Sieker, ospalh@gmail.com
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
@@ -45,17 +45,16 @@ class WiktionaryDownloader(AudioDownloader):
         # onclick attribute.
         self.button_onclick_re = '"videoUrl":"([^"]+)"'
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         """
         Get pronunciations of a word from the right wiktionary.
         """
         self.downloads_list = []
-        if split:
-            # Avoid double downloads.
+        if field_data.split:
             return
-        if not word:
+        if not field_data.word:
             return
-        u_word = urllib.quote(word.encode('utf-8'))
+        u_word = urllib.quote(field_data.word.encode('utf-8'))
         self.maybe_get_icon()
         self.language = self.language[:2]
         word_soup = self.get_soup_from_url(
@@ -109,17 +108,14 @@ class WiktionaryDownloader(AudioDownloader):
             word_url = urlparse.urljoin(
                 self.url.format(self.language, ''), url_to_get)
             try:
-                word_data = self.get_data_from_url(word_url)
+                word_path = self.get_tempfile_from_url(word_url)
             except:
                 continue
-            word_path, word_fname = self.get_file_name(
-                word, self.file_extension)
-            with open(word_path, 'wb') as word_file:
-                word_file.write(word_data)
-            self.downloads_list.append(DownloadEntry(
-                word_path, word_fname, base_name=word, display_text=word,
-                file_extension=self.file_extension,
-                extras=dict(Source="Wiktionary")))
+            entry = DownloadEntry(
+                field_data, word_path, dict(Source="Wiktionary"),
+                self.site_icon)
+            entry.file_extension = self.file_extension
+            self.downloads_list.append(entry)
 
     def maybe_get_icon(self):
         if self.site_icon:

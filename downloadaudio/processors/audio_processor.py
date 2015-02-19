@@ -1,7 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–13 Roland Sieker, <ospalh@gmail.com>
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/copyleft/agpl.html
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
+#
+# License: GNU AGPL, version 3 or later;
+# http://www.gnu.org/copyleft/agpl.html
 
 """
 Move a file to the Anki2 media folder, processing it on the way when
@@ -15,18 +17,15 @@ from ..exists import free_media_name
 
 class AudioProcessor(object):
     u"""Class to do audio processing."""
-    def __init__(self):
-        """
-        Keep track if there is a point in using this at all.
+    # In the past we kept track of whether the processor was
+    # “useful”. That ment that the downloaders downloaded to
+    # different places depending on which processor we had. Maybe
+    # useful, but somewhat Byzantine. Get rid of that extra
+    # complexit. Now the downloaders download to temp files and
+    # the processor moves the file, changed or not. So nothing
+    # left to do → no __init__
 
-        Only one of the audio processors is actually useful. The other
-        just moves the file without changing it. So we can use this
-        value and skip the step of creating a temp file and then just
-        moving the content of that file.
-        """
-        self.useful = False
-
-    def process_and_move(self, in_name, base_name):
+    def process_and_move(self, dl_entry):
         """
         Make a sound file in the Anki media directory.
 
@@ -49,9 +48,9 @@ class AudioProcessor(object):
         Determine a free media name and move the data there from the
         tempfile.
         """
-        # New style: we now get both the path and just the file name out
-        # of free_media_name.
+        # N.B.: We can’t use the DownloadEntry in here because the
+        # normalizing processor may move the temp file because pysox
+        # can’t handle mp3 files. (Another reason to get rid of pysox)
         media_path, media_file_name = free_media_name(base_name, suffix)
-        # Don't copy and delete, let the os do the work.
         shutil.move(in_name, media_path)
         return media_file_name

@@ -1,6 +1,6 @@
 # -*- mode: python; coding: utf-8 -*-
 #
-# Copyright © 2014 Roland Sieker, ospalh@gmail.com
+# Copyright © 2014–15 Roland Sieker <ospalh@gmail.com>
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
@@ -16,7 +16,7 @@ Abstract base class, derived for several languages.
 import urllib
 
 from .downloader import AudioDownloader, uniqify_list
-from ..download_entry import DownloadEntry
+from ..download_entry import Action, DownloadEntry
 
 
 class CollinsDownloader(AudioDownloader):
@@ -29,12 +29,12 @@ class CollinsDownloader(AudioDownloader):
         self.base_url = u'http://www.collinsdictionary.com'
         self.lang = None  # e.g. u'fr'
         self.lang_code = None  # e.g. u'/fr_/'
-        self.file_extension = u'.mp3'
         # self.icon_url = self.url
         # self.extras = dict(Source="Collins German")
         # Here the word page url works to get the favicon.
+        self.action = Action.Add
 
-    def download_files(self, word, base, ruby, split):
+    def download_files(self, field_data):
         u"""
         Get pronunciations of a word from a Collins dictionary.
 
@@ -42,14 +42,14 @@ class CollinsDownloader(AudioDownloader):
         for English, French, Spanish, German and Italian.
         """
         self.downloads_list = []
-        if split:
+        if field_data.split:
             # Avoid double downloads
             return
         if not self.language.lower().startswith(self.lang):
             return
-        if not word:
+        if not field_data.word:
             return
-        lword = word.lower()
+        lword = field_data.word.lower()
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
             self.url + urllib.quote(lword.encode('utf-8')))
@@ -64,31 +64,25 @@ class CollinsDownloader(AudioDownloader):
                 if self.lang_code not in wai['onclick']:
                     # Wrong language
                     continue
-                # print(u'look at “{}”'.format(wai['title']))
                 if not (wai['title'] == "Pronunciation for "
                         or wai['title'].lower().endswith(lword)):
-                    # print('not good')
                     continue
             except KeyError:
                 # Not an onclick element after all. Or no title with
                 # the word. Surely not what we want.
                 continue
             # Looks good so far.
-            # print(u'adding link with title “{}”'.format(wai['title']))
             link_list.append(self.get_link(wai['onclick']))
         if not link_list:
             return
         link_list = uniqify_list(link_list)
         self.maybe_get_icon()
         for lnk in link_list:
-            word_data = self.get_data_from_url(lnk)
-            word_path, word_fname = self.get_file_name(
-                word, self.file_extension)
-            with open(word_path, 'wb') as word_file:
-                word_file.write(word_data)
-            self.downloads_list.append(DownloadEntry(
-                word_path, word_fname, base_name=word, display_text=word,
-                file_extension=self.file_extension, extras=self.extras))
+            word_path = self.get_tempfile_from_url(lnk)
+            entry = DownloadEntry(
+                field_data, word_path, self.extras, self.site_icon)
+            entry.action = self.action
+            self.downloads_list.append(entry)
 
     def get_link(self, onclick_string):
         # Wrote these bits for ooad
