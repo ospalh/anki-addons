@@ -32,6 +32,10 @@ body{
     color: @fg-color;
     background-color:@bg-bg-color;
     font-family: "Praxis LT", "Linux Biolium",  sans-serif;
+
+    :lang(ja) {
+        font-family: "IPAPGothic", "IPAGothic", "IPAPMincho", "IPAMincho", "Kochi Mincho", "東風明朝", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "ヒラギノ明朝 Pro", "MS Mincho", "ＭＳ 明朝",  sans-serif;
+    }
 }
 
 /* Hyperlink Styles: */
@@ -367,7 +371,7 @@ ul {
 q { quotes: '“' '”' '‘' '’' }
 q:lang(fr) { quotes: '« ' ' »'}
 q:lang(fr_CH) { quotes: '«' '»' '‹' '›' }
-q:lang(de) { quotes: '„' '“' '‚' '‘' }
+q:lang(de) { quotes: '»' '«' '›' '‹' }
 q:lang(de_CH) { quotes: '«' '»' '‹' '›' }
 q:lang(en) { quotes: '“' '”' '‘' '’' }
 q:lang(en_GB) { quotes: '‘' '’' '“' '”' }
