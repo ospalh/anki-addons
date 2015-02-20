@@ -3,7 +3,7 @@ id: dlaudio
 main_file: download_audio.py
 status: working
 type: addon
-date: 2013-06-07
+date: 2015-02-11
 status_color: green
 status_text_color: white
 abstract: "Automatically download audio from talking dictionaries or
@@ -20,9 +20,9 @@ extra_jq_script: audio_tips.js
 
 This add-on adds three menu items,
 
-* “Edit/Media/Note audio”
-* “Edit/Media/Side audio” and
-* “Edit/Media/Manual audio”,
+* <q>Edit/Media/Note audio</q>
+* <q>Edit/Media/Side audio</q> and
+* <q>Edit/Media/Manual audio</q>,
 
 All three try to download audio in slightly different manners from a
 number of sources. It also adds a button to the edit card screens to
@@ -77,8 +77,8 @@ note, and how to [create audio cards](More%20audio%20cards.html).
 highlighted in Anki.">
 <figcaption>Use these menus when reviewing.</figcaption>
 </figure>
-When reviewing, select one of the three “Edit/Media/Note audio”,
-“Edit/Media/Side audio” and “Edit/Media/Manual audio” menu items to
+When reviewing, select one of the three <q>Edit/Media/Note audio</q>,
+<q>Edit/Media/Side audio</q> and <q>Edit/Media/Manual audio</q> menu items to
 download.
 
 When editing or adding cards, click the <span class="qtbase
@@ -118,7 +118,7 @@ window. Text: Requests send to the download sites. Reading. Edit texts:
 夫 おっと, Text: Expression. Edit text 夫.">
 <figcaption>Edit Japanese text.</figcaption>
 </figure>
-When learning Japanese, when there is a “Reading” field,
+When learning Japanese, when there is a <q>Reading</q> field,
 the text used as request and shown in the dialog is split into the
 base text and the reading. See the
 [split reading page](Split%20reading.html) for more details.
@@ -185,8 +185,8 @@ languages with different decks. See also the
 
 ### <span id="tags">Using tags</span>
 
-When a note has a tag in the form “`lang_<NN>`” (e.g. “`lang_en`” for
-English, “`lang_fr`” for French), this language code is used for the
+When a note has a tag in the form <q>`lang_<NN>`</q> (e.g. <q>`lang_en`</q> for
+English, <q>`lang_fr`</q> for French), this language code is used for the
 download.
 
 ### Supported languages
@@ -284,7 +284,7 @@ used by default, as it requires two extra Python packages,
 still alpha status, and installing it isn’t always easy, either.
 Hackers that do manage that may then want to take a look at the
 content of the
-“[`downloadaudio/processors`](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/processors)”
+<q>[`downloadaudio/processors`](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/processors)</q>
 directory.
 
 ### More ideas
@@ -293,12 +293,13 @@ Things that might be added in the future (but don’t hold your breath):
 
 * Switch off the menu items when not reviewing.
 * Automatically edit the information before the request is sent. I use
-  what i call “electric” cards for Japanese verbs, where the different
-  forms are formed automatically. That means that the whole word
-  doesn’t actually appear in the note. While it is no big problem to
-  complete the word in the “Manual audio” dialog, the add-on could
-  automatically add the 「る」 for 一段動詞.  This will most likely
-  not by implemented any time soon.
+  what i call <q>electric</q> cards for Japanese verbs, where the
+  different forms are formed automatically. That means that the whole
+  word doesn’t actually appear in the note. While it is no big problem
+  to complete the word in the <q>Manual audio</q> dialog, the add-on
+  could automatically add the <q lang="ja">る</q> for <span
+  lang="ja">一段動詞</span>.  This will most likely not by implemented
+  any time soon.
 * More non-English talking dictionaries. Links welcome.  Python files
   welcome. Take a look at
   [`downloadaudio/downloaders`](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/downloaders),

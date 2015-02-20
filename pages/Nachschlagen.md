@@ -16,12 +16,12 @@ Forvo, Auswahl bei Forvo"
 first_caption: The new menu
 ankiweb_id: 1211332804
 
-Like the “Lookup” menu from the Japanese support add-on, this adds a
-menu called „Nachschlagen“ were you can look up words at some of my
-favorite resources.
+Like the <q>Lookup</q> menu from the Japanese support add-on, this
+adds a menu called <q lang="de">Nachschlagen</q> were you can look up
+words at some of my favorite resources.
 
 A few of them are German, and the whole add-on is kept in German as
-well. „Nachschlagen“ is German for “look up”.
+well. <q lang="de">Nachschlagen</q> is German for <q>look up</q>.
 
 ## Set-up
 
@@ -29,15 +29,16 @@ There is a configuration section at the head of the
 [source file](https://github.com/ospalh/anki-addons/blob/master/nachschlagen.py)
 where a few things can be configured. Most of it is not too important
 and explained in the file itself. You may encounter the error message
-“No field found for look-up. Consider changing the field name lists in
-the plugin source.” That means that my guesses about what you use as
-field names were wrong. In this case you should add your favorite
-field names to the `expression_fields` and `meaning_fields` lists.
+<q>No field found for look-up. Consider changing the field name lists
+in the plugin source.</q> That means that my guesses about what you
+use as field names were wrong. In this case you should add your
+favorite field names to the `expression_fields` and `meaning_fields`
+lists.
 
 
 ## For learners of any spoken language
 
-The “Forvo” links are useful for learners of any spoken language. Look
+The <q>Forvo</q> links are useful for learners of any spoken language. Look
 up pronunciations at the crowd-sourced [forvo.com](http://forvo.com).
 
 ## For learners of Japanese

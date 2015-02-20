@@ -15,7 +15,7 @@ deck work.
 
 <blockquote class="nb">
 This add-on needs extra Python packages. See the
-“<a href="Batteries.html">Batteries</a>” page for details.
+<q><a href="Batteries.html">Batteries</a></q> page for details.
 </blockquote>
 
 The main problem this tries to fix is the vast span of inhabitants of
@@ -26,13 +26,15 @@ nice way to display 67 and 1,347,350,000 and have both numbers look
 good without a little bit of hacking. That is even more the case when
 you use the input answer feature.
 
-My solution is to store the number of inhabitants as millions. But
-for countries with less then one million inhabitants, the display
-would look like „0.26 Millionen Einwohner“ or „0.00007 Millionen
-Einwohner“. That looks ugly. So, i use this add-on and in the card
-template i use `{{swissmega:MegaInhabitants_Scalar}}`. Like that, the
-output is  „260'000 Einwohner“ and „70 Einwohner“, while larger
-countries will still get something like „83 Millionen Einwohner“.
+My solution is to store the number of inhabitants as millions. But for
+countries with less then one million inhabitants, the display would
+look like <q lang="de_CH">0.26 Millionen Einwohner</q> or <q
+lang="de_CH">0.00007 Millionen Einwohner</q>. That looks ugly. So, i
+use this add-on and in the card template i use
+`{{swissmega:MegaInhabitants_Scalar}}`. Like that, the output is <q
+lang="de_CH">260'000 Einwohner</q> and <q lang="de_CH">70
+Einwohner</q>, while larger countries will still get something like <q
+lang="de_CH">83 Millionen Einwohner</q>.
 
 Basically the same is done with the area, which is stored in thousands
 of square kilometers. One twist is that i am a big fan of the
@@ -41,7 +43,7 @@ all its glory. I like to use SI prefixes even when they are not
 common. So, an area of a million square kilometers, that is just one
 megameter times one megameter, 1 Mm<sup>2</sup>.
 
-The “Swiss” part comes from the fact that i just personally like the
+The <q>Swiss</q> part comes from the fact that i just personally like the
 Swiss way of writing large numbers with an apostrophe as thousands
 separator and have included this in the add-on. The Swiss formatting
 will only work on Linux systems.

@@ -19,8 +19,8 @@ but not in the browser."
 Hide text with the CSS class `browserhide` in the card browser. This
 is useful for cards where there is a text repeated for every card.
 
-The effect of this add-on is similar to using the “Browser Appearance”
-feature hidden in the “More” button of the template editor.
+The effect of this add-on is similar to using the <q>Browser Appearance</q>
+feature hidden in the <q>More</q> button of the template editor.
 
 The functionallity of this add-on has been added to the
 [Replay button on card](Play%20button.html) add-on. There is no need

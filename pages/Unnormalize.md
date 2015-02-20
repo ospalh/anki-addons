@@ -13,7 +13,7 @@ Tübingen_Neckarfront.jpg Used on cards but missing from media folder:
 Tübingen_Neckarfront.jpg.'
 first_caption: "So, the file is there and it is missing‽"
 
-This can be used to fix a problem caused by adding files “sideways” on
+This can be used to fix a problem caused by adding files <q>sideways</q> on
 Macs.
 
 <blockquote class="nb">
@@ -37,23 +37,23 @@ file names on Macs, many
 non-[ASCII](http://en.wikipedia.org/wiki/ASCII) characters are
 [decomposed](http://en.wikipedia.org/wiki/Precomposed_character#Comparing_precomposed_and_decomposed_characters).
 For example, the character
-“[ü](http://www.fileformat.info/info/unicode/char/00fc/index.htm)” is
+<q>[ü](http://www.fileformat.info/info/unicode/char/00fc/index.htm)</q> is
 stored as
-“[u](http://www.fileformat.info/info/unicode/char/0075/index.htm)”
+<q>[u](http://www.fileformat.info/info/unicode/char/0075/index.htm)</q>
 plus the
 [dots](http://www.fileformat.info/info/unicode/char/0308/index.htm) as
 an extra character.
 
 Most of the time this is completely harmless. But when the text in the
-field contains an un-decomposed character, for example “`<img
-src="Tübingen_Neckarfront.jpg" />`” and that text together with the
-file with the decomposed name, “`Tübingen_Neckarfront.jpg`”, are
-synced to a Linux or Windows machine, those two strings do not point
-to the same file. The result is that the file isn’t show during
-review. At the moment (January 2013, Anki 2.0.6), the
-“Tools/Maintenance/Unused media...”  file will not detect this
-problem, it only becomes apparent during reviews or when browsing the
-cards.
+field contains an un-decomposed character, for example <q
+lang="de">`<img src="Tübingen_Neckarfront.jpg" />`</q> and that text
+together with the file with the decomposed name, <q
+lang="de">`Tübingen_Neckarfront.jpg`</q>, are synced to a Linux or
+Windows machine, those two strings do not point to the same file. The
+result is that the file isn’t show during review. At the moment
+(January 2013, Anki 2.0.6), the <q>Tools/Maintenance/Unused
+media...</q> file will not detect this problem, it only becomes
+apparent during reviews or when browsing the cards.
 
 
 ## The solution

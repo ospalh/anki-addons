@@ -28,5 +28,5 @@ unpatched AnkiDroid and am done with this now. It will stay in this
 pretty much useless state.
 
 The add-on may also need extra Python packages. See the
-“<a href="Batteries.html">Batteries</a>” page for details on
+<q><a href="Batteries.html">Batteries</a></q> page for details on
 this.

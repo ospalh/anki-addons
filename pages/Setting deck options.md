@@ -22,20 +22,20 @@ more details.
 <figure>
 <img src="images/click_on_gear.png"
 alt="The Anki deck list. To the right of the gear button to the right
-of the deck name a pop-up menu with the item “Options”
+of the deck name a pop-up menu with the item <q>Options</q>
 marked.">
 <figcaption>Click here to open the deck options.</figcaption>
 </figure>
 To change the language for an options group, first click on the gear
-button to the right of the deck name, then on “Options”.
+button to the right of the deck name, then on <q>Options</q>.
 <figure>
 <img src="images/options_for.png"
 alt="The “Options for deck NN” window. The tab “General” has a line-edit
 “Language code”.">
 <figcaption>Change the code of the language you are learning here.</figcaption>
 </figure>
-This will open the “Options for NN” dialog. There, click on the
-“General” tab. On that sheet, change the language code in new input
+This will open the <q>Options for NN</q> dialog. There, click on the
+<q>General</q> tab. On that sheet, change the language code in new input
 field.
 
 
@@ -44,9 +44,9 @@ field.
 When learning different languages, arrange the notes in different
 decks and add an option groups for each deck:
 
-As above, click on the gear and select “Options”. In the “Options for
-NN” dialog, near the top, beside the option group name list, there is
-another gear button. Click on that and select “Add”. Enter a new
-name. Putting the language name into the options name helps keeping
-them apart. Then, go to the “General” tab and set the language code
-again.
+As above, click on the gear and select <q>Options</q>. In the
+<q>Options for NN</q> dialog, near the top, beside the option group
+name list, there is another gear button. Click on that and select
+<q>Add</q>. Enter a new name. Putting the language name into the
+options name helps keeping them apart. Then, go to the <q>General</q>
+tab and set the language code again.

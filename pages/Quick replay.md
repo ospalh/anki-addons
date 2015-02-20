@@ -17,7 +17,8 @@ Normally, audio and video files are put in a queue and played one after
 the other.
 
 But i sometimes like an audio file replayed immediately, even before
-the first playing is finished. This makes that work. Just hit “r” or “F5”.
+the first playing is finished. This makes that work. Just hit <q>r</q>
+or <q>F5</q>.
 
 <blockquote class="nb">
 This add-on has not been tested on all

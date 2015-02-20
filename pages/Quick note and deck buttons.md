@@ -23,10 +23,10 @@ adapt this to your deck and model names.</blockquote>
 ## Setup
 
 After downloading, you have to modify the `Quick note and deck
-buttons.py` file. Trigger the “Tools/Add-ons/Open Add-ons
-Folder...” menu item, pick out that file and open it with your
-favorite source editor or trigger “Tools/Add-ons/Quick note and deck
-buttons/Edit...” to use Anki’s built-in editor.
+buttons.py` file. Trigger the <q>Tools/Add-ons/Open Add-ons
+Folder...</q> menu item, pick out that file and open it with your
+favorite source editor or trigger <q>Tools/Add-ons/Quick note and deck
+buttons/Edit...</q> to use Anki’s built-in editor.
 
 There are two bits of code that should be changed, marked with the
 comments `# Set up here...` and `# ... and here.` A knowledge of

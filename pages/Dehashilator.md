@@ -50,7 +50,7 @@ change the
 [source](https://github.com/ospalh/anki-addons/blob/master/dehashilator/dehashilator.py),
 especially the `name_source_fields` list.
 
-When you like the names and click “Yes” twice, the file will be
+When you like the names and click <q>Yes</q> twice, the file will be
 renamed and field content changed. You should run the
 `Maintenance/Unused Media ...` menu item to find problems created by
 the dehashilation. You may also run the dehashilator again.  At one
@@ -62,8 +62,8 @@ This was written as a one-off fix-my-collection-once add-on. As such,
 with my personal collection fixed, i am not really interested in
 making this perfect. It will probably stay in its current, somewhat
 buggy, state. Others are welcome to do their own work or to send pull
-requests, but simple “it broke my collection” issue reports will be
-ignored.
+requests, but simple <q>it broke my collection</q> issue reports will
+be ignored.
 
 The name was inspired by the
 [dihoxulator](http://www.girlgeniusonline.com/comic.php?date=20021213). So

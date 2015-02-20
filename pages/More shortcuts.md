@@ -16,9 +16,9 @@ Reactivate two Anki 1 shortcuts:
 - *Ctrl+f* card browser
 - *Ctrl+w* Deck overview
 
-During reviews, the audio is replayed with the “6” or “i” keys. Those
-are convenient when using the numpad or a Dvorak keyboard with the
-[Dvorak keys](Dvorak%20keys.html) add-on.
+During reviews, the audio is replayed with the <q>6</q> or <q>i</q>
+keys. Those are convenient when using the numpad or a Dvorak keyboard
+with the [Dvorak keys](Dvorak%20keys.html) add-on.
 
 This add-on is based on
 [oldshortcuts.py](https://github.com/dae/ankiplugins/blob/master/oldshortcuts.py),

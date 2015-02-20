@@ -41,10 +41,10 @@ The add-on adds the classes `loc` to all cards. The model and template
 names of each card are reduced to the characters `a` to `z`, `A` to
 `Z`, `0` to `9` and `_` and added as classes as well, in the form of
 `model_NN` and `template_NN`. As an example, the second card of a
-model or note type called “Satz Japanese 日本語” and that is called
-“Hörübung” would have the CSS classes `loc card card2
-model_SatzJapanese template_Hrbung`. These classes can be used to
-build CSS selectors.
+model or note type called <q lang="de">Satz Japanese <span lang="ja">日
+本語</span></q> and that is called <q lang="de">Hörübung</q> would
+have the CSS classes `loc card card2 model_SatzJapanese
+template_Hrbung`. These classes can be used to build CSS selectors.
 
 ### Standard use
 
@@ -89,12 +89,13 @@ example, to change the style of the Japanese text, use <code>.loc
 
 Applying different styles to different cards works in a similar way.
 
-As an example, in the past i used a standard style of black on light blue for
-standard cards and black and light red for grammar cards. In the
-alternative style i used light colored text on dark background, dark
-green for normal cards and dark red for grammar cards. The standard
-cards use the the `.loc.card` selector described above. The model name
-of the grammar cards is “Grammatik VHS — Japanese” and so i used
+As an example, in the past i used a standard style of black on light
+blue for standard cards and black and light red for grammar cards. In
+the alternative style i used light colored text on dark background,
+dark green for normal cards and dark red for grammar cards. The
+standard cards use the the `.loc.card` selector described above. The
+model name of the grammar cards is <q lang="de">Grammatik VHS —
+Japanese</q> and so i used
 <blockquote><pre><code>.loc.card.model_grammatikvhsjapanese{
   background-color: #64354c;
   color: #d9b7ce;}</code></pre></blockquote>
@@ -102,7 +103,7 @@ to set up the pink-on-dark-red.
 
 ## Night mode
 
-The add-on adds a “Mode (extra class)” sub-menu to the “Edit” menu to
+The add-on adds a <q>Mode (extra class)</q> sub-menu to the <q>Edit</q> menu to
 switch between night mode and normal (day) mode.
 
 <blockquote class="nb">
@@ -131,12 +132,12 @@ AnkiDroid code i intend to write to bring night mode there.
 More display modes can be used. Edit the
 [source file](https://github.com/ospalh/anki-addons/blob/master/local_css_and_diy_night_mode.py).
 
-Look for “`extra_classes_list`” near the top. Duplicate the `Night
+Look for <q>`extra_classes_list`</q> near the top. Duplicate the `Night
 mode` line and change the texts *after* the `class` and `display`
 bits.
 
 For example, i use the
-“[solarized](http://ethanschoonover.com/solarized)” color schemes. I
+<q>[solarized](http://ethanschoonover.com/solarized)</q> color schemes. I
 use the light theme most of the time but sometimes want the dark
 theme. I also sometimes want to see the cards in black-on-white.
 
@@ -157,7 +158,7 @@ The relevant bits of my templates look like this:
   background-color: white;
 }</code></pre></blockquote>
 
-And i have added “`highc`” as entry to the menu:
+And i have added <q>`highc`</q> as entry to the menu:
 <blockquote><pre><code>extra_classes_list = [
     {'class': 'night', 'display': u'Night mode'},
     {'class': 'highc', 'display': u'High contrast mode'},
@@ -181,7 +182,7 @@ user_style.css`.
 ### Reloading
 
 The user style is loaded when the profile is opened. To reload the
-style after a change go to the “Switch Profiles” dialog and re-open the
+style after a change go to the <q>Switch Profiles</q> dialog and re-open the
 profile.
 
 

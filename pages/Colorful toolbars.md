@@ -6,7 +6,7 @@ date: 2013-06-10
 status: working
 status_color: green
 status_text_color: white
-abstract: "Replace the top menu bar with the “Decks Study Add Browse”
+abstract: "Replace the top menu bar with the <q>Decks Study Add Browse</q>
 text buttons and the two rather drab sync and statistics buttons with
 a colorful icon toolbar like the one in Anki 1."
 subtitle: Get back the Anki1 look
@@ -16,30 +16,31 @@ reads Die Hauptstadt von Niue ist"
 ankiweb_id: 388296573
 extra_jq_script: ct_tips.js
 
-This add-on replaces the top menu bar with the “Decks Study Add
-Browse” text buttons and the two rather drab sync and statistics
+This add-on replaces the top menu bar with the <q>Decks Study Add
+Browse</q> text buttons and the two rather drab sync and statistics
 buttons with a colorful icon toolbar like the one in Anki 1.
 
 The edit button and the more button in the bottom bar are also
 replaced by an icon tool bar.
 
-This also adds a few more menu items and adds icons to the menus (not on Macs).
-The tool bars can be shown and hidden via the "View" menu, the “Decks
-Study Add Browse” functions can also be reached through the "Go" menu.
+This also adds a few more menu items and adds icons to the menus (not
+on Macs).  The tool bars can be shown and hidden via the "View" menu,
+the <q>Decks Study Add Browse</q> functions can also be reached
+through the <q>Go</q> menu.
 
 ## Menu-only items
 
 Two items are added only to the menus, not to the icon bars:
 
-In the “View” menu, there is a “Mute” switch. It works similar to the
-“Automatically play audio” setting in the deck options (“General”
+In the <q>View</q> menu, there is a <q>Mute</q> switch. It works similar to the
+<q>Automatically play audio</q> setting in the deck options (<q>General</q>
 tab). Audio on the card is not played when the card is shown, but only
 when <span class="qtbase or_replay_button">the replay button or the
-“R” key</span> are pressed. This options works for all decks, and can
+<q>R</q> key</span> are pressed. This options works for all decks, and can
 be switched on and off quickly.
 
-The “Go” menu contains a “Last card” switch. When this is active,
-rating an answer (clicking “Again”, “Good” &c.) goes back to the deck
+The <q>Go</q> menu contains a <q>Last card</q> switch. When this is active,
+rating an answer (clicking <q>Again</q>, <q>Good</q> &c.) goes back to the deck
 overview screen.
 
 
@@ -56,21 +57,21 @@ overview screen.
 </figure>
 The appearence can be changed by editing the add-on
  [source file](https://github.com/ospalh/anki-addons/blob/master/colorful_toolbars.py)
- by activating the “Tools/Add-ons/Colorful toolbars/Edit...” menu
+ by activating the <q>Tools/Add-ons/Colorful toolbars/Edit...</q> menu
 item.
 
-The file contains a switch to chage the add-on to “netbook”-mode. When
+The file contains a switch to chage the add-on to netbook mode. When
 the `netbook_version = True` line is active the the two icon bars are
-on the <span class="qtbase left_or_top">left</span> and right, to preserve vertical screen space. To get to my
-personal variant with different buttons in the bottom bar, take a look
-at the git branch
+on the <span class="qtbase left_or_top">left</span> and right, to
+preserve vertical screen space. To get to my personal variant with
+different buttons in the bottom bar, take a look at the git branch
 [`develop-ospalh-special`](https://github.com/ospalh/anki-addons/blob/develop-ospalh-special/colorful_toolbars.py). Remember
 to also get the
 [icons directory](https://github.com/ospalh/anki-addons/tree/develop-ospalh-special/color_icons)
 when you get the add-on from github.
 
-There are also switches to show the “Mute” and “Last card” switches in
-the bottom icon bar.
+There are also switches to show the <q>Mute</q> and <q>Last card</q>
+switches in the bottom icon bar.
 
 [UTSL](http://www.jargon.net/jargonfile/u/UTSL.html) for further
 changes to the icons shown.

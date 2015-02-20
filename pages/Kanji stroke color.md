@@ -34,7 +34,7 @@ the code on [GitHub](https://github.com/cayennes/kanji-colorize/).)
 
 <blockquote class="nb">
 This add-on needs extra Python packages. See the
-“<a href="Batteries.html">Batteries</a>” page for details.
+<q><a href="Batteries.html">Batteries</a></q> page for details.
 </blockquote>
 
 
@@ -71,9 +71,9 @@ hackish/broken [Add kanji embeds](Add%20kanji%20embeds.html) add-on.
 
 ## Usage
 
-Use the template “`kanjiColor`” to see the diagrams. In the template
-editor in the (front or back) template, where it says “`{{Kanji}}`”,
-change it to “`{{kanjiColor:Kanji}}`”. When you use another field name
+Use the template <q>`kanjiColor`</q> to see the diagrams. In the template
+editor in the (front or back) template, where it says <q>`{{Kanji}}`</q>,
+change it to <q>`{{kanjiColor:Kanji}}`</q>. When you use another field name
 for you kanji, use that instead.
 
 ## Variants
@@ -83,8 +83,8 @@ diagrams:
 
 ### kanjiColorJinmei and kanjiColorKaisho
 
-Using either “`{{kanjiColorJinmei:Kanji}}`” or
-“`{{kanjiColorKaisho:Kanji}}`”, the Jinmei or Kaisho variant drawings
+Using either <q>`{{kanjiColorJinmei:Kanji}}`</q> or
+<q>`{{kanjiColorKaisho:Kanji}}`</q>, the Jinmei or Kaisho variant drawings
 are shown, using the normal version when there is no variant.
 
 ### kanjiColorRest
@@ -94,14 +94,14 @@ are shown, using the normal version when there is no variant.
 旺. Below two smaller diagrams of that character. In the bottom
 diagrams the third stroke is shorter. The bottom left diagram shows
 the vertical stroke on the right drawn last.">
-<figcaption>For 「旺」, there are two variant forms.</figcaption>
+<figcaption>For <q lang="ja">旺</q>, there are two variant forms.</figcaption>
 </figure>
 
-Using “`{{kanjiColorRest:Kanji}}`” displays all variants of a given
+Using <q>`{{kanjiColorRest:Kanji}}`</q> displays all variants of a given
 kanji, and nothing when there is no variant. The variants are also
 drawn smaller.
 
-Typically you put this below a standard “`{{kanjiColor:Kanji}}`”: Like
+Typically you put this below a standard <q>`{{kanjiColor:Kanji}}`</q>: Like
 that you always get the normal version and when there are variants,
 you see them, too. For example the template for the images uses
 <blockquote><pre><code>&lt;div>{{kanjiColor:Kanji}}&lt;/div>
@@ -118,10 +118,10 @@ diagrams in <code>&ltdiv class="strokevariants">...&lt;/div></code>,
 
 The size of the displayed diagrams can be changed in the add-on’s
 [source file](https://github.com/ospalh/anki-addons/blob/master/kanji_stroke_color.py).
-Use the “Tools/Add-ons/Kanji stroke color/Edit...” menu item to open
-it. Set the size in the line “`kanji_size = 200`”. The size of the
-variants shown with the “kanjiColorRest” can be set in the “`rest_size
-= 120`” line.
+Use the <q>Tools/Add-ons/Kanji stroke color/Edit...</q> menu item to
+open it. Set the size in the line <q>`kanji_size = 200`</q>. The size
+of the variants shown with the <q>kanjiColorRest</q> can be set in the
+<q>`rest_size = 120`</q> line.
 
 ### Colors
 

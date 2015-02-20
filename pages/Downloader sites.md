@@ -11,15 +11,20 @@ These sites are tried to retrieve audio clips:
 
 [Beolingus](http://dict.tu-chemnitz.de/doc/about.en.html) is an online
 dictionary provided by the
-[<span class="qtbase tu">TU</span> Chemnitz](http://www.tu-chemnitz.de/en/).
+[<span class="qtbase tu" lang="de">TU</span> Chemnitz](http://www.tu-chemnitz.de/en/).
 
 The site provides German↔English, German↔Portuguese and German↔Spanish
-dictionaries and pronunciations in English, German and Spanish.
+dictionaries and pronunciations in English, German and Spanish. Some
+of the English pronunciations appear to be wrong, so the non-German
+words are deleted by default. (The delete button is preselected and the
+user has to click the add button to keep the file).
 
 ## Collins
 
 [Collins Dictoonaries](http://www.collinsdictionary.com/) are used for
-French, German, Italian and Spanish
+French, German, Italian and Spanish. Here, too, the quality of the
+pronunciations didn’t really convince me, so the files will be deleted
+by default, too.
 
 ## Duden
 
@@ -43,7 +48,8 @@ The disadvantage is that that this will almost always get you an audio
 version of the text entered, even when it is misspelled.
 
 Another disadvantage is that it is a robot voice. It may hide
-idiosyncrasies of the phrase or word.
+idiosyncrasies of the phrase or word. Because of this, Google TTS
+files are deleted by default, too.
 
 For Chinese, the Google TTS download is skipped by default, because
 the [Chinese support](https://ankiweb.net/shared/info/3448800906)
@@ -65,21 +71,27 @@ Downloads audio provided by
 data source as
 [Jim Breen's WWWJDIC](http://www.csse.monash.edu.au/~jwb/cgi-bin/wwwjdic.cgi?1C)
 uses for its Japanese audio. WWWJDIC
-is the dictionary called “edict” by the
+is the dictionary called <q>edict</q> by the
 [Japanese Support add-on](https://ankiweb.net/shared/info/3918629684).
 
+The JapanesePod101 collection has several files for words that are
+usually written with kana alone, like <q lang="ja">ください</q>, but
+written with kanji, <q lang="ja">下さい</q>. In cases like these the
+add-on asks the WWWJDIC site for the kanji version of the word, based
+on the reading.
 
-This was the main motivation for writing this add-on. By providing a
-way to download these pronunciations this add-on is a replacement for
-the Anki 1 plugins “Audio Download” and “Audio Download (Extension)”.
+This site was the main motivation for writing this add-on. By
+providing a way to download these pronunciations this add-on is a
+replacement for the Anki 1 plugins <q>Audio Download</q> and <q>Audio
+Download (Extension)</q>.
 
 ### <span id="blacklist">Blacklist</span>
 
 The download mechanism at JapanesePod can’t really say
-[“no”](nopagehere.html) in the usual way. Instead it sends you an
-audio clip that tells you “The audio for this clip is currently not
+[<q>no</q>](nopagehere.html) in the usual way. Instead it sends you an
+audio clip that tells you <q>The audio for this clip is currently not
 available. It will be recorded and uploaded shortly. Thank you for
-your patience.”. While that is a nice gesture, after hearing that
+your patience.</q>. While that is a nice gesture, after hearing that
 message two or three times the voice starts sounding a bit like <span
 class="qtbase sonya">Sonya</span>.
 
@@ -90,12 +102,24 @@ alt="Review dialog with a skull-and-bones button">
 <figcaption>Use the skull-and-bones button to blacklist a file.</figcaption>
 </figure>
 To deal with this phenomenon, this add-on provides another button in
-the download review dialog, called “blacklist”. Click this for each
-file where you get the “... currently not
-available...” spiel. The add-on will then store a
+the download review dialog, called <q>blacklist</q>. Click this for
+each file where you get the <q>… currently not available…</q>
+spiel. The add-on will then store a
 [hash](http://en.wikipedia.org/wiki/Cryptographic_hash_function) for
 this file. When the same file is seen again, it is quietly dropped and
-you may receive a “Nothing downloaded” message.
+you may receive a <q>Nothing downloaded</q> message.
+
+## Leo
+
+These audio files come from
+[LEO GmbH](http://www.leo.org/index_en.html), originaly founded by the
+[Department of Informatics](http://www.in.tum.de/en.html) of the
+[<span class="qtbase tu">TU</span> München](http://www.tum.de/en/homepage/).
+They offer several German↔NN dictionaries, with audio files for
+English, French, German and Spanish. I could not find spoken words for
+other languages, but they may be added in the future, when they
+appear.
+
 
 ## Lexin
 
@@ -110,14 +134,15 @@ This downloader gets  pronunciations from the
 [Macmillan Dictionary](http://www.macmillandictionary.com/) site.
 
 Apart from the pronunciation, for some words that name sounds or
-noises, the dictionary offers “sound effects”, that are also
+noises, the dictionary offers sound effects, that are also
 downloaded. Try downloading
-“[house](http://en.wikipedia.org/wiki/House_music)” or “thunder”. The
-sound effects should be marked in the bubble help text in the review.
+<q>[house](http://en.wikipedia.org/wiki/House_music)</q> or
+<q>thunder</q>. The sound effects should be marked in the bubble help
+text in the review.
 
 Macmillan Dictionary is available in a British English and an American
 English version. To counterbalance the American English of
-Merriam-Webster, the standard install of the add-on uses the British
+oher downloaders, the standard install of the add-on uses the British
 version. See [below](#sitesonoff) how to turn on the American English
 version instead.
 
@@ -160,9 +185,9 @@ A number of people have asked for the crowd-sourced pronunciation site
 [Forvo](http://forvo.com) to be added. While the pronunciations
 offered are usually quite useful (even if sometimes of a low audio
 quality), adding the site to this add-on does *not* work. Downloading
-from Forvo requires what is called an “API-key”. This key would have
-to be both kept secret and included in the published add-on source. A
-contardiction.
+from Forvo requires what is called <span class="qtbase
+onlyone">an</span> <q>API-key</q>. This key would have to be both kept
+secret and included in the published add-on source. A contardiction.
 
 (The way Forvo apparently intends this kind of key to be used is to
 add a service to a web site, rather than to a bit of free, published
@@ -170,28 +195,28 @@ software. The web service owner would than keep eir hands on the key
 and hand out just the pronunciations. This add-on does not work this
 way.)
 
-My “[Nachschlagen](Nachschlagen.html)” add-on adds a menu item too look
-up, but not download, words at Forvo.
+My <q lang="de">[Nachschlagen](Nachschlagen.html)</q> add-on adds a
+menu item too look up, but not download, words at Forvo.
 
 ## <span id="sitesonoff">Using different sites</span>
 
 The add-on loads the different downloaders through the list
-“`downloaders`” in the file “<a
+<q>`downloaders`</q> in the file “<a
 href="https://github.com/ospalh/anki-addons/blob/master/downloadaudio/downloaders/__init__.py">
 `downloadaudio/downloaders/__init__.py`</a>”. To get to the file, use
-the “Tools/Add-ons/Open Add-ons Folder...”  menu item, then open the
-folder “`downloadaudio`” and in there “`downloaders`”.
+the <q>Tools/Add-ons/Open Add-ons Folder...</q>  menu item, then open the
+folder <q>`downloadaudio`</q> and in there <q>`downloaders`</q>.
 
 The downloaders are tried in the order they appear there. To change
 this order or to switch on or off downloaders, rearrange the list
-entries, or add or remove “`#`” characters before the name. Lines
-starting with a “`#`” are comments in Python. Those lines are not
+entries, or add or remove <q>`#`</q> characters before the name. Lines
+starting with a <q>`#`</q> are comments in Python. Those lines are not
 used, nothing will be downloaded from these sites.
 
 For example, to change the Macmillan downloads from British English to
-American English, add a “`#`” character to the line
-“`MacmillanBritishDownloader(),`” and remove it from the line “`#
-MacmillanAmericanDownloader(),`”. (Do not remove the comma or
+American English, add a <q>`#`</q> character to the line
+<q>`MacmillanBritishDownloader(),`</q> and remove it from the line
+<q>`# MacmillanAmericanDownloader(),`</q>. (Do not remove the comma or
 parentheses. Do not make other changes unless you know what you are
 doing.)
 

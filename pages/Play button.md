@@ -1,7 +1,7 @@
 title: Replay buttons on card
 id: playbutton
 main_file: play_button.py
-date: 2013-06-10
+date: 2014-07-31
 tags: [review replay button]
 type: addon
 status: working
@@ -23,7 +23,7 @@ the pronunciation of a word, or just one example sentences.
 <img src="images/browserhide.png" alt=" Part of the Anki review window.
 Text: みんなの日本語： に んぎょう.  Below part on the Anki card
 browser. One line highlighted. Text: 人形; Japanisch-De...; にんぎょう">
-<figcaption>The text 「みんなの日本語：」 is shown on the card,
+<figcaption>The text <q lang="ja">みんなの日本語：</q> is shown on the card,
 but not in the browser.</figcaption>
 </figure>
 The add-on also hides text with the CSS class `browserhide` in the
@@ -33,9 +33,9 @@ image. The class is useful for cards where there is a text repeated
 for every card, too. Put text  parts of your card template that
 should not appear in the card browser into spans with the class `browserhide`.
 
-The effect of the `browserhide` class is similar to using the “Browser
-Appearance” feature hidden in the “More” button of the template
-editor.
+The effect of the `browserhide` class is similar to using the
+<q>Browser Appearance</q> feature hidden in the <q>More</q> button of
+the template editor.
 
 There is another add-on that implements *only* this hiding of text in
 the text browser, called [Lean browser qa](Lean%20browser%20qa.html).

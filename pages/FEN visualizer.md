@@ -11,8 +11,8 @@ abstract: Display FEN data as a chess board.
 first_image: excelsior.png
 first_alt: "Chess board with the chess problem “excelsior”. See text for
 precise position."
-first_caption: "“White to mate in five with the least likely piece or
-pawn.”"
+first_caption: "White to mate in five with the least likely piece
+  or pawn."
 ankiweb_id: 2923601993
 
 

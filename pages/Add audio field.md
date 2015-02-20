@@ -31,7 +31,7 @@ first card, try the menu item
 starting Requests to send to the download sites">
 <figcaption>When you get this, dialog, the add-on will go fetch.</figcaption>
 </figure>
-When a dialog with “Requests to send to the download sites” and with
+When a dialog with <q>Requests to send to the download sites</q> and with
 the right word in the edit box appears you are in luck and your model
 already works with this add-on.
 
@@ -112,7 +112,7 @@ work. So we look for interesting text in the <q>Edit Current</q>
 window: <q lang='fr'>l'oiseau</q>, marked in red with a <q>1</q> in
 the image. That text is in the field named <q>Back</q> (blue 2). That
 field name appears again in the <q>Fields for NN</q>
-dialog. (blue 3). Use this field name together with the word
+dialog (blue 3). Use this field name together with the word
 <q>Audio</q> as the new field name. In this case, use <q>Back
 Audio</q>. (blue 4)
 

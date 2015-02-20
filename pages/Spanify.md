@@ -15,10 +15,10 @@ first_caption: Three new buttons.
 Another add-on to add buttons to the note editor. This adds buttons to
 wrap text in spans.
 
-By default there are three buttons, “s1”, “s2” and “s3”, that wrap the
-text selected in a note’s field in `<span class="styleN">`/`</span>`
-tags. (`N` = 1, 2, 3). It is up to the user to set up the card
-styling to make use these classes.
+By default there are three buttons, <q>s1</q>, <q>s2</q> and
+<q>s3</q>, that wrap the text selected in a note’s field in `<span
+class="styleN">`/`</span>` tags. (`N` = 1, 2, 3). It is up to the user
+to set up the card styling to make use these classes.
 
 <blockquote class="nb">
 The changes made by the add-on are invisible in the card editor, and

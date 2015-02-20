@@ -31,7 +31,7 @@ hidden with clever CSS:
 <span class=justmobile>Shown on mobile</span>`
 
 in the card template and
-<pre><code>.justdt {display:none;}
+<pre><code>.justmobile {display:none;}
 .mobile .justmobile {display:inline;}
 .mobile .justdt {display:none;}</code></pre>
 in the card CSS.

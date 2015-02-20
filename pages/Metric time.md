@@ -21,7 +21,7 @@ mass. (Or weight. Better not go
 
 <blockquote class="nb">
 This add-on needs extra Python packages. See the
-“<a href="Batteries.html">Batteries</a>” page for details.
+<q><a href="Batteries.html">Batteries</a></q> page for details.
 </blockquote>
 
 This add-on replaces the standard time-formatting function with one

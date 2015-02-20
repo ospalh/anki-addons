@@ -34,26 +34,28 @@ Without this add-on: even though the typed in answer is close to the
 correct one, it is marked in red.
 </figcaption>
 </figure>
-In the image, the correct answer is “65”, when you know it is close to
+In the image, the correct answer is <q>65</q>, when you know it is close to
 70, you type that. The original behavior is to compare character by
 character, and mark the typed answer red: a 7 is no 6 and a 0 is no
 5. With this add-on, the whole answer would be yellow, as it is close
 to the correct answer.
 
-On the other hand, if you had typed “650” as the answer, with the
-original behavior, you would get the “65” marked green and “0” marked
+On the other hand, if you had typed <q>650</q> as the answer, with the
+original behavior, you would get the <q>65</q> marked green and <q>0</q> marked
 red, showing more green, even though the answer is farther from the
 correct one.  With this add-on the 650 would be completely red.
 
 ## Setup
 
 ### Fields
+
 To use, the name of the answer field (the `{{type:NN}}` bit) must
-contain the word “Scalar”. (E.g. “Area_Scalar” or “Inhabitants_Scalar”
-for a geography deck or “Atomic_Mass_Scalar” for a chemistry deck.)
+contain the word <q>scalar</q>. For example use <q>Area scalar</q> or
+<q>Inhabitants scalar</q> for a geography deck or <q>Atomic mass
+scalar</q> for a chemistry deck.
 
 For fields without
-“Scalar” in the name the behavior stays the same, doing the
+<q>scalar</q> in the name the behavior stays the same, doing the
 character-by-character comparison.
 
 ### CSS
@@ -66,6 +68,10 @@ to the card styling. The `div` containing the numbers also has the
 class `typedscalar`, so that these numbers can be styled differently
 from typed-in text.
 
+Take a look at the [source code]
+(https://github.com/ospalh/anki-addons/blob/master/scalar.py) for more
+details.
+
 The example images where taken with a somewhat complex note
 type, using this type of CSS setup. In this case:
 <blockquote class=lsting><pre><code><span>.card {color: #657b83; background-color: #fdf6e3;}
@@ -74,16 +80,17 @@ type, using this type of CSS setup. In this case:
 .typeMissed, .typePass {  color: #268bd2;}
 .typeGood{color: #859900;} </code></pre></blockquote>
 
-This also changes the “pass”/“close enough” color from the yellow
+This also changes the <q>pass</q>/<q>close enough</q> color from the yellow
 mentioned in the text to blue.
 
 The basic color scheme is called
 [Solarized](http://ethanschoonover.com/solarized).
 
 
+
 ### Close enough factor
 
-To change what counts as “close enough” change the `pass_factor` in
+To change what counts as <q>close enough</q> change the `pass_factor` in
 the .py source file.
 
 ## Anki version

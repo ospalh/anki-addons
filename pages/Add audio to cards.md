@@ -49,5 +49,5 @@ should disappear there. When `Unknown field NN` appears on the right,
 compare the spelling with the list in the <q>Edit Current</q> window.
 
 For people that find typing a word and two pairs of curly braces too
-challenging, there is also the “Add Field” button, that takes this
+challenging, there is also the <q>Add Field</q> button, that takes this
 task off your hands.

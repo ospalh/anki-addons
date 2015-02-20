@@ -16,10 +16,10 @@ first_alt: "Three lines of Text: 1: Einwohner, Bürger: 住民 じゅうみん
 first_caption: The typed-in answer was compared to the kana only.
 ankiweb_id: 4091556602
 
-A typical model for learning Japanese has a field called “Reading”. In
+A typical model for learning Japanese has a field called <q>Reading</q>. In
 that field, the reading (kana) is stored *along with the kanji*. For
 example, in a fact defining the Japanese word for citizens, the
-reading field would look like 「住民[じゃうみん]」. Like this, the
+reading field would look like <q lang="ja">住民[じゃうみん]</q>. Like this, the
 standard templates `{{furigana:Reading}}` and `{{kana:Reading}}` work.
 
 <span class="clear" />
@@ -41,12 +41,9 @@ the typed text only with the kana part of the stored text.
 
 ## Setup
 
-The kanji are removed when the model name contains the word “Japanese”
-and the field name contains “Reading”. Use `{{type:Reading}}` or
+The kanji are removed when the model name contains the word <q>Japanese</q>
+and the field name contains <q>Reading</q>. Use `{{type:Reading}}` or
 `{{type:NN Reading}}` in your cards.
-
-Please also make sure that you are running a version of Anki ≥ 2.0.9,
-as the comparison mechanism was changed for that release.
 
 ### CSS
 
