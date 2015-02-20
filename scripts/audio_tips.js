@@ -79,4 +79,10 @@ $(document).ready(function(){
         }
     });
 
+    $('.onlyone').qtip({
+        content: {
+            text:'…and only one for the <q>app</q>. That is part of the Forvo licence.'
+        }
+    });
+
 });
