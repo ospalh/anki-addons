@@ -34,14 +34,14 @@ alt="The “Options for deck NN” window. The tab “General” has a line-edit
 “Language code”.">
 <figcaption>Change the code of the language you are learning here.</figcaption>
 </figure>
-This will open the <q>Options for NN</q> dialog. There, click on the
-<q>General</q> tab. On that sheet, change the language code in new input
+This will open the <q>Options for NN</q> dialog. Click on the
+<q>General</q> tab and change the <q>Audio download language code</q>.
 field.
 
 
 ## Adding deck options
 
-When learning different languages, arrange the notes in different
+When learning different languages, arrange the cards in different
 decks and add an option groups for each deck:
 
 As above, click on the gear and select <q>Options</q>. In the

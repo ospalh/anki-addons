@@ -59,11 +59,11 @@ Instead of changing an existing model by adding an
 still preferred for more complex models – existing basic notes can
 also be changed to the newly created audio models:
 
-* Sync. First with all other clients (other computers, mobile decices,
+* Sync. First with all other clients (other computers, mobile devices,
   AnkiWeb), then the local computer.
 * Open the card browser
 * On the left, click the model where you want to use audio
-* In the card list, select all cards (Strg+A), or just those cards you
+* In the card list, select all cards (Ctrl+A), or just those cards you
   want to use audio for
 * Trigger the browsers menu item <q>Edit/Change Note Type ...</q>
 * For <q>New note type:</q> select the <q>… with audio</q> type.

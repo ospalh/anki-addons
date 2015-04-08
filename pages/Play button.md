@@ -20,8 +20,8 @@ the pronunciation of a word, or just one example sentences.
 
 <span  class="clear" />
 <figure>
-<img src="images/browserhide.png" alt=" Part of the Anki review window.
-Text: みんなの日本語： に んぎょう.  Below part on the Anki card
+<img src="images/browserhide.png" alt="Part of the Anki review window.
+Text: みんなの日本語： にんぎょう.  Below part of the Anki card
 browser. One line highlighted. Text: 人形; Japanisch-De...; にんぎょう">
 <figcaption>The text <q lang="ja">みんなの日本語：</q> is shown on the card,
 but not in the browser.</figcaption>
