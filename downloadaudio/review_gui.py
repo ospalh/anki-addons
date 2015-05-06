@@ -21,15 +21,15 @@ choices what to do wit each:
 
 import os
 
-from PyQt4.QtGui import QButtonGroup, QDialog, QDialogButtonBox, QGridLayout, \
-    QIcon, QLabel, QPixmap, QPushButton
+from PyQt4.QtGui import QButtonGroup, QDialog, QDialogButtonBox, QFrame, \
+    QGridLayout, QIcon, QLabel, QPixmap, QPushButton, QScrollArea, \
+    QSizePolicy, QVBoxLayout
 from PyQt4.QtCore import SIGNAL, SLOT
 
 from aqt import mw
 from anki.lang import _
 from anki.sound import play, playFromText
 
-from .blacklist import add_black_hash
 from .download_entry import Action
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
@@ -126,48 +126,58 @@ that they are sorry, will add this soon &c., click on this.""")
         u"""Build the dialog box."""
         self.setWindowTitle(_(u'Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
-        layout = QGridLayout()
-        self.setLayout(layout)
+        outer_layout = QVBoxLayout()
+        self.setLayout(outer_layout)
         explanation = QLabel(self)
         if len(self.entries_list) > 1:
             explanation.setText(
                 _(u'Please select an action for each downloaded file:'))
         else:
             explanation.setText(_(u'Please select what to do with the file:'))
-        layout.addWidget(explanation, 0, 0, 1, self.num_columns)
+        outer_layout.addWidget(explanation)
+        scroll_area = QScrollArea()
+        scroll_area.setFrameStyle(QFrame.Plain)
+        inner_widget = QFrame(self)
+        inner_widget.setSizePolicy(
+            QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        layout = QGridLayout()
+        inner_widget.setLayout(layout)
+        scroll_area.setWidget(inner_widget)
+        scroll_area.setWidgetResizable(True)
+        outer_layout.addWidget(scroll_area)
         if not self.hide_text:
-            text_head_label = QLabel(_(u'<b>Source text</b>'), self)
-            layout.addWidget(text_head_label, 1, 0, 1, 2)
+            text_head_label = QLabel(_(u'<b>Source text</b>'), inner_widget)
+            layout.addWidget(text_head_label, 0, 0, 1, 2)
             text_head_label.setToolTip(self.text_help)
         else:
-            text_head_label = QLabel(_(u'<b>Source</b>'), self)
-            layout.addWidget(text_head_label, 1, 0)
+            text_head_label = QLabel(_(u'<b>Source</b>'), inner_widget)
+            layout.addWidget(text_head_label, 0, 0)
             text_head_label.setToolTip(self.text_hide_help)
-        play_head_label = QLabel(_(u'play'), self)
+        play_head_label = QLabel(_(u'play'), inner_widget)
         play_head_label.setToolTip(self.play_help)
-        layout.addWidget(play_head_label, 1, self.play_column)
+        layout.addWidget(play_head_label, 0, self.play_column)
         play_old_head_label = QLabel(_(u'play old'), self)
         if not self.hide_text:
             play_old_head_label.setToolTip(self.play_old_help)
         else:
             play_old_head_label.setToolTip(self.play_old_hide_help)
-        layout.addWidget(play_old_head_label, 1, self.play_old_column)
+        layout.addWidget(play_old_head_label, 0, self.play_old_column)
         add_head_label = QLabel(_(u'add'), self)
         add_head_label.setToolTip(self.add_help_text_long)
-        layout.addWidget(add_head_label, 1, self.add_column)
+        layout.addWidget(add_head_label, 0, self.add_column)
         keep_head_label = QLabel(_(u'keep'), self)
         keep_head_label.setToolTip(self.keep_help_text_long)
-        layout.addWidget(keep_head_label, 1, self.keep_column)
+        layout.addWidget(keep_head_label, 0, self.keep_column)
         delete_head_label = QLabel(_(u'delete'), self)
         delete_head_label.setToolTip(self.delete_help_text_long)
-        layout.addWidget(delete_head_label, 1, self.delete_column)
+        layout.addWidget(delete_head_label, 0, self.delete_column)
         if self.show_skull_and_bones:
             blacklist_head_label = QLabel(_(u'blacklist'), self)
             blacklist_head_label.setToolTip(self.blacklist_help_text_long)
-            layout.addWidget(blacklist_head_label, 1, self.blacklist_column)
+            layout.addWidget(blacklist_head_label, 0, self.blacklist_column)
         rule_label = QLabel('<hr>')
-        layout.addWidget(rule_label, 2, 0, 1, self.num_columns)
-        self.create_rows(layout)
+        layout.addWidget(rule_label, 1, 0, 1, self.num_columns)
+        self.create_rows(layout, inner_widget)
         dialog_buttons = QDialogButtonBox(self)
         dialog_buttons.addButton(QDialogButtonBox.Cancel)
         dialog_buttons.addButton(QDialogButtonBox.Ok)
@@ -175,35 +185,33 @@ that they are sorry, will add this soon &c., click on this.""")
             dialog_buttons, SIGNAL("accepted()"), self, SLOT("accept()"))
         self.connect(
             dialog_buttons, SIGNAL("rejected()"), self, SLOT("reject()"))
-        layout.addWidget(
-            dialog_buttons, len(self.buttons_groups) + 3, 0, 1,
-            self.num_columns)
+        outer_layout.addWidget(dialog_buttons)
 
-    def create_rows(self, layout):
+    def create_rows(self, layout, sarea):
         u"""Build the rows of the dialog box"""
-        play_button_group = QButtonGroup(self)
-        old_play_button_group = QButtonGroup(self)
-        for num, entry in enumerate(self.entries_list, 3):
+        play_button_group = QButtonGroup(sarea)
+        old_play_button_group = QButtonGroup(sarea)
+        for num, entry in enumerate(self.entries_list, 2):
             tt_text = self.build_text_help_label(entry)
-            ico_label = QLabel('', self)
+            ico_label = QLabel('', sarea)
             ico_label.setToolTip(tt_text)
             if entry.icon:
                 ico_label.setPixmap(QPixmap.fromImage(entry.icon))
             layout.addWidget(ico_label, num, 0)
-            tt_label = QLabel(entry.display_word, self)
+            tt_label = QLabel(entry.display_word, sarea)
             tt_label.setToolTip(tt_text)
             layout.addWidget(tt_label, num, 1)
             if self.hide_text:
                 tt_label.hide()
             # Play button.
-            t_play_button = QPushButton(self)
-            play_button_group.addButton(t_play_button, num - 3)
+            t_play_button = QPushButton(sarea)
+            play_button_group.addButton(t_play_button, num-2)
             t_play_button.setToolTip(self.play_help)
             t_play_button.setIcon(QIcon(os.path.join(icons_dir, 'play.png')))
             layout.addWidget(t_play_button, num, self.play_column)
             if self.note[entry.audio_field_name]:
-                t_play_old_button = QPushButton(self)
-                old_play_button_group.addButton(t_play_old_button, num - 3)
+                t_play_old_button = QPushButton(sarea)
+                old_play_button_group.addButton(t_play_old_button, num-2)
                 t_play_old_button.setIcon(
                     QIcon(os.path.join(icons_dir, 'play.png')))
                 if not self.hide_text:
@@ -213,28 +221,28 @@ that they are sorry, will add this soon &c., click on this.""")
                     t_play_old_button.setToolTip(self.play_old_help_short)
                 layout.addWidget(t_play_old_button, num, self.play_old_column)
             else:
-                dummy_label = QLabel('', self)
+                dummy_label = QLabel('', sarea)
                 dummy_label.setToolTip(self.play_old_empty_line_help)
                 layout.addWidget(dummy_label, num, self.play_old_column)
             # The group where we later look what to do:
-            t_button_group = QButtonGroup(self)
+            t_button_group = QButtonGroup(sarea)
             t_button_group.setExclusive(True)
             # Now the four buttons
-            t_add_button = QPushButton(self)
+            t_add_button = QPushButton(sarea)
             t_add_button.setCheckable(True)
             t_add_button.setFlat(True)
             t_add_button.setToolTip(self.add_help_text_short)
             t_add_button.setIcon(QIcon(os.path.join(icons_dir, 'add.png')))
             layout.addWidget(t_add_button, num, self.add_column)
             t_button_group.addButton(t_add_button, Action.Add)
-            t_keep_button = QPushButton(self)
+            t_keep_button = QPushButton(sarea)
             t_keep_button.setCheckable(True)
             t_keep_button.setFlat(True)
             t_keep_button.setToolTip(self.keep_help_text_short)
             t_keep_button.setIcon(QIcon(os.path.join(icons_dir, 'keep.png')))
             layout.addWidget(t_keep_button, num, self.keep_column)
             t_button_group.addButton(t_keep_button, Action.Keep)
-            t_delete_button = QPushButton(self)
+            t_delete_button = QPushButton(sarea)
             t_delete_button.setCheckable(True)
             t_delete_button.setFlat(True)
             t_delete_button.setToolTip(self.delete_help_text_short)
@@ -242,7 +250,7 @@ that they are sorry, will add this soon &c., click on this.""")
                 QIcon(os.path.join(icons_dir, 'delete.png')))
             layout.addWidget(t_delete_button, num, self.delete_column)
             t_button_group.addButton(t_delete_button,  Action.Delete)
-            t_blacklist_button = QPushButton(self)
+            t_blacklist_button = QPushButton(sarea)
             t_blacklist_button.setCheckable(True)
             t_blacklist_button.setFlat(True)
             t_blacklist_button.setToolTip(self.blacklist_help_text_short)
@@ -253,7 +261,7 @@ that they are sorry, will add this soon &c., click on this.""")
                     t_blacklist_button, num, self.blacklist_column)
             else:
                 t_blacklist_button.hide()
-                dummy_label_bl = QLabel('', self)
+                dummy_label_bl = QLabel('', sarea)
                 dummy_label_bl.setToolTip(self.blacklist_empty_line_help)
                 layout.addWidget(dummy_label_bl, num, self.blacklist_column)
             t_button_group.button(entry.action).setChecked(True)
