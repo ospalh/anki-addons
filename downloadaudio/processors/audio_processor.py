@@ -6,13 +6,21 @@
 # http://www.gnu.org/copyleft/agpl.html
 
 """
-Move a file to the Anki2 media folder, processing it on the way when
-possible.
+Process an audio file.
 """
 
-import shutil
 
-from ..exists import free_media_name
+load_functions = {
+    'mp3': AudioSegment.from_mp3, 'ogg': AudioSegment.from_ogg,
+    'wav': AudioSegment.from_wav}
+
+output_format = 'flac'
+output_suffix = '.' + output_format
+silence_threshold = -30
+# Use lower values like -40, -50 when stuff gets cut off
+minimum_silence_length = 150
+# Similarly, try longer values here if the silencing doesn’t work well
+fade_length = 42  # Very quick fade in and out. Mostly to avoid clicks.
 
 
 class AudioProcessor(object):
@@ -20,37 +28,41 @@ class AudioProcessor(object):
     # In the past we kept track of whether the processor was
     # “useful”. That ment that the downloaders downloaded to
     # different places depending on which processor we had. Maybe
-    # useful, but somewhat Byzantine. Get rid of that extra
-    # complexit. Now the downloaders download to temp files and
-    # the processor moves the file, changed or not. So nothing
-    # left to do → no __init__
+    # useful, but somewhat Byzantine.
+    #
+    # That was gone temporarily. Now we do something similar
+    # again. Check __init__ and DownloadEntry.process. That checks if
+    # there *is* a processor, rather than ask if it is useful.
 
-    def process_and_move(self, dl_entry):
+    def process(self, dl_entry):
+        """Make new audio file in the media directory.
+
+        Take the audio file pointed to by dl_entry, normalize, remove silence,
+        convert to output_format.
+
         """
-        Make a sound file in the Anki media directory.
-
-        Make a sound file with the sound information in in_name in the
-        Anki media directory. The new name should use base_name as the
-        base of the new file name.
-
-        For typical installations, the file
-        is simply moved.
-
-        When pysox and pydub are installed, the file is normalised and
-        changed to the format set in the processor (flac).
-        """
-        raise NotImplementedError("Use a class derived from this.")
-
-    def unmunge_to_mediafile(self, in_name, base_name, suffix):
-        u"""
-        Move the data to the media folder.
-
-        Determine a free media name and move the data there from the
-        tempfile.
-        """
-        # N.B.: We can’t use the DownloadEntry in here because the
-        # normalizing processor may move the temp file because pysox
-        # can’t handle mp3 files. (Another reason to get rid of pysox)
-        media_path, media_file_name = free_media_name(base_name, suffix)
-        shutil.move(in_name, media_path)
-        return media_file_name
+        input_format = dl_entry.file_extension.lstrip('.')
+        in_name = dl_entry.file_path
+        try:
+            loader = load_functions[input_format]
+        except KeyError:
+            loader = lambda file: AudioSegment.from_file(
+                file=file, format=input_format)
+        segment = loader(in_name)
+        # First normalize
+        segment = segment.normalize()
+        # Try to remove silence
+        loud_pos = detect_nonsilent(
+            segment, min_silence_len=minimum_silence_length,
+            silence_thresh=silence_threshold)
+        if len(loud_segment_positions) == 1 and  loud_pos[0][0] > 0 and \
+               loud_pos[0][1] < len(segment):
+            segment = segment[loud_pos[0][0], loud_pos[0][1]]
+        segment = segment.fade_in(fade_length).fade_out(fade_length)
+        # Now write
+        tof = tempfile.NamedTemporaryFile(
+            delete=False, suffix=output_suffix)
+        temp_out_file_name = tof.name
+        tof.close()
+        segment.export(temp_out_file_name, output_format)
+        return temp_file_name, output_suffix
