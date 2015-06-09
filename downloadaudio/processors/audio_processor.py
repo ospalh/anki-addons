@@ -10,6 +10,10 @@ Process an audio file.
 """
 
 
+from pydub import AudioSegment
+from pydub.silence import detect_nonsilent
+import tempfile
+
 load_functions = {
     'mp3': AudioSegment.from_mp3, 'ogg': AudioSegment.from_ogg,
     'wav': AudioSegment.from_wav}
@@ -42,7 +46,6 @@ class AudioProcessor(object):
 
         Take the audio file pointed to by dl_entry, normalize, remove silence,
         convert to output_format.
-
         """
         input_format = dl_entry.file_extension.lstrip('.')
         in_name = dl_entry.file_path
@@ -62,9 +65,9 @@ class AudioProcessor(object):
         fade_out_length = rapid_fade_length
         if len(loud_pos) == 1:
             loud_p = loud_pos[0]
-            if loud_p[0] > fade_length:
+            if loud_p[0] > silence_fade_length:
                 fade_in_length = silence_fade_length
-            if loud_p[1] < len(segment) - fade_length:
+            if loud_p[1] < len(segment) - silence_fade_length:
                 fade_out_length = silence_fade_length
             if loud_p[0] > 0 or loud_p[1] < len(segment):
                 segment = segment[loud_pos[0][0], loud_pos[0][1]]
@@ -75,4 +78,4 @@ class AudioProcessor(object):
         temp_out_file_name = tof.name
         tof.close()
         segment.export(temp_out_file_name, output_format)
-        return temp_file_name, output_suffix
+        return temp_out_file_name, output_suffix

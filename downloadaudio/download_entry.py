@@ -10,7 +10,7 @@ import os
 
 from .blacklist import add_black_hash
 from .processors import processor
-from .mediafile_utlis import unmunge_to_mediafile
+from .mediafile_utils import unmunge_to_mediafile
 
 
 class DownloadEntry(object):
