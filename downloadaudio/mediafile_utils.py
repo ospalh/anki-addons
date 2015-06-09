@@ -14,6 +14,7 @@ Helper function to deal with file names.
 
 import os
 import re
+import shutil
 import unicodedata
 
 from aqt import mw
