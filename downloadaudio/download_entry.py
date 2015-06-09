@@ -10,6 +10,7 @@ import os
 
 from .blacklist import add_black_hash
 from .processors import processor
+from .mediafile_utlis import unmunge_to_mediafile
 
 
 class DownloadEntry(object):
@@ -46,6 +47,18 @@ class DownloadEntry(object):
         # old show_skull_and_bones. We show that button when this
         # has an interesting value. And that is set in JpodDownleadEntry
 
+    def process(self):
+        u"""Normalize &c. the audio file, if possible
+
+        When we have an audio processor, process the file
+        (i.e. normalize, remove silence, convert to preferred format)
+        and update self.  """
+        if processor:
+            new_fp, new_bn, new_sffx = processor.process(self)
+            self.file_path = new_fp
+            self.base_name = new_bn
+            self.file_extension = new_sffx
+
     def dispatch(self, note):
         u"""Do what should be done with the downloaded file
 
@@ -57,7 +70,7 @@ class DownloadEntry(object):
         * Delete it if we want just delete or blacklist it.
         * Blacklist the hash if that’s what we want."""
         if self.action == Action.Add or self.action == Action.Keep:
-            media_fn = processor.process_and_move(self)
+            media_fn = unmunge_to_mediafile(self)
             if self.action == Action.Add:
                 note[self.audio_field_name] += '[sound:' + media_fn + ']'
         if self.action == Action.Delete or self.action == Action.Blacklist:
