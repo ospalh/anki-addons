@@ -52,11 +52,11 @@ class DownloadEntry(object):
 
         When we have an audio processor, process the file
         (i.e. normalize, remove silence, convert to preferred format)
-        and update self.  """
+        and update self.
+        """
         if processor:
-            new_fp, new_bn, new_sffx = processor.process(self)
+            new_fp, new_sffx = processor.process(self)
             self.file_path = new_fp
-            self.base_name = new_bn
             self.file_extension = new_sffx
 
     def dispatch(self, note):
