@@ -79,9 +79,10 @@ class ForvoDownloader(AudioDownloader):
                 # I guess the try is not really necessary. Anyway.
             except (ValueError, KeyError):
                 continue
-            self.downloads_list.append(
-                DownloadEntry(
-                    self.field_data, file_path, extras, self.site_icon))
+            entry = DownloadEntry(
+                self.field_data, file_path, extras, self.site_icon)
+            entry.file_extension = self.file_extension
+            self.downloads_list.append(entry)
         # No clean-up
 
     def query_url(self):
