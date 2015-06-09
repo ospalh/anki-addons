@@ -55,9 +55,13 @@ class DownloadEntry(object):
         and update self.
         """
         if processor:
-            new_fp, new_sffx = processor.process(self)
-            self.file_path = new_fp
-            self.file_extension = new_sffx
+            try:
+                new_fp, new_sffx = processor.process(self)
+            except pydub.exceptions.CouldntDecodeError:
+                self.action = Delete
+            else:
+                self.file_path = new_fp
+                self.file_extension = new_sffx
 
     def dispatch(self, note):
         u"""Do what should be done with the downloaded file

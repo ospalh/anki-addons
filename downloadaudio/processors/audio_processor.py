@@ -12,6 +12,7 @@ Process an audio file.
 
 from pydub import AudioSegment
 from pydub.silence import detect_nonsilent
+import os
 import tempfile
 
 load_functions = {
@@ -48,15 +49,14 @@ class AudioProcessor(object):
         convert to output_format.
         """
         input_format = dl_entry.file_extension.lstrip('.')
-        in_name = dl_entry.file_path
         try:
             loader = load_functions[input_format]
         except KeyError:
             loader = lambda file: AudioSegment.from_file(
                 file=file, format=input_format)
-        segment = loader(in_name)
-        # First normalize
-        segment = segment.normalize()
+        segment = loader(dl_entry.file_path) # This
+        # sometimes raised a pydub.exceptions.CouldntDecodeError
+        segment = segment.normalize()  # First normalize
         # Try to remove silence
         loud_pos = detect_nonsilent(
             segment, min_silence_len=minimum_silence_length,
@@ -74,8 +74,9 @@ class AudioProcessor(object):
         segment = segment.fade_in(fade_in_length).fade_out(fade_out_length)
         # Now write
         tof = tempfile.NamedTemporaryFile(
-            delete=False, suffix=output_suffix)
+            delete=False, suffix=output_suffix, prefix=u'anki_audio_')
         temp_out_file_name = tof.name
         tof.close()
         segment.export(temp_out_file_name, output_format)
+        os.unlink(dl_entry.file_path)  # Get rid of unprocessed version
         return temp_out_file_name, output_suffix
