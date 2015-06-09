@@ -20,7 +20,10 @@ silence_threshold = -30
 # Use lower values like -40, -50 when stuff gets cut off
 minimum_silence_length = 150
 # Similarly, try longer values here if the silencing doesn’t work well
-fade_length = 42  # Very quick fade in and out. Mostly to avoid clicks.
+silence_fade_length = 100  # Quick fade in and out where we found silence
+rapid_fade_length = 20
+# Rapid fade in and at the beginning or end. Mostly to avoid the click
+# of a DC offset.
 
 
 class AudioProcessor(object):
@@ -55,10 +58,17 @@ class AudioProcessor(object):
         loud_pos = detect_nonsilent(
             segment, min_silence_len=minimum_silence_length,
             silence_thresh=silence_threshold)
-        if len(loud_segment_positions) == 1 and  loud_pos[0][0] > 0 and \
-               loud_pos[0][1] < len(segment):
-            segment = segment[loud_pos[0][0], loud_pos[0][1]]
-        segment = segment.fade_in(fade_length).fade_out(fade_length)
+        fade_in_length = rapid_fade_length
+        fade_out_length = rapid_fade_length
+        if len(loud_pos) == 1:
+            loud_p = loud_pos[0]
+            if loud_p[0] > fade_length:
+                fade_in_length = silence_fade_length
+            if loud_p[1] < len(segment) - fade_length:
+                fade_out_length = silence_fade_length
+            if loud_p[0] > 0 or loud_p[1] < len(segment):
+                segment = segment[loud_pos[0][0], loud_pos[0][1]]
+        segment = segment.fade_in(fade_in_length).fade_out(fade_out_length)
         # Now write
         tof = tempfile.NamedTemporaryFile(
             delete=False, suffix=output_suffix)
