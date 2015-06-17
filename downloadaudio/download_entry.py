@@ -12,6 +12,10 @@ from .blacklist import add_black_hash
 from .processors import processor
 from .mediafile_utils import unmunge_to_mediafile
 
+if processor:
+    import pydub
+    # See processors/__init__.py. We try the import there. If we have
+    # a processor, this import should work.
 
 class DownloadEntry(object):
     u"""Data about a single file downloaded by a downloader"""
