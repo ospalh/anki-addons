@@ -62,7 +62,7 @@ class DownloadEntry(object):
             try:
                 new_fp, new_sffx = processor.process(self)
             except pydub.exceptions.CouldntDecodeError:
-                self.action = Delete
+                self.action = Action.Delete
             else:
                 self.file_path = new_fp
                 self.file_extension = new_sffx
