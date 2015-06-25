@@ -70,7 +70,7 @@ class AudioProcessor(object):
             if loud_p[1] < len(segment) - silence_fade_length:
                 fade_out_length = silence_fade_length
             if loud_p[0] > 0 or loud_p[1] < len(segment):
-                segment = segment[loud_pos[0][0], loud_pos[0][1]]
+                segment = segment[loud_p[0] : loud_p[1]]
         segment = segment.fade_in(fade_in_length).fade_out(fade_out_length)
         # Now write
         tof = tempfile.NamedTemporaryFile(
