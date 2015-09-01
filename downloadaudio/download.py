@@ -76,8 +76,9 @@ def do_download(note, field_data_list, language, hide_text=False):
                 dloader.download_files(field_data)
             except:
                 #  # Uncomment this raise while testing a new
-                #  # downloaders.  Also comment out all the others in the
-                #  # downloaders list in downloaders.__init__
+                #  # downloaders.  Also use the “For testing”
+                #  # downloaders list with your downloader in
+                #  # downloaders.__init__
                 # raise
                 continue
             retrieved_entries += dloader.downloads_list
