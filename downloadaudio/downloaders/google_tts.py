@@ -61,5 +61,6 @@ class GooglettsDownloader(AudioDownloader):
 
     def build_url(self, source):
         u"""Return a string that can be used as the url."""
-        qdict = dict(tl=self.language, q=source.encode('utf-8'))
+        qdict = dict(
+            tl=self.language, q=source.encode('utf-8'), ie='utf-8', client='t')
         return self.url + urllib.urlencode(qdict)
