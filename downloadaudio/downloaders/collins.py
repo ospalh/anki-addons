@@ -54,15 +54,12 @@ class CollinsDownloader(AudioDownloader):
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
             self.url + urllib.quote(lword.encode('utf-8')))
-
         html_tag_with_audio_url = word_soup.find(
             name='a', attrs={'class': 'hwd_sound sound audio_play_button'})
         if not html_tag_with_audio_url:
             return
-
         audio_url = self.base_url + html_tag_with_audio_url['data-src-mp3']
         self.maybe_get_icon()
-
         word_path = self.get_tempfile_from_url(audio_url)
         entry = DownloadEntry(
             field_data, word_path, self.extras, self.site_icon)
