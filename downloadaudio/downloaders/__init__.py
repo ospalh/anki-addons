@@ -58,7 +58,7 @@ downloaders = [
 # the order, or which lines get the “#”, to taste
 
 
-# # For testing. See also the “Uncomment this …” bit in ..downloaders
+# # For testing. See also the “Uncomment this …” bit in ..download
 # downloaders = [
 #     DictNNDownloader(),
 # ]
