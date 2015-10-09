@@ -17,6 +17,7 @@ import urllib
 
 from .downloader import AudioDownloader, uniqify_list
 from ..download_entry import Action, DownloadEntry
+import aqt.utils
 
 
 class CollinsDownloader(AudioDownloader):
@@ -53,40 +54,17 @@ class CollinsDownloader(AudioDownloader):
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
             self.url + urllib.quote(lword.encode('utf-8')))
-        # The audio clips are stored as img tags with class sound
-        word_audio_img = word_soup.findAll(
-            name='img', attrs={'class': 'sound'})
-        link_list = []
-        for wai in word_audio_img:
-            # Filter out a number of wrong (i.e. other language)
-            # links.
-            try:
-                if self.lang_code not in wai['onclick']:
-                    # Wrong language
-                    continue
-                if not (wai['title'] == "Pronunciation for "
-                        or wai['title'].lower().endswith(lword)):
-                    continue
-            except KeyError:
-                # Not an onclick element after all. Or no title with
-                # the word. Surely not what we want.
-                continue
-            # Looks good so far.
-            link_list.append(self.get_link(wai['onclick']))
-        if not link_list:
-            return
-        link_list = uniqify_list(link_list)
-        self.maybe_get_icon()
-        for lnk in link_list:
-            word_path = self.get_tempfile_from_url(lnk)
-            entry = DownloadEntry(
-                field_data, word_path, self.extras, self.site_icon)
-            entry.action = self.action
-            self.downloads_list.append(entry)
 
-    def get_link(self, onclick_string):
-        # Wrote these bits for ooad
-        onclick_string = onclick_string.lstrip('playSoundFromFlash(')
-        onclick_string = onclick_string.rstrip(')')
-        audio_url = onclick_string.split(', ')[1]
-        return self.base_url + audio_url.lstrip("'").rstrip("'")
+        html_tag_with_audio_url = word_soup.find(
+            name='a', attrs={'class': 'hwd_sound sound audio_play_button'})
+        if not html_tag_with_audio_url:
+            return
+
+        audio_url = self.base_url + html_tag_with_audio_url['data-src-mp3']
+        self.maybe_get_icon()
+
+        word_path = self.get_tempfile_from_url(audio_url)
+        entry = DownloadEntry(
+            field_data, word_path, self.extras, self.site_icon)
+        entry.action = self.action
+        self.downloads_list.append(entry)
