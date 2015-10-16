@@ -116,9 +116,7 @@ These audio files come from
 [Department of Informatics](http://www.in.tum.de/en.html) of the
 [<span class="qtbase tu">TU</span> München](http://www.tum.de/en/homepage/).
 They offer several German↔NN dictionaries, with audio files for
-English, French, German and Spanish. I could not find spoken words for
-other languages, but they may be added in the future, when they
-appear.
+English, French, German and Spanish. Some other pronunciations at the site are TTS, and are not downloaded.
 
 
 ## Lexin

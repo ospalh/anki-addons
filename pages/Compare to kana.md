@@ -2,7 +2,7 @@ title: Compare to kana
 id: comparekana
 main_file: compare_to_kana.py
 type: addon
-date: 2013-06-16
+date: 2015-10-16
 status: working
 status_color: green
 status_text_color: white
@@ -18,7 +18,7 @@ ankiweb_id: 4091556602
 
 A typical model for learning Japanese has a field called <q>Reading</q>. In
 that field, the reading (kana) is stored *along with the kanji*. For
-example, in a fact defining the Japanese word for citizens, the
+example, in a note defining the Japanese word for citizens, the
 reading field would look like <q lang="ja">住民[じゃうみん]</q>. Like this, the
 standard templates `{{furigana:Reading}}` and `{{kana:Reading}}` work.
 

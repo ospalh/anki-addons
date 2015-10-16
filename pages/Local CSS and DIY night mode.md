@@ -4,7 +4,7 @@ id: localcss
 main_file: local_css_and_diy_night_mode.py
 status: working
 type: addon
-date: 2013-06-14
+date: 2015-10-16
 status_color: green
 status_text_color: white
 abstract: "Add styling from a local CSS file. With this, the card
@@ -188,9 +188,4 @@ profile.
 
 ## AnkiDroid
 
-People that like to build their own AnkiDroid version can take a look
-at my
-[patched branch](https://github.com/ospalh/Anki-Android/tree/develop-ospalh-special)
-where one of the changes is a re-implementation of extra classes for
-the night mode mechanism. This isn’t a specific branch any more. You
-have to look through the commits.
+When the class `night_mode` instead to `night` is used, and when the card styling uses this `night_mode` class, the day/night mode switch behavior of Anki desktop should match that of AnkiDroid.

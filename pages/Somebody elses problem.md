@@ -2,7 +2,7 @@ title: Somebody else’s problem
 id: sep
 main_file: somebody_elses_problem.py
 type: addon
-date: 2013-06-07
+date: 2015-10-16
 status: working
 status_color: green
 status_text_color: white
@@ -44,9 +44,6 @@ device to save FAT
 which are in short supply if you have a collection with many files
 with long names.
 
-<blockquote class="nb">
-Due to a <a
-href="https://code.google.com/p/ankidroid/issues/detail?id=1458">problem
-in AnkiDroid</a>, you should make sure that the files copied to the
-Android device appear first on the cards.
-</blockquote>
+<blockquote class="nb">Due to a problem in some versions of AnkiDroid
+(possibly fixed by now), you should make sure that the files copied to
+the Android device appear first on the cards.</blockquote>

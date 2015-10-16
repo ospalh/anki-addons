@@ -3,7 +3,7 @@ id: dlaudio
 main_file: download_audio.py
 status: working
 type: addon
-date: 2015-02-11
+date: 2015-10-16
 status_color: green
 status_text_color: white
 abstract: "Automatically download audio from talking dictionaries or
@@ -54,7 +54,6 @@ A list of audio codes can – unsurprisingly – be found at
 
 
 ## Setup – Models
-
 
 Use the [models](Audio%20models.html) the add-on brings along can be
 used for simple cards and new material.
@@ -277,15 +276,14 @@ The standard installation saves the files as they are received, which
 works well enough. Nothing more is needed.
 
 But the add-on contains code to do some simple audio processing,
-normalizing the files and changing the output format. This code is not
-used by default, as it requires two extra Python packages,
-[PyDub](http://pydub.com/) and
-[pysox](http://pypi.python.org/pypi/pysox/0.3.6.alpha). Pysox has
-still alpha status, and installing it isn’t always easy, either.
-Hackers that do manage that may then want to take a look at the
-content of the
-<q>[`downloadaudio/processors`](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/processors)</q>
-directory.
+normalizing the files, clipping silence at the beginning and the end, and
+changing the output format. This code is not used by default, as it
+requires an extra Python packages, [PyDub](http://pydub.com/). That
+[depends](https://github.com/jiaaro/pydub#dependencies) on
+[ffmpeg](https://www.ffmpeg.org/). If ffmpeg is there, pydub can usually
+be installed via [pip](https://pypi.python.org/pypi/pip).  Hackers
+that manage to do that may then want to take a look at the
+[processors](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/processors/audio_processor.py).
 
 ### More ideas
 
