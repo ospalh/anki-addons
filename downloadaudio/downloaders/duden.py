@@ -61,12 +61,11 @@ class DudenDownloader(AudioDownloader):
         m_word = munge_word(field_data.word)
         self.maybe_get_icon()
         word_soup = self.get_soup_from_url(self.url + m_word)
-        blank_links = word_soup.findAll(name='a', target="_blank")
+        blank_links = word_soup.findAll(name='a', target="_blank", title=True)
         for link in blank_links:
             # I expect no more than one result. So we don't catch
             # anything here. When something goes wrong with the first
-            # word we don't try to get any later words. Also, when a
-            # link does not contain a title, we will fail.
+            # word we don't try to get any later words.
             if self.good_link(link):
                 extras = dict(Source="Duden")
                 try:
