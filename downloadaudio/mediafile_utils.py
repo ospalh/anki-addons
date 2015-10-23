@@ -14,6 +14,7 @@ Helper function to deal with file names.
 
 import os
 import re
+import shutil
 import unicodedata
 
 from aqt import mw
@@ -68,3 +69,16 @@ def exists_lc(path, name):
             return True
     # After the loop, none found.
     return False
+
+
+def unmunge_to_mediafile(dl_entry):
+    u"""
+    Move the data to the media folder.
+
+    Determine a free media name and move the data there from the
+    tempfile.
+    """
+    media_path, media_file_name = free_media_name(
+        dl_entry.base_name, dl_entry.file_extension)
+    shutil.move(dl_entry.file_path, media_path)
+    return media_file_name

@@ -1,32 +1,20 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–13 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
 u"""
-Two classes to deal with audio files.
-
 One just moves files and isn’t used. The other does simple audio
 processing and nmoves the files.
 """
 
-preferred_format = ".flac"
-"""Ignored on normal installs."""
-
-
 try:
-    import pysox
-    import pydub
+    from pydub.silence import detect_nonsilent
+    # Look for a reasonable new pydub
 except ImportError:
-    have_pysox = False
+    processor = None
 else:
-    have_pysox = True
-
-if have_pysox:
-    from .normalise import AudioNormaliser
-    processor = AudioNormaliser()
-else:
-    from .move import AudioMover
-    processor = AudioMover()
+    from .audio_processor import AudioProcessor
+    processor = AudioProcessor()

@@ -76,13 +76,17 @@ def do_download(note, field_data_list, language, hide_text=False):
                 dloader.download_files(field_data)
             except:
                 #  # Uncomment this raise while testing a new
-                #  # downloaders.  Also comment out all the others in the
-                #  # downloaders list in downloaders.__init__
+                #  # downloaders.  Also use the “For testing”
+                #  # downloaders list with your downloader in
+                #  # downloaders.__init__
                 # raise
                 continue
             retrieved_entries += dloader.downloads_list
     # Significantly changed the logic. Put all entries in one
     # list, do stuff with that list of DownloadEntries.
+    for entry in retrieved_entries:
+        # Do the processing before the reviewing now.
+        entry.process()
     try:
         retrieved_entries = review_entries(note, retrieved_entries, hide_text)
         # Now just the dialog, which sets the fields in the entries
