@@ -22,6 +22,8 @@ class IslexDownloader(AudioDownloader):
     def __init__(self):
         AudioDownloader.__init__(self)
         self.url = 'http://islex.is/'
+        self.icon_url = 'http://islex.is/'
+        self.file_extension = u'.ogg'
 
     def download_files(self, field_data):
         self.downloads_list = []
