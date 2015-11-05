@@ -71,7 +71,18 @@ class IslexDownloader(AudioDownloader):
             for a in links:
                 try:
                     word_soup = self.get_soup_from_url(self.url + a['href'])
-                    href_list.append(self.url + word_soup.find('audio').find('source')['src'])
                 except (AttributeError, KeyError):  # What else could go wrong?
-                    pass
+                    continue
+                href_list.append(self.url + word_soup.find('audio').find('source')['src'])
 
+        if not href_list:
+            return
+
+        self.maybe_get_icon()
+
+        for url in href_list:
+            extras = {'Source': 'Islex'}
+            word_path = self.get_tempfile_from_url(url)
+            self.downloads_list.append(
+                DownloadEntry(
+                    field_data, word_path, extras, self.site_icon))
