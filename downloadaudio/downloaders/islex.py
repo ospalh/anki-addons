@@ -27,11 +27,16 @@ class IslexDownloader(AudioDownloader):
 
     def download_files(self, field_data):
         self.downloads_list = []
-        # Don't ask what the flags do. Got them by sniffing the POST request
-        # sent by the advanced search on Islex with the desired settings.
+
         if not self.language.lower().startswith('is'):
             return
+        if field_data.split:
+            return
+        if not field_data.word:
+            return
 
+        # Don't ask what the flags do. Got them by sniffing the POST request
+        # sent by the advanced search on Islex with the desired settings.
         qdict = {'finna': 1,
                  'dict': 'SE',
                  'erflokin': 1,
