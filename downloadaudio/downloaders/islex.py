@@ -35,7 +35,7 @@ class IslexDownloader(AudioDownloader):
                  'erflokin': 1,
                  'nlo': 1,
                  'fuzz': 1,
-                 'samleit': field_data}
+                 'samleit': field_data.encode('utf-8')}
 
         # Get soup from search
         soup = self.get_soup_from_url(self.url + '?' + urllib.urlencode(qdict))
