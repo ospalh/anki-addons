@@ -12,7 +12,8 @@ Download pronunciations for Icelandic from islex.is
 
 import urllib
 
-from downloader import AudioDownloader # Change to .downloader when testing in Anki
+from .downloader import AudioDownloader
+from ..download_entry import DownloadEntry
 
 
 class IslexDownloader(AudioDownloader):
