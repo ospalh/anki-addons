@@ -33,6 +33,7 @@ from .macmillan_british import MacmillanBritishDownloader
 from .mw import MerriamWebsterDownloader
 from .oald import OaldDownloader
 from .wiktionary import WiktionaryDownloader
+from .islex import IslexDownloader
 
 
 downloaders = [
@@ -46,6 +47,7 @@ downloaders = [
     OaldDownloader(),
     DudenDownloader(),
     HowJSayDownloader(),
+    IslexDownloader()
     CollinsFrenchDownloader(),
     CollinsGermanDownloader(),
     CollinsItalianDownloader(),
