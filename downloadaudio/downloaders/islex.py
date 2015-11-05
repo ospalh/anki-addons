@@ -11,3 +11,12 @@ Download pronunciations for Icelandic from islex.is
 '''
 
 
+from downloader import AudioDownloader # Change to .downloader when testing in Anki
+
+
+class IslexDownloader(AudioDownloader):
+    """Download audio from Islex"""
+
+    def __init__(self):
+        AudioDownloader.__init__(self)
+        self.url = 'http://islex.is/'
