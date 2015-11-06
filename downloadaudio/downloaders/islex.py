@@ -38,14 +38,25 @@ class IslexDownloader(AudioDownloader):
         # work, but not all of them may be needed.
         qdict = {'finna': 1, 'dict': 'SE', 'erflokin': 1, 'nlo': 1, 'fuzz': 1,
                  'samleit': field_data.word.encode('utf-8')}
-        soup = self.get_soup_from_url(self.url + '?' + urllib.urlencode(qdict))
+        soup = self.get_soup_from_url(self.url + 'se?' + urllib.urlencode(qdict))
         href_list = []
         if soup.findAll(attrs=dict(id='ord')):
             # When we have a table tag with id="ord" we (probably)
             # have just one word. Use that.
-            href_list.append(
-                self.url + soup.find('audio').find(
-                    'source', type="audio/mp3")['src'])
+            word = {'url': self.url + soup.find('audio').find(
+                           'source', type="audio/mp3")['src']}
+            # Get the spelling and gender, these are not essential
+            # so if something goes wrong, just let it pass.
+            try:
+                word['spelling'] = soup.find('table', id='flettuhaus').find(
+                                   'span', {'class': 'fletta'}).getText()
+                # This will raise exception for non-nouns
+                word['gender'] = soup.find('table', id='flettuhaus').find(
+                                 'span', {'class': 'ofl'}).getText()
+            except:
+                pass
+            href_list.append(word)
+
         else:
             # More than one word. Or 0 words.
             links = soup.find(
@@ -56,12 +67,29 @@ class IslexDownloader(AudioDownloader):
                     word_soup = self.get_soup_from_url(self.url + a['href'])
                 except (AttributeError, KeyError):  # What else could go wrong?
                     continue
-                href_list.append(
-                    self.url + word_soup.find('audio').find(
-                        'source', type="audio/mp3")['src'])
+
+                word = {'url': self.url + word_soup.find('audio').find(
+                               'source', type="audio/mp3")['src']}
+                # Get the spelling and gender, these are not essential
+                # so if something goes wrong, just let it pass.
+                try:
+                    word['spelling'] = word_soup.find('table', id='flettuhaus').find(
+                                       'span', {'class': 'fletta'}).getText()
+                    # This will raise exception for non-nouns
+                    word['gender'] = word_soup.find('table', id='flettuhaus').find(
+                                     'span', {'class': 'ofl'}).getText()
+                except:
+                    pass
+                href_list.append(word)
         if href_list:
             self.maybe_get_icon()
-        for url in href_list:
-            self.downloads_list.append(DownloadEntry(
-                field_data, self.get_tempfile_from_url(url),
-                dict(Source='Islex'), self.site_icon))
+        for word in href_list:
+            extras = {'Source': 'Islex'}
+            if 'gender' in word:
+                extras['gender'] = word['gender']
+            entry = DownloadEntry(
+                field_data, self.get_tempfile_from_url(word['url']),
+                extras, self.site_icon)
+            if 'spelling' in word:
+                entry.word = word['spelling']
+            self.downloads_list.append(entry)
