@@ -25,6 +25,7 @@ class IslexDownloader(AudioDownloader):
         self.url = 'http://islex.is/'
         self.icon_url = 'http://islex.is/'
         self.file_extension = u'.mp3'
+        self.field_data = None
 
     def download_files(self, field_data):
         self.downloads_list = []
@@ -34,28 +35,17 @@ class IslexDownloader(AudioDownloader):
             return
         if not field_data.word:
             return
+        self.field_data = field_data
         # These flags were used by an advanced search on Islex. They
         # work, but not all of them may be needed.
         qdict = {'finna': 1, 'dict': 'SE', 'erflokin': 1, 'nlo': 1, 'fuzz': 1,
                  'samleit': field_data.word.encode('utf-8')}
         soup = self.get_soup_from_url(self.url + 'se?' + urllib.urlencode(qdict))
-        href_list = []
+
         if soup.findAll(attrs=dict(id='ord')):
             # When we have a table tag with id="ord" we (probably)
             # have just one word. Use that.
-            word = {'url': self.url + soup.find('audio').find(
-                           'source', type="audio/mp3")['src']}
-            # Get the spelling and gender, these are not essential
-            # so if something goes wrong, just let it pass.
-            try:
-                word['spelling'] = soup.find('table', id='flettuhaus').find(
-                                   'span', {'class': 'fletta'}).getText()
-                # This will raise exception for non-nouns
-                word['gender'] = soup.find('table', id='flettuhaus').find(
-                                 'span', {'class': 'ofl'}).getText()
-            except:
-                pass
-            href_list.append(word)
+            self.download_audio_for_soup(soup)
 
         else:
             # More than one word. Or 0 words.
@@ -65,31 +55,30 @@ class IslexDownloader(AudioDownloader):
             for a in links:
                 try:
                     word_soup = self.get_soup_from_url(self.url + a['href'])
+                    self.download_audio_for_soup(word_soup)
                 except (AttributeError, KeyError):  # What else could go wrong?
                     continue
 
-                word = {'url': self.url + word_soup.find('audio').find(
-                               'source', type="audio/mp3")['src']}
-                # Get the spelling and gender, these are not essential
-                # so if something goes wrong, just let it pass.
-                try:
-                    word['spelling'] = word_soup.find('table', id='flettuhaus').find(
+    def download_audio_for_soup(self, soup):
+        self.maybe_get_icon()
+        extras = {'Source': 'Islex'}
+        # Try to get Part of Speech/gender
+        try:
+            extras['Type'] = soup.find('table', id='flettuhaus').find(
+                                       'span', {'class': 'ofl'}).getText()
+        except AttributeError:
+            pass
+        entry = DownloadEntry(
+            self.field_data,
+            self.get_tempfile_from_url(
+                self.url + soup.find('audio').find(
+                    'source', type="audio/mp3")['src']),
+            extras, self.site_icon)
+        # Try to get Source text
+        try:
+            entry.word = soup.find('table', id='flettuhaus').find(
                                        'span', {'class': 'fletta'}).getText()
-                    # This will raise exception for non-nouns
-                    word['gender'] = word_soup.find('table', id='flettuhaus').find(
-                                     'span', {'class': 'ofl'}).getText()
-                except:
-                    pass
-                href_list.append(word)
-        if href_list:
-            self.maybe_get_icon()
-        for word in href_list:
-            extras = {'Source': 'Islex'}
-            if 'gender' in word:
-                extras['gender'] = word['gender']
-            entry = DownloadEntry(
-                field_data, self.get_tempfile_from_url(word['url']),
-                extras, self.site_icon)
-            if 'spelling' in word:
-                entry.word = word['spelling']
-            self.downloads_list.append(entry)
+        except AttributeError:
+            pass
+
+        self.downloads_list.append(entry)
