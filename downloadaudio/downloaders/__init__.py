@@ -47,7 +47,7 @@ downloaders = [
     OaldDownloader(),
     DudenDownloader(),
     HowJSayDownloader(),
-    IslexDownloader()
+    IslexDownloader(),
     CollinsFrenchDownloader(),
     CollinsGermanDownloader(),
     CollinsItalianDownloader(),
