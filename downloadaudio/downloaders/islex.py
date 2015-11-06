@@ -24,7 +24,7 @@ class IslexDownloader(AudioDownloader):
         AudioDownloader.__init__(self)
         self.url = 'http://islex.is/'
         self.icon_url = 'http://islex.is/'
-        self.file_extension = u'.ogg'
+        self.file_extension = u'.mp3'
 
     def download_files(self, field_data):
         self.downloads_list = []
@@ -43,10 +43,9 @@ class IslexDownloader(AudioDownloader):
         if soup.findAll(attrs=dict(id='ord')):
             # When we have a table tag with id="ord" we (probably)
             # have just one word. Use that.
-            # Both mp3 and ogg are available. They contain the same sound
-            # This will take whichever comes first
             href_list.append(
-                self.url + soup.find('audio').find('source')['src'])
+                self.url + soup.find('audio').find(
+                    'source', type="audio/mp3")['src'])
         else:
             # More than one word. Or 0 words.
             links = soup.find(
@@ -58,7 +57,8 @@ class IslexDownloader(AudioDownloader):
                 except (AttributeError, KeyError):  # What else could go wrong?
                     continue
                 href_list.append(
-                    self.url + word_soup.find('audio').find('source')['src'])
+                    self.url + word_soup.find('audio').find(
+                        'source', type="audio/mp3")['src'])
         if href_list:
             self.maybe_get_icon()
         for url in href_list:
