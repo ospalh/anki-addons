@@ -51,15 +51,18 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
                 word_soup = self.get_soup_from_url(
                     link['href'].encode('utf-8'))
                 audio_link = word_soup.find('audio').find('a')['href']
+
+                entry = DownloadEntry(
+                    field_data,
+                    self.get_tempfile_from_url(audio_link),
+                    dict(Source='Den Danske Ordbog'),
+                    self.site_icon)
+
             except (AttributeError, KeyError, HTTPError):
                 # Getting HTTPErrors sometimes. could it be rate limiting?
                 continue
-            entry = DownloadEntry(
-                field_data,
-                self.get_tempfile_from_url(audio_link),
-                dict(Source='Den Danske Ordbog'),
-                self.site_icon)
 
+            # Try to get the display name from the dictionary
             try:
                 # BeautifulSoup doesn't unescape properly. Why?
                 entry.word = HTMLParser().unescape(
@@ -68,4 +71,3 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
                 pass
 
             self.downloads_list.append(entry)
-
