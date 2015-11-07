@@ -23,3 +23,13 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
         AudioDownloader.__init__(self)
         self.url = 'http://ordnet.dk/ddo/ordbog?'
         self.icon_url = 'http://ordnet.dk/'
+
+    def download_files(self, field_data):
+        if not self.language.lower().startswith('da'):
+            return
+        if field_data.split:
+            return
+        if not field_data.word:
+            return
+        self.downloads_list = []
+
