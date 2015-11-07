@@ -12,6 +12,8 @@ Download pronunciations for Danish from Den Danske Ordbog
 """
 
 import urllib
+from urllib2 import HTTPError
+from HTMLParser import HTMLParser
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
 
@@ -45,4 +47,25 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
             self.maybe_get_icon()
 
         for link in search_results:
-            # Do something...
+            try:
+                word_soup = self.get_soup_from_url(
+                    link['href'].encode('utf-8'))
+                audio_link = word_soup.find('audio').find('a')['href']
+            except (AttributeError, KeyError, HTTPError):
+                # Getting HTTPErrors sometimes. could it be rate limiting?
+                continue
+            entry = DownloadEntry(
+                field_data,
+                self.get_tempfile_from_url(audio_link),
+                dict(Source='Den Danske Ordbog'),
+                self.site_icon)
+
+            try:
+                # BeautifulSoup doesn't unescape properly. Why?
+                entry.word = HTMLParser().unescape(
+                    word_soup.find('span', {'class': 'match'}).getText())
+            except AttributeError:
+                pass
+
+            self.downloads_list.append(entry)
+
