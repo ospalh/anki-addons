@@ -33,3 +33,16 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
             return
         self.downloads_list = []
 
+        search_soup = self.get_soup_from_url(
+            self.url + urllib.urlencode(
+                dict(query=field_data.word)))
+
+        search_results = search_soup.find(
+            'div', {'class': 'searchResultBox'}).findAll('a')
+
+        # If no hits we have an empty list now
+        if search_results:
+            self.maybe_get_icon()
+
+        for link in search_results:
+            # Do something...
