@@ -40,7 +40,8 @@ class IslexDownloader(AudioDownloader):
         # work, but not all of them may be needed.
         qdict = {'finna': 1, 'dict': 'SE', 'erflokin': 1, 'nlo': 1, 'fuzz': 1,
                  'samleit': field_data.word.encode('utf-8')}
-        soup = self.get_soup_from_url(self.url + 'se?' + urllib.urlencode(qdict))
+        soup = self.get_soup_from_url(
+            self.url + 'se?' + urllib.urlencode(qdict))
 
         if soup.findAll(attrs=dict(id='ord')):
             # When we have a table tag with id="ord" we (probably)
@@ -65,7 +66,7 @@ class IslexDownloader(AudioDownloader):
         # Try to get Part of Speech/gender
         try:
             extras['Type'] = soup.find('table', id='flettuhaus').find(
-                                       'span', {'class': 'ofl'}).getText()
+                'span', {'class': 'ofl'}).getText()
         except AttributeError:
             pass
         entry = DownloadEntry(
@@ -77,7 +78,7 @@ class IslexDownloader(AudioDownloader):
         # Try to get Source text
         try:
             entry.word = soup.find('table', id='flettuhaus').find(
-                                       'span', {'class': 'fletta'}).getText()
+                'span', {'class': 'fletta'}).getText()
         except AttributeError:
             pass
 
