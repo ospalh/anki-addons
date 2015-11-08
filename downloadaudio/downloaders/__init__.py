@@ -22,6 +22,7 @@ from .collins_french import CollinsFrenchDownloader
 from .collins_german import CollinsGermanDownloader
 from .collins_italian import CollinsItalianDownloader
 from .collins_spanish import CollinsSpanishDownloader
+from .den_danske_ordbog import DenDanskeOrdbogDownloader
 from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .howjsay import HowJSayDownloader
@@ -34,7 +35,6 @@ from .macmillan_british import MacmillanBritishDownloader
 from .mw import MerriamWebsterDownloader
 from .oald import OaldDownloader
 from .wiktionary import WiktionaryDownloader
-from .den_danske_ordbog import DenDanskeOrdbogDownloader
 
 
 downloaders = [
