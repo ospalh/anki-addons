@@ -25,6 +25,7 @@ from .collins_spanish import CollinsSpanishDownloader
 from .duden import DudenDownloader
 from .google_tts import GooglettsDownloader
 from .howjsay import HowJSayDownloader
+from .islex import IslexDownloader
 from .japanesepod import JapanesepodDownloader
 from .leo import LeoDownloader
 from .lexin import LexinDownloader
@@ -33,7 +34,6 @@ from .macmillan_british import MacmillanBritishDownloader
 from .mw import MerriamWebsterDownloader
 from .oald import OaldDownloader
 from .wiktionary import WiktionaryDownloader
-from .islex import IslexDownloader
 
 
 downloaders = [
