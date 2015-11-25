@@ -57,8 +57,13 @@ class LexinDownloader(AudioDownloader):
             return
         if not field_data.word:
             return
-        # Replace special characters with ISO-8859-1 oct codes
         self.maybe_get_icon()
+        self.download_v1(field_data)
+
+    def download_v1(self, field_data):
+        """Get pronunciations of a word in Swedish from Lexin
+        using the old v1 url structure."""
+
         file_path = self.get_tempfile_from_url(
             self.url + munge_word(field_data.word) + self.file_extension)
         self.downloads_list.append(
