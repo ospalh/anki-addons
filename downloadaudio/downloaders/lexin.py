@@ -46,7 +46,8 @@ class LexinDownloader(AudioDownloader):
     def __init__(self):
         AudioDownloader.__init__(self)
         self.icon_url = 'http://lexin.nada.kth.se/lexin/'
-        self.url = 'http://lexin.nada.kth.se/sound/'
+        self.url = 'http://lexin.nada.kth.se/lexin/lexin/lookupword'
+        self.audio_url = 'http://lexin.nada.kth.se/sound/'
 
     def download_files(self, field_data):
         """Get pronunciations of a word in Swedish from Lexin"""
@@ -65,7 +66,9 @@ class LexinDownloader(AudioDownloader):
         using the old v1 url structure."""
 
         file_path = self.get_tempfile_from_url(
-            self.url + munge_word(field_data.word) + self.file_extension)
+            self.audio_url +
+            munge_word(field_data.word) +
+            self.file_extension)
         self.downloads_list.append(
             DownloadEntry(
                 field_data, file_path, dict(Source="Lexin"), self.site_icon))
