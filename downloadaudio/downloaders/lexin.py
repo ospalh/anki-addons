@@ -1,7 +1,7 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
-# Copyright © 2014 Daniel Eriksson, p.e.d.eriksson@gmail.com
+# Copyright © 2014-15 Daniel Eriksson, <daniel@deriksson.se>
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
