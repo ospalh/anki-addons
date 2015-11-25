@@ -91,6 +91,11 @@ class LexinDownloader(AudioDownloader):
         word_xmls = json.loads(data)[-3][3:-2]
         for word_xml in word_xmls:
             soup = BeautifulSoup(word_xml)
+            extras = dict(Source='Lexin')
+            try:
+                extras['Type'] = soup.find('lemma')['type']
+            except AttributeError:
+                pass
             try:
                 audio_file = soup.find('phonetic')['file']
                 # Sometimes we get files using the old filename style
@@ -103,6 +108,10 @@ class LexinDownloader(AudioDownloader):
                     self.site_icon)
             except:
                 continue
+            try:
+                entry.word = soup.find('lemma')['value']
+            except AttributeError:
+                pass
             self.downloads_list.append(entry)
 
     def download_v1(self, field_data):
