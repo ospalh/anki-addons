@@ -62,7 +62,7 @@ class LexinDownloader(AudioDownloader):
         if not field_data.word:
             return
         self.maybe_get_icon()
-        self.download_v1(field_data)
+        v1_downloaded = False
         # These headers are necessary
         # Without them, the server returns 500 response
         headers = {
@@ -81,6 +81,7 @@ class LexinDownloader(AudioDownloader):
         try:
             response = urllib2.urlopen(request)
         except:
+            self.download_v1(field_data)
             return
         # Strip leading '//OK' and
         # exchange invalid hex escapes with unicode escapes
@@ -106,6 +107,11 @@ class LexinDownloader(AudioDownloader):
                     self.get_tempfile_from_url(audio_link),
                     extras,
                     self.site_icon)
+                if audio_file == field_data.word + '.mp3':
+                    # This is a file from the legacy v1 collection
+                    # Some v1 files have been abandoned, but are still
+                    # out there.
+                    v1_downloaded = True
             except:
                 continue
             try:
@@ -113,6 +119,13 @@ class LexinDownloader(AudioDownloader):
             except AttributeError:
                 pass
             self.downloads_list.append(entry)
+        if not v1_downloaded:
+            # Try downloading a file with the old <word>.mp3 filename
+            # if it has not already been downloaded.
+            try:
+                self.download_v1(field_data)
+            except:
+                pass
 
     def download_v1(self, field_data):
         """Get pronunciations of a word in Swedish from Lexin
