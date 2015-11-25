@@ -14,6 +14,8 @@ Download pronunciations from Lexin.
 
 import unicodedata
 import urllib2
+import json
+from BeautifulSoup import BeautifulSoup
 
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -79,7 +81,29 @@ class LexinDownloader(AudioDownloader):
         try:
             response = urllib2.urlopen(request)
         except:
-            pass
+            return
+        # Strip leading '//OK' and
+        # exchange invalid hex escapes with unicode escapes
+        data = response.read()[4:].replace('\\x', '\\u00')
+        # data is now valid json.
+        # Each word has a corresponding xml string
+        # inside the list.
+        word_xmls = json.loads(data)[-3][3:-2]
+        for word_xml in word_xmls:
+            soup = BeautifulSoup(word_xml)
+            try:
+                audio_file = soup.find('phonetic')['file']
+                # Sometimes we get files using the old filename style
+                # that need to be munched
+                audio_link = self.audio_url + munge_word(audio_file)
+                entry = DownloadEntry(
+                    field_data,
+                    self.get_tempfile_from_url(audio_link),
+                    extras,
+                    self.site_icon)
+            except:
+                continue
+            self.downloads_list.append(entry)
 
     def download_v1(self, field_data):
         """Get pronunciations of a word in Swedish from Lexin
