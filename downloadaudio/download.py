@@ -39,6 +39,7 @@ from PyQt4.QtGui import QAction, QIcon, QMenu
 from PyQt4.QtCore import SIGNAL
 
 from aqt import mw
+from aqt.qt import QShortcut, QKeySequence
 from aqt.utils import tooltip
 from anki.hooks import addHook
 
@@ -50,6 +51,9 @@ from .processors import processor
 from .review_gui import review_entries
 from .update_gui import update_data
 
+DOWNLOAD_NOTE_SHORTCUT  = "q"
+DOWNLOAD_SIDE_SHORTCUT  = "Shift+W"
+DOWNLOAD_MANUAL_SHORTCUT  = "Ctrl+w"
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 # Place were we keep our megaphone icon.
@@ -258,3 +262,12 @@ mw.edit_media_submenu.addAction(mw.manual_download_action)
 
 
 addHook("setupEditorButtons", editor_add_download_editing_button)
+
+# add shortcuts to start the download
+mw.download_note_shortcut = QShortcut(QKeySequence(DOWNLOAD_NOTE_SHORTCUT), mw)
+mw.download_side_shortcut = QShortcut(QKeySequence(DOWNLOAD_SIDE_SHORTCUT), mw)
+mw.download_manual_shortcut = QShortcut(QKeySequence(DOWNLOAD_MANUAL_SHORTCUT), mw)
+
+mw.connect(mw.download_note_shortcut, SIGNAL("activated()"), download_for_note)
+mw.connect(mw.download_side_shortcut, SIGNAL("activated()"), download_for_side)
+mw.connect(mw.download_manual_shortcut, SIGNAL("activated()"), download_manual)
