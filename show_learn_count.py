@@ -16,6 +16,10 @@ __version__ = '1.0.0'
 
 hide_big_numbers = True
 big_number = 1000
+subdecks_hidden_bullet = u"➢"
+subdecks_shown_bullet = u"⌄"
+no_subdecks_bullet = u"•"
+# no_subdecks_bullet = u""
 zero_style = "color: #e0e0e0;"
 new_style = "color: #009;"
 learn_style = "color: #900;"
@@ -100,9 +104,9 @@ def deck_browser_deck_row(deck_browser, node, depth, cnt):
         if parent['collapsed']:
             buff = ""
             return buff
-    prefix = u"⌄"
+    bullet = subdecks_shown_bullet
     if deck_browser.mw.col.decks.get(did)['collapsed']:
-        prefix = u"➢"
+        bullet = subdecks_hidden_bullet
 
     def indent():
         return "&nbsp;"*6*depth
@@ -114,9 +118,11 @@ def deck_browser_deck_row(deck_browser, node, depth, cnt):
     # deck link
     if children:
         collapse = \
-            u"<a class=collapse href='collapse:%d'>%s</a>" % (did, prefix)
+            u"<a class=collapse href='collapse:{did}'>{bullet}</a>".format(
+            did=did, bullet=bullet)
     else:
-        collapse = u"<span class=collapse>•</span>"
+        collapse = u"<span class=collapse>{bullet}</span>".format(
+            bullet=no_subdecks_bullet)
     if deck['dyn']:
         extraclass = "filtered"
     else:
