@@ -82,9 +82,9 @@ def deck_browser_deck_row(deck_browser, node, depth, cnt):
         return """<span style='color: {};'>{}</span>""".format(colour, cnt)
     buf += """\
 <td align=right>%s</td><td align=right>%s</td><td align=right>%s</td>""" % (
-        nonzeroColour(due, "#009"),
+        nonzeroColour(new, "#009"),
         nonzeroColour(lrn, "#900"),
-        nonzeroColour(new, "#070"))
+        nonzeroColour(due, "#070"))
     # options
     buf += "<td align=right class=opts>%s</td></tr>" % deck_browser.mw.button(
         link="opts:%d" % did,
