@@ -16,11 +16,11 @@ __version__ = '1.0.0'
 
 hide_big_numbers = True
 big_number = 1000
-zero_color = "#e0e0e0"
-new_color = "#009"
-learn_color = "#900"
-due_color = "#070"
-sum_color = "black"
+zero_style = "color: #e0e0e0;"
+new_style = "color: #009;"
+learn_style = "color: #900;"
+due_style = "color: #070;"
+sum_style = "color: black;"
 deck_browser_css = """
 .count {
   width: unset; padding-left: 0.75em;
@@ -30,13 +30,13 @@ deck_browser_css = """
 }
 """
 
-def nonzero_color(cnt, color):
-    """Color text."""
+def nonzero_style(cnt, style):
+    """Style text."""
     if cnt > big_number and hide_big_numbers:
         cnt = "&gt;{bn}".format(bn=big_number)
     if not cnt:
-        color = "#e0e0e0"
-    return '<span style="color: {};">{}</span>'.format(color, cnt)
+        style = zero_style
+    return '<span style="{};">{}</span>'.format(style, cnt)
 
 
 def deck_browser_render_deck_tree(deck_browser, nodes, depth=0):
@@ -80,10 +80,10 @@ def deck_browser_render_deck_tree(deck_browser, nodes, depth=0):
     <th class=count>{}</th>
   </tr>
 </tfoot>
-""".format(_(u"Sum"), nonzero_color(sum_new, new_color),
-           nonzero_color(sum_lrn, learn_color),
-           nonzero_color(sum_due, due_color),
-           nonzero_color(sum_new + sum_lrn + sum_due, sum_color))
+""".format(_(u"Sum"), nonzero_style(sum_new, new_style),
+           nonzero_style(sum_lrn, learn_style),
+           nonzero_style(sum_due, due_style),
+           nonzero_style(sum_new + sum_lrn + sum_due, sum_style))
     return buf
 
 
@@ -128,9 +128,9 @@ def deck_browser_deck_row(deck_browser, node, depth, cnt):
     # due counts
     buf += u"""<td align=right>{}</td><td align=right>{}</td>\
 <td align=right>{}</td>""".format(
-        nonzero_color(new, new_color),
-        nonzero_color(lrn, learn_color),
-        nonzero_color(due, due_color))
+        nonzero_style(new, new_style),
+        nonzero_style(lrn, learn_style),
+        nonzero_style(due, due_style))
     # options
     buf += u"<td align=right class=opts>%s</td></tr>" % deck_browser.mw.button(
         link="opts:%d" % did,
