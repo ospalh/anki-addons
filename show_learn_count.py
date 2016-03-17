@@ -16,10 +16,12 @@ __version__ = '1.0.0'
 
 hide_big_numbers = True
 big_number = 1000
-subdecks_hidden_bullet = u"➢"
-subdecks_shown_bullet = u"⌄"
-no_subdecks_bullet = u"•"
-# no_subdecks_bullet = u""
+subdecks_hidden_bullet = u"+"
+# subdecks_hidden_bullet = u"➢"
+subdecks_shown_bullet = u"-"
+# subdecks_shown_bullet = u"⌄"
+no_subdecks_bullet = u""
+# no_subdecks_bullet = u"•"
 zero_style = "color: #e0e0e0;"
 new_style = "color: #009;"
 learn_style = "color: #900;"
