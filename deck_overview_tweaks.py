@@ -36,8 +36,9 @@ deck_browser_css = """
 }
 """
 
+
 def nonzero_style(cnt, style):
-    """Style text."""
+    """Style text"""
     if cnt > big_number and hide_big_numbers:
         cnt = "&gt;{bn}".format(bn=big_number)
     if not cnt:
@@ -97,11 +98,11 @@ def deck_browser_deck_row(deck_browser, node, depth, cnt):
     name, did, due, lrn, new, children = node
     deck = deck_browser.mw.col.decks.get(did)
     if did == 1 and cnt > 1 and not children:
-        # if the default deck is empty, hide it
+        # If the default deck is empty, hide it
         if not deck_browser.mw.col.db.scalar(
                 "select 1 from cards where did = 1"):
             return ""
-    # parent toggled for collapsing
+    # Parent toggled for collapsing
     for parent in deck_browser.mw.col.decks.parents(did):
         if parent['collapsed']:
             buff = ""
@@ -117,11 +118,11 @@ def deck_browser_deck_row(deck_browser, node, depth, cnt):
     else:
         klass = 'deck'
     buf = "<tr class='%s' id='%d'>" % (klass, did)
-    # deck link
+    # Deck link
     if children:
         collapse = \
             u"<a class=collapse href='collapse:{did}'>{bullet}</a>".format(
-            did=did, bullet=bullet)
+                did=did, bullet=bullet)
     else:
         collapse = u"<span class=collapse>{bullet}</span>".format(
             bullet=no_subdecks_bullet)
@@ -133,17 +134,17 @@ def deck_browser_deck_row(deck_browser, node, depth, cnt):
     <td class=decktd>%s%s<a class="deck %s"\
  href='open:%d'>%s</a></td>""" % (
         indent(), collapse, extraclass, did, name)
-    # due counts
+    # Due counts
     buf += u"""<td align=right>{}</td><td align=right>{}</td>\
 <td align=right>{}</td>""".format(
         nonzero_style(new, new_style),
         nonzero_style(lrn, learn_style),
         nonzero_style(due, due_style))
-    # options
+    # Options
     buf += u"<td align=right class=opts>%s</td></tr>" % deck_browser.mw.button(
         link="opts:%d" % did,
         name=u"<img valign=bottom src='qrc:/icons/gears.png'>▾")
-    # children
+    # Children
     buf += deck_browser._renderDeckTree(children, depth+1)
     return buf
 
