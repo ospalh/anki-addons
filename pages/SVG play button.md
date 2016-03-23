@@ -1,6 +1,6 @@
-title: SVG Replay buttons on card
+title: SVG replay buttons on card
 id: svgbutton
-main_file: play_button.py
+main_file: svg_play_button.py
 date: 2016-03-18
 tags: [review replay button svg]
 type: addon
@@ -17,7 +17,7 @@ files.
 With this it is possible to replay individual files. For example just
 the pronunciation of a word, or just one example sentences.
 
-This add-on is quite similar to the Replay button add-on, but the button looks simpler and …
+This add-on is quite similar to the [Replay button](./Play%20button.html) add-on, but the button looks simpler; it doesn’t use an image file, but inlined SVG. This brings the inlined play button up to date with the new version
 
 <span  class="clear" />
 <figure>
