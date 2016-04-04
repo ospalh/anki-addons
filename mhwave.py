@@ -38,16 +38,20 @@ def sound_ending(fname):
     return None
 
 
-def edit_files(note):
-    u"""Call the audio editor with all sounds from the note"""
+def edit_files(note=None, text=None):
+    u"""Edit files of a note or for a given text
+
+    Call the audio editor with all sounds from the note, or for a given
+    text"""
     # First, join all fields. Use some random field delimiter. (Could
     # be '', i guess.) EAFP, raise stuff when we don't have a note.
-    try:
-        text = '@'.join(note.fields)
-    except AttributeError:
-        # Maybe we don’t have a note
-        print('debug: editfiles w/o note')
-        return
+    if text is None:
+        try:
+            text = '@'.join(note.fields)
+        except AttributeError:
+            # Maybe we don’t have a note
+            print('debug: editfiles w/o note')
+            return
     matches = [fn for fn in re.findall(sound_re, text) if sound_ending(fn)]
     if command_list and matches:
         call_edit(matches)
@@ -110,15 +114,21 @@ in path. Please download and install it.'''
 def edit_current_note():
     u"""Call the action to edit the sound files of the current note."""
     try:
-        edit_files(mw.reviewer.card.note())
+        edit_files(note=mw.reviewer.card.note())
     except AttributeError:
         # No note.
         pass
 
+
+def edit_from_editor(editor):
+    u"""Edit audio of the field currently being edited."""
+    edit_files(text=editor.note.fields[editor.currentField])
+
+
 def setup_button(editor):
     u"""Add the buttons to the editor."""
     editor._addButton(
-        "wave_button", lambda nt=editor.note: edit_files(nt),
+        "wave_button", lambda ed=editor: edit_from_editor(ed),
         tip=u"wave", text='W')
 
 
