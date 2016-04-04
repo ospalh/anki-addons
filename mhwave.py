@@ -1,5 +1,5 @@
 # -*- mode: Python ; coding: utf-8 -*-
-# © 2012–4: Roland Sieker <ospalh@gmail.com>
+# © 2012–2016 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU GPL, version 3 or later;
 # http://www.gnu.org/copyleft/gpl.html
