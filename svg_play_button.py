@@ -15,6 +15,7 @@ from BeautifulSoup import BeautifulSoup
 from PyQt4.QtCore import QUrl
 from PyQt4.QtGui import QDesktopServices
 
+from anki.cards import Card
 from anki.hooks import addHook, wrap
 from anki.sound import play
 from aqt import mw
@@ -28,6 +29,28 @@ __version__ = "1.0.0"
 sound_re = ur"\[sound:(.*?)\]"
 
 hide_class_name = u'browserhide'
+
+
+def svg_css(Card):
+    """Add the svg button style to the card style"""
+    return u"""<style scoped>
+.replaybutton span {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px;
+}
+
+.replaybutton span svg {
+  stroke: none;
+  fill: black;
+  display: inline;
+  height: 1em;
+  width: 1em;
+  min-width: 12px;
+  min-height: 12px;
+}
+</style>
+""" + old_css(Card)
 
 
 def play_button_filter(
@@ -49,10 +72,9 @@ def play_button_filter(
         else:
             title = sound.group(1)
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
-title="{ttl}" class="replaybutton browserhide"><span><svg viewBox="0 0 32 32" \
-style="height: 1em; width: 1em; min-height: 8px;">\
-<polygon points="11,25 25,16 11,7"/>Replay</svg>\
-</span></a><span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
+title="{ttl}" class="replaybutton browserhide"><span><svg viewBox="0 0 32 32">\
+<polygon points="11,25 25,16 11,7"/>Replay</svg></span></a>\
+<span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
             orig=sound.group(0), fn=sound.group(1), ttl=title)
         # The &#91; &#93; are the square brackets that we want to
         # appear as brackets and not trigger the playing of the
@@ -102,6 +124,9 @@ Reviewer._linkHandler = review_link_handler_wrapper
 
 original_format_qa = DataModel.formatQA
 DataModel.formatQA = reduce_format_qa
+
+old_css = Card.css
+Card.css = svg_css
 
 addHook("mungeQA", play_button_filter)
 Browser._openPreview = wrap(Browser._openPreview, add_preview_link_handler)
