@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2013–14 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2013–16 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -12,8 +12,8 @@ import re
 import shutil
 
 from BeautifulSoup import BeautifulSoup
-from PyQt4.QtCore import QUrl
-from PyQt4.QtGui import QDesktopServices
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
 
 from anki.hooks import addHook, wrap
 from anki.sound import play
