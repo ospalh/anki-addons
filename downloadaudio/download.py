@@ -50,6 +50,9 @@ from .processors import processor
 from .review_gui import review_entries
 from .update_gui import update_data
 
+DOWNLOAD_NOTE_SHORTCUT = "q"
+DOWNLOAD_SIDE_SHORTCUT = "t"
+DOWNLOAD_MANUAL_SHORTCUT = "Ctrl+t"
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 # Place were we keep our megaphone icon.
@@ -229,6 +232,7 @@ mw.note_download_action.setIcon(QIcon(os.path.join(icons_dir,
                                                    'download_note_audio.png')))
 mw.note_download_action.setToolTip(
     "Download audio for all audio fields of this note.")
+mw.note_download_action.setShortcut(DOWNLOAD_NOTE_SHORTCUT)
 mw.connect(mw.note_download_action, SIGNAL("triggered()"), download_for_note)
 
 mw.side_download_action = QAction(mw)
@@ -237,6 +241,7 @@ mw.side_download_action.setIcon(
     QIcon(os.path.join(icons_dir, 'download_side_audio.png')))
 mw.side_download_action.setToolTip(
     "Download audio for audio fields currently visible.")
+mw.side_download_action.setShortcut(DOWNLOAD_SIDE_SHORTCUT)
 mw.connect(mw.side_download_action, SIGNAL("triggered()"), download_for_side)
 
 mw.manual_download_action = QAction(mw)
@@ -245,6 +250,7 @@ mw.manual_download_action.setIcon(
     QIcon(os.path.join(icons_dir, 'download_audio_manual.png')))
 mw.manual_download_action.setToolTip(
     "Download audio, editing the information first.")
+mw.manual_download_action.setShortcut(DOWNLOAD_MANUAL_SHORTCUT)
 mw.connect(mw.manual_download_action, SIGNAL("triggered()"), download_manual)
 
 
