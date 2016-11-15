@@ -1,0 +1,21 @@
+---
+layout: index
+---
+
+{% for post in site.posts %}
+  {% if post.status_color == "green" %}
+    {% include abstract.html %}
+  {% endif %}
+{% endfor %}
+<div class="line"></div>
+{% for post in site.posts %}
+  {% if post.status_color == "yellow" %}
+    {% include abstract.html %}
+  {% endif %}
+{% endfor %}
+<div class="line"></div>
+{% for post in site.posts %}
+  {% if post.status_color == "red" %}
+    {% include abstract.html %}
+  {% endif %}
+{% endfor %}

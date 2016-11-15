@@ -1,0 +1,20 @@
+  <body>
+    <section id="page">
+      <header>
+        <nav class="clear">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{{ site.github.url }}/">Anki add-ons</a></li>
+            <li><a href="https://github.com/ospalh/anki-addons" class="code">GitHub project</a></li>
+            <li><a href="https://github.com/ospalh/anki-addons/blob/master/{{ page.source_file }}" class="code">Add-on source</a></li>
+            <li><a href="https://ankiweb.net/shared/info/{{ page.ankiweb_id }}">AnkiWeb</a></li>
+            <li><span>ID: {{ page.ankiweb_id }}</span></li>
+          </ul>
+        </nav>
+        <h1>{{ page.title }}</h1>
+        {% if page.subtitle %}
+        <h3>{{ page.subtitle }}</h3>
+        {%else%}
+        <h3>An Anki2 add-on</h3>
+        {%endif%}
+      </header>

@@ -3,9 +3,8 @@ layout: addon
 title: Furikanji
 permalink: Furikanji.html
 source_file: furikanji.py
-categories:
- - yellow
- - addon
+status_color: yellow
+status_text_color: black
 status: for desktop use only
 abstract: >
  Display text as furikanji, that is, show kana on the base line, with
