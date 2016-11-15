@@ -1,5 +1,4 @@
 title: Download audio
-id: dlaudio
 main_file: download_audio.py
 status: working
 layout: addon

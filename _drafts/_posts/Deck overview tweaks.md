@@ -1,5 +1,4 @@
 title: Deck overview tweaks
-id: deck_overview
 main_file: deck_overview_tweaks.py
 date: 2016-03-18
 layout: addon

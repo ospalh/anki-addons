@@ -1,5 +1,4 @@
 title: Kanji stroke color
-id: kanjistrokecolor
 main_file: kanji_stroke_color.py
 layout: addon
 date: 2013-06-17

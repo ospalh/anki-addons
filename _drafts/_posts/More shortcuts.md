@@ -1,5 +1,4 @@
 title: More shortcuts
-id: moreshortcuts
 main_file: more_shortcuts.py
 date: 2013-06-07
 tags: [anki1, shortcut]

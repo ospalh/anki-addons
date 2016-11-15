@@ -1,5 +1,4 @@
 title: Kanji tips
-id: kanjitips
 main_file: kanji_tips.py
 layout: addon
 date: 2013-06-17

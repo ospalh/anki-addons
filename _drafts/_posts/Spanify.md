@@ -1,5 +1,4 @@
 title: Spanify text
-id: spanify
 main_file: spanify.py
 date: 2013-06-19
 layout: addon

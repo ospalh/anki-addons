@@ -1,5 +1,4 @@
 title: Deck name in title
-id: title
 main_file: deck_name_in_title.py
 status: working
 layout: addon

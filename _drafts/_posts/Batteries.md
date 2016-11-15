@@ -1,5 +1,4 @@
 title: Batteries
-id: batteries
 layout: other_page
 
 Usually, [Python](http://python.org), the programming language Anki

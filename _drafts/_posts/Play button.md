@@ -1,5 +1,4 @@
 title: Replay buttons on card
-id: playbutton
 main_file: play_button.py
 date: 2014-07-31
 tags: [review replay button]

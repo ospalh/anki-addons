@@ -1,5 +1,4 @@
 title: Backdoor
-id: backdoor
 main_file: backdoor.py
 layout: addon
 date: 2013-05-07

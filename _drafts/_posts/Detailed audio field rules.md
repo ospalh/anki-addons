@@ -1,5 +1,4 @@
 title: Detailed audio field rules
-id: fieldrules
 source_file: downloadaudio/get_fields.py
 layout: subpage
 ankiweb_id: 3100585138

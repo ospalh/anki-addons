@@ -1,5 +1,4 @@
 title: Add note id
-id: add_nid
 main_file: add_note_id.py
 layout: addon
 date: 2013-05-07

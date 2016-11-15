@@ -1,5 +1,4 @@
 title: Sweep
-id: sweep
 main_file: sweep.py
 date: 2013-06-07
 tags: [edit audio]

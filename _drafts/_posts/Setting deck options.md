@@ -1,5 +1,4 @@
 title: Setting the language in the deck options
-id: optionslang
 source_file: downloadaudio/conflanguage.py
 layout: subpage
 ankiweb_id: 3100585138

@@ -1,5 +1,4 @@
 title: Small add cards
-id: smalladd
 main_file: small_add_cards.py
 status: quick hack
 layout: addon

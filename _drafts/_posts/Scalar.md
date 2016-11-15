@@ -1,5 +1,4 @@
 title: Scalar
-id: scalar
 main_file: scalar.py
 layout: addon
 date: 2013-05-07

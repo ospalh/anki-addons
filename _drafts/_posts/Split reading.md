@@ -1,5 +1,4 @@
 title: Split reading
-id: splitreading
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio

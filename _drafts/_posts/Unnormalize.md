@@ -1,5 +1,4 @@
 title: Unnormalize
-id: unnormalize
 main_file: unnormalize.py
 date: 2013-06-07
 layout: addon

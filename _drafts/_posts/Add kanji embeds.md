@@ -1,5 +1,4 @@
 title: Add kanji embeds
-id: embed_kanji
 main_file: add_kanji_embeds.py
 date: 2013-06-07
 tags: [svg, embed, abandoned]

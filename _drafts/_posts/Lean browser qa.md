@@ -1,5 +1,4 @@
 title: Lean browser question/answer
-id: leanqa
 main_file: lean_browser_qa.py
 date: 2012-10-19
 tags: [browser display]

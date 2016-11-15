@@ -1,5 +1,4 @@
 title: Swiss locale
-id: swisslocale
 main_file: swiss_locale.py
 layout: addon
 date: 2013-05-07

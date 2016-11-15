@@ -1,5 +1,4 @@
 title: Compare to kana
-id: comparekana
 main_file: compare_to_kana.py
 layout: addon
 date: 2015-10-16

@@ -1,5 +1,4 @@
 title: SVG replay buttons on card
-id: svgbutton
 main_file: svg_play_button.py
 date: 2016-03-18
 tags: [review replay button svg]

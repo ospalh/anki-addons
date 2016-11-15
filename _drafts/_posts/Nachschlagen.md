@@ -1,5 +1,4 @@
 title: Nachschlagen
-id: lookup
 main_file: nachschlagen.py
 layout: addon
 date: 2013-05-07

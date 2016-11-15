@@ -1,6 +1,5 @@
 title: Local CSS and DIY night mode
 subtitle: Adapt card styles to time and place
-id: localcss
 main_file: local_css_and_diy_night_mode.py
 status: working
 layout: addon

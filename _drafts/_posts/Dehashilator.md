@@ -1,5 +1,4 @@
 title: Dehashilator
-id: dehashilator
 main_file: dehashilate.py
 status: breaks collections
 layout: addon

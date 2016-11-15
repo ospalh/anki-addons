@@ -1,5 +1,4 @@
 title: One-sided cards
-id: oneside
 main_file: onesided_cards.py
 date: 2013-06-07
 tags: [review answer]

@@ -1,5 +1,4 @@
 title: Colorful toolbars
-id: colorbar
 main_file: colorful_toolbars.py
 layout: addon
 date: 2013-06-10

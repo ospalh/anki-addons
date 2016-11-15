@@ -1,5 +1,4 @@
 title: Fix AnkiDroid’s negative review times
-id: fix_neg_times
 main_file: fix_negative_review_times.py
 date: 2013-05-07
 layout: addon

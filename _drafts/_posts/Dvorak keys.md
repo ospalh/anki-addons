@@ -1,5 +1,4 @@
 title: Dvorak keys
-id: dvorak
 main_file: dvorak_keys.py
 status: working
 layout: addon

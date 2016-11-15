@@ -1,5 +1,4 @@
 title: Metric time
-id: metrictime
 main_file: metric_time.py
 status: personal hobby horse, broken
 layout: addon

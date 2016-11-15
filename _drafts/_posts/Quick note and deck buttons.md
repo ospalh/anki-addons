@@ -1,5 +1,4 @@
 title: Quick note and deck buttons
-id: quick_buttons
 main_file: quick_note_and_deck_buttons.py
 status: working
 layout: addon

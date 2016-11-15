@@ -1,5 +1,4 @@
 title: FEN chess visualizer
-id: fen
 main_file: fen_visualizer.py
 date: 2013-06-12
 tags: [chess fen unicode]

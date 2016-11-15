@@ -1,5 +1,4 @@
 title: Complex use of classes
-id: crazy_classes
 layout: subpage
 ankiweb_id: 2327947748
 parent: Furikanji
