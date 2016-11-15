@@ -2,7 +2,7 @@
 layout: addon
 title: Furikanji
 permalink: Furikanji.html
-source_file: furikanji.py
+main_file: furikanji.py
 status_color: yellow
 status_text_color: black
 status: for desktop use only
