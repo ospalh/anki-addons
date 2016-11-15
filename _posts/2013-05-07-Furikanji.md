@@ -1,18 +1,18 @@
-title: Furikanji
-id: furikanji
+---
+layout: addon
 main_file: furikanji.py
-type: addon
-date: 2013-05-07
+categories:
+ - yellow
+ - addon
 status: for desktop use only
-status_color: yellow
-status_text_color: black
-abstract: "Improved way to parse kanji and readings, a way to render
-kanji the kana and a few other display hacks."
+abstract: >
+ Improved way to parse kanji and readings, a way to render kanji the
+ kana and a few other display hacks.
 first_image: furikanji.png
 first_alt: "Sceenshot of text ふりかんじ with 振り漢字 as ruby."
 first_caption: Furikanji demo
 ankiweb_id: 2327947748
-
+---
 This add-on adds support for furikanji and slightly changes the way
 kanji and readings are parsed.
 
