@@ -2,7 +2,7 @@ title: Dehashilator
 id: dehashilator
 main_file: dehashilate.py
 status: breaks collections
-type: addon
+layout: addon
 date: 2013-06-17
 status_color: red
 status_text_color: white

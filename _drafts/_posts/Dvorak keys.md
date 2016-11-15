@@ -2,7 +2,7 @@ title: Dvorak keys
 id: dvorak
 main_file: dvorak_keys.py
 status: working
-type: addon
+layout: addon
 date: 2013-05-07
 status_color: green
 status_text_color: white

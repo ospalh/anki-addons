@@ -1,7 +1,7 @@
 title: Scalar
 id: scalar
 main_file: scalar.py
-type: addon
+layout: addon
 date: 2013-05-07
 status: working
 status_color: green

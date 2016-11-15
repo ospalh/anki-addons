@@ -1,6 +1,6 @@
 title: Complex use of classes
 id: crazy_classes
-type: subpage
+layout: subpage
 ankiweb_id: 2327947748
 parent: Furikanji
 extra_jq_script: class_tips.js

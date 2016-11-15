@@ -1,7 +1,7 @@
 title: Colorful toolbars
 id: colorbar
 main_file: colorful_toolbars.py
-type: addon
+layout: addon
 date: 2013-06-10
 status: working
 status_color: green

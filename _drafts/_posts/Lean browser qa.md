@@ -3,7 +3,7 @@ id: leanqa
 main_file: lean_browser_qa.py
 date: 2012-10-19
 tags: [browser display]
-type: addon
+layout: addon
 date: 2013-05-07
 status: working
 status_color: green

@@ -2,7 +2,7 @@ title: Spanify text
 id: spanify
 main_file: spanify.py
 date: 2013-06-19
-type: addon
+layout: addon
 status: hackish
 status_color: yellow
 status_text_color: black

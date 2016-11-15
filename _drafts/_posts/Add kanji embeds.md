@@ -3,7 +3,7 @@ id: embed_kanji
 main_file: add_kanji_embeds.py
 date: 2013-06-07
 tags: [svg, embed, abandoned]
-type: addon
+layout: addon
 status: hackish, one-off
 status_color: red
 status_text_color: white

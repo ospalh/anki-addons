@@ -1,6 +1,6 @@
 title: Add audio field
 id: addaudio
-type: subpage
+layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 extra_jq_script: audio_tips.js

@@ -2,7 +2,7 @@ title: Small add cards
 id: smalladd
 main_file: small_add_cards.py
 status: quick hack
-type: addon
+layout: addon
 date: 2013-06-07
 status_color: yellow
 status_text_color: black

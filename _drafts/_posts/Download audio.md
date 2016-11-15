@@ -2,7 +2,7 @@ title: Download audio
 id: dlaudio
 main_file: download_audio.py
 status: working
-type: addon
+layout: addon
 date: 2015-10-16
 status_color: green
 status_text_color: white

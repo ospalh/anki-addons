@@ -2,7 +2,7 @@ title: Metric time
 id: metrictime
 main_file: metric_time.py
 status: personal hobby horse, broken
-type: addon
+layout: addon
 date: 2013-05-07
 status_color: red
 status_text_color: white

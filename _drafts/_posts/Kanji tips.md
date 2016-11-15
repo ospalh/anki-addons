@@ -1,7 +1,7 @@
 title: Kanji tips
 id: kanjitips
 main_file: kanji_tips.py
-type: addon
+layout: addon
 date: 2013-06-17
 status: broken, source only
 status_color: red

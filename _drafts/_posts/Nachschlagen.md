@@ -1,7 +1,7 @@
 title: Nachschlagen
 id: lookup
 main_file: nachschlagen.py
-type: addon
+layout: addon
 date: 2013-05-07
 status: working
 status_color: green

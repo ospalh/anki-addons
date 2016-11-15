@@ -3,7 +3,7 @@ id: zoom
 main_file: zoom.py
 ankiweb_id: 1956318463
 date: 2013-06-10
-type: addon
+layout: addon
 status: working
 status_color: green
 status_text_color: white

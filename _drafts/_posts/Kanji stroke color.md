@@ -1,7 +1,7 @@
 title: Kanji stroke color
 id: kanjistrokecolor
 main_file: kanji_stroke_color.py
-type: addon
+layout: addon
 date: 2013-06-17
 status: hackish, desktop only, abandoned
 status_color: red

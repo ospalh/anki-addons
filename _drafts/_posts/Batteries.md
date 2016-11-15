@@ -1,6 +1,6 @@
 title: Batteries
 id: batteries
-type: other_page
+layout: other_page
 
 Usually, [Python](http://python.org), the programming language Anki
 and Anki add-ons are written in, comes with a number of functions

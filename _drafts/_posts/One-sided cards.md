@@ -3,7 +3,7 @@ id: oneside
 main_file: onesided_cards.py
 date: 2013-06-07
 tags: [review answer]
-type: addon
+layout: addon
 status: abandoned
 status_color: red
 status_text_color: white

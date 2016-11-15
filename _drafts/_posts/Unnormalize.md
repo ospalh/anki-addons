@@ -2,7 +2,7 @@ title: Unnormalize
 id: unnormalize
 main_file: unnormalize.py
 date: 2013-06-07
-type: addon
+layout: addon
 status: may add errors, broken
 status_color: red
 status_text_color: white

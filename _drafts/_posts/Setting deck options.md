@@ -1,7 +1,7 @@
 title: Setting the language in the deck options
 id: optionslang
 source_file: downloadaudio/conflanguage.py
-type: subpage
+layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 

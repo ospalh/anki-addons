@@ -3,7 +3,7 @@ id: fen
 main_file: fen_visualizer.py
 date: 2013-06-12
 tags: [chess fen unicode]
-type: addon
+layout: addon
 status: abandoned
 status_color: yellow
 status_text_color: black

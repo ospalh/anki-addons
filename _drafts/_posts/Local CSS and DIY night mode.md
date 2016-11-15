@@ -3,7 +3,7 @@ subtitle: Adapt card styles to time and place
 id: localcss
 main_file: local_css_and_diy_night_mode.py
 status: working
-type: addon
+layout: addon
 date: 2015-10-16
 status_color: green
 status_text_color: white

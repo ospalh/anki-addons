@@ -2,7 +2,7 @@ title: Deck overview tweaks
 id: deck_overview
 main_file: deck_overview_tweaks.py
 date: 2016-03-18
-type: addon
+layout: addon
 status: working
 status_color: green
 status_text_color: white

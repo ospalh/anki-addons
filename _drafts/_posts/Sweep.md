@@ -3,7 +3,7 @@ id: sweep
 main_file: sweep.py
 date: 2013-06-07
 tags: [edit audio]
-type: addon
+layout: addon
 status: working, hackish
 status_color: yellow
 status_text_color: black

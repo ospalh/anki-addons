@@ -2,7 +2,7 @@ title: Quick note and deck buttons
 id: quick_buttons
 main_file: quick_note_and_deck_buttons.py
 status: working
-type: addon
+layout: addon
 date: 2013-05-07
 ankiweb_id: 2181333594
 status_color: green

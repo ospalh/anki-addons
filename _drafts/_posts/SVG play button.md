@@ -3,7 +3,7 @@ id: svgbutton
 main_file: svg_play_button.py
 date: 2016-03-18
 tags: [review replay button svg]
-type: addon
+layout: addon
 status: working
 status_color: green
 status_text_color: white

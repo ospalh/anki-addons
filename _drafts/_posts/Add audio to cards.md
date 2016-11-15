@@ -1,6 +1,6 @@
 title: Add audio to cards
 id: addaudiocard
-type: subpage
+layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 

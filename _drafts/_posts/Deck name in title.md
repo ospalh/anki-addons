@@ -2,7 +2,7 @@ title: Deck name in title
 id: title
 main_file: deck_name_in_title.py
 status: working
-type: addon
+layout: addon
 date: 2013-05-07
 status_color: green
 status_text_color: white

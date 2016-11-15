@@ -1,7 +1,7 @@
 title: Detailed audio field rules
 id: fieldrules
 source_file: downloadaudio/get_fields.py
-type: subpage
+layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 extra_jq_script: audio_tips.js
