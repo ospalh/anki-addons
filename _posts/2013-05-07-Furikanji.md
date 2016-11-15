@@ -1,22 +1,24 @@
 ---
 layout: addon
-main_file: furikanji.py
+title: Furikanji
+permalink: Furikanji.html
+source_file: furikanji.py
 categories:
  - yellow
  - addon
 status: for desktop use only
 abstract: >
- Improved way to parse kanji and readings, a way to render kanji the
- kana and a few other display hacks.
+ Display text as furikanji, that is, show kana on the base line, with
+ the kanji above. This adds a few other display hacks, too.
 first_image: furikanji.png
 first_alt: "Sceenshot of text ふりかんじ with 振り漢字 as ruby."
 first_caption: Furikanji demo
 ankiweb_id: 2327947748
 ---
-This add-on adds support for furikanji and slightly changes the way
+{% raw %}This add-on adds support for furikanji and slightly changes the way
 kanji and readings are parsed.
 
-<blockquote class=nb>
+<blockquote class="nb">
 This add-on is for use with the desktop
 client only. Using features of this add-on with mobile clients or
 AnkiWeb may result in suboptimal layout.
@@ -85,4 +87,4 @@ This means that commas, newlines,
   reading for <q lang="ja">お釣り</q> must still be written with an ASCII space or
   other separator between the <q lang="ja">お</q> and the <q lang="ja">釣</q>: <q lang="ja">お 釣[つ]り</q>.
 * This mechanism only work with Python version 2.7.
-* As the other functions, this works only on the desktop client.
+* As the other functions, this works only on the desktop client.{% endraw %}
