@@ -49,9 +49,8 @@ brackets.
 い加減おwith きなよいいかげん as ruby and きなよいいかげん with 起きな
 よいい加減お as ruby. The kanji of the ruby are marked in orange.">
 <figcaption> AnkiDroid can be patched to use furikanji.  </figcaption>
-</figure> Daring spirits can take a look at my version of the
-[`FuriganaFilters.java`](https://github.com/ospalh/Anki-Android/blob/develop-ospalh-special/AnkiDroid/src/main/java/com/ichi2/libanki/hooks/FuriganaFilters.java)
-file and add furikanji to their own version of AnkiDroid
+</figure> Daring spirits can try to merge my [`option-furikanji`](https://github.com/ospalh/Anki-Android/tree/option-furikanji) branch into their AnkiDroid source. It contains the equivalent of this code in the [`FuriganaFilters.java`](https://github.com/ospalh/Anki-Android/blob/option-furikanji/AnkiDroid/src/main/java/com/ichi2/libanki/hooks/FuriganaFilters.java)
+file and adds furikanji to AnkiDroid.
 
 This may not work with Android versions < 3.0
 
