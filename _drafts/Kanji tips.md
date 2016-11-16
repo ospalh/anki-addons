@@ -14,7 +14,7 @@ This is a try to show pop-up tips for kanji.
 
 It appears to not work in the current form.
 
-<blockquote class="listing"><span class=warn>Caveat:</span>Do not use this add-on.</blockquote>
+<blockquote><span class="warn">Caveat:</span>Do not use this add-on.</blockquote>
 
 The add-on uses the Python package lxml, that must be installed by
 hand.

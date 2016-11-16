@@ -73,7 +73,7 @@ details.
 
 The example images where taken with a somewhat complex note
 type, using this type of CSS setup. In this case:
-<blockquote class=lsting><pre><code><span>.card {color: #657b83; background-color: #fdf6e3;}
+<blockquote class="lsting"><pre><code><span>.card {color: #657b83; background-color: #fdf6e3;}
 \#typeans span {background-color: #fdf6e3;}
 .typeBad {color: #dc322f;}
 .typeMissed, .typePass {  color: #268bd2;}

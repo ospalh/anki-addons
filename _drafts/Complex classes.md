@@ -24,7 +24,7 @@ href="http://subs2srs.sourceforge.net/">sub2srs</a> example deck 「時
 </figcaption>
 </figure>
 To use furikanji, with the markers shown, i use
-<blockquote class=lsting><pre><code>.redish { color: #a00;}
+<blockquote class="lsting"><pre><code>.redish { color: #a00;}
 .furikanji:before, .furikanji:after {
     font-size: 50%;
     position: relative;
@@ -35,7 +35,7 @@ To use furikanji, with the markers shown, i use
 .furikanji:before { content : "|"}
 .furikanji:after { content : "|"}</code></pre></blockquote>
 as styling and
-<blockquote class=lsting><pre><code>&lt;div>{{Image}}&lt;/div>
+<blockquote class="lsting"><pre><code>&lt;div>{{Image}}&lt;/div>
 {{Audio}}
 &lt;div class="nhg lnsz">{{furigana:Reading}}&lt;/div>
 &lt;div class="nhg redish lnsz">{{furikanji:Reading}}&lt;/div></code></pre></blockquote>
@@ -63,9 +63,9 @@ the<q lang='ja'>なか</q> into them.
 
 The adding of the interpunct can be done using two CSS pseudo-classes,
 <q>`:after`</q> and <q>`:last-child`</q>:
-<blockquote class=lsting><pre><code>&lt;div class="interpuncts">{kana:Reading}}&lt;/div></code></pre></blockquote>
+<blockquote class="lsting"><pre><code>&lt;div class="interpuncts">{kana:Reading}}&lt;/div></code></pre></blockquote>
 
-<blockquote class=lsting><pre><code>.interpuncts .kana:after{content:"・";}
+<blockquote class="lsting"><pre><code>.interpuncts .kana:after{content:"・";}
 .interpuncts .kana:last-child:after{content: none;}</code></pre></blockquote>
 
 The advantage of this method over using a pure kana is that with this
@@ -76,14 +76,14 @@ method furigana can be used as well, with <q>`{{furigana:Reading}}`</q>.
 This method works without this add-on as well.
 
 To show furigana only when the mouse hovers above it use:
-<blockquote class=lsting><pre><code>&lt;div class="kanjihover">{{furigana:Reading}}&lt;/div></code></pre></blockquote>
+<blockquote class="lsting"><pre><code>&lt;div class="kanjihover">{{furigana:Reading}}&lt;/div></code></pre></blockquote>
 
-<blockquote class=lsting><pre><code>.kanjihover rt{visibility: hidden;}
+<blockquote class="lsting"><pre><code>.kanjihover rt{visibility: hidden;}
 .kanjihover ruby:hover rt {visibility: visible;}</blockquote></pre></code>
 
 or to activate this for all furigana everywhere, drop the extra class:
 
-<blockquote class=lsting><pre><code>{{furigana:Reading}}</code></pre></blockquote>
+<blockquote class="lsting"><pre><code>{{furigana:Reading}}</code></pre></blockquote>
 
-<blockquote class=lsting><pre><code>rt{visibility: hidden;}
+<blockquote class="lsting"><pre><code>rt{visibility: hidden;}
 ruby:hover rt {visibility: visible;}</blockquote></pre></code>

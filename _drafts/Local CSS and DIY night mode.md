@@ -55,7 +55,7 @@ To apply a style to the whole card only on a specific computer, use the
   background-color: #ededff;
   font-size: 58px;}</code></pre></blockquote>
 
-<blockquote class=nb> The selector in the style file must be more
+<blockquote class="nb"> The selector in the style file must be more
 specific than the one used in the template in the collection. When a
 setup for <code>.card</code> is used in the template, the style file should use
 <code>.loc.card</code>, not just <code>.loc</code> </blockquote>
@@ -75,7 +75,7 @@ one style file and <code>.loc .nihongo{font-family:
 "[Moon font](http://cooltext.com/Download-Font-%E6%9C%88+Moon)";}</code>
 in another.
 
-<blockquote class=nb>
+<blockquote class="nb">
 As the <code>loc</code> and <code>card</code> apply to the same object, the
 selector <code>.loc.card</code> contains <em>no</em> space. When setting
 the style for a sub-element, a space <em>must</em> be added. For

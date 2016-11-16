@@ -26,8 +26,8 @@ becomes visible again.
 This is only needed for audio/video files. Text or images can be
 hidden with clever CSS:
 
-`<span class=justdt>Shown on desktop</span>
-<span class=justmobile>Shown on mobile</span>`
+`<span class="justdt">Shown on desktop</span>
+<span class="justmobile">Shown on mobile</span>`
 
 in the card template and
 <pre><code>.justmobile {display:none;}

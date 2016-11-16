@@ -13,7 +13,7 @@ first_caption: Old and new file names.
 download_file: dehashilator.zip
 
 Rename media files with names that look like MD5 hashes.
-<blockquote class=nb>This add-on is likely to break your
+<blockquote class="nb">This add-on is likely to break your
 collection. You *will* have to fix a few file names by hand.</blockquote>
 
 Up to version 1.1, Anki changed the names of media files added to
