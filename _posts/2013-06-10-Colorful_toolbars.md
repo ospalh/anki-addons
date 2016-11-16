@@ -1,20 +1,23 @@
+---
 title: Colorful toolbars
+permalink: Colorful_toolbars.html
 main_file: colorful_toolbars.py
 layout: addon
-date: 2013-06-10
 status: working
 status_color: green
 status_text_color: white
-abstract: "Replace the top menu bar with the <q>Decks Study Add Browse</q>
-text buttons and the two rather drab sync and statistics buttons with
-a colorful icon toolbar like the one in Anki 1."
+abstract: >
+ Replace the top menu bar with the <q>Decks Study Add Browse</q> text
+ buttons and the two rather drab sync and statistics buttons with a
+ colorful icon toolbar like the one in Anki 1.
 subtitle: Get back the Anki1 look
 first_image: Colorful%20toolbar.png
-first_alt: "Anki 2 review window with two icon bars. The review area
-reads Die Hauptstadt von Niue ist"
+first_alt: >
+ Anki 2 review window with two icon bars. The review area reads Die
+ Hauptstadt von Niue ist
 ankiweb_id: 388296573
 extra_jq_script: ct_tips.js
-
+---
 This add-on replaces the top menu bar with the <q>Decks Study Add
 Browse</q> text buttons and the two rather drab sync and statistics
 buttons with a colorful icon toolbar like the one in Anki 1.
