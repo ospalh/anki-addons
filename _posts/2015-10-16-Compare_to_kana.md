@@ -52,11 +52,11 @@ The example images where taken with a somewhat complex note
 type. Without further set-up, the background rather than the text of
 the correct and wrong parts of the text is colored. To override this,
 the following CSS was used:
-<blockquote class="lsting"><pre><code><span>.card {color: #657b83; background-color: #fdf6e3;}
-\#typeans span {background-color: #fdf6e3;}
+<blockquote class="lsting" ><pre><code>.card {color: #657b83; background-color: #fdf6e3;}
+#typeans span {background-color: #fdf6e3;}
 .typeBad {color: #dc322f;}
 .typeMissed, .typePass {  color: #268bd2;}
-.typeGood{color: #859900;} </code></pre></blockquote>
+.typeGood{color: #859900;}</code></pre></blockquote>
 
 The basic color scheme is called
 [Solarized](http://ethanschoonover.com/solarized).{% endraw %}
