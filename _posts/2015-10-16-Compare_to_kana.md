@@ -1,7 +1,8 @@
+---
 title: Compare to kana
 main_file: compare_to_kana.py
 layout: addon
-date: 2015-10-16
+permalink: Compare_to_kana.html
 status: working
 status_color: green
 status_text_color: white
@@ -9,16 +10,17 @@ abstract: "When typing in Japanese readings, remove the kanji bit from
 the correct text, so that the red and green coloring of the answer
 works correctly."
 first_image: compare_to_kana.png
-first_alt: "Three lines of Text: 1: Einwohner, Bürger: 住民 じゅうみん
-　読み 2: じゅ-みん (kana in green, the dash in red) 3: じゅうみん (the
-じゅ and みん in green, う in blue)"
+first_alt: >
+ Three lines of Text: 1: Einwohner, Bürger: 住民 じゅうみん　読み 2:
+ じゅ-みん (kana in green, the dash in red) 3: じゅうみん (theじゅ and
+ みん in green, う in blue)
 first_caption: The typed-in answer was compared to the kana only.
 ankiweb_id: 4091556602
-
-A typical model for learning Japanese has a field called <q>Reading</q>. In
+---
+{% raw %}A typical model for learning Japanese has a field called <q>Reading</q>. In
 that field, the reading (kana) is stored *along with the kanji*. For
 example, in a note defining the Japanese word for citizens, the
-reading field would look like <q lang="ja">住民[じゃうみん]</q>. Like this, the
+reading field would look like <q lang="ja">住民[じゅうみん]</q>. Like this, the
 standard templates `{{furigana:Reading}}` and `{{kana:Reading}}` work.
 
 <span class="clear" />
@@ -50,11 +52,11 @@ The example images where taken with a somewhat complex note
 type. Without further set-up, the background rather than the text of
 the correct and wrong parts of the text is colored. To override this,
 the following CSS was used:
-<blockquote class=lsting><pre><code><span>.card {color: #657b83; background-color: #fdf6e3;}
+<blockquote class="lsting"><pre><code><span>.card {color: #657b83; background-color: #fdf6e3;}
 \#typeans span {background-color: #fdf6e3;}
 .typeBad {color: #dc322f;}
 .typeMissed, .typePass {  color: #268bd2;}
 .typeGood{color: #859900;} </code></pre></blockquote>
 
 The basic color scheme is called
-[Solarized](http://ethanschoonover.com/solarized).
+[Solarized](http://ethanschoonover.com/solarized).{% endraw %}
