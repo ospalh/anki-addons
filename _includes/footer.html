@@ -4,5 +4,10 @@
         maintains <a href="https://github.com/ospalh/anki-addons">anki-addons</a></span>
       </footer>
     </section>
+{% if page.extra_jq_script %}
+  <script src="{{ site.github.url }}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+  <script src="{{ site.github.url }}/scripts/jquery.qtip.min.js" type="text/javascript"></script>
+  <script src="{{ site.github.url }}/scripts/{{ page.extra_jq_script }}" type="text/javascript"></script>
+    {% endif %}
 </body>
 </html>
