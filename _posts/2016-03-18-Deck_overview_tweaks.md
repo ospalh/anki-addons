@@ -1,15 +1,16 @@
+---
 title: Deck overview tweaks
 main_file: deck_overview_tweaks.py
-date: 2016-03-18
+permalink: Deck_overview_tweaks.html
 layout: addon
 status: working
 status_color: green
 status_text_color: white
 abstract: Show the learn count on the start screen
 first_image: tweaked_deck_overview.png
-first_alt: "The deck overview with New Learn and Due columns and a footer line with card count sums"
+first_alt: "The deck overview with New, Learn and Due columns and a footer line with card count sums"
 first_caption: Learn counts in the deck overview
-
+---
 An add-on to show the learn count on the deck overview screen. With
 this, Anki desktop is more in line with AnkiDroid.
 

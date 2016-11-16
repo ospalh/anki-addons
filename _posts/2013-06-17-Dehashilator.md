@@ -1,20 +1,22 @@
+---
 title: Dehashilator
 main_file: dehashilate.py
 status: breaks collections
 layout: addon
-date: 2013-06-17
+permalink: Dehashilate.html
 status_color: red
 status_text_color: white
 abstract: "Rename media files with names that look like MD5 hashes."
 first_image: hashes.png
-first_alt: "Text display window: These file names will be used and many
-lines like 59d4b8d8eddf0818.e9b228944ccfbca.wav → せ.wav"
+first_alt: >
+ Text display window: These file names will be used and many
+ lines like 59d4b8d8eddf0818.e9b228944ccfbca.wav → せ.wav
 first_caption: Old and new file names.
 download_file: dehashilator.zip
-
+---
 Rename media files with names that look like MD5 hashes.
 <blockquote class="nb">This add-on is likely to break your
-collection. You *will* have to fix a few file names by hand.</blockquote>
+collection. You <em>will</em> have to fix a few file names by hand.</blockquote>
 
 Up to version 1.1, Anki changed the names of media files added to
 their [MD5](http://en.wikipedia.org/wiki/MD5)
