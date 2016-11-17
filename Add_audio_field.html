@@ -1,16 +1,18 @@
+---
 title: Add audio field
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
+parent_link: Download_audio.html
 extra_jq_script: audio_tips.js
-
+---
 The add-on requires a field called <q>Audio</q>, or that contains the word
 <q>Audio</q>, to put the downloaded data.
 
 While adding or renaming fields in Anki isn’t too hard, a short guide
 might be helpful.
 
-## <span id="one_try">Step one: Try</span>
+<h2><span id="one_try">Step one: Try</span></h2>
 
 <figure>
 <img src="images/manual_audio.png" alt="Anki with a card shown and the
@@ -19,12 +21,13 @@ Edit/Media/Manual audio. ">
 <figcaption>When reviewing, activate the
 Edit/Media/Manual audio menu.</figcaption>
 </figure>
+
 When you downloaded a shared deck that already has some audio data,
 it may work without any change. Start reviewing the new deck. On the
 first card, try the menu item
 <q>Edit/Media/Manual audio</q>.
 
-<span class="clear" />
+<span class="clear"></span>
 <figure>
 <img src="images/preview_audio.png" alt="Dialog window with text
 starting Requests to send to the download sites">
@@ -34,7 +37,7 @@ When a dialog with <q>Requests to send to the download sites</q> and with
 the right word in the edit box appears you are in luck and your model
 already works with this add-on.
 
-<span class="clear" />
+<span class="clear"></span>
 <figure>
 <img src="images/nothing_to_download.png" alt="Anki with a card shown
 and a message reading nothing to download">
@@ -42,7 +45,7 @@ and a message reading nothing to download">
 </figure>
 
 
-## Before you go on
+<h2>Before you go on</h2>
 
 Adding fields or changing field names requires a full upload of the
 collection. Make sure you sync before you do this.
@@ -52,12 +55,12 @@ AnkiWeb, sync on these remote clients first. Then sync your desktop
 client. Only then start checking the field list.</blockquote>
 
 
-## Checking the field list
+<h2>Checking the field list</h2>
 
 When the download test didn’t work, you should click on the  <q>Edit</q>
 button in the bottom left.
 
-<figure style="width: 333px;">
+<span class="clear"></span><figure style="width: 333px;">
 <img src="images/front_back.png" alt="Edit current window with fields
 Front and Back. ">
 <img src="images/id_franz_de.png" alt="Edit current window with fields
@@ -72,12 +75,12 @@ fields you would like to download data.
 Then click on the <q>Fields...</q> button.
 
 
-## Adding an audio field
+<h2>Adding an audio field</h2>
 
 In the <q>Fields for NN</q> dialog, click on <q>Add</q>
 
-<span class="clear" />
-### Add for the first field
+<span class="clear"></span>
+<h3>Add for the first field</h3>
 
 <figure>
 <img src="images/add_for_base.png" alt="Dialog with text Field name:
@@ -88,8 +91,8 @@ and input text Audio.">
 When you want to download for the first field, just type <q>Audio</q> for
 the new field name. Then click  <q>OK</q>.
 
-<span class="clear" />
-### <span id="otherfield">Add for <span class="qtbase orfirst">other</span> field</span>
+<span class="clear"></span>
+<h3><span id="otherfield">Add for <span class="qtbase orfirst">other</span> field</span></h3>
 
 <figure>
 <img src="images/add_not_first.png" alt="Anki review window with a
@@ -115,8 +118,8 @@ dialog (blue 3). Use this field name together with the word
 <q>Audio</q> as the new field name. In this case, use <q>Back
 Audio</q>. (blue 4)
 
-<span class="clear" />
-### <span id="thewarning">The warning</span>
+<span class="clear"></span>
+<h3><span id="thewarning">The warning</span></h3>
 
 <figure>
 <img src="images/sync_warning.png" alt="Dialog with text The requested
@@ -132,15 +135,15 @@ collection and do the steps above again. If you are sure, click
 <q>Yes</q>.
 
 
-### More fields
+<h3>More fields</h3>
 
 You can add more than one audio field to download from more than one
-source field by repeating the [Add for other field](#otherfield)
+source field by repeating the <a href="#otherfield">Add for other field</a>
 step.
 
 
-<span class="clear" />
-## <span id="renamefields">Rename fields</span>
+<span class="clear"></span>
+<h2><span id="renamefields">Rename fields</span></h2>
 
 <figure>
 
@@ -150,9 +153,9 @@ window. Text: Requests send to the download sites ID 00906">
 <figcaption>No Sir. I do not want to learn to pronounce
 <q>00906</q>.</figcaption>
 </figure>
-When the [test above](#one_try)
+When the <a href="#one_try">test above</a>
 tried to download from a wrong field, you have to rename the audio
-field. Doing this is similar to [adding an audio field](#otherfield).
+field. Doing this is similar to <a href="#otherfield">adding an audio field</a>.
 
 <figure>
 <img src="images/change_name.png" alt="On the left: Window with a list
@@ -167,26 +170,29 @@ marked in blue, Audio in yellow.">
 <figcaption>Change the name of the field <q>Audio</q>. Add
 the name of the source field to the name.</figcaption>
 </figure>
-
-* Start reviewing.
-* From the main window, click the <q>Edit</q> button in the
+<ul>
+<li>Start reviewing.
+<li>From the main window, click the <q>Edit</q> button in the
   bottom left.
-* Look at the field list: <ul> <li>There should be a field named
-  <q>Audio</q> or <q>Sound</q>. (yellow in the image)</li>
-  <li>Identify the interesting text (<q lang='fr'>Oui monsieur.</q>,
-  red). Note the field name (<q lang='de'>Französisch</q>, blue)</li>
+<li>Look at the field list:
+  <ul>
+    <li>There should be a field named <q>Audio</q>
+      or <q>Sound</q>. (yellow in the image)</li>
+
+    <li>Identify the interesting text (<q lang='fr'>Oui monsieur.</q>,
+      red). Note the field name (<q lang='de'>Französisch</q>, blue)</li>
   </ul>
-* Click the <q>Fields...</q> button
-* The two field names, (<q lang='de'>Französisch</q> and
+<li>Click the <q>Fields...</q> button
+<li>The two field names, (<q lang='de'>Französisch</q> and
   <q>Audio</q>), appear in the list and are marked in blue and yellow.
-* Click on <q>Audio</q> to select the field.
-* Then click the <q>Rename</q> button.
-* As the new name, add the other field’s name to the old
+<li>Click on <q>Audio</q> to select the field.
+<li>Then click the <q>Rename</q> button.
+<li>As the new name, add the other field’s name to the old
   name. (<q>Französisch Audio</q> or <q>Audio Französisch</q>, either
   will work.)
-* Click <q>OK</q>. [The warning](#thewarning) may pop up.
-
-## Go back
+<li>Click <q>OK</q>. <a href="#thewarning">The warning</a> may pop up.
+</ul>
+<h2>Go back</h2>
 
 When you are finished with setting up the fields, simply click
 <q>Close</q> in the <q>Fields for NN</q> dialog and <q>Close</q> again
