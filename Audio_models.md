@@ -1,8 +1,10 @@
+---
 title: Audio models
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
-
+parent_link: Download_audio.html
+---
 
 When adding new material, it is easiest to use the standard models this
 add-on brings along.
@@ -53,8 +55,8 @@ chosen from the list that appears when you click on the current note type.
 ### Changing note types
 
 Instead of changing an existing model by adding an
-[audio field](Add%20audio%20field.html) and that field
-[to the cards](Add%20audio%20to%20cards.html) – the method that is
+[audio field](Add_audio_field.html) and that field
+[to the cards](Add_audio_to_card.html) – the method that is
 still preferred for more complex models – existing basic notes can
 also be changed to the newly created audio models:
 
