@@ -1,15 +1,17 @@
+---
 title: Detailed audio field rules
 source_file: downloadaudio/get_fields.py
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
+parent_link: Download_audio.html
 extra_jq_script: audio_tips.js
-
+---
 In most cases – including learning Japanese or Chinese with the
 [standard](https://ankiweb.net/shared/info/3918629684)
 [add-ons](https://ankiweb.net/shared/info/3448800906) installed –
-[adding a field](Add%20audio%20field.html) <q>Audio</q> to the note and to at
-least [one side of a card](Add%20audio%20to%20cards.html) is enough, but more
+[adding a field](Add_audio_field.html) <q>Audio</q> to the note and to at
+least [one side of a card](Add_audio_to_card.html) is enough, but more
 sophisticated use of the add-on is also possible.
 
 This page describes how the add-on matches audio and text fields and
@@ -17,8 +19,8 @@ gives examples on how to use more than one pronunciation per note.
 
 ## Fields rules
 
-The download mechanism uses these rules to match audio fields to text
-fields:
+The download mechanism uses the following rules to match audio fields to text
+fields
 
 For most downloaders, plain text is used. The rules to find the source
 fields are:
