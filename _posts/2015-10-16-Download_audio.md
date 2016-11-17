@@ -1,22 +1,24 @@
+---
 title: Download audio
 main_file: download_audio.py
 status: working
 layout: addon
-date: 2015-10-16
+permalink: Download_audio.html
 status_color: green
 status_text_color: white
-abstract: "Automatically download audio from talking dictionaries or
-from Google TTS."
+abstract: >
+  Automatically download audio from talking dictionaries or
+  from Google TTS
 first_image: Downloaded%20audio.png
-first_caption: "Do you pronounce the –ear– like in hear? Or like
-earth? ..."
-first_alt: "A dialog window. Six lines with different site icons, the
-word “hearth” and some more buttons. A bubble help with the text
-Source text: hearth From field: Front Source: Macmillan Variant: British"
+first_caption: Do you pronounce the –ear– like in hear? Or like earth? …
+first_alt: >
+  A dialog window. Six lines with different site icons, the word
+  “hearth” and some more buttons. A bubble help with the text Source
+  text: hearth From field: Front Source: Macmillan Variant: British
 subtitle: Hear what you learn
 ankiweb_id: 3100585138
 extra_jq_script: audio_tips.js
-
+---
 This add-on adds three menu items,
 
 * <q>Edit/Media/Note audio</q>
@@ -61,12 +63,12 @@ used for simple cards and new material.
 
 When the already existing notes use a more complex model, this model
 should be modified instead. An audio field should be added to the
-[model](Add%20audio%20field.html)  and the [cards](Add%20audio%20to%20cards.html)
+[model](Add_audio_field.html)  and the [cards](Add_audio_to_cards.html)
 
 Interested users can look at the
-[detailed rules](Detailed%20audio%20field%20rules.html) on field
+[detailed rules](Detailed_audio_field_rules.html) on field
 selection for hints on how to use more then one pronunciation per
-note, and how to [create audio cards](More%20audio%20cards.html).
+note, and how to [create audio cards](More_audio_cards.html).
 
 ## Downloading
 
@@ -119,7 +121,7 @@ window. Text: Requests send to the download sites. Reading. Edit texts:
 When learning Japanese, when there is a <q>Reading</q> field,
 the text used as request and shown in the dialog is split into the
 base text and the reading. See the
-[split reading page](Split%20reading.html) for more details.
+[split reading page](Split_reading.html) for more details.
 
 Along with the edit field or fields for the request text, the edit
 dialog also as a field to set the  language code. This can be used to
@@ -166,7 +168,7 @@ each line. They determine what happens to the downloaded file.
   don’t like.
 * There may be a *blacklist* skull-and-bones button. When this is
   down, the same file will be dropped in the future. See
-  [blacklist](Downloader%20sites.html#blacklist) for more information.
+  [blacklist](Downloader_sites.html#blacklist) for more information.
 
 
 
@@ -175,7 +177,7 @@ each line. They determine what happens to the downloaded file.
 ### Changing languages
 
 After the start, the language code can be
-[changed in the deck options](Setting%20deck%20options.html),
+[changed in the deck options](Setting_deck_options.html),
 under the general tab. This can be done separately for each
 options group. Like this, it is possible to use different download
 languages with different decks. See also the
@@ -215,7 +217,7 @@ send a request or two and see (hear) if you get a useful reply.
 Lastly, [Wiktionary](http://wiktionary.org) is asked with any language
 code. The add-on may or may not find anything useful.
 
-More information in the [list of sites](Downloader%20sites.html) used.
+More information in the [list of sites](Downloader_sites.html) used.
 
 
 ## Private use
@@ -252,7 +254,7 @@ every card. There are a few reasons for this:
 * As there may be many files downloaded for each word, i think  the
   review of the downloaded material should not be skipped.
 * This is especially true for JapanesePod, where you may want to
-  [blacklist](Downloader%20sites.html#blacklist) some downloads.
+  [blacklist](Downloader_sites.html#blacklist) some downloads.
 * Contemplating the downloaded data when you get it note by note is
   also potentially useful in remembering the words.
 
@@ -274,9 +276,13 @@ branch.
 The standard installation saves the files as they are received, which
 works well enough. Nothing more is needed.
 
-But the add-on contains code to do some simple audio processing,
-normalizing the files, clipping silence at the beginning and the end, and
-changing the output format. This code is not used by default, as it
+But the add-on contains code to do simple audio processing:
+
+* Normalizing the volume
+* Clipping silence at the beginning and the end
+* Changing the output format
+
+This code is not used by default, as it
 requires an extra Python packages, [PyDub](http://pydub.com/). That
 [depends](https://github.com/jiaaro/pydub#dependencies) on
 [ffmpeg](https://www.ffmpeg.org/). If ffmpeg is there, pydub can usually
