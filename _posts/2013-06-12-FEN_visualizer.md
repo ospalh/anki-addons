@@ -1,19 +1,24 @@
+---
 title: FEN chess visualizer
 main_file: fen_visualizer.py
-date: 2013-06-12
-tags: [chess fen unicode]
+permalink: FEN_visualizer.html
+tags:
+ - chess
+ - fen
+ - unicode
 layout: addon
 status: abandoned
 status_color: yellow
 status_text_color: black
 abstract: Display FEN data as a chess board.
 first_image: excelsior.png
-first_alt: "Chess board with the chess problem “excelsior”. See text for
-precise position."
-first_caption: "White to mate in five with the least likely piece
-  or pawn."
+first_alt: >
+  Chess board with the chess problem “excelsior”. See text for
+  precise position.
+first_caption: >
+  White to mate in five with the least likely piece or pawn.
 ankiweb_id: 2923601993
-
+---
 
 
 Display a record of a chess position in
@@ -51,6 +56,6 @@ ey’s welcome to take over this add-on.
 
 ## Chess deck
 
-This [shared deck](https://ankiweb.net/shared/info/1176122148)
+This [shared deck](https://ankiweb.net/shared/info/1176122148),
 that should work on AnkiWeb as well, can be used instead. While that
 deck does not allow black’s view, it is otherwise more flexible.

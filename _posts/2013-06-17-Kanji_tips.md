@@ -1,14 +1,15 @@
+---
 title: Kanji tips
-main_file: kanji_tips.py
+main_file: kanjitips/tips.py
 layout: addon
-date: 2013-06-17
+permalink: Kanji_tips.html
 status: broken, source only
 status_color: red
 status_text_color: white
 abstract: Gloss kanji with pop-up tips.
 first_image: stroke%20color.png
 first_caption: Stroke order diagrams are part of what the tips could show.
-
+---
 
 This is a try to show pop-up tips for kanji.
 

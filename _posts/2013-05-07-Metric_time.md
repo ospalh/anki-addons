@@ -1,14 +1,16 @@
+---
 title: Metric time
 main_file: metric_time.py
 status: personal hobby horse, broken
 layout: addon
-date: 2013-05-07
+permalink: Metric_time.html
 status_color: red
 status_text_color: white
 abstract: Shows times in some spots as days or years.
 first_image: Studied%20in%20days.png
 first_alt: The time studied is shown in days, not hours.
-
+first_caption: 5.6 centidays
+---
 This add-on is just me riding my favorite hobby horse,
 [metric time](http://en.wikipedia.org/wiki/Decimal_time#Fractional_days).
 I think splitting days into hours, minutes and seconds is about as

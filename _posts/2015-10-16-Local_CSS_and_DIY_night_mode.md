@@ -1,29 +1,32 @@
+---
 title: Local CSS and DIY night mode
 subtitle: Adapt card styles to time and place
 main_file: local_css_and_diy_night_mode.py
 status: working
 layout: addon
-date: 2015-10-16
+permalink: Local_CSS_and_DIY_night_mode.html
 status_color: green
 status_text_color: white
-abstract: "Add styling from a local CSS file. With this, the card
-style can be adapted to time (night colors) and place (small fonts on
-small screens, big fonts on big screens, ...). Also add classes for a
-DIY night mode."
+abstract: >
+  Add styling from a local CSS file. With this, the card style can be
+  adapted to time (night colors) and place (small fonts on small
+  screens, big fonts on big screens, …). Also add classes for a DIY
+  night mode.
 first_image: three_styles.png
 first_caption: "The same card with different styles"
-first_alt: "An Anki review window, split and showing different fonts and color schemes in different parts."
+first_alt: >
+  An Anki review window, split and showing different fonts and color
+  schemes in different parts."
 ankiweb_id: 2587372325
-
+---
 This loads the local CSS file `user_style.css` and adds the style to
 the CSS set in the card templates.
 
 It also adds a few classes to the cards.
 
-
 With this, the look of the cards can be adapted to the time of day
 (night colors) and place (small fonts on small screens, big fonts on
-big screens, ...)
+big screens, …)
 
 ## Set-up
 
@@ -70,9 +73,9 @@ back template of a card.
 
 Then, different Japanese fonts can be selected on different computers
 by using <code>.loc .nihongo{font-family:
-[IPAPMincho](http://ossipedia.ipa.go.jp/ipafont/index.html);}</code> in
+<a href="http://ossipedia.ipa.go.jp/ipafont/index.html">IPAPMincho</a>;}</code> in
 one style file and <code>.loc .nihongo{font-family:
-"[Moon font](http://cooltext.com/Download-Font-%E6%9C%88+Moon)";}</code>
+"<a href="http://cooltext.com/Download-Font-%E6%9C%88+Moon">Moon font</a>";}</code>
 in another.
 
 <blockquote class="nb">

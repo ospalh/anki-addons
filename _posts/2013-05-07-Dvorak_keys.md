@@ -1,20 +1,23 @@
+---
 title: Dvorak keys
 main_file: dvorak_keys.py
 status: working
 layout: addon
-date: 2013-05-07
+permalink: Dvorak_keys.html
 status_color: green
 status_text_color: white
-abstract: "Use keys easy to use for user of the <a
-href=\"http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard\">Dvorak
-simplified keyboard</a> to answer a question."
+abstract: >
+  Use keys easy to use for user of the <a
+  href="https://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak
+  simplified keyboard</a> to answer a question.
 first_image: Dvorak_keys.png
-first_alt: "Sketch of a keyboard and hands. Some keys are marked as described
-in the text."
+first_alt: >
+  Sketch of a keyboard and hands. Some keys are marked as described
+  in the text.
 first_caption: The keys to use.
 ankiweb_id: 2714331040
 extra_jq_script: dvorak_tips.js
-
+---
 Use keys easy to use for user of the <a
 href="http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak
 simplified keyboard</a> to answer a question.

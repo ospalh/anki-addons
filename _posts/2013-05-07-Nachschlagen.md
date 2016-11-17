@@ -1,20 +1,23 @@
+---
 title: Nachschlagen
 main_file: nachschlagen.py
+permalink: nachschlagen.html
 layout: addon
-date: 2013-05-07
 status: working
 status_color: green
 status_text_color: white
-abstract: "Menu to look up words at a few web sites. Most useful for
-speakers of German learning Japanese."
+abstract: >
+  Menu to look up words at a few web sites. Most useful for speakers
+  of German learning Japanese.
 first_image: nachschlagen.png
-first_alt: "A menu called Nachschlagen under the Tools menu. Menu
-items: Japanisch bei Wadoku, Deutsch bei Wadoku, Auswahl bei Wadoku,
-Kanji bei Kanji-Lexikon, Kanjiauswahl bei Kanji-Lexikon, Ausdruck bei
-Forvo, Auswahl bei Forvo"
+first_alt: >
+  A menu called Nachschlagen under the Tools menu. Menu items:
+  Japanisch bei Wadoku, Deutsch bei Wadoku, Auswahl bei Wadoku, Kanji
+  bei Kanji-Lexikon, Kanjiauswahl bei Kanji-Lexikon, Ausdruck bei
+  Forvo, Auswahl bei Forvo
 first_caption: The new menu
 ankiweb_id: 1211332804
-
+---
 Like the <q>Lookup</q> menu from the Japanese support add-on, this
 adds a menu called <q lang="de">Nachschlagen</q> were you can look up
 words at some of my favorite resources.
@@ -50,7 +53,7 @@ useful for learners of Japanese
 
 The two other resources are more narrowly useful for German speakers:
 
-* [Kanjilexikon](http://lingweb.eva.mpg.de/kanji/index.html), pretty
+* [Kanjilexikon](https://mpi-lingweb.shh.mpg.de/kanji/index.html), pretty
   much what it says. A German kanji dictionary.
-* [WaDoku](http://www.wadoku.de/wadoku), basically *the* Japanese–German
+* [WaDoku](http://www.wadoku.de/), basically *the* Japanese–German
   online dictionary

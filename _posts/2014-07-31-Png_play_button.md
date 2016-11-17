@@ -1,7 +1,11 @@
+---
 title: Replay buttons on card
 main_file: play_button.py
-date: 2014-07-31
-tags: [review replay button]
+permalink: Play_button.html
+tags:
+ - review
+ - replay
+ - button
 layout: addon
 status: working
 status_color: green
@@ -10,7 +14,7 @@ abstract: "Show a replay button for each file on a card."
 first_image: play_buttons.png
 first_alt: "Flash card with text and play buttons."
 ankiweb_id: 498789867
-
+---
 Simple add-on that adds play buttons to the cards for audio and video
 files.
 
