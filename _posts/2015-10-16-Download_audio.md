@@ -56,19 +56,19 @@ A list of audio codes can – unsurprisingly – be found at
 
 ## Setup – Models
 
-Use the [models](Audio%20models.html) the add-on brings along can be
+Use the [models](Audio_models.html) the add-on brings along can be
 used for simple cards and new material.
 
 ### Changes to existing models
 
 When the already existing notes use a more complex model, this model
 should be modified instead. An audio field should be added to the
-[model](Add_audio_field.html)  and the [cards](Add_audio_to_cards.html)
+[model](Add_audio_field.html)  and the [cards](Add_audio_to_card.html)
 
 Interested users can look at the
 [detailed rules](Detailed_audio_field_rules.html) on field
 selection for hints on how to use more then one pronunciation per
-note, and how to [create audio cards](More_audio_cards.html).
+note, and how to [create audio cards](More_audio_card.html).
 
 ## Downloading
 
