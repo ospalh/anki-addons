@@ -2,7 +2,7 @@
 {% include subpage_header.html %}
 <article id="{{page.id}}" class="clear">
   <div class="articleBody">
-    {{ page.content }}
+    {{ page.content | markdownify }}
   </div>
 
 </article>
