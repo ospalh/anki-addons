@@ -41,7 +41,7 @@ of curly braces, to the top left <q>Front Template</q> editor. To add it to
 the answer, type it into the bottom left <q>Back Template</q> editor.
 
 When you had to pick a different field name when you
-[added the field](Add%20audio%20field.html) to the note, use that name
+[added the field](Add_audio_field.html) to the note, use that name
 inside the braces.
 
 While typing on the left, the text should be visible on the right,

@@ -1,8 +1,11 @@
+---
 title: Setting the language in the deck options
 source_file: downloadaudio/conflanguage.py
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
+parent: Download_audio.html
+---
 
 During start-up, only one language code is set for all decks.
 

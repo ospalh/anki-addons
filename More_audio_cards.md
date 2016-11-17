@@ -1,8 +1,10 @@
+---
 title: More audio cards
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
-
+parent_link: Download_audio.html
+---
 One way to use the downloaded audio is to create a special card for
 hearing comprehension.
 
@@ -19,6 +21,7 @@ To get the template editor, start reviewing. Then click the <q>Edit</q>
 button at the bottom left. In the <q>Edit Current</q> window click <q>Cards...</q>
 
 <span class="clear" />
+
 ### Adding a hearing comprehension card
 
 Click on the <q>+</q> button at the top right. A new tab appears at

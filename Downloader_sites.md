@@ -1,9 +1,11 @@
+---
 title: Audio downloader sites
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
+parent_link: Download_audio.html
 extra_jq_script: audio_tips.js
-
+---
 These sites are tried to retrieve audio clips:
 
 ## Beolingus
@@ -176,7 +178,7 @@ pronunciation that is present on a specific Wiktionary page, please
 will then try to find a way to extract that word, so that it should be
 downloaded with an updated version of the add-on.
 
-## <span id="not_forvo">*Not* Forvo</span>
+<h2><span id="not_forvo"><em>Not</em> Forvo</span></h2>
 
 A number of people have asked for the crowd-sourced pronunciation site
 [Forvo](http://forvo.com) to be added. While the pronunciations

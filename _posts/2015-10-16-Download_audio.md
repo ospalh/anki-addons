@@ -68,7 +68,7 @@ should be modified instead. An audio field should be added to the
 Interested users can look at the
 [detailed rules](Detailed_audio_field_rules.html) on field
 selection for hints on how to use more then one pronunciation per
-note, and how to [create audio cards](More_audio_card.html).
+note, and how to [create audio cards](More_audio_cards.html).
 
 ## Downloading
 
