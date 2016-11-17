@@ -1,8 +1,10 @@
+---
 title: Add audio to cards
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
-
+parent_link: Download_audio.html
+---
 Without a bit of set-up, audio may be downloaded but not played during
 review. To hear the words, the audio field has to be added to a card
 template.
