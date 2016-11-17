@@ -62,7 +62,7 @@ additional classes  `furigana` and `furikanji`; the kana and kanji
 texts get wrapped in spans with classes `kana`  and
 `kanji`.
 
-See the [complex classes](Complex%20classes.html) page for examples on
+See the [complex classes](Complex_classes.html) page for examples on
 how to use these classes.
 
 

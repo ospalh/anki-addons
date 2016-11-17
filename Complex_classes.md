@@ -1,9 +1,11 @@
+---
 title: Complex use of classes
 layout: subpage
 ankiweb_id: 2327947748
 parent: Furikanji
+parent_link: Furikanji.html
 extra_jq_script: class_tips.js
-
+---
 These are examples of more creative use of the classes added by the
 Furikanji add-on.
 
