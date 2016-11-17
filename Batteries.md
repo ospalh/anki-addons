@@ -1,6 +1,7 @@
+---
 title: Batteries
 layout: other_page
-
+---
 Usually, [Python](http://python.org), the programming language Anki
 and Anki add-ons are written in, comes with a number of functions
 useful for programmers, the
@@ -20,10 +21,10 @@ on my system.
 This applies to the following add-on. None of them have been published
 on Anki web or are all that useful for the general public.
 
-* [Add kanji embeds](Add%20kanji%20embeds.html)
-* [Metric time](Metric%20time.html)
-* [Swiss locale](Swiss%20locale.html)
-* [Kanji stroke color](Kanji%20stroke%20color.html)
+* [Add kanji embeds](Add_kanji_embeds.html)
+* [Metric time](Metric_time.html)
+* [Swiss locale](Swiss_locale.html)
+* [Kanji stroke color](Kanji_stroke_color.html)
 
 The other add-ons should not need this.
 

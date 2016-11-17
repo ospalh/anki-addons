@@ -1,0 +1,10 @@
+{% include top.html %}
+{% include other_header.html %}
+<article id="{{page.id}}" class="clear">
+  <div class="articleBody">
+    {{ page.content | markdownify }}
+  </div>
+
+</article>
+
+{% include footer.html %}
