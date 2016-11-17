@@ -1,9 +1,11 @@
+---
 title: Add audio field
 layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
+parent_link: Download_audio.html
 extra_jq_script: audio_tips.js
-
+---
 The add-on requires a field called <q>Audio</q>, or that contains the word
 <q>Audio</q>, to put the downloaded data.
 
@@ -77,6 +79,7 @@ Then click on the <q>Fields...</q> button.
 In the <q>Fields for NN</q> dialog, click on <q>Add</q>
 
 <span class="clear" />
+
 ### Add for the first field
 
 <figure>
@@ -89,7 +92,8 @@ When you want to download for the first field, just type <q>Audio</q> for
 the new field name. Then click  <q>OK</q>.
 
 <span class="clear" />
-### <span id="otherfield">Add for <span class="qtbase orfirst">other</span> field</span>
+
+<h3><span id="otherfield">Add for <span class="qtbase orfirst">other</span> field</span></h3>
 
 <figure>
 <img src="images/add_not_first.png" alt="Anki review window with a
@@ -116,7 +120,7 @@ dialog (blue 3). Use this field name together with the word
 Audio</q>. (blue 4)
 
 <span class="clear" />
-### <span id="thewarning">The warning</span>
+<h3><span id="thewarning">The warning</span></h3>
 
 <figure>
 <img src="images/sync_warning.png" alt="Dialog with text The requested
@@ -140,6 +144,7 @@ step.
 
 
 <span class="clear" />
+
 ## <span id="renamefields">Rename fields</span>
 
 <figure>
@@ -171,11 +176,11 @@ the name of the source field to the name.</figcaption>
 * Start reviewing.
 * From the main window, click the <q>Edit</q> button in the
   bottom left.
-* Look at the field list: <ul> <li>There should be a field named
-  <q>Audio</q> or <q>Sound</q>. (yellow in the image)</li>
-  <li>Identify the interesting text (<q lang='fr'>Oui monsieur.</q>,
-  red). Note the field name (<q lang='de'>Französisch</q>, blue)</li>
-  </ul>
+* Look at the field list:
+  * There should be a field named
+    <q>Audio</q> or <q>Sound</q>. (yellow in the image)
+  * Identify the interesting text (<q lang='fr'>Oui monsieur.</q>,
+    red). Note the field name (<q lang='de'>Französisch</q>, blue)
 * Click the <q>Fields...</q> button
 * The two field names, (<q lang='de'>Französisch</q> and
   <q>Audio</q>), appear in the list and are marked in blue and yellow.
