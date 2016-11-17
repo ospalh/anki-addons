@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2013–16 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2013–14 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -15,7 +15,6 @@ from BeautifulSoup import BeautifulSoup
 from PyQt4.QtCore import QUrl
 from PyQt4.QtGui import QDesktopServices
 
-from anki.cards import Card
 from anki.hooks import addHook, wrap
 from anki.sound import play
 from aqt import mw
@@ -24,33 +23,13 @@ from aqt.browser import DataModel
 from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 
-__version__ = "1.0.0"
+__version__ = "1.5.0"
 
 sound_re = ur"\[sound:(.*?)\]"
 
+original_arrow_name = 'replay.png'
+collection_arrow_name = '_inline_replay_button.png'
 hide_class_name = u'browserhide'
-
-
-def svg_css(Card):
-    """Add the svg button style to the card style"""
-    return u"""<style scoped>
-.replaybutton span {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 5px;
-}
-
-.replaybutton span svg {
-  stroke: none;
-  fill: black;
-  display: inline;
-  height: 1em;
-  width: 1em;
-  min-width: 12px;
-  min-height: 12px;
-}
-</style>
-""" + old_css(Card)
 
 
 def play_button_filter(
@@ -72,13 +51,14 @@ def play_button_filter(
         else:
             title = sound.group(1)
         return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
-title="{ttl}" class="replaybutton browserhide"><span><svg viewBox="0 0 32 32">\
-<polygon points="11,25 25,16 11,7"/>Replay</svg></span></a>\
-<span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
-            orig=sound.group(0), fn=sound.group(1), ttl=title)
+title="{ttl}" class="replaybutton browserhide"><span><img src="{ip}" \
+alt="play" style="max-width: 32px; max-height: 1em; min-height:8px;" />\
+</span></a><span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
+            orig=sound.group(0), fn=sound.group(1), ip=collection_arrow_name,
+            ttl=title)
         # The &#91; &#93; are the square brackets that we want to
         # appear as brackets and not trigger the playing of the
-        # sound. The span inside the a around the svg is to bring this
+        # sound. The span inside the a around the img is to bring this
         # closer in line with AnkiDroid.
     return re.sub(sound_re, add_button, qa_html)
 
@@ -119,15 +99,23 @@ def reduce_format_qa(self, text):
     return original_format_qa(self, unicode(soup))
 
 
+def copy_arrow():
+    u"""Copy the image file to the collection."""
+    if not os.path.exists(os.path.join(
+            mw.col.media.dir(), collection_arrow_name)):
+        shutil.copy(
+            os.path.join(mw.pm.addonFolder(), 'color_icons',
+                         original_arrow_name),
+            collection_arrow_name)
+
+
 original_review_link_handler = Reviewer._linkHandler
 Reviewer._linkHandler = review_link_handler_wrapper
 
 original_format_qa = DataModel.formatQA
 DataModel.formatQA = reduce_format_qa
 
-old_css = Card.css
-Card.css = svg_css
-
 addHook("mungeQA", play_button_filter)
 Browser._openPreview = wrap(Browser._openPreview, add_preview_link_handler)
 CardLayout.addTab = wrap(CardLayout.addTab, add_clayout_link_handler)
+addHook("profileLoaded", copy_arrow)
