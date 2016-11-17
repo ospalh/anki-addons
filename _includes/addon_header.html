@@ -14,9 +14,5 @@
           </ul>
         </nav>
         <h1>{{ page.title }}</h1>
-        {% if page.subtitle %}
-        <h3>{{ page.subtitle }}</h3>
-        {%else%}
-        <h3>An Anki2 add-on</h3>
-        {%endif%}
+        <h3>{{ page.subtitle | default: "An Anki2 add-on"}}</h3>
       </header>
