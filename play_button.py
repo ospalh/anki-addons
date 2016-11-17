@@ -25,7 +25,7 @@ from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 from aqt import mw
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 sound_re = ur"\[sound:(.*?)\]"
 
@@ -62,11 +62,11 @@ def play_button_filter(
 
     def add_button(sound):
         u"""
-        Add img link after the match.
+        Add a button after the match.
 
-        Add an img link after the match to replay the audio. The title
-        is set to "Replay" on the question side to hide information or
-        to the file name on the answer.
+        Add a button after the match to replay the audio. The title is
+        set to "Replay" on the question side to hide information or to
+        the file name on the answer.
         """
         if 'q' == qa_type:
             title = u"Replay"
@@ -79,8 +79,8 @@ title="{ttl}" class="replaybutton browserhide"><span><svg viewBox="0 0 32 32">\
             orig=sound.group(0), fn=sound.group(1), ttl=title)
         # The &#91; &#93; are the square brackets that we want to
         # appear as brackets and not trigger the playing of the
-        # sound. The span inside the a around the svg is to bring this
-        # closer in line with AnkiDroid.
+        # sound. The span inside the a around the svg is there to
+        # bring this closer in line with AnkiDroid.
     return re.sub(sound_re, add_button, qa_html)
 
 
