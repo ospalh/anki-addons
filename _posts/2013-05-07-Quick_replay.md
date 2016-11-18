@@ -1,15 +1,17 @@
+---
 title: Quick replay
 main_file: quick_replay.py
 layout: addon
-date: 2013-05-07
+permalink: quick_replay.html
 status: hackish
 status_color: yellow
 status_text_color: black
-abstract: "Bypass the mplayer play queue. Like this, when you hit
-replay, the replay starts at once."
+abstract: >
+  Bypass the mplayer play queue. Like this, when you hit replay, the
+  replay starts at once.
 first_image: mplayer.png
 first_alt: Console output of mpg321
-
+---
 Play all audio from a single card with a single call to mplayer.
 
 Normally, audio and video files are put in a queue and played one after

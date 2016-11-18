@@ -1,8 +1,9 @@
+---
 title: Quick note and deck buttons
 main_file: quick_note_and_deck_buttons.py
 status: working
 layout: addon
-date: 2013-05-07
+permalink: Quick_note_and_deck_buttons.html
 ankiweb_id: 2181333594
 status_color: green
 status_text_color: white
@@ -10,7 +11,7 @@ abstract: Quickly select a few models or decks.
 first_image: quick_buttons.png
 first_alt: The top of the add card dialog with a few extra buttons
 first_caption: Select your favorite model or deck.
-
+---
 This add-on adds a few buttons to the right of the select note type
 button and the select deck button at the top of the add card dialog.
 
@@ -61,7 +62,6 @@ For more options read the comments in the
 
 ## Notes
 
-This add-on is an expansion of the
-[Quick change Note buttons](https://ankiweb.net/shared/info/1720844055)
+This add-on was inspired by the “Quick change Note buttons”
 add-on. The code is based on that version, by Steve AW. Many thanks,
 for the code and also for the idea in the first place.
