@@ -1,17 +1,20 @@
+---
 title: Unnormalize
 main_file: unnormalize.py
-date: 2013-06-07
+permalink: Unnormalize.html
 layout: addon
 status: may add errors, broken
 status_color: red
 status_text_color: white
-abstract: "Fix file name problems caused by Unicode normalization."
+abstract: >
+  Fix file name problems caused by Unicode normalization.
 first_image: tuebingen_tuebingen.png
-first_alt: 'Screen text: In media folder but not used by any cards:
-Tübingen_Neckarfront.jpg Used on cards but missing from media folder:
-Tübingen_Neckarfront.jpg.'
+first_alt: >
+ Screen text: In media folder but not used by any cards:
+ Tübingen_Neckarfront.jpg Used on cards but missing from media folder:
+ Tübingen_Neckarfront.jpg.
 first_caption: "So, the file is there and it is missing‽"
-
+---
 This can be used to fix a problem caused by adding files <q>sideways</q> on
 Macs.
 

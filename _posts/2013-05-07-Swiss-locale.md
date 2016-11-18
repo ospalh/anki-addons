@@ -1,14 +1,15 @@
+---
 title: Swiss locale
 main_file: swiss_locale.py
 layout: addon
-date: 2013-05-07
+permalink: Swiss_locale.html
 status: one-off, broken
 status_color: red
 status_text_color: white
 abstract: An add-on to make my German geography deck work.
 first_image: nordzypern.png
 first_alt: The input of 0.26 is formatted as 260'000.
-
+---
 This add-on provides a few hacks to make my personal German geography
 deck work.
 
@@ -30,17 +31,17 @@ countries with less then one million inhabitants, the display would
 look like <q lang="de_CH">0.26 Millionen Einwohner</q> or <q
 lang="de_CH">0.00007 Millionen Einwohner</q>. That looks ugly. So, i
 use this add-on and in the card template i use
-`{{swissmega:MegaInhabitants_Scalar}}`. Like that, the output is <q
-lang="de_CH">260'000 Einwohner</q> and <q lang="de_CH">70
-Einwohner</q>, while larger countries will still get something like <q
-lang="de_CH">83 Millionen Einwohner</q>.
+`{%raw%}{{swissmega:MegaInhabitants_Scalar}}{%endraw%}`. Like that,
+the output is <q lang="de_CH">260'000 Einwohner</q> and <q
+lang="de_CH">70 Einwohner</q>, while larger countries will still get
+something like <q lang="de_CH">83 Millionen Einwohner</q>.
 
 Basically the same is done with the area, which is stored in thousands
 of square kilometers. One twist is that i am a big fan of the
 [SI](http://en.wikipedia.org/wiki/International_System_of_Units) in
 all its glory. I like to use SI prefixes even when they are not
 common. So, an area of a million square kilometers, that is just one
-megameter times one megameter, 1 Mm<sup>2</sup>.
+megameter times one megameter, 1 Mm<sup>2</sup>. UTSL for details.
 
 The <q>Swiss</q> part comes from the fact that i just personally like the
 Swiss way of writing large numbers with an apostrophe as thousands
