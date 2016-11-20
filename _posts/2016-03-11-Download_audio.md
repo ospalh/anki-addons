@@ -92,12 +92,15 @@ side. During the [review](#review), it will hide the text it used to
 get the sounds. Use this while learning from your native language to
 the foreign language, or when trying to recognize spoken words.
 
+The “t” key can be used as a shortcut for this download method.
+
 ### Note audio
 
 Note audio fetches sounds for all audio fields of the current note.
 During the [review](#review), the texts used to
 retrieve the sounds are shown.
 
+Use “q” a short cut for this download method.
 
 ### Manual audio
 
@@ -110,6 +113,11 @@ to annex. The to is marked..">
 Manual audio mode opens a dialog showing all fields where files can be
 downloaded. The texts, as well as the language to use, can be changed
 before the request is send.
+
+You can also use “Ctrl+t” to open the dialog. The “q” and “t” keys are
+used by the [Dvorak keys](Dvorak_keys.html) add-on, too. When both are
+installed, the download shortcuts will not work, and a “hard” or
+“good” reply will be recorded.
 
 <span  class="clear" />
 <figure>
@@ -196,6 +204,7 @@ dictionaries used.
 
 At the moment, you can get pronunciations for
 
+* Danish (`da`) from [Den Dasnke Ordbog](http://ordnet.dk/ddo)
 * English (`en`) from
   [Macmillan Dictionary](http://www.macmillandictionary.com/dictionary/),
   [Merriam-Webster](http://merriam-webster.com),
@@ -203,6 +212,7 @@ At the moment, you can get pronunciations for
 * French (`fr`) from [Collins](http://www.collinsdictionary.com/dictionary/english-french)
 * German (`de`) from [BeoLingus](http://beolingus.org) and
   [Duden](http://www.duden.de)
+* Icelandic (`is`) from [ISLEX](http://islex.is/)
 * Italian (`it`) from
   [Collins](http://www.collinsdictionary.com/dictionary/english-italian)
 * Japanese (`ja`) from [JapanesePod](http://japanesepod101.com)
@@ -282,12 +292,13 @@ But the add-on contains code to do simple audio processing:
 * Clipping silence at the beginning and the end
 * Changing the output format
 
-This code is not used by default, as it
-requires an extra Python packages, [PyDub](http://pydub.com/). That
+This code is not used by default, as it requires an extra Python
+packages, [PyDub](http://pydub.com/). That
 [depends](https://github.com/jiaaro/pydub#dependencies) on
-[ffmpeg](https://www.ffmpeg.org/). If ffmpeg is there, pydub can usually
-be installed via [pip](https://pypi.python.org/pypi/pip).  Hackers
-that manage to do that may then want to take a look at the
+[ffmpeg](https://www.ffmpeg.org/) or [libav](https://libav.org/). If
+either one is there, pydub can usually be installed via
+[pip](https://pypi.python.org/pypi/pip).  Hackers that manage to do
+that may then want to take a look at the
 [processors](https://github.com/ospalh/anki-addons/tree/develop/downloadaudio/processors/audio_processor.py).
 
 ### More ideas

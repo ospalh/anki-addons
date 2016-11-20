@@ -27,6 +27,13 @@ French, German, Italian and Spanish. Here, too, the quality of the
 pronunciations didn’t really convince me, so the files will be deleted
 by default, too.
 
+## Den Danske Ordbog
+
+[Den Dasnke Ordbog](http://ordnet.dk/ddo) or [The Danish
+Dictionary](http://ordnet.dk/ddo_en?set_language=en) is used for
+Danish (language code `da`). It has been called the largest dictionary
+of modern Danish.
+
 ## Duden
 
 The [Duden](http://www.duden.de) is pretty much the reference
@@ -64,6 +71,13 @@ file to `True`.
 ## Howjsay
 
 Requests for English words are sent to [howjsay.com](http://howjsay.com/).
+
+## ISLEX
+
+The [ISLEX](http://islex.is/) orðabókin is used for Icelandic. The
+dictionary is run by the [Stofnun Árna Magnússonar í íslenskum
+fræðum](https://en.wikipedia.org/wiki/%C3%81rni_Magn%C3%BAsson_Institute_for_Icelandic_Studies)
+([SAM](http://www.arnastofnun.is/)).
 
 ## <span id="jpod">JapanesePod</span>
 
@@ -164,12 +178,11 @@ The add-on tries to download words for every language. Where you get
 any results is hard to say.
 
 As these sound files are all uploaded by users, it is possible (even
-if unlikely) that some files do not contain what the should. They
-*might* even contain obscenities. The
-[content disclaimer](http://en.wikipedia.org/wiki/Wikipedia:Content_disclaimer)
+if unlikely) that some files do not contain what the should. The
+[content
+disclaimer](http://en.wikipedia.org/wiki/Wikipedia:Content_disclaimer)
 from Wikipedia applies. If you encounter an incorrect file, the best
-way to proceed is to clean up the Wiktionary page in
-question.
+way to proceed is to clean up the Wiktionary page in question.
 
 The different language versions of Wiktionary add audio clips in
 different ways to their word pages. When the add-on did not download a
