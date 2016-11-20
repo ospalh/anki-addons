@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–16 Roland Sieker <ospalh@gmail.com>
 # Copyright © 2013 Albert Lyubarsky <albert.lyubarsky@gmail.com>
 # Copyright © 2014 Daniel Eriksson, p.e.d.eriksson@gmail.com
 # Copyright © 2015 Paul Hartmann <phaaurlt@gmail.com>
