@@ -2,7 +2,7 @@
     <figure class="abstract">
       <img src="{{ site.github.url }}/images/{{post.first_image}}" alt="{{post.first_alt}}" {%if post.first_image_attributes %}{{post.first_image_attributes|safe}}{% endif %}/>
     </figure>
-  <h2><a href="{{ post.url }}">{{ post.title}}</a></h2>
+  <h2><a href="{{ site.github.url }}{{ post.url | relative_url }}">{{ post.title}}</a></h2>
 
     {%if post.subtitle%}
     <h4>{{post.subtitle}}</h4>
