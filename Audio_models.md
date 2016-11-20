@@ -69,7 +69,7 @@ also be changed to the newly created audio models:
 * Trigger the browsers menu item <q>Edit/Change Note Type ...</q>
 * For <q>New note type:</q> select the <q>… with audio</q> type.
 * Check that no information will be lost. When you see that something
-  will be changed to <q>Nothing</q>, you may be better of with modifying
+  will be changed to <q>Nothing</q>, you may be better off with modifying
   the existing *model*, rather than changing *notes* from one model to another.
 * Click OK
 * You will get a warning that you will have to do a full sync. Choose

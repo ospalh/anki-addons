@@ -31,8 +31,7 @@ by default, too.
 
 [Den Dasnke Ordbog](http://ordnet.dk/ddo) or [The Danish
 Dictionary](http://ordnet.dk/ddo_en?set_language=en) is used for
-Danish (language code `da`). It has been called the largest dictionary
-of modern Danish.
+Danish. It has been called the largest dictionary of modern Danish.
 
 ## Duden
 
