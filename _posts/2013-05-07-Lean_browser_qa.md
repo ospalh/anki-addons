@@ -14,7 +14,7 @@ first_image: browserhide.png
 first_alt: >
  Part of the Anki review window. Text: みんなの日本語： に んぎょう.
  Below part on the Anki card browser. One line highlighted. Text: 人形;
- Japanisch-De...; にんぎょう"
+ Japanisch-De...; にんぎょう
 first_caption: >
  The text 「みんなの日本語：」 is shown on the card, but not in the
  browser.

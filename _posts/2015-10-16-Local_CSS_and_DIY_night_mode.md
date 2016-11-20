@@ -16,7 +16,7 @@ first_image: three_styles.png
 first_caption: "The same card with different styles"
 first_alt: >
   An Anki review window, split and showing different fonts and color
-  schemes in different parts."
+  schemes in different parts.
 ankiweb_id: 2587372325
 ---
 This loads the local CSS file `user_style.css` and adds the style to
