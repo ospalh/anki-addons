@@ -13,7 +13,7 @@ Download pronunciations for Danish from Den Danske Ordbog
 
 import urllib.request, urllib.parse, urllib.error
 from urllib.error import HTTPError
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
 

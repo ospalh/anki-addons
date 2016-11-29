@@ -14,7 +14,7 @@ Class to download a files from a speaking dictionary or TTS service.
 
 import tempfile
 import urllib.request, urllib.error, urllib.parse
-import urlparse
+import urllib.parse
 from BeautifulSoup import BeautifulSoup as soup
 
 # Make this work without PyQt
@@ -128,8 +128,8 @@ class AudioDownloader(object):
             self.get_favicon()
             return
         # The url may be absolute or relative.
-        if not urlparse.urlsplit(icon_url).netloc:
-            icon_url = urlparse.urljoin(
+        if not urllib.parse.urlsplit(icon_url).netloc:
+            icon_url = urllib.parse.urljoin(
                 self.url, urllib.parse.quote(icon_url.encode('utf-8')))
         icon_request = urllib.request.Request(icon_url)
         if self.user_agent:
@@ -159,7 +159,7 @@ class AudioDownloader(object):
         if not with_pyqt:
             self.site_icon = None
             return
-        ico_url = urlparse.urljoin(self.icon_url, "/favicon.ico")
+        ico_url = urllib.parse.urljoin(self.icon_url, "/favicon.ico")
         ico_request = urllib.request.Request(ico_url)
         if self.user_agent:
             ico_request.add_header('User-agent', self.user_agent)

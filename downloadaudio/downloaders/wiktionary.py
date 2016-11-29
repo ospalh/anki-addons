@@ -13,7 +13,7 @@ Download pronunciations from Wiktionary.
 
 import re
 import urllib.request, urllib.parse, urllib.error
-import urlparse
+import urllib.parse
 
 from .downloader import AudioDownloader, uniqify_list
 from ..download_entry import DownloadEntry
@@ -105,7 +105,7 @@ class WiktionaryDownloader(AudioDownloader):
         for url_to_get in ogg_url_list:
             # We may have to add a scheme or a scheme and host
             # name (netloc). urlparse to the rescue!
-            word_url = urlparse.urljoin(
+            word_url = urllib.parse.urljoin(
                 self.url.format(self.language, ''), url_to_get)
             try:
                 word_path = self.get_tempfile_from_url(word_url)

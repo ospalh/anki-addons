@@ -17,7 +17,7 @@ from copy import copy
 import os
 import re
 import urllib.request, urllib.error, urllib.parse
-import urlparse
+import urllib.parse
 
 from ..blacklist import get_hash
 from ..download_entry import JpodDownloadEntry
@@ -152,7 +152,7 @@ class JapanesepodDownloader(AudioDownloader):
                     hits[audio] = popular
                     break
         for audio, popular in hits.items():
-            args = urlparse.parse_qs(audio.encode('utf-8'))
+            args = urllib.parse.parse_qs(audio.encode('utf-8'))
             audio_kanji = args['kanji'][0].decode('utf-8') \
                 if 'kanji' in args else None
             audio_kana = args['kana'][0].decode('utf-8') \
