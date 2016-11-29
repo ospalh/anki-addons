@@ -12,7 +12,7 @@ Download pronunciations from Wiktionary.
 '''
 
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import urlparse
 
 from .downloader import AudioDownloader, uniqify_list
@@ -54,7 +54,7 @@ class WiktionaryDownloader(AudioDownloader):
             return
         if not field_data.word:
             return
-        u_word = urllib.quote(field_data.word.encode('utf-8'))
+        u_word = urllib.parse.quote(field_data.word.encode('utf-8'))
         self.maybe_get_icon()
         self.language = self.language[:2]
         word_soup = self.get_soup_from_url(

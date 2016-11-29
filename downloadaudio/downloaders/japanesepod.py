@@ -16,8 +16,7 @@ from collections import OrderedDict
 from copy import copy
 import os
 import re
-import urllib
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import urlparse
 
 from ..blacklist import get_hash
@@ -118,12 +117,12 @@ class JapanesepodDownloader(AudioDownloader):
             qdict['kanji'] = kanji.encode('utf-8')
         if kana:
             qdict['kana'] = kana.encode('utf-8')
-        return self.url + urllib.urlencode(qdict)
+        return self.url + urllib.parse.urlencode(qdict)
 
     def get_words_from_wwwjdic(self):
         soup = self.get_soup_from_url(
             self.wwwjdic_url.format(
-                kana=urllib2.quote(self.field_data.kana.encode('utf-8'))))
+                kana=urllib.parse.quote(self.field_data.kana.encode('utf-8'))))
         # get 50 entries (no idea what the 2 means)
         labels = soup.findAll('label')
         hits = OrderedDict()
@@ -141,7 +140,7 @@ class JapanesepodDownloader(AudioDownloader):
             entry.extract()
             audio = re.search(r'm\("(.*)"\);', audio.text).group(1)
             # string is quoted twice, so unquote it once
-            audio = urllib2.unquote(audio)
+            audio = urllib.parse.unquote(audio)
             entry = entry.text
             popular = u'(P)' in entry or u'(P)' in lbl.text
             # strip "(P)" and similar markers

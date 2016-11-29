@@ -14,7 +14,7 @@ Download pronunciations from Collins dictionary
 Abstract base class, derived for several languages.
 """
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from .downloader import AudioDownloader, uniqify_list
 from ..download_entry import Action, DownloadEntry
@@ -54,7 +54,7 @@ class CollinsDownloader(AudioDownloader):
         lword = field_data.word.lower()
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
-            self.url + urllib.quote(lword.encode('utf-8')))
+            self.url + urllib.parse.quote(lword.encode('utf-8')))
         html_tag_with_audio_url = word_soup.find(
             name='a', attrs={'class': 'hwd_sound sound audio_play_button'})
         if not html_tag_with_audio_url:

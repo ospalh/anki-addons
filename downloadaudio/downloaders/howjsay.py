@@ -11,7 +11,7 @@
 Download pronunciations from HowJSay.
 """
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -36,7 +36,7 @@ class HowJSayDownloader(AudioDownloader):
         # Replace special characters with ISO-8859-1 oct codes
         self.maybe_get_icon()
         word_path = self.get_tempfile_from_url(
-            self.url + urllib.quote(field_data.word.encode('utf-8')) +
+            self.url + urllib.parse.quote(field_data.word.encode('utf-8')) +
             self.file_extension)
         self.downloads_list.append(
             DownloadEntry(

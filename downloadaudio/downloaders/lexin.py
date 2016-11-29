@@ -13,7 +13,7 @@ Download pronunciations from Lexin.
 """
 
 import unicodedata
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import json
 from BeautifulSoup import BeautifulSoup
 
@@ -75,11 +75,11 @@ class LexinDownloader(AudioDownloader):
             'se.jojoman.lexin.lexingwt.client.LookUpService|'
             'lookUpWord|se.jojoman.lexin.lexingwt.client.LookUpRequest/682723451|swe_swe|' +
             field_data.word.encode('utf-8') + '|1|2|3|4|1|5|5|1|6|1|7|')
-        request = urllib2.Request(
+        request = urllib.request.Request(
             self.url,
             payload, headers)
         try:
-            response = urllib2.urlopen(request)
+            response = urllib.request.urlopen(request)
         except:
             self.download_v1(field_data)
             return

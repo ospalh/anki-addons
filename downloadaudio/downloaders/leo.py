@@ -13,7 +13,7 @@ Download pronunciations from leo.org
 
 from collections import OrderedDict
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ElementTree
 
 # Make this work without PyQt
@@ -80,7 +80,7 @@ class LeoDownloader(AudioDownloader):
         xml = self.get_data_from_url(
             self.dic_url.format(
                 lang=query_lang,
-                word=urllib.quote_plus(field_data.word.encode('utf-8')),
+                word=urllib.parse.quote_plus(field_data.word.encode('utf-8')),
                 direction=direction))
         root = ElementTree.fromstring(xml)
         hits = OrderedDict()

@@ -11,7 +11,7 @@
 Download pronunciations from BeoLingus.
 '''
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import urlparse
 import re
 
@@ -97,7 +97,7 @@ class BeolingusDownloader(AudioDownloader):
         pop-up, isolate the "Listen with your default mp3 player" link
         from that, get the file that points to and get that.
         """
-        word_encoded = urllib.quote(word.encode('utf-8'))
+        word_encoded = urllib.parse.quote(word.encode('utf-8'))
         popup_url = re.sub(';text=.*$', ';text=' + word_encoded, popup_url)
         popup_url = urlparse.urljoin(self.site_url, popup_url)
         popup_soup = self.get_soup_from_url(popup_url)
@@ -114,4 +114,4 @@ class BeolingusDownloader(AudioDownloader):
     def build_word_url(self, source):
         u"""Put source into a dict useful as part of a url."""
         qdict = dict(service=self.service, query=source.encode('utf-8'))
-        return self.url + urllib.urlencode(qdict)
+        return self.url + urllib.parse.urlencode(qdict)

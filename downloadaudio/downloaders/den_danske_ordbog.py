@@ -11,8 +11,8 @@
 Download pronunciations for Danish from Den Danske Ordbog
 """
 
-import urllib
-from urllib2 import HTTPError
+import urllib.request, urllib.parse, urllib.error
+from urllib.error import HTTPError
 from HTMLParser import HTMLParser
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -35,7 +35,7 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
         if not field_data.word:
             return
         search_soup = self.get_soup_from_url(
-            self.url + urllib.urlencode(dict(query=field_data.word)))
+            self.url + urllib.parse.urlencode(dict(query=field_data.word)))
         search_results = search_soup.find(
             'div', {'class': 'searchResultBox'}).findAll('a')
         if search_results:
