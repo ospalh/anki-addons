@@ -40,7 +40,7 @@ class WiktionaryDownloader(AudioDownloader):
         # in the style <hex_digit_1>/<hex_digit_1><hex_digit_2>. Look
         # for that pattern.
         self.word_ogg_re = \
-            ur'/([a-f0-9])/\1[a-f0-9]/[^/]*\b{word}\b[^/]*\.ogg$'
+            r'/([a-f0-9])/\1[a-f0-9]/[^/]*\b{word}\b[^/]*\.ogg$'
         # This seems to work to extract the url from a <button> tag's
         # onclick attribute.
         self.button_onclick_re = '"videoUrl":"([^"]+)"'

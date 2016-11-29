@@ -26,7 +26,7 @@ from aqt.reviewer import Reviewer
 
 __version__ = "1.0.0"
 
-sound_re = ur"\[sound:(.*?)\]"
+sound_re = r"\[sound:(.*?)\]"
 
 hide_class_name = u'browserhide'
 

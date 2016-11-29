@@ -25,7 +25,7 @@ from aqt.reviewer import Reviewer
 
 __version__ = "1.5.0"
 
-sound_re = ur"\[sound:(.*?)\]"
+sound_re = r"\[sound:(.*?)\]"
 
 original_arrow_name = 'replay.png'
 collection_arrow_name = '_inline_replay_button.png'

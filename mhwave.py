@@ -20,7 +20,7 @@ from aqt.editor import Editor
 
 __version__ = "2.0.0"
 
-sound_re = ur'\[sound:(.*?)\]'
+sound_re = r'\[sound:(.*?)\]'
 
 command_list = ['mhwaveedit']
 sound_ending_list = ['.mp3', '.wav', '.flac', '.ogg']
