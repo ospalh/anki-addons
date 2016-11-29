@@ -15,7 +15,7 @@ Download pronunciations from Lexin.
 import unicodedata
 import urllib.request, urllib.error, urllib.parse
 import json
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -91,7 +91,7 @@ class LexinDownloader(AudioDownloader):
         # inside the list.
         word_xmls = json.loads(data)[-3][3:-2]
         for word_xml in word_xmls:
-            soup = BeautifulSoup(word_xml)
+            soup = BeautifulSoup(word_xml, 'xml')
             extras = dict(Source='Lexin')
             try:
                 extras['Type'] = soup.find('lemma')['type']

@@ -11,7 +11,7 @@ import os
 import re
 import shutil
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QDesktopServices
 
@@ -112,9 +112,9 @@ def add_preview_link_handler(browser):
 
 def reduce_format_qa(self, text):
     u"""Remove elements with a given class before displaying."""
-    soup = BeautifulSoup(text)
+    soup = BeautifulSoup(text, 'html.parser')
     for hide in soup.findAll(True, {'class': re.compile(
-            '\\b' + hide_class_name + '\\b')}):
+        '\\b' + hide_class_name + '\\b')}):
         hide.extract()
     return original_format_qa(self, unicode(soup))
 

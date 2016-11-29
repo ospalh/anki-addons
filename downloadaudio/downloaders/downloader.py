@@ -15,7 +15,7 @@ Class to download a files from a speaking dictionary or TTS service.
 import tempfile
 import urllib.request, urllib.error, urllib.parse
 import urllib.parse
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 
 # Make this work without PyQt
 with_pyqt = True
@@ -120,7 +120,7 @@ class AudioDownloader(object):
         if 200 != page_response.code:
             self.get_favicon()
             return
-        page_soup = soup(page_response)
+        page_soup = soup(page_response, 'html.parser')
         try:
             icon_url = page_soup.find(
                 name='link', attrs={'rel': 'icon'})['href']
@@ -207,7 +207,7 @@ class AudioDownloader(object):
 
         Wrapper helper function aronud self.get_data_from_url()
         """
-        return soup(self.get_data_from_url(url_in))
+        return soup(self.get_data_from_url(url_in), 'html.parser')
 
     def get_tempfile_from_url(self, url_in):
         """
