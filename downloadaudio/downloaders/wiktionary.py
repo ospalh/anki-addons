@@ -34,7 +34,6 @@ class WiktionaryDownloader(AudioDownloader):
         self.file_extension = u'.ogg'
         self.icon_url = 'http://de.wiktionary.org/'
         self.full_icon_url = 'http://bits.wikimedia.org/favicon/piece.ico'
-        self.url = 'http://{0}.wiktionary.org/wiki/{1}'
         # This re should find only the 'real' files, not the file
         # description pages. Mediawiki builds 256 (0x100) sub-folders
         # in the style <hex_digit_1>/<hex_digit_1><hex_digit_2>. Look
@@ -44,6 +43,16 @@ class WiktionaryDownloader(AudioDownloader):
         # This seems to work to extract the url from a <button> tag's
         # onclick attribute.
         self.button_onclick_re = '"videoUrl":"([^"]+)"'
+
+    @property
+    def url(self):
+        return 'http://%s.wiktionary.org/wiki/' % self.language
+
+    @url.setter
+    def url(self, value):
+        # Simply ignore assignment
+        # We need this because self.url is assigned on super().__init__
+        pass
 
     def download_files(self, field_data):
         """
@@ -57,8 +66,7 @@ class WiktionaryDownloader(AudioDownloader):
         u_word = urllib.parse.quote(field_data.word.encode('utf-8'))
         self.maybe_get_icon()
         self.language = self.language[:2]
-        word_soup = self.get_soup_from_url(
-            self.url.format(self.language, u_word))
+        word_soup = self.get_soup_from_url(self.url + u_word)
         # There are a number of ways the audio files can be present:
         ogg_url_list = []
         # As simple links:
@@ -105,8 +113,7 @@ class WiktionaryDownloader(AudioDownloader):
         for url_to_get in ogg_url_list:
             # We may have to add a scheme or a scheme and host
             # name (netloc). urlparse to the rescue!
-            word_url = urllib.parse.urljoin(
-                self.url.format(self.language, ''), url_to_get)
+            word_url = urllib.parse.urljoin(self.url, url_to_get)
             try:
                 word_path = self.get_tempfile_from_url(word_url)
             except:
