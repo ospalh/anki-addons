@@ -9,7 +9,6 @@
 Change the download audio parameters on user input.
 """
 
-from PyQt5.QtCore import SIGNAL, SLOT
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QFrame, QGridLayout, \
     QHBoxLayout, QLabel, QLineEdit, QVBoxLayout
@@ -110,10 +109,8 @@ reading (ruby) on the right.</p>
         dialog_buttons = QDialogButtonBox(self)
         dialog_buttons.addButton(QDialogButtonBox.Cancel)
         dialog_buttons.addButton(QDialogButtonBox.Ok)
-        self.connect(dialog_buttons, SIGNAL("accepted()"),
-                     self, SLOT("accept()"))
-        self.connect(dialog_buttons, SIGNAL("rejected()"),
-                     self, SLOT("reject()"))
+        dialog_buttons.accepted.connect(self.accept)
+        dialog_buttons.rejected.connect(self.reject)
         layout.addWidget(dialog_buttons)
 
     def create_data_rows(self, layout):
