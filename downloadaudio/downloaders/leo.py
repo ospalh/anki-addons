@@ -98,11 +98,6 @@ class LeoDownloader(AudioDownloader):
                 matching_word = None
                 for el_word in side.findall('words/word'):
                     cur_word = el_word.text
-                    # Text in ElementTree has inconsistent types: "str" when it
-                    # contains only ASCII characters and "unicode" otherwise.
-                    # Make everything unicode.
-                    if type(cur_word) == str:
-                        cur_word = cur_word.decode('utf-8')
                     if self.normalize(cur_word) == self.normalize(
                             field_data.word):
                         matching_word = cur_word
