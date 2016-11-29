@@ -21,8 +21,8 @@ from BeautifulSoup import BeautifulSoup as soup
 # Make this work without PyQt
 with_pyqt = True
 try:
-    from PyQt4.QtGui import QImage
-    from PyQt4.QtCore import QSize, Qt
+    from PyQt5.QtGui import QImage
+    from PyQt5.QtCore import QSize, Qt
 except ImportError:
     with_pyqt = False
 

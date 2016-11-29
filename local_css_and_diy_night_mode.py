@@ -15,8 +15,8 @@ Load the file 'user_style.css' from the user’s profile folder
 the style from the template.
 """
 
-from PyQt4.QtGui import QAction, QActionGroup, QMenu
-from PyQt4.QtCore import SIGNAL
+from PyQt5.QtWidgets import QAction, QActionGroup, QMenu
+from PyQt5.QtCore import SIGNAL
 
 import os
 import re

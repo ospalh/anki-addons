@@ -12,8 +12,8 @@ import re
 import shutil
 
 from BeautifulSoup import BeautifulSoup
-from PyQt4.QtCore import QUrl
-from PyQt4.QtGui import QDesktopServices
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
 
 from anki.cards import Card
 from anki.hooks import addHook, wrap

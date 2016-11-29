@@ -5,8 +5,9 @@
 
 """Add-on for Anki 2 to zoom in or out."""
 
-from PyQt4.QtCore import Qt, SIGNAL
-from PyQt4.QtGui import QAction, QKeySequence, QMenu
+from PyQt5.QtCore import Qt, SIGNAL
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QAction, QMenu
 
 from aqt import mw
 from anki.hooks import addHook, runHook, wrap

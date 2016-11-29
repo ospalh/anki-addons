@@ -35,8 +35,10 @@ manual.
 """
 
 import os
-from PyQt4.QtGui import QAction, QIcon, QMenu
-from PyQt4.QtCore import SIGNAL
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction, QMenu
+from PyQt5.QtCore import SIGNAL
+
 
 from aqt import mw
 from aqt.utils import tooltip

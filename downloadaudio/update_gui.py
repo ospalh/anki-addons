@@ -9,9 +9,10 @@
 Change the download audio parameters on user input.
 """
 
-from PyQt4.QtCore import SIGNAL, SLOT
-from PyQt4.QtGui import QDialog, QDialogButtonBox, QFrame, QGridLayout, \
-    QHBoxLayout, QIcon, QLabel, QLineEdit, QVBoxLayout
+from PyQt5.QtCore import SIGNAL, SLOT
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QFrame, QGridLayout, \
+    QHBoxLayout, QLabel, QLineEdit, QVBoxLayout
 
 from anki.lang import _
 

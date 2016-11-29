@@ -21,10 +21,10 @@ choices what to do wit each:
 
 import os
 
-from PyQt4.QtGui import QButtonGroup, QDialog, QDialogButtonBox, QFrame, \
-    QGridLayout, QIcon, QLabel, QPixmap, QPushButton, QScrollArea, \
-    QSizePolicy, QVBoxLayout
-from PyQt4.QtCore import SIGNAL, SLOT
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QButtonGroup, QDialog, QDialogButtonBox, QFrame, \
+    QGridLayout, QLabel, QPushButton, QScrollArea, QSizePolicy, QVBoxLayout
+from PyQt5.QtCore import SIGNAL, SLOT
 
 from aqt import mw
 from anki.lang import _

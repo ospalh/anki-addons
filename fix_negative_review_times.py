@@ -15,8 +15,8 @@ the methods described in
 http://code.google.com/p/ankidroid/issues/detail?id=1449#c23
 """
 
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QAction
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtWidgets import QAction
 
 from anki.lang import _
 from aqt import mw

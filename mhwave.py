@@ -5,8 +5,9 @@
 # http://www.gnu.org/copyleft/gpl.html
 u"""Anki 2 add-on that opens an audio editor."""
 
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QAction, QIcon, QMenu
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction, QMenu
 import copy
 import os
 import re

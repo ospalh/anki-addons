@@ -19,7 +19,7 @@ import xml.etree.ElementTree as ElementTree
 # Make this work without PyQt
 with_pyqt = True
 try:
-    from PyQt4.QtGui import QImage
+    from PyQt5.QtGui import QImage
 except ImportError:
     with_pyqt = False
 
