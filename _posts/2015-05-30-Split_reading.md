@@ -4,6 +4,7 @@ layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 parent_link: Download_audio.html
+permalink: Split_reading.html
 ---
 
 Use the standard add-ons when learning Japanese or Chinese.

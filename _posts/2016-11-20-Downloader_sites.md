@@ -5,6 +5,7 @@ ankiweb_id: 3100585138
 parent: Download audio
 parent_link: Download_audio.html
 extra_jq_script: audio_tips.js
+permalink: Downloader_sites.html
 ---
 These sites are tried to retrieve audio clips:
 

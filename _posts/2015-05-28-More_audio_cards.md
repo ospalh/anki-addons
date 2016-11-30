@@ -4,8 +4,9 @@ layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 parent_link: Download_audio.html
+permalink: More_audio_cards.html
 ---
-One way to use the downloaded audio is to create a special card for
+{%raw%}One way to use the downloaded audio is to create a special card for
 hearing comprehension.
 
 ## Template editor
@@ -41,12 +42,10 @@ Replace the whole content of the top left <q>Front Template</q> box, with
 Listen.
 {{Audio}}
 {{/Audio}}</code></pre></blockquote>
-and the content of the bottom left <q>Front Template</q> box with
-<blockquote><pre><code>Listen.
-{{Audio}}
-<div>{{Front}}</div>
-<div>{{Back}}</div>
-</code></pre></blockquote>
+and the content of the bottom left <q>Back Template</q> box with
+<blockquote><pre><code>{{Audio}}
+&lt;div>{{Front}}&lt;/div>
+&lt;div>{{Back}}&lt;/div></code></pre></blockquote>
 
 Next, to get rid of the generic <q>Card n</q> name, click on the <q>More</q>
 button at the bottom and select <q>Rename</q>. In the dialog, pick a
@@ -61,3 +60,4 @@ becomes necessary. Using it here, too, guards against surprises later.
 This example assumes the standard field names. When you see `{Unknown
 field NN}` in the boxes on the right, you must change the names  to
 those of your note, as listed in the  <q>Edit Current</q> window.
+{%endraw%}

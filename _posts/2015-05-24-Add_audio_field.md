@@ -5,6 +5,7 @@ ankiweb_id: 3100585138
 parent: Download audio
 parent_link: Download_audio.html
 extra_jq_script: audio_tips.js
+permalink: Add_audio_field.html
 ---
 The add-on requires a field called <q>Audio</q>, or that contains the word
 <q>Audio</q>, to put the downloaded data.

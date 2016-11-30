@@ -5,6 +5,7 @@ ankiweb_id: 2327947748
 parent: Furikanji
 parent_link: Furikanji.html
 extra_jq_script: class_tips.js
+permalink: Complex_classes.html
 ---
 These are examples of more creative use of the classes added by the
 Furikanji add-on.
@@ -13,7 +14,7 @@ Furikanji add-on.
 
 I use markers that show the beginning and end of a specific block of
 readings:
-
+{%raw%}
 <figure>
 <img src="images/furikanji-desktop.png" alt="Text: 起きなよいい加減お
 with きなよいいかげん as ruby and きなよいいかげん with 起きなよいい加
@@ -70,7 +71,7 @@ The adding of the interpunct can be done using two CSS pseudo-classes,
 <blockquote class="lsting"><pre><code>.interpuncts .kana:after{content:"・";}
 .interpuncts .kana:last-child:after{content: none;}</code></pre></blockquote>
 
-The advantage of this method over using a pure kana is that with this
+The advantage of this method over using pure kana is that with this
 method furigana can be used as well, with <q>`{{furigana:Reading}}`</q>.
 
 ## Furigana on hover
@@ -81,11 +82,13 @@ To show furigana only when the mouse hovers above it use:
 <blockquote class="lsting"><pre><code>&lt;div class="kanjihover">{{furigana:Reading}}&lt;/div></code></pre></blockquote>
 
 <blockquote class="lsting"><pre><code>.kanjihover rt{visibility: hidden;}
-.kanjihover ruby:hover rt {visibility: visible;}</blockquote></pre></code>
+.kanjihover ruby:hover rt {visibility: visible;}
+</code></pre></blockquote>
 
 or to activate this for all furigana everywhere, drop the extra class:
 
 <blockquote class="lsting"><pre><code>{{furigana:Reading}}</code></pre></blockquote>
 
 <blockquote class="lsting"><pre><code>rt{visibility: hidden;}
-ruby:hover rt {visibility: visible;}</blockquote></pre></code>
+ruby:hover rt {visibility: visible;}</code></pre></blockquote>
+{%endraw%}

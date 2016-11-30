@@ -4,6 +4,7 @@ layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 parent_link: Download_audio.html
+permalink: Audio_models.html
 ---
 
 When adding new material, it is easiest to use the standard models this

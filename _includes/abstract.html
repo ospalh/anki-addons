@@ -1,18 +1,22 @@
 <article id="{{post.id}}">
+   {% if post.first_image %}
     <figure class="abstract">
       <img src="{{ site.github.url }}/images/{{post.first_image}}" alt="{{post.first_alt}}" {%if post.first_image_attributes %}{{post.first_image_attributes|safe}}{% endif %}/>
     </figure>
-  <h2><a href="{{ site.github.url }}{{ post.url | relative_url | remove_first: "/anki-addons" }}">{{ post.title}}</a></h2>
+    {% endif %}
+    <h2><a href="{{ site.github.url }}{{ post.url | relative_url | remove_first: "/anki-addons" }}">{{ post.title}}</a></h2>
 
     {%if post.subtitle%}
     <h4>{{post.subtitle}}</h4>
     {%endif%}
 
-  <div class="line"></div>
-  <div class="status">Status:
+    {% if post.status %}
+    <div class="line"></div>
+    <div class="status">Stadus:
     <span class=status_light
     style="background-color:{{post.status_color}};
-    color:{{post.status_text_color}}; ">{{post.status}}</span></div>
+           color:{{post.status_text_color}}; ">{{post.status}}</span></div>
+     {% endif %}
   <div class="line"></div>
   <div class="articleBody clear">
     {{ post.abstract| safe }}

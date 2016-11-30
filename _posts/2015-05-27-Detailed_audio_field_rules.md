@@ -6,6 +6,7 @@ ankiweb_id: 3100585138
 parent: Download audio
 parent_link: Download_audio.html
 extra_jq_script: audio_tips.js
+permalink: Detailed_audio_field_rules.html
 ---
 In most cases – including learning Japanese or Chinese with the
 [standard](https://ankiweb.net/shared/info/3918629684)

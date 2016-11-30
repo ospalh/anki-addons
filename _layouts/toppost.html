@@ -1,0 +1,16 @@
+{% include top.html %}
+{% include other_header.html %}
+<article id="{{page.id}}" class="clear">
+  <div class="articleBody">
+    {% if page.first_image %}
+    <figure>
+      <img src="{{ site.github.url }}/images/{{page.first_image}}" alt="{{page.first_alt}}" {%if page.first_image_attributes%}{{page.first_image_attributes|safe}}{%endif%}/>
+{% if page.first_caption %}<figcaption>{{page.first_caption}}</figcaption>{% endif%}
+    </figure>
+    {% endif %}
+    {{ page.content }}
+  </div>
+
+</article>
+
+{% include footer.html %}

@@ -19,7 +19,7 @@ first_alt: >
   schemes in different parts.
 ankiweb_id: 2587372325
 ---
-This loads the local CSS file `user_style.css` and adds the style to
+{%raw%}This loads the local CSS file `user_style.css` and adds the style to
 the CSS set in the card templates.
 
 It also adds a few classes to the cards.
@@ -193,3 +193,4 @@ profile.
 ## AnkiDroid
 
 When the class `night_mode` instead to `night` is used, and when the card styling uses this `night_mode` class, the day/night mode switch behavior of Anki desktop should match that of AnkiDroid.
+{%endraw%}

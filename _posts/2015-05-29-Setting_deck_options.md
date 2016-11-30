@@ -5,6 +5,7 @@ layout: subpage
 ankiweb_id: 3100585138
 parent: Download audio
 parent: Download_audio.html
+permalink: Setting_deck_options.html
 ---
 
 During start-up, only one language code is set for all decks.
