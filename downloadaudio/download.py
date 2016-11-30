@@ -35,7 +35,7 @@ manual.
 """
 
 import os
-from PyQt4.QtGui import QAction, QIcon, QMenu
+from PyQt4.QtGui import QAction, QIcon, QMenu, QKeySequence, QShortcut
 from PyQt4.QtCore import SIGNAL
 
 from aqt import mw
@@ -234,6 +234,7 @@ mw.note_download_action.setToolTip(
     "Download audio for all audio fields of this note.")
 mw.note_download_action.setShortcut(DOWNLOAD_NOTE_SHORTCUT)
 mw.connect(mw.note_download_action, SIGNAL("triggered()"), download_for_note)
+mw.note_download_signal = QShortcut(QKeySequence("'"), mw)
 
 mw.side_download_action = QAction(mw)
 mw.side_download_action.setText(u"Side audio")
