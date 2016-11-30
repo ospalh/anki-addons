@@ -38,8 +38,8 @@ finger for <q>good</q> and ring finger for <q>easy</q>.
 The third set is similar to the first set, but in the bottom row,
 here, too, going from <span class="qtbase pinky">little finger</span>,
 <q>again</q>, to the index finger, <q>easy</q>. (Some (German? international?)
-keyboards have a small left shift key and an extra key for <q><</q> and
-<q>></q>. That key is skipped.) (The idea for this set of keys came from
+keyboards have a small left shift key and an extra key for <q>&lt;</q> and
+<q>&gt;</q>. That key is skipped.) (The idea for this set of keys came from
 Peter Horwood, (<q>Madman Pierre</q>), who has released
 [his own add-on](https://ankiweb.net/shared/info/3196965470) which
 does this remapping.)

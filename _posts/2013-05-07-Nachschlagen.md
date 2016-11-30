@@ -1,7 +1,7 @@
 ---
 title: Nachschlagen
 main_file: nachschlagen.py
-permalink: nachschlagen.html
+permalink: Nachschlagen.html
 layout: addon
 status: working
 status_color: green

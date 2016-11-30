@@ -99,7 +99,7 @@ The effect of the `browserhide` class is similar to using the
 the template editor.
 
 There is another add-on that implements *only* this hiding of text in
-the text browser, called [Lean browser qa](Lean%20browser%20qa.html).
+the text browser, called [Lean browser qa](Lean_browser_qa.html).
 
 ## PNG image version
 

@@ -31,7 +31,7 @@ clip icon, but through other ways,
 * by copying them to the media folder by hand and adding the text to
   display them to the fields,
 * through other tools like older versions (up to version 2.3.4, 24
-  January 2013) of my [Download audio](Download%20audio.html) add-on,
+  January 2013) of my [Download audio](Download_audio.html) add-on,
 * or possibly by drag-and-dropping them from the Finder,
 
 there may be a problem caused by a quirk of the Macs’ file system. In
