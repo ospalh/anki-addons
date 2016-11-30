@@ -33,6 +33,8 @@ big screens, …)
 The add-on loads the file `user_style.css` from the current profile’s
 directory, typically `Anki/User 1` or `Anki\User 1`.
 
+<blockquote class="nb">You have to create the style file yourself. That is the point of the add-on.</blockquote>
+
 Typically the standard styling in the card template isn’t
 changed. Like this, reviewing on AnkiWeb and on mobile devices works
 as before.
