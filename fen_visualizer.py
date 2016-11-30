@@ -25,10 +25,13 @@ from collections import namedtuple
 from anki.cards import Card
 from anki.hooks import addHook
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 reverse_for_black = True
 # reverse_for_black = False
+
+row_notation = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+col_notation = [1, 2, 3, 4, 5, 6, 7, 8]
 
 FenData = namedtuple(
     'FenData',
@@ -50,7 +53,6 @@ fen_template = u"""<figure class="chess_diagram"><table class="chess_board">
 </figcaption>
 </figure>
 """
-
 
 def chess_card_css(self):
     """Add the chess style to the card style """
@@ -124,10 +126,17 @@ def insert_table(fen_match):
         rows.reverse()
         active += u', black’s view'
     active += u'.'
+    
+    row_str = '<tr>'
+    for c in row_notation:
+        row_str += u'<td>{0}</td>'.format(c)
+    row_str += '<td></td></tr>' # extra cell to end it off
+    
     # We don’t realy care about the length. This should work for large
     # boards as well.
-    trows = []
-    for r in rows:
+    trows = [row_str] # first row for numbers
+    for i in range(len(rows)):
+        r = rows[i]
         # Replace numbers with spaces
         r = re.sub('[1-9][0-9]?', counted_spaces, r)
         if do_reverse:
@@ -137,11 +146,11 @@ def insert_table(fen_match):
         tr = u'<tr>'
         for p in r:
             tr += u'<td>{0}</td>'.format(p)
+        tr += u'<td>{0}</td>'.format(col_notation[i])
         trows.append(tr + u'</tr>\n')
     return fen_template.format(
         rows=''.join(trows), act=active, cas=fen.castling,
         enp=fen.enpassant, half=fen.halfmove, full=fen.fullmove)
-
 
 def insert_fen_table(txt, dummy_type, dummy_fields, dummy_model, dummy_data,
                      dummy_col):
