@@ -27,8 +27,9 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-from PyQt4.QtCore import QSize, Qt, SIGNAL
-from PyQt4.QtGui import QAction, QIcon, QMenu, QPalette, QToolBar
+from PyQt5.QtCore import QSize, Qt, SIGNAL
+from PyQt5.QtGui import QIcon, QPalette
+from PyQt5.QtWidgets import QAction, QMenu, QToolBar
 import os
 
 from anki.hooks import wrap, addHook

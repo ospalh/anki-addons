@@ -7,7 +7,7 @@
 u"""Anki-2 add-on to hide text in the card browser. """
 
 import re
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from aqt.browser import DataModel
 
 __version__ = "1.0.1"
@@ -18,7 +18,7 @@ hide_class_name = u'browserhide'
 
 def reduce_format_qa(self, text):
     u"""Remove elements with a given class before displaying."""
-    soup = BeautifulSoup(text)
+    soup = BeautifulSoup(text, 'html.parser')
     for hide in soup.findAll(True, {'class': re.compile(
                 '\\b' + hide_class_name + '\\b')}):
         hide.extract()

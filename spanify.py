@@ -24,7 +24,7 @@ __version__ = "2.1.0"
 def add_span(editor, s_class):
     u"""Call js function to wrap text in the span."""
     editor.web.eval(
-        ur"""wrap('<span class=\"{cls}\">', '</span>');""".format(
+        r"""wrap('<span class=\"{cls}\">', '</span>');""".format(
             cls=s_class))
 
 

@@ -12,8 +12,8 @@ Download pronunciations from Wiktionary.
 '''
 
 import re
-import urllib
-import urlparse
+import urllib.request, urllib.parse, urllib.error
+import urllib.parse
 
 from .downloader import AudioDownloader, uniqify_list
 from ..download_entry import DownloadEntry
@@ -21,8 +21,8 @@ from ..download_entry import DownloadEntry
 # Make this work without PyQt
 with_pyqt = True
 try:
-    from PyQt4.QtGui import QImage
-    from PyQt4.QtCore import QSize, Qt
+    from PyQt5.QtGui import QImage
+    from PyQt5.QtCore import QSize, Qt
 except ImportError:
     with_pyqt = False
 
@@ -34,16 +34,25 @@ class WiktionaryDownloader(AudioDownloader):
         self.file_extension = u'.ogg'
         self.icon_url = 'http://de.wiktionary.org/'
         self.full_icon_url = 'http://bits.wikimedia.org/favicon/piece.ico'
-        self.url = 'http://{0}.wiktionary.org/wiki/{1}'
         # This re should find only the 'real' files, not the file
         # description pages. Mediawiki builds 256 (0x100) sub-folders
         # in the style <hex_digit_1>/<hex_digit_1><hex_digit_2>. Look
         # for that pattern.
         self.word_ogg_re = \
-            ur'/([a-f0-9])/\1[a-f0-9]/[^/]*\b{word}\b[^/]*\.ogg$'
+            r'/([a-f0-9])/\1[a-f0-9]/[^/]*\b{word}\b[^/]*\.ogg$'
         # This seems to work to extract the url from a <button> tag's
         # onclick attribute.
         self.button_onclick_re = '"videoUrl":"([^"]+)"'
+
+    @property
+    def url(self):
+        return 'http://%s.wiktionary.org/wiki/' % self.language
+
+    @url.setter
+    def url(self, value):
+        # Simply ignore assignment
+        # We need this because self.url is assigned on super().__init__
+        pass
 
     def download_files(self, field_data):
         """
@@ -54,11 +63,10 @@ class WiktionaryDownloader(AudioDownloader):
             return
         if not field_data.word:
             return
-        u_word = urllib.quote(field_data.word.encode('utf-8'))
+        u_word = urllib.parse.quote(field_data.word.encode('utf-8'))
         self.maybe_get_icon()
         self.language = self.language[:2]
-        word_soup = self.get_soup_from_url(
-            self.url.format(self.language, u_word))
+        word_soup = self.get_soup_from_url(self.url + u_word)
         # There are a number of ways the audio files can be present:
         ogg_url_list = []
         # As simple links:
@@ -105,8 +113,7 @@ class WiktionaryDownloader(AudioDownloader):
         for url_to_get in ogg_url_list:
             # We may have to add a scheme or a scheme and host
             # name (netloc). urlparse to the rescue!
-            word_url = urlparse.urljoin(
-                self.url.format(self.language, ''), url_to_get)
+            word_url = urllib.parse.urljoin(self.url, url_to_get)
             try:
                 word_path = self.get_tempfile_from_url(word_url)
             except:

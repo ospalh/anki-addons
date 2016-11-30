@@ -32,7 +32,7 @@ def free_media_name(base, end):
     """
     base = stripHTML(base)
     # Strip the ‘invalidFilenameChars’ by hand.
-    base = re.sub(ur'[\\/:\*?\'"<>\|]', '', base)
+    base = re.sub(r'[\\/:\*?\'"<>\|]', '', base)
     base = unicodedata.normalize('NFC', base)
     # Looks like the normalization issue has finally been
     # solved. Always use NFC versions of file names now.

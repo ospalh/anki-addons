@@ -13,16 +13,15 @@ Class to download a files from a speaking dictionary or TTS service.
 
 
 import tempfile
-import urllib
-import urllib2
-import urlparse
-from BeautifulSoup import BeautifulSoup as soup
+import urllib.request, urllib.error, urllib.parse
+import urllib.parse
+from bs4 import BeautifulSoup as soup
 
 # Make this work without PyQt
 with_pyqt = True
 try:
-    from PyQt4.QtGui import QImage
-    from PyQt4.QtCore import QSize, Qt
+    from PyQt5.QtGui import QImage
+    from PyQt5.QtCore import QSize, Qt
 except ImportError:
     with_pyqt = False
 
@@ -114,14 +113,14 @@ class AudioDownloader(object):
         if not with_pyqt:
             self.site_icon = None
             return
-        page_request = urllib2.Request(self.icon_url)
+        page_request = urllib.request.Request(self.icon_url)
         if self.user_agent:
             page_request.add_header('User-agent', self.user_agent)
-        page_response = urllib2.urlopen(page_request)
+        page_response = urllib.request.urlopen(page_request)
         if 200 != page_response.code:
             self.get_favicon()
             return
-        page_soup = soup(page_response)
+        page_soup = soup(page_response, 'html.parser')
         try:
             icon_url = page_soup.find(
                 name='link', attrs={'rel': 'icon'})['href']
@@ -129,13 +128,13 @@ class AudioDownloader(object):
             self.get_favicon()
             return
         # The url may be absolute or relative.
-        if not urlparse.urlsplit(icon_url).netloc:
-            icon_url = urlparse.urljoin(
-                self.url, urllib.quote(icon_url.encode('utf-8')))
-        icon_request = urllib2.Request(icon_url)
+        if not urllib.parse.urlsplit(icon_url).netloc:
+            icon_url = urllib.parse.urljoin(
+                self.url, urllib.parse.quote(icon_url.encode('utf-8')))
+        icon_request = urllib.request.Request(icon_url)
         if self.user_agent:
             icon_request.add_header('User-agent', self.user_agent)
-        icon_response = urllib2.urlopen(icon_request)
+        icon_response = urllib.request.urlopen(icon_request)
         if 200 != icon_response.code:
             self.site_icon = None
             return
@@ -160,11 +159,11 @@ class AudioDownloader(object):
         if not with_pyqt:
             self.site_icon = None
             return
-        ico_url = urlparse.urljoin(self.icon_url, "/favicon.ico")
-        ico_request = urllib2.Request(ico_url)
+        ico_url = urllib.parse.urljoin(self.icon_url, "/favicon.ico")
+        ico_request = urllib.request.Request(ico_url)
         if self.user_agent:
             ico_request.add_header('User-agent', self.user_agent)
-        ico_response = urllib2.urlopen(ico_request)
+        ico_response = urllib.request.urlopen(ico_request)
         if 200 != ico_response.code:
             self.site_icon = None
             return
@@ -184,20 +183,9 @@ class AudioDownloader(object):
         the requests, checks that we got error code 200 and returns
         the raw data only when everything is OK.
         """
-        try:
-            # There have been reports that the request was send in a
-            # 32-bit encoding (UTF-32?). Avoid that. (The whole things
-            # is a bit curious, but there shouldn’t really be any harm
-            # in this.)
-            request = urllib2.Request(url_in.encode('ascii'))
-        except UnicodeDecodeError:
-            request = urllib2.Request(url_in)
-        try:
-            # dto. But i guess this is even less necessary.
-            request.add_header('User-agent', self.user_agent.encode('ascii'))
-        except UnicodeDecodeError:
-            request.add_header('User-agent', self.user_agent)
-        response = urllib2.urlopen(request)
+        request = urllib.request.Request(url_in)
+        request.add_header('User-agent', self.user_agent)
+        response = urllib.request.urlopen(request)
         if 200 != response.code:
             raise ValueError(str(response.code) + ': ' + response.msg)
         return response.read()
@@ -208,7 +196,7 @@ class AudioDownloader(object):
 
         Wrapper helper function aronud self.get_data_from_url()
         """
-        return soup(self.get_data_from_url(url_in))
+        return soup(self.get_data_from_url(url_in), 'html.parser')
 
     def get_tempfile_from_url(self, url_in):
         """

@@ -90,8 +90,8 @@ deck_buttons = [
 ## IAR, (or "practicality beats purity"). Put the stuff to change on
 ## top, even before the imports.
 
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QHBoxLayout, QKeySequence, QPushButton, QShortcut
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtGui import QHBoxLayout, QKeySequence, QPushButton, QShortcut
 
 from aqt.modelchooser import ModelChooser
 from aqt.deckchooser import DeckChooser
