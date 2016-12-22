@@ -77,9 +77,11 @@ might be used to add a shadow effect.
 
 <span  class="clear" />
 
-## Browserhide
+## Card browser
 
+The replay button is not shown in the card browser. Instead the sound file names are added to its  list section in the way they are entered into the cards, as `[sound:NN.mp3]` or similar.
 
+### Browserhide
 <figure>
 <img src="images/browserhide.png" alt="Part of the Anki review window.
 Text: みんなの日本語： にんぎょう.  Below part of the Anki card
@@ -87,12 +89,11 @@ browser. One line highlighted. Text: 人形; Japanisch-De...; にんぎょう">
 <figcaption>The text <q lang="ja">みんなの日本語：</q> is shown on the card,
 but not in the browser.</figcaption>
 </figure>
-The add-on also hides text with the CSS class `browserhide` in the
-card browser. With its help the name of sound and video files is shown in
-the card browser instead of the file name of the replay arrow
-image. The class is useful for cards where there is a text repeated
-for every card, too. Put text  parts of your card template that
-should not appear in the card browser into spans with the class `browserhide`.
+
+The mechanism that is used to hide the play button can also be used to
+hide other text repeated on every card.  Put parts of your card
+template that should not appear in the card browser into spans with
+the class `browserhide`.
 
 The effect of the `browserhide` class is similar to using the
 <q>Browser Appearance</q> feature hidden in the <q>More</q> button of
