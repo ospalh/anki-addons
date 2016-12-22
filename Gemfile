@@ -1,5 +1,5 @@
 ruby source 'https://rubygems.org'
-ruby "2.3.1"
+ruby "2.3.3"
 require 'json'
 require 'open-uri'
 gem 'jekyll'
