@@ -11,9 +11,10 @@ import os
 import re
 import shutil
 
-from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from PyQt4.QtCore import QUrl
 from PyQt4.QtGui import QDesktopServices
+from urllib import quote
 
 from anki.cards import Card
 from anki.hooks import addHook, wrap
@@ -66,16 +67,26 @@ def play_button_filter(
         Add a button after the match to replay the audio. The title is
         set to "Replay" on the question side to hide information or to
         the file name on the answer.
+        
+        The filename is first unescaped and then percentage encoded. The
+        utf8 encoding is a workaround for unicode support. In python 3:
+        
+        from urllib.parse import quote
+        clean_fn = quote(unescaped_fn)
         """
+        fn = sound.group(1)
+        unescaped_fn = BeautifulStoneSoup(fn,
+            convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0];
+        clean_fn = quote(unescaped_fn.encode('utf8')).decode('utf8')
         if 'q' == qa_type:
             title = u"Replay"
         else:
-            title = sound.group(1)
-        return u"""{orig}<a href='javascript:py.link("ankiplay{fn}");' \
+            title = fn
+        return u"""{orig}<a href='javascript:py.link("ankiplay{link_fn}");' \
 title="{ttl}" class="replaybutton browserhide"><span><svg viewBox="0 0 32 32">\
 <polygon points="11,25 25,16 11,7"/>Replay</svg></span></a>\
 <span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
-            orig=sound.group(0), fn=sound.group(1), ttl=title)
+            orig=sound.group(0), link_fn=clean_fn, ttl=title, fn=fn)
         # The &#91; &#93; are the square brackets that we want to
         # appear as brackets and not trigger the playing of the
         # sound. The span inside the a around the svg is there to
