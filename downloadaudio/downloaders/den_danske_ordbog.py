@@ -35,7 +35,7 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
         if not field_data.word:
             return
         search_soup = self.get_soup_from_url(
-            self.url + urllib.urlencode(dict(query=field_data.word)))
+            self.url + urllib.urlencode(dict(query=field_data.word.encode('utf-8'))))
         search_results = search_soup.find(
             'div', {'class': 'searchResultBox'}).findAll('a')
         if search_results:
