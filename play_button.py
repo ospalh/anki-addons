@@ -76,8 +76,8 @@ def play_button_filter(
         """
         fn = sound.group(1)
         unescaped_fn = BeautifulStoneSoup(fn,
-            convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0];
-        clean_fn = quote(unescaped_fn.encode('utf8')).decode('utf8')
+            convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+        clean_fn = quote(unescaped_fn.encode('utf8'))
         if 'q' == qa_type:
             title = u"Replay"
         else:
