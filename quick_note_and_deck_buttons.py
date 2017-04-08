@@ -134,6 +134,7 @@ def init_chooser(self, mw, widget, label):
     QHBoxLayout.__init__(self)
     self.vbox = QVBoxLayout()
     self.vbox.addLayout(self)
+    self.vbox.setMargin(0)
     self.widget = widget
     self.widget.setLayout(self.vbox)
     self.mw = mw
