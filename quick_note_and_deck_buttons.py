@@ -165,6 +165,8 @@ def setup_buttons(chooser, rows, text, do_function):
             if isMac:
                 b.setStyleSheet("padding: 5px; padding-right: 7px;")
             b.setToolTip(tt)
+            b.setFocusPolicy(Qt.ClickFocus)
+            b.setAutoDefault(False)
             bhbl.addWidget(b)
             b.clicked.connect(l)
         target.addLayout(bhbl)
