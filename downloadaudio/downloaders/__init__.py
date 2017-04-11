@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–17 Roland Sieker <ospalh@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -24,6 +24,7 @@ from .collins_italian import CollinsItalianDownloader
 from .collins_spanish import CollinsSpanishDownloader
 from .den_danske_ordbog import DenDanskeOrdbogDownloader
 from .duden import DudenDownloader
+# from .forvo import ForvoDownloader
 from .google_tts import GooglettsDownloader
 from .howjsay import HowJSayDownloader
 from .islex import IslexDownloader
@@ -48,6 +49,7 @@ downloaders = [
     OaldDownloader(),
     DudenDownloader(),
     DenDanskeOrdbogDownloader(),
+    # ForvoDownloader(),  # Couldn’t pay them their buck/month
     HowJSayDownloader(),
     IslexDownloader(),
     CollinsFrenchDownloader(),
