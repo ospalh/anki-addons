@@ -38,10 +38,6 @@ model_button_rows = [[{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
 #       non-ascii characters (u'Basic' and 'Basic' work, but you must
 #       use u'ベーシック', not 'ベーシック').
 #
-# N.B.: When there is no model with the given name, you will get
-#       an error ending with “TypeError: 'NoneType' object has no
-#       attribute '__getitem__'”. Set the names carefully.
-#
 # Example 1 (minimal):
 # model_button_rows = [
 #     [{"label": 'S', "name": 'Standard'}] # row 1
@@ -193,11 +189,10 @@ def change_model_to(chooser, model_name):
     try:
         chooser.deck.conf['curModel'] = m['id']
     except TypeError:
-        # When you get a “TypeError: 'NoneType' object has no attribute
-        # '__getitem__'” directing you here, the most likely explanation
+        # When you see this erro message, the most likely explanation
         # is that the model names are not set up correctly in the
         # model_button_rows list of dictionaries above.
-        tooltip("'%s' note type not found" % model_name)
+        tooltip(u"No note type “{model}”".format(model=model_name))
         return
     cdeck = chooser.deck.decks.current()
     cdeck['mid'] = m['id']
