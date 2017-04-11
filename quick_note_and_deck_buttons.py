@@ -48,7 +48,7 @@ model_button_rows = [[{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
 # ]
 #
 # Example 2 (ospalh’s models, one row)
-#model_button_rows = [
+# model_button_rows = [
 #    [{"label": u'和', 'name': u'Standard — Japanese'},
 #     {"label": u'動', 'name': u'Standard — Verb — Japanese'},
 #     {"label": u'一', 'name': u'Standard — electric 一段 Verb — Japanese'},
@@ -59,8 +59,9 @@ model_button_rows = [[{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
 #                  {"label": u'F', 'name': u'FieldAtTop'}]
 #
 # Example 4 (default):
-#model_button_rows = [[{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
-#                      {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]]
+# model_button_rows = [
+#     [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+#      {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]]
 # Example 5, multi-row:
 # model_button_rows = [
 #     [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
@@ -83,12 +84,12 @@ deck_button_rows = [[{"label": u'D', 'name': u'Default'}]]
 # exist already.
 #
 # Example 1, ospalh’s collection (one row, old style):
-#deck_button_rows = [
+# deck_button_rows = [
 #    {"label": u'Z', 'name': u'ZZ'},
 #    {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}]
 
 # Example 2, multi row:
-#deck_button_rows = [
+# deck_button_rows = [
 #    [{"label": u'D', 'name': u'Default'}], # row 1
 #    [{"label": u'E1', 'name': u'English::Chapter 1'},
 #     {"label": u'E2', 'name': u'English::Chapter 2'},
@@ -108,12 +109,12 @@ deck_button_rows = [[{"label": u'D', 'name': u'Default'}]]
 # deck_button_rows = [[{"label": u'D', 'name': u'Default'}]]
 
 
-###############################
-## Configuration section end ##
-###############################
+#############################
+# Configuration section end #
+#############################
 
-## IAR, (or "practicality beats purity"). Put the stuff to change on
-## top, even before the imports.
+# IAR, (or "practicality beats purity"). Put the stuff to change on
+# top, even before the imports.
 
 from aqt.qt import *
 
@@ -134,10 +135,12 @@ def init_dc(self, mw, widget, label=True, start=None):
     self.setupDecks()
     addHook('currentModelChanged', self.onModelChange)
 
+
 def init_mc(self, mw, widget, label=True):
     init_chooser(self, mw, widget, label)
     self.setupModels()
     addHook('reset', self.onReset)
+
 
 def init_chooser(self, mw, widget, label):
     QHBoxLayout.__init__(self)
@@ -152,8 +155,9 @@ def init_chooser(self, mw, widget, label):
     self.setMargin(0)
     self.setSpacing(8)
 
+
 def setup_buttons(chooser, rows, text, do_function):
-    if rows and isinstance(rows[0], dict): # backwards compatibility
+    if rows and isinstance(rows[0], dict):  # backwards compatibility
         rows = [rows]
     for idx, buttons in enumerate(rows):
         target = chooser if idx == 0 else chooser.vbox
@@ -162,7 +166,8 @@ def setup_buttons(chooser, rows, text, do_function):
             b = QPushButton(button_item["label"])
             tt = _("Change {what} to {name}").format(
                 what=text, name=button_item["name"])
-            l = lambda _=None, s=chooser, nn=button_item["name"]: do_function(s, nn)
+            l = lambda _=None, s=chooser, nn=button_item["name"]: do_function(
+                s, nn)
             try:
                 sc = _(button_item["shortcut"])
                 s = QShortcut(QKeySequence(sc), chooser.widget)
@@ -210,7 +215,8 @@ def change_deck_to(chooser, deck_name):
 ModelChooser.__init__ = init_mc
 ModelChooser.setupModels = wrap(
     ModelChooser.setupModels,
-    lambda mc: setup_buttons(mc, model_button_rows, "note type", change_model_to),
+    lambda mc: setup_buttons(
+        mc, model_button_rows, "note type", change_model_to),
     "after")
 ModelChooser.change_model_to = change_model_to
 DeckChooser.__init__ = init_dc
