@@ -24,7 +24,6 @@ from .collins_italian import CollinsItalianDownloader
 from .collins_spanish import CollinsSpanishDownloader
 from .den_danske_ordbog import DenDanskeOrdbogDownloader
 from .duden import DudenDownloader
-from .google_tts import GooglettsDownloader
 from .howjsay import HowJSayDownloader
 from .islex import IslexDownloader
 from .japanesepod import JapanesepodDownloader
@@ -55,7 +54,6 @@ downloaders = [
     CollinsItalianDownloader(),
     CollinsSpanishDownloader(),
     BeolingusDownloader(),
-    GooglettsDownloader(),
 ]
 # For each word field, these downloader sites are tried in the order
 # they appear here. Lines starting with a “#” are not tried. Change
