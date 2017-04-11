@@ -189,7 +189,7 @@ def change_model_to(chooser, model_name):
     try:
         chooser.deck.conf['curModel'] = m['id']
     except TypeError:
-        # When you see this erro message, the most likely explanation
+        # When you see this error message, the most likely explanation
         # is that the model names are not set up correctly in the
         # model_button_rows list of dictionaries above.
         tooltip(u"No note type “{model}”".format(model=model_name))
