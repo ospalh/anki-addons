@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2014 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–2017 Roland Sieker <ospalh@gmail.com>
 # Copyright © 2017 Glutanimate <github.com/glutanimate>
 #
 # Provenance:
@@ -21,17 +21,8 @@ note types and decks in the "Add" cards dialog.
 
 ###############################
 # Set up here...
-model_button_rows = [
-    [{"label": u'C1', "shortcut": "Ctrl+1", "name": u'Cloze'}, 
-        {"label": u'B1', "shortcut": "Ctrl+2", "name": u'Basic'},
-        {"label": u'B2', "shortcut": "Ctrl+3", "name": u'Basic'}],  # row1
-    [{"label": u'C2', "shortcut": "Ctrl+5", "name": u'Cloze'}, 
-        {"label": u'B3', "shortcut": "Ctrl+4", "name": u'Basic'},
-        {"label": u'B4', "shortcut": "Ctrl+6", "name": u'Basic'},
-        {"label": u'B5', "shortcut": "Ctrl+7", "name": u'Basic'}], # row 2
-    [{"label": u'C3', "shortcut": "Ctrl+8", "name": u'Cloze'}, 
-        {"label": u'B6', "shortcut": "Ctrl+9", "name": u'Basic'}] # row 3
-    ]
+model_button_rows = [[{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+                      {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]]
 ###############################
 # List of lists defining which model buttons to use in each row
 #
@@ -56,47 +47,65 @@ model_button_rows = [
 #     [{"label": 'S', "name": 'Standard'}] # row 1
 # ]
 #
-# Example 2.
-# model_button_rows = [
-#     [{"label": u'和', 'name': u'Standard — Japanese'},
-#          {"label": u'動', 'name': u'Standard — Verb — Japanese'}], # row 1
-#     [{"label": u'一', 'name': u'Standard — electric 一段 Verb — Japanese'},
-#         {"label": u'す','name': u'Standard — electric する Verb — Japanese'}] # row 2
-# ]
+# Example 2 (ospalh’s models, one row)
+#model_button_rows = [
+#    [{"label": u'和', 'name': u'Standard — Japanese'},
+#     {"label": u'動', 'name': u'Standard — Verb — Japanese'},
+#     {"label": u'一', 'name': u'Standard — electric 一段 Verb — Japanese'},
+#     {"label": u'す','name': u'Standard — electric する Verb — Japanese'}]]
 #
-# Example 3:
+# Example 3, old style:
 # model_button_rows = [{"label": u'C','name': u'ClozeFieldAtTop'},
 #                  {"label": u'F', 'name': u'FieldAtTop'}]
 #
 # Example 4 (default):
-# model_button_rows = [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
-#                  {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]
+#model_button_rows = [[{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+#                      {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}]]
+# Example 5, multi-row:
+# model_button_rows = [
+#     [{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
+#      {"label": u'B', "shortcut": "Ctrl+2", "name": u'Basic'}],  # row1
+#     [{"label": u'A', "shortcut": "Ctrl+5",
+#      "name": u'"Standard with audio fields"'},
+#      {"label": u'J', "shortcut": "Ctrl+4",
+#      "name": u"Japanese with audio fields"}] # row 2
+#    ]
 
 
 ###############################
 # ... and here.
-deck_button_rows = [
-    [{"label": u'D1', 'name': u'Default'},
-        {"label": u'D2', 'name': u'Default'}], # row 1
-    [{"label": u'D3', 'name': u'Default'},
-        {"label": u'D4', 'name': u'Default'}], # row 2
-    [{"label": u'D5', 'name': u'Default'},
-        {"label": u'D6', 'name': u'Default'},
-        {"label": u'D7', 'name': u'Default'}], # row 3
-    ]
+deck_button_rows = [[{"label": u'D', 'name': u'Default'}]]
 ###############################
 # List of lists defining which deck buttons to use in each row
 #
-# The rules are identical to those for the model buttons, "name" must
-# name an existing deck.
+# The rules are identical to those for the model buttons, but the name
+# refers to a deck, not a model. The deck is created if it doesn’t
+# exist already.
 #
-# Example:
-# deck_button_rows = [
-#         [{"label": u'Z', 'name': u'ZZ'},
-#             {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}], # row 1
-#         [{"label": u'A', 'name': u'AA'},
-#             {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}] # row 2
-#     ]
+# Example 1, ospalh’s collection (one row, old style):
+#deck_button_rows = [
+#    {"label": u'Z', 'name': u'ZZ'},
+#    {"label": u'読', 'name': u'1 日本語::1 VHS::1 Lesen'}]
+
+# Example 2, multi row:
+#deck_button_rows = [
+#    [{"label": u'D', 'name': u'Default'}], # row 1
+#    [{"label": u'E1', 'name': u'English::Chapter 1'},
+#     {"label": u'E2', 'name': u'English::Chapter 2'},
+#     {"label": u'E3', 'name': u'English::Chapter 3'},
+#     {"label": u'E4', 'name': u'English::Chapter 4'},
+#     {"label": u'E5', 'name': u'English::Chapter 5'},
+#    ], # row 2
+#    [{"label": u'F1', 'name': u'Français::chapitre 1'},
+#     {"label": u'F2', 'name': u'Français::chapitre 2'},
+#     {"label": u'F3', 'name': u'Français::chapitre 3'},
+#     {"label": u'F4', 'name': u'Français::chapitre 4'},
+#     {"label": u'F5', 'name': u'Français::chapitre 5'},
+#    ], # row 3
+#    ]
+#
+# Example 2 (default, minimal):
+# deck_button_rows = [[{"label": u'D', 'name': u'Default'}]]
 
 
 ###############################
