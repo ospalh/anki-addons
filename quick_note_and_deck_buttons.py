@@ -21,13 +21,12 @@ note types and decks in the "Add" cards dialog.
 
 ###############################
 # Set up here...
-model_buttons = [{"label": u'和', 'name': u'Standard — Japanese'},
-                 {"label": u'P', 'name': u'Person'},
-                 {"label": u'動', 'name': u'Standard — Verb — Japanese'},
-                 {"label": u'一',
-                  'name': u'Standard — electric 一段 Verb — Japanese'},
-                 {"label": u'す',
-                  'name': u'Standard — electric する Verb — Japanese'}]
+model_button_rows = [[
+    {"label": u'和', 'name': u'Standard — Japanese'},
+    {"label": u'P', 'name': u'Person'},
+    {"label": u'動', 'name': u'Standard — Verb — Japanese'},
+    {"label": u'一', 'name': u'Standard — electric 一段 Verb — Japanese'},
+    {"label": u'す', 'name': u'Standard — electric する Verb — Japanese'}]]
 ###############################
 # List of lists defining which model buttons to use in each row
 #
