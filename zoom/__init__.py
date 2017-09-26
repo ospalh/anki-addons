@@ -3,17 +3,20 @@
 # Based in part on code by Damien Elmes <anki@ichi2.net>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
-"""Add-on for Anki 2 to zoom in or out."""
+"""Add-on for Anki 2.1 to zoom in or out."""
 
-from PyQt5.QtCore import Qt, SIGNAL
+from types import MethodType
+
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QKeySequence
 from PyQt5.QtWidgets import QAction, QMenu
 
 from aqt import mw
+from aqt.webview import AnkiWebView, QWebEngineView
 from anki.hooks import addHook, runHook, wrap
 from anki.lang import _
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # Standard zoom factors for the main views of the central area:
 deck_browser_standard_zoom = 1.0
@@ -32,21 +35,21 @@ zoom_step = 2.0**0.25
 
 
 def zoom_in(step=None):
-    u"""Increase the text size."""
+    """Increase the text size."""
     if not step:
         step = zoom_step
-    mw.web.setTextSizeMultiplier(mw.web.textSizeMultiplier() * step)
+    mw.web.setZoomFactor(mw.web.zoomFactor() * step)
 
 
 def zoom_out(step=None):
-    u"""Decrease the text size."""
+    """Decrease the text size."""
     if not step:
         step = zoom_step
-    mw.web.setTextSizeMultiplier(mw.web.textSizeMultiplier() / zoom_step)
+    mw.web.setZoomFactor(mw.web.zoomFactor() / step)
 
 
 def reset_zoom(state=None, *args):
-    u"""Reset the text size."""
+    """Reset the text size."""
     if not state:
         state = mw.state
     standard_zoom = deck_browser_standard_zoom
@@ -56,36 +59,41 @@ def reset_zoom(state=None, *args):
         standard_zoom = reset_required_standard_zoom
     if 'review' == state:
         standard_zoom = review_standard_zoom
-    mw.web.setTextSizeMultiplier(standard_zoom)
+    mw.web.setZoomFactor(standard_zoom)
+
+
+def add_action(submenu, label, callback, shortcut=None):
+    """Add action to menu"""
+    action = QAction(_(label), mw)
+    action.triggered.connect(callback)
+    if shortcut:
+        action.setShortcut(QKeySequence(shortcut))
+    submenu.addAction(action)
 
 
 def setup_menu():
-    u"""Set up the zoom menu."""
+    """Set up the zoom menu."""
     try:
         mw.addon_view_menu
     except AttributeError:
-        mw.addon_view_menu = QMenu(_(u"&View"), mw)
+        mw.addon_view_menu = QMenu(_('&View'), mw)
         mw.form.menubar.insertMenu(
-            mw.form.menuTools.menuAction(), mw.addon_view_menu)
-    mw.zoom_submenu = QMenu(_(u"&Zoom"), mw)
+            mw.form.menuTools.menuAction(),
+            mw.addon_view_menu
+        )
+
+    mw.zoom_submenu = QMenu(_('&Zoom'), mw)
     mw.addon_view_menu.addMenu(mw.zoom_submenu)
-    zoom_in_action = QAction(_('Zoom &In'), mw)
-    zoom_in_action.setShortcut(QKeySequence("Ctrl++"))
-    mw.zoom_submenu.addAction(zoom_in_action)
-    mw.connect(zoom_in_action, SIGNAL("triggered()"), zoom_in)
-    zoom_out_action = QAction(_('Zoom &Out'), mw)
-    zoom_out_action.setShortcut(QKeySequence("Ctrl+-"))
-    mw.zoom_submenu.addAction(zoom_out_action)
-    mw.connect(zoom_out_action, SIGNAL("triggered()"), zoom_out)
+
+    add_action(mw.zoom_submenu, 'Zoom &In', zoom_in, 'Ctrl++')
+    add_action(mw.zoom_submenu, 'Zoom &Out', zoom_out, 'Ctrl+-')
     mw.zoom_submenu.addSeparator()
-    reset_zoom_action = QAction(_('&Reset'), mw)
-    reset_zoom_action.setShortcut(QKeySequence("Ctrl+0"))
-    mw.zoom_submenu.addAction(reset_zoom_action)
-    mw.connect(reset_zoom_action, SIGNAL("triggered()"), reset_zoom)
+
+    add_action(mw.zoom_submenu, '&Reset', reset_zoom, 'Ctrl+0')
 
 
 def handle_wheel_event(event):
-    u"""
+    """
     Zoom on mouse wheel events with Ctrl.
 
     Zoom in our out on mouse wheel events when Ctrl is pressed.  A
@@ -93,23 +101,32 @@ def handle_wheel_event(event):
     that amount.
     """
     if event.modifiers() & Qt.ControlModifier:
-        step = event.delta() / 120 * zoom_step
+        step = event.angleDelta().y()
         if step > 0:
-            zoom_in(step)
-        else:
-            zoom_out(-step)
+            zoom_in()
+        elif step < 0:
+            zoom_out()
     else:
         original_mw_web_wheelEvent(event)
 
 
 def run_move_to_state_hook(state, *args):
-    u"""Run a hook whenever we have changed the state."""
+    """Run a hook whenever we have changed the state."""
     runHook("movedToState", state)
 
 
-mw.moveToState = wrap(mw.moveToState, run_move_to_state_hook)
-addHook("movedToState", reset_zoom)
+def real_zoom_factor(self):
+    """Use the default zoomFactor.
+
+    Overwrites Anki's effort to support hiDPI screens.
+    """
+    return QWebEngineView.zoomFactor(self)
+
+
+mw.moveToState = MethodType(wrap(mw.moveToState.__func__, run_move_to_state_hook), mw)
+addHook('movedToState', reset_zoom)
 original_mw_web_wheelEvent = mw.web.wheelEvent
 mw.web.wheelEvent = handle_wheel_event
-
+mw.web.zoomFactor = MethodType(real_zoom_factor, mw.web)
+AnkiWebView.zoomFactor = real_zoom_factor
 setup_menu()
