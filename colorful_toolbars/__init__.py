@@ -1,6 +1,7 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2013–2014  Roland Sieker <ospalh@gmail.com>
+# © 2013–2017  Roland Sieker <ospalh@gmail.com>
+# © 2017 Marcio Mazza
 #
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 # Images:
