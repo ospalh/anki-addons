@@ -46,7 +46,7 @@ model_button_rows = [[{"label": u'C', "shortcut": "Ctrl+1", "name": u'Cloze'},
 # Example 2 (ospalh’s models, one row)
 # model_button_rows = [
 #    [{"label": u'和', 'name': u'Standard — Japanese'},
-#     {"label": u'動', 'name': u'Standard — Verb — Japanese'},
+#                  {"label": u'動', 'name': u'Standard — Verb — Japanese'},
 #     {"label": u'一', 'name': u'Standard — electric 一段 Verb — Japanese'},
 #     {"label": u'す','name': u'Standard — electric する Verb — Japanese'}]]
 #
@@ -112,7 +112,8 @@ deck_button_rows = [[{"label": u'D', 'name': u'Default'}]]
 # IAR, (or "practicality beats purity"). Put the stuff to change on
 # top, even before the imports.
 
-from aqt.qt import *
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtGui import QHBoxLayout, QKeySequence, QPushButton, QShortcut
 
 from aqt.modelchooser import ModelChooser
 from aqt.deckchooser import DeckChooser
@@ -157,27 +158,27 @@ def setup_buttons(chooser, rows, text, do_function):
         rows = [rows]
     for idx, buttons in enumerate(rows):
         target = chooser if idx == 0 else chooser.vbox
-        bhbl = QHBoxLayout()
-        for button_item in buttons:
-            b = QPushButton(button_item["label"])
+    bhbl = QHBoxLayout()
+    for button_item in buttons:
+        b = QPushButton(button_item["label"])
             tt = _("Change {what} to {name}").format(
                 what=text, name=button_item["name"])
             l = lambda _=None, s=chooser, nn=button_item["name"]: do_function(
                 s, nn)
-            try:
+        try:
                 sc = _(button_item["shortcut"])
                 s = QShortcut(QKeySequence(sc), chooser.widget)
                 tt += "<br>({})".format(sc)
-            except KeyError:
-                pass
-            else:
+        except KeyError:
+            pass
+        else:
                 s.activated.connect(l)
-            if isMac:
-                b.setStyleSheet("padding: 5px; padding-right: 7px;")
+        if isMac:
+            b.setStyleSheet("padding: 5px; padding-right: 7px;")
             b.setToolTip(tt)
             b.setFocusPolicy(Qt.ClickFocus)
             b.setAutoDefault(False)
-            bhbl.addWidget(b)
+        bhbl.addWidget(b)
             b.clicked.connect(l)
         target.addLayout(bhbl)
 
@@ -187,10 +188,10 @@ def change_model_to(chooser, model_name):
     # Mostly just a copy and paste from the bottom of onModelChange()
     m = chooser.deck.models.byName(model_name)
     try:
-        chooser.deck.conf['curModel'] = m['id']
+    chooser.deck.conf['curModel'] = m['id']
     except TypeError:
         # When you see this error message, the most likely explanation
-        # is that the model names are not set up correctly in the
+    # is that the model names are not set up correctly in the
         # model_button_rows list of dictionaries above.
         tooltip(u"No note type “{model}”".format(model=model_name))
         return

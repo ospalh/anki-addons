@@ -15,8 +15,8 @@ Load the file 'user_style.css' from the user’s profile folder
 the style from the template.
 """
 
-from PyQt4.QtGui import QAction, QActionGroup, QMenu
-from PyQt4.QtCore import SIGNAL
+from PyQt5.QtWidgets import QAction, QActionGroup, QMenu
+from PyQt5.QtCore import SIGNAL
 
 import os
 import re
@@ -59,10 +59,10 @@ def fix_body_class():
         template_nr = mw.reviewer.card.ord
     else:
         template_nr = 0
-    template_class = re.sub(ur'[\W_]+', u'',
+    template_class = re.sub(r'[\W_]+', u'',
                             model['tmpls'][template_nr]['name']).lower()
-    model_class = re.sub(ur'[\W_]+', u'', model['name']).lower()
-    body_class = ur'{0} card card{1} template_{2} model_{3}'.format(
+    model_class = re.sub(r'[\W_]+', u'', model['name']).lower()
+    body_class = r'{0} card card{1} template_{2} model_{3}'.format(
         local_class, mw.reviewer.card.ord + 1,
         template_class, model_class)
     try:

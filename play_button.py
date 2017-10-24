@@ -11,10 +11,9 @@ import os
 import re
 import shutil
 
-from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
-from PyQt4.QtCore import QUrl
-from PyQt4.QtGui import QDesktopServices
-from urllib import quote
+from bs4 import BeautifulSoup
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
 
 from anki.cards import Card
 from anki.hooks import addHook, wrap
@@ -27,7 +26,7 @@ from aqt.reviewer import Reviewer
 
 __version__ = "2.0.0"
 
-sound_re = ur"\[sound:(.*?)\]"
+sound_re = r"\[sound:(.*?)\]"
 
 hide_class_name = u'browserhide'
 
@@ -123,7 +122,7 @@ def add_preview_link_handler(browser):
 
 def reduce_format_qa(self, text):
     u"""Remove elements with a given class before displaying."""
-    soup = BeautifulSoup(text)
+    soup = BeautifulSoup(text, 'html.parser')
     for hide in soup.findAll(True, {'class': re.compile(
             '\\b' + hide_class_name + '\\b')}):
         hide.extract()

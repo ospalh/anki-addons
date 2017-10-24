@@ -21,10 +21,9 @@ choices what to do wit each:
 
 import os
 
-from PyQt4.QtGui import QButtonGroup, QDialog, QDialogButtonBox, QFrame, \
-    QGridLayout, QIcon, QLabel, QPixmap, QPushButton, QScrollArea, \
-    QSizePolicy, QVBoxLayout
-from PyQt4.QtCore import SIGNAL, SLOT
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QButtonGroup, QDialog, QDialogButtonBox, QFrame, \
+    QGridLayout, QLabel, QPushButton, QScrollArea, QSizePolicy, QVBoxLayout
 
 from aqt import mw
 from anki.lang import _
@@ -181,10 +180,8 @@ that they are sorry, will add this soon &c., click on this.""")
         dialog_buttons = QDialogButtonBox(self)
         dialog_buttons.addButton(QDialogButtonBox.Cancel)
         dialog_buttons.addButton(QDialogButtonBox.Ok)
-        self.connect(
-            dialog_buttons, SIGNAL("accepted()"), self, SLOT("accept()"))
-        self.connect(
-            dialog_buttons, SIGNAL("rejected()"), self, SLOT("reject()"))
+        dialog_buttons.accepted.connect(self.accept)
+        dialog_buttons.rejected.connect(self.reject)
         outer_layout.addWidget(dialog_buttons)
 
     def create_rows(self, layout, sarea):

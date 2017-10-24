@@ -11,7 +11,7 @@
 Download pronunciations from GoogleTTS
 """
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from anki.template import furigana
 
@@ -63,4 +63,4 @@ class GooglettsDownloader(AudioDownloader):
         u"""Return a string that can be used as the url."""
         qdict = dict(
             tl=self.language, q=source.encode('utf-8'), ie='utf-8', client='t')
-        return self.url + urllib.urlencode(qdict)
+        return self.url + urllib.parse.urlencode(qdict)

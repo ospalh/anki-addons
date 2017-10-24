@@ -14,7 +14,7 @@ Download pronunciations from Duden.
 
 import re
 import unicodedata
-import urlparse
+import urllib.parse
 
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -83,5 +83,5 @@ class DudenDownloader(AudioDownloader):
         """Check if link looks """
         if title_key not in link['title']:
             return False
-        return urlparse.urlsplit(link['href']).netloc \
-            == urlparse.urlsplit(self.url).netloc
+        return urllib.parse.urlsplit(link['href']).netloc \
+            == urllib.parse.urlsplit(self.url).netloc

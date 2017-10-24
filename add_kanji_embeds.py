@@ -26,8 +26,9 @@ import os
 import re
 import sys
 
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QAction
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtWidgets import QAction
+
 
 # The rest of the anki componets.
 from aqt.utils import askUser, tooltip

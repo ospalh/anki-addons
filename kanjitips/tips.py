@@ -108,7 +108,7 @@ current_script = u''
 # debug: rememeber:
 #pp(mw.reviewer.web.page().mainFrame().toHtml())
 
-skip_re = ur"\[(:?sound|type):(:?.*?)\]"
+skip_re = r"\[(:?sound|type):(:?.*?)\]"
 
 
 def uniqify_list(seq):

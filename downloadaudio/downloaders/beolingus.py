@@ -11,8 +11,8 @@
 Download pronunciations from BeoLingus.
 '''
 
-import urllib
-import urlparse
+import urllib.request, urllib.parse, urllib.error
+import urllib.parse
 import re
 
 from .downloader import AudioDownloader, uniqify_list
@@ -97,9 +97,9 @@ class BeolingusDownloader(AudioDownloader):
         pop-up, isolate the "Listen with your default mp3 player" link
         from that, get the file that points to and get that.
         """
-        word_encoded = urllib.quote(word.encode('utf-8'))
+        word_encoded = urllib.parse.quote(word.encode('utf-8'))
         popup_url = re.sub(';text=.*$', ';text=' + word_encoded, popup_url)
-        popup_url = urlparse.urljoin(self.site_url, popup_url)
+        popup_url = urllib.parse.urljoin(self.site_url, popup_url)
         popup_soup = self.get_soup_from_url(popup_url)
         # The audio link should be the only link.
         href_list = [a['href'] for a in popup_soup.findAll('a')]
@@ -109,9 +109,9 @@ class BeolingusDownloader(AudioDownloader):
         # If we don't have exactly one url, something's wrong. Assume
         # we have at least one.
         return self.get_tempfile_from_url(
-            urlparse.urljoin(self.site_url, href_list[0]))
+            urllib.parse.urljoin(self.site_url, href_list[0]))
 
     def build_word_url(self, source):
         u"""Put source into a dict useful as part of a url."""
         qdict = dict(service=self.service, query=source.encode('utf-8'))
-        return self.url + urllib.urlencode(qdict)
+        return self.url + urllib.parse.urlencode(qdict)
