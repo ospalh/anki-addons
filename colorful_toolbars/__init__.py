@@ -95,7 +95,8 @@ do_gradient = True
 # Change below this at your own risk/only when you know what you are
 # doing.
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'colorful_toolbars', 'color_icons')
+icons_dir = os.path.join(
+    mw.pm.addonFolder(), 'colorful_toolbars', 'color_icons')
 
 
 toolbar_gradient_form = u'''QToolBar:top, QToolBar:bottom {{
@@ -621,13 +622,15 @@ add_tool_bar()
 add_more_tool_bar()
 add_to_menus()
 #mw.toolbar.web.hide()
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off)
-mw.overview.show = wrap(mw.overview.show, edit_actions_on)
-mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
-mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
-mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
-mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
+
+# TODO: FIX
+# mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off)
+# mw.overview.show = wrap(mw.overview.show, edit_actions_on)
+# mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
+# mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
+# mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
+# mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
+# mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
 
 # Wrapper to not show a next card.
 original_next_card = Reviewer.nextCard
