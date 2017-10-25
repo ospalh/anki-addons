@@ -10,11 +10,11 @@
 import re
 import urllib.parse
 from aqt.qt import *
-from aqt.webview import AnkiWebPage
+from aqt.webview import AnkiWebView
 from aqt import mw
 
 
-def setHtmlWithBaseurl(self, html):
+def setHtmlWithBaseurl(webview, html):
     """Pass along the base url when setting the HTML
 
     Because something, something, security, you are not allowed to
@@ -23,20 +23,20 @@ def setHtmlWithBaseurl(self, html):
     """
     app = QApplication.instance()
     oldFocus = app.focusWidget()
-    self._domDone = False
+    webview._domDone = False
     try:
         base_url = QUrl(
             urllib.parse.unquote(
                 re.search('<base href="(.*?)">', html).group(1)) +
             "__viewer__.html")
     except AttributeError as ae:
-        self._page.setHtml(html)
+        webview._page.setHtml(html)
     else:
-        self._page.setHtml(html, base_url)
+        webview._page.setHtml(html, base_url)
         # work around webengine stealing focus on setHtml()
     if oldFocus:
         oldFocus.setFocus()
 
 
-AnkiWebPage.setHtml = setHtmlWithBaseurl
+AnkiWebView._setHtml = setHtmlWithBaseurl
 mw.web._setHtml = setHtmlWithBaseurl
