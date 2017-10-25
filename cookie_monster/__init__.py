@@ -28,4 +28,4 @@ def setHtmlWithBaseurl(webpage, html):
 original_setHtml = AnkiWebPage.setHtml
 
 AnkiWebPage.setHtml = setHtmlWithBaseurl
-#mw.web._page.setHtml = setHtmlWithBaseurl
+mw.web._page.setHtml = setHtmlWithBaseurl
