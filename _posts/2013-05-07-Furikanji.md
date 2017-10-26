@@ -5,7 +5,7 @@ permalink: Furikanji.html
 main_file: furikanji.py
 status_color: yellow
 status_text_color: black
-status: for desktop use only
+status: for desktop use only, update planned
 abstract: >
  Display text as furikanji, that is, show kana on the base line, with
  the kanji above. This adds a few other display hacks, too.
@@ -22,6 +22,11 @@ This add-on is for use with the desktop
 client only. Using features of this add-on with mobile clients or
 AnkiWeb may result in suboptimal layout.
 </blockquote>
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+update it to 2.1, but don’t know when i will get around to it. If you
+are impatient, you can of course do the update yourself. Please let me
+know which way you want your version published.</blockquote>
 
 ## Furikanji
 
@@ -84,5 +89,4 @@ This means that commas, newlines,
 * Leading kana are not automatically separated. For example the
   reading for <q lang="ja">お釣り</q> must still be written with an ASCII space or
   other separator between the <q lang="ja">お</q> and the <q lang="ja">釣</q>: <q lang="ja">お 釣[つ]り</q>.
-* This mechanism only work with Python version 2.7.
 * As the other functions, this works only on the desktop client.{% endraw %}

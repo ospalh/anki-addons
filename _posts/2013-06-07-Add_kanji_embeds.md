@@ -35,3 +35,5 @@ pretty much useless state.
 The add-on may also need extra Python packages. See the
 <q><a href="Batteries.html">Batteries</a></q> page for details on
 this.
+
+This is in Anki 2.0 style, and will not be updated.

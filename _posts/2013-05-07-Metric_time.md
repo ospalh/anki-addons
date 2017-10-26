@@ -1,7 +1,7 @@
 ---
 title: Metric time
 main_file: metric_time.py
-status: personal hobby horse, broken
+status: no update planned
 layout: addon
 permalink: Metric_time.html
 status_color: red
@@ -29,6 +29,10 @@ This add-on replaces the standard time-formatting function with one
 that returns times shorter than a year as days – even times much
 shorter than a day. Longer times are written as years with one decimal
 place.
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I have no plans of
+updating it. People that are interrested in this are welcome to take
+this over.</blockquote>
 
 ## AnkiDroid
 

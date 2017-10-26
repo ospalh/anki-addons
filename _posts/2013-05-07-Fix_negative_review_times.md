@@ -4,8 +4,8 @@ main_file: fix_negative_review_times.py
 permalink: Fix_negative_review_times.html
 layout: addon
 status: obsolete
-status_color: yellow
-status_text_color: black
+status_color: red
+status_text_color: white
 abstract: "Fix negative review times."
 first_image: time_fix.png
 first_alt: 'Some Python code'
@@ -16,3 +16,5 @@ ankiweb_id: 3009264632
 This applies a fix for symptoms caused by an AnkiDroid bug that has long been
 fixed. When you see negative review times, either in AnkiDroid or in
 the statistics window of the desktop client, download the add-on, run it once and get a new AnkiDroid.
+
+This is in Anki 2.0 style, and will not be updated.

@@ -3,7 +3,7 @@ title: Unnormalize
 main_file: unnormalize.py
 permalink: Unnormalize.html
 layout: addon
-status: may add errors, broken
+status: may add errors, no update planned
 status_color: red
 status_text_color: white
 abstract: >

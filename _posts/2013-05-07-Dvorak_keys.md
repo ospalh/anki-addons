@@ -1,11 +1,11 @@
 ---
 title: Dvorak keys
 main_file: dvorak_keys.py
-status: working
+status: update planned
 layout: addon
 permalink: Dvorak_keys.html
-status_color: green
-status_text_color: white
+status_color: yellow
+status_text_color: black
 abstract: >
   Use keys easy to use for user of the <a
   href="https://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak
@@ -47,6 +47,10 @@ does this remapping.)
 These keys were selected so that they don't clash with other functions
 like add card or edit card.
 
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+update it to 2.1, but don’t know when i will get around to it. If you
+are impatient, you can of course do the update yourself. Please let me
+know which way you want your version published.</blockquote>
 
 ## Configuration
 

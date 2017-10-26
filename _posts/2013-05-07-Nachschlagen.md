@@ -3,8 +3,8 @@ title: Nachschlagen
 main_file: nachschlagen.py
 permalink: Nachschlagen.html
 layout: addon
-status: working
-status_color: green
+status: no update planned
+status_color: red
 status_text_color: white
 abstract: >
   Menu to look up words at a few web sites. Most useful for speakers
@@ -24,6 +24,10 @@ words at some of my favorite resources.
 
 A few of them are German, and the whole add-on is kept in German as
 well. <q lang="de">Nachschlagen</q> is German for <q>look up</q>.
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I have no plans of
+updating it. People that are interrested in this are welcome to take
+this over.</blockquote>
 
 ## Set-up
 

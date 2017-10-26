@@ -1,11 +1,11 @@
 ---
 title: Deck name in title
 main_file: deck_name_in_title.py
-status: working
+status: update planned
 layout: addon
 permalink: Deck_name_in_title.html
-status_color: green
-status_text_color: white
+status_color: yellow
+status_text_color: black
 abstract: >
  Show the name of the deck you are currently learning in the window
  title.
@@ -19,6 +19,9 @@ andprofile">learning</span> in the window title.
 
 Taking a hint from some other applications, the <span class="qtbase
 orprofile">deck</span> name is shown *before* the application name.
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will update it to 2.1, but don’t know when i will get around to it. If you are impatient, you can of course do the update yourself. Please let me know which way you want your version published.</blockquote>
+
 
 ### Setup
 

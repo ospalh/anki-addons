@@ -6,9 +6,9 @@ tags:
  - browser
  - display
 layout: addon
-status: working
-status_color: green
-status_text_color: white
+status: update planned
+status_color: yellow
+status_text_color: black
 abstract: Hide some text in the card browser list.
 first_image: browserhide.png
 first_alt: >
@@ -28,3 +28,6 @@ feature hidden in the <q>More</q> button of the template editor.
 The functionallity of this add-on has been added to the
 [Replay button on card](Play_button.html) add-on. There is no need
 to install this add-on when the play button add-on is used, too.
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+publish a 2.1 version after i have updated the play button addon.</blockquote>

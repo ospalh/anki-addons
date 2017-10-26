@@ -3,9 +3,9 @@ title: Swiss locale
 main_file: swiss_locale.py
 layout: addon
 permalink: Swiss_locale.html
-status: one-off, broken
-status_color: red
-status_text_color: white
+status: hackish, update planned
+status_color: yellow
+status_text_color: black
 abstract: An add-on to make my German geography deck work.
 first_image: nordzypern.png
 first_alt: The input of 0.26 is formatted as 260'000.
@@ -51,3 +51,9 @@ will only work on Linux systems.
 While this add-on only works with the desktop client, the deck for
 which this is written compensates for that, so that the deck is
 usable on AnkiWeb and mobile devices.
+
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+update it to 2.1, but don’t know when i will get around to it. If you
+are impatient, you can of course do the update yourself. Please let me
+know which way you want your version published.</blockquote>

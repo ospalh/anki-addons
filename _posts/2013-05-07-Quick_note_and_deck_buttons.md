@@ -1,11 +1,11 @@
 ---
 title: Quick note and deck buttons
 main_file: quick_note_and_deck_buttons.py
-status: working
+status: no update planned
 layout: addon
 permalink: Quick_note_and_deck_buttons.html
 ankiweb_id: 2181333594
-status_color: green
+status_color: red
 status_text_color: white
 abstract: Quickly select a few models or decks.
 first_image: quick_buttons.png
@@ -19,6 +19,10 @@ Click on them to select your favorite model or note type.
 
 <blockquote class="nb">You will have to modify the add-on source to
 adapt this to your deck and model names.</blockquote>
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I have no plans of
+updating it. People that are interrested in this are welcome to take
+this over.</blockquote>
 
 ## Setup
 

@@ -1,11 +1,11 @@
 ---
 title: Small add cards
 main_file: small_add_cards.py
-status: quick hack
+status: quick hack, no update planned
 layout: addon
 permalink: Small_add_cards.html
-status_color: yellow
-status_text_color: black
+status_color: red
+status_text_color: white
 abstract: Remove size limits from add card window
 first_image: too%20small.png
 first_caption: U cn hrdly read anything.
@@ -25,3 +25,5 @@ much. Just make it bigger again in this case.
 
 The add-on also adds a toggle button to hide or show the model and
 deck selectors.
+
+This is in Anki 2.0 style, and will not be updated.

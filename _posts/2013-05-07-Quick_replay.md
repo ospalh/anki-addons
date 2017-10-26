@@ -3,9 +3,9 @@ title: Quick replay
 main_file: quick_replay.py
 layout: addon
 permalink: quick_replay.html
-status: hackish
-status_color: yellow
-status_text_color: black
+status: no update planned
+status_color: red
+status_text_color: white
 abstract: >
   Bypass the mplayer play queue. Like this, when you hit replay, the
   replay starts at once.
@@ -26,3 +26,7 @@ This add-on has not been tested on all
 platforms. It may not work when the only mplayer available is the one
 from a binary Anki installation.
 </blockquote>
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I have no plans of
+updating it. People that are interrested in this are welcome to take
+this over.</blockquote>

@@ -21,3 +21,5 @@ button.
 This add-on works somewhat, but there may be a few problems with the
 first card. I don't use this, so i will not spend too much time fixing
 the problem.
+
+This is in Anki 2.0 style, and will not be updated.

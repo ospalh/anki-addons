@@ -3,9 +3,9 @@ title: Add note id
 permalink: Add_note_id.html
 main_file: add_note_id.py
 layout: addon
-status: working
-status_color: green
-status_text_color: white
+status: update planned
+status_color: yellow
+status_text_color: black
 abstract: >
   The first field of cards should be unique. To make sure this is the
   case, this add-on adds a unique number to fields called <code>Note ID</code>.
@@ -34,6 +34,9 @@ changed.
 To use, the first field in the card model must be named <q>Note ID</q>.
 Then, when adding content, this field is automatically filled with a
 number based on the note id when you move the cursor to another field.
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will update it to 2.1, but don’t know when i will get around to it. If you are impatient, you can of course do the update yourself. Please let me know which way you want your version published.</blockquote>
+
 
 ## Menu
 There is also an item in the Tools menu that goes through the whole
