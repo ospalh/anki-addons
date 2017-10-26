@@ -2,11 +2,11 @@
 title: Local CSS and DIY night mode
 subtitle: Adapt card styles to time and place
 main_file: local_css_and_diy_night_mode.py
-status: working
+status: updated planned
 layout: addon
 permalink: Local_CSS_and_DIY_night_mode.html
-status_color: green
-status_text_color: white
+status_color: yellow
+status_text_color: black
 abstract: >
   Add styling from a local CSS file. With this, the card style can be
   adapted to time (night colors) and place (small fonts on small
@@ -19,6 +19,13 @@ first_alt: >
   schemes in different parts.
 ankiweb_id: 2587372325
 ---
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+update it to 2.1, but don’t know when i will get around to it. If you
+are impatient, you can of course do the update yourself. Please let me
+know which way you want your version published.</blockquote>
+
+
 {%raw%}This loads the local CSS file `user_style.css` and adds the style to
 the CSS set in the card templates.
 

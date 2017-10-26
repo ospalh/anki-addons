@@ -1,11 +1,11 @@
 ---
 title: Download audio
 main_file: download_audio.py
-status: working
+status: update planned
 layout: addon
 permalink: Download_audio.html
-status_color: green
-status_text_color: white
+status_color: yellow
+status_text_color: black
 abstract: >
   Automatically download audio from talking dictionaries or
   from Google TTS
@@ -19,6 +19,11 @@ subtitle: Hear what you learn
 ankiweb_id: 3100585138
 extra_jq_script: audio_tips.js
 ---
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+update it to 2.1, but don’t know when i will get around to it. If you
+are impatient, you can of course do the update yourself. Please let me
+know which way you want your version published.</blockquote>
 This add-on adds three menu items,
 
 * <q>Edit/Media/Note audio</q>

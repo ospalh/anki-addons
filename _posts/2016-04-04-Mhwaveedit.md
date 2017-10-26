@@ -6,7 +6,7 @@ tags:
  - edit
  - audio
 layout: addon
-status: working, hackish, Linux only
+status: hackish, update planned
 status_color: yellow
 status_text_color: black
 abstract: Edit files with external programs
@@ -14,6 +14,11 @@ first_image: mhWaveEdit.png
 first_alt: An audio editor
 first_caption: Edit files with mhWaveEdit
 ---
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+update it to 2.1, but don’t know when i will get around to it. If you
+are impatient, you can of course do the update yourself. Please let me
+know which way you want your version published.</blockquote>
 Edit audio files with
 [mhWaveEdit](https://gna.org/projects/mhwaveedit/).
 

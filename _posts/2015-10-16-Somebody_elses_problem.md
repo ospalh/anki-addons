@@ -3,8 +3,8 @@ title: Somebody else’s problem
 main_file: somebody_elses_problem.py
 layout: addon
 permalink: Somebody_elses_problem.html
-status: working
-status_color: green
+status: no update planned
+status_color: red
 status_text_color: white
 abstract: >
   Quick hack to hide field content only on the desktop client.
@@ -16,6 +16,11 @@ invisible."
 ankiweb_id: 4073019785
 ---
 This is a quick hack to hide field content only on the desktop client.
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I have no plans of
+updating it. People that are interrested in this are welcome to take
+this over.</blockquote>
+
 
 Put fields you don’t want to see on the desktop into
 `{%raw%}{{sep:NN}}{%endraw%}` templates, and they become
