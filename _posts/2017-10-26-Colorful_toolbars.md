@@ -3,9 +3,9 @@ title: Colorful toolbars
 permalink: Colorful_toolbars.html
 main_file: colorful_toolbars.py
 layout: addon
-status: working
-status_color: green
-status_text_color: white
+status: update in progress
+status_color: yellow
+status_text_color: black
 abstract: >
  Replace the top menu bar with the <q>Decks Study Add Browse</q> text
  buttons and the two rather drab sync and statistics buttons with a
@@ -18,6 +18,12 @@ first_alt: >
 ankiweb_id: 388296573
 extra_jq_script: ct_tips.js
 ---
+
+<blockquote class="nb">I am in the process of updating this for Anki
+2.1. At one time parts of this worked with Anki 2.1 and others
+didn’t.</blockquote>
+
+
 This add-on replaces the top menu bar with the <q>Decks Study Add
 Browse</q> text buttons and the two rather drab sync and statistics
 buttons with a colorful icon toolbar like the one in Anki 1.

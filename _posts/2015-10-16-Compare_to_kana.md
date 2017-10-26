@@ -3,9 +3,9 @@ title: Compare to kana
 main_file: compare_to_kana.py
 layout: addon
 permalink: Compare_to_kana.html
-status: working
-status_color: green
-status_text_color: white
+status: update planned
+status_color: yellow
+status_text_color: black
 abstract: "When typing in Japanese readings, remove the kanji bit from
 the correct text, so that the red and green coloring of the answer
 works correctly."
@@ -17,6 +17,15 @@ first_alt: >
 first_caption: The typed-in answer was compared to the kana only.
 ankiweb_id: 4091556602
 ---
+
+<blockquote class="nb">This is an Anki 2.0 plugin. I think i will
+update it to 2.1, but don’t know when i will get around to it. If you
+are impatient, you can of course do the update yourself. Please let me
+know which way you want your version published.</blockquote>
+
+
+
+
 {% raw %}A typical model for learning Japanese has a field called <q>Reading</q>. In
 that field, the reading (kana) is stored *along with the kanji*. For
 example, in a note defining the Japanese word for citizens, the

@@ -8,8 +8,8 @@ tags:
  - unicode
 layout: addon
 status: abandoned
-status_color: yellow
-status_text_color: black
+status_color: red
+status_text_color: white
 abstract: Display FEN data as a chess board.
 first_image: excelsior.png
 first_alt: >
@@ -20,6 +20,9 @@ first_caption: >
 ankiweb_id: 2923601993
 ---
 
+<blockquote class="nb">This is an Anki 2.0 plugin. I have no plans of
+updating it, as it was obsolete anyway. People that are still
+interrested in this are welcome to take this over.</blockquote>
 
 Display a record of a chess position in
 [Forsyth–Edwards Notation](http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation)

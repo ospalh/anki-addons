@@ -7,14 +7,15 @@ tags:
  - replay
  - button
 layout: addon
-status: working
-status_color: green
+status: obsolete
+status_color: rod
 status_text_color: white
 abstract: "Show a replay button for each file on a card."
 first_image: play_buttons.png
 first_alt: "Flash card with text and play buttons."
 # ankiweb_id: 498789867
 ---
+
 Simple add-on that adds play buttons to the cards for audio and video
 files.
 
@@ -22,6 +23,8 @@ With this it is possible to replay individual files. For example just
 the pronunciation of a word, or just one example sentences.
 
 <blockquote class="nb">This add-on has been superseded by the <a href="Play_button.html">play button</a> add-on.</blockquote>
+
+This is in Anki 2.0 style, and will not be updated.
 
 ## Installation
 

@@ -14,6 +14,8 @@ first_caption: Write 況 in this order.
 Show colored stroke order diagrams on the desktop client, including
 variants.
 
+This is in Anki 2.0 style, and will not be updated.
+
 ## Alternatives
 
 This add-on serves a similar purpose as

@@ -1,7 +1,7 @@
 ---
 title: Dehashilator
 main_file: dehashilate.py
-status: breaks collections
+status: breaks collections, no update planned
 layout: addon
 permalink: Dehashilate.html
 status_color: red
@@ -70,3 +70,5 @@ The name was inspired by the
 [dihoxulator](http://www.girlgeniusonline.com/comic.php?date=20021213). So
 was the [stop button
 text](http://www.girlgeniusonline.com/comic.php?date=20021218).
+
+This is in Anki 2.0 style, and will not be updated.
