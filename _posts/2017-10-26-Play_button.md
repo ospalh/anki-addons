@@ -7,14 +7,18 @@ tags:
  - replay
  - button
 layout: addon
-status: working
-status_color: green
-status_text_color: white
+status: update in progress
+status_color: yellow
+status_text_color: black
 abstract: "Show a replay button for each file on a card."
 first_image: SVG_buttons_solarized.png
 first_alt: "Flash card with text and play buttons."
 ankiweb_id: 498789867
 ---
+
+<blockquote class="nb">I have started updating this to Anki 2.1 standard. Currently the display of the replay arrow works, but clicking it does not play the file.</blockquote>
+
+
 Simple add-on that adds play buttons to the cards for audio and video
 files.
 
