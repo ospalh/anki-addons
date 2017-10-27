@@ -5,13 +5,15 @@
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
-"""Add-on for Anki 2.1 to add AnkiDroid-style replay buttons."""
+"""Add-on for Anki 2.1 to allow the use of cookies."""
 
 import re
 import urllib.parse
-from aqt.webview import AnkiWebPage
+from aqt.webview import AnkiWebPage, AnkiWebView
 from aqt import mw
 from PyQt5.QtCore import QUrl
+
+__version__ = "0.1.0"
 
 def setHtmlWithBaseurl(webpage, html):
     try:
@@ -28,4 +30,4 @@ def setHtmlWithBaseurl(webpage, html):
 original_setHtml = AnkiWebPage.setHtml
 
 AnkiWebPage.setHtml = setHtmlWithBaseurl
-mw.web._page.setHtml = setHtmlWithBaseurl
+mw.web = AnkiWebView()  # I think the webview has already been created when we get here. So reset it.
