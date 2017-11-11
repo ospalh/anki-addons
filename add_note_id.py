@@ -18,7 +18,7 @@ Anki2 add-on to make notes unique
 Add the note id to a field named Note ID in
 """
 
-from PyQt5.QtCore import QCoreApplication, SIGNAL
+from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import QAction, QProgressDialog
 
 
@@ -92,7 +92,7 @@ def add_nids_to_all():
                 if f == name.lower():
                     # Check if target is empty
                     if not n[name]:
-                        n[name] = str(nid - long(13e11))
+                        n[name] = str(nid - int(13e11))
                         n.flush()
     mw.reset()
 
@@ -119,7 +119,7 @@ def onFocusLost(flag, n, fidx):
     if field_index != fidx:
         return flag
     # Got to here: We have an empty id field, so put in a number.
-    n[field_name] = str(n.id - long(13e11))
+    n[field_name] = str(n.id - int(13e11))
     return True
 
 
@@ -127,6 +127,6 @@ if show_menu_item:
     add_nid = QAction(mw)
     mw.form.menuTools.addAction(add_nid)
     add_nid.setText(_(u"Add note ids"))
-    mw.connect(add_nid, SIGNAL("triggered()"), add_nids_to_all)
+    add_nid.triggered.connect(add_nids_to_all)
 
 addHook('editFocusLost', onFocusLost)
