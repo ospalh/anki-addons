@@ -1,6 +1,7 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
 # Copyricht © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyright © 2017 Luo Li-Yan, <joseph.lorimer13@gmail.com>
 #
 # Portions of this file were originally written by
 # Damien Elmes <anki@ichi2.net>
@@ -22,9 +23,10 @@ from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import QAction, QProgressDialog
 
 
-from anki.hooks import addHook
+from anki.hooks import addHook, wrap
 from anki.lang import _
 from aqt import mw
+from aqt.editor import Editor
 from aqt.utils import askUser
 
 __version__ = '1.2.1'
@@ -123,10 +125,19 @@ def onFocusLost(flag, n, fidx):
     return True
 
 
+def onLoadNote(self, *args, **kwargs):
+    for f in self.note.keys():
+        if f.lower() in id_fields and not self.note[f]:
+            self.note[f] = str(self.note.id - int(13e11))
+
+
 if show_menu_item:
     add_nid = QAction(mw)
     mw.form.menuTools.addAction(add_nid)
     add_nid.setText(_(u"Add note ids"))
     add_nid.triggered.connect(add_nids_to_all)
 
+
 addHook('editFocusLost', onFocusLost)
+
+Editor.loadNote = wrap(Editor.loadNote, onLoadNote, 'before')
