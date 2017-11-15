@@ -62,7 +62,7 @@ def add_nids_to_all():
     """Add note id to all empty fields with the right names.
 
     Iterate over all notes and add the nid minus
-    1’300’000’000’000. The subtraction is done mostly for aesthetical
+    1’500’000’000’000. The subtraction is done mostly for aesthetical
     reasons.
     """
     if not askUser(
