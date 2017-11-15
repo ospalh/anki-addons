@@ -29,7 +29,7 @@ from aqt import mw
 from aqt.editor import Editor
 from aqt.utils import askUser
 
-__version__ = '1.2.1'
+__version__ = '2.0.0'
 
 config = mw.addonManager.getConfig(__name__)
 
