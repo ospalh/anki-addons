@@ -11,7 +11,7 @@
 Download pronunciations for Icelandic from islex.is
 """
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -41,7 +41,7 @@ class IslexDownloader(AudioDownloader):
         qdict = {'finna': 1, 'dict': 'SE', 'erflokin': 1, 'nlo': 1, 'fuzz': 1,
                  'samleit': field_data.word.encode('utf-8')}
         soup = self.get_soup_from_url(
-            self.url + 'se?' + urllib.urlencode(qdict))
+            self.url + 'se?' + urllib.parse.urlencode(qdict))
 
         if soup.findAll(attrs=dict(id='ord')):
             # When we have a table tag with id="ord" we (probably)

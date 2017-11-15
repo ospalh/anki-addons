@@ -44,7 +44,7 @@ split_kanji_kana = False
 # Replace ‘False’ with ‘True’ when you have no kanji in your reading field
 
 # Change this at your own risk.
-field_name_re = ur'{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
+field_name_re = r'{{(?:[/^#]|[^:}]+:|)([^:}{]*%s[^:}{]*)}}'
 
 
 def uniqify_list(seq):
@@ -112,7 +112,7 @@ def field_data(note, audio_field, reading=False):
             # While a bit tricky, this is not THAT hard to do. (Not
             # lookbehind needed.)
             sources_list = [
-                re.sub(ur'[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
+                re.sub(r'[\s_]{0}|{0}[\s_]?'.format(re.escape(afk)),
                        '', a_name, count=1, flags=re.UNICODE)]
         for cnd in sources_list:
             for idx, lname in enumerate(f_names):

@@ -13,8 +13,12 @@ u"""Add a menu to Anki2 to look up words in a few more dictionaries. """
 
 
 import urllib
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtWidgets import QAction, QMenu
+
 from aqt import mw
-from aqt.qt import QDesktopServices, QUrl, QMenu, QAction, SIGNAL
+from aqt.qt import SIGNAL
 from aqt.utils import tooltip
 from aqt.webview import QWebPage
 

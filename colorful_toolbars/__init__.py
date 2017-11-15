@@ -1,6 +1,7 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyright © 2013–2014  Roland Sieker <ospalh@gmail.com>
+# © 2013–2017  Roland Sieker <ospalh@gmail.com>
+# © 2017 Marcio Mazza
 #
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 # Images:
@@ -27,8 +28,9 @@ main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
 
-from PyQt4.QtCore import QSize, Qt, SIGNAL
-from PyQt4.QtGui import QAction, QIcon, QMenu, QPalette, QToolBar
+from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtGui import QIcon, QPalette
+from PyQt5.QtWidgets import QAction, QMenu, QToolBar
 import os
 
 from anki.hooks import wrap, addHook
@@ -93,7 +95,8 @@ do_gradient = True
 # Change below this at your own risk/only when you know what you are
 # doing.
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'color_icons')
+icons_dir = os.path.join(
+    mw.pm.addonFolder(), 'colorful_toolbars', 'color_icons')
 
 
 toolbar_gradient_form = u'''QToolBar:top, QToolBar:bottom {{
@@ -461,47 +464,47 @@ sync_action = QAction(mw)
 sync_action.setText(_(u"S&ync"))
 sync_action.setIcon(QIcon(os.path.join(icons_dir, 'sync.png')))
 sync_action.setToolTip(_(u"Synchronize with AnkiWeb."))
-mw.connect(sync_action, SIGNAL("triggered()"), mw.onSync)
+sync_action.triggered.connect(mw.onSync)
 decks_action = QAction(mw)
 decks_action.setText(_(u"&Deck browser"))
 decks_action.setIcon(QIcon(os.path.join(icons_dir, 'deck_browser.png')))
 decks_action.setToolTip(_(u"Go to the deck browser."))
-mw.connect(decks_action, SIGNAL("triggered()"), go_deck_browse)
+decks_action.triggered.connect(go_deck_browse)
 overview_action = QAction(mw)
 overview_action.setText(_(u"Deck overview"))
 overview_action.setIcon(QIcon(os.path.join(icons_dir, 'study_options.png')))
 overview_action.setToolTip(_(u"Go to the deck overview."))
-mw.connect(overview_action, SIGNAL("triggered()"), mw.onOverview)
+overview_action.triggered.connect(mw.onOverview)
 study_action = QAction(mw)
 study_action.setText(_(u"Study"))
 study_action.setIcon(QIcon(os.path.join(icons_dir, 'study.png')))
 study_action.setToolTip(_(u"Start studying the selected deck."))
-mw.connect(study_action, SIGNAL("triggered()"), go_study)
+study_action.triggered.connect(go_study)
 add_notes_action = QAction(mw)
 add_notes_action.setText(_(u"Add notes"))
 add_notes_action.setIcon(QIcon(os.path.join(icons_dir, 'add.png')))
 add_notes_action.setToolTip(_(u"Add notes."))
-mw.connect(add_notes_action, SIGNAL("triggered()"), mw.onAddCard)
+add_notes_action.triggered.connect(mw.onAddCard)
 browse_cards_action = QAction(mw)
 browse_cards_action.setText(_(u"Browse cards"))
 browse_cards_action.setIcon(QIcon(os.path.join(icons_dir, 'browse.png')))
 browse_cards_action.setToolTip(_(u"Open the cards browser."))
-mw.connect(browse_cards_action, SIGNAL("triggered()"), mw.onBrowse)
+browse_cards_action.triggered.connect(mw.onBrowse)
 statistics_action = QAction(mw)
 statistics_action.setText(_(u"Show statistics"))
 statistics_action.setIcon(QIcon(os.path.join(icons_dir, 'statistics.png')))
 statistics_action.setToolTip(_(u"Show statistics."))
-mw.connect(statistics_action, SIGNAL("triggered()"), mw.onStats)
+statistics_action.triggered.connect(mw.onStats)
 edit_current_action = QAction(mw)
 edit_current_action.setText(_(u"Edit current"))
 edit_current_action.setIcon(QIcon(os.path.join(icons_dir, 'edit_current.png')))
 edit_current_action.setToolTip(_(u"Edit the current note."))
-mw.connect(edit_current_action, SIGNAL("triggered()"), go_edit_current)
+edit_current_action.triggered.connect(go_edit_current)
 edit_layout_action = QAction(mw)
 edit_layout_action.setText(_(u"Edit layout"))
 edit_layout_action.setIcon(QIcon(os.path.join(icons_dir, 'edit_layout.png')))
 edit_layout_action.setToolTip(_(u"Edit the layout of the current card."))
-mw.connect(edit_layout_action, SIGNAL("triggered()"), go_edit_layout)
+edit_layout_action.triggered.connect(go_edit_layout)
 toggle_mark_action = QAction(mw)
 toggle_mark_action.setText(_(u"Mark"))
 toggle_mark_action.setCheckable(True)
@@ -511,7 +514,7 @@ toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_off.png'))
 toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_on.png'), QSize(),
                          QIcon.Normal, QIcon.On)
 toggle_mark_action.setIcon(toggle_mark_icon)
-mw.connect(toggle_mark_action, SIGNAL("triggered()"), mw.reviewer.onMark)
+toggle_mark_action.triggered.connect(mw.reviewer.onMark)
 toggle_last_card_action = QAction(mw)
 toggle_last_card_action.setText(_(u"Last card"))
 toggle_last_card_action.setCheckable(True)
@@ -536,63 +539,59 @@ bury_action = QAction(mw)
 bury_action.setText(_(u"Bury note"))
 bury_action.setIcon(QIcon(os.path.join(icons_dir, 'bury.png')))
 bury_action.setToolTip(_(u"Hide this note for today."))
-mw.connect(bury_action, SIGNAL("triggered()"), mw.reviewer.onBuryNote)
+bury_action.triggered.connect(mw.reviewer.onBuryNote)
 suspend_card_action = QAction(mw)
 suspend_card_action.setText(_(u"Suspend card"))
 suspend_card_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend_card.png')))
 suspend_card_action.setToolTip(_(u"Hide this card permanently."))
-mw.connect(
-    suspend_card_action, SIGNAL("triggered()"), mw.reviewer.onSuspendCard)
+suspend_card_action.triggered.connect(mw.reviewer.onSuspendCard)
 suspend_note_action = QAction(mw)
 suspend_note_action.setText(_(u"Suspend note"))
 suspend_note_action.setIcon(QIcon(os.path.join(icons_dir, 'suspend.png')))
 suspend_note_action.setToolTip(_(u"Hide this note permanently."))
-mw.connect(suspend_note_action, SIGNAL("triggered()"), mw.reviewer.onSuspend)
+suspend_note_action.triggered.connect(mw.reviewer.onSuspend)
 delete_action = QAction(mw)
 delete_action.setText(_(u"Delete note"))
 delete_action.setIcon(QIcon(os.path.join(icons_dir, 'delete.png')))
 delete_action.setToolTip(_(u"Delete this note."))
-mw.connect(delete_action, SIGNAL("triggered()"), ask_delete)
+delete_action.triggered.connect(ask_delete)
 options_action = QAction(mw)
 options_action.setText(_(u"Study options"))
 options_action.setIcon(QIcon(os.path.join(icons_dir, 'options.png')))
 options_action.setToolTip(_(u"Show the active study options group."))
-mw.connect(options_action, SIGNAL("triggered()"), mw.reviewer.onOptions)
+options_action.triggered.connect(mw.reviewer.onOptions)
 replay_action = QAction(mw)
 replay_action.setText(_(u"Replay audio"))
 replay_action.setIcon(QIcon(os.path.join(icons_dir, 'replay.png')))
 replay_action.setToolTip(_(u"Replay card’s audio or video."))
-mw.connect(replay_action, SIGNAL("triggered()"), mw.reviewer.replayAudio)
+replay_action.triggered.connect(mw.reviewer.replayAudio)
 record_own_action = QAction(mw)
 record_own_action.setText(_(u"Record own voice"))
 record_own_action.setIcon(QIcon(os.path.join(icons_dir, 'blue_mic.png')))
 record_own_action.setToolTip(_(u"Record your own voice."))
-mw.connect(record_own_action, SIGNAL("triggered()"), mw.reviewer.onRecordVoice)
+record_own_action.triggered.connect(mw.reviewer.onRecordVoice)
 replay_own_action = QAction(mw)
 replay_own_action.setText(_(u"Replay own voice"))
 replay_own_action.setIcon(QIcon(os.path.join(icons_dir, 'play_green.png')))
 replay_own_action.setToolTip(_(u"Replay your recorded voice."))
-mw.connect(replay_own_action, SIGNAL("triggered()"),
-           mw.reviewer.onReplayRecorded)
+replay_own_action.triggered.connect(mw.reviewer.onReplayRecorded)
 
 ## Actions to show and hide the different tool bars.
 show_text_tool_bar_action = QAction(mw)
 show_text_tool_bar_action.setText(_(u"Show text tool bar"))
 show_text_tool_bar_action.setCheckable(True)
-mw.connect(show_text_tool_bar_action, SIGNAL("triggered()"),
-           toggle_text_tool_bar)
+show_text_tool_bar_action.triggered.connect(toggle_text_tool_bar)
 show_qt_tool_bar_action = QAction(mw)
 show_qt_tool_bar_action.setText(_(u"Show icon bar"))
 show_qt_tool_bar_action.setCheckable(True)
 show_qt_tool_bar_action.setChecked(True)
-mw.connect(show_qt_tool_bar_action, SIGNAL("triggered()"), toggle_qt_tool_bar)
+show_qt_tool_bar_action.triggered.connect(toggle_qt_tool_bar)
 show_more_tool_bar_action = QAction(mw)
 show_more_tool_bar_action.setText(_(u"Show more tool bar"))
 show_more_tool_bar_action.setCheckable(True)
 show_more_tool_bar_action.setChecked(True)
 show_more_tool_bar_action.setEnabled(False)
-mw.connect(show_more_tool_bar_action, SIGNAL("triggered()"),
-           toggle_more_tool_bar)
+show_more_tool_bar_action.triggered.connect(toggle_more_tool_bar)
 
 
 ## Add images to actions we already have. I skip a few where no icon
@@ -601,8 +600,8 @@ mw.form.actionDocumentation.setIcon(QIcon(os.path.join(icons_dir, 'help.png')))
 mw.form.actionDonate.setIcon(QIcon(os.path.join(icons_dir, 'donate.png')))
 mw.form.actionAbout.setIcon(QIcon(os.path.join(icons_dir, 'anki.png')))
 mw.form.actionUndo.setIcon(QIcon(os.path.join(icons_dir, 'undo.png')))
-mw.form.actionSwitchProfile.setIcon(QIcon(os.path.join(icons_dir,
-                                                       'switch-profile.png')))
+mw.form.actionSwitchProfile.setIcon(
+    QIcon(os.path.join(icons_dir, 'switch-profile.png')))
 mw.form.actionImport.setIcon(QIcon(os.path.join(icons_dir, 'import.png')))
 mw.form.actionExport.setIcon(QIcon(os.path.join(icons_dir, 'export.png')))
 mw.form.actionExit.setIcon(QIcon(os.path.join(icons_dir, 'exit.png')))
@@ -610,11 +609,12 @@ mw.form.actionDownloadSharedPlugin.setIcon(
     QIcon(os.path.join(icons_dir, 'download-addon.png')))
 mw.form.actionFullDatabaseCheck.setIcon(
     QIcon(os.path.join(icons_dir, 'check-db.png')))
-mw.form.actionPreferences.setIcon(QIcon(os.path.join(icons_dir,
-                                                     'preferences.png')))
+mw.form.actionPreferences.setIcon(
+    QIcon(os.path.join(icons_dir, 'preferences.png')))
 
 ## Hide the edit and nmore buttons.
-mw.reviewer._bottomCSS += "td.stat button {display:none;}"
+# mw.reviewer._bottomCSS += "td.stat button {display:none;}"
+#mw.reviewer.bottom.css += "td.stat button {display:none;}"
 
 
 # Create the menus
@@ -622,13 +622,15 @@ add_tool_bar()
 add_more_tool_bar()
 add_to_menus()
 #mw.toolbar.web.hide()
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off)
-mw.overview.show = wrap(mw.overview.show, edit_actions_on)
-mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
-mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
-mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
-mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
+
+# TODO: FIX
+# mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off)
+# mw.overview.show = wrap(mw.overview.show, edit_actions_on)
+# mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
+# mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
+# mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
+# mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
+# mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
 
 # Wrapper to not show a next card.
 original_next_card = Reviewer.nextCard

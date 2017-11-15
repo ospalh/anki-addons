@@ -35,8 +35,9 @@ manual.
 """
 
 import os
-from PyQt4.QtGui import QAction, QIcon, QMenu
-from PyQt4.QtCore import SIGNAL
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction, QMenu
+
 
 from aqt import mw
 from aqt.utils import tooltip
@@ -233,7 +234,7 @@ mw.note_download_action.setIcon(QIcon(os.path.join(icons_dir,
 mw.note_download_action.setToolTip(
     "Download audio for all audio fields of this note.")
 mw.note_download_action.setShortcut(DOWNLOAD_NOTE_SHORTCUT)
-mw.connect(mw.note_download_action, SIGNAL("triggered()"), download_for_note)
+mw.note_download_action.triggered.connect(download_for_note)
 
 mw.side_download_action = QAction(mw)
 mw.side_download_action.setText(u"Side audio")
@@ -242,7 +243,7 @@ mw.side_download_action.setIcon(
 mw.side_download_action.setToolTip(
     "Download audio for audio fields currently visible.")
 mw.side_download_action.setShortcut(DOWNLOAD_SIDE_SHORTCUT)
-mw.connect(mw.side_download_action, SIGNAL("triggered()"), download_for_side)
+mw.side_download_action.triggered.connect(download_for_side)
 
 mw.manual_download_action = QAction(mw)
 mw.manual_download_action.setText(u"Manual audio")
@@ -251,7 +252,7 @@ mw.manual_download_action.setIcon(
 mw.manual_download_action.setToolTip(
     "Download audio, editing the information first.")
 mw.manual_download_action.setShortcut(DOWNLOAD_MANUAL_SHORTCUT)
-mw.connect(mw.manual_download_action, SIGNAL("triggered()"), download_manual)
+mw.manual_download_action.triggered.connect(download_manual)
 
 
 mw.edit_media_submenu.addAction(mw.note_download_action)

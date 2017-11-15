@@ -13,13 +13,13 @@ Download pronunciations from leo.org
 
 from collections import OrderedDict
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ElementTree
 
 # Make this work without PyQt
 with_pyqt = True
 try:
-    from PyQt4.QtGui import QImage
+    from PyQt5.QtGui import QImage
 except ImportError:
     with_pyqt = False
 
@@ -80,7 +80,7 @@ class LeoDownloader(AudioDownloader):
         xml = self.get_data_from_url(
             self.dic_url.format(
                 lang=query_lang,
-                word=urllib.quote_plus(field_data.word.encode('utf-8')),
+                word=urllib.parse.quote_plus(field_data.word.encode('utf-8')),
                 direction=direction))
         root = ElementTree.fromstring(xml)
         hits = OrderedDict()
@@ -98,11 +98,6 @@ class LeoDownloader(AudioDownloader):
                 matching_word = None
                 for el_word in side.findall('words/word'):
                     cur_word = el_word.text
-                    # Text in ElementTree has inconsistent types: "str" when it
-                    # contains only ASCII characters and "unicode" otherwise.
-                    # Make everything unicode.
-                    if type(cur_word) == str:
-                        cur_word = cur_word.decode('utf-8')
                     if self.normalize(cur_word) == self.normalize(
                             field_data.word):
                         matching_word = cur_word

@@ -14,7 +14,7 @@ Download pronunciations from  Oxford Advanced Learner’s Dictionary.
 
 from copy import copy
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
@@ -50,7 +50,7 @@ class OaldDownloader(AudioDownloader):
         self.maybe_get_icon()
         # Do our parsing with BeautifulSoup
         word_soup = self.get_soup_from_url(
-            self.url + urllib.quote(word.encode('utf-8')))
+            self.url + urllib.parse.quote(word.encode('utf-8')))
         self.ws = word_soup
         # The audio clips are stored as images with class sound and
         # the link hidden in the onclick bit.

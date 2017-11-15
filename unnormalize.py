@@ -19,7 +19,7 @@ import sys
 import unicodedata
 
 from PyQt4.QtCore import QCoreApplication, SIGNAL
-from PyQt4.QtGui import QAction, QProgressDialog
+from PyQt5.QtWidgets import QAction, QProgressDialog
 
 from anki.utils import isMac
 from anki.lang import _

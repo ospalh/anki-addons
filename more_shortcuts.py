@@ -19,8 +19,8 @@ on a Dvorak keyboard (See also my “Dvorak keys” add-on.) or with the
 right hand on the numeric key-pad.
 """
 
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QKeySequence, QShortcut
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtGui import QKeySequence, QShortcut
 
 from anki.hooks import wrap
 from aqt import mw

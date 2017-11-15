@@ -25,7 +25,7 @@ if isWin:
     subprocess.STARTUPINFO.wShowWindow = subprocess.SW_HIDE
     subprocess.STARTUPINFO.dwFlags = subprocess.STARTF_USESHOWWINDOW
 
-sound_re = ur'\[sound:(.*?)\]'
+sound_re = r'\[sound:(.*?)\]'
 
 command_list = ['mplayer', '-really-quiet']
 if isWin:

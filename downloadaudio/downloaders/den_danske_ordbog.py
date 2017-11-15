@@ -1,7 +1,8 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright © 2015 Daniel Eriksson <daniel@deriksson.se>
-# Copyright © 2015 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2015–2017 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2017 antortjim <ntoniohu@gmail.com>
 #
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
@@ -11,9 +12,9 @@
 Download pronunciations for Danish from Den Danske Ordbog
 """
 
-import urllib
-from urllib2 import HTTPError
-from HTMLParser import HTMLParser
+import urllib.request, urllib.parse, urllib.error
+from urllib.error import HTTPError
+from html.parser import HTMLParser
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
 
@@ -35,7 +36,7 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
         if not field_data.word:
             return
         search_soup = self.get_soup_from_url(
-            self.url + urllib.urlencode(dict(query=field_data.word)))
+            self.url + urllib.parse.urlencode(dict(query=field_data.word)))
         search_results = search_soup.find(
             'div', {'class': 'searchResultBox'}).findAll('a')
         if search_results:
