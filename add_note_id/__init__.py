@@ -1,7 +1,7 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyricht © 2012–2017 Roland Sieker, <ospalh@gmail.com>
-# Copyright © 2017 Luo Li-Yan, <joseph.lorimer13@gmail.com>
+# © 2012–2017 Roland Sieker, <ospalh@gmail.com>
+# © 2017 Luo Li-Yan, <joseph.lorimer13@gmail.com>
 #
 # Portions of this file were originally written by
 # Damien Elmes <anki@ichi2.net>
