@@ -1,7 +1,7 @@
 ---
 title: Add note id
 permalink: Add_note_id.html
-main_file: add_note_id.py
+main_file: add_note_id/__init__.py
 layout: addon
 status: working
 status_color: green
