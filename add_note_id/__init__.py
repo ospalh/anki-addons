@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# Copyricht © 2012 Roland Sieker, <ospalh@gmail.com>
+# Copyricht © 2012–2017 Roland Sieker, <ospalh@gmail.com>
 # Copyright © 2017 Luo Li-Yan, <joseph.lorimer13@gmail.com>
 #
 # Portions of this file were originally written by
@@ -14,7 +14,7 @@
 # See the notes in the progress function
 
 """
-Anki2 add-on to make notes unique
+Anki2.1 add-on to make notes unique
 
 Add the note id to a field named Note ID in
 """
@@ -31,19 +31,7 @@ from aqt.utils import askUser
 
 __version__ = '1.2.1'
 
-# Field names to use. Use only lower-case here. The field name can
-# have upper-case letters. (Use "Note ID" as the field name.)
-id_fields = ['note id', 'nid']
-
-## Select one or the other line.
-
-## You can remove the '# ' from the 'show_menu_item =
-## False' line (and add one to the show_menu_item = True' line) to
-## hide the 'Add note ids' menu after you have filled the fields in
-## your old cards. NB.: remember to remove the space at the start of
-## the line, too.
-show_menu_item = True
-# show_menu_item = False
+config = mw.addonManager.getConfig(__name__)
 
 
 def progress(data, *args):
@@ -71,73 +59,45 @@ def progress(data, *args):
 
 
 def add_nids_to_all():
-    """
-    Add note id to all empty fields with the right names.
+    """Add note id to all empty fields with the right names.
 
-    Iterate over all notes and add the nid minus 1’300’000’000’000. The
-    subtraction is done mostly for aesthetical reasons.
+    Iterate over all notes and add the nid minus
+    1’300’000’000’000. The subtraction is done mostly for aesthetical
+    reasons.
     """
-    if not askUser(_(u"Add note id to all 'Note ID' fields?")):
+    if not askUser(
+            _("Add note id to all “{fn}” fields?".format(
+                fn=config["NoteIdFieldName"]))):
         return
     # Maybe there is a way to just select the notes which have a nid
     # field. But this should work and efficency isn't too much of an
     # issue.
     nids = mw.col.db.list("select id from notes")
     # Iterate over the cards
-    for nid in progress(nids, _(u"Adding note ids."), _(u"Stop that!")):
+    for nid in progress(nids, _("Adding note ids."), _("Stop that!")):
         n = mw.col.getNote(nid)
         # Go over the fields ...
         for name in mw.col.models.fieldNames(n.model()):
             # ... and the target field names ..
-            for f in id_fields:
-                # ... and compare the two
-                if f == name.lower():
-                    # Check if target is empty
-                    if not n[name]:
-                        n[name] = str(nid - int(13e11))
-                        n.flush()
+            if name == config["NoteIdFieldName"]:
+                # Check if target is empty
+                if not n[name]:
+                    n[name] = str(nid - int(15e11))
+                    n.flush()
     mw.reset()
-
-
-def onFocusLost(flag, n, fidx):
-    u"""
-    Add the nid minus 1’300’000’000’000 to the right field
-    """
-    field_name = None
-    for c, name in enumerate(mw.col.models.fieldNames(n.model())):
-        for f in id_fields:
-            if f == name.lower():
-                field_name = name
-                field_index = c
-                # I would like to break out of the nested for loops
-                # here. In C++ you are allowed to use a goto for that.
-                # ^_^ Nothing bad will happen when we go on, though.
-    if not field_name:
-        return flag
-    # Field already filled
-    if n[field_name]:
-        return flag
-    # event not coming from id field?
-    if field_index != fidx:
-        return flag
-    # Got to here: We have an empty id field, so put in a number.
-    n[field_name] = str(n.id - int(13e11))
-    return True
 
 
 def onLoadNote(self, *args, **kwargs):
     for f in self.note.keys():
-        if f.lower() in id_fields and not self.note[f]:
-            self.note[f] = str(self.note.id - int(13e11))
+        if f == config["NoteIdFieldName"] and not self.note[f]:
+            self.note[f] = str(self.note.id - int(15e11))
 
 
-if show_menu_item:
+if config["ShowMenu"]:
     add_nid = QAction(mw)
     mw.form.menuTools.addAction(add_nid)
-    add_nid.setText(_(u"Add note ids"))
+    add_nid.setText(_("Add note ids"))
     add_nid.triggered.connect(add_nids_to_all)
 
-
-addHook('editFocusLost', onFocusLost)
 
 Editor.loadNote = wrap(Editor.loadNote, onLoadNote, 'before')
