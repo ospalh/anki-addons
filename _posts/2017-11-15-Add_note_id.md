@@ -33,9 +33,9 @@ changed.
 
 To use, the first field in the card model must be named <q>Note ID</q>.
 Then, when adding content, this field is automatically filled with a
-number based on the note id when you move the cursor to another field.
+number based on the note id when you open the add note window.
 
-The field name used must match exactly, including the case, but it can be changed via the configuration mechanism, in case your collection uses something like <q>note id</q>.
+The field name used must match exactly, including the case, but it can be changed via the configuration mechanism, in case your collection uses <q>note id</q> as the field name.
 
 ## Menu
 
