@@ -7,17 +7,14 @@ tags:
  - replay
  - button
 layout: addon
-status: update in progress
-status_color: yellow
-status_text_color: black
+status: working (basic)
+status_color: green
+status_text_color: white
 abstract: "Show a replay button for each file on a card."
 first_image: SVG_buttons_solarized.png
 first_alt: "Flash card with text and play buttons."
 ankiweb_id: 498789867
 ---
-
-<blockquote class="nb">I have started updating this to Anki 2.1 standard. Currently the display of the replay arrow works, but clicking it does not play the file.</blockquote>
-
 
 Simple add-on that adds play buttons to the cards for audio and video
 files.
@@ -28,6 +25,11 @@ the pronunciation of a word, or just an example sentences.
 The button is created as inline SVG and copies the look of the replay
 button of newer AnkiDroid versions. The minimum size is set to
 12 pixel, otherwise the button is the same size as the text.
+
+The old Anki 2.0 version worked in the card layout editor and the
+preview as well. The new Anki 2.1 version works only during reviews so
+far. I think i’ll update the other add-ons before i go back to
+this. So replay there may take a while.
 
 <span  class="clear" />
 
@@ -85,28 +87,4 @@ might be used to add a shadow effect.
 
 The replay button is not shown in the card browser. Instead the sound file names are added to its  list section in the way they are entered into the cards, as `[sound:NN.mp3]` or similar.
 
-### Browserhide
-<figure>
-<img src="images/browserhide.png" alt="Part of the Anki review window.
-Text: みんなの日本語： にんぎょう.  Below part of the Anki card
-browser. One line highlighted. Text: 人形; Japanisch-De...; にんぎょう">
-<figcaption>The text <q lang="ja">みんなの日本語：</q> is shown on the card,
-but not in the browser.</figcaption>
-</figure>
-
-The mechanism that is used to hide the play button can also be used to
-hide other text repeated on every card.  Put parts of your card
-template that should not appear in the card browser into spans with
-the class `browserhide`.
-
-The effect of the `browserhide` class is similar to using the
-<q>Browser Appearance</q> feature hidden in the <q>More</q> button of
-the template editor.
-
-There is another add-on that implements *only* this hiding of text in
-the text browser, called [Lean browser qa](Lean_browser_qa.html).
-
-## PNG image version
-
-An [older version](Play_button_png.html) of this add-on
-that used an image file is still available at github.
+At leas that is the idea. I am not sure about this browser hide functionality on Anki 2.1. The same caveat as above applies.
