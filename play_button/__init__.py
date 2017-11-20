@@ -83,7 +83,7 @@ def play_button_filter(
             title = "Replay"
         else:
             title = fn
-        return """{orig}<a href='javascript:py.link("ankiplay{link_fn}");' \
+        return """{orig}<a href='javascript:pycmd("ankiplay{link_fn}");' \
 title="{ttl}" class="replaybutton browserhide"><span><svg viewBox="0 0 32 32">\
 <polygon points="11,25 25,16 11,7"/>Replay</svg></span></a>\
 <span style="display: none;">&#91;sound:{fn}&#93;</span>""".format(
