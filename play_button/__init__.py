@@ -27,7 +27,7 @@ from aqt.browser import DataModel
 from aqt.clayout import CardLayout
 from aqt.reviewer import Reviewer
 
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 
 sound_re = r"\[sound:(.*?)\]"
 
