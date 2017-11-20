@@ -142,7 +142,7 @@ old_css = Card.css
 Card.css = svg_css
 
 addHook("mungeQA", play_button_filter)
-Browser._openPreview = wrap(Browser._openPreview, add_preview_link_handler)
+# Browser._openPreview = wrap(Browser._openPreview, add_preview_link_handler)
 
 # TODO: fix this
 #CardLayout.addTab = wrap(CardLayout.addTab, add_clayout_link_handler)
