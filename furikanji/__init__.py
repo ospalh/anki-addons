@@ -14,8 +14,7 @@ Addon for Anki 2.1 for Furikanji and other purposes
 
 This provides a way to show kanji above the kana.
 The addon uses the Unicode word character class to decide what to
-display as base text and what as ruby. This bit works only with Python
-2.7.
+display as base text and what as ruby.
 
 Also add a few other templates.
 """
@@ -24,12 +23,7 @@ import re
 from anki import hooks
 
 
-__version__ = "2.1.0"
-
-
-
-#re_sub_flag = lambda pattern, repl, string: \
-#    re.sub(pattern, repl, string, flags=re.UNICODE)
+__version__ = "3.0.0"
 
 
 # Get rid off the Python 2.6 vs. 2.7 check. This is Python 3 and knows
