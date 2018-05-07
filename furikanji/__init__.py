@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–15 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–18 Roland Sieker <ospalh@gmail.com>
 # Provenance:
 # Via libanki/anki/template/furigana.py by Damien Elmes <anki@ichi2.net>
 # Based off Kieran Clancy's initial implementation.
@@ -10,7 +10,7 @@
 
 
 """
-Addon for Anki 2 for Furikanji and other purposes
+Addon for Anki 2.1 for Furikanji and other purposes
 
 This provides a way to show kanji above the kana.
 The addon uses the Unicode word character class to decide what to
@@ -26,38 +26,24 @@ from anki import hooks
 
 __version__ = "2.1.0"
 
-# Check which pattern we should use, with or without the re.UNICODE flag.
-try:
-    # Just a dummy call to re.sub to see if the flags work. I think it
-    # works with python 2.7 and doesn't work with python 2.6, but i
-    # don't really care about version numbers. (There may be a way to
-    # inspect the argument list, but doing it EAFP is fine by me.)
-    re.sub('test', 'for', 'flags', flags=re.UNICODE)
-except TypeError:
-    # Pattern close to the original one, but using named goups and
-    # excluding newlines.
-    split_pat = r' ?(?P<kanji>[^ >\n]+?)\[(?P<kana>.+?)\]'
-    # Use our own name for re.sub, so that bending the call below
-    # works.
-    re_sub_flag = re.sub
-else:
-    # Pretty much what this is about. Use unicode word characters in
-    # the pattern. Also name the groups so the code below becomes a
-    # bit more readable.
-    split_pat = r' ?(?P<kanji>\w+?)\[(?P<kana>.+?)\]'
-    # Add flag parameter to calls to re.sub.
-    re_sub_flag = lambda pattern, repl, string: \
-        re.sub(pattern, repl, string, flags=re.UNICODE)
 
-furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>' + \
-               r'<rt>\g<kana></rt></ruby>'
+
+#re_sub_flag = lambda pattern, repl, string: \
+#    re.sub(pattern, repl, string, flags=re.UNICODE)
+
+
+# Get rid off the Python 2.6 vs. 2.7 check. This is Python 3 and knows
+# Unicode.
+# Then new split pattern
+split_pat = r' ?(?P<kanji>\w+?)\[(?P<kana>.+?)\]'
 # The pattern to produce the furigana. What is called ruby in the old
 # code, but using named groups and adding a class.
-
-furikanji_pat = \
-    r'<ruby class="furikanji"><rb>\g<kana></rb><rt>\g<kanji></rt></ruby>'
+furigana_pat = r'<ruby class="furigana"><rb>\g<kanji></rb>' + \
+               r'<rt>\g<kana></rt></ruby>'
 # Pattern to produce the furikanji.  This is pretty much the reason
 # for this add-on.
+furikanji_pat = \
+    r'<ruby class="furikanji"><rb>\g<kana></rb><rt>\g<kanji></rt></ruby>'
 
 
 def no_sound(repl):
@@ -70,21 +56,23 @@ def no_sound(repl):
         else:
             # I used another if here. Use different values for re_flag
             # in a variable now.
-            return re_sub_flag(split_pat, repl, match.group(0))
+            return re.sub(split_pat, repl, match.group(0), flags=re.UNICODE)
 
     return func
 
 
 def kanji_word_re(txt, *dummy_args):
     """Strip kana and wrap base text in class kanji."""
-    return re_sub_flag(
-        split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'), txt)
+    return re.sub(
+        split_pat, no_sound(r'<span class="kanji">\g<kanji></span>'),
+        txt, flags=re.UNICODE)
 
 
 def kana_word_re(txt, *dummy_args):
     """Strip base text and wrap kana in class kana."""
-    return re_sub_flag(
-        split_pat, no_sound(r'<span class="kana">\g<kana></span>'), txt)
+    return re.sub(
+        split_pat, no_sound(r'<span class="kana">\g<kana></span>'), txt,
+        flags=re.UNICODE)
 
 
 def furigana_word_re(txt, *dummy_args):
@@ -95,7 +83,7 @@ def furigana_word_re(txt, *dummy_args):
     the brackets as the base, the text in the brackets as <rt>, that
     is, the ruby. Add class furigana to the ruby tag.
     """
-    return re_sub_flag(split_pat, no_sound(furigana_pat), txt)
+    return re.sub(split_pat, no_sound(furigana_pat), txt, flags=re.UNICODE)
 
 
 def furikanji(txt, *dummy_args):
@@ -108,7 +96,7 @@ def furikanji(txt, *dummy_args):
     from the standard way and typically shows small kanji above their
     reading.
     """
-    return re_sub_flag(split_pat, no_sound(furikanji_pat), txt)
+    return re.sub(split_pat, no_sound(furikanji_pat), txt, flags=re.UNICODE)
 
 
 hooks.addHook('fmod_furikanji', furikanji)
