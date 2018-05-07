@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# Copyright © 2012–2013 Roland Sieker <ospalh@gmail.com>
+# Copyright © 2012–2018 Roland Sieker <ospalh@gmail.com>
 #
 # Based in part on code by Damien Elmes <anki@ichi2.net>
 # and Kieran Clancy
@@ -9,7 +9,7 @@
 # http://www.gnu.org/licenses/agpl.html
 
 """
-Add-on for Anki 2 to compare typed-in text to just the kana.
+Add-on for Anki 2.1 to compare typed-in text to just the kana.
 """
 
 import re
@@ -32,7 +32,7 @@ __version__ = "3.0.0"
 
 
 def correct_kana(reviewer, given, correct, showBad=True, _old=None):
-    u"""Filter to compare the typed text to just the kana."""
+    """Filter to compare the typed text to just the kana."""
     try:
         crd = reviewer.card
         fld = re.search(r'\[\[type:([^\]]+)\]\]', crd.a()).group(1)
@@ -41,7 +41,7 @@ def correct_kana(reviewer, given, correct, showBad=True, _old=None):
         return _old(reviewer, given, correct, showBad)
     if not reading_field in fld.lower() or fld.startswith("cq:"):
         return _old(reviewer, given, correct, showBad)
-    if not japanese_model in crd.model()[u'name'].lower():
+    if not japanese_model in crd.model()['name'].lower():
         return _old(reviewer, given, correct, showBad)
     return _old(reviewer, given, kana(correct), showBad)
 
