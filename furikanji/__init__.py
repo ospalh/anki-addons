@@ -48,8 +48,6 @@ def no_sound(repl):
             # return without modification
             return match.group(0)
         else:
-            # I used another if here. Use different values for re_flag
-            # in a variable now.
             return re.sub(split_pat, repl, match.group(0), flags=re.UNICODE)
 
     return func
