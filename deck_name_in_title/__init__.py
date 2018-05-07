@@ -1,9 +1,9 @@
 # -*- mode: python ; coding: utf-8 -*-
-# © 2012–2013 Roland Sieker <ospalh@gmail.com>
+# © 2012–2018 Roland Sieker <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 """
-Anki-2 add-on to show the deck name in the window title.
+Anki 2.1 add-on to show the deck name in the window title.
 """
 
 import sys
@@ -12,6 +12,9 @@ from anki.hooks import wrap, addHook
 from aqt import mw
 
 
+config = mw.addonManager.getConfig(__name__)
+
+## Put these into the config file
 ## Several separators between the current ‘activity’ (file, directory,
 ## web page) and the program name seem common. Pick one to taste:
 title_separator = u' – '
