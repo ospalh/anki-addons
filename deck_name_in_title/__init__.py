@@ -101,8 +101,11 @@ class DeckNamer(object):
 
 
 deck_namer = DeckNamer()
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, deck_namer.deck_browser_title)
-mw.overview.show = wrap(mw.overview.show, deck_namer.overview_title)
-mw.reviewer.show = wrap(mw.reviewer.show, deck_namer.overview_title)
+#mw.deckBrowser.show = wrap(mw.deckBrowser.show, deck_namer.deck_browser_title)
+#TypeError: You are decorating a non function: <bound method DeckBrowser.show of <aqt.deckbrowser.DeckBrowser object at 0x08A7F3F0> >
+#mw.overview.show = wrap(mw.overview.show, deck_namer.overview_title)
+#TypeError: You are decorating a non function: <bound method Overview.show of <aqt.overview.Overview object at 0x08A8FD90> >
+#mw.reviewer.show = wrap(mw.reviewer.show, deck_namer.overview_title)
+#TypeError: You are decorating a non function: <bound method Reviewer.show of <12128877655.RightHandReviewer object at 0x0E084290> >
 if show_subdeck:
     addHook('showQuestion', deck_namer.card_title)
