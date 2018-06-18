@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# © 2013–2017  Roland Sieker <ospalh@gmail.com>
+# © 2013–2018  Roland Sieker <ospalh@gmail.com>
 # © 2017 Marcio Mazza
 #
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
@@ -371,8 +371,9 @@ def more_tool_bar_off():
         pass
 
 
-def maybe_more_tool_bar_on():
+def reviewer_show_extras(old_reviewer):
     """Show the more tool bar when we should."""
+    edit_actions_on()
     show_more_tool_bar_action.setEnabled(True)
     bury_action.setEnabled(True)
     toggle_mark_action.setEnabled(True)
@@ -627,7 +628,7 @@ add_to_menus()
 # mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off)
 # mw.overview.show = wrap(mw.overview.show, edit_actions_on)
 # mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
-# mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
+Reviewer.show = wrap(Reviewer.show, reviewer_show_extras)
 # mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
 # mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
 # mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
