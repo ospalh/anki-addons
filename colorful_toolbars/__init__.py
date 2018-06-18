@@ -647,6 +647,7 @@ def draw_no_star(dummy_reviewer):
 DeckBrowser.show = wrap(DeckBrowser.show, deck_browser_show_extras)
 Overview.show = wrap(Overview.show, overview_show_extras)
 Reviewer.show = wrap(Reviewer.show, reviewer_show_extras)
+# TODO: Check the mark stuff
 # Reviewer._toggleStar = wrap(Reviewer._toggleStar, update_mark_action)
 Reviewer._drawMark = draw_no_star
 
