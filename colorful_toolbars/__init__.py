@@ -46,39 +46,8 @@ __version__ = "1.5.0"
 
 
 config = mw.addonManager.getConfig(__name__)
-
-
-########################
-## Configuration section
-########################
-
-
-## Do or do not show a button that lets this be the last card reviewed.
-# show_toggle_last = False
-show_toggle_last = True
-
-## Do or do not show a mute button that stops Anki from playing
-## sound/videos initially.
-## NB. The mute is not absolute. When you push the replay button, the
-## sound still gets played.
-# show_mute_button = False
-show_mute_button = True
-
-## Show the suspend card button
-# show_suspend_card = True
-show_suspend_card = False
-
-## Show the suspend note button
-# show_suspend_note = True
-show_suspend_note = False
-
-
-###########################
-# End configuration section
-###########################
-
-# Change below this at your own risk/only when you know what you are
-# doing.
+#todo: show edit layout
+#todo: hide study options gear
 
 icons_dir = os.path.join(
     mw.pm.addonFolder(), 'colorful_toolbars', 'color_icons')
@@ -229,9 +198,9 @@ def add_more_toolbar():
     # Add the actions here
     mw.reviewer.more_toolbar.addAction(edit_current_action)
     mw.reviewer.more_toolbar.addAction(toggle_mark_action)
-    if show_toggle_last:
+    if config["show_last_card"]:
         mw.reviewer.more_toolbar.addAction(toggle_last_card_action)
-    if show_mute_button:
+    if config["show_mute_button"]:
         mw.reviewer.more_toolbar.addAction(mute_action)
     mw.reviewer.more_toolbar.addAction(bury_action)
     if show_suspend_card:
