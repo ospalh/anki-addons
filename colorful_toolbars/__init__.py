@@ -44,50 +44,33 @@ from aqt.utils import askUser
 
 __version__ = "1.5.0"
 
+
+config = mw.addonManager.getConfig(__name__)
+
+
 ########################
 ## Configuration section
 ########################
 
-# Keep this on False for tool bars on top or bottom or set it to True
-# for tool bars at the left an right. The left tool bar wil also get
-# smaller icons.
-netbook_version = False
-# netbook_version = True
-
-
-## Position of the new toolbar: either starting out above the old tool
-## bar and movable, or below the old tool bar. In that case it can't
-## be dragged to another position.
-qt_toolbar_movable = True
-# qt_toolbar_movable = False
 
 ## Do or do not show a button that lets this be the last card reviewed.
-show_toggle_last = False
-# show_toggle_last = True
+# show_toggle_last = False
+show_toggle_last = True
 
 ## Do or do not show a mute button that stops Anki from playing
 ## sound/videos initially.
 ## NB. The mute is not absolute. When you push the replay button, the
 ## sound still gets played.
-show_mute_button = False
-# show_mute_button = True
+# show_mute_button = False
+show_mute_button = True
 
 ## Show the suspend card button
-show_suspend_card = True
-# show_suspend_card = False
+# show_suspend_card = True
+show_suspend_card = False
 
 ## Show the suspend note button
-show_suspend_note = True
-# show_suspend_note = False
-
-
-# Show the tool bars with a gradient background
-#
-# In my opinion it looks a little bit nicer with gradient. The
-# disadvantage is that with the gradient the tool bars don't follow
-# color scheme changes untill you restart Anki.
-do_gradient = True
-# do_gradient = False
+# show_suspend_note = True
+show_suspend_note = False
 
 
 ###########################
@@ -184,35 +167,23 @@ def add_toolbar():
     mw.qt_toolbar = QToolBar()
     # mw.qt_toolbar.setAccessibleName('secondary tool bar')
     mw.qt_toolbar.setObjectName('qt tool bar')
-    if netbook_version:
-        mw.qt_toolbar.setIconSize(QSize(24, 24))
-    else:
-        mw.qt_toolbar.setIconSize(QSize(32, 32))
+    mw.qt_toolbar.setIconSize(QSize(32, 32))
     # Conditional setup
-    if netbook_version or qt_toolbar_movable:
-        mw.qt_toolbar.setFloatable(True)
-        mw.qt_toolbar.setMovable(True)
-        if netbook_version:
-            mw.addToolBar(Qt.LeftToolBarArea, mw.qt_toolbar)
-        else:
-            mw.addToolBar(Qt.TopToolBarArea, mw.qt_toolbar)
+    mw.qt_toolbar.setFloatable(True)
+    mw.qt_toolbar.setMovable(True)
+    mw.addToolBar(Qt.TopToolBarArea, mw.qt_toolbar)
+    palette = mw.qt_toolbar.palette()
+    fg = palette.color(QPalette.ButtonText)
+    bg = palette.color(QPalette.Button)
+    if bg.lightnessF() > fg.lightnessF():
+        bgg = bg.darker(108)
+        bgl = bg.darker()
     else:
-        mw.qt_toolbar.setFloatable(False)
-        mw.qt_toolbar.setMovable(False)
-        mw.mainLayout.insertWidget(1, mw.qt_toolbar)
-    if do_gradient:
-        palette = mw.qt_toolbar.palette()
-        fg = palette.color(QPalette.ButtonText)
-        bg = palette.color(QPalette.Button)
-        if bg.lightnessF() > fg.lightnessF():
-            bgg = bg.darker(108)
-            bgl = bg.darker()
-        else:
-            bgg = bg.lighter(120)
-            bgl = bg.lighter()
-        mw.qt_toolbar.setStyleSheet(
-            toolbar_gradient_form.format(
-                bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
+        bgg = bg.lighter(120)
+        bgl = bg.lighter()
+    mw.qt_toolbar.setStyleSheet(
+        toolbar_gradient_form.format(
+            bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
     # Add the actions here
     mw.qt_toolbar.addAction(sync_action)
     # Put this in the more tool bar, closer to the old edit button
@@ -240,27 +211,21 @@ def add_more_toolbar():
     # mw.reviewer.more_toolbar.setAccessibleName('secondary tool bar')
     mw.reviewer.more_toolbar.setObjectName('more options tool bar')
     mw.reviewer.more_toolbar.setIconSize(QSize(24, 24))
-    if netbook_version:
-        mw.reviewer.more_toolbar.setFloatable(True)
-        mw.reviewer.more_toolbar.setMovable(True)
-        mw.addToolBar(Qt.RightToolBarArea, mw.reviewer.more_toolbar)
+    mw.reviewer.more_toolbar.setFloatable(False)
+    mw.reviewer.more_toolbar.setMovable(False)
+    mw.mainLayout.insertWidget(2, mw.reviewer.more_toolbar)
+    palette = mw.reviewer.more_toolbar.palette()
+    fg = palette.color(QPalette.ButtonText)
+    bg = palette.color(QPalette.Button)
+    if bg.lightnessF() > fg.lightnessF():
+        bgg = bg.darker(108)
+        bgl = bg.darker()
     else:
-        mw.reviewer.more_toolbar.setFloatable(False)
-        mw.reviewer.more_toolbar.setMovable(False)
-        mw.mainLayout.insertWidget(2, mw.reviewer.more_toolbar)
-    if do_gradient:
-        palette = mw.reviewer.more_toolbar.palette()
-        fg = palette.color(QPalette.ButtonText)
-        bg = palette.color(QPalette.Button)
-        if bg.lightnessF() > fg.lightnessF():
-            bgg = bg.darker(108)
-            bgl = bg.darker()
-        else:
-            bgg = bg.lighter(105)
-            bgl = bg.lighter()
-        mw.reviewer.more_toolbar.setStyleSheet(
-            toolbar_gradient_form.format(
-                bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
+        bgg = bg.lighter(105)
+        bgl = bg.lighter()
+    mw.reviewer.more_toolbar.setStyleSheet(
+        toolbar_gradient_form.format(
+            bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
     # Add the actions here
     mw.reviewer.more_toolbar.addAction(edit_current_action)
     mw.reviewer.more_toolbar.addAction(toggle_mark_action)
