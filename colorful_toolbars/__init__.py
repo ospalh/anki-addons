@@ -21,9 +21,9 @@
 
 
 """
-Add standard tool bars to Anki2.
+Add standard tool bars to Anki 2.1.
 
-This Anki2 addon adds standard tool bars (QtToolBar) to the Anki
+This Anki 2.1 addon adds standard tool bars (QtToolBar) to the Anki
 main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
@@ -197,23 +197,29 @@ def add_more_toolbar():
             bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
     # Add the actions here
     mw.reviewer.more_toolbar.addAction(edit_current_action)
+    if config["show_edit_layout"]:
+        mw.reviewer.more_toolbar.addAction(edit_layout_action)
+    mw.reviewer.more_toolbar.addSeparator()
     mw.reviewer.more_toolbar.addAction(toggle_mark_action)
     if config["show_last_card"]:
         mw.reviewer.more_toolbar.addAction(toggle_last_card_action)
     if config["show_mute_button"]:
         mw.reviewer.more_toolbar.addAction(mute_action)
     mw.reviewer.more_toolbar.addAction(bury_action)
-    if show_suspend_card:
+    if config["show_suspend_card"]:
         mw.reviewer.more_toolbar.addAction(suspend_card_action)
-    if show_suspend_note:
+    if config["show_suspend_note"]:
         mw.reviewer.more_toolbar.addAction(suspend_note_action)
-    mw.reviewer.more_toolbar.addAction(delete_action)
-    mw.reviewer.more_toolbar.addSeparator()
-    mw.reviewer.more_toolbar.addAction(options_action)
+    if config["show_delete_note"]:
+        mw.reviewer.more_toolbar.addAction(delete_action)
+    if config["show_options_button"]:
+        mw.reviewer.more_toolbar.addSeparator()
+        mw.reviewer.more_toolbar.addAction(options_action)
     mw.reviewer.more_toolbar.addSeparator()
     mw.reviewer.more_toolbar.addAction(replay_action)
-    mw.reviewer.more_toolbar.addAction(record_own_action)
-    mw.reviewer.more_toolbar.addAction(replay_own_action)
+    if config["show_voice_buttons"]:
+        mw.reviewer.more_toolbar.addAction(record_own_action)
+        mw.reviewer.more_toolbar.addAction(replay_own_action)
     more_toolbar_off()
 
 
@@ -446,8 +452,8 @@ toggle_mark_action.setCheckable(True)
 toggle_mark_action.setToolTip(_(u"Mark or unmark the current note."))
 toggle_mark_icon = QIcon()
 toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_off.png'))
-toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_on.png'), QSize(),
-                         QIcon.Normal, QIcon.On)
+toggle_mark_icon.addFile(
+    os.path.join(icons_dir, 'mark_on.png'), QSize(), QIcon.Normal, QIcon.On)
 toggle_mark_action.setIcon(toggle_mark_icon)
 toggle_mark_action.triggered.connect(mw.reviewer.onMark)
 toggle_last_card_action = QAction(mw)
@@ -457,18 +463,19 @@ toggle_last_card_action.setChecked(False)
 toggle_last_card_action.setToolTip(_(u"Make this card the last to review."))
 toggle_last_card_icon = QIcon()
 toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_off.png'))
-toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_on.png'),
-                              QSize(), QIcon.Normal, QIcon.On)
+toggle_last_card_icon.addFile(
+    os.path.join(icons_dir, 'last_card_on.png'), QSize(), QIcon.Normal,
+    QIcon.On)
 toggle_last_card_action.setIcon(toggle_last_card_icon)
 mute_action = QAction(mw)
 mute_action.setText(_(u"Mute"))
 mute_action.setCheckable(True)
-mute_action.setChecked(False)
+mute_action.setChecked(config["start_muted"])
 mute_action.setToolTip(_(u"Temporarily switch off playing sounds."))
 mute_icon = QIcon()
 mute_icon.addFile(os.path.join(icons_dir, 'unmute.png'))
-mute_icon.addFile(os.path.join(icons_dir, 'mute.png'),
-                  QSize(), QIcon.Normal, QIcon.On)
+mute_icon.addFile(
+    os.path.join(icons_dir, 'mute.png'), QSize(), QIcon.Normal, QIcon.On)
 mute_action.setIcon(mute_icon)
 bury_action = QAction(mw)
 bury_action.setText(_(u"Bury note"))
