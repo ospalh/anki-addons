@@ -212,6 +212,8 @@ def add_more_toolbar():
         mw.reviewer.more_toolbar.addAction(suspend_note_action)
     if config["show_delete_note"]:
         mw.reviewer.more_toolbar.addAction(delete_action)
+    if config["show_undo"]:
+        mw.reviewer.more_toolbar.addAction(mw.form.actionUndo)
     if config["show_options_button"]:
         mw.reviewer.more_toolbar.addSeparator()
         mw.reviewer.more_toolbar.addAction(options_action)

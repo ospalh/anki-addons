@@ -5,7 +5,8 @@
     "show_suspend_card": false,
     "show_suspend_note": false,
     "show_delete_note": false,
+    "show_undo": true,
     "show_voice_buttons": false,
     "show_options_button": false,
-    "start_muted": true
+    "start_muted": false
 }
