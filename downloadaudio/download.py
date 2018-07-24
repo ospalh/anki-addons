@@ -194,10 +194,8 @@ def download_on():
     mw.side_download_action.setEnabled(True)
     mw.manual_download_action.setEnabled(True)
 
-
 def editor_download_editing(self):
     """Do the download when we are in the note editor."""
-    self.saveNow()
     download_for_note(ask_user=True, note=self.note, editor=self)
     # Fix for issue #10.
     self.stealFocus = True
@@ -205,15 +203,15 @@ def editor_download_editing(self):
     self.stealFocus = False
 
 
-def editor_add_download_editing_button(self):
+def editor_add_download_editing_button(toprightbuts, editor):
     """Add the download button to the editor"""
-    dl_button = self._addButton(
+    dl_icon = os.path.join(icons_dir, "download_note_audio.png")
+    dl_button = editor.addButton(dl_icon, 
         "download_audio",
-        lambda self=self: editor_download_editing(self),
+        editor_download_editing, # FIXME: Call saveNow before this
         tip="Download audio…")
-    dl_button.setIcon(
-        QIcon(os.path.join(icons_dir, 'download_note_audio.png')))
-
+    toprightbuts.insert(-1, dl_button)
+    return toprightbuts
 
 # Either reuse an edit-media sub-menu created by another add-on
 # (probably the mhwave (ex sweep) add-on by Y.T.) or create that
