@@ -21,7 +21,7 @@ class CollinsItalianDownloader(CollinsDownloader):
         self.url \
             = 'http://www.collinsdictionary.com/dictionary/italian-english/'
         self.lang = 'it'
-        self.lang_code = u'/it_/'
+        self.lang_code = '/it_/'
         self.icon_url = self.url
         self.extras = dict(Source="Collins Italian")
         self.action = Action.Delete  # Couldn’t get good downloads from them.

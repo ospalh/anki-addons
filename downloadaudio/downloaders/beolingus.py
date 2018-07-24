@@ -32,7 +32,7 @@ class BeolingusDownloader(AudioDownloader):
         # I have seen "text=sink%20{verb}" and the like. The simple text
         # match wasn't good enough.
         # self.text_code = 'text='
-        self.text_re = u'text={0}(?:%20{{([a-zA-Z ]+)}})?$'
+        self.text_re = 'text={0}(?:%20{{([a-zA-Z ]+)}})?$'
         self.services_dict = {'de': 'de-en', 'en': 'en-de', 'es': 'es-de'}
         # Mapping of languages to "services".
         # We can get pronunciations for the keys in this
@@ -112,6 +112,6 @@ class BeolingusDownloader(AudioDownloader):
             urllib.parse.urljoin(self.site_url, href_list[0]))
 
     def build_word_url(self, source):
-        u"""Put source into a dict useful as part of a url."""
+        """Put source into a dict useful as part of a url."""
         qdict = dict(service=self.service, query=source.encode('utf-8'))
         return self.url + urllib.parse.urlencode(qdict)

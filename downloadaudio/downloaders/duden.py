@@ -19,14 +19,14 @@ import urllib.parse
 from .downloader import AudioDownloader
 from ..download_entry import DownloadEntry
 
-transliterations = [(u'Ä', 'Ae'), (u'Ö', 'Oe'), (u'Ü', 'Ue'), (u'ä', 'ae'),
-                    (u'ö', 'oe'), (u'ü', 'ue'), (u'ß', 'sz')]
+transliterations = [('Ä', 'Ae'), ('Ö', 'Oe'), ('Ü', 'Ue'), ('ä', 'ae'),
+                    ('ö', 'oe'), ('ü', 'ue'), ('ß', 'sz')]
 """List of transliterations needed to get the correct url."""
 title_key = 'Als mp3 abspielen'
 
 
 def munge_word(word):
-    u"""
+    """
     Munge the word so that it matches the URL used by duden.de.
 
     Replace umlauts by the Xe transcription, ß wit sz [sic], drop
@@ -70,7 +70,7 @@ class DudenDownloader(AudioDownloader):
             if self.good_link(link):
                 extras = dict(Source="Duden")
                 try:
-                    extras[u'©'] = re.search(u'© (.*)', link['title']).group(1)
+                    extras['©'] = re.search('© (.*)', link['title']).group(1)
                 except AttributeError:
                     # 'NoneType' object has no attribute 'group' …
                     pass

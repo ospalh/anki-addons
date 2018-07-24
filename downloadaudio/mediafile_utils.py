@@ -8,7 +8,7 @@
 # http://www.gnu.org/copyleft/agpl.html
 #
 
-u"""
+"""
 Helper function to deal with file names.
 """
 
@@ -22,7 +22,7 @@ from anki.utils import isMac, stripHTML
 
 
 def free_media_name(base, end):
-    u"""Return a useful media name
+    """Return a useful media name
 
     Return a pair of a file name that can be used for the media file,
     and the whole file path. The name is based on the base name and
@@ -42,7 +42,7 @@ def free_media_name(base, end):
     for i in range(1, 10000):
         # Don't be silly. Give up after 9999 tries (by falling out of
         # this loop).
-        long_name = u'{0}_{1}{2}'.format(base, i, end)
+        long_name = '{0}_{1}{2}'.format(base, i, end)
         if not exists_lc(mdir, long_name):
             return os.path.join(mdir, long_name), long_name
     # The only way we can have arrived here is by unsuccessfully
@@ -51,7 +51,7 @@ def free_media_name(base, end):
 
 
 def exists_lc(path, name):
-    u"""Test if file name clashes with name of extant file.
+    """Test if file name clashes with name of extant file.
 
     On Mac OS X we, simply check if the file exists.
     On other systems, we check if the name would clashes with an
@@ -72,7 +72,7 @@ def exists_lc(path, name):
 
 
 def unmunge_to_mediafile(dl_entry):
-    u"""
+    """
     Move the data to the media folder.
 
     Determine a free media name and move the data there from the

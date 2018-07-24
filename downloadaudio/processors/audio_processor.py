@@ -32,7 +32,7 @@ rapid_fade_length = 20
 
 
 class AudioProcessor(object):
-    u"""Class to do audio processing."""
+    """Class to do audio processing."""
     # In the past we kept track of whether the processor was
     # “useful”. That ment that the downloaders downloaded to
     # different places depending on which processor we had. Maybe
@@ -74,7 +74,7 @@ class AudioProcessor(object):
         segment = segment.fade_in(fade_in_length).fade_out(fade_out_length)
         # Now write
         tof = tempfile.NamedTemporaryFile(
-            delete=False, suffix=output_suffix, prefix=u'anki_audio_')
+            delete=False, suffix=output_suffix, prefix='anki_audio_')
         temp_out_file_name = tof.name
         tof.close()
         segment.export(temp_out_file_name, output_format)

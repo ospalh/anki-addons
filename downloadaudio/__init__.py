@@ -18,6 +18,6 @@ words in the cards.
 
 __version__ = "5.0.0"
 
-import conflanguage
-import download
-import model
+from . import conflanguage
+from . import download
+from . import model

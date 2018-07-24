@@ -25,7 +25,7 @@ from .downloader import AudioDownloader
 
 
 def equals_kana(kana1, kana2):
-    u"""Check whether two kana strings represent the same sound
+    """Check whether two kana strings represent the same sound
 
     Compare two strings, converting katakana to hiragana first. That
     means that for example equals_kana(u'キ', u'き') is True.
@@ -45,8 +45,8 @@ class JapanesepodDownloader(AudioDownloader):
         self.icon_url = 'http://www.japanesepod101.com/'
         self.url = 'http://assets.languagepod101.com/' \
             'dictionary/japanese/audiomp3.php?'
-        self.wwwjdic_url = u'http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic' \
-            u'?1MUJ{kana}_2_50'
+        self.wwwjdic_url = 'http://www.edrdg.org/cgi-bin/wwwjdic/wwwjdic' \
+            '?1MUJ{kana}_2_50'
         self.extras = {'Source': 'JapanesePod'}
         self.field_data = None
 
@@ -111,7 +111,7 @@ class JapanesepodDownloader(AudioDownloader):
         self.downloads_list.append(entry)
 
     def jpod_url(self, kanji, kana):
-        u"""Return a string that can be used as the url."""
+        """Return a string that can be used as the url."""
         qdict = {}
         if kanji:
             qdict['kanji'] = kanji.encode('utf-8')
@@ -129,7 +129,7 @@ class JapanesepodDownloader(AudioDownloader):
         for lbl in labels:
             audio = lbl.find('script')
             entry = lbl.find('font')
-            if not audio or not entry or not entry.has_key('size') \
+            if not audio or not entry or 'size' not in entry \
                     or entry['size'] != '+1':
                 # entry is a BeautifulSoup.Tag. Looks like “'a' not in
                 # tag” does not work instead of “not
@@ -142,16 +142,16 @@ class JapanesepodDownloader(AudioDownloader):
             # string is quoted twice, so unquote it once
             audio = urllib.parse.unquote(audio)
             entry = entry.text
-            popular = u'(P)' in entry or u'(P)' in lbl.text
+            popular = '(P)' in entry or '(P)' in lbl.text
             # strip "(P)" and similar markers
             entry = re.sub(r'\(.*?\)', '', entry)
             # convert brackets to delimiter (Treat “　” as a space)
-            entry = re.sub(u'[\s《》【】]', ';', entry, flags=re.UNICODE)
+            entry = re.sub('[\s《》【】]', ';', entry, flags=re.UNICODE)
             for reading in entry.split(';'):
                 if reading == self.field_data.kana:
                     hits[audio] = popular
                     break
-        for audio, popular in hits.items():
+        for audio, popular in list(hits.items()):
             args = urllib.parse.parse_qs(audio.encode('utf-8'))
             audio_kanji = args['kanji'][0].decode('utf-8') \
                 if 'kanji' in args else None
