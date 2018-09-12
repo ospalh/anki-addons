@@ -1,0 +1,41 @@
+{
+    "model_button_rows": [
+        [
+            {
+                "label": "C",
+                "shortcut": "Ctrl+1",
+                "name": "Cloze"
+            },
+            {
+                "label": "B",
+                "shortcut": "Ctrl+2",
+                "name": "Basic"
+            }
+        ],
+        [
+            {
+                "label": "with reverse",
+                "shortcut": "Ctrl+3",
+                "name": "Basic (and reversed card)"
+            }
+        ]
+    ],
+    "deck_button_rows": [
+        [
+            {
+                "label": "Deck1",
+                "name": "Deck1"
+            },
+            {
+                "label": "my subdeck",
+                "name": "Deck1::my subdeck"
+            }
+        ],
+        [
+            {
+                "label": "Deck 2",
+                "name": "Deck 2"
+            }
+        ]
+    ]
+}
