@@ -10,6 +10,8 @@
 import html.parser
 import os
 import re
+import requests
+import hashlib
 import shutil
 import urllib.parse
 
@@ -20,7 +22,8 @@ from PyQt5.QtGui import QDesktopServices
 
 from anki.cards import Card
 from anki.hooks import addHook, wrap
-from anki.sound import play
+from anki.sound import play,mpvManager
+from anki.utils import tmpdir,isWin
 from aqt import mw
 from aqt.browser import Browser
 from aqt.browser import DataModel
@@ -98,7 +101,22 @@ title="{ttl}" class="replaybutton browserhide"><span><svg viewBox="0 0 32 32">\
 def review_link_handler_wrapper(reviewer, url):
     """Play the sound or call the original link handler."""
     if url.startswith("ankiplay"):
-        play(url[8:])
+        if url.startswith("ankiplayhttp://") or url.startswith("ankiplayhttps://"):
+            if isWin:
+                # download audio from url
+                name = os.path.join(tmpdir(),hashlib.md5(url.encode(encoding="UTF-8")).hexdigest()+".mp3")
+                if not os.path.exists(name):
+                    f = open(name, "wb")
+                    f.write(requests.get(url[8:]).content)
+                    f.close()
+                # it wants unix paths, too!
+                path = name.replace("\\", "/")
+                play(path)
+            else:
+                # use mpv directly
+                mpvManager.command("loadfile", url[8:], "append-play")
+        else:
+            play(url[8:])
     else:
         original_review_link_handler(reviewer, url)
 
