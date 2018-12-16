@@ -24,7 +24,9 @@ from .collins_italian import CollinsItalianDownloader
 from .collins_spanish import CollinsSpanishDownloader
 from .den_danske_ordbog import DenDanskeOrdbogDownloader
 from .duden import DudenDownloader
-from .howjsay import HowJSayDownloader
+from .forvo import ForvoDownloader
+from .google_tts import GooglettsDownloader
+from .howjsay import HowJSayDownloade
 from .islex import IslexDownloader
 from .japanesepod import JapanesepodDownloader
 from .leo import LeoDownloader
@@ -53,6 +55,7 @@ downloaders = [
     CollinsGermanDownloader(),
     CollinsItalianDownloader(),
     CollinsSpanishDownloader(),
+    ForvoDownloader(),
     BeolingusDownloader(),
 ]
 # For each word field, these downloader sites are tried in the order
