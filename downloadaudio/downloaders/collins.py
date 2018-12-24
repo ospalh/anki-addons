@@ -17,6 +17,8 @@ Abstract base class, derived for several languages.
 from downloader import AudioDownloader
 from download_entry import Action, DownloadEntry
 
+import urllib
+
 
 class CollinsDownloader(AudioDownloader):
     """Download audio from Collins"""

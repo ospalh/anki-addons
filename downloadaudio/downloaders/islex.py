@@ -14,6 +14,7 @@ Download pronunciations for Icelandic from islex.is
 from downloader import AudioDownloader
 from download_entry import DownloadEntry
 
+import urllib
 
 class IslexDownloader(AudioDownloader):
     """Download audio from Islex"""

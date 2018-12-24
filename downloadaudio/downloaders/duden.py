@@ -18,6 +18,8 @@ import unicodedata
 from downloader import AudioDownloader
 from download_entry import DownloadEntry
 
+import urllib
+
 transliterations = [(u'Ä', 'Ae'), (u'Ö', 'Oe'), (u'Ü', 'Ue'), (u'ä', 'ae'),
                     (u'ö', 'oe'), (u'ü', 'ue'), (u'ß', 'sz')]
 """List of transliterations needed to get the correct url."""

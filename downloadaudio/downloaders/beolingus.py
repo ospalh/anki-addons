@@ -16,6 +16,8 @@ import re
 from downloader import AudioDownloader, uniqify_list
 from download_entry import Action, DownloadEntry
 
+import urllib
+
 
 class BeolingusDownloader(AudioDownloader):
     """Download audio from Beolingus"""

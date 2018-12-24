@@ -19,6 +19,9 @@ from bs4 import BeautifulSoup
 from downloader import AudioDownloader
 from download_entry import DownloadEntry
 
+import urllib
+
+
 transliterations = [
     (u'å', '0345'), (u'ä', '0344'), (u'ö', '0366'), (u'é', '0351'),
     (u'ü', '0374'), (u'Å', '0305'), (u'Ä', '0304'), (u'Ö', '0326'),

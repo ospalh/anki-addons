@@ -14,6 +14,7 @@ Download pronunciations from HowJSay.
 from downloader import AudioDownloader
 from download_entry import DownloadEntry
 
+import urllib
 
 class HowJSayDownloader(AudioDownloader):
     """Download audio from HowJSay"""

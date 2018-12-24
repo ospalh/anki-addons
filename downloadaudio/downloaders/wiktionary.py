@@ -24,6 +24,8 @@ try:
 except ImportError:
     with_pyqt = False
 
+import urllib
+
 
 class WiktionaryDownloader(AudioDownloader):
     """Download audio from Wiktionary"""

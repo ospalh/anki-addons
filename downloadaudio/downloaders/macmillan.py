@@ -19,6 +19,9 @@ import re
 from downloader import AudioDownloader
 from download_entry import DownloadEntry
 
+import urllib
+
+
 # Work-around for broken BeautifulSoup
 sound_class = re.compile(r'\bsound\b')
 

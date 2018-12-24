@@ -21,6 +21,8 @@ from blacklist import get_hash
 from download_entry import JpodDownloadEntry
 from downloader import AudioDownloader
 
+import urllib
+
 
 def equals_kana(kana1, kana2):
     u"""Check whether two kana strings represent the same sound

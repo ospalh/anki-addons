@@ -23,6 +23,8 @@ try:
 except ImportError:
     with_pyqt = False
 
+import urllib
+
 
 def uniqify_list(seq):
     """Return a copy of the list with every element appearing only once."""

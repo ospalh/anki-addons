@@ -20,6 +20,8 @@ except ImportError:
 from downloader import AudioDownloader
 from download_entry import DownloadEntry
 
+import urllib
+
 
 class DenDanskeOrdbogDownloader(AudioDownloader):
     """Download audio from Den Danske Ordbog"""

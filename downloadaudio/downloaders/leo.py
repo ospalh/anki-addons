@@ -25,6 +25,8 @@ except ImportError:
 from downloader import AudioDownloader
 from download_entry import DownloadEntry
 
+import urllib
+
 
 class LeoDownloader(AudioDownloader):
     """Download audio from LEO"""

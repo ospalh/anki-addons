@@ -20,7 +20,6 @@ except ImportError:
 from download_entry import DownloadEntry
 from downloader import AudioDownloader
 
-
 class ForvoDownloader(AudioDownloader):
     """Download audio from Forvo"""
     def __init__(self):
@@ -86,7 +85,7 @@ class ForvoDownloader(AudioDownloader):
         # No clean-up
 
     def query_url(self):
-        builded_url = self.url + urllib.quote(
+        builded_url = self.url + urllib.parse.quote(
             self.field_data.word.encode('utf-8'))
         if self.language:
             builded_url += '/language/' + self.language

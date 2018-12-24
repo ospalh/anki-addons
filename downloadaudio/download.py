@@ -78,13 +78,15 @@ def do_download(note, field_data_list, language, hide_text=False):
                 # goes wrong, don't catch, or raise whatever you want.
                 dloader.download_files(field_data)
             except Exception:
-                #  # Uncomment this raise while testing a new
-                #  # downloaders.  Also use the “For testing”
-                #  # downloaders list with your downloader in
-                #  # downloaders.__init__
-                # raise
-                continue
+                 # Uncomment this raise while testing a new
+                 # downloaders.  Also use the “For testing”
+                 # downloaders list with your downloader in
+                 # downloaders.__init__
+                raise  # ALICE FIXME - need debug asserts. but also comment this back out.
+                # continue
             retrieved_entries += dloader.downloads_list
+
+    print("Retrieved list of entries in do_download, so we got some entries.")
     # Significantly changed the logic. Put all entries in one
     # list, do stuff with that list of DownloadEntries.
     for entry in retrieved_entries:
@@ -146,6 +148,9 @@ def download_for_note(ask_user=False, note=None, editor=None):
     note. When ask_user is true, show a dialog that lets the user
     modify these texts.
     """
+    print("This is the note:")
+    print(note)
+
     if not note:
         try:
             card = mw.reviewer.card
@@ -197,7 +202,7 @@ def download_on():
 def editor_download_editing(self):
     u"""Do the download when we are in the note editor."""
     print("We are in the callback for when the dl audio button is clicked - editor_download_editing()")
-    self.saveNow()
+    self.saveNow(print)  # FIXME - make a null function
     download_for_note(ask_user=True, note=self.note, editor=self)
     # Fix for issue #10.
     self.stealFocus = True
@@ -209,11 +214,13 @@ def editor_add_download_editing_button(righttopbtns, editor):
     """Add the download button to the editor"""
     print("This is the second argument in editor_add_download_editing_button:")
     print(editor)
-    editor._addButton(
+    downloadaudio_button = editor.addButton(
         os.path.join(icons_dir, 'download_note_audio.png'),
-        lambda self=editor: editor_download_editing(self),    # ALICE FIXME - i'm not sure that this `cmd` argument should be a function.
+        "test",
+        lambda self=editor: editor_download_editing(self),
         tip=u"Download audio…",
-        label=u"download_audio")
+        label=u"DL Audio")
+    righttopbtns.append(downloadaudio_button)
     return righttopbtns
 
 

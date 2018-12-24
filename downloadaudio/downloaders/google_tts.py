@@ -16,6 +16,8 @@ from anki.template import furigana
 from download_entry import Action, DownloadEntry
 from downloader import AudioDownloader
 
+import urllib
+
 get_chinese = False
 """
 Download for Chinese.

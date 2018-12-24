@@ -42,15 +42,6 @@ from mw import MerriamWebsterDownloader
 from oald import OaldDownloader
 from wiktionary import WiktionaryDownloader
 
-try:
-    import urllib.request
-except ImportError:
-    from urllib2 import Request, urlopen
-
-try:
-    import urllib.parse
-except ImportError:
-    import urlparse
 
 downloaders = [
     JapanesepodDownloader(),
