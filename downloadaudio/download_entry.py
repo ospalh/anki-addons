@@ -8,9 +8,9 @@
 
 import os
 
-from .blacklist import add_black_hash
-from .processors import processor
-from .mediafile_utils import unmunge_to_mediafile
+from blacklist import add_black_hash
+from processors import processor
+from mediafile_utils import unmunge_to_mediafile
 
 if processor:
     import pydub

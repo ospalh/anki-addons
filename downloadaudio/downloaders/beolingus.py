@@ -11,16 +11,15 @@
 Download pronunciations from BeoLingus.
 '''
 
-import urllib.request, urllib.parse, urllib.error
-import urllib.parse
 import re
 
-from .downloader import AudioDownloader, uniqify_list
-from ..download_entry import Action, DownloadEntry
+from downloader import AudioDownloader, uniqify_list
+from download_entry import Action, DownloadEntry
 
 
 class BeolingusDownloader(AudioDownloader):
     """Download audio from Beolingus"""
+
     def __init__(self):
         AudioDownloader.__init__(self)
         self.icon_url = 'http://dict.tu-chemnitz.de/'

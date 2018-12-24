@@ -16,12 +16,10 @@ from collections import OrderedDict
 from copy import copy
 import os
 import re
-import urllib.request, urllib.error, urllib.parse
-import urllib.parse
 
-from ..blacklist import get_hash
-from ..download_entry import JpodDownloadEntry
-from .downloader import AudioDownloader
+from blacklist import get_hash
+from download_entry import JpodDownloadEntry
+from downloader import AudioDownloader
 
 
 def equals_kana(kana1, kana2):

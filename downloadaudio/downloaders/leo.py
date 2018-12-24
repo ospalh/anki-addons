@@ -13,7 +13,6 @@ Download pronunciations from leo.org
 
 from collections import OrderedDict
 import re
-import urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ElementTree
 
 # Make this work without PyQt
@@ -23,8 +22,8 @@ try:
 except ImportError:
     with_pyqt = False
 
-from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
+from downloader import AudioDownloader
+from download_entry import DownloadEntry
 
 
 class LeoDownloader(AudioDownloader):

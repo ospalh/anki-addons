@@ -11,10 +11,8 @@
 Download pronunciations from HowJSay.
 """
 
-import urllib.request, urllib.parse, urllib.error
-
-from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
+from downloader import AudioDownloader
+from download_entry import DownloadEntry
 
 
 class HowJSayDownloader(AudioDownloader):

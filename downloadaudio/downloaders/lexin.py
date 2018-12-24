@@ -13,12 +13,11 @@ Download pronunciations from Lexin.
 """
 
 import unicodedata
-import urllib.request, urllib.error, urllib.parse
 import json
 from bs4 import BeautifulSoup
 
-from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
+from downloader import AudioDownloader
+from download_entry import DownloadEntry
 
 transliterations = [
     (u'å', '0345'), (u'ä', '0344'), (u'ö', '0366'), (u'é', '0351'),

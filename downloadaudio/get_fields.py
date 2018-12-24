@@ -14,7 +14,7 @@ import re
 
 from aqt import mw
 
-from .field_data import FieldData, JapaneseFieldData
+from field_data import FieldData, JapaneseFieldData
 
 
 # # Change these to mach the field names of your decks. Make sure to

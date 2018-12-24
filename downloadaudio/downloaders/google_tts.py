@@ -11,12 +11,10 @@
 Download pronunciations from GoogleTTS
 """
 
-import urllib.request, urllib.parse, urllib.error
-
 from anki.template import furigana
 
-from ..download_entry import Action, DownloadEntry
-from .downloader import AudioDownloader
+from download_entry import Action, DownloadEntry
+from downloader import AudioDownloader
 
 get_chinese = False
 """

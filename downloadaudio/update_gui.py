@@ -15,7 +15,7 @@ from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QFrame, QGridLayout, \
 
 from anki.lang import _
 
-from .language import default_audio_language_code
+from language import default_audio_language_code
 
 
 def update_data(field_data_list, language_code):

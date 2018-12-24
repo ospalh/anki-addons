@@ -14,15 +14,13 @@ Download pronunciations from Collins dictionary
 Abstract base class, derived for several languages.
 """
 
-import urllib.request, urllib.parse, urllib.error
-
-from .downloader import AudioDownloader, uniqify_list
-from ..download_entry import Action, DownloadEntry
-import aqt.utils
+from downloader import AudioDownloader
+from download_entry import Action, DownloadEntry
 
 
 class CollinsDownloader(AudioDownloader):
     """Download audio from Collins"""
+
     def __init__(self):
         AudioDownloader.__init__(self)
         # self.url = 'http://www.collinsdictionary.com/dictionary/NN-english/'

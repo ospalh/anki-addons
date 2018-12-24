@@ -18,7 +18,7 @@ import shutil
 import sys
 import unicodedata
 
-from PyQt4.QtCore import QCoreApplication, SIGNAL
+from PyQt5.QtCore import QCoreApplication, SIGNAL
 from PyQt5.QtWidgets import QAction, QProgressDialog
 
 from anki.utils import isMac

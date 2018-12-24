@@ -12,11 +12,13 @@
 Download pronunciations for Danish from Den Danske Ordbog
 """
 
-import urllib.request, urllib.parse, urllib.error
-from urllib.error import HTTPError
-from html.parser import HTMLParser
-from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
+try:
+    from html.parser import HTMLParser
+except ImportError:
+    from HTMLParser import HTMLParser
+
+from downloader import AudioDownloader
+from download_entry import DownloadEntry
 
 
 class DenDanskeOrdbogDownloader(AudioDownloader):
@@ -49,7 +51,7 @@ class DenDanskeOrdbogDownloader(AudioDownloader):
                 entry = DownloadEntry(
                     field_data, self.get_tempfile_from_url(audio_link),
                     dict(Source='Den Danske Ordbog'), self.site_icon)
-            except (AttributeError, KeyError, HTTPError):
+            except (AttributeError, KeyError):
                 # Getting HTTPErrors sometimes. Could be rate limiting.
                 continue
             # Try to get the display name from the dictionary

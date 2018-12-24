@@ -10,7 +10,7 @@
 Download British pronunciations from  Macmillan Dictionary.
 """
 
-from .macmillan import MacmillanDownloader
+from macmillan import MacmillanDownloader
 
 
 class MacmillanBritishDownloader(MacmillanDownloader):

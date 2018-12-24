@@ -29,7 +29,7 @@ from aqt import mw
 from anki.lang import _
 from anki.sound import play, playFromText
 
-from .download_entry import Action
+from download_entry import Action
 
 icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 

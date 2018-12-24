@@ -10,8 +10,8 @@
 Download German pronunciations from  Collins Dictionary.
 """
 
-from ..download_entry import Action
-from .collins import CollinsDownloader
+from download_entry import Action
+from collins import CollinsDownloader
 
 
 class CollinsGermanDownloader(CollinsDownloader):

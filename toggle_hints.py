@@ -11,7 +11,7 @@ Trigger hints through a key press.
 Toggle the chint class on a key press. Through this the hints done in
 my style are shown or changed to show-on-hover again.
 """
-from PyQt4.QtCore import Qt
+from PyQt5.QtCore import Qt
 
 SHOW_HINT_KEY = Qt.Key_G
 

@@ -15,7 +15,7 @@ from aqt.qt import QGridLayout, QLabel, QLineEdit
 from aqt.utils import getText, tooltip
 from anki.lang import _
 
-from .language import default_audio_language_code, fl_code_code, \
+from language import default_audio_language_code, fl_code_code, \
     old_al_code_code
 
 

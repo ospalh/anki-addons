@@ -10,7 +10,7 @@
 Download American pronunciations from  Macmillan Dictionary.
 """
 
-from .macmillan import MacmillanDownloader
+from macmillan import MacmillanDownloader
 
 
 class MacmillanAmericanDownloader(MacmillanDownloader):

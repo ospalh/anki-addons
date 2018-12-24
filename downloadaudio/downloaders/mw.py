@@ -11,11 +11,10 @@
 Download pronunciations from Merriam-Webster.
 """
 
-import urllib.request, urllib.parse, urllib.error
 import re
 
-from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
+from downloader import AudioDownloader
+from download_entry import DownloadEntry
 
 
 def join_strings(a, b):

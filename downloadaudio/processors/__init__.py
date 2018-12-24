@@ -16,5 +16,5 @@ try:
 except ImportError:
     processor = None
 else:
-    from .audio_processor import AudioProcessor
+    from audio_processor import AudioProcessor
     processor = AudioProcessor()

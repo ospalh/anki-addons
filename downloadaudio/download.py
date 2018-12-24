@@ -35,21 +35,20 @@ manual.
 """
 
 import os
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction, QMenu
-
 
 from aqt import mw
 from aqt.utils import tooltip
 from anki.hooks import addHook
 
-from .downloaders import downloaders
-from .download_entry import DownloadEntry, Action
-from .get_fields import get_note_fields, get_side_fields
-from .language import language_code_from_card, language_code_from_editor
-from .processors import processor
-from .review_gui import review_entries
-from .update_gui import update_data
+from downloaders import downloaders
+from download_entry import Action
+from get_fields import get_note_fields, get_side_fields
+from language import language_code_from_card, language_code_from_editor
+from review_gui import review_entries
+from update_gui import update_data
+
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction, QMenu
 
 DOWNLOAD_NOTE_SHORTCUT = "q"
 DOWNLOAD_SIDE_SHORTCUT = "t"
@@ -78,7 +77,7 @@ def do_download(note, field_data_list, language, hide_text=False):
                 # Make it easer inside the downloader. If anything
                 # goes wrong, don't catch, or raise whatever you want.
                 dloader.download_files(field_data)
-            except:
+            except Exception:
                 #  # Uncomment this raise while testing a new
                 #  # downloaders.  Also use the “For testing”
                 #  # downloaders list with your downloader in
@@ -197,6 +196,7 @@ def download_on():
 
 def editor_download_editing(self):
     u"""Do the download when we are in the note editor."""
+    print("We are in the callback for when the dl audio button is clicked - editor_download_editing()")
     self.saveNow()
     download_for_note(ask_user=True, note=self.note, editor=self)
     # Fix for issue #10.
@@ -205,14 +205,16 @@ def editor_download_editing(self):
     self.stealFocus = False
 
 
-def editor_add_download_editing_button(self):
+def editor_add_download_editing_button(righttopbtns, editor):
     """Add the download button to the editor"""
-    dl_button = self._addButton(
-        "download_audio",
-        lambda self=self: editor_download_editing(self),
-        tip=u"Download audio…")
-    dl_button.setIcon(
-        QIcon(os.path.join(icons_dir, 'download_note_audio.png')))
+    print("This is the second argument in editor_add_download_editing_button:")
+    print(editor)
+    editor._addButton(
+        os.path.join(icons_dir, 'download_note_audio.png'),
+        lambda self=editor: editor_download_editing(self),    # ALICE FIXME - i'm not sure that this `cmd` argument should be a function.
+        tip=u"Download audio…",
+        label=u"download_audio")
+    return righttopbtns
 
 
 # Either reuse an edit-media sub-menu created by another add-on
@@ -262,6 +264,5 @@ mw.edit_media_submenu.addAction(mw.manual_download_action)
 # Todo: switch off at start and on when we get to reviewing.
 # # And start with the acitons off.
 # download_off()
-
 
 addHook("setupEditorButtons", editor_add_download_editing_button)

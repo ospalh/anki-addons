@@ -13,8 +13,6 @@ Class to download a files from a speaking dictionary or TTS service.
 
 
 import tempfile
-import urllib.request, urllib.error, urllib.parse
-import urllib.parse
 from bs4 import BeautifulSoup as soup
 
 # Make this work without PyQt

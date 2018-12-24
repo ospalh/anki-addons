@@ -14,10 +14,9 @@ Download pronunciations from Duden.
 
 import re
 import unicodedata
-import urllib.parse
 
-from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
+from downloader import AudioDownloader
+from download_entry import DownloadEntry
 
 transliterations = [(u'Ä', 'Ae'), (u'Ö', 'Oe'), (u'Ü', 'Ue'), (u'ä', 'ae'),
                     (u'ö', 'oe'), (u'ü', 'ue'), (u'ß', 'sz')]

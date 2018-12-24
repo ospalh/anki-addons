@@ -17,8 +17,8 @@ try:
 except ImportError:
     import json
 
-from ..download_entry import DownloadEntry
-from .downloader import AudioDownloader
+from download_entry import DownloadEntry
+from downloader import AudioDownloader
 
 
 class ForvoDownloader(AudioDownloader):

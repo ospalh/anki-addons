@@ -12,11 +12,9 @@ Download pronunciations from Wiktionary.
 '''
 
 import re
-import urllib.request, urllib.parse, urllib.error
-import urllib.parse
 
-from .downloader import AudioDownloader, uniqify_list
-from ..download_entry import DownloadEntry
+from downloader import AudioDownloader, uniqify_list
+from download_entry import DownloadEntry
 
 # Make this work without PyQt
 with_pyqt = True

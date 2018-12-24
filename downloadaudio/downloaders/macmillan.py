@@ -15,10 +15,9 @@ Abstract base class, derived for American and British English.
 
 from copy import copy
 import re
-import urllib.request, urllib.parse, urllib.error
 
-from .downloader import AudioDownloader
-from ..download_entry import DownloadEntry
+from downloader import AudioDownloader
+from download_entry import DownloadEntry
 
 # Work-around for broken BeautifulSoup
 sound_class = re.compile(r'\bsound\b')
