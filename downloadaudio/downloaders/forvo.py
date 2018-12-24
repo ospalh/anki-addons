@@ -20,6 +20,7 @@ except ImportError:
 from download_entry import DownloadEntry
 from downloader import AudioDownloader
 
+
 class ForvoDownloader(AudioDownloader):
     """Download audio from Forvo"""
     def __init__(self):
@@ -27,10 +28,13 @@ class ForvoDownloader(AudioDownloader):
         # Keep these two in sync
         self.file_extension = u'.ogg'
         self.path_code = 'pathogg'
-        # Keep this secret:
+        # Get the API key
+        key_file = open('forvokey.py', 'rb')
+        api_key = key_file.read()
+        key_file.close()
         self.url = 'http://apifree.forvo.com/action/word-pronunciations/' \
             'format/json/order/rate-desc/limit/3/' \
-            'key/XXXXXXXXXX/word/'
+            'key/%s/word/' % (api_key)
         self.icon_url = 'http://www.forvo.com/'
         self.gender_dict = {'f': u'♀', 'm': u'♂'}
         self.field_data = None
