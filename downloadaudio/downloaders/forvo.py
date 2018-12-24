@@ -10,7 +10,9 @@
 Download pronunciations from Forvo.
 """
 
+import os
 import urllib
+from pathlib import Path
 
 try:
     import simplejson as json
@@ -29,7 +31,8 @@ class ForvoDownloader(AudioDownloader):
         self.file_extension = u'.ogg'
         self.path_code = 'pathogg'
         # Get the API key
-        key_file = open('forvokey.py', 'rb')
+        key_file_path = os.path.join(str(Path(__file__).parents[1]), 'forvokey.py')
+        key_file = open(key_file_path)
         api_key = key_file.read()
         key_file.close()
         self.url = 'http://apifree.forvo.com/action/word-pronunciations/' \
@@ -89,8 +92,8 @@ class ForvoDownloader(AudioDownloader):
         # No clean-up
 
     def query_url(self):
-        builded_url = self.url + urllib.parse.quote(
+        built_url = self.url + urllib.parse.quote(
             self.field_data.word.encode('utf-8'))
         if self.language:
-            builded_url += '/language/' + self.language
-        return builded_url + '/'
+            built_url += '/language/' + self.language
+        return built_url + '/'
