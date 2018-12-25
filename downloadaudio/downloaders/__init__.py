@@ -7,7 +7,7 @@
 
 """A list of audio downloaders.
 
-They are intended for use with the Anki2 audiodownload add-on, but can
+They are intended for use with the Anki2 downloadaudio add-on, but can
 possibly be used alone. For each downloader in the list, setting its
 language variable and then calling download_files(text, base, ruby,
 split) downloads audio files to temp files and fills its

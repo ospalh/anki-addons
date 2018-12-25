@@ -20,10 +20,6 @@ import sys
 from os.path import dirname         # Append cur dir to sys path so the
 sys.path.append(dirname(__file__))  # following files can be imported.
 
-# ALICE FIXME - remove this
-print(sys.path)
-print("The Python version is %s.%s.%s" % sys.version_info[:3])
-
 __version__ = "5.0.0"
 
 import conflanguage

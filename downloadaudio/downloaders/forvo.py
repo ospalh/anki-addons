@@ -22,6 +22,13 @@ except ImportError:
 from download_entry import DownloadEntry
 from downloader import AudioDownloader
 
+# When downloading Japanese audio, set a preference for audio from
+# a user called `strawberrybrown`. She has uploaded 23k+ recordings
+# and speaks with a standard Japanese accent.
+PREFERRED_USERNAME = 'strawberrybrown'  # WIP
+KEY_FILE_NAME = 'forvokey.py'
+API_KEY_LEN = 32
+
 
 class ForvoDownloader(AudioDownloader):
     """Download audio from Forvo"""
@@ -30,22 +37,37 @@ class ForvoDownloader(AudioDownloader):
         # Keep these two in sync
         self.file_extension = u'.ogg'
         self.path_code = 'pathogg'
-        # Get the API key
-        key_file_path = os.path.join(str(Path(__file__).parents[1]), 'forvokey.py')
-        key_file = open(key_file_path)
-        api_key = key_file.read()
-        key_file.close()
+        # Get the API key if the key is valid
+        api_key_file_path = str(Path(__file__).parents[1])
+        api_key_file_path = os.path.join(api_key_file_path, KEY_FILE_NAME)
+        api_key_file = open(api_key_file_path)
+        self.api_key = api_key_file.read()
+        self._is_api_key_valid()
+        api_key_file.close()
+        # Build the query URL
         self.url = 'http://apifree.forvo.com/action/word-pronunciations/' \
             'format/json/order/rate-desc/limit/3/' \
-            'key/%s/word/' % (api_key)
+            'key/%s/word/' % (self.api_key)
         self.icon_url = 'http://www.forvo.com/'
         self.gender_dict = {'f': u'♀', 'm': u'♂'}
         self.field_data = None
+
+    def _is_api_key_valid(self):
+        # Check that the user supplied key seems valid.
+        # If the key is not valid, skip downloading files from Forvo.
+        if (len(self.api_key) != API_KEY_LEN) or \
+                not self.api_key.isalnum():
+            self.api_key = None
 
     def download_files(self, field_data):
         """
         Get pronunciations of a word from Forvo
         """
+        if self.api_key is None:
+            # Please note, you are not using a valid Forvo API key.
+            # If you want to download audio from Forvo using their API,
+            # you can purchase one at https://api.forvo.com/
+            return
         self.downloads_list = []
         self.field_data = field_data
         if field_data.split:
