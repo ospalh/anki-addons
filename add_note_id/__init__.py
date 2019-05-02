@@ -82,7 +82,7 @@ def add_nids_to_all():
             if name == config["NoteIdFieldName"]:
                 # Check if target is empty
                 if not n[name]:
-                    n[name] = str(nid - int(15e11))
+                    n[name] = str(nid - int(15e11)) if not config["ShowFullNoteId"] else str(nid)
                     n.flush()
     mw.reset()
 
@@ -90,7 +90,7 @@ def add_nids_to_all():
 def onLoadNote(self, *args, **kwargs):
     for f in self.note.keys():
         if f == config["NoteIdFieldName"] and not self.note[f]:
-            self.note[f] = str(self.note.id - int(15e11))
+            self.note[f] = str(self.note.id - int(15e11)) if not config["ShowFullNoteId"] else str(self.note.id)
 
 
 if config["ShowMenu"]:
