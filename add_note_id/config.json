@@ -1,4 +1,5 @@
 {
     "NoteIdFieldName": "Note ID",
-    "ShowMenu": true
+    "ShowMenu": true,
+    "ShowFullNoteId": false
 }
