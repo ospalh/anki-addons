@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# © 2012–2017 Roland Sieker, <ospalh@gmail.com>
+# © 2012–2019 Roland Sieker, <ospalh@gmail.com>
 # © 2017 Luo Li-Yan, <joseph.lorimer13@gmail.com>
 #
 # Portions of this file were originally written by
@@ -28,6 +28,10 @@ from anki.lang import _
 from aqt import mw
 from aqt.editor import Editor
 from aqt.utils import askUser
+
+import uuid
+# This may break this add-on for those not running it from source. As
+# this includes me on my Mac, i may have to look into this.
 
 __version__ = '2.0.0'
 
@@ -59,19 +63,19 @@ def progress(data, *args):
 
 
 def add_nids_to_all():
-    """Add note id to all empty fields with the right names.
+    """Add a uuid to all empty fields with the right names.
 
-    Iterate over all notes and add the nid minus
-    1’500’000’000’000. The subtraction is done mostly for aesthetical
-    reasons.
+    Iterate over all notes and add a uuid to an empty id field.
     """
     if not askUser(
-            _("Add note id to all “{fn}” fields?".format(
+            _("Add uuid to all “{fn}” fields?".format(
                 fn=config["NoteIdFieldName"]))):
         return
     # Maybe there is a way to just select the notes which have a nid
     # field. But this should work and efficency isn't too much of an
-    # issue.
+    # issue. Also, as we don’t use the Anki note id any more, we could
+    # just iterate over the notes in any fashion, not just by getting
+    # them by id. This works, so no real need to re-write.
     nids = mw.col.db.list("select id from notes")
     # Iterate over the cards
     for nid in progress(nids, _("Adding note ids."), _("Stop that!")):
@@ -82,7 +86,7 @@ def add_nids_to_all():
             if name == config["NoteIdFieldName"]:
                 # Check if target is empty
                 if not n[name]:
-                    n[name] = str(nid - int(15e11))
+                    n[name] = str(uuid.uuid4())
                     n.flush()
     mw.reset()
 
@@ -90,7 +94,7 @@ def add_nids_to_all():
 def onLoadNote(self, *args, **kwargs):
     for f in self.note.keys():
         if f == config["NoteIdFieldName"] and not self.note[f]:
-            self.note[f] = str(self.note.id - int(15e11))
+            self.note[f] = str(uuid.uuid4())
 
 
 if config["ShowMenu"]:
