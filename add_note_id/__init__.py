@@ -86,7 +86,7 @@ def add_nids_to_all():
             if name == config["NoteIdFieldName"]:
                 # Check if target is empty
                 if not n[name]:
-                    n[name] = str(uuid.uuid4())
+                    n[name] = str(uuid.uuid1())
                     n.flush()
     mw.reset()
 
@@ -94,7 +94,7 @@ def add_nids_to_all():
 def onLoadNote(self, *args, **kwargs):
     for f in self.note.keys():
         if f == config["NoteIdFieldName"] and not self.note[f]:
-            self.note[f] = str(uuid.uuid4())
+            self.note[f] = str(uuid.uuid1())
 
 
 if config["ShowMenu"]:
