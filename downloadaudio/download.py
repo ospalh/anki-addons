@@ -55,8 +55,9 @@ DOWNLOAD_NOTE_SHORTCUT = "q"
 DOWNLOAD_SIDE_SHORTCUT = "t"
 DOWNLOAD_MANUAL_SHORTCUT = "Ctrl+t"
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
-# Place were we keep our megaphone icon.
+icons_dir = os.path.join(os.path.realpath(__file__), 'icons')
+# icons_dir = 'icons'
+# Place were we keep our megafone icon.
 
 
 def do_download(note, field_data_list, language, hide_text=False):
@@ -206,7 +207,7 @@ def editor_download_editing(self):
 def editor_add_download_editing_button(toprightbuts, editor):
     """Add the download button to the editor"""
     dl_icon = os.path.join(icons_dir, "download_note_audio.png")
-    dl_button = editor.addButton(dl_icon, 
+    dl_button = editor.addButton(dl_icon,
         "download_audio",
         editor_download_editing, # FIXME: Call saveNow before this
         tip="Download audio…")
