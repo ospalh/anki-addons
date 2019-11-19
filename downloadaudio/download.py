@@ -159,7 +159,7 @@ def download_for_note(ask_user=False, note=None, editor=None):
     field_data = get_note_fields(note)
     if not field_data:
         # Complain before we show the empty dialog.
-        tooltip(u'Nothing to download.')
+        tooltip('Nothing to download.')
         return
 
     if ask_user:
@@ -177,27 +177,25 @@ def download_for_note(ask_user=False, note=None, editor=None):
 
 
 def download_manual():
-    u"""Do the download with the dialog before we go."""
+    """Do the download with the dialog before we go."""
     download_for_note(ask_user=True)
 
 
 def download_off():
-    u"""Deactivate the download menus."""
+    """Deactivate the download menus."""
     mw.note_download_action.setEnabled(False)
     mw.side_download_action.setEnabled(False)
     mw.manual_download_action.setEnabled(False)
 
 
 def download_on():
-    u"""Activate the download menus."""
+    """Activate the download menus."""
     mw.note_download_action.setEnabled(True)
     mw.side_download_action.setEnabled(True)
     mw.manual_download_action.setEnabled(True)
 
-
 def editor_download_editing(self):
-    u"""Do the download when we are in the note editor."""
-    self.saveNow()
+    """Do the download when we are in the note editor."""
     download_for_note(ask_user=True, note=self.note, editor=self)
     # Fix for issue #10.
     self.stealFocus = True
@@ -205,15 +203,15 @@ def editor_download_editing(self):
     self.stealFocus = False
 
 
-def editor_add_download_editing_button(self):
+def editor_add_download_editing_button(toprightbuts, editor):
     """Add the download button to the editor"""
-    dl_button = self._addButton(
+    dl_icon = os.path.join(icons_dir, "download_note_audio.png")
+    dl_button = editor.addButton(dl_icon, 
         "download_audio",
-        lambda self=self: editor_download_editing(self),
-        tip=u"Download audio…")
-    dl_button.setIcon(
-        QIcon(os.path.join(icons_dir, 'download_note_audio.png')))
-
+        editor_download_editing, # FIXME: Call saveNow before this
+        tip="Download audio…")
+    toprightbuts.insert(-1, dl_button)
+    return toprightbuts
 
 # Either reuse an edit-media sub-menu created by another add-on
 # (probably the mhwave (ex sweep) add-on by Y.T.) or create that
@@ -222,13 +220,13 @@ def editor_add_download_editing_button(self):
 try:
     mw.edit_media_submenu.addSeparator()
 except AttributeError:
-    mw.edit_media_submenu = QMenu(u"&Media", mw)
+    mw.edit_media_submenu = QMenu("&Media", mw)
     mw.form.menuEdit.addSeparator()
     mw.form.menuEdit.addMenu(mw.edit_media_submenu)
 
 
 mw.note_download_action = QAction(mw)
-mw.note_download_action.setText(u"Note audio")
+mw.note_download_action.setText("Note audio")
 mw.note_download_action.setIcon(QIcon(os.path.join(icons_dir,
                                                    'download_note_audio.png')))
 mw.note_download_action.setToolTip(
@@ -237,7 +235,7 @@ mw.note_download_action.setShortcut(DOWNLOAD_NOTE_SHORTCUT)
 mw.note_download_action.triggered.connect(download_for_note)
 
 mw.side_download_action = QAction(mw)
-mw.side_download_action.setText(u"Side audio")
+mw.side_download_action.setText("Side audio")
 mw.side_download_action.setIcon(
     QIcon(os.path.join(icons_dir, 'download_side_audio.png')))
 mw.side_download_action.setToolTip(
@@ -246,7 +244,7 @@ mw.side_download_action.setShortcut(DOWNLOAD_SIDE_SHORTCUT)
 mw.side_download_action.triggered.connect(download_for_side)
 
 mw.manual_download_action = QAction(mw)
-mw.manual_download_action.setText(u"Manual audio")
+mw.manual_download_action.setText("Manual audio")
 mw.manual_download_action.setIcon(
     QIcon(os.path.join(icons_dir, 'download_audio_manual.png')))
 mw.manual_download_action.setToolTip(

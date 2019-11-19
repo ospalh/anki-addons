@@ -21,7 +21,7 @@ class CollinsFrenchDownloader(CollinsDownloader):
         self.url \
             = 'http://www.collinsdictionary.com/dictionary/french-english/'
         self.lang = 'fr'
-        self.lang_code = u'/fr_/'
+        self.lang_code = '/fr_/'
         self.icon_url = self.url
         self.extras = dict(Source="Collins French")
         self.action = Action.Delete  # Reported to be bad sometimes.

@@ -5,7 +5,7 @@
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
-u"""
+"""
 One just moves files and isn’t used. The other does simple audio
 processing and nmoves the files.
 """

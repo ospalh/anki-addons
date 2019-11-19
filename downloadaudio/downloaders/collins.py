@@ -28,7 +28,7 @@ class CollinsDownloader(AudioDownloader):
         # self.url = 'http://www.collinsdictionary.com/dictionary/NN-english/'
         # The url is set in the derived French or Spanish classes.
         self.url = None
-        self.base_url = u'http://www.collinsdictionary.com'
+        self.base_url = 'http://www.collinsdictionary.com'
         self.lang = None  # e.g. u'fr'
         self.lang_code = None  # e.g. u'/fr_/'
         # self.icon_url = self.url
@@ -37,7 +37,7 @@ class CollinsDownloader(AudioDownloader):
         self.action = Action.Add
 
     def download_files(self, field_data):
-        u"""
+        """
         Get pronunciations of a word from a Collins dictionary.
 
         Look up a word at collins.com. There are a few derived classes

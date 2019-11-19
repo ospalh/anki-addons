@@ -5,7 +5,7 @@
 # License: GNU AGPL, version 3 or later;
 # http://www.gnu.org/copyleft/agpl.html
 
-u"""Set the download language."""
+"""Set the download language."""
 
 from aqt.deckconf import DeckConf
 from aqt.forms import dconf
@@ -20,7 +20,7 @@ from .language import default_audio_language_code, fl_code_code, \
 
 
 def setup_ui(self, Dialog):
-    u"""Add a QLineEdit to the settings to set the dl language."""
+    """Add a QLineEdit to the settings to set the dl language."""
     help_text = """<p>This code is used for audio downloads.  Set
 this to the two-letter (ISO-639-1) code of the language you are
 learning.</p>"""
@@ -44,20 +44,20 @@ learning.</p>"""
 
 
 def load_conf(self):
-    u"""Get the download language from the configuration."""
+    """Get the download language from the configuration."""
     self.form.audio_download_language.setText(
         self.conf.get(fl_code_code, default_audio_language_code))
 
 
 def save_conf(self):
-    u"""Save the download language tothe configuration."""
+    """Save the download language tothe configuration."""
     self.conf[fl_code_code] = self.form.audio_download_language.text()
 
 
 def ask_and_set_language_code():
-    u"""Ask the user for the language code."""
+    """Ask the user for the language code."""
     lang_code, ok = getText(
-        prompt=u"""<h4>Set download language code</h4>
+        prompt="""<h4>Set download language code</h4>
 Set the <a
 href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">code</a>
 of the language you are learning.<br>
@@ -65,12 +65,12 @@ of the language you are learning.<br>
 <code>en</code> for English ...)
 """,
         default=default_audio_language_code,
-        title=u'Set language')
+        title='Set language')
     if not ok or not lang_code:
-        tooltip(u'Setting download language aborted.')
+        tooltip('Setting download language aborted.')
         return
     if len(lang_code) < 2:
-        tooltip(u'Not setting download language.<br>Too short.')
+        tooltip('Not setting download language.<br>Too short.')
         return
     # Go through all configuration sets
     for conf in mw.col.decks.allConf():
@@ -84,7 +84,7 @@ of the language you are learning.<br>
 
 
 def rename_language_code():
-    u"""
+    """
     Rename the language code.
 
     Look for the old audio-only language code and change it to one
@@ -106,7 +106,7 @@ def rename_language_code():
 
 
 def maybe_ask_language():
-    u"""Ask the user for the language code if neccessary."""
+    """Ask the user for the language code if neccessary."""
     # Just try to rename on every start. The delay should be rather
     # slight, so i see no real problem.
     rename_language_code()
