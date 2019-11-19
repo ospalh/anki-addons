@@ -145,7 +145,7 @@ def add_japanese_model(col):
 
 anki.stdmodels.models.append(
     (_("Standard with audio fields"), add_standard_model))
-if os.path.exists(
-        os.path.join(mw.pm.addonFolder(), 'japanese', 'reading.py')):
-    anki.stdmodels.models.append(
-        (_("Japanese with audio fields"), add_japanese_model))
+# Removed a broken test. We don’t know the name of the Japanese
+# add-on. So always add Japanese model.
+anki.stdmodels.models.append(
+    (_("Japanese with audio fields"), add_japanese_model))

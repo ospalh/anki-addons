@@ -19,7 +19,7 @@ This is an add-on for Anki-2 that downloads spoken version of the
 words in the cards.
 """
 
-__version__ = "6.0.0"
+__version__ = "7.0.0"
 
 from . import conflanguage
 from . import download

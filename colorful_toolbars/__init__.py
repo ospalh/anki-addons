@@ -42,16 +42,14 @@ from aqt.reviewer import Reviewer
 from aqt.utils import askUser
 
 
-__version__ = "1.5.0"
+__version__ = "2.0.0"
 
 
 config = mw.addonManager.getConfig(__name__)
 #todo: show edit layout
 #todo: hide study options gear
 
-icons_dir = os.path.join(
-    mw.pm.addonFolder(), 'colorful_toolbars', 'color_icons')
-
+icons_dir = os.path.join(os.path.dirname(__file__), 'color_icons')
 
 toolbar_gradient_form = u'''QToolBar:top, QToolBar:bottom {{
 background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 {bg}, stop:1 {bgg});
