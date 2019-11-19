@@ -31,8 +31,7 @@ from anki.sound import play, playFromText
 
 from .download_entry import Action
 
-icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
-
+icons_dir = os.path.join(os.path.dirname(__file__), 'icons')
 
 def review_entries(note, retrieved_data, hide_text):
     """

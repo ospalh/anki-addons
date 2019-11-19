@@ -55,8 +55,7 @@ DOWNLOAD_NOTE_SHORTCUT = "q"
 DOWNLOAD_SIDE_SHORTCUT = "t"
 DOWNLOAD_MANUAL_SHORTCUT = "Ctrl+t"
 
-icons_dir = os.path.join(os.path.realpath(__file__), 'icons')
-# icons_dir = 'icons'
+icons_dir = os.path.join(os.path.dirname(__file__), 'icons')
 # Place were we keep our megafone icon.
 
 
