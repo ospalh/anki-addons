@@ -42,7 +42,7 @@ from aqt.reviewer import Reviewer
 from aqt.utils import askUser
 
 
-__version__ = "1.5.0"
+__version__ = "1.6.0"
 
 
 config = mw.addonManager.getConfig(__name__)
