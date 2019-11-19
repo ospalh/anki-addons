@@ -1,17 +1,22 @@
 # -*- mode: python ; coding: utf-8 -*-
-# © 2012–2013 Roland Sieker <ospalh@gmail.com>
+# © 2012–2018 Roland Sieker <ospalh@gmail.com>
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 """
-Anki-2 add-on to show the deck name in the window title.
+Anki 2.1 add-on to show the deck name in the window title.
 """
 
+import functools
 import sys
 import os
+import types
 from anki.hooks import wrap, addHook
 from aqt import mw
 
 
+config = mw.addonManager.getConfig(__name__)
+
+## Put these into the config file
 ## Several separators between the current ‘activity’ (file, directory,
 ## web page) and the program name seem common. Pick one to taste:
 title_separator = u' – '
@@ -31,6 +36,33 @@ use_argv_0 = False
 # use_argv_0 = True
 
 __version__ = '1.3.0'
+
+
+def wrapmethod(orig, wrapper, pos="after"):
+    """Like anki.hooks.wrap, but for bound methods.
+    Caveat: does not preserve function signatures."""
+
+    wrapped = None
+    if pos == "after":
+        def wrapped(self, *args, **kwargs):
+            orig(*args, **kwargs)
+            return wrapper(*args, **kwargs)
+    elif pos == "before":
+        def wrapped(self, *args, **kwargs):
+            wrapper(*args, **kwargs)
+            return orig(*args, **kwargs)
+    else:
+        def wrapped(self, *args, **kwargs):
+            return wrapper(_old=orig, *args, **kwargs)
+    if not isinstance(wrapper, types.MethodType) or wrapper.__self__ is None:
+        # wrapper is not a bound method, need to pass self
+        wrapper = functools.partial(wrapper, orig.__self__)
+
+    # Copy over attributes such as __name__ or __annotations__
+    wrapped = functools.update_wrapper(wrapped, orig.__func__)
+    # Convert wrapped function to bound method
+    wrapped = wrapped.__get__(orig.__self__, orig.__class__)
+    return wrapped
 
 
 def get_prog_name():
@@ -98,8 +130,8 @@ class DeckNamer(object):
 
 
 deck_namer = DeckNamer()
-mw.deckBrowser.show = wrap(mw.deckBrowser.show, deck_namer.deck_browser_title)
-mw.overview.show = wrap(mw.overview.show, deck_namer.overview_title)
-mw.reviewer.show = wrap(mw.reviewer.show, deck_namer.overview_title)
+mw.deckBrowser.show = wrapmethod(mw.deckBrowser.show, deck_namer.deck_browser_title)
+mw.overview.show = wrapmethod(mw.overview.show, deck_namer.overview_title)
+mw.reviewer.show = wrapmethod(mw.reviewer.show, deck_namer.overview_title)
 if show_subdeck:
     addHook('showQuestion', deck_namer.card_title)

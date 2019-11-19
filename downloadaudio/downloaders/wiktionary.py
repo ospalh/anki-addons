@@ -31,7 +31,7 @@ class WiktionaryDownloader(AudioDownloader):
     """Download audio from Wiktionary"""
     def __init__(self):
         AudioDownloader.__init__(self)
-        self.file_extension = u'.ogg'
+        self.file_extension = '.ogg'
         self.icon_url = 'http://de.wiktionary.org/'
         self.full_icon_url = 'http://bits.wikimedia.org/favicon/piece.ico'
         # This re should find only the 'real' files, not the file

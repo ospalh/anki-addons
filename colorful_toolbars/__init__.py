@@ -1,6 +1,6 @@
 # -*- mode: Python ; coding: utf-8 -*-
 #
-# © 2013–2017  Roland Sieker <ospalh@gmail.com>
+# © 2013–2018  Roland Sieker <ospalh@gmail.com>
 # © 2017 Marcio Mazza
 #
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
@@ -21,9 +21,9 @@
 
 
 """
-Add standard tool bars to Anki2.
+Add standard tool bars to Anki 2.1.
 
-This Anki2 addon adds standard tool bars (QtToolBar) to the Anki
+This Anki 2.1 addon adds standard tool bars (QtToolBar) to the Anki
 main window. By default a few buttons (QActions) are added, more can
 be added by the user.
 """
@@ -36,64 +36,18 @@ import os
 from anki.hooks import wrap, addHook
 from anki.lang import _
 from aqt import mw, clayout
+from aqt.deckbrowser import DeckBrowser
+from aqt.overview import Overview
 from aqt.reviewer import Reviewer
 from aqt.utils import askUser
 
 
 __version__ = "1.5.0"
 
-########################
-## Configuration section
-########################
 
-# Keep this on False for tool bars on top or bottom or set it to True
-# for tool bars at the left an right. The left tool bar wil also get
-# smaller icons.
-netbook_version = False
-# netbook_version = True
-
-
-## Position of the new toolbar: either starting out above the old tool
-## bar and movable, or below the old tool bar. In that case it can't
-## be dragged to another position.
-qt_toolbar_movable = True
-# qt_toolbar_movable = False
-
-## Do or do not show a button that lets this be the last card reviewed.
-show_toggle_last = False
-# show_toggle_last = True
-
-## Do or do not show a mute button that stops Anki from playing
-## sound/videos initially.
-## NB. The mute is not absolute. When you push the replay button, the
-## sound still gets played.
-show_mute_button = False
-# show_mute_button = True
-
-## Show the suspend card button
-show_suspend_card = True
-# show_suspend_card = False
-
-## Show the suspend note button
-show_suspend_note = True
-# show_suspend_note = False
-
-
-# Show the tool bars with a gradient background
-#
-# In my opinion it looks a little bit nicer with gradient. The
-# disadvantage is that with the gradient the tool bars don't follow
-# color scheme changes untill you restart Anki.
-do_gradient = True
-# do_gradient = False
-
-
-###########################
-# End configuration section
-###########################
-
-# Change below this at your own risk/only when you know what you are
-# doing.
+config = mw.addonManager.getConfig(__name__)
+#todo: show edit layout
+#todo: hide study options gear
 
 icons_dir = os.path.join(
     mw.pm.addonFolder(), 'colorful_toolbars', 'color_icons')
@@ -140,30 +94,30 @@ def go_edit_layout():
         return
 
 
-def toggle_text_tool_bar():
+def toggle_text_toolbar():
     """Switch the original toolbar on or off."""
-    if show_text_tool_bar_action.isChecked():
+    if show_text_toolbar_action.isChecked():
         mw.toolbar.web.show()
     else:
         mw.toolbar.web.hide()
 
 
-def toggle_qt_tool_bar():
+def toggle_qt_toolbar():
     """Switch the new upper tool bar on or off."""
-    if show_qt_tool_bar_action.isChecked():
-        mw.qt_tool_bar.show()
+    if show_qt_toolbar_action.isChecked():
+        mw.qt_toolbar.show()
     else:
-        mw.qt_tool_bar.hide()
+        mw.qt_toolbar.hide()
 
 
-def toggle_more_tool_bar():
+def toggle_more_toolbar():
     """Switch the new lower tool bar on or off."""
     # No real need to check if we are in review. Only then should we
     # be able to activate the action.
-    if show_more_tool_bar_action.isChecked():
-        mw.reviewer.more_tool_bar.show()
+    if show_more_toolbar_action.isChecked():
+        mw.reviewer.more_toolbar.show()
     else:
-        mw.reviewer.more_tool_bar.hide()
+        mw.reviewer.more_toolbar.hide()
 
 
 def ask_delete():
@@ -172,59 +126,47 @@ def ask_delete():
         mw.reviewer.onDelete()
 
 
-def add_tool_bar():
+def add_toolbar():
     """
     Add a Qt tool bar to Anki2.
 
     This is a more Anki-1-ish Qt tool bar with a number of rather big,
     colorful icons to replace the Anki 2 DSAB toolbar.
     """
-    mw.qt_tool_bar = QToolBar()
-    # mw.qt_tool_bar.setAccessibleName('secondary tool bar')
-    mw.qt_tool_bar.setObjectName('qt tool bar')
-    if netbook_version:
-        mw.qt_tool_bar.setIconSize(QSize(24, 24))
-    else:
-        mw.qt_tool_bar.setIconSize(QSize(32, 32))
+    mw.qt_toolbar = QToolBar()
+    # mw.qt_toolbar.setAccessibleName('secondary tool bar')
+    mw.qt_toolbar.setObjectName('qt tool bar')
+    mw.qt_toolbar.setIconSize(QSize(32, 32))
     # Conditional setup
-    if netbook_version or qt_toolbar_movable:
-        mw.qt_tool_bar.setFloatable(True)
-        mw.qt_tool_bar.setMovable(True)
-        if netbook_version:
-            mw.addToolBar(Qt.LeftToolBarArea, mw.qt_tool_bar)
-        else:
-            mw.addToolBar(Qt.TopToolBarArea, mw.qt_tool_bar)
+    mw.qt_toolbar.setFloatable(True)
+    mw.qt_toolbar.setMovable(True)
+    mw.addToolBar(Qt.TopToolBarArea, mw.qt_toolbar)
+    palette = mw.qt_toolbar.palette()
+    fg = palette.color(QPalette.ButtonText)
+    bg = palette.color(QPalette.Button)
+    if bg.lightnessF() > fg.lightnessF():
+        bgg = bg.darker(108)
+        bgl = bg.darker()
     else:
-        mw.qt_tool_bar.setFloatable(False)
-        mw.qt_tool_bar.setMovable(False)
-        mw.mainLayout.insertWidget(1, mw.qt_tool_bar)
-    if do_gradient:
-        palette = mw.qt_tool_bar.palette()
-        fg = palette.color(QPalette.ButtonText)
-        bg = palette.color(QPalette.Button)
-        if bg.lightnessF() > fg.lightnessF():
-            bgg = bg.darker(108)
-            bgl = bg.darker()
-        else:
-            bgg = bg.lighter(120)
-            bgl = bg.lighter()
-        mw.qt_tool_bar.setStyleSheet(
-            toolbar_gradient_form.format(
-                bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
+        bgg = bg.lighter(120)
+        bgl = bg.lighter()
+    mw.qt_toolbar.setStyleSheet(
+        toolbar_gradient_form.format(
+            bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
     # Add the actions here
-    mw.qt_tool_bar.addAction(sync_action)
+    mw.qt_toolbar.addAction(sync_action)
     # Put this in the more tool bar, closer to the old edit button
-    #    mw.qt_tool_bar.addAction(edit_current_action)
-    mw.qt_tool_bar.addAction(decks_action)
-    mw.qt_tool_bar.addAction(overview_action)
+    #    mw.qt_toolbar.addAction(edit_current_action)
+    mw.qt_toolbar.addAction(decks_action)
+    mw.qt_toolbar.addAction(overview_action)
     # Keep in line with the old tool bar. Don't show in standard version.
-    # mw.qt_tool_bar.addAction(study_action)
-    mw.qt_tool_bar.addAction(add_notes_action)
-    mw.qt_tool_bar.addAction(browse_cards_action)
-    mw.qt_tool_bar.addAction(statistics_action)
+    # mw.qt_toolbar.addAction(study_action)
+    mw.qt_toolbar.addAction(add_notes_action)
+    mw.qt_toolbar.addAction(browse_cards_action)
+    mw.qt_toolbar.addAction(statistics_action)
 
 
-def add_more_tool_bar():
+def add_more_toolbar():
     """
     Add a tool bar at the bottom.
 
@@ -232,53 +174,55 @@ def add_more_tool_bar():
     hidden in the "More" button at the bottom.
     """
     try:
-        mw.reviewer.more_tool_bar = QToolBar()
+        mw.reviewer.more_toolbar = QToolBar()
     except AttributeError:
         return
-    # mw.reviewer.more_tool_bar.setAccessibleName('secondary tool bar')
-    mw.reviewer.more_tool_bar.setObjectName('more options tool bar')
-    mw.reviewer.more_tool_bar.setIconSize(QSize(24, 24))
-    if netbook_version:
-        mw.reviewer.more_tool_bar.setFloatable(True)
-        mw.reviewer.more_tool_bar.setMovable(True)
-        mw.addToolBar(Qt.RightToolBarArea, mw.reviewer.more_tool_bar)
+    # mw.reviewer.more_toolbar.setAccessibleName('secondary tool bar')
+    mw.reviewer.more_toolbar.setObjectName('more options tool bar')
+    mw.reviewer.more_toolbar.setIconSize(QSize(24, 24))
+    mw.reviewer.more_toolbar.setFloatable(False)
+    mw.reviewer.more_toolbar.setMovable(False)
+    mw.mainLayout.insertWidget(2, mw.reviewer.more_toolbar)
+    palette = mw.reviewer.more_toolbar.palette()
+    fg = palette.color(QPalette.ButtonText)
+    bg = palette.color(QPalette.Button)
+    if bg.lightnessF() > fg.lightnessF():
+        bgg = bg.darker(108)
+        bgl = bg.darker()
     else:
-        mw.reviewer.more_tool_bar.setFloatable(False)
-        mw.reviewer.more_tool_bar.setMovable(False)
-        mw.mainLayout.insertWidget(2, mw.reviewer.more_tool_bar)
-    if do_gradient:
-        palette = mw.reviewer.more_tool_bar.palette()
-        fg = palette.color(QPalette.ButtonText)
-        bg = palette.color(QPalette.Button)
-        if bg.lightnessF() > fg.lightnessF():
-            bgg = bg.darker(108)
-            bgl = bg.darker()
-        else:
-            bgg = bg.lighter(105)
-            bgl = bg.lighter()
-        mw.reviewer.more_tool_bar.setStyleSheet(
-            toolbar_gradient_form.format(
-                bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
+        bgg = bg.lighter(105)
+        bgl = bg.lighter()
+    mw.reviewer.more_toolbar.setStyleSheet(
+        toolbar_gradient_form.format(
+            bg=bg.name(), bgg=bgg.name(), bgl=bgl.name()))
     # Add the actions here
-    mw.reviewer.more_tool_bar.addAction(edit_current_action)
-    mw.reviewer.more_tool_bar.addAction(toggle_mark_action)
-    if show_toggle_last:
-        mw.reviewer.more_tool_bar.addAction(toggle_last_card_action)
-    if show_mute_button:
-        mw.reviewer.more_tool_bar.addAction(mute_action)
-    mw.reviewer.more_tool_bar.addAction(bury_action)
-    if show_suspend_card:
-        mw.reviewer.more_tool_bar.addAction(suspend_card_action)
-    if show_suspend_note:
-        mw.reviewer.more_tool_bar.addAction(suspend_note_action)
-    mw.reviewer.more_tool_bar.addAction(delete_action)
-    mw.reviewer.more_tool_bar.addSeparator()
-    mw.reviewer.more_tool_bar.addAction(options_action)
-    mw.reviewer.more_tool_bar.addSeparator()
-    mw.reviewer.more_tool_bar.addAction(replay_action)
-    mw.reviewer.more_tool_bar.addAction(record_own_action)
-    mw.reviewer.more_tool_bar.addAction(replay_own_action)
-    more_tool_bar_off()
+    mw.reviewer.more_toolbar.addAction(edit_current_action)
+    if config["show_edit_layout"]:
+        mw.reviewer.more_toolbar.addAction(edit_layout_action)
+    mw.reviewer.more_toolbar.addSeparator()
+    mw.reviewer.more_toolbar.addAction(toggle_mark_action)
+    if config["show_last_card"]:
+        mw.reviewer.more_toolbar.addAction(toggle_last_card_action)
+    if config["show_mute_button"]:
+        mw.reviewer.more_toolbar.addAction(mute_action)
+    mw.reviewer.more_toolbar.addAction(bury_action)
+    if config["show_suspend_card"]:
+        mw.reviewer.more_toolbar.addAction(suspend_card_action)
+    if config["show_suspend_note"]:
+        mw.reviewer.more_toolbar.addAction(suspend_note_action)
+    if config["show_delete_note"]:
+        mw.reviewer.more_toolbar.addAction(delete_action)
+    if config["show_undo"]:
+        mw.reviewer.more_toolbar.addAction(mw.form.actionUndo)
+    if config["show_options_button"]:
+        mw.reviewer.more_toolbar.addSeparator()
+        mw.reviewer.more_toolbar.addAction(options_action)
+    mw.reviewer.more_toolbar.addSeparator()
+    mw.reviewer.more_toolbar.addAction(replay_action)
+    if config["show_voice_buttons"]:
+        mw.reviewer.more_toolbar.addAction(record_own_action)
+        mw.reviewer.more_toolbar.addAction(replay_own_action)
+    more_toolbar_off()
 
 
 def add_to_menus():
@@ -300,9 +244,9 @@ def add_to_menus():
         mw.addon_view_menu = QMenu(_(u"&View"), mw)
         mw.form.menubar.insertMenu(
             mw.form.menuTools.menuAction(), mw.addon_view_menu)
-    mw.addon_view_menu.addAction(show_qt_tool_bar_action)
-    mw.addon_view_menu.addAction(show_text_tool_bar_action)
-    mw.addon_view_menu.addAction(show_more_tool_bar_action)
+    mw.addon_view_menu.addAction(show_qt_toolbar_action)
+    mw.addon_view_menu.addAction(show_text_toolbar_action)
+    mw.addon_view_menu.addAction(show_more_toolbar_action)
     # And another one
     try:
         mw.addon_go_menu.addSeparator()
@@ -357,41 +301,40 @@ def edit_actions_on():
         pass
 
 
-def more_tool_bar_off():
+def more_toolbar_off():
     """Hide the more tool bar."""
-    show_more_tool_bar_action.setEnabled(False)
+    show_more_toolbar_action.setEnabled(False)
     bury_action.setEnabled(False)
     toggle_mark_action.setEnabled(False)
     suspend_card_action.setEnabled(False)
     suspend_note_action.setEnabled(False)
     delete_action.setEnabled(False)
     try:
-        mw.reviewer.more_tool_bar.hide()
+        mw.reviewer.more_toolbar.hide()
     except AttributeError:
         pass
 
 
-def maybe_more_tool_bar_on():
-    """Show the more tool bar when we should."""
-    show_more_tool_bar_action.setEnabled(True)
+def maybe_more_toolbar_on():
+    show_more_toolbar_action.setEnabled(True)
     bury_action.setEnabled(True)
     toggle_mark_action.setEnabled(True)
     suspend_card_action.setEnabled(True)
     suspend_note_action.setEnabled(True)
     delete_action.setEnabled(True)
-    if show_more_tool_bar_action.isChecked():
+    if show_more_toolbar_action.isChecked():
         try:
-            mw.reviewer.more_tool_bar.show()
+            mw.reviewer.more_toolbar.show()
         except AttributeError:
             pass
 
 
 def save_toolbars_visible():
     """Save if we should show the tool bars in the profile."""
-    mw.pm.profile['ctb_show_toolbar'] = show_text_tool_bar_action.isChecked()
-    mw.pm.profile['ctb_show_qt_toolbar'] = show_qt_tool_bar_action.isChecked()
+    mw.pm.profile['ctb_show_toolbar'] = show_text_toolbar_action.isChecked()
+    mw.pm.profile['ctb_show_qt_toolbar'] = show_qt_toolbar_action.isChecked()
     mw.pm.profile['ctb_show_more_toolbar'] = \
-        show_more_tool_bar_action.isChecked()
+        show_more_toolbar_action.isChecked()
 
 
 def load_toolbars_visible():
@@ -405,22 +348,22 @@ def load_toolbars_visible():
         ttb_on = mw.pm.profile['ctb_show_toolbar']
     except KeyError:
         ttb_on = False
-    show_text_tool_bar_action.setChecked(ttb_on)
-    toggle_text_tool_bar()
+    show_text_toolbar_action.setChecked(ttb_on)
+    toggle_text_toolbar()
     try:
         qtb_on = mw.pm.profile['ctb_show_qt_toolbar']
     except KeyError:
         qtb_on = True
-    show_qt_tool_bar_action.setChecked(qtb_on)
-    toggle_qt_tool_bar()
+    show_qt_toolbar_action.setChecked(qtb_on)
+    toggle_qt_toolbar()
     try:
         mtb_on = mw.pm.profile['ctb_show_more_toolbar']
     except KeyError:
         mtb_on = True
-    show_more_tool_bar_action.setChecked(mtb_on)
+    show_more_toolbar_action.setChecked(mtb_on)
     # Don't toggle the more tool bar yet. It would be shown on the
     # deck browser screen
-    # toggle_more_tool_bar()
+    # toggle_more_toolbar()
 
 
 def update_mark_action():
@@ -511,8 +454,8 @@ toggle_mark_action.setCheckable(True)
 toggle_mark_action.setToolTip(_(u"Mark or unmark the current note."))
 toggle_mark_icon = QIcon()
 toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_off.png'))
-toggle_mark_icon.addFile(os.path.join(icons_dir, 'mark_on.png'), QSize(),
-                         QIcon.Normal, QIcon.On)
+toggle_mark_icon.addFile(
+    os.path.join(icons_dir, 'mark_on.png'), QSize(), QIcon.Normal, QIcon.On)
 toggle_mark_action.setIcon(toggle_mark_icon)
 toggle_mark_action.triggered.connect(mw.reviewer.onMark)
 toggle_last_card_action = QAction(mw)
@@ -522,18 +465,19 @@ toggle_last_card_action.setChecked(False)
 toggle_last_card_action.setToolTip(_(u"Make this card the last to review."))
 toggle_last_card_icon = QIcon()
 toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_off.png'))
-toggle_last_card_icon.addFile(os.path.join(icons_dir, 'last_card_on.png'),
-                              QSize(), QIcon.Normal, QIcon.On)
+toggle_last_card_icon.addFile(
+    os.path.join(icons_dir, 'last_card_on.png'), QSize(), QIcon.Normal,
+    QIcon.On)
 toggle_last_card_action.setIcon(toggle_last_card_icon)
 mute_action = QAction(mw)
 mute_action.setText(_(u"Mute"))
 mute_action.setCheckable(True)
-mute_action.setChecked(False)
+mute_action.setChecked(config["start_muted"])
 mute_action.setToolTip(_(u"Temporarily switch off playing sounds."))
 mute_icon = QIcon()
 mute_icon.addFile(os.path.join(icons_dir, 'unmute.png'))
-mute_icon.addFile(os.path.join(icons_dir, 'mute.png'),
-                  QSize(), QIcon.Normal, QIcon.On)
+mute_icon.addFile(
+    os.path.join(icons_dir, 'mute.png'), QSize(), QIcon.Normal, QIcon.On)
 mute_action.setIcon(mute_icon)
 bury_action = QAction(mw)
 bury_action.setText(_(u"Bury note"))
@@ -577,21 +521,21 @@ replay_own_action.setToolTip(_(u"Replay your recorded voice."))
 replay_own_action.triggered.connect(mw.reviewer.onReplayRecorded)
 
 ## Actions to show and hide the different tool bars.
-show_text_tool_bar_action = QAction(mw)
-show_text_tool_bar_action.setText(_(u"Show text tool bar"))
-show_text_tool_bar_action.setCheckable(True)
-show_text_tool_bar_action.triggered.connect(toggle_text_tool_bar)
-show_qt_tool_bar_action = QAction(mw)
-show_qt_tool_bar_action.setText(_(u"Show icon bar"))
-show_qt_tool_bar_action.setCheckable(True)
-show_qt_tool_bar_action.setChecked(True)
-show_qt_tool_bar_action.triggered.connect(toggle_qt_tool_bar)
-show_more_tool_bar_action = QAction(mw)
-show_more_tool_bar_action.setText(_(u"Show more tool bar"))
-show_more_tool_bar_action.setCheckable(True)
-show_more_tool_bar_action.setChecked(True)
-show_more_tool_bar_action.setEnabled(False)
-show_more_tool_bar_action.triggered.connect(toggle_more_tool_bar)
+show_text_toolbar_action = QAction(mw)
+show_text_toolbar_action.setText(_(u"Show text tool bar"))
+show_text_toolbar_action.setCheckable(True)
+show_text_toolbar_action.triggered.connect(toggle_text_toolbar)
+show_qt_toolbar_action = QAction(mw)
+show_qt_toolbar_action.setText(_(u"Show icon bar"))
+show_qt_toolbar_action.setCheckable(True)
+show_qt_toolbar_action.setChecked(True)
+show_qt_toolbar_action.triggered.connect(toggle_qt_toolbar)
+show_more_toolbar_action = QAction(mw)
+show_more_toolbar_action.setText(_(u"Show more tool bar"))
+show_more_toolbar_action.setCheckable(True)
+show_more_toolbar_action.setChecked(True)
+show_more_toolbar_action.setEnabled(False)
+show_more_toolbar_action.triggered.connect(toggle_more_toolbar)
 
 
 ## Add images to actions we already have. I skip a few where no icon
@@ -618,19 +562,38 @@ mw.form.actionPreferences.setIcon(
 
 
 # Create the menus
-add_tool_bar()
-add_more_tool_bar()
+add_toolbar()
+add_more_toolbar()
 add_to_menus()
 #mw.toolbar.web.hide()
 
-# TODO: FIX
-# mw.deckBrowser.show = wrap(mw.deckBrowser.show, edit_actions_off)
-# mw.overview.show = wrap(mw.overview.show, edit_actions_on)
-# mw.reviewer.show = wrap(mw.reviewer.show, edit_actions_on)
-# mw.reviewer.show = wrap(mw.reviewer.show, maybe_more_tool_bar_on)
-# mw.overview.show = wrap(mw.overview.show, more_tool_bar_off)
-# mw.reviewer._toggleStar = wrap(mw.reviewer._toggleStar, update_mark_action)
-# mw.deckBrowser.show = wrap(mw.deckBrowser.show, more_tool_bar_off)
+
+# Mid level wrappers to do stuff for the wrapped methods.
+def deck_browser_show_extras(dummy_deck_browser):
+    edit_actions_off()
+    more_toolbar_off()
+
+
+def overview_show_extras(dummy_overview):
+    more_toolbar_off()
+    edit_actions_on()
+
+
+def reviewer_show_extras(dummy_reviewer):
+    edit_actions_on()
+    maybe_more_toolbar_on()
+
+def draw_no_star(dummy_reviewer):
+    pass
+
+
+DeckBrowser.show = wrap(DeckBrowser.show, deck_browser_show_extras)
+Overview.show = wrap(Overview.show, overview_show_extras)
+Reviewer.show = wrap(Reviewer.show, reviewer_show_extras)
+# TODO: Check the mark stuff
+# Reviewer._toggleStar = wrap(Reviewer._toggleStar, update_mark_action)
+Reviewer._drawMark = draw_no_star
+
 
 # Wrapper to not show a next card.
 original_next_card = Reviewer.nextCard

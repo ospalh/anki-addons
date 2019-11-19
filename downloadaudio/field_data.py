@@ -25,14 +25,14 @@ class FieldData(object):
         self.word_field_name = w_field
         self.audio_field_name = a_field
         # This is taken from aqt/browser.py.
-        self.word = word.replace(u'<br>', u' ')
-        self.word = self.word.replace(u'<br />', u' ')
+        self.word = word.replace('<br>', ' ')
+        self.word = self.word.replace('<br />', ' ')
         if strip_interpunct:
-            self.word = self.word.replace(u'・', u'')
+            self.word = self.word.replace('・', '')
         self.word = stripHTML(self.word)
         self.word = stripSounds(self.word)
         # Reformat so we have exactly one space between words.
-        self.word = u' '.join(self.word.split())
+        self.word = ' '.join(self.word.split())
 
     @property
     def empty(self):

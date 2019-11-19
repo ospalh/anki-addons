@@ -109,7 +109,7 @@ class LeoDownloader(AudioDownloader):
                     continue  # no audio file for this entry
                 audio_id = pron.attrib['url']
                 hits[audio_id] = matching_word
-        for audio_id, matching_word in hits.items():
+        for audio_id, matching_word in list(hits.items()):
             self.download_audio(audio_id, self.adjust_to_audio(matching_word))
 
     def download_audio(self, audio_id, word):

@@ -18,14 +18,14 @@ if processor:
     # a processor, this import should work.
 
 class DownloadEntry(object):
-    u"""Data about a single file downloaded by a downloader"""
+    """Data about a single file downloaded by a downloader"""
     def __init__(self, field_data, file_path, extras, icon):
         self.file_path = file_path
         # Absolute file path of the downloaded audio file
         self.word = field_data.word
         self.word_field_name = field_data.word_field_name
         self.audio_field_name = field_data.audio_field_name
-        self.file_extension = u'.mp3'
+        self.file_extension = '.mp3'
         # The file extension (with dot)
         self.extras = extras
         # A dict with strings of interesting informations, like
@@ -52,7 +52,7 @@ class DownloadEntry(object):
         # has an interesting value. And that is set in JpodDownleadEntry
 
     def process(self):
-        u"""Normalize &c. the audio file, if possible
+        """Normalize &c. the audio file, if possible
 
         When we have an audio processor, process the file
         (i.e. normalize, remove silence, convert to preferred format)
@@ -68,7 +68,7 @@ class DownloadEntry(object):
                 self.file_extension = new_sffx
 
     def dispatch(self, note):
-        u"""Do what should be done with the downloaded file
+        """Do what should be done with the downloaded file
 
         Depending on self.action, do that action.
 
@@ -88,7 +88,7 @@ class DownloadEntry(object):
 
 
 class JpodDownloadEntry(DownloadEntry):
-    u"""Data about a single file downloaded by a downloader"""
+    """Data about a single file downloaded by a downloader"""
     def __init__(
             self, japanese_field_data, file_path, extras, icon, file_hash):
         DownloadEntry.__init__(
@@ -100,15 +100,15 @@ class JpodDownloadEntry(DownloadEntry):
     @property
     def base_name(self):
         if self.kana and self.kana != self.kanji:
-            return u"{kanji}_{kana}".format(kanji=self.kanji, kana=self.kana)
-        return u"{kanji}".format(kanji=self.kanji)
+            return "{kanji}_{kana}".format(kanji=self.kanji, kana=self.kana)
+        return "{kanji}".format(kanji=self.kanji)
 
     @property
     def display_word(self):
         if self.kana and self.kana != self.kanji:
-            return u"{kanji}（{kana}）".format(kanji=self.kanji, kana=self.kana)
+            return "{kanji}（{kana}）".format(kanji=self.kanji, kana=self.kana)
             # N.B.: those are “full width” (CJK/quad) parentheses
-        return u"{kanji}".format(kanji=self.kanji)
+        return "{kanji}".format(kanji=self.kanji)
 
     @property
     def entry_hash(self):
@@ -116,4 +116,4 @@ class JpodDownloadEntry(DownloadEntry):
 
 
 class Action(object):
-    Add, Keep, Delete, Blacklist = range(0, 4)
+    Add, Keep, Delete, Blacklist = list(range(0, 4))

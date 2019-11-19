@@ -49,15 +49,15 @@ class ReviewFields(QDialog):
         self.initUI()
 
     def initUI(self):
-        u"""Build the dialog box."""
-        language_help = _(u'''<h4>Language code.</h4>
+        """Build the dialog box."""
+        language_help = _('''<h4>Language code.</h4>
 <p>This will be transmitted as part of the requst sent to the
 sites. As some sites only support one language, this is also used to
 decide where to send the requests. Use a standard language code
 here. Using invalid values or codes of unsupported languages will
 result in no downloads. Do <em>not</em> use domain codes (E.g. use
 <code>zh</code> rather than <code>cn</code> for Chinese.)</p>''')
-        self.setWindowTitle(_(u'Anki – Download audio'))
+        self.setWindowTitle(_('Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         layout = QVBoxLayout()
         self.setLayout(layout)
@@ -95,7 +95,7 @@ reading (ruby) on the right.</p>
         lcode_head = QLabel(_('''<h4>Language code</h4>'''))
         layout.addWidget(lcode_head)
         lang_hlayout = QHBoxLayout()
-        lc_label = QLabel(_(u'Language code:'), self)
+        lc_label = QLabel(_('Language code:'), self)
         lang_hlayout.addWidget(lc_label)
         lc_label.setToolTip(language_help)
         self.language_code_lineedit = QLineEdit(self)
@@ -114,13 +114,13 @@ reading (ruby) on the right.</p>
         layout.addWidget(dialog_buttons)
 
     def create_data_rows(self, layout):
-        u"""Build one line of the dialog box."""
+        """Build one line of the dialog box."""
         gf_layout = QGridLayout()
         for num, field_data in enumerate(self.field_data_list):
             # We create all three QTextEdits for each item and hide
             # some according to field_data.split.
-            label = QLabel(u'{0}:'.format(field_data.word_field_name))
-            label.setToolTip(_(u'Source of the request text'))
+            label = QLabel('{0}:'.format(field_data.word_field_name))
+            label.setToolTip(_('Source of the request text'))
             gf_layout.addWidget(label, num, 0)
             ledit = QLineEdit(field_data.word)
             self.word_lineedits.append(ledit)
@@ -141,7 +141,7 @@ reading (ruby) on the right.</p>
             if not field_data.split:
                 gf_layout.addWidget(ledit, num, 1, 1, 2)
                 ledit.setToolTip(
-                    _(u'''<h4>Text of the request.</h4>
+                    _('''<h4>Text of the request.</h4>
 <p>Edit this as appropriate.  Clear it to not download anything for
 this line.</p>'''))
                 bedit.hide()
@@ -149,12 +149,12 @@ this line.</p>'''))
             else:
                 ledit.hide()
                 gf_layout.addWidget(bedit, num, 1)
-                kanji_tt_text = _(u'''\
+                kanji_tt_text = _('''\
 <h4>Kanji of the request.</h4>
 <p>Edit this as appropriate.  Clear this to not download anything for
 this line.  For pure kana words, enter (or keep) the kana
 here.</p>''')
-                base_tt_text = _(u'''\
+                base_tt_text = _('''\
 <h4>Expression of the request.</h4>
 <p>Edit this as appropriate. Clear this to not download anything for
 this line.</p>''')
@@ -165,10 +165,10 @@ this line.</p>''')
                     bedit.setToolTip(base_tt_text)
                 gf_layout.addWidget(redit, num, 2)
 
-                kana_tt_text = _(u'''<h4>Kana of the request.</h4>
+                kana_tt_text = _('''<h4>Kana of the request.</h4>
 <p>Edit this as appropriate.  For pure kana words, enter (or keep) the
 kana here or clear this field.</p>''')
-                ruby_tt_text = _(u'''<h4>Reading (ruby) of the request.</h4>
+                ruby_tt_text = _('''<h4>Reading (ruby) of the request.</h4>
 <p>Edit this as appropriate.</p>''')
                 if self.language_code and self.language_code.startswith('ja'):
                     redit.setToolTip(kana_tt_text)

@@ -29,7 +29,7 @@ so skip this by default.
 
 
 class GooglettsDownloader(AudioDownloader):
-    u"""Class to get pronunciations from Google’s TTS service."""
+    """Class to get pronunciations from Google’s TTS service."""
     def __init__(self):
         AudioDownloader.__init__(self)
         self.icon_url = 'http://translate.google.com/'
@@ -60,7 +60,7 @@ class GooglettsDownloader(AudioDownloader):
         self.downloads_list.append(entry)
 
     def build_url(self, source):
-        u"""Return a string that can be used as the url."""
+        """Return a string that can be used as the url."""
         qdict = dict(
             tl=self.language, q=source.encode('utf-8'), ie='utf-8', client='t')
         return self.url + urllib.parse.urlencode(qdict)

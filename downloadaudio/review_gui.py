@@ -35,7 +35,7 @@ icons_dir = os.path.join(mw.pm.addonFolder(), 'downloadaudio', 'icons')
 
 
 def review_entries(note, retrieved_data, hide_text):
-    u"""
+    """
     Show a dialog box where the user decides what to do.
 
     Show a dialog box where the user can listen to the downloaded
@@ -83,56 +83,56 @@ class ReviewFiles(QDialog):
             self.delete_column -= 1
             self.blacklist_column -= 1
         self.buttons_groups = []
-        self.text_help = _(u"""<h4>Text used to retrieve audio.</h4>
+        self.text_help = _("""<h4>Text used to retrieve audio.</h4>
 <p>Mouse over the icons or texts below to see further information.</p>""")
-        self.text_hide_help = _(u"""<h4>Audio source</h4>
+        self.text_hide_help = _("""<h4>Audio source</h4>
 <p>Mouse over the icons below to see further information.</p>
 <p>The text that was used to retrieve the audio has been hidden to
 reduce information leaks.</p> """)
-        self.play_help = u"<h4>Play the retrieved file.</h4>"
-        self.play_old_help = _(u"""<h4>Play the current content of the
+        self.play_help = "<h4>Play the retrieved file.</h4>"
+        self.play_old_help = _("""<h4>Play the current content of the
  audio field.</h4>
 <p>No button means the field is empty. Hovering over the button shows
 the current field content as text.</p>""")
-        self.play_old_hide_help = _(u"""<h4>Play the current content of the
+        self.play_old_hide_help = _("""<h4>Play the current content of the
  audio field.</h4>
 <p>No button means the field is empty.</p>""")
-        self.play_old_empty_line_help = _(u"The target field is empty.")
-        self.play_old_help_short = _(u"Play current field content.")
-        self.add_help_text_long = _(u"""<h4>Add the sound to the card.</h4>
+        self.play_old_empty_line_help = _("The target field is empty.")
+        self.play_old_help_short = _("Play current field content.")
+        self.add_help_text_long = _("""<h4>Add the sound to the card.</h4>
 <p>This is the normal thing to select for a good download.
 (You may want to select only one file in this column.)</p>""")
-        self.add_help_text_short = _(u"Add this sound to the card")
-        self.keep_help_text_long = _(u"""<h4>Keep the file.</h4>
+        self.add_help_text_short = _("Add this sound to the card")
+        self.keep_help_text_long = _("""<h4>Keep the file.</h4>
 <p>Keep this file in the media collection folder, but don’t add it to
 the card. (This means the file will show up as an unused medium and
 may be deleted during the unused media check.</p>""")
-        self.keep_help_text_short = _(u"Keep this file")
-        self.delete_help_text_long = _(u"""<h4>Delete the file.</h4>
+        self.keep_help_text_short = _("Keep this file")
+        self.delete_help_text_long = _("""<h4>Delete the file.</h4>
 <p>This is the normal thing to do with a file you don’t like.</p>""")
-        self.delete_help_text_short = _(u"Delete this file")
-        self.blacklist_help_text_long = _(u"""<h4>Blacklist the file.</h4>
+        self.delete_help_text_short = _("Delete this file")
+        self.blacklist_help_text_long = _("""<h4>Blacklist the file.</h4>
 Add an idetifier for this file to a blacklist. When this file is
 downloaded again, it will be silently dropped. This behaviour is
 useful for Japanesepod downloads. When your downloaded file tells you
 that they are sorry, will add this soon &c., click on this.""")
-        self.blacklist_help_text_short = _(u"Blacklist this file")
+        self.blacklist_help_text_short = _("Blacklist this file")
         self.blacklist_empty_line_help = _(
-            u"Blacklisting is only used for JapanesPod files.")
+            "Blacklisting is only used for JapanesPod files.")
         self.initUI()
 
     def initUI(self):
-        u"""Build the dialog box."""
-        self.setWindowTitle(_(u'Anki – Download audio'))
+        """Build the dialog box."""
+        self.setWindowTitle(_('Anki – Download audio'))
         self.setWindowIcon(QIcon(":/icons/anki.png"))
         outer_layout = QVBoxLayout()
         self.setLayout(outer_layout)
         explanation = QLabel(self)
         if len(self.entries_list) > 1:
             explanation.setText(
-                _(u'Please select an action for each downloaded file:'))
+                _('Please select an action for each downloaded file:'))
         else:
-            explanation.setText(_(u'Please select what to do with the file:'))
+            explanation.setText(_('Please select what to do with the file:'))
         outer_layout.addWidget(explanation)
         scroll_area = QScrollArea()
         scroll_area.setFrameStyle(QFrame.Plain)
@@ -145,33 +145,33 @@ that they are sorry, will add this soon &c., click on this.""")
         scroll_area.setWidgetResizable(True)
         outer_layout.addWidget(scroll_area)
         if not self.hide_text:
-            text_head_label = QLabel(_(u'<b>Source text</b>'), inner_widget)
+            text_head_label = QLabel(_('<b>Source text</b>'), inner_widget)
             layout.addWidget(text_head_label, 0, 0, 1, 2)
             text_head_label.setToolTip(self.text_help)
         else:
-            text_head_label = QLabel(_(u'<b>Source</b>'), inner_widget)
+            text_head_label = QLabel(_('<b>Source</b>'), inner_widget)
             layout.addWidget(text_head_label, 0, 0)
             text_head_label.setToolTip(self.text_hide_help)
-        play_head_label = QLabel(_(u'play'), inner_widget)
+        play_head_label = QLabel(_('play'), inner_widget)
         play_head_label.setToolTip(self.play_help)
         layout.addWidget(play_head_label, 0, self.play_column)
-        play_old_head_label = QLabel(_(u'play old'), self)
+        play_old_head_label = QLabel(_('play old'), self)
         if not self.hide_text:
             play_old_head_label.setToolTip(self.play_old_help)
         else:
             play_old_head_label.setToolTip(self.play_old_hide_help)
         layout.addWidget(play_old_head_label, 0, self.play_old_column)
-        add_head_label = QLabel(_(u'add'), self)
+        add_head_label = QLabel(_('add'), self)
         add_head_label.setToolTip(self.add_help_text_long)
         layout.addWidget(add_head_label, 0, self.add_column)
-        keep_head_label = QLabel(_(u'keep'), self)
+        keep_head_label = QLabel(_('keep'), self)
         keep_head_label.setToolTip(self.keep_help_text_long)
         layout.addWidget(keep_head_label, 0, self.keep_column)
-        delete_head_label = QLabel(_(u'delete'), self)
+        delete_head_label = QLabel(_('delete'), self)
         delete_head_label.setToolTip(self.delete_help_text_long)
         layout.addWidget(delete_head_label, 0, self.delete_column)
         if self.show_skull_and_bones:
-            blacklist_head_label = QLabel(_(u'blacklist'), self)
+            blacklist_head_label = QLabel(_('blacklist'), self)
             blacklist_head_label.setToolTip(self.blacklist_help_text_long)
             layout.addWidget(blacklist_head_label, 0, self.blacklist_column)
         rule_label = QLabel('<hr>')
@@ -185,7 +185,7 @@ that they are sorry, will add this soon &c., click on this.""")
         outer_layout.addWidget(dialog_buttons)
 
     def create_rows(self, layout, sarea):
-        u"""Build the rows of the dialog box"""
+        """Build the rows of the dialog box"""
         play_button_group = QButtonGroup(sarea)
         old_play_button_group = QButtonGroup(sarea)
         for num, entry in enumerate(self.entries_list, 2):
@@ -278,9 +278,9 @@ that they are sorry, will add this soon &c., click on this.""")
                         old_play_button_group.id(button)].audio_field_name]))
 
     def build_text_help_label(self, entry):
-        u"""Build the bubble help text label."""
-        ret_text = u'Text field: {0}'.format(entry.word_field_name)
-        ret_text += u'<br>Audio field: {0}'.format(entry.audio_field_name)
-        for key, value in entry.extras.items():
-            ret_text += u'<br>{0}: {1}'.format(key, value)
+        """Build the bubble help text label."""
+        ret_text = 'Text field: {0}'.format(entry.word_field_name)
+        ret_text += '<br>Audio field: {0}'.format(entry.audio_field_name)
+        for key, value in list(entry.extras.items()):
+            ret_text += '<br>{0}: {1}'.format(key, value)
         return ret_text

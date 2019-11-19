@@ -33,7 +33,7 @@ class OaldDownloader(AudioDownloader):
             'http://www.oxfordlearnersdictionaries.com/definition/english/'
         self.url_sound = self.icon_url
         self.extras = dict(
-            Source=u"Oxford Advanced Learner’s Dictionary")
+            Source="Oxford Advanced Learner’s Dictionary")
 
     def download_files(self, field_data):
         """
