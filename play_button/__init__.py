@@ -7,6 +7,7 @@
 
 """Add-on for Anki 2 to add AnkiDroid-style replay buttons."""
 
+import html
 import html.parser
 import os
 import re
@@ -77,7 +78,7 @@ def play_button_filter(
         fn = sound.group(1)
         # Cut out some escaping of HTML enteties that is done
         # automatically by BS4
-        unescaped_fn = html.parser.HTMLParser().unescape(fn)
+        unescaped_fn = html.unescape(fn)
         clean_fn = urllib.parse.quote(unescaped_fn)
         if 'q' == qa_type:
             title = "Replay"
