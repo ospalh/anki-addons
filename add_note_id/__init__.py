@@ -33,7 +33,7 @@ import uuid
 # This may break this add-on for those not running it from source. As
 # this includes me on my Mac, i may have to look into this.
 
-__version__ = '2.0.0'
+__version__ = '2.1.0'
 
 config = mw.addonManager.getConfig(__name__)
 
