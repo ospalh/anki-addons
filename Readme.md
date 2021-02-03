@@ -1,5 +1,6 @@
 anki-addons
 ============
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 Some Anki2 add-ons in different states of usefulness and bugginess.
 
