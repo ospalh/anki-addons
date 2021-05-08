@@ -117,6 +117,7 @@ from PyQt5.QtGui import QHBoxLayout, QKeySequence, QPushButton, QShortcut
 
 from aqt.modelchooser import ModelChooser
 from aqt.deckchooser import DeckChooser
+from aqt.addcards import AddCards
 from aqt.utils import tooltip
 
 from anki.hooks import wrap
@@ -198,7 +199,13 @@ def change_model_to(chooser, model_name):
     cdeck = chooser.deck.decks.current()
     cdeck['mid'] = m['id']
     chooser.deck.decks.save(cdeck)
-    runHook("currentModelChanged")
+    window = chooser.widget.parent()
+    if window and isinstance(window, AddCards):
+        # Workaround for "Multiple Windows" add-on:
+        window.onModelChange()
+        chooser.onReset()
+    else:
+        runHook("currentModelChanged")
     chooser.mw.reset()
 
 
