@@ -100,7 +100,7 @@ def review_link_handler_wrapper(reviewer, url):
     if url.startswith("ankiplay"):
         play(url[8:])
     else:
-        original_review_link_handler(reviewer, url)
+        return original_review_link_handler(reviewer, url)
 
 
 def simple_link_handler(url):
