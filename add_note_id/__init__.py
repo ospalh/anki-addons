@@ -19,8 +19,9 @@ Anki2.1 add-on to make notes unique
 Add the note id to a field named Note ID in
 """
 
-from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtWidgets import QAction, QProgressDialog
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QAction 
+from PyQt6.QtWidgets import QProgressDialog
 
 
 from anki.hooks import addHook, wrap
